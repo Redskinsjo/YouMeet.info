@@ -16,10 +16,11 @@
   "engines": {
     "node": ">=18"
   },
-  "name": "with-tailwind",
+  "name": "youmeet",
   "packageManager": "yarn@1.22.19",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "version": "0.0.0"
 }
