@@ -1,0 +1,5 @@
+mutation SubmitVideo($data: VideoInput) {
+  submitVideo(data: $data) {
+    id
+  }
+}

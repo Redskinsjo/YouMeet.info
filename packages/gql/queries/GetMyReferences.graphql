@@ -1,0 +1,29 @@
+query GetMyReferences($userId: ID) {
+  myReferences(userId: $userId) {
+    id
+    concerned
+    content
+    createdAt
+    type
+    updatedAt
+    user {
+      id
+    }
+    valid
+    experience {
+      id
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      duration
+      company {
+        id
+        name
+      }
+    }
+  }
+}

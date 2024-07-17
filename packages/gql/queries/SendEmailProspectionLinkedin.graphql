@@ -1,0 +1,5 @@
+query SendEmailProspectionLinkedin($leadsIds: [ID]) {
+  sendEmailProspectionLinkedin(leadsIds: $leadsIds) {
+    id
+  }
+}

@@ -1,0 +1,5 @@
+mutation UpdateDetails($data: BetaDetailsInput) {
+  updateDetails(data: $data) {
+    id
+  }
+}

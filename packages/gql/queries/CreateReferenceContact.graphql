@@ -1,0 +1,5 @@
+mutation CreateReferenceContact($data: ReferenceContactInput) {
+  createReferenceContact(data: $data) {
+    id
+  }
+}

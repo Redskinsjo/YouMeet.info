@@ -1,0 +1,5 @@
+mutation DeleteGptCompetency($id: ID) {
+  deleteGptCompetency(id: $id) {
+    id
+  }
+}

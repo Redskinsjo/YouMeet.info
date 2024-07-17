@@ -1,0 +1,5 @@
+query GetOneVideo($id: String) {
+  oneVideo(id: $id) {
+    id
+  }
+}

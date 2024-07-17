@@ -1,0 +1,15 @@
+query GetOneDetails($filter: BetaDetailsInput!) {
+  oneDetails(filter: $filter) {
+    id
+    profileId
+    email
+    phone {
+      code
+      number
+    }
+    user {
+      id
+      linkedinProfileId
+    }
+  }
+}

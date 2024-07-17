@@ -1,0 +1,27 @@
+query OwnQueues($originId: ID, $targetId: ID, $status: [String]) {
+  ownQueues(originId: $originId, targetId: $targetId, status: $status) {
+    id
+    target {
+      id
+      fullname
+      firstname
+      linkedinProfileId
+      lastname
+    }
+    status
+    origin {
+      id
+    }
+    offerTarget {
+      id
+      company {
+        id
+        name
+      }
+      rebroadcast
+      companyName
+    }
+    createdAt
+    updatedAt
+  }
+}

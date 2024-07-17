@@ -1,0 +1,48 @@
+query GetOneExperience($id: ID) {
+  oneExperience(id: $id) {
+    id
+    job {
+      id
+      title {
+        fr
+        en
+      }
+    }
+    user {
+      id
+      details {
+        id
+        email
+      }
+      fullname
+      firstname
+      picture
+      lastname
+    }
+    company {
+      id
+      name
+    }
+    candidate {
+      id
+      userId
+      user {
+        id
+        lastname
+        firstname
+        fullname
+        picture
+      }
+    }
+  }
+  profiles(experienceId: $id) {
+    id
+    user {
+      id
+      fullname
+      firstname
+      lastname
+      picture
+    }
+  }
+}

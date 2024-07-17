@@ -1,0 +1,16 @@
+query GetOneJob($id: ID) {
+  oneJob(id: $id) {
+    id
+    title {
+      fr
+      en
+    }
+    topSector {
+      id
+    }
+    questions {
+      id
+      text
+    }
+  }
+}

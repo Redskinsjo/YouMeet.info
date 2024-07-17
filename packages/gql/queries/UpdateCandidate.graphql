@@ -1,0 +1,19 @@
+mutation UpdateCandidate($data: BetaCandidateInput) {
+  updateCandidate(data: $data) {
+    id
+    targetJob {
+      id
+      topSector {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      title {
+        fr
+        en
+      }
+    }
+  }
+}

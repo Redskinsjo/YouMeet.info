@@ -1,0 +1,36 @@
+query GetMyReferenceContacts($userId: ID, $experienceId: ID) {
+  myReferenceContacts(userId: $userId, experienceId: $experienceId) {
+    id
+    name
+    email
+    phone {
+      code
+      number
+    }
+    position
+    experience {
+      id
+      job {
+        id
+        title {
+          en
+          fr
+        }
+      }
+      starting
+      ending
+      isLiveJob
+      duration
+      company {
+        id
+        name
+      }
+    }
+    user {
+      id
+      firstname
+      lastname
+      fullname
+    }
+  }
+}

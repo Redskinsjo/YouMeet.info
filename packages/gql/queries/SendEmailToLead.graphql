@@ -1,0 +1,20 @@
+query SendEmailToLead(
+  $data: LeadInput
+  $type: String
+  $leadsIds: [String]
+  $negativeAnswerForDesign: Boolean
+  $negativeAnswerForDev: Boolean
+) {
+  sendEmailToLead(
+    data: $data
+    type: $type
+    leadsIds: $leadsIds
+    negativeAnswerForDev: $negativeAnswerForDev
+    negativeAnswerForDesign: $negativeAnswerForDesign
+  ) {
+    id
+    type
+    name
+    email
+  }
+}

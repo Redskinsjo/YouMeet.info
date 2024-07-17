@@ -1,0 +1,9 @@
+query GetOneLead($id: ID) {
+  oneLead(id: $id) {
+    id
+    createdAt
+    email
+    type
+    updatedAt
+  }
+}

@@ -1,0 +1,5 @@
+mutation UpdateQueue($data: BetaQueueInput) {
+  updateQueue(data: $data) {
+    id
+  }
+}

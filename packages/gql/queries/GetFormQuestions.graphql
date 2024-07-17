@@ -1,0 +1,10 @@
+query GetFormQuestions {
+  formQuestions {
+    id
+    title
+    target
+    type
+    createdAt
+    updatedAt
+  }
+}

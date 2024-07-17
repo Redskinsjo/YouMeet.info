@@ -1,0 +1,17 @@
+query GetOneCustomisation($id: ID, $queueId: ID) {
+  oneCustomisation(id: $id, queueId: $queueId) {
+    id
+    questions {
+      id
+      type
+      job {
+        id
+      }
+      customisation {
+        id
+      }
+      prefix
+      text
+    }
+  }
+}

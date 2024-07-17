@@ -1,0 +1,9 @@
+query GetGptCompetenciesForBold(
+  $data: GptCompetencyInput
+  $params: PageParamsInput
+) {
+  gptCompetencies(data: $data, params: $params) {
+    id
+    title
+  }
+}

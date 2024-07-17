@@ -1,0 +1,6 @@
+mutation UpdateExperience($data: BetaExperienceInput) {
+  updateExperience(data: $data) {
+    id
+    referenced
+  }
+}

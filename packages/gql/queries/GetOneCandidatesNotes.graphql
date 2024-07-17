@@ -1,0 +1,7 @@
+query GetOneCandidatesNotes($data: CandidatesNotesInput) {
+  oneCandidatesNotes(data: $data) {
+    id
+    content
+    appreciation
+  }
+}

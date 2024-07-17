@@ -1,0 +1,5 @@
+mutation DeleteLead($leadId: ID) {
+  deleteLead(leadId: $leadId) {
+    id
+  }
+}

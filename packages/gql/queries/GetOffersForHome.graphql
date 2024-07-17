@@ -1,0 +1,13 @@
+query GetOffersForHome($params: PageParamsInput, $data: OfferInput) {
+  offers(params: $params, data: $data) {
+    id
+    slug
+    job {
+      id
+      title {
+        fr
+        en
+      }
+    }
+  }
+}

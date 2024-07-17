@@ -1,0 +1,5 @@
+mutation CreateOffer($data: OfferInput) {
+  createOffer(data: $data) {
+    id
+  }
+}

@@ -1,0 +1,99 @@
+query GetUsers($first: PageParamsInput, $data: BetaUserInput) {
+  users(first: $first, data: $data) {
+    id
+    auth {
+      internal {
+        email
+      }
+      social {
+        expiryDate
+      }
+    }
+    languages
+    lastname
+    picture
+    email
+    role
+    linkedinProfileId
+    description
+    firstname
+    customerId
+    fullname
+    cardPrice
+    video {
+      url
+      secure_url
+      original_filename
+    }
+    experiences {
+      id
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      duration
+      company {
+        id
+        name
+      }
+      companyName
+      isLiveJob
+      ending
+      duration
+      starting
+    }
+    details {
+      id
+      phone {
+        code
+        number
+      }
+    }
+    candidate {
+      id
+      targetJob {
+        id
+        title {
+          fr
+          en
+        }
+        topSector {
+          id
+          bgImage
+        }
+      }
+      targetContractType
+      avatars {
+        url
+        secure_url
+      }
+    }
+    videos {
+      id
+      principal
+      file {
+        url
+        secure_url
+        subtitledUrl
+        eager {
+          url
+          secure_url
+        }
+      }
+    }
+    unvolonteerFavorites {
+      id
+      origin {
+        id
+      }
+    }
+    user
+    pro
+    uniqueName
+    updatedAt
+    createdAt
+  }
+}

@@ -1,0 +1,5 @@
+mutation CreateInterviewOffer($data: InterviewOfferInput) {
+  createInterviewOffer(data: $data) {
+    id
+  }
+}

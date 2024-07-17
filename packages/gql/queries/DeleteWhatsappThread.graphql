@@ -1,0 +1,5 @@
+mutation DeleteWhatsappThread($threadId: ID) {
+  deleteWhatsappThread(threadId: $threadId) {
+    id
+  }
+}

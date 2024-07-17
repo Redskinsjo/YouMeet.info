@@ -1,0 +1,28 @@
+query GetOneUserExperiences($userId: String) {
+  oneUserExperiences(userId: $userId) {
+    id
+    starting
+    company {
+      id
+      name
+    }
+    duration
+    ending
+    isLiveJob
+    job {
+      id
+      title {
+        fr
+        en
+      }
+      topSector {
+        id
+        title {
+          en
+          fr
+        }
+      }
+    }
+    referenced
+  }
+}

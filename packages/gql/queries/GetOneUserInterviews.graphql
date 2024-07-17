@@ -1,0 +1,24 @@
+query GetOneUserInterviews($userId: String) {
+  oneUserInterviews(userId: $userId) {
+    id
+    status
+    datetime
+    comment
+    origin {
+      id
+      firstname
+      lastname
+      fullname
+      email
+      linkedinProfileId
+    }
+    target {
+      id
+      firstname
+      lastname
+      fullname
+      email
+      linkedinProfileId
+    }
+  }
+}

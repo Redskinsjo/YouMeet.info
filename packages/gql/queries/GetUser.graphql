@@ -1,0 +1,55 @@
+query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID) {
+  user(
+    uniqueName: $uniqueName
+    userId: $userId
+    email: $email
+    originId: $originId
+  ) {
+    id
+    lastname
+    picture
+    languages
+    age
+    credit
+    cardPrice
+    email
+    description
+    fullname
+    extension
+    uniqueName
+    scrapped
+    firstname
+    linkedinProfileId
+    professionalEmail
+    customerId
+    isPublic
+    user
+    pro
+    role
+    consent
+    hiddenFields
+    details {
+      id
+      birthday
+      websites
+      facebook
+      twitter
+      phone {
+        code
+        number
+      }
+    }
+    videos {
+      id
+      principal
+      file {
+        url
+        secure_url
+        subtitledUrl
+        eager {
+          transformation
+        }
+      }
+    }
+  }
+}

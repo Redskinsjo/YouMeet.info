@@ -1,0 +1,10 @@
+query GetOneTopSector($id: ID) {
+  oneTopSector(id: $id) {
+    id
+    title {
+      fr
+      en
+    }
+    bgImage
+  }
+}

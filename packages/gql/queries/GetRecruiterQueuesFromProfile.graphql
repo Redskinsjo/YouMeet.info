@@ -1,0 +1,46 @@
+query GetRecruiterQueuesFromProfile($originId: ID, $targetId: ID) {
+  recruiterQueuesFromProfile(originId: $originId, targetId: $targetId) {
+    id
+    status
+    seen
+    offerTarget {
+      id
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      location
+      revenue
+      contractType
+    }
+    target {
+      id
+      fullname
+      firstname
+      lastname
+      email
+      linkedinProfileId
+      description
+      picture
+    }
+    origin {
+      fullname
+      id
+      linkedinProfileId
+      picture
+      email
+      roles {
+        id
+        title {
+          fr
+          en
+        }
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}

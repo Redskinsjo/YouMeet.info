@@ -1,0 +1,7 @@
+mutation UpdateUser($data: BetaUserInput, $userId: ID, $uniqueName: String) {
+  updateUser(data: $data, userId: $userId, uniqueName: $uniqueName) {
+    id
+    hiddenFields
+    isPublic
+  }
+}

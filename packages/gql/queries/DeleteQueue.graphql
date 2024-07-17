@@ -1,0 +1,5 @@
+mutation DeleteQueue($queueId: ID) {
+  deleteQueue(queueId: $queueId) {
+    id
+  }
+}

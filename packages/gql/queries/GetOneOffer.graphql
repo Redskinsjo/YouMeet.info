@@ -1,0 +1,50 @@
+query GetOneOffer($id: ID, $slug: String) {
+  oneOffer(id: $id, slug: $slug) {
+    id
+    content
+    profileSearched
+    company {
+      id
+      name
+      location
+      logo {
+        url
+        secure_url
+        eager {
+          transformation
+        }
+      }
+    }
+    author {
+      id
+      email
+      firstname
+      fullname
+      lastname
+    }
+    requirements {
+      id
+      title
+    }
+    contractType
+    remote
+    limitDate
+    authorInterviewLink
+    authorName
+    createdAt
+    updatedAt
+    job {
+      title {
+        fr
+        en
+      }
+    }
+    sector {
+      id
+    }
+    jobDescriptionLink
+    authorEmail
+    location
+    revenue
+  }
+}

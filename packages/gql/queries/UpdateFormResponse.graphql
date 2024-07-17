@@ -1,0 +1,5 @@
+mutation UpdateFormResponse($data: FormResponseInput) {
+  updateFormResponse(data: $data) {
+    id
+  }
+}

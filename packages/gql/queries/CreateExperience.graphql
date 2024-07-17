@@ -1,0 +1,5 @@
+mutation CreateExperience($data: ExperienceInput) {
+  createExperience(data: $data) {
+    id
+  }
+}

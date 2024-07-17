@@ -1,0 +1,43 @@
+query GetOneCompany($id: ID, $filters: BetaCompanyFilters) {
+  oneCompany(id: $id, filters: $filters) {
+    id
+    location
+    name
+    resume
+    scrapped
+    experiences {
+      id
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      starting
+      ending
+      references {
+        id
+        user {
+          id
+          fullname
+          email
+          linkedinProfileId
+        }
+      }
+      user {
+        id
+        fullname
+        linkedinProfileId
+        email
+      }
+      details {
+        id
+        phone {
+          code
+          number
+        }
+      }
+    }
+  }
+}

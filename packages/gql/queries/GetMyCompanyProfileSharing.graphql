@@ -1,0 +1,53 @@
+query GetMyCompanyProfileSharings($targetId: String) {
+  myCompanyProfileSharings(targetId: $targetId) {
+    id
+    origin {
+      id
+      firstname
+      lastname
+      fullname
+      linkedinProfileId
+      email
+      cardPrice
+    }
+    offerTarget {
+      id
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+    }
+    target {
+      id
+      name
+      logo {
+        url
+        secure_url
+        eager {
+          transformation
+        }
+      }
+      linkedinProfilePage
+      resume
+      location
+    }
+    video {
+      id
+      file {
+        url
+        secure_url
+        subtitledUrl
+        eager {
+          transformation
+          url
+          secure_url
+        }
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}

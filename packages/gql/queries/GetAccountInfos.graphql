@@ -1,0 +1,81 @@
+query GetAccountInfos($userId: String) {
+  accountInfos(userId: $userId) {
+    id
+    lastname
+    picture
+    languages
+    age
+    credit
+    email
+    description
+    fullname
+    extension
+    uniqueName
+    scrapped
+    firstname
+    linkedinProfileId
+    customerId
+    isPublic
+    user
+    pro
+    role
+    consent
+    hiddenFields
+    details {
+      id
+      birthday
+      websites
+      facebook
+      twitter
+      phone {
+        code
+        number
+      }
+    }
+    experiences {
+      id
+      starting
+      company {
+        id
+        name
+      }
+      duration
+      ending
+      isLiveJob
+      job {
+        id
+        title {
+          fr
+          en
+        }
+        topSector {
+          id
+          title {
+            en
+            fr
+          }
+        }
+      }
+      referenced
+    }
+    candidate {
+      id
+      targetJob {
+        id
+        title {
+          fr
+          en
+        }
+        topSector {
+          id
+        }
+      }
+      avatars {
+        url
+        secure_url
+        width
+        height
+      }
+    }
+  }
+}

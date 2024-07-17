@@ -1,0 +1,16 @@
+query GetUserRemarks {
+  remarks {
+    id
+    content
+    user {
+      id
+      user
+      pro
+      fullname
+      company {
+        id
+        name
+      }
+    }
+  }
+}

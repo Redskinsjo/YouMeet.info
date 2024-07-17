@@ -1,0 +1,15 @@
+{
+  "name": "@youmeet/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./tailwind.config.ts",
+    "./styles": "./styles.css"
+  },
+  "devDependencies": {
+    "@youmeet/typescript-config": "*",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38"
+  }
+}

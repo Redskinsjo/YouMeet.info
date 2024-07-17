@@ -1,0 +1,6 @@
+query GetUsersUniqueName($first: PageParamsInput, $data: BetaUserInput) {
+  users(first: $first, data: $data) {
+    id
+    uniqueName
+  }
+}

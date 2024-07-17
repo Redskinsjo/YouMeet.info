@@ -1,0 +1,16 @@
+query GetJobs($data: JobInput, $first: PageParamsInput) {
+  jobs(data: $data, first: $first) {
+    id
+    title {
+      en
+      fr
+    }
+    topSector {
+      id
+      title {
+        fr
+        en
+      }
+    }
+  }
+}

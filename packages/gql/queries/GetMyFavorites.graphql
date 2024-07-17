@@ -1,0 +1,92 @@
+query GetMyFavorites($data: FavoriteInput, $first: PageParamsInput) {
+  myFavorites(data: $data, first: $first) {
+    id
+    target {
+      __typename
+      id
+      firstname
+      lastname
+      fullname
+      email
+      description
+      picture
+      isPublic
+      uniqueName
+      age
+      user
+      pro
+      consent
+      languages
+      scrapped
+      linkedinProfileId
+      cvFile {
+        url
+        secure_url
+      }
+      details {
+        id
+        phone {
+          number
+          code
+        }
+      }
+      candidate {
+        id
+        targetContractType
+        salaryExpected
+        avatars {
+          secure_url
+          url
+          eager {
+            transformation
+          }
+        }
+        targetJob {
+          id
+          title {
+            fr
+            en
+          }
+          topSector {
+            id
+            bgImage
+          }
+        }
+      }
+      videos {
+        id
+        likes
+        principal
+        report
+        job {
+          id
+          title {
+            fr
+            en
+          }
+        }
+        transcript
+        confidence
+        audio {
+          url
+          secure_url
+        }
+        file {
+          url
+          secure_url
+          subtitledUrl
+          width
+          height
+          original_filename
+          public_id
+          eager {
+            transformation
+          }
+        }
+      }
+    }
+    origin {
+      id
+    }
+  }
+}

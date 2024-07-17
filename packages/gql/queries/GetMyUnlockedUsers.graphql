@@ -1,0 +1,11 @@
+query GetMyUnlockedUsers($originId: ID) {
+  myUnlockedUsers(originId: $originId) {
+    id
+    origin {
+      id
+    }
+    target {
+      id
+    }
+  }
+}

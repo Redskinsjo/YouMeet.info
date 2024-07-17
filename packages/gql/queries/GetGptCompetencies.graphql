@@ -1,0 +1,11 @@
+query GetGptCompetencies($data: GptCompetencyInput, $params: PageParamsInput) {
+  gptCompetencies(data: $data, params: $params) {
+    id
+    title
+    advantages
+    conclusion
+    definition
+    examples
+    relatedSkills
+  }
+}

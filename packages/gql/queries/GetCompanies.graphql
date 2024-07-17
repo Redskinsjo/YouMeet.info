@@ -1,0 +1,57 @@
+query GetCompanies($first: PageParamsInput, $filters: BetaCompanyFilters) {
+  companies(filters: $filters, first: $first) {
+    id
+    location
+    name
+    resume
+    scrapped
+    logo {
+      url
+      secure_url
+      eager {
+        transformation
+      }
+    }
+    video {
+      url
+      secure_url
+      eager {
+        transformation
+      }
+    }
+    experiences {
+      id
+      job {
+        id
+        title {
+          en
+          fr
+        }
+      }
+      starting
+      ending
+      references {
+        id
+        user {
+          id
+          fullname
+          email
+          linkedinProfileId
+        }
+      }
+      user {
+        id
+        fullname
+        linkedinProfileId
+        email
+      }
+      details {
+        id
+        phone {
+          code
+          number
+        }
+      }
+    }
+  }
+}

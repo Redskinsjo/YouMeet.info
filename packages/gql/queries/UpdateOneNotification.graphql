@@ -1,0 +1,5 @@
+mutation UpdateOneNotification($id: ID, $status: String) {
+  updateOneNotification(id: $id, status: $status) {
+    id
+  }
+}

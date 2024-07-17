@@ -1,0 +1,16 @@
+query GetUserCustomerId(
+  $uniqueName: String
+  $userId: ID
+  $email: String
+  $originId: ID
+) {
+  user(
+    uniqueName: $uniqueName
+    userId: $userId
+    email: $email
+    originId: $originId
+  ) {
+    id
+    customerId
+  }
+}

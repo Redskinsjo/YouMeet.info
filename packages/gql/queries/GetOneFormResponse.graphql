@@ -1,0 +1,15 @@
+query GetOneFormResponse($leadId: ID, $questionId: ID) {
+  oneFormResponse(leadId: $leadId, questionId: $questionId) {
+    id
+    isTrue
+    content
+    type
+    createdAt
+    question {
+      id
+    }
+    lead {
+      id
+    }
+  }
+}

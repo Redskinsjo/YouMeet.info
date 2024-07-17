@@ -1,0 +1,41 @@
+query GetArticles {
+  articles {
+    id
+    createdAt
+    title {
+      en
+      fr
+    }
+    description {
+      en
+      fr
+    }
+    introduction {
+      en
+      fr
+    }
+    conclusion {
+      en
+      fr
+    }
+    links {
+      href
+      label {
+        fr
+        en
+      }
+    }
+    paragraphs {
+      content {
+        fr
+        en
+      }
+      title {
+        fr
+        en
+      }
+    }
+    new
+    updatedAt
+  }
+}

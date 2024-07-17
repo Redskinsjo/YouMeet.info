@@ -1,0 +1,5 @@
+mutation DeleteOneInterviewOffer($id: ID) {
+  deleteInterviewOffer(id: $id) {
+    id
+  }
+}

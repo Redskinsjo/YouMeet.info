@@ -1,0 +1,6 @@
+mutation CreateUserRemark($data: RemarkInput) {
+  createRemark(data: $data) {
+    id
+    content
+  }
+}

@@ -1,0 +1,40 @@
+query GetMyPublishedOffers($data: OfferInput) {
+  myPublishedOffers(data: $data) {
+    id
+    author {
+      id
+      firstname
+      lastname
+      fullname
+      email
+      linkedinProfileId
+    }
+    contractType
+    createdAt
+    jobDescriptionLink
+    job {
+      id
+      title {
+        fr
+        en
+      }
+    }
+    sector {
+      id
+    }
+    limitDate
+    location
+    requirements {
+      id
+      title
+    }
+    authorEmail
+    revenue
+    authorInterviewLink
+    authorName
+    company {
+      id
+      name
+    }
+  }
+}

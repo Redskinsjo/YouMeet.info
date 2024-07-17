@@ -1,0 +1,5 @@
+mutation CreateReference($data: ReferenceInput) {
+  createReference(data: $data) {
+    id
+  }
+}

@@ -1,0 +1,9 @@
+mutation CreateCandidate($data: CandidateInput) {
+  createCandidate(data: $data) {
+    id
+    user {
+      id
+      fullname
+    }
+  }
+}

@@ -1,0 +1,7 @@
+mutation CreateOrUpdateNotes($data: CandidatesNotesInput) {
+  createOrUpdateNotes(data: $data) {
+    id
+    content
+    appreciation
+  }
+}

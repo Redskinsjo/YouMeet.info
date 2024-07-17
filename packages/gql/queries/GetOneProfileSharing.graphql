@@ -1,0 +1,90 @@
+query GetOneProfileSharing($data: ProfileSharingInput) {
+  oneProfileSharing(data: $data) {
+    id
+    report
+    origin {
+      id
+      firstname
+      lastname
+      fullname
+      linkedinProfileId
+      email
+      uniqueName
+    }
+    target {
+      id
+      name
+      logo {
+        url
+        secure_url
+      }
+      linkedinProfilePage
+      resume
+      location
+    }
+    offerTarget {
+      id
+      content
+      profileSearched
+      company {
+        id
+        name
+        location
+      }
+      author {
+        id
+        email
+        firstname
+        fullname
+        lastname
+      }
+      requirements {
+        id
+        title
+      }
+      contractType
+      remote
+      limitDate
+      authorInterviewLink
+      authorName
+      createdAt
+      updatedAt
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      sector {
+        id
+      }
+      jobDescriptionLink
+      authorEmail
+      location
+      revenue
+    }
+    video {
+      id
+      transcript
+      confidence
+      report
+      audio {
+        url
+        secure_url
+      }
+      file {
+        url
+        secure_url
+        subtitledUrl
+        eager {
+          transformation
+          url
+          secure_url
+        }
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}

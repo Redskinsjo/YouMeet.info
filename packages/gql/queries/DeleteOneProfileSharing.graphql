@@ -1,0 +1,5 @@
+mutation DeleteOneProfileSharing($id: ID) {
+  deleteProfileSharing(id: $id) {
+    id
+  }
+}

@@ -1,0 +1,41 @@
+query GetOneArticle($id: ID) {
+  oneArticle(id: $id) {
+    id
+    title {
+      en
+      fr
+    }
+    conclusion {
+      fr
+      en
+    }
+    introduction {
+      fr
+      en
+    }
+    description {
+      fr
+      en
+    }
+    links {
+      href
+      label {
+        fr
+        en
+      }
+    }
+    paragraphs {
+      content {
+        en
+        fr
+      }
+      title {
+        fr
+        en
+      }
+    }
+    new
+    createdAt
+    updatedAt
+  }
+}

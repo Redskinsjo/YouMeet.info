@@ -1,0 +1,19 @@
+query GetMyInterviewOffers($originId: ID, $targetId: ID, $status: String) {
+  myInterviewOffers(originId: $originId, targetId: $targetId, status: $status) {
+    id
+    status
+    comment
+    datetime
+    origin {
+      id
+      fullname
+      firstname
+      lastname
+    }
+    target {
+      id
+    }
+    createdAt
+    updatedAt
+  }
+}

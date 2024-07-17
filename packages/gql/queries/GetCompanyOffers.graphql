@@ -1,0 +1,36 @@
+query GetCompanyOffers($companyId: ID) {
+  companyOffers(companyId: $companyId) {
+    id
+    content
+    authorName
+    authorInterviewLink
+    authorEmail
+    jobDescriptionLink
+    sector {
+      id
+    }
+    job {
+      id
+      title {
+        fr
+        en
+      }
+    }
+    author {
+      id
+      firstname
+      lastname
+      fullname
+      linkedinProfileId
+    }
+    candidates {
+      id
+    }
+    company {
+      id
+      name
+    }
+    createdAt
+    updatedAt
+  }
+}

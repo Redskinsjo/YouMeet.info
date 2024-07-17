@@ -1,0 +1,5 @@
+mutation UpdateAllMyNotifications($targetId: ID, $status: String) {
+  updateAllMyNotifications(targetId: $targetId, status: $status) {
+    id
+  }
+}

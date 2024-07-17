@@ -1,0 +1,15 @@
+mutation CreateUnlockedUser($originId: ID, $targetId: ID) {
+  createUnlockedUser(originId: $originId, targetId: $targetId) {
+    id
+    target {
+      id
+      firstname
+      lastname
+    }
+    origin {
+      id
+      firstname
+      lastname
+    }
+  }
+}

@@ -1,0 +1,9 @@
+mutation CreateFavorite($originId: ID, $targetId: ID, $offerTargetId: ID) {
+  createFavorite(
+    originId: $originId
+    targetId: $targetId
+    offerTargetId: $offerTargetId
+  ) {
+    id
+  }
+}

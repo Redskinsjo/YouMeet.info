@@ -1,0 +1,17 @@
+query GetLeadFormResponses($leadId: ID) {
+  leadFormResponses(leadId: $leadId) {
+    id
+    content
+    type
+    isTrue
+    lead {
+      id
+    }
+    question {
+      id
+      title
+    }
+    createdAt
+    updatedAt
+  }
+}

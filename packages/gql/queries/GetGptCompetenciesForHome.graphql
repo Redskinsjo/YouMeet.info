@@ -1,0 +1,10 @@
+query GetGptCompetenciesForHome(
+  $data: GptCompetencyInput
+  $params: PageParamsInput
+) {
+  gptCompetencies(data: $data, params: $params) {
+    id
+    title
+    slug
+  }
+}

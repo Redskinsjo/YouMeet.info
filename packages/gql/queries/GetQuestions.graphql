@@ -1,0 +1,7 @@
+query GetQuestions($jobId: ID, $type: String) {
+  questions(jobId: $jobId, type: $type) {
+    id
+    prefix
+    text
+  }
+}

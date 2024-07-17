@@ -1,0 +1,9 @@
+query GetTopSectors($data: TopSectorInput) {
+  topSectors(data: $data) {
+    id
+    title {
+      en
+      fr
+    }
+  }
+}

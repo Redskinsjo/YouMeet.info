@@ -1,0 +1,5 @@
+mutation CreateDetails($data: BetaDetailsInput) {
+  createDetails(data: $data) {
+    id
+  }
+}

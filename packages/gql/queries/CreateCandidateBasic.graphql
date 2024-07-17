@@ -1,0 +1,16 @@
+mutation CreateCandidateBasic($data: CandidateBasicInput) {
+  createCandidateBasic(data: $data) {
+    id
+    targetJob {
+      id
+      title {
+        fr
+        en
+      }
+    }
+    avatars {
+      url
+      secure_url
+    }
+  }
+}

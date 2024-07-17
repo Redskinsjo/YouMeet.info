@@ -1,0 +1,18 @@
+mutation UpdateCompany($data: BetaCompanyInput) {
+  updateCompany(data: $data) {
+    id
+    linkedinProfilePage
+    location
+    logo {
+      url
+      secure_url
+    }
+    name
+    resume
+    video {
+      url
+      secure_url
+    }
+    isPublic
+  }
+}

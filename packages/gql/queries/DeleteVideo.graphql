@@ -1,0 +1,5 @@
+mutation DeleteVideo($id: String) {
+  deleteVideo(id: $id) {
+    id
+  }
+}

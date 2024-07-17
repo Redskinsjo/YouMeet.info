@@ -1,0 +1,5 @@
+mutation CreateNotification($data: NotificationInput) {
+  createNotification(data: $data) {
+    id
+  }
+}

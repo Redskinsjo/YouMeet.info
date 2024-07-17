@@ -1,0 +1,46 @@
+query GetOffers($params: PageParamsInput, $data: OfferInput) {
+  offers(params: $params, data: $data) {
+    id
+    jobDescriptionLink
+    job {
+      id
+      title {
+        fr
+        en
+      }
+    }
+    limitDate
+    location
+    requirements {
+      title
+      id
+    }
+    content
+    revenue
+    contractType
+    authorName
+    authorInterviewLink
+    authorEmail
+    sector {
+      id
+      bgImage
+    }
+    company {
+      id
+      name
+      location
+      logo {
+        secure_url
+        url
+      }
+    }
+    author {
+      id
+      firstname
+      lastname
+      fullname
+      email
+      linkedinProfileId
+    }
+  }
+}

@@ -1,0 +1,11 @@
+query GetOneFavorite($id: ID, $targetId: ID, $originId: ID) {
+  oneFavorite(id: $id, targetId: $targetId, originId: $originId) {
+    id
+    target {
+      id
+    }
+    origin {
+      id
+    }
+  }
+}

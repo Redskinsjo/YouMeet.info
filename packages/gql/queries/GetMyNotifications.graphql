@@ -1,0 +1,27 @@
+query GetMyNotifications(
+  $targetId: String
+  $type: [String]
+  $status: String
+  $timePeriod: Int
+) {
+  myNotifications(
+    status: $status
+    targetId: $targetId
+    type: $type
+    timePeriod: $timePeriod
+  ) {
+    id
+    content
+    createdAt
+    concernedId
+    origin {
+      id
+    }
+    status
+    target {
+      id
+    }
+    updatedAt
+    type
+  }
+}

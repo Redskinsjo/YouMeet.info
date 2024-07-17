@@ -1,0 +1,502 @@
+[
+  {
+    "les-prix": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Les Tarifs et Descriptions des Offres",
+      "description": "Découvrez nos différentes offres, les fonctionnalités incluses, et les tarifs pour utiliser notre plateforme de recrutement. Choisissez l'abonnement qui correspond le mieux à vos besoins.",
+      "url": "https://www.youmeet.info/les-prix",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "3",
+          "name": "Verifié",
+          "description": "Pour les candidats, nous offrons la possibilité d'obtenir de la part de YouMeet un référencement de vos expériences professionnelles et diplômes, en plus de créer votre profil public et votre vidéo de présentation",
+          "priceCurrency": "EUR",
+          "seller": {
+            "@type": "Organization",
+            "name": "YouMeet",
+            "url": "https://www.youmeet.info"
+          }
+        },
+        {
+          "@type": "Offer",
+          "price": "45",
+          "name": "Premium",
+          "description": "Pour les recruteurs, nous offrons la possibilité de consulter des profils qualifiés, de regarder leurs vidéos de présentation et d'obtenir leurs références professionnelles et académiques, en plus de diffuser des offres d'emploi et de proposer des entretiens à ces candidats.",
+          "priceCurrency": "EUR",
+          "seller": {
+            "@type": "Organization",
+            "name": "YouMeet",
+            "url": "https://www.youmeet.info"
+          }
+        },
+        {
+          "@type": "Offer",
+          "price": "59",
+          "name": "Chatbot",
+          "description": "Pour les recruteurs, nous offrons la possibilité d'obtenir, en plus de toutes les fonctionnalités Premium, un chatbot qui permette d'automatiser la prise de contacts, faisant gagner du temps.",
+          "priceCurrency": "EUR",
+          "seller": {
+            "@type": "Organization",
+            "name": "YouMeet",
+            "url": "https://www.youmeet.info"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "le-produit": {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "name": "Solution Complète de Prise de Références Automatisées",
+      "description": "Optimisez vos processus de recrutement avec notre application de prise de références automatisées. Découvrez ses fonctionnalités et avantages.",
+      "url": "https://www.youmeet.info/le-produit",
+      "image": "https://res.cloudinary.com/de822mdsy/image/upload/v1691348066/youmeet-official/webp/logo-favicon_yvmhxq.webp",
+      "brand": {
+        "@type": "Brand",
+        "name": "YouMeet"
+      }
+    }
+  },
+  {
+    "formulaire-profil-candidat": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Formulaire de Profil Candidat - Plateforme de Recrutement",
+      "description": "Remplissez le formulaire pour créer votre profil professionnel en tant que recruteur. Fournissez des informations sur votre entreprise et facilitez la mise en relation avec des candidats qualifiés sur notre plateforme de recrutement.",
+      "url": "https://www.youmeet.info/formulaire-profil",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Remplir le Formulaire de Profil",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/formulaire-profil"
+          }
+        },
+        {
+          "@type": "Action",
+          "name": "Soumettre le Formulaire",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/formulaire-profil"
+          }
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info"
+      }
+    }
+  },
+  {
+    "prises-de-references": {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "name": "Service de Prises de Références Professionnelles",
+      "description": "Découvrez comment notre service de prises de références simplifie votre processus de recrutement et garantit la qualité des candidats.",
+      "url": "https://www.youmeet.info/verifications",
+      "image": "https://res.cloudinary.com/de822mdsy/image/upload/v1691348066/youmeet-official/webp/logo-favicon_yvmhxq.webp",
+      "brand": {
+        "@type": "Brand",
+        "name": "YouMeet"
+      }
+    }
+  },
+  {
+    "compte": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Espace Personnel Recruteur - Plateforme de Recrutement",
+      "description": "Gérez vos informations personnelles et professionnelles, votre vidéo de présentation, souscrivez à un abonnement, consultez vos notifications. Optimisez votre expérience sur la plateforme.",
+      "url": "https://www.youmeet.info/compte",
+      "potentialAction": [
+        {
+          "@type": "SubscribeAction",
+          "name": "Souscrire à un Abonnement",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/compte"
+          }
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Voir les Informations Personnelles et Professionnelles",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/compte"
+          }
+        },
+        {
+          "@type": "WatchAction",
+          "name": "Visionner votre Vidéo de Présentation",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/compte"
+          }
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Consulter les Notifications",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/compte"
+          }
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info"
+      }
+    }
+  },
+  {
+    "se-connecter": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Se Connecter - Plateforme de Recrutement",
+      "description": "Connectez-vous à notre plateforme de recrutement et explorez des opportunités passionnantes. Rencontrez des talents exceptionnels et trouvez le candidat idéal.",
+      "url": "https://www.youmeet.info/se-connecter",
+      "image": "https://res.cloudinary.com/de822mdsy/image/upload/v1691348066/youmeet-official/webp/logo-favicon_yvmhxq.webp",
+      "inLanguage": "fr-FR",
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info/se-connecter"
+      },
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Connexion Candidat",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/se-connecter"
+          }
+        },
+        {
+          "@type": "Action",
+          "name": "Inscription Candidat",
+          "target": "https://www.youmeet.info/se-connecter"
+        }
+      ]
+    }
+  },
+  {
+    "pro-se-connecter": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Connexion Recruteur - Plateforme de Recrutement",
+      "description": "Connectez-vous en tant que recruteur sur notre plateforme et découvrez des profils de candidats qualifiés pour vos besoins de recrutement.",
+      "url": "https://pro.youmeet.info/se-connecter",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Connexion Recruteur",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/se-connecter"
+          }
+        },
+        {
+          "@type": "Action",
+          "name": "Inscription Recruteur",
+          "target": "https://pro.youmeet.info/se-connecter"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://pro.youmeet.info"
+      }
+    }
+  },
+  {
+    "/": {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "YouMeet - CV vidéos, références",
+      "description": "Bienvenue sur notre plateforme de recrutement innovante. Découvrez des opportunités passionnantes et connectez-vous avec des talents exceptionnels.",
+      "url": "https://www.youmeet.info/",
+      "image": "https://res.cloudinary.com/de822mdsy/image/upload/v1705698917/youmeet-official/webp/dqykgwibzdzyub26xe5h.webp",
+      "inLanguage": "fr-FR",
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info"
+      }
+    }
+  },
+  {
+    "reinitialiser-mot-de-passe": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Réinitialiser Mot de Passe - Plateforme de Recrutement",
+      "description": "Réinitialisez votre mot de passe sur notre plateforme de recrutement. Suivez les étapes simples pour sécuriser votre compte et accéder à de nouvelles opportunités professionnelles.",
+      "url": "https://www.youmeet.info/reinitialiser-mot-de-passe",
+      "inLanguage": "fr-FR",
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info"
+      }
+    }
+  },
+  {
+    "confidentiality-rules": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Règles de Confidentialité",
+      "description": "Consultez nos règles de confidentialité pour comprendre comment nous traitons vos informations personnelles.",
+      "url": "https://www.youmeet.info/regles-de-confidentialite",
+      "datePublished": "2023-12-23",
+      "dateModified": "2023-12-23",
+      "author": {
+        "@type": "Organization",
+        "name": "YouMeet"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info"
+      }
+    }
+  },
+  {
+    "recruteurs": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Recruteurs - Plateforme de Recrutement",
+      "description": "Explorez les profils des entreprises qui recrutent sur notre plateforme de recrutement. Découvrez leurs offres d'emploi et trouvez des opportunités professionnelles passionnantes.",
+      "url": "https://www.youmeet.info/recruteurs",
+      "inLanguage": "fr-FR",
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info"
+      },
+      "potentialAction": [
+        {
+          "@type": "ViewAction",
+          "name": "Visualiser les Recruteurs",
+          "target": "https://www.youmeet.info/recruteurs"
+        },
+        {
+          "@type": "PlayAction",
+          "name": "Regarder les Vidéos de Présentation des Recruteurs",
+          "target": "https://www.youmeet.info/recruteurs"
+        },
+        {
+          "@type": "SearchAction",
+          "name": "Rechercher parmis les Recruteurs",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/recruteurs"
+          },
+          "query-input": "recherche de recruteurs"
+        }
+      ]
+    }
+  },
+  {
+    "offres": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Offres d'Emploi - Plateforme de Recrutement",
+      "description": "Explorez les offres d'emplois sur notre plateforme de recrutement. Trouvez l'emploi qui vous correspond parmis de nombreux choix.",
+      "url": "https://www.youmeet.info/offres",
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "name": "Rechercher parmis les Candidats",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.youmeet.info/offres"
+          },
+          "query-input": "recherche d'emploi"
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Visualiser les Offres d'Emploi",
+          "target": "https://www.youmeet.info/offres"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://www.youmeet.info"
+      }
+    }
+  },
+  {
+    "pro-profils": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Profils de Candidats - Plateforme de Recrutement",
+      "description": "Explorez des profils de candidats qualifiés sur notre plateforme de recrutement. Trouvez des talents correspondant à vos besoins de recrutement.",
+      "url": "https://pro.youmeet.info/profils",
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "name": "Rechercher parmis les Candidats",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/profils"
+          },
+          "query-input": "recherche de profils de candidats"
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Visualiser les Profils de Candidats",
+          "target": "https://pro.youmeet.info/profils"
+        },
+        {
+          "@type": "PlayAction",
+          "name": "Regarder les Vidéos de Présentation des Candidats",
+          "target": "https://pro.youmeet.info/profils"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://pro.youmeet.info"
+      }
+    }
+  },
+  {
+    "pro-form": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Formulaire de Profil Recruteur - Plateforme de Recrutement",
+      "description": "Remplissez le formulaire pour créer votre profil professionnel en tant que recruteur. Fournissez des informations sur votre entreprise et facilitez la mise en relation avec des candidats qualifiés sur notre plateforme de recrutement.",
+      "url": "https://pro.youmeet.info/formulaire-profil",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Remplir le Formulaire de Profil",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/formulaire-profil"
+          }
+        },
+        {
+          "@type": "Action",
+          "name": "Soumettre le Formulaire",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/formulaire-profil"
+          }
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://pro.youmeet.info"
+      }
+    }
+  },
+  {
+    "pro-favoris": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Candidats Favoris - Plateforme de Recrutement",
+      "description": "Consultez la liste des candidats que vous avez marqués comme favoris sur notre plateforme de recrutement. Visualisez les profils et gardez une trace des candidats que vous souhaitez considérer pour des opportunités futures.",
+      "url": "https://pro.youmeet.info/favoris",
+      "potentialAction": [
+        {
+          "@type": "ViewAction",
+          "name": "Visualiser les Candidats Favoris",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/favoris"
+          }
+        },
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/favoris"
+          },
+          "query-input": "recherche de candidats favoris"
+        },
+        {
+          "@type": "PlayAction",
+          "target": "https://pro.youmeet.info/favoris"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://pro.youmeet.info"
+      }
+    }
+  },
+  {
+    "pro-compte": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Espace Personnel Recruteur - Plateforme de Recrutement",
+      "description": "Gérez vos informations personnelles et professionnelles, la vidéo de votre entreprise, souscrivez à un abonnement, consultez vos notifications et ajoutez des offres d'emploi sur notre plateforme de recrutement pour recruteurs. Optimisez votre expérience sur la plateforme.",
+      "url": "https://pro.youmeet.info/compte",
+      "potentialAction": [
+        {
+          "@type": "SubscribeAction",
+          "name": "Souscrire à un Abonnement",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/compte"
+          }
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Voir les Informations Personnelles et Professionnelles",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/compte"
+          }
+        },
+        {
+          "@type": "WatchAction",
+          "name": "Visionner la Vidéo de l'Entreprise",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/compte"
+          }
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Consulter les Notifications",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/compte"
+          }
+        },
+        {
+          "@type": "AddAction",
+          "name": "Ajouter une Offre d'Emploi",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://pro.youmeet.info/compte"
+          }
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "YouMeet",
+        "url": "https://pro.youmeet.info"
+      }
+    }
+  },
+  {
+    "cgu": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "name": "Conditions Générales d'Utilisation",
+      "description": "Consultez nos conditions générales d'utilisation pour utiliser notre plateforme de recrutement. Informations sur les règles, les droits et les responsabilités des utilisateurs.",
+      "url": "https://www.youmeet.info/conditions-generales-utilisation"
+    }
+  }
+]

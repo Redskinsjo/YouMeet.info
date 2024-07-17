@@ -1,0 +1,5 @@
+mutation CreateAccount($data: QuickCreateCandidateInput) {
+  createAccount(data: $data) {
+    id
+  }
+}

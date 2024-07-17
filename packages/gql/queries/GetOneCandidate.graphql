@@ -1,0 +1,20 @@
+query GetOneCandidate($userId: ID, $email: String) {
+  oneCandidate(userId: $userId, email: $email) {
+    confirmed
+    id
+    targetJob {
+      id
+      title {
+        fr
+        en
+      }
+      topSector {
+        id
+        title {
+          fr
+          en
+        }
+      }
+    }
+  }
+}

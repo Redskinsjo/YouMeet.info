@@ -1,0 +1,17 @@
+mutation CreateCompanyProfile($data: ProFormInput) {
+  createCompanyProfile(data: $data) {
+    id
+    linkedinProfilePage
+    location
+    logo {
+      url
+      secure_url
+    }
+    video {
+      url
+      secure_url
+    }
+    name
+    resume
+  }
+}

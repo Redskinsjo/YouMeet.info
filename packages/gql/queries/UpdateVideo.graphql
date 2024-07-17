@@ -1,0 +1,5 @@
+mutation UpdateVideo($data: VideoInput) {
+  updateVideo(data: $data) {
+    id
+  }
+}

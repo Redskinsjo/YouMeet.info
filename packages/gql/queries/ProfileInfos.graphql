@@ -1,0 +1,20 @@
+query ProfileInfos($userId: ID!) {
+  accountUser(userId: $userId) {
+    id
+    fullname
+    linkedinProfileId
+    email
+  }
+  accountDetails(userId: $userId) {
+    id
+    candidate {
+      id
+      confirmed
+    }
+    phone {
+      code
+      number
+    }
+    email
+  }
+}

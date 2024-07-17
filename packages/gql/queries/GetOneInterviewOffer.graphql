@@ -1,0 +1,23 @@
+query GetOneInterviewOffer($id: ID, $status: String) {
+  oneInterviewOffer(id: $id, status: $status) {
+    id
+    status
+    comment
+    datetime
+    origin {
+      id
+      fullname
+      firstname
+      lastname
+      linkedinProfileId
+    }
+    target {
+      id
+      fullname
+      firstname
+      lastname
+    }
+    createdAt
+    updatedAt
+  }
+}

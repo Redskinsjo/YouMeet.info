@@ -1,0 +1,5 @@
+query ResetEmailLink($email: String) {
+  resetEmailLink(email: $email) {
+    id
+  }
+}

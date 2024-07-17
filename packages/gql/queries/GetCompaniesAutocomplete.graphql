@@ -1,0 +1,10 @@
+query GetCompaniesAutocomplete(
+  $first: PageParamsInput
+  $filters: BetaCompanyFilters
+) {
+  companies(filters: $filters, first: $first) {
+    id
+    location
+    name
+  }
+}

@@ -1,0 +1,45 @@
+query GetOneThread($id: ID, $queueId: ID) {
+  oneThread(id: $id, queueId: $queueId) {
+    id
+    chatId
+    createdAt
+    updatedAt
+    queue {
+      id
+      target {
+        id
+        firstname
+        fullname
+        lastname
+        linkedinProfileId
+        picture
+      }
+      origin {
+        id
+        firstname
+        fullname
+        lastname
+        linkedinProfileId
+        picture
+      }
+    }
+    terminated
+    exchanges {
+      id
+      question {
+        id
+        type
+        text
+        prefix
+      }
+      responses {
+        id
+        content
+      }
+    }
+    responses {
+      id
+      content
+    }
+  }
+}
