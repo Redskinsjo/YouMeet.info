@@ -1,0 +1,791 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+type files {
+  asset_id          String?
+  public_id         String?
+  width             Int?
+  height            Int?
+  format            String?
+  created_at        DateTime?
+  subtitledUrl      String?
+  url               String?
+  secure_url        String?
+  folder            String?
+  original_filename String?
+  duration          Float?
+  eager             eager[]
+}
+
+type eager {
+  transformation String?
+  width          Int?
+  height         Int?
+  bytes          Int?
+  format         String?
+  url            String?
+  secure_url     String?
+}
+
+model profileviews {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  user      betausers? @relation(references: [id], fields: [userId])
+  userId    String?    @db.ObjectId
+  count     Int        @default(1)
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+model videos {
+  id              String                  @id @default(auto()) @map("_id") @db.ObjectId
+  transcript      String?
+  confidence      Float?
+  audio           files?
+  report          String?
+  principal       Boolean                 @default(false)
+  job             jobs?                   @relation(references: [id], fields: [jobId])
+  jobId           String?                 @db.ObjectId
+  user            betausers?              @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId          String?                 @db.ObjectId
+  company         betacompanies?          @relation(references: [id], fields: [companyId])
+  companyId       String?                 @db.ObjectId
+  exchange        betawhatsappexchanges?  @relation(references: [id], fields: [exchangeId])
+  exchangeId      String?                 @db.ObjectId
+  responses       betawhatsappresponses[]
+  likes           Int                     @default(0)
+  file            files
+  sharings        profileSharings[]
+  meetCandidate   meetcandidates?         @relation(references: [id], fields: [meetCandidateId], onDelete: SetNull)
+  meetCandidateId String?                 @db.ObjectId
+  preview         Boolean                 @default(false)
+  createdAt       DateTime?
+  updatedAt       DateTime?
+}
+
+model feedback {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  content       String
+  user          betausers?      @relation(references: [id], fields: [userId])
+  userId        String?         @db.ObjectId
+  author        betausers?      @relation("author", references: [id], fields: [authorId])
+  authorId      String?         @db.ObjectId
+  candidate     meetcandidates? @relation(references: [id], fields: [candidateId])
+  candidateId   String?         @db.ObjectId
+  recruiter     meetrecruiters? @relation(references: [id], fields: [recruiterId])
+  recruiterId   String?         @db.ObjectId
+  notifications notifications[]
+  createdAt     DateTime?
+  updatedAt     DateTime?
+}
+
+type googleauthentications {
+  network        String?
+  email          String?
+  email_verified Boolean?
+  family_name    String?
+  given_name     String?
+  locale         String?
+  name           String?
+  nickname       String?
+  picture        String?
+  sid            String?
+  sub            String?
+  updated_at     String?
+}
+
+type socialauthentications {
+  user         googleauthentications?
+  provider     String?
+  accessToken  String?
+  refreshToken String?
+  expiryDate   Int?
+}
+
+type internalauthentications {
+  email    String?
+  username String?
+  salt     String?
+  hash     String?
+  token    String?
+}
+
+type authdetails {
+  social   socialauthentications?
+  internal internalauthentications?
+}
+
+model jobs {
+  id             String            @id @default(auto()) @map("_id") @db.ObjectId
+  href           String?
+  title          translated?
+  frTitle        String?
+  enTitle        String?
+  type           String?
+  topSector      topsectors?       @relation(fields: [topSectorId], references: [id])
+  topSectorId    String?           @db.ObjectId
+  users          betausers[]       @relation(fields: [usersIds], references: [id])
+  usersIds       String[]          @db.ObjectId
+  experience     betaexperiences[]
+  questions      questions[]
+  offers         offers[]
+  candidates     betacandidates[]
+  videos         videos[]
+  meetCandidates meetcandidates[]
+  createdAt      DateTime?
+  updatedAt      DateTime?
+}
+
+model meetcandidates {
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  email             String     @unique
+  firstname         String?
+  lastname          String?
+  fullname          String?
+  linkedinProfileId String?
+  phone             phones?
+  videos            videos[]
+  meets             meets[]
+  feedbacks         feedback[]
+  job               jobs?      @relation(fields: [jobId], references: [id])
+  jobId             String?    @db.ObjectId
+  createdAt         DateTime?
+  updatedAt         DateTime?
+}
+
+model meetrecruiters {
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  email             String     @unique
+  firstname         String?
+  lastname          String?
+  fullname          String?
+  linkedinProfileId String?
+  phone             phones?
+  meets             meets[]
+  feedbacks         feedback[]
+  createdAt         DateTime?
+  updatedAt         DateTime?
+}
+
+model topsectors {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  title     translated
+  jobs      jobs[]
+  offers    offers[]
+  bgImage   String?
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+type errorsonvalidation {
+  message String
+  field   String
+}
+
+type scrappedinfos {
+  fullname String
+}
+
+type betarelationlevels {
+  title    String?
+  location String?
+}
+
+model betaexperiences {
+  id                 String              @id @default(auto()) @map("_id") @db.ObjectId
+  details            betadetails?        @relation(fields: [detailsId], references: [id])
+  detailsId          String?             @db.ObjectId
+  candidate          betacandidates?     @relation(fields: [candidateId], references: [id])
+  candidateId        String?             @db.ObjectId
+  company            betacompanies?      @relation(fields: [companyId], references: [id])
+  companyId          String?             @db.ObjectId
+  companyName        String?
+  ending             String?
+  starting           String?
+  duration           Int?
+  isLiveJob          Boolean?
+  isTargetJob        Boolean?
+  job                jobs?               @relation(fields: [jobId], references: [id])
+  jobId              String?             @db.ObjectId
+  confirmed          Boolean             @default(false)
+  password           String?
+  previouslyEmployed Boolean?
+  referenced         Boolean             @default(false)
+  references         betaprofiles[]      @relation(fields: [referencesIds], references: [id])
+  referencesIds      String[]            @default([]) @db.ObjectId
+  user               betausers?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             String?             @db.ObjectId
+  referenceContacts  referenceContacts[]
+  referencesGiven    references[]
+  createdAt          DateTime?
+  updatedAt          DateTime?
+}
+
+model questions {
+  id              String                  @id @default(auto()) @map("_id") @db.ObjectId
+  type            String?
+  prefix          String?
+  text            String?
+  generated       String?
+  job             jobs?                   @relation(references: [id], fields: [jobId], onDelete: Cascade)
+  jobId           String?                 @db.ObjectId
+  origin          betausers?              @relation(references: [id], fields: [originId])
+  originId        String?                 @db.ObjectId
+  customisation   customisations?         @relation(references: [id], fields: [customisationId])
+  customisationId String?                 @db.ObjectId
+  exchanges       betawhatsappexchanges[]
+  createdAt       DateTime?
+  updatedAt       DateTime?
+}
+
+model meets {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  meetRecruiter   meetrecruiters? @relation(references: [id], fields: [meetRecruiterId])
+  meetRecruiterId String?         @db.ObjectId
+  meetCandidate   meetcandidates? @relation(references: [id], fields: [meetCandidateId])
+  meetCandidateId String?         @db.ObjectId
+  expired         Boolean         @default(false)
+  token           String?
+  createdAt       DateTime?
+  updatedAt       DateTime?
+}
+
+model customisations {
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  origin    betausers?   @relation(references: [id], fields: [originId])
+  originId  String?      @db.ObjectId
+  queues    betaqueues[]
+  questions questions[]
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+model errors {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  environment String
+  pro         Boolean
+  query       String
+  message     String
+  type        Int
+  status      Int?
+  statusText  String
+  createdAt   DateTime
+  updatedAt   DateTime
+}
+
+model betaqueues {
+  id              String                @id @default(auto()) @map("_id") @db.ObjectId
+  origin          betausers?            @relation("recruiter", fields: [originId], references: [id], onDelete: Cascade)
+  originId        String?               @db.ObjectId
+  target          betausers?            @relation("candidate", fields: [targetId], references: [id], onDelete: Cascade)
+  targetId        String?               @db.ObjectId
+  offerTarget     offers?               @relation(fields: [offerTargetId], references: [id])
+  offerTargetId   String?               @db.ObjectId
+  status          String                @default("pending")
+  seen            Boolean?
+  system          String?
+  customisation   customisations?       @relation(fields: [customisationId], references: [id])
+  customisationId String?               @db.ObjectId
+  threads         betawhatsappthreads[]
+  createdAt       DateTime?
+  updatedAt       DateTime?
+}
+
+model betawhatsappthreads {
+  id         String                  @id @default(auto()) @map("_id") @db.ObjectId
+  queue      betaqueues?             @relation(fields: [queueId], references: [id], onDelete: SetNull)
+  queueId    String?                 @unique @db.ObjectId
+  chatId     String?
+  exchanges  betawhatsappexchanges[]
+  terminated Boolean?                @default(false)
+  responses  betawhatsappresponses[]
+  createdAt  DateTime?
+  updatedAt  DateTime?
+}
+
+model betawhatsappresponses {
+  id         String                 @id @default(auto()) @map("_id") @db.ObjectId
+  type       String?
+  content    String?
+  user       betausers?             @relation(fields: [userId], references: [id])
+  userId     String?                @db.ObjectId
+  video      videos?                @relation(fields: [videoId], references: [id])
+  videoId    String?                @db.ObjectId
+  thread     betawhatsappthreads?   @relation(fields: [threadId], references: [id])
+  threadId   String?                @db.ObjectId
+  exchange   betawhatsappexchanges? @relation(fields: [exchangeId], references: [id])
+  exchangeId String?                @db.ObjectId
+  createdAt  DateTime?
+  updatedAt  DateTime?
+}
+
+model betawhatsappexchanges {
+  id         String                  @id @default(auto()) @map("_id") @db.ObjectId
+  step       Int?
+  thread     betawhatsappthreads?    @relation(fields: [threadId], references: [id])
+  threadId   String?                 @db.ObjectId
+  question   questions?              @relation(fields: [questionId], references: [id])
+  questionId String?                 @db.ObjectId
+  responses  betawhatsappresponses[]
+  videos     videos[]
+  createdAt  DateTime?
+  updatedAt  DateTime?
+}
+
+model betacandidates {
+  id                        String            @id @default(auto()) @map("_id") @db.ObjectId
+  avatars                   files[]
+  salaryExpected            String?
+  type                      String?
+  bgImage                   String?
+  confirmed                 Boolean?          @default(false)
+  user                      betausers?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                    String?           @unique @db.ObjectId
+  details                   betadetails[]
+  experiences               betaexperiences[]
+  candidatesNotes           candidatesNotes?
+  suggestedOpportunities    offers[]          @relation(references: [id], fields: [suggestedOpportunitiesIds])
+  suggestedOpportunitiesIds String[]          @db.ObjectId
+  targetJob                 jobs?             @relation(fields: [targetJobId], references: [id])
+  targetJobId               String?           @db.ObjectId
+  targetContractType        String?
+  createdAt                 DateTime?
+  updatedAt                 DateTime?
+}
+
+model candidatesNotes {
+  id           String          @id @default(auto()) @map("_id") @db.ObjectId
+  content      String?
+  appreciation Int?
+  candidate    betacandidates? @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  candidateId  String          @unique @db.ObjectId
+  createdAt    DateTime?
+  updatedAt    DateTime?
+}
+
+model betacompanies {
+  id                  String            @id @default(auto()) @map("_id") @db.ObjectId
+  name                String?           @unique
+  autocompletions     String[]
+  resume              String?
+  location            String?
+  scrapped            Boolean?
+  experiences         betaexperiences[]
+  employeesUsers      betausers[]
+  video               files?
+  linkedinProfilePage String?
+  pro                 Boolean           @default(false)
+  offers              offers[]
+  logo                files?
+  sharings            profileSharings[]
+  videos              videos[]
+  isPublic            Boolean?          @default(false)
+  sharingRefusals     sharingRefusals[]
+  createdAt           DateTime?
+  updatedAt           DateTime?
+}
+
+model betausers {
+  id                             String                  @id @default(auto()) @map("_id") @db.ObjectId
+  age                            Int?
+  auth                           authdetails?
+  candidate                      betacandidates?
+  credit                         Float?                  @default(0)
+  cardPrice                      Float?                  @default(0)
+  description                    String?
+  email                          String?                 @unique
+  firstname                      String?
+  fullname                       String?
+  uniqueName                     String?                 @unique
+  extension                      String?                 @default("")
+  languages                      String[]                @default([])
+  lastname                       String?
+  linkedinProfileId              String?
+  picture                        String?
+  customerId                     String?
+  trial                          Boolean?                @default(false)
+  active                         Boolean?
+  roles                          jobs[]                  @relation(fields: [rolesIds], references: [id])
+  rolesIds                       String[]                @db.ObjectId
+  profile                        betaprofiles?
+  experiences                    betaexperiences[]
+  details                        betadetails?
+  recruiterQueues                betaqueues[]            @relation("recruiter")
+  candidateQueues                betaqueues[]            @relation("candidate")
+  unlimited                      Boolean?
+  user                           Boolean?
+  role                           String?
+  scrapped                       Boolean?
+  hasVideo                       Boolean?
+  videos                         videos[]
+  cvFile                         files?
+  status                         String?
+  isPublic                       Boolean?                @default(false)
+  myOffers                       offers[]                @relation("author")
+  candidatedOffers               offers[]                @relation("candidates", fields: [candidatedOffersIds], references: [id])
+  candidatedOffersIds            String[]                @default([]) @db.ObjectId
+  createdFavorites               favorites[]             @relation("origin")
+  unvolonteerFavorites           favorites[]             @relation("target")
+  createdVerificationRequest     verificationRequest[]   @relation("origin")
+  unvolonteerVerificationRequest verificationRequest[]   @relation("target")
+  createdInterviewOffer          interviewOffer[]        @relation("origin")
+  unvolonteerInterviewOffer      interviewOffer[]        @relation("target")
+  createdNotifications           notifications[]         @relation("origin")
+  unvolonteerNotifications       notifications[]         @relation("target")
+  references                     references[]
+  cv                             Boolean                 @default(false)
+  consent                        Boolean                 @default(false)
+  pro                            Boolean                 @default(false)
+  referenceContacts              referenceContacts[]
+  sharings                       profileSharings[]
+  company                        betacompanies?          @relation(references: [id], fields: [companyId])
+  companyId                      String?                 @db.ObjectId
+  affiliation                    affiliations?           @relation("children", references: [id], fields: [affiliationId], onDelete: NoAction, onUpdate: NoAction)
+  affiliationId                  String?                 @db.ObjectId
+  hiddenFields                   String[]                @default([])
+  unlockedUsers                  unlockedUsers[]         @relation("origin")
+  watchedUsers                   unlockedUsers[]         @relation("target")
+  professionalEmail              Boolean?                @default(false)
+  remarks                        userRemarks[]
+  feedbacks                      feedback[]
+  feedbacksCreated               feedback[]              @relation("author")
+  questions                      questions[]
+  customisations                 customisations[]
+  profileViews                   profileviews[]
+  sharingRefusalsReceived        sharingRefusals[]
+  responses                      betawhatsappresponses[]
+  affiliations                   affiliations[]          @relation("parent")
+  leadsChildren                  leads[]
+  createdAt                      DateTime?
+  updatedAt                      DateTime?
+}
+
+model affiliations {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  parent    betausers?  @relation("parent", references: [id], fields: [parentId], onDelete: Cascade)
+  parentId  String?     @unique @db.ObjectId
+  children  betausers[] @relation("children")
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+model unlockedUsers {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  origin    betausers? @relation("origin", references: [id], fields: [originId])
+  originId  String?    @db.ObjectId
+  target    betausers? @relation("target", references: [id], fields: [targetId])
+  targetId  String?    @db.ObjectId
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+type phones {
+  code   String?
+  number String?
+}
+
+model betadetails {
+  id          String            @id @default(auto()) @map("_id") @db.ObjectId
+  websites    String?
+  twitter     String?
+  facebook    String?
+  birthday    String?
+  phone       phones?
+  phone2      phones?
+  email       String?
+  email2      String?
+  principal   Boolean           @default(false)
+  profile     betaprofiles?     @relation(fields: [profileId], references: [id])
+  profileId   String?           @db.ObjectId
+  user        betausers?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String?           @unique @db.ObjectId
+  candidate   betacandidates?   @relation(fields: [candidateId], references: [id])
+  candidateId String?           @db.ObjectId
+  experiences betaexperiences[]
+  createdAt   DateTime?
+  updatedAt   DateTime?
+}
+
+model betaprofiles {
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  details           betadetails[]
+  allSkills         String?
+  user              betausers?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String?           @unique @db.ObjectId
+  refExperiences    betaexperiences[] @relation(references: [id], fields: [refExperiencesIds])
+  refExperiencesIds String[]          @default([]) @db.ObjectId
+  createdAt         DateTime?
+  updatedAt         DateTime?
+}
+
+type MessageGPT {
+  role    String
+  name    String?
+  content String
+}
+
+model formQuestions {
+  id        String          @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  type      String          @default("text")
+  responses formResponses[]
+  target    String
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+model formResponses {
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  question   formQuestions? @relation(references: [id], fields: [questionId])
+  questionId String?        @db.ObjectId
+  content    String
+  type       String         @default("text")
+  isTrue     Boolean        @default(false)
+  lead       leads?         @relation(references: [id], fields: [leadId])
+  leadId     String?        @db.ObjectId
+  createdAt  DateTime?
+  updatedAt  DateTime?
+}
+
+model leads {
+  id                String          @id @default(auto()) @map("_id") @db.ObjectId
+  name              String?
+  email             String
+  phone             phones?
+  contacted         Boolean?
+  prospected        Boolean?
+  token             String?
+  linkedinProfileId String?
+  type              String
+  trialOffering     DateTime?
+  fr                Boolean?        @default(true)
+  parent            betausers?      @relation(references: [id], fields: [parentId])
+  parentId          String?         @db.ObjectId
+  responses         formResponses[]
+  createdAt         DateTime?
+  updatedAt         DateTime?
+}
+
+model gptcompetencies {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  slug          String?   @unique
+  extension     String?
+  title         String
+  definition    String
+  relatedSkills String[]
+  advantages    String[]
+  examples      String[]
+  importance    String
+  development   String
+  conclusion    String
+  keywords      String[]
+  offers        offers[]  @relation(fields: [offersIds], references: [id])
+  offersIds     String[]  @default([]) @db.ObjectId
+  createdAt     DateTime?
+  updatedAt     DateTime?
+}
+
+model userRemarks {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  content   String?
+  user      betausers? @relation(references: [id], fields: [userId])
+  userId    String?    @db.ObjectId
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+model offers {
+  id                     String            @id @default(auto()) @map("_id") @db.ObjectId
+  slug                   String?           @unique
+  extension              String?
+  sector                 topsectors?       @relation(fields: [sectorId], references: [id])
+  sectorId               String?           @db.ObjectId
+  job                    jobs?             @relation(fields: [jobId], references: [id])
+  jobId                  String?           @db.ObjectId
+  content                String?
+  profileSearched        String?
+  requirements           gptcompetencies[] @relation(fields: [requirementsIds], references: [id])
+  requirementsIds        String[]          @default([]) @db.ObjectId
+  jobDescriptionLink     String?
+  revenue                Int?
+  contractType           String?
+  remote                 String?
+  location               String?
+  limitDate              DateTime?
+  authorInterviewLink    String?
+  authorName             String?
+  authorEmail            String?
+  rebroadcast            Boolean?          @default(false)
+  companyName            String?
+  companyLogo            String?
+  author                 betausers?        @relation("author", fields: [authorId], references: [id])
+  authorId               String?           @db.ObjectId
+  candidates             betausers[]       @relation("candidates", fields: [candidatesIds], references: [id])
+  candidatesIds          String[]          @default([]) @db.ObjectId
+  generated              String?
+  company                betacompanies?    @relation(references: [id], fields: [companyId])
+  companyId              String?           @db.ObjectId
+  suggestedCandidates    betacandidates[]  @relation(references: [id], fields: [suggestedCandidatesIds])
+  suggestedCandidatesIds String[]          @db.ObjectId
+  favorites              favorites[]
+  sharings               profileSharings[]
+  queues                 betaqueues[]
+  createdAt              DateTime?
+  updatedAt              DateTime?
+}
+
+model favorites {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  origin        betausers? @relation("origin", fields: [originId], references: [id])
+  originId      String?    @db.ObjectId
+  target        betausers? @relation("target", fields: [targetId], references: [id])
+  targetId      String?    @db.ObjectId
+  offerTarget   offers?    @relation(fields: [offerTargetId], references: [id])
+  offerTargetId String?    @db.ObjectId
+  createdAt     DateTime?
+  updatedAt     DateTime?
+}
+
+model verificationRequest {
+  id                 String     @id @default(auto()) @map("_id") @db.ObjectId
+  type               String[]
+  professionalProofs files[]
+  academicProofs     files[]
+  judiciaryProofs    files[]
+  origin             betausers? @relation("origin", fields: [originId], references: [id])
+  originId           String?    @db.ObjectId
+  target             betausers? @relation("target", fields: [targetId], references: [id])
+  targetId           String?    @db.ObjectId
+  createdAt          DateTime?
+  updatedAt          DateTime?
+}
+
+model interviewOffer {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  status    String?    @default("pending")
+  datetime  DateTime?
+  comment   String?
+  origin    betausers? @relation("origin", fields: [originId], references: [id])
+  originId  String?    @db.ObjectId
+  target    betausers? @relation("target", fields: [targetId], references: [id])
+  targetId  String?    @db.ObjectId
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
+model references {
+  id           String           @id @default(auto()) @map("_id") @db.ObjectId
+  type         String?
+  content      String?
+  concerned    String?
+  valid        Boolean?
+  user         betausers?       @relation(fields: [userId], references: [id])
+  userId       String?          @db.ObjectId
+  experience   betaexperiences? @relation(fields: [experienceId], references: [id])
+  experienceId String?          @db.ObjectId
+  createdAt    DateTime?
+  updatedAt    DateTime?
+}
+
+model referenceContacts {
+  id           String           @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String?
+  phone        phones?
+  position     String?
+  experience   betaexperiences? @relation(fields: [experienceId], references: [id])
+  experienceId String?          @db.ObjectId
+  user         betausers?       @relation(fields: [userId], references: [id])
+  userId       String?          @db.ObjectId
+  createdAt    DateTime?
+  updatedAt    DateTime?
+}
+
+model notifications {
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  type        String
+  content     String?
+  concernedId String?
+  refusal     sharingRefusals? @relation(fields: [refusalId], references: [id])
+  refusalId   String?          @db.ObjectId
+  sharing     profileSharings? @relation(fields: [sharingId], references: [id])
+  sharingId   String?          @db.ObjectId
+  feedback    feedback?        @relation(fields: [feedbackId], references: [id])
+  feedbackId  String?          @db.ObjectId
+  status      String           @default("pending")
+  origin      betausers?       @relation("origin", fields: [originId], references: [id])
+  originId    String?          @db.ObjectId
+  target      betausers?       @relation("target", fields: [targetId], references: [id])
+  targetId    String?          @db.ObjectId
+  createdAt   DateTime?
+  updatedAt   DateTime?
+}
+
+model profileSharings {
+  id            String            @id @default(auto()) @map("_id") @db.ObjectId
+  origin        betausers?        @relation(fields: [originId], references: [id], onDelete: Cascade)
+  originId      String?           @db.ObjectId
+  target        betacompanies?    @relation(fields: [targetId], references: [id])
+  targetId      String?           @db.ObjectId
+  offerTarget   offers?           @relation(fields: [offerTargetId], references: [id], onDelete: Cascade)
+  offerTargetId String?           @db.ObjectId
+  video         videos?           @relation(fields: [videoId], references: [id])
+  videoId       String?           @db.ObjectId
+  notifications notifications[]
+  refusals      sharingRefusals[]
+  createdAt     DateTime?
+  updatedAt     DateTime?
+}
+
+model sharingRefusals {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  reason        String?
+  type          String
+  origin        betacompanies?   @relation(fields: [originId], references: [id], onDelete: Cascade)
+  originId      String?          @db.ObjectId
+  target        betausers?       @relation(fields: [targetId], references: [id])
+  targetId      String?          @db.ObjectId
+  sharing       profileSharings? @relation(fields: [sharingId], references: [id])
+  sharingId     String?          @db.ObjectId
+  notifications notifications[]
+  createdAt     DateTime?
+  updatedAt     DateTime?
+}
+
+type translated {
+  en String?
+  fr String?
+}
+
+type articleParagraphs {
+  title   translated
+  content translated
+}
+
+type articlesLinks {
+  href  String?
+  label translated?
+}
+
+model articles {
+  id           String              @id @default(auto()) @map("_id") @db.ObjectId
+  slug         String              @unique
+  extension    String?
+  title        translated
+  description  translated?
+  paragraphs   articleParagraphs[]
+  introduction translated?
+  conclusion   translated?
+  links        articlesLinks[]
+  new          Boolean?
+  bgImage      String?
+  alt          String?
+  createdAt    DateTime?
+  updatedAt    DateTime?
+}

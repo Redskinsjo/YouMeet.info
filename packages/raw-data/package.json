@@ -5,6 +5,7 @@
   "exports": {
     "./languages.json": "./languages.json",
     "./phoneCodes.json": "./phoneCodes.json",
-    "./productJSONs.json": "./productJSONs.json"
+    "./productJSONs.json": "./productJSONs.json",
+    "./produits.json": "./produits.json"
   }
 }

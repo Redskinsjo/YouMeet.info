@@ -1,0 +1,84 @@
+[
+  {
+    "id": "1",
+    "title": { "fr": "Mise en Relation", "en": "Linking" },
+    "slug": "/le-produit/mise-en-relation",
+    "punchlines": [
+      {
+        "text": "linking-text1",
+        "cta": "linking-cta1"
+      },
+      {
+        "text": "linking-text2",
+        "cta": "linking-cta2"
+      },
+      {
+        "text": "linking-text3",
+        "cta": "linking-cta3"
+      },
+      {
+        "text": "linking-text4",
+        "cta": "linking-cta4"
+      },
+      {
+        "text": "linking-text5",
+        "cta": "linking-cta5"
+      },
+      {
+        "text": "linking-text6",
+        "cta": "linking-cta6"
+      },
+      {
+        "text": "linking-text7",
+        "cta": "linking-cta7"
+      },
+      {
+        "text": "linking-text8",
+        "cta": "linking-cta8"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": { "fr": "ATS", "en": "ATS" },
+    "slug": "/le-produit/ats",
+    "punchlines": [
+      {
+        "text": "ats-text1",
+        "cta": "ats-cta1"
+      },
+      {
+        "text": "ats-text2",
+        "cta": "ats-cta2"
+      },
+      {
+        "text": "ats-text3",
+        "cta": "ats-cta3"
+      },
+      {
+        "text": "ats-text4",
+        "cta": "ats-cta4"
+      },
+      {
+        "text": "ats-text5",
+        "cta": "ats-cta5"
+      },
+      {
+        "text": "ats-text6",
+        "cta": "ats-cta6"
+      },
+      {
+        "text": "ats-text7",
+        "cta": "ats-cta7"
+      },
+      {
+        "text": "ats-text8",
+        "cta": "ats-cta8"
+      },
+      {
+        "text": "ats-text9",
+        "cta": "ats-cta9"
+      }
+    ]
+  }
+]

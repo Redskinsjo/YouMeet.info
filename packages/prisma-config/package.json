@@ -1,0 +1,17 @@
+{
+  "name": "@youmeet/prisma-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./prisma": "./prisma.ts"
+  },
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts --watch"
+  },
+  "devDependencies": {
+    "prisma": "^5.16.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.16.2"
+  }
+}

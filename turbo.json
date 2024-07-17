@@ -16,6 +16,22 @@
       "env": ["*"],
       "outputs": ["gql/generated.ts"]
     },
+    "format": {
+      "dependsOn": ["^format"],
+      "env": ["*"]
+    },
+    "db-push-dev": {
+      "dependsOn": ["^db-push-dev"],
+      "env": ["*"]
+    },
+    "db-push": {
+      "dependsOn": ["^db-push"],
+      "env": ["*"]
+    },
+    "generate": {
+      "dependsOn": ["^generate"],
+      "env": ["*"]
+    },
     "type-check": {}
   }
 }

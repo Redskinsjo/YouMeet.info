@@ -6,7 +6,10 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "yarn prisma format",
+    "db-push-dev": "dotenv -e .env.development -- yarn prisma db push",
+    "db-push": "dotenv -e .env -- yarn prisma db push",
+    "generate": "yarn prisma generate"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
