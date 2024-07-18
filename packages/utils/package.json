@@ -1,0 +1,16 @@
+{
+  "name": "@youmeet/utils",
+  "version": "0.0.0",
+  "private": true,
+  "imports": {
+    "@/*": "./*"
+  },
+  "exports": {
+    ".": "./"
+  },
+  "dependencies": {
+    "@youmeet/gql": "*",
+    "@youmeet/typescript-config": "*",
+    "next": "^14.2.3"
+  }
+}
