@@ -3,7 +3,7 @@ import {
   ProFormHandledData,
   OfferHandledData,
 } from "@youmeet/types/form/FormHandledData";
-import { fromNames } from "@/utils/resolvers/resolveFullname";
+import { fromNames } from "@youmeet/utils/resolvers/resolveFullname";
 import {
   FormHandledData,
   FormNonHandledData,

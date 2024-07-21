@@ -3,10 +3,10 @@ import {
   getLead,
   getUser,
   updateUser,
-} from "@/app/_functions/request";
+} from "@youmeet/functions/request";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
-import setUniqueNameAndExtension from "@/utils/backoffice/setUniqueNameAndExtension";
-import { isProfessionalEmail } from "@/utils/isProfessionalEmail";
+import setUniqueNameAndExtension from "@/backoffice/setUniqueNameAndExtension";
+import { isProfessionalEmail } from "@/isProfessionalEmail";
 import { EmailingParams, StripeParams } from "@youmeet/types/api/StripeParams";
 import { BackendError } from "../BackendErrorClass";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
@@ -26,7 +26,7 @@ import { setName } from "../setName";
 const processChoice = async (
   customer: any,
   user: BetaUser,
-  params: StripeParams & EmailingParams,
+  params: StripeParams & EmailingParams
 ) => {
   try {
     if (params.choice === "premium") {
@@ -36,7 +36,7 @@ const processChoice = async (
           BACKEND_ERRORS.UNKNOWN,
           BACKEND_MESSAGES.UNKNOWN,
           undefined,
-          "dashboard",
+          "dashboard"
         );
       }
       const updated = (await updateUser<BetaUser>({
@@ -48,7 +48,7 @@ const processChoice = async (
           BACKEND_ERRORS.NO_USER,
           BACKEND_MESSAGES.NO_USER,
           undefined,
-          "dashboard",
+          "dashboard"
         );
       }
     } else if (params.choice === "credit") {
@@ -61,7 +61,7 @@ const processChoice = async (
           BACKEND_ERRORS.NO_USER,
           BACKEND_MESSAGES.NO_USER,
           undefined,
-          "dashboard",
+          "dashboard"
         );
       }
     } else {
@@ -69,7 +69,7 @@ const processChoice = async (
         BACKEND_ERRORS.NO_CHOICE,
         BACKEND_MESSAGES.NO_CHOICE,
         undefined,
-        "dashboard",
+        "dashboard"
       );
     }
   } catch (err: any) {
@@ -79,7 +79,7 @@ const processChoice = async (
 
 const processCustomerCreation = async (
   user: BetaUser,
-  params: StripeParams & EmailingParams,
+  params: StripeParams & EmailingParams
 ) => {
   try {
     const customer = await createCustomer(user);
@@ -96,7 +96,7 @@ const processCustomerCreation = async (
           BACKEND_ERRORS.CUSTOMER_NOT_CREATED,
           BACKEND_MESSAGES.CUSTOMER_NOT_CREATED,
           undefined,
-          "dashboard",
+          "dashboard"
         );
       }
     }
@@ -112,7 +112,7 @@ const handleMiddlewares = (user: BetaUser, trial?: boolean) => {
     } else {
       throw new BackendError(
         BACKEND_ERRORS.NOT_AUTHORIZED,
-        BACKEND_MESSAGES.NOT_AUTHORIZED,
+        BACKEND_MESSAGES.NOT_AUTHORIZED
       );
     }
   } catch (err: any) {
@@ -122,7 +122,7 @@ const handleMiddlewares = (user: BetaUser, trial?: boolean) => {
 
 const handleTrialForUser = async (
   user: BetaUser,
-  params: StripeParams & EmailingParams,
+  params: StripeParams & EmailingParams
 ) => {
   try {
     const auth = handleMiddlewares(user, user?.trial || false);
@@ -149,7 +149,7 @@ const handleTrialForUser = async (
 export const redir = (
   type: BACKEND_ERRORS,
   msg: BACKEND_MESSAGES,
-  uri?: string,
+  uri?: string
 ) => {
   return handleRedirect(
     {
@@ -158,12 +158,12 @@ export const redir = (
         message: msg,
       },
     },
-    uri,
+    uri
   );
 };
 
 export const handleTrialLoggedOut = async (
-  params: StripeParams & EmailingParams,
+  params: StripeParams & EmailingParams
 ): Promise<Response | NextResponse<unknown>> => {
   try {
     const lead = (await getLead<Lead>({ id: params.leadId })) as Lead;
@@ -182,7 +182,7 @@ export const handleTrialLoggedOut = async (
         const { uniqueName, extension } = await setUniqueNameAndExtension(
           firstname || "",
           lastname || "",
-          1,
+          1
         );
 
         user = (await createUser<BetaUser>({
@@ -211,7 +211,7 @@ export const handleTrialLoggedOut = async (
     } else {
       throw new BackendError(
         BACKEND_ERRORS.NOT_AUTHORIZED,
-        BACKEND_MESSAGES.NOT_AUTHORIZED,
+        BACKEND_MESSAGES.NOT_AUTHORIZED
       );
     }
   } catch (err: any) {
@@ -221,7 +221,7 @@ export const handleTrialLoggedOut = async (
 
 export const handleTrialLoggedIn = async (
   loginPro: string,
-  params: StripeParams & EmailingParams,
+  params: StripeParams & EmailingParams
 ): Promise<Response | NextResponse<unknown>> => {
   try {
     const verified = await verifyTokenServer(loginPro);
@@ -242,7 +242,7 @@ export const handleTrialLoggedIn = async (
 
 export const handleCheckoutLoggedIn = async (
   loginPro: string,
-  params: StripeParams & EmailingParams,
+  params: StripeParams & EmailingParams
 ) => {
   try {
     const verified = await verifyTokenServer(loginPro);
@@ -272,14 +272,14 @@ export const handleCheckoutLoggedIn = async (
         "subscription",
         returnTo,
         customerPayload,
-        user.id || "",
+        user.id || ""
       );
     } else if (params.choice === "credit") {
       session = await createSession(
         "payment",
         returnTo,
         customerPayload,
-        user.id || "",
+        user.id || ""
       );
     }
     if (session) {
@@ -292,7 +292,7 @@ export const handleCheckoutLoggedIn = async (
     } else {
       throw new BackendError(
         BACKEND_ERRORS.NO_CHOICE,
-        BACKEND_MESSAGES.NO_CHOICE,
+        BACKEND_MESSAGES.NO_CHOICE
       );
     }
   } catch (err: any) {

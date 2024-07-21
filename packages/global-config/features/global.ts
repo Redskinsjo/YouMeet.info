@@ -50,12 +50,7 @@ export const globalSlice = createSlice({
     ) => {
       state.upload = action.payload;
     },
-    setError: (
-      state,
-      action: PayloadAction<
-        "fileTooLarge" | "not-completed" | "request-feedback" | null
-      >
-    ) => {
+    setError: (state, action: PayloadAction<GlobalError | null>) => {
       state.error = action.payload;
     },
     setLogin: (state, action: PayloadAction<boolean>) => {

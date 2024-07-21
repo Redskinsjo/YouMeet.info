@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction, Slice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface SelectionState {
   interviewOfferId?: string | undefined;
@@ -17,7 +17,7 @@ export const selectionSlice = createSlice({
   reducers: {
     setSelection: (
       state,
-      action: PayloadAction<{ id: string; type: string }>,
+      action: PayloadAction<{ id: string; type: string }>
     ) => {
       if (action.payload.type === "interview")
         state.interviewOfferId = action.payload.id;

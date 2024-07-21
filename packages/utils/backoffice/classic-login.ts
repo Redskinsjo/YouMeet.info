@@ -1,4 +1,4 @@
-import { uri } from "@/imports";
+import { uri } from "@youmeet/functions/imports";
 import { PayloadRedirections } from "@youmeet/types/api/backend";
 
 export const handleRedirect = (

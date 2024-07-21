@@ -1,10 +1,10 @@
-import { getSubscriptionStatus2 } from "@/global/useSubscriptionStatus";
+import { getSubscriptionStatus2 } from "@youmeet/global-config/useSubscriptionStatus";
 import { BetaUser } from "@youmeet/gql/generated";
 import {
   chatbotProduct,
   premiumProduct,
   verifiedProduct,
-} from "@/app/_functions/imports";
+} from "@youmeet/functions/imports";
 
 const fetchStatus = async (user: BetaUser) => {
   if (user.email) {
@@ -22,13 +22,13 @@ export const detectSubscribed = async (user: BetaUser) => {
   const status = await fetchStatus(user);
   if (status) {
     const verifiedClient = status?.subscriptions.find(
-      (sub) => sub.plan.id === verifiedProduct && (sub.plan as any).active,
+      (sub) => sub.plan.id === verifiedProduct && (sub.plan as any).active
     );
     const premiumClient = status?.subscriptions.find(
-      (sub) => sub.plan.id === premiumProduct && (sub.plan as any).active,
+      (sub) => sub.plan.id === premiumProduct && (sub.plan as any).active
     );
     const chatbotClient = status?.subscriptions.find(
-      (sub) => sub.plan.id === chatbotProduct && (sub.plan as any).active,
+      (sub) => sub.plan.id === chatbotProduct && (sub.plan as any).active
     );
     return {
       verified: verifiedClient ? "Oui" : "Non",

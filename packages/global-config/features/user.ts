@@ -7,6 +7,7 @@ import {
   BetaUser,
   InterviewOffer,
   Job,
+  Offer,
   Video,
 } from "@youmeet/gql/generated";
 import { createSlice } from "@reduxjs/toolkit";
@@ -35,16 +36,17 @@ export interface UserState {
   roles: Job[] | undefined;
   unlimited: boolean;
   role: string;
-  videos: Video[];
-  cvFile: Avatar | null;
   consent: boolean;
   isPublic: boolean;
+  cvFile: Avatar | null;
   user: boolean;
   pro: boolean;
   company: BetaCompany | undefined;
   hiddenFields: string[];
   professionalEmail: boolean;
   uniqueName: string;
+  videos: Video[];
+  myOffers: Offer[];
 }
 
 const initialState: UserState = {
@@ -63,15 +65,14 @@ const initialState: UserState = {
   firstname: "",
   picture: "",
   credit: 0,
+  cvFile: null,
   customerId: "",
   scrapped: false,
   trial: false,
   roles: undefined,
   unlimited: false,
   role: "",
-  videos: [],
   interviews: [],
-  cvFile: null,
   consent: false,
   isPublic: false,
   user: false,
@@ -80,6 +81,8 @@ const initialState: UserState = {
   hiddenFields: [],
   professionalEmail: false,
   uniqueName: "",
+  videos: [],
+  myOffers: [],
 };
 
 export const userSlice = createSlice({
@@ -103,9 +106,7 @@ export const userSlice = createSlice({
       const credit = action.payload?.credit;
       const scrapped = action.payload?.scrapped;
       const role = action.payload?.role;
-      const videos = action.payload?.videos;
       const interviews = action.payload?.interviews;
-      const cvFile = action.payload?.cvFile;
       const consent = action.payload.consent;
       const isPublic = action.payload.isPublic;
       const user = action.payload.user;
@@ -114,12 +115,16 @@ export const userSlice = createSlice({
       const hiddenFields = action.payload.hiddenFields;
       const professionalEmail = action.payload.professionalEmail;
       const uniqueName = action.payload.uniqueName;
+      const videos = action.payload.videos;
+      const cvFile = action.payload.cvFile;
+      const myOffers = action.payload.myOffers;
 
       // remember when you wanted to get a customerId for activating a candidate feedbacks
       const customerId = action.payload?.customerId;
       const trial = action.payload?.trial;
       const roles = action.payload?.roles as Job[];
 
+      if (videos) state.videos = videos as Video[];
       if (id) state.id = id;
       if (email) state.email = email;
       if (description) state.description = description;
@@ -135,13 +140,11 @@ export const userSlice = createSlice({
       if (scrapped !== undefined) state.scrapped = scrapped as boolean;
       if (role) state.role = role;
       if (unlimited !== undefined) state.unlimited = unlimited as boolean;
-      if (typeof credit === "number") state.credit = credit;
+      state.credit = credit ?? 0;
       if (customerId) state.customerId = customerId;
       if (trial !== undefined) state.trial = trial as boolean;
       if (roles) state.roles = roles;
-      if (videos) state.videos = videos as Video[];
       if (interviews) state.interviews = interviews as InterviewOffer[];
-      if (cvFile) state.cvFile = cvFile;
       if (consent !== undefined) state.consent = consent as boolean;
       if (isPublic !== undefined) state.isPublic = isPublic as boolean;
       if (user !== undefined) state.user = user as boolean;
@@ -151,11 +154,14 @@ export const userSlice = createSlice({
       if (professionalEmail !== undefined)
         state.professionalEmail = professionalEmail as boolean;
       if (uniqueName) state.uniqueName = uniqueName as string;
+      if (cvFile) state.cvFile = cvFile as Avatar;
+      if (myOffers) state.myOffers = myOffers as Offer[];
     },
     setCredit: (state: UserState, action: PayloadAction<number>) => {
       state.credit = action.payload;
     },
     removeUser: (state: UserState, action: PayloadAction<string>) => {
+      state.videos = [];
       state.id = "";
       state.email = "";
       state.phone = "";
@@ -175,15 +181,15 @@ export const userSlice = createSlice({
       state.unlimited = false;
       state.consent = false;
       state.isPublic = false;
-      state.videos = [];
       state.interviews = [];
-      state.cvFile = null;
       state.user = false;
       state.pro = false;
       state.company = undefined;
       state.hiddenFields = [];
       state.professionalEmail = false;
       state.uniqueName = "";
+      state.cvFile = null;
+      state.myOffers = [];
     },
     setCustomerId: (state: UserState, action: PayloadAction<string>) => {
       state.customerId = action.payload;

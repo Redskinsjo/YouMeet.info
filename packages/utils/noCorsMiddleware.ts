@@ -1,4 +1,4 @@
-import { dev } from "@/app/_functions/imports";
+import { dev } from "@youmeet/functions/imports";
 import { ContextRequest } from "@youmeet/types/ContextRequest";
 
 export const noCorsMiddleware = async (context: ContextRequest) => {

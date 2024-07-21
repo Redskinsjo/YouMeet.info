@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import globalSlice from "@/global/features/global";
-import formSlice from "@/global/features/form";
-import userSlice from "@/global/features/user";
-import searchSlice from "@/global/features/search";
-import modalSlice from "@/global/features/modal";
+import globalSlice from "./features/global";
+import formSlice from "./features/form";
+import userSlice from "./features/user";
+import searchSlice from "./features/search";
+import modalSlice from "./features/modal";
 import selectionSlice from "./features/selection";
 
 export const store = configureStore({

@@ -1,5 +1,5 @@
 import { Avatar } from "@youmeet/gql/generated";
-import { dev } from "@/app/_functions/imports";
+import { dev } from "@youmeet/functions/imports";
 import { isAvatar } from "@youmeet/types/TypeGuards";
 
 export default (file: Avatar | undefined | null): string | undefined => {

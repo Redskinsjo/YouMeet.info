@@ -2,12 +2,12 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { verif } from "./jwt";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import Cookies from "js-cookie";
-import { uri } from "@/app/_functions/imports";
+import { uri } from "@youmeet/functions/imports";
 
 export const redirectToLogin = async (
   router: AppRouterInstance,
   window: Window,
-  subscribed?: boolean,
+  subscribed?: boolean
 ) => {
   let returnToPath;
   const cookie = Cookies.get("loginPro");
@@ -21,22 +21,22 @@ export const redirectToLogin = async (
 
       if (verified?.pro) {
         return router.push(
-          `${uri}/se-connecter?redirect=${encodeURIComponent(returnToPath)}`,
+          `${uri}/se-connecter?redirect=${encodeURIComponent(returnToPath)}`
         );
       } else if (verified.user) {
         return router.push(
-          `/se-connecter?redirect=${encodeURIComponent(returnToPath)}`,
+          `/se-connecter?redirect=${encodeURIComponent(returnToPath)}`
         );
       }
     }
     returnToPath = window.location.pathname;
     if (verified?.pro) {
       return router.push(
-        `${uri}/se-connecter?redirect=${encodeURIComponent(returnToPath)}`,
+        `${uri}/se-connecter?redirect=${encodeURIComponent(returnToPath)}`
       );
     } else if (verified.user) {
       return router.push(
-        `/se-connecter?redirect=${encodeURIComponent(returnToPath)}`,
+        `/se-connecter?redirect=${encodeURIComponent(returnToPath)}`
       );
     }
     return router.push(`/?returnTo=${encodeURIComponent(returnToPath)}`);
@@ -46,6 +46,6 @@ export const redirectToLogin = async (
     currentLocation.replace(new URL(currentLocation).origin, "") || "/";
 
   return router.push(
-    `/se-connecter?redirect=${encodeURIComponent(returnToPath)}`,
+    `/se-connecter?redirect=${encodeURIComponent(returnToPath)}`
   );
 };

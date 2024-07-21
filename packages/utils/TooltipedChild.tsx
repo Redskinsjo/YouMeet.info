@@ -50,7 +50,7 @@ const TooltipChild = (
   props: {
     asset: BetaExperience | string;
   },
-  ref: any,
+  ref: any
 ) => {
   return (
     <div

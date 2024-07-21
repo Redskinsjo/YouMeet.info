@@ -5,12 +5,15 @@
   "imports": {
     "@/*": "./*"
   },
-  "exports": {
-    ".": "./"
-  },
   "dependencies": {
-    "@youmeet/gql": "*",
-    "@youmeet/typescript-config": "*",
-    "next": "^14.2.3"
+    "next": "^14.2.3",
+    "react-hook-form": "^7.52.1",
+    "@mui/material": "^5.16.0",
+    "react": "^19.0.0-canary-fd0da3eef-20240404",
+    "js-cookie": "^3.0.5",
+    "uid2": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6"
   }
 }

@@ -1,5 +1,5 @@
-import { dev, test } from "@/app/_functions/imports";
-import { createError } from "@/app/_functions/request";
+import { dev, test } from "@youmeet/functions/imports";
+import { createError } from "@youmeet/functions/request";
 import { ContextRequest } from "@youmeet/types/ContextRequest";
 import { BACKEND_ERRORS } from "@youmeet/types/api/backend";
 

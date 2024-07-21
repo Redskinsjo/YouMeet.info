@@ -1,13 +1,13 @@
 import { CookieListItem } from "next/dist/compiled/@edge-runtime/cookies";
 import { BetaCandidate, Translated, Video } from "@youmeet/gql/generated";
-import setFileUrl from "@/utils/setFileUrl";
+import setFileUrl from "@/setFileUrl";
 import { v1 as VideoIntelligence } from "@google-cloud/video-intelligence";
 import OpenAI from "openai";
-import { generateChat } from "@/utils/generateChat";
-import { getCandidate, updateVideo } from "@/app/_functions/request";
-import { submitFile } from "@/utils/submitFile";
+import { generateChat } from "@/generateChat";
+import { getCandidate, updateVideo } from "@youmeet/functions/request";
+import { submitFile } from "@/submitFile";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { BackendError } from "@/utils/BackendErrorClass";
+import { BackendError } from "@/BackendErrorClass";
 import {
   BACKEND_ERRORS,
   BACKEND_MESSAGES,
@@ -37,7 +37,7 @@ const openai = new OpenAI();
 
 export const analyseVideo = async (
   video: Video,
-  cookies: CookieListItem[],
+  cookies: CookieListItem[]
 ): Promise<{ message: string; error?: true; success?: true }> => {
   try {
     const transcript = video.transcript;
@@ -75,7 +75,7 @@ export const analyseVideo = async (
               "Est-ce que le candidat qui se présente est compétent techniquement? Fais un compte-rendu de sa présentation vidéo.",
           },
         ],
-        "gpt-3.5-turbo",
+        "gpt-3.5-turbo"
       );
       const message = chat?.choices[0].message.content;
       if (message && video.id) {
@@ -84,7 +84,7 @@ export const analyseVideo = async (
             data: { id: video.id, report: message },
           },
           0,
-          true,
+          true
         )) as withData<Video> | PayloadBackendError;
 
         if (result1 && isPayloadError(result1)) {
@@ -92,7 +92,7 @@ export const analyseVideo = async (
         } else if (!result1.data) {
           throw new BackendError(
             BACKEND_ERRORS.PROCESSING,
-            BACKEND_MESSAGES.PROCESSING,
+            BACKEND_MESSAGES.PROCESSING
           );
         } else {
           // const speechFile = path.resolve("./speech.mp3");
@@ -113,7 +113,7 @@ export const analyseVideo = async (
             formData,
             video.id,
             "audio",
-            cookies,
+            cookies
           );
           if (result2 && isPayloadError(result2)) {
             throw new BackendError(result2.type, result2.message);
@@ -123,14 +123,14 @@ export const analyseVideo = async (
                 data: { id: video.id, audio: result2 },
               },
               0,
-              true,
+              true
             )) as withData<Video> | PayloadBackendError;
             if (result3 && isPayloadError(result3)) {
               throw new BackendError(result3.type, result3.message);
             } else if (!result3.data) {
               throw new BackendError(
                 BACKEND_ERRORS.PROCESSING,
-                BACKEND_MESSAGES.PROCESSING,
+                BACKEND_MESSAGES.PROCESSING
               );
             } else {
               return { message: "L'analyse a été faite.", success: true };

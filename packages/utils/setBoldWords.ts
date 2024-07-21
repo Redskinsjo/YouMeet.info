@@ -1,4 +1,4 @@
-import { getGptCompetencySlug } from "@/app/_functions/request";
+import { getGptCompetencySlug } from "@youmeet/functions/request";
 import {
   GetGptCompetenciesDocument,
   GptCompetency,
@@ -15,7 +15,7 @@ export const useLinksRegex = () => {
       if (data?.gptCompetencies) {
         const regex = new RegExp(
           data?.gptCompetencies?.map((comp) => comp?.title).join("|"),
-          "gi",
+          "gi"
         );
         setRegex(regex);
       }
@@ -37,7 +37,7 @@ const isIntertwining = (text: string, word: string) => {
       if (curr === "=") return { ...acc, foundEnd: true };
       return acc;
     },
-    { foundEnd: false, result: false },
+    { foundEnd: false, result: false }
   );
 
   return hasIncluded || isInside.result;
@@ -46,7 +46,7 @@ const isIntertwining = (text: string, word: string) => {
 export const setBoldWords = async (
   text: string,
   regex: RegExp | string,
-  noEndingFormatting: boolean = false,
+  noEndingFormatting: boolean = false
 ): Promise<undefined | { text: string; slugs: { [key: number]: string } }> => {
   if (text && regex) {
     const found = [...new Set(text.match(regex))] || [];

@@ -8,7 +8,7 @@
     },
     "dev": {
       "env": ["*"],
-      "dependsOn": ["codegen"],
+      "dependsOn": ["generate"],
       "persistent": true,
       "cache": false
     },

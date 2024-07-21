@@ -1,4 +1,4 @@
-import { ExperienceInput } from "../../gql/generated";
+import { ExperienceInput } from "@youmeet/gql/generated";
 
 const endMs = (exp: ExperienceInput) =>
   exp.isLiveJob

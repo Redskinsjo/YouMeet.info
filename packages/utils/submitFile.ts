@@ -5,15 +5,20 @@ import {
 } from "@youmeet/types/api/backend";
 import { BackendError } from "./BackendErrorClass";
 import { AvatarInput, BetaUser, Lead } from "@youmeet/gql/generated";
-import { dev, uri } from "@/app/_functions/imports";
-import { createError, getLead, getSimpleUser } from "@/app/_functions/request";
+import { dev, uri } from "@youmeet/functions/imports";
+import {
+  createError,
+  getLead,
+  getSimpleUser,
+} from "@youmeet/functions/request";
 import { getPublicIdFull, getUserIdFromPublicId } from "./getPublicId";
+import { CookieListItem } from "next/dist/compiled/@edge-runtime/cookies";
 
 const setSearchAndFormData = (
   label: string,
   value: string,
   search: URLSearchParams,
-  formData: FormData,
+  formData: FormData
 ) => {
   formData.append(label, value);
   search.append(label, value);
@@ -22,14 +27,15 @@ const setSearchAndFormData = (
 export const submitFile = async (
   fileFormData: FormData,
   userId: string,
-  type: "cv" | "avatar" | "video",
+  type: "cv" | "avatar" | "video" | "logo" | "audio",
+  cookies?: CookieListItem[]
 ): Promise<AvatarInput | PayloadBackendError> => {
   try {
     const file = fileFormData.get("file");
     if (!file)
       throw new BackendError(
         BACKEND_ERRORS.MISSING_ARGUMENT,
-        BACKEND_MESSAGES.UNKNOWN,
+        BACKEND_MESSAGES.UNKNOWN
       );
     const folder = "youmeet-official";
     const unique_filename = false;
@@ -39,6 +45,9 @@ export const submitFile = async (
 
     const avatar = type === "avatar";
     const cv = type === "cv";
+    const logo = type === "logo";
+    const video = type === "video";
+    const audio = type === "audio";
     const id = userId;
     const public_id = getPublicIdFull(id, type);
 
@@ -61,15 +70,19 @@ export const submitFile = async (
         "raw_convert",
         `google_speech:vtt:${lang}`,
         search,
-        form,
+        form
       );
     }
 
+    const loginCookieValue = cookies?.find((c) => c.name === "loginPro")?.value;
+
+    const headers = {} as { [s: string]: string };
+    headers["Content-Type"] = "application/json";
+    if (loginCookieValue) headers["Set-Cookie"] = loginCookieValue;
+
     const response1 = await fetch(`${uri}/api/sign?${search.toString()}`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     });
 
     const { signature, timestamp } = await response1.json();
@@ -87,7 +100,7 @@ export const submitFile = async (
       {
         method: "POST",
         body: form,
-      },
+      }
     );
 
     const result = await response2.json();
@@ -113,7 +126,7 @@ export const submitFile = async (
       throw new BackendError(
         BACKEND_ERRORS.UPLOAD_FAIL,
         result.error.message,
-        response2.status,
+        response2.status
       );
     }
   } catch (err: any) {

@@ -4,11 +4,11 @@ import {
   premiumProduct,
   trialSettings,
   uri,
-} from "@/app/_functions/imports";
+} from "@youmeet/functions/imports";
 import { BetaUser } from "@youmeet/gql/generated";
 
 const stripe = require("stripe")(
-  dev ? `${process.env.STRIPE_SECRET}` : `${process.env.STRIPE_SECRET_PROD}`,
+  dev ? `${process.env.STRIPE_SECRET}` : `${process.env.STRIPE_SECRET_PROD}`
 );
 
 export const createSubscription = async (customerId: string, trial?: true) => {
@@ -45,7 +45,7 @@ export const createSession = async (
   mode: "subscription" | "payment",
   redirect: string,
   customerPayload: { customer: string; customer_email: string },
-  userId: string,
+  userId: string
 ) => {
   const settings = {} as {
     mode: "subscription" | "payment";

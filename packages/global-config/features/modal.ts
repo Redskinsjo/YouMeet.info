@@ -9,34 +9,23 @@ import {
   InterviewOffer,
   Job,
   Lead,
+  Meet,
   Notification,
   Offer,
   ProfileSharing,
 } from "@youmeet/gql/generated";
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction, Slice } from "@reduxjs/toolkit";
+import { CustomModalType } from "@youmeet/types/CustomModal";
+import { OfferContentValues } from "@youmeet/types/OfferContentValues";
+import { OfferDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
+import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 
 export interface ModalState {
-  display:
-    | "feedback"
-    | "search"
-    | "consent"
-    | "backoffice"
-    | "account"
-    | "notifications"
-    | "custom"
-    | "offer"
-    | "publicOffer"
-    | false
-    | "home"
-    | "product"
-    | "blog"
-    | "record";
+  display: CustomModalType | false;
   position:
     | { [key in "top" | "left" | "bottom" | "right"]: number }
     | undefined;
   user?: BetaUser | undefined;
-
+  users?: BetaUser[] | undefined;
   profile?: BetaProfile | undefined;
   experience?: BetaExperience | undefined;
   authorship?: "candidate" | "profile" | undefined;
@@ -49,16 +38,19 @@ export interface ModalState {
   interview: InterviewOffer | undefined;
   notifications: Notification[] | undefined;
   sharing: ProfileSharing | undefined;
-  offer: Offer | undefined;
+  offer: Offer | OfferDefaultValues | undefined;
   publicOffer: Offer | undefined;
+  offerPreview: OfferContentValues | undefined;
   type?: "fileTooLarge" | "unauthorized" | undefined;
   message: string | undefined;
+  meet: Meet | undefined;
 }
 
 const initialState: ModalState = {
   display: false,
   position: undefined,
   user: undefined,
+  users: [],
   profile: undefined,
   experience: undefined,
   authorship: undefined,
@@ -73,8 +65,10 @@ const initialState: ModalState = {
   sharing: undefined,
   offer: undefined,
   publicOffer: undefined,
+  offerPreview: undefined,
   type: undefined,
   message: undefined,
+  meet: undefined,
 };
 
 export const modalSlice = createSlice({
@@ -85,6 +79,7 @@ export const modalSlice = createSlice({
       state.display = action.payload.display;
       if (action.payload.position) state.position = action.payload.position;
       if (action.payload.user) state.user = action.payload.user;
+      if (action.payload.users) state.users = action.payload.users;
       if (action.payload.profile) state.profile = action.payload.profile;
       if (action.payload.candidate) state.candidate = action.payload.candidate;
       if (action.payload.experience)
@@ -103,13 +98,17 @@ export const modalSlice = createSlice({
       if (action.payload.offer) state.offer = action.payload.offer;
       if (action.payload.publicOffer)
         state.publicOffer = action.payload.publicOffer;
+      if (action.payload.offerPreview)
+        state.offerPreview = action.payload.offerPreview;
       if (action.payload.type) state.type = action.payload.type;
       if (action.payload.message) state.message = action.payload.message;
+      if (action.payload.meet) state.meet = action.payload.meet;
     },
     resetModal: (state: ModalState) => {
       state.display = false;
       state.position = undefined;
       state.user = undefined;
+      state.users = [];
       state.profile = undefined;
       state.candidate = undefined;
       state.experience = undefined;
@@ -124,8 +123,10 @@ export const modalSlice = createSlice({
       state.sharing = undefined;
       state.offer = undefined;
       state.publicOffer = undefined;
+      state.offerPreview = undefined;
       state.type = undefined;
       state.message = undefined;
+      state.meet = undefined;
     },
     setModalUserExperiences: (
       state: ModalState,
@@ -137,11 +138,14 @@ export const modalSlice = createSlice({
         experiences: action.payload,
       };
     },
+    setUsers: (state: ModalState, action: PayloadAction<BetaUser[]>) => {
+      state.users = action.payload;
+    },
   },
 }) as Slice<ModalState>;
 
 // Action creators are generated for each case reducer function
-export const { setModal, resetModal, setModalUserExperiences } =
+export const { setModal, resetModal, setModalUserExperiences, setUsers } =
   modalSlice.actions;
 
 export default modalSlice.reducer;

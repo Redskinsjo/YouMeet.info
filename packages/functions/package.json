@@ -1,0 +1,11 @@
+{
+  "name": "@youmeet/functions",
+  "version": "0.0.0",
+  "private": true,
+  "imports": {
+    "@/*": "./*"
+  },
+  "dependencies": {
+    "next": "^14.2.3"
+  }
+}

@@ -2,7 +2,7 @@ import { BetaUser } from "@youmeet/gql/generated";
 import { formatReturnTo } from "./formatReturnTo";
 import { isUser } from "@youmeet/types/TypeGuards";
 import { s } from "./jwt";
-import { uri } from "@/app/_functions/imports";
+import { uri } from "@youmeet/functions/imports";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
 import { BackendError } from "./BackendErrorClass";
 import { NextResponse } from "next/server";
@@ -10,7 +10,7 @@ import { redir } from "./checkout/functions";
 
 export const setCookieAndTerminate = async (
   redirect: string,
-  user: BetaUser,
+  user: BetaUser
 ): Promise<Response | NextResponse<unknown>> => {
   try {
     const returnTo = formatReturnTo(redirect);
@@ -36,7 +36,7 @@ export const setCookieAndTerminate = async (
       } else {
         throw new BackendError(
           BACKEND_ERRORS.NO_PAYLOAD,
-          BACKEND_MESSAGES.NO_PAYLOAD,
+          BACKEND_MESSAGES.NO_PAYLOAD
         );
       }
     } else {
@@ -50,7 +50,7 @@ export const setCookieAndTerminate = async (
 const setCookieOnResponse = (
   cookie: string,
   pathname: string,
-  base: string,
+  base: string
 ) => {
   const res = NextResponse.redirect(new URL(`${pathname}`, base));
   if (cookie) {

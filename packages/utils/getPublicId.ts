@@ -7,11 +7,12 @@ export const getPublicIdFirstPart = (userId: string, videosLength: number) => {
 };
 export const getPublicIdFull = (
   id: string,
-  type: "cv" | "avatar" | "video",
+  type: "cv" | "avatar" | "video" | "logo" | "audio"
 ) => {
   if (type === "cv") return `${id}${separator}cv`;
-  if (type === "avatar") return `${id}${separator}image`;
-  return `${id}${separator}video`;
+  if (type === "avatar" || type === "logo") return `${id}${separator}image`;
+  if (type === "video") return `${id}${separator}video`;
+  else return `${id}${separator}audio`;
 };
 export const getUserIdFromPublicId = (publicId: string) =>
   publicId.split(`${separator}`)[0];

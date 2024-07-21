@@ -34,3 +34,33 @@ export type FormDefaultValues = {
   video: Partial<Avatar>[] | [];
   linkedinProfilePage: string;
 };
+
+export type ProfileFormDefaultValues = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  description: string;
+  avatars: string[];
+  salaryExpected: string;
+  phone: string;
+  phonecode: string;
+  languages: string[];
+  age: string;
+  experiences: {
+    id: string;
+    sector: string;
+    job: string;
+    company:
+      | {
+          id: string;
+          name: string;
+          input: boolean;
+        }
+      | { id: string; name: string; input: boolean };
+    ending: string;
+    starting: string;
+    duration: string;
+    isLiveJob: boolean;
+  }[];
+  linkedinProfileId: string;
+};

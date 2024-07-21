@@ -1,0 +1,14 @@
+{
+  "name": "@youmeet/models",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "mongoose": "^8.3.4",
+    "@youmeet/utils": "*",
+    "@youmeet/types": "*",
+    "@youmeet/typescript-config": "*"
+  },
+  "devDependencies": {
+    "@typegoose/typegoose": "^12.4.0"
+  }
+}

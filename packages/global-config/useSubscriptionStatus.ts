@@ -1,10 +1,10 @@
-import { UserState } from "@/global/features/user";
+import { UserState } from "@youmeet/global-config/features/user";
 import { Subscription } from "@youmeet/types/app";
 import { BetaUser } from "@youmeet/gql/generated";
-import { uri } from "@/app/_functions/imports";
+import { uri } from "@youmeet/functions/imports";
 
 export const getSubscriptionStatus2 = async (
-  user: UserState | BetaUser | undefined,
+  user: UserState | BetaUser | undefined
 ) => {
   if (user?.email) {
     if (user.customerId) {
