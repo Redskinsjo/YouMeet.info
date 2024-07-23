@@ -264,6 +264,8 @@ const product = {
 };
 
 const translations = {
+  "skills-to-be-valued": "Skills to be valued",
+  "jobs-to-be-filled": "Jobs to be filled",
   "discover-more-users": "Discover more users",
   "video-used-in-meet": "Video +used= in a meet, don't delete.+",
   "read-some-articles":

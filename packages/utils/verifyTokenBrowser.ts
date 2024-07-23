@@ -2,7 +2,7 @@ import { verif } from "./jwt";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import Cookies from "js-cookie";
 
-const cookieLabel = `${process.env.PORT === "3000" ? "login" : "loginPro"}`;
+const cookieLabel = `${process.env.APP === "candidate" ? "login" : "loginPro"}`;
 
 export default async function verifyTokenBrowser(
   pathname: string

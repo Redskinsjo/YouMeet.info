@@ -1,5 +1,5 @@
 import { Video } from "@youmeet/gql/generated";
-import { VideoSchema } from "@/app/api/models/videos";
+import { VideoSchema } from "@youmeet/models/videos";
 import { DocumentType } from "@typegoose/typegoose";
 
 export const getPrincipalVideo = (videos: Video[]) => {
@@ -13,7 +13,7 @@ export const getPrincipalVideo = (videos: Video[]) => {
 };
 
 export const getPrincipalVideoForScript = (
-  videos: DocumentType<VideoSchema>[],
+  videos: DocumentType<VideoSchema>[]
 ) => {
   if (videos && videos.length > 0) {
     const principal = videos

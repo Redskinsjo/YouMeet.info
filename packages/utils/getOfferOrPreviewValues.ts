@@ -1,4 +1,4 @@
-import { getCompany, getCompetency, getJob } from "@/app/_functions/request";
+import { getCompany, getCompetency, getJob } from "@youmeet/functions/request";
 import {
   BetaCompany,
   GptCompetency,
@@ -13,7 +13,7 @@ import { OfferDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 export default async function getOfferOrPreviewValues(
   offre: Offer | OfferDefaultValues,
   language: "fr" | "en",
-  companyId?: string,
+  companyId?: string
 ): Promise<OfferContentValues> {
   let values = {} as OfferContentValues;
 
@@ -53,8 +53,8 @@ export default async function getOfferOrPreviewValues(
           async (req) =>
             (await getCompetency<GptCompetency>({
               id: req as string,
-            })) as GptCompetency,
-        ),
+            })) as GptCompetency
+        )
       );
       values.requirements = requirements;
       values.contractType = typ(offre)?.contractType as string;

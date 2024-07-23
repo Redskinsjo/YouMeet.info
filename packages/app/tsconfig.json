@@ -1,0 +1,25 @@
+{
+  "extends": "@youmeet/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.test.tsx",
+    "i18n/index.js",
+    ".next/types/**/*.ts",
+    "**/*.mjs",
+    "next.config.js",
+    "app/api/scripts/formatCompetencyTitle.mts",
+    "app/api/scripts/addSubtitledUrl.ts",
+    "app/api/scripts/formatCompetencyTitle.mts",
+    "next.config.js",
+    "CustomModal.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

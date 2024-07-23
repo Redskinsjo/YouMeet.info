@@ -18,6 +18,9 @@ export type SimpleSelectNames =
   | "logo"
   | "video"
   | "companyName"
-  | "reason";
+  | "reason"
+  | "videoMain"
+  | "videoPreview1"
+  | "videoPreview2";
 
 export type SimpleSelectData = { value: string; label: string };

@@ -291,6 +291,8 @@ const product = {
 };
 
 const translations = {
+  "skills-to-be-valued": "Des compétences à valoriser",
+  "jobs-to-be-filled": "Des emplois à pourvoir",
   "discover-more-users": "Découvrez plus d'utilisateurs",
   "video-used-in-meet":
     "Vidéo +utilisée= dans un entretien, ne pas supprimer.+",

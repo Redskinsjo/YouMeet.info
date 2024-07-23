@@ -8,9 +8,9 @@ export type FrontCardProps = {
   setFrontShouldTurnUp: Dispatch<SetStateAction<false | CardTurnUp>>;
   frontShouldTurnUp: false | CardTurnUp;
   offer?: Offer;
-  isSubscribed: boolean;
-  type: "favorites" | "candidates";
+  isSubscribed?: boolean;
+  type?: "favorites" | "candidates";
   refetch?: () => void;
   unlocked?: string[];
-  shouldSee: boolean;
+  shouldSee?: boolean;
 };

@@ -1,13 +1,13 @@
 import { CookieListItem } from "next/dist/compiled/@edge-runtime/cookies";
 import { BetaCandidate, Translated, Video } from "@youmeet/gql/generated";
-import setFileUrl from "@/setFileUrl";
+import setFileUrl from "./setFileUrl";
 import { v1 as VideoIntelligence } from "@google-cloud/video-intelligence";
 import OpenAI from "openai";
-import { generateChat } from "@/generateChat";
+import { generateChat } from "./generateChat";
 import { getCandidate, updateVideo } from "@youmeet/functions/request";
-import { submitFile } from "@/submitFile";
+import { submitFile } from "./submitFile";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { BackendError } from "@/BackendErrorClass";
+import { BackendError } from "./BackendErrorClass";
 import {
   BACKEND_ERRORS,
   BACKEND_MESSAGES,

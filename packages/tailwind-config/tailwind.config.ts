@@ -135,7 +135,7 @@ const config: Omit<Config, "content"> = {
       md2: { min: "900px", max: "1000px" },
       lg: { min: "1000px", max: "1260px" },
       lg2: { min: "1260px", max: "1400px" },
-      xl: { min: "1260px", max: "1600px" },
+      xl: { min: "1400px", max: "1600px" },
       offers: { max: "1350px" },
     },
     extend: {

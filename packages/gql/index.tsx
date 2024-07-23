@@ -14,7 +14,7 @@ const httpLink = createHttpLink({
 export const client = new ApolloClient({
   link: ApolloLink.from([httpLink]),
   cache: new InMemoryCache(),
-  ssrMode: true,
+  ssrMode: false,
 });
 
 export default function GraphQLProvider({ children }: any) {

@@ -1,6 +1,6 @@
 export const isSuspensionPoint = (
   text: string,
-  i: number,
+  i: number
 ): false | { end: number } => {
   let end = i;
   const followedBy =
@@ -25,8 +25,10 @@ export const isSuspensionPoint = (
 };
 
 export const isFakePoint = (text: string, i: number) => {
+  const letter = text[i + 1];
+  if (!letter) return false;
   const notFollowedBy =
-    text[i + 1].charCodeAt(0) !== 10 && text[i + 1].charCodeAt(0) !== 32;
+    letter.charCodeAt(0) !== 10 && letter.charCodeAt(0) !== 32;
 
   const condition = text[i] === "." && notFollowedBy;
 
