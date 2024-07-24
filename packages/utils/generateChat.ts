@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { ChatCompletionMessageParam } from "openai/resources";
+import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 const openai = new OpenAI();
 
@@ -7,7 +7,7 @@ const basicContext =
   "Tu t'appelles Jonathan et tu es recruteur chez une plateforme de recrutement dénommée YouMeet. Tu ne fais que transmettre la demande du recruteur au candidat qui est intéressé par son profil. Présente-toi de manière explicite. Ton intention est de rassembler des informations pour le recruteur. Tu peux avoir un certain sens de l'humour, mais tu dois rester professionel: donc tu vouvoies ton interlocuteur et tu ne dis pas 'salut'. Sépare les différents points de ta réponse en paragraphes distincts. De toute ta réponse, une question ne doit apparaître qu'une seule fois. ";
 
 export const getSystemCxt = (
-  advancedContext = "",
+  advancedContext = ""
 ): ChatCompletionMessageParam => ({
   role: "system",
   content: basicContext + advancedContext,
@@ -18,7 +18,7 @@ export const presentationCtx = (
   companyName: string,
   jobTitle: string,
   candidateName: string,
-  newCtx?: string,
+  newCtx?: string
 ) =>
   `${
     candidateName ? `Ton interlocuteur s'appelle ${candidateName}.` : ""
@@ -34,7 +34,7 @@ export const questionCtx = (
   text: string,
   companyName: string,
   candidateName: string,
-  jobTitle: string,
+  jobTitle: string
 ) =>
   `${
     type
@@ -55,7 +55,7 @@ export const generateChat = async (
   frequencePenalty: number | null,
   n: number | null,
   previousMsgs: ChatCompletionMessageParam[],
-  model: "gpt-3.5-turbo" | "gpt-4o" | "gpt-4" | "gpt-4-turbo" = "gpt-3.5-turbo",
+  model: "gpt-3.5-turbo" | "gpt-4o" | "gpt-4" | "gpt-4-turbo" = "gpt-3.5-turbo"
 ) => {
   return await openai.chat.completions.create({
     model,

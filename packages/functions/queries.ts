@@ -302,6 +302,7 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
           }
         }
         myOffers {
+          __typename
           id
           job {
             id
@@ -751,7 +752,8 @@ export const getAccountInfosQuery = `query GetAccountInfos($userId: String) {
           height
         }
         salaryExpected
-        company {
+      }
+      company {
         id
         name
         resume
@@ -779,29 +781,28 @@ export const getAccountInfosQuery = `query GetAccountInfos($userId: String) {
           }
           duration
         }
-        video {
-          asset_id
-          public_id
+      }     
+      video {
+        asset_id
+        public_id
+        width
+        height
+        format
+        created_at
+        url
+        secure_url
+        folder
+        original_filename
+        eager {
+          transformation
           width
           height
+          bytes
           format
-          created_at
           url
           secure_url
-          folder
-          original_filename
-          eager {
-            transformation
-            width
-            height
-            bytes
-            format
-            url
-            secure_url
-          }
-          duration
         }
-      }
+        duration  
       }
     }
   }`;

@@ -1,6 +1,6 @@
 "use client";
 import Header from "@youmeet/components/Header";
-import React from "react";
+import React, { Suspense } from "react";
 import { useEffect, useState } from "react";
 
 export default function BigHeaderSection() {
@@ -20,18 +20,22 @@ export default function BigHeaderSection() {
   return (
     !loading && (
       <section className="flex flex-col w-full">
-        <Header />
+        <Suspense>
+          <Header />
+        </Suspense>
 
         {scrollY >= 100 && !scrollingDown && (
-          <Header
-            newStyles={{
-              zIndex: 90,
-              top: 0,
-              position: "fixed",
-              animation: "fadeIn 0.8s 1 ease-in-out",
-            }}
-            scrollY={scrollY}
-          />
+          <Suspense>
+            <Header
+              newStyles={{
+                zIndex: 90,
+                top: 0,
+                position: "fixed",
+                animation: "fadeIn 0.8s 1 ease-in-out",
+              }}
+              scrollY={scrollY}
+            />
+          </Suspense>
         )}
       </section>
     )

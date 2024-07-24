@@ -5,8 +5,8 @@ import {
   updateUser,
 } from "@youmeet/functions/request";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
-import setUniqueNameAndExtension from "@/backoffice/setUniqueNameAndExtension";
-import { isProfessionalEmail } from "@/isProfessionalEmail";
+import setUniqueNameAndExtension from "../backoffice/setUniqueNameAndExtension";
+import { isProfessionalEmail } from "../isProfessionalEmail";
 import { EmailingParams, StripeParams } from "@youmeet/types/api/StripeParams";
 import { BackendError } from "../BackendErrorClass";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";

@@ -1,6 +1,12 @@
 "use client";
 import { Button, Checkbox, useMediaQuery } from "@mui/material";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  Suspense,
+} from "react";
 import {
   CustomModalProps,
   SignupCookiePayload,
@@ -238,7 +244,9 @@ const WhenLogin = ({
       className="auth-form-content dark:mediumDarkBg gap-0"
       onClick={(e) => e.stopPropagation()}
     >
-      <LoginComponentTopPart />
+      <Suspense>
+        <LoginComponentTopPart />
+      </Suspense>
       <form
         ref={formRef}
         action={handle}

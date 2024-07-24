@@ -8,7 +8,7 @@ import { RootState } from "@youmeet/global-config/store";
 import { purple } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function SearchComponentField() {
   const { t } = useTranslation();
@@ -16,19 +16,27 @@ export default function SearchComponentField() {
   const search = useSelector(
     (state: RootState) => (state.search as SearchState).search
   );
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
   return (
-    <GenericField
-      type="text"
-      name="search"
-      location="search"
-      label={t("search-by-name-job")}
-      value={search}
-      onChange={(value) => {
-        dispatch(setSearchInput(value));
-      }}
-      border={`1px solid ${purple[500]}`}
-      genericClasses="w-[50vw] xs:w-screen sm:w-screen md:w-screen"
-      basic
-    />
+    !loading && (
+      <GenericField
+        type="text"
+        name="search"
+        location="search"
+        label={t("search-by-name-job")}
+        value={search}
+        onChange={(value) => {
+          dispatch(setSearchInput(value));
+        }}
+        border={`1px solid ${purple[500]}`}
+        genericClasses="w-[50vw] xs:w-screen sm:w-screen md:w-screen"
+        basic
+      />
+    )
   );
 }

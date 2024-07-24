@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "turbo-analyse": "turbo turbo-analyse",
     "build": "turbo build",
     "dev": "turbo dev codegen",
     "lint": "turbo lint",

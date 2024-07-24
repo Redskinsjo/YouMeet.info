@@ -14,10 +14,19 @@ import { RootState } from "@youmeet/global-config/store";
 import TooltipedAsset from "./TooltipedAsset";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 type Attributes = { [key: string]: string | number | Attributes };
 
-export default function DetailComponent({
+export default function DetailComponentWrapper(params: any) {
+  return (
+    <Suspense>
+      <DetailComponent {...params} />
+    </Suspense>
+  );
+}
+
+function DetailComponent({
   label,
   value,
   type,

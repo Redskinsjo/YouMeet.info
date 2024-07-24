@@ -107,5 +107,5 @@ export default async function useFormDefaultValues(
       } as BetaCompany;
     }
   }
-  return { defaultValues };
+  return defaultValues;
 }

@@ -1,7 +1,7 @@
 import { FormExperience } from "./useFormDefaultValues";
 import { Avatar } from "@youmeet/gql/generated";
 import { NewReferenceTypes } from "../NewReferenceFieldProps";
-import { FormDefaultValues } from "../useFormDefaultValues";
+import { FormDefaultValues } from "./useFormDefaultValues";
 
 export type ExperienceFieldAttrs = {
   id: string;

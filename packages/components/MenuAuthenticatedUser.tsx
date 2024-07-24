@@ -104,20 +104,21 @@ export default function MenuAuthenticatedUser() {
           itemText={t("dashboard")}
         />
 
-        {!user.candidate && (
+        {process.env.APP === "pro" && (
           <MenuItemRouter
-            route={"/formulaire-profil"}
+            route={"/compte"}
             handleClose={handleClose}
-            itemText={t("profile")}
+            itemText={t("account")}
           />
         )}
-        {user.email.toLowerCase() === "jonathan.carnos@gmail.com" && (
-          <MenuItemRouter
-            route="/backoffice"
-            handleClose={handleClose}
-            itemText={"Admin"}
-          />
-        )}
+        {process.env.APP === "candidate" &&
+          user.email.toLowerCase() === "jonathan.carnos@gmail.com" && (
+            <MenuItemRouter
+              route="/backoffice"
+              handleClose={handleClose}
+              itemText={"Admin"}
+            />
+          )}
 
         <form action={customOnLogout} className="flex-center">
           <MenuItem

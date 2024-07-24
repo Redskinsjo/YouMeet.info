@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
-import FrontCardRecruiter from "@/FrontCardRecruiter";
-import BackCardRecruiter from "@/BackCardRecruiter";
+import FrontCardRecruiter from "./FrontCardRecruiter";
+import BackCardRecruiter from "./BackCardRecruiter";
 import FrontCardOffer from "@youmeet/app/offres/offresComponent/FrontCardOffer";
 import BackCardOffer from "@youmeet/app/offres/offresComponent/BackCardOffer";
 import { CardTurnUp } from "@youmeet/types/Header";

@@ -12,6 +12,7 @@
     "@youmeet/utils": "*",
     "@youmeet/global-config": "*",
     "@youmeet/gql": "*",
+    "@youmeet/components": "*",
     "@reduxjs/toolkit": "^2.2.3",
     "@mui/material": "^5.15.17",
     "react-i18next": "^14.1.1",

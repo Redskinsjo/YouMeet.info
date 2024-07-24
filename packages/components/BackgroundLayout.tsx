@@ -1,3 +1,4 @@
+"use client";
 import { RootState } from "@youmeet/global-config/store";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,13 +19,18 @@ const images = [
 const productImg =
   "https://res.cloudinary.com/de822mdsy/image/upload/v1691349994/youmeet-official/webp/sunset2-modified_weymh7.webp";
 
-const BackgroundLayout: FC<{
+export default function BackgroundLayout({
+  children,
+  product,
+  newStyles,
+  error,
+}: {
   children: React.ReactElement;
   newClasses?: string;
   newStyles?: { [key: string]: number | string };
   product?: boolean;
   error?: boolean;
-}> = ({ children, product, newStyles, error }) => {
+}) {
   const { background, lastModification } = useSelector(
     (state: RootState) => state.global as GlobalState
   );
@@ -83,6 +89,4 @@ const BackgroundLayout: FC<{
       </div>
     </div>
   );
-};
-
-export default BackgroundLayout;
+}
