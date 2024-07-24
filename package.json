@@ -7,10 +7,10 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "format": "yarn prisma format",
-    "db-push-dev": "dotenv -e .env.development -- yarn prisma db push",
-    "db-push": "dotenv -e .env -- yarn prisma db push",
-    "generate": "yarn prisma generate"
+    "format": "turbo format",
+    "db-push-dev": "turbo db-push-dev",
+    "db-push": "turbo db-push",
+    "generate": "turbo generate"
   },
   "devDependencies": {
     "turbo": "^2.0.9"
