@@ -6,7 +6,8 @@
     "@/*": "./*"
   },
   "scripts": {
-    "dev": "tailwindcss -i ./styles.css -o ./dist/index.css --watch"
+    "dev": "tailwindcss -i ./styles.css -o ./dist/index.css --watch",
+    "build": "tailwindcss -i ./styles.css -o ./dist/index.css --watch"
   },
   "dependencies": {
     "@youmeet/utils": "*",
