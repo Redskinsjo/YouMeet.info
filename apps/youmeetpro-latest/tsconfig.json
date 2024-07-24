@@ -1,0 +1,23 @@
+{
+  "extends": "@youmeet/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.test.tsx",
+    "i18n/index.js",
+    ".next/types/**/*.ts",
+    "**/*.mjs",
+    "next.config.ts",
+    "../../packages/prisma-config/init.ts",
+    "../../packages/prisma-config/prisma.ts",
+    "next.config.js"
+  ],
+  "exclude": ["node_modules"]
+}

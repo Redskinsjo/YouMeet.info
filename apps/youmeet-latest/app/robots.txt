@@ -1,0 +1,20 @@
+User-Agent: *
+Allow: /
+Allow: /dashboard
+Allow: /formulaire-profil
+Allow: /se-connecter
+Allow: /offres/
+Allow: /competences/
+Allow: /medias/
+Allow: /blog
+Allow: /le-produit/mise-en-relation
+
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /backoffice/
+Disallow: /conditions-generales-utilisation
+Disallow: /regles-de-confidentialite
+Disallow: /reinitialiser-mot-de-passe
+Disallow: /enregistrer
+
+Sitemap: https://www.youmeet.info/sitemap.xml
