@@ -10,7 +10,7 @@
     "format": "turbo format",
     "db-push-dev": "turbo db-push-dev",
     "db-push": "turbo db-push",
-    "generate": "turbo generate"
+    "prisma-generate": "turbo prisma-generate"
   },
   "devDependencies": {
     "turbo": "^2.0.9"

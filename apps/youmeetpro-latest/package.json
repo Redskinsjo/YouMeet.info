@@ -19,11 +19,7 @@
     "handleQuestions": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/handleQuestions.ts",
     "transcriptVideos": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/transcriptVideos.ts",
     "decryptToken": "SCRIPT=true dotenv -e .env -- ts-node ./app/api/scripts/decryptToken.ts",
-    "isValidObjectId": "SCRIPT=true dotenv -e .env -- ts-node ./app/api/scripts/isValidObjectId.ts",
-    "format": "yarn prisma format",
-    "db-push-dev": "dotenv -e .env.development -- yarn prisma db push",
-    "db-push": "dotenv -e .env -- yarn prisma db push",
-    "generate": "yarn prisma generate"
+    "isValidObjectId": "SCRIPT=true dotenv -e .env -- ts-node ./app/api/scripts/isValidObjectId.ts"
   },
   "dependencies": {
     "@youmeet/app": "*",
