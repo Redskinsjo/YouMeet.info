@@ -1,18 +1,20 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "remoteCache": { "signature": true },
   "tasks": {
     "turbo-analyse": {
       "env": ["*"],
+      "dependsOn": ["generate", "^codegen", "^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "build": {
-      "dependsOn": ["^generate", "^build"],
       "env": ["*"],
+      "dependsOn": ["generate", "^codegen", "^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {
       "env": ["*"],
-      "dependsOn": ["generate"],
+      "dependsOn": ["generate", "codegen"],
       "persistent": true,
       "cache": false
     },

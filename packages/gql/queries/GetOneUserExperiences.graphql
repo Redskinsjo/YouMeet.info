@@ -1,4 +1,4 @@
-query GetOneUserExperiences($userId: String) {
+query GetOneUserExperiences($userId: ID) {
   oneUserExperiences(userId: $userId) {
     id
     starting

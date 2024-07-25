@@ -1,4 +1,4 @@
-query GetAccountInfos($userId: String) {
+query GetAccountInfos($userId: ID) {
   accountInfos(userId: $userId) {
     id
     lastname

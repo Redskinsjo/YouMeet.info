@@ -1300,8 +1300,8 @@ type Query {
   recruiterQueuesFromProfile(targetId: ID, originId: ID): [BetaQueue]
   oneNotification(data: NotificationInput): Notification
   uniqueCompetency(id: String, slug: String): GptCompetency
-  oneUserInterviews(userId: String): [InterviewOffer]
-  accountInfos(userId: String): BetaUser
+  oneUserInterviews(userId: ID): [InterviewOffer]
+  accountInfos(userId: ID): BetaUser
   remarks: [UserRemark]
   oneVideo(id: String): Video
   sendEmailProspectionLinkedin(leadsIds: [ID]): [Lead]
@@ -1361,7 +1361,7 @@ type Query {
   oneCandidate(data: BetaUserInput, userId: ID, email: String): BetaCandidate
   oneQueue(id: ID): BetaQueue
   ownQueues(originId: ID, targetId: ID, status: [String]): [BetaQueue]
-  oneUserExperiences(userId: String): [BetaExperience]
+  oneUserExperiences(userId: ID): [BetaExperience]
   oneDetails(filter: BetaDetailsInput!): BetaDetails
   profiles(experienceId: ID): [BetaProfile]
   accountUser(userId: ID, details: PersonalDetailsInput): BetaUser

@@ -618,7 +618,7 @@ export const getUserRemarksQuery = `query GetUserRemarks {
     }
   }`;
 
-export const getUserExperiencesQuery = `query GetOneUserExperiences($userId: String) {
+export const getUserExperiencesQuery = `query GetOneUserExperiences($userId: ID) {
     oneUserExperiences(userId: $userId) {
       id
       starting
@@ -672,7 +672,7 @@ export const createCompanyProfileMutation = `mutation CreateCompanyProfile($data
   }
   `;
 
-export const getAccountInfosQuery = `query GetAccountInfos($userId: String) {
+export const getAccountInfosQuery = `query GetAccountInfos($userId: ID) {
     accountInfos(userId: $userId) {
       __typename
       id

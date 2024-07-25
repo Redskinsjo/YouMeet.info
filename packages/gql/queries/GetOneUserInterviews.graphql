@@ -1,4 +1,4 @@
-query GetOneUserInterviews($userId: String) {
+query GetOneUserInterviews($userId: ID) {
   oneUserInterviews(userId: $userId) {
     id
     status
