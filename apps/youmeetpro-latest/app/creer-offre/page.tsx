@@ -11,7 +11,7 @@ export default async function Form() {
   const defaultValues = (await useFormDefaultValues(
     "offer",
     (verified as LoginCookiePayload)?.userId
-  )) as unknown as OfferDefaultValues;
+  )) as OfferDefaultValues;
   if (defaultValues)
     return <OfferChild defaultValues={defaultValues} category="offer" />;
 

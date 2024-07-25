@@ -15,7 +15,7 @@ export default async function useFormDefaultValues(
   category: "profile" | "organisation" | "offer",
   userId: string
 ) {
-  if (!userId) return { defaultValues: undefined };
+  if (!userId) return undefined;
   const infos = (await getAccountInfos<BetaUser>({ userId })) as BetaUser;
   const user = infos;
   const details = infos?.details;
