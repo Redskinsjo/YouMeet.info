@@ -17,4 +17,4 @@ Disallow: /regles-de-confidentialite
 Disallow: /reinitialiser-mot-de-passe
 Disallow: /enregistrer
 
-Sitemap: https://www.youmeet.info/sitemap.xml
+Sitemap: https://www.youmeet.info/sitemap

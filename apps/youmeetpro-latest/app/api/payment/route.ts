@@ -13,7 +13,7 @@ mongoose.connect(`${process.env.MONGODB_URI}`);
 
 export async function POST(req: NextRequest) {
   const endpointSecret = dev
-    ? "whsec_19d04b6c1b8665033f582154f9ff4d14e81830f4978bf17cb15aaf85cb7b3f91"
+    ? `${process.env.STRIPE_DEV_WEBHOOK_SECRET}`
     : `${process.env.STRIPE_ENDPOINT_SECRET}`;
 
   const sig = req.headers.get("stripe-signature");

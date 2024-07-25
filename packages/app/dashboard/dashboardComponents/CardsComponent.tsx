@@ -6,7 +6,7 @@ import {
 } from "@youmeet/gql/generated";
 import { useCallback, useEffect, useState } from "react";
 import Card from "./Card";
-import FrontFavoriteCard from "@/app/mes-favoris/myFavoritesComponents/FrontFavoriteCard";
+import FrontFavoriteCard from "../../mes-favoris/myFavoritesComponents/FrontFavoriteCard";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";

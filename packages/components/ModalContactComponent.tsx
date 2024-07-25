@@ -13,7 +13,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ExperienceFieldAttrs } from "@youmeet/types/StepContent";
+import { ExperienceFieldAttrs } from "@youmeet/types/form/StepContent";
 
 const ModalContactComponent = ({
   contact,

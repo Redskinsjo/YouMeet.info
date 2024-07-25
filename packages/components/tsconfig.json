@@ -4,7 +4,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "rootDir": ".",
+    "outDir": "dist"
   },
   "include": [
     "next-env.d.ts",

@@ -4,7 +4,25 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "rootDirs": [
+      "_components",
+      "_homeComponents",
+      "_sections",
+      "[candidateName]",
+      "backoffice",
+      "competences",
+      "compte",
+      "conditions-generales-utilisation",
+      "dashboard",
+      "formulaire-profil",
+      "le-produit",
+      "medias",
+      "mes-favoris",
+      "offres",
+      "profils"
+    ],
+    "outDir": "dist"
   },
   "include": [
     "next-env.d.ts",

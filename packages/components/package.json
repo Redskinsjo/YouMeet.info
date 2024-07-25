@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "tailwindcss -i ./styles.css -o ./dist/index.css --watch",
-    "build": "tailwindcss -i ./styles.css -o ./dist/index.css"
+    "build": "tsc --project . && tailwindcss -i ./styles.css -o ./dist/index.css"
   },
   "dependencies": {
     "@mui/material": "^5.15.17",
