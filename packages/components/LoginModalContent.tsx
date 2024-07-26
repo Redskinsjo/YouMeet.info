@@ -13,7 +13,7 @@ import {
 } from "@youmeet/types/CustomModal";
 import { useTranslation } from "react-i18next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import LoginComponentTopPart from "@youmeet/components/LoginComponentTopPart";
+import LoginComponentTopPart from "./LoginComponentTopPart";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormState } from "react-dom";
 import {
@@ -22,9 +22,9 @@ import {
   onSigninUp,
 } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
-import SimpleField from "@youmeet/app/formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "./formulaire-profil/formComponents/fields/SimpleField";
 import LoginModalClose from "./LoginModalClose";
-import PhoneField from "@youmeet/app/formulaire-profil/formComponents/fields/PhoneField";
+import PhoneField from "./formulaire-profil/formComponents/fields/PhoneField";
 import Logo from "./Logo";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { RootState } from "@youmeet/global-config/store";

@@ -1,7 +1,7 @@
 import Layout from "./Layout";
-import FooterList from "@youmeet/app/_homeComponents/FooterList";
-import FooterList2 from "@youmeet/app/_homeComponents/FooterList2";
-import FooterProposedBy from "@youmeet/app/_homeComponents/FooterProposedBy";
+import FooterList from "./_homeComponents/FooterList";
+import FooterList2 from "./_homeComponents/FooterList2";
+import FooterProposedBy from "./_homeComponents/FooterProposedBy";
 
 export default function Footer() {
   return (

@@ -1,4 +1,3 @@
-import "@sentry/tracing";
 import { createSchema, createYoga } from "graphql-yoga";
 import resolvers from "@/resolvers";
 import mongoose from "mongoose";

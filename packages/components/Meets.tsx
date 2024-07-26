@@ -1,9 +1,9 @@
 import React from "react";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import CardLoading from "@youmeet/app/offres/offresComponent/offresChildLoading";
+import CardLoading from "./offres/offresComponent/offresChildLoading";
 
-const Card = dynamic(() => import("@youmeet/components/Card"), {
+const Card = dynamic(() => import("./Card"), {
   ssr: false,
   loading: () => <CardLoading />,
 });

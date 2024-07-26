@@ -6,6 +6,7 @@
     "@/*": "./*"
   },
   "dependencies": {
+    "@youmeet/components": "*",
     "next": "^14.2.3"
   }
 }

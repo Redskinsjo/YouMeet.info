@@ -52,7 +52,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
 import { renderUrlQuery } from "@youmeet/utils/renderUrlQuery";
 import { UnknownAction } from "@reduxjs/toolkit";
-import SimpleField from "@youmeet/app/formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "./formulaire-profil/formComponents/fields/SimpleField";
 import { onAddFeedback, onApplying } from "@youmeet/functions/actions";
 import { useFormState } from "react-dom";
 import { useQuery } from "@apollo/client";
@@ -65,10 +65,10 @@ import {
   BackofficeModalData,
   BackofficeModalDataType,
 } from "@youmeet/types/modal";
-import BackofficeModalContent from "@youmeet/app/backoffice/backofficeComponents/BackofficeModalContent";
-import UserRemarkComponent from "@youmeet/app/dashboard/dashboardComponents/UserRemarkComponent";
+import BackofficeModalContent from "./backoffice/backofficeComponents/BackofficeModalContent";
+import UserRemarkComponent from "./dashboard/dashboardComponents/UserRemarkComponent";
 import LoginModalClose from "./LoginModalClose";
-import WebcamComponent from "@youmeet/app/dashboard/dashboardComponents/WebcamComponent";
+import WebcamComponent from "./dashboard/dashboardComponents/WebcamComponent";
 import { setError } from "@youmeet/global-config/features/global";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { withData } from "@youmeet/types/api/backend";
@@ -77,8 +77,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { setName } from "@youmeet/utils/setName";
 import Logo from "./Logo";
-import NewTargetJobComponent from "@youmeet/app/dashboard/dashboardComponents/NewTargetJobComponent";
-import NewTargetContractTypeComponent from "@youmeet/app/dashboard/dashboardComponents/NewTargetContractTypeComponent";
+import NewTargetJobComponent from "./dashboard/dashboardComponents/NewTargetJobComponent";
+import NewTargetContractTypeComponent from "./dashboard/dashboardComponents/NewTargetContractTypeComponent";
 import Image from "next/image";
 import AddVideo from "./AddVideo";
 

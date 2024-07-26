@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "noEmit": true
   },
   "include": [
     "next-env.d.ts",
@@ -18,9 +19,7 @@
     "app/api/scripts/formatCompetencyTitle.mts",
     "app/api/scripts/addSubtitledUrl.ts",
     "app/api/scripts/formatCompetencyTitle.mts",
-    "next.config.js",
-    "../../packages/components/CustomModal.tsx",
-    "../../packages/components/RawValue.tsx"
+    "next.config.js"
   ],
   "exclude": ["node_modules"]
 }

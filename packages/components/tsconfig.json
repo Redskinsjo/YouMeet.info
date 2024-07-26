@@ -1,27 +1,27 @@
 {
   "extends": "@youmeet/typescript-config/base.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["./*"]
     },
-    "rootDir": ".",
+    "rootDir": "",
     "outDir": "dist"
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.test.tsx",
-    "i18n/index.js",
-    ".next/types/**/*.ts",
-    "**/*.mjs",
-    "next.config.js",
-    "app/api/scripts/formatCompetencyTitle.mts",
-    "app/api/scripts/addSubtitledUrl.ts",
-    "app/api/scripts/formatCompetencyTitle.mts",
-    "next.config.js",
-    "CustomModal.tsx"
+    "SubLayout.tsx",
+    "SubLayoutField.tsx",
+    "SubmitBtn.tsx",
+    "SubPartContainer.tsx",
+    "SuggestedMeets.tsx",
+    "ThinHeader.tsx",
+    "TogglePersonalInfo.tsx",
+    "TooltipedAsset.tsx",
+    "UserInfos.tsx",
+    "VideoPartLoading.tsx"
   ],
   "exclude": ["node_modules"]
 }

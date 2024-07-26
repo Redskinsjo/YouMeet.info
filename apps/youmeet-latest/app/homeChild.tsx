@@ -1,21 +1,21 @@
 import { GptCompetency, Offer } from "@youmeet/gql/generated";
 import React from "react";
-import OfferSection from "@youmeet/app/_sections/OfferSection";
-import CompetencySection from "@youmeet/app/_sections/CompetencySection";
-import DividerSection from "@youmeet/app/_components/DividerSection";
-import PromotionSection from "@youmeet/app/_sections/PromotionSection";
-import HeroSection from "@youmeet/app/_sections/HeroSection";
-import InsightSection from "@youmeet/app/_sections/InsightSection";
-import BandSection from "@youmeet/app/_sections/BandSection";
-import SquareSection from "@youmeet/app/_sections/SquareSection";
-import WhatsappSection from "@youmeet/app/_sections/WhatsappSection";
+import OfferSection from "@youmeet/components/_sections/OfferSection";
+import CompetencySection from "@youmeet/components/_sections/CompetencySection";
+import DividerSection from "@youmeet/components/_components/DividerSection";
+import PromotionSection from "@youmeet/components/_sections/PromotionSection";
+import HeroSection from "@youmeet/components/_sections/HeroSection";
+import InsightSection from "@youmeet/components/_sections/InsightSection";
+import BandSection from "@youmeet/components/_sections/BandSection";
+import SquareSection from "@youmeet/components/_sections/SquareSection";
+import WhatsappSection from "@youmeet/components/_sections/WhatsappSection";
 import dynamic from "next/dynamic";
 
 const BigHeaderSection = dynamic(
-  () => import("@youmeet/app/_sections/BigHeaderSection")
+  () => import("@youmeet/components/_sections/BigHeaderSection")
 );
 const BrandsSection = dynamic(
-  () => import("@youmeet/app/_sections/BrandsSection")
+  () => import("@youmeet/components/_sections/BrandsSection")
 );
 const Footer = dynamic(() => import("@youmeet/components/Footer"));
 

@@ -2,7 +2,7 @@ import { purple } from "@mui/material/colors";
 import React, { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import { IoIosSearch } from "react-icons/io";
-import GenericField from "@youmeet/app/formulaire-profil/formComponents/fields/GenericField";
+import GenericField from "./formulaire-profil/formComponents/fields/GenericField";
 
 export default function PageFilters({
   setSearch,

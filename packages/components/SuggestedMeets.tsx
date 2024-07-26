@@ -1,6 +1,6 @@
 import React from "react";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
-import Meets from "@youmeet/components/Meets";
+import Meets from "./Meets";
 import { useTranslation } from "react-i18next";
 import BoldText from "./BoldText";
 

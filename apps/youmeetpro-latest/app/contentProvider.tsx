@@ -5,7 +5,7 @@ import { RootState } from "@youmeet/global-config/store";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { outfit } from "@youmeet/functions/fonts";
-import Modals from "@youmeet/app/_homeComponents/Modals";
+import Modals from "@youmeet/components/_homeComponents/Modals";
 import ThinHeader from "@youmeet/components/ThinHeader";
 import { usePathname } from "next/navigation";
 

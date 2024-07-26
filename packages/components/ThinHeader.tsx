@@ -1,6 +1,6 @@
 "use client";
 import { CgDarkMode } from "react-icons/cg";
-import Logo from "@youmeet/components/Logo";
+import Logo from "./Logo";
 import { RiLoginCircleLine } from "react-icons/ri";
 import {
   Dispatch,
@@ -16,7 +16,7 @@ import MenuAuthenticatedUser from "./MenuAuthenticatedUser";
 import verifyTokenBrowser from "@youmeet/utils/verifyTokenBrowser";
 import { getUser } from "@youmeet/functions/request";
 import { usePathname } from "next/navigation";
-import NotificationsIconComponent from "@youmeet/components/NotificationsIconComponent";
+import NotificationsIconComponent from "./NotificationsIconComponent";
 import { BetaUser } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";

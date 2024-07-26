@@ -1,7 +1,6 @@
 "use client";
 import "./globals.css";
-import "@youmeet/app/dist/index.css";
-import "@youmeet/components/dist/index.css";
+import "@youmeet/components/styles.css";
 import "@youmeet/i18n/index";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { Provider as ReduxProvider } from "react-redux";

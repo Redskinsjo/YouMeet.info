@@ -24,7 +24,7 @@ import {
   SharingRefusal,
   Video,
 } from "@youmeet/gql/generated";
-import { ConversationTheme } from "@youmeet/app/profils/[candidateName]/candidateProfileComponents/ConversationComponent";
+import { ConversationTheme } from "@youmeet/types/ConversationTheme";
 import { analyseVideo } from "@youmeet/utils/analyseVideo";
 import { externallyHandleData } from "@youmeet/utils/handleProfileSubmit";
 import { revalidatePath } from "next/cache";
