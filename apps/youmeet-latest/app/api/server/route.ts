@@ -26,6 +26,7 @@ const { handleRequest } = createYoga({
       "POST, OPTIONS"
     );
   },
+  fetchAPI: { Response },
 });
 
 export {
