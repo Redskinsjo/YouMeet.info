@@ -102,6 +102,7 @@
     "ts-jest": "^29.2.3",
     "ts-jest-mock-import-meta": "^1.2.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "turbo": "^2.0.9"
   }
 }
