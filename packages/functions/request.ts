@@ -216,7 +216,6 @@ const req = async <T>(
   try {
     const nextParams = {} as { next?: { revalidate: number } };
     if (process.env.SCRIPT === undefined) nextParams.next = { revalidate };
-    console.log(uri, "uri");
     const response = await fetch(`${uri}/api/server`, {
       method: "POST",
       headers: {
@@ -230,6 +229,7 @@ const req = async <T>(
       signal: controller?.signal,
     });
     const json = await response.json();
+    console.log(response.ok, "response.ok");
     if (response.ok) {
       clearTimeout(timeoutId);
       if (json) {
