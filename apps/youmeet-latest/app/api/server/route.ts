@@ -10,6 +10,8 @@ const schema = createSchema({
   resolvers,
 });
 
+console.log("test test");
+
 const { handleRequest } = createYoga({
   graphqlEndpoint: "/api/server",
   schema,
