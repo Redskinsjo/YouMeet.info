@@ -70,6 +70,7 @@ const nextConfig = {
   },
   env: {
     STRIPE_DEV_WEBHOOK_SECRET: process.env.STRIPE_DEV_WEBHOOK_SECRET,
+    TEST: process.env.TEST,
     APP: process.env.APP,
     GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
     GOOGLE_PRIVATE_KEY_ID: process.env.GOOGLE_PRIVATE_KEY_ID,

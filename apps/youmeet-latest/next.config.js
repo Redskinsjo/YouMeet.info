@@ -69,6 +69,7 @@ const nextConfig = {
     ],
   },
   env: {
+    TEST: process.env.TEST,
     APP: process.env.APP,
     PRO_DOMAIN: process.env.PRO_DOMAIN,
     PRO_URI: process.env.PRO_URI,
