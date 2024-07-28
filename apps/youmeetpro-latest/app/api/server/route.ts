@@ -13,6 +13,7 @@ const schema = createSchema({
   typeDefs,
   resolvers,
 });
+console.log(typeDefs, "typeDefs");
 
 const { handleRequest } = createYoga({
   graphqlEndpoint: "/api/server",

@@ -6,7 +6,7 @@
     "@/*": "./*"
   },
   "scripts": {
-    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch"
+    "dev": "tailwindcss -i ./styles.css -o ./dist/index.css --watch"
   },
   "dependencies": {
     "@mui/material": "^5.16.5",

@@ -27,7 +27,6 @@ export const checkingIndexes = <T>(myIndexes: IndexList, model: Model<T>) => {
                 // index has not the same name
                 const indexes = await model.collection.getIndexes();
                 if (indexes[existingIndexName]) {
-                  console.log("1");
                   await model.collection.dropIndex(existingIndexName);
                 }
               } else {
@@ -46,7 +45,7 @@ export const checkingIndexes = <T>(myIndexes: IndexList, model: Model<T>) => {
             console.log("3");
             await model.collection.createIndex(
               { [scheduledIndexKey]: 1 },
-              scheduledIndexOptions,
+              scheduledIndexOptions
             );
           }
         }
@@ -54,7 +53,7 @@ export const checkingIndexes = <T>(myIndexes: IndexList, model: Model<T>) => {
         console.log(
           `UNE ERREUR avec la vérification d'index: `,
           err.message,
-          err.type,
+          err.type
         );
       }
     })
