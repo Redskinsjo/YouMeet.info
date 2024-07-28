@@ -19,6 +19,9 @@
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@faker-js/faker": "^8.4.1",
+    "@graphql-tools/graphql-file-loader": "^8.0.1",
+    "@graphql-tools/load": "^8.0.2",
+    "@graphql-tools/webpack-loader": "^7.0.0",
     "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "^5.16.5",
     "@mui/x-data-grid": "^7.11.1",
@@ -101,7 +104,7 @@
     "ts-jest": "^29.2.3",
     "ts-jest-mock-import-meta": "^1.2.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "turbo": "^2.0.9"
+    "turbo": "^2.0.9",
+    "typescript": "^5.5.4"
   }
 }

@@ -110,6 +110,11 @@ const nextConfig = {
   webpack: (config, { dev, isServer }) => {
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: "@graphql-tools/webpack-loader",
+    });
 
     if (dev || isServer) {
       config.devtool = "source-map";

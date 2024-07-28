@@ -1,15 +1,9 @@
 import { createSchema, createYoga } from "graphql-yoga";
 import resolvers from "@/resolvers";
 import mongoose from "mongoose";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-import { readFileSync } from "fs";
-
-const filename = fileURLToPath(import.meta.url);
-const _dirname = dirname(filename);
-const filepath = join(_dirname, "schema.graphql");
-
-const typeDefs = readFileSync(filepath).toString("utf-8");
+import { join } from "path";
+import { loadSchemaSync } from "@graphql-tools/load";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 
 mongoose.connect(`${process.env.MONGODB_URI}`, {
   serverSelectionTimeoutMS: 5000,
@@ -17,11 +11,14 @@ mongoose.connect(`${process.env.MONGODB_URI}`, {
   socketTimeoutMS: 10000,
 });
 
+const typeDefs = loadSchemaSync(join(import.meta.url, "../schema.graphql"), {
+  loaders: [new GraphQLFileLoader()],
+});
+
 const schema = createSchema({
   typeDefs,
   resolvers,
 });
-console.log(typeDefs, "typeDefs");
 
 const { handleRequest } = createYoga({
   graphqlEndpoint: "/api/server",
