@@ -14,12 +14,14 @@ const schema = createSchema({
   resolvers,
 });
 
+console.log("test");
+
 const { handleRequest } = createYoga({
   graphqlEndpoint: "/api/server",
   schema,
   graphiql: false,
   cors: {
-    origin: [`${process.env.API_DOMAIN}`, `${process.env.PRO_DOMAIN}`],
+    origin: [`${process.env.API_DOMAIN}`, `${process.env.CANDIDATE_DOMAIN}`],
     allowedHeaders: ["X-Custom-Header"],
     methods: ["POST", "OPTIONS", "GET"],
     credentials: true,

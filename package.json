@@ -1,16 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "analyse": "turbo analyse",
     "build": "turbo build",
     "dev": "turbo dev codegen",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "format": "turbo format",
-    "db-push-dev": "turbo db-push-dev",
-    "db-push": "turbo db-push",
-    "prisma-generate": "turbo prisma-generate"
+    "prisma": "turbo format db-push-dev db-push prisma-generate",
+    "vercel-generate": "turbo vercel-generate"
   },
   "devDependencies": {
     "turbo": "^2.0.9"

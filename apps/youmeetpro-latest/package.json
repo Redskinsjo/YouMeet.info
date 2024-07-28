@@ -8,8 +8,6 @@
   "scripts": {
     "dev": "PORT=3001 dotenv -e .env.development -- next dev",
     "build": "next build",
-    "analyse": "dotenv -e .env -- yarn build",
-    "turbo-analyse": "dotenv -e .env.development -- yarn build",
     "start": "PORT=3001 next start",
     "lint": "next lint",
     "generateCookie": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/generateCookie.ts",
