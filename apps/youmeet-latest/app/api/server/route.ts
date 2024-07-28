@@ -1,7 +1,17 @@
 import { createSchema, createYoga } from "graphql-yoga";
 import resolvers from "@/resolvers";
 import mongoose from "mongoose";
-import { schema as typeDefs } from "@youmeet/gql/imports";
+// import { schema as typeDefs } from "@youmeet/gql/imports";
+
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import { readFileSync } from "fs";
+
+const filename = fileURLToPath(import.meta.url);
+const _dirname = dirname(filename);
+const filepath = join(_dirname, "schema.graphql");
+
+const typeDefs = readFileSync(filepath).toString("utf-8");
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 
