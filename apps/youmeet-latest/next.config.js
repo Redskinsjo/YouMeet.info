@@ -111,9 +111,9 @@ const nextConfig = {
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
     config.module.rules.push({
-      test: /\.(graphql|gql)$/,
+      test: /\.(graphql|gql)/,
       exclude: /node_modules/,
-      loader: "@graphql-tools/webpack-loader",
+      loader: "graphql-tag/loader",
     });
 
     if (dev || isServer) {
