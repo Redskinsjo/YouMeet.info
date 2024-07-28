@@ -3,12 +3,12 @@
   "tasks": {
     "build": {
       "env": ["*"],
-      "dependsOn": ["@youmeet/prisma-config#vercel-generate", "^build"],
+      "dependsOn": ["vercel-generate", "^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {
       "env": ["*"],
-      "dependsOn": ["@youmeet/prisma-config#vercel-generate", "codegen"],
+      "dependsOn": ["vercel-generate", "codegen"],
       "persistent": true,
       "cache": false
     },
@@ -27,7 +27,7 @@
     "prisma-generate": {
       "dependsOn": ["db-push"]
     },
-    "vercel-generate": {},
+    "vercel-generate": { "cache": false },
     "type-check": {}
   }
 }
