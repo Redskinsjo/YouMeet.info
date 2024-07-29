@@ -71,6 +71,7 @@
     "@graphql-codegen/typescript": "^4.0.6",
     "@graphql-codegen/typescript-operations": "^4.2.0",
     "@graphql-codegen/typescript-resolvers": "^4.0.6",
+    "@graphql-tools/webpack-loader": "^7.0.0",
     "@typegoose/typegoose": "^12.3.1",
     "@types/crypto-js": "^4.2.2",
     "@types/js-cookie": "^3.0.6",
@@ -87,7 +88,7 @@
     "prisma": "^5.16.2",
     "tailwindcss": "^3.4.7",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "turbo": "^2.0.9"
+    "turbo": "^2.0.9",
+    "typescript": "^5.5.4"
   }
 }

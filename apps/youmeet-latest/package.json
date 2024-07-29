@@ -73,6 +73,7 @@
     "zod": "^3.23.7"
   },
   "devDependencies": {
+    "@graphql-tools/webpack-loader": "^7.0.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
     "@typegoose/typegoose": "^12.4.0",

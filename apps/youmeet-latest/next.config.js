@@ -118,7 +118,7 @@ const nextConfig = {
       exclude: /node_modules/,
       use: [
         {
-          loader: "graphql-tag/loader",
+          loader: "@graphql-tools/webpack-loader",
         },
       ],
     });
