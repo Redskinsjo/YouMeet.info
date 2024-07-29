@@ -1,12 +1,14 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const path = require("path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
     serverActions: { allowedOrigins: ["localhost", "*.youmeet.info"] },
+    outputFileTracingRoot: path.join(__dirname, "../../"),
   },
   swcMinify: true,
   transpilePackages: ["@youmeet/components"],
@@ -68,6 +70,7 @@ const nextConfig = {
       },
     ],
   },
+
   env: {
     TEST: process.env.TEST,
     APP: process.env.APP,
@@ -111,9 +114,13 @@ const nextConfig = {
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
     config.module.rules.push({
-      test: /\.(graphql|gql)/,
+      test: /\.graphql$/,
       exclude: /node_modules/,
-      loader: "graphql-tag/loader",
+      use: [
+        {
+          loader: "graphql-tag/loader",
+        },
+      ],
     });
 
     if (dev || isServer) {

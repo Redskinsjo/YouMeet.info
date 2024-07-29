@@ -1,7 +1,8 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
+import { uri } from "@youmeet/functions/imports";
 
 const config: CodegenConfig = {
-  schema: "./schema.graphql",
+  schema: `schema.graphql`,
   documents: ["./queries/*.graphql"],
   emitLegacyCommonJSImports: false,
   generates: {

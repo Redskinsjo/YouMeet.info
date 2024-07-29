@@ -5,8 +5,23 @@
   "imports": {
     "@/*": "./*"
   },
+  "exports": {
+    "./actions": "./src/actions.ts",
+    "./fetchUser": "./src/fetchUser.ts",
+    "./fonts": "./src/fonts.ts",
+    "./imports": "./src/imports.ts",
+    "./queries": "./src/queries.ts",
+    "./request": "./src/request.ts"
+  },
   "dependencies": {
     "@youmeet/components": "*",
-    "next": "^14.2.3"
+    "next": "^14.2.3",
+    "dotenv": "^16.4.5"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
   }
 }

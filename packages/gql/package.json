@@ -6,7 +6,8 @@
     "./codegen": "./codegen.ts",
     "./generated": "./generated.ts",
     "./index": "./index.tsx",
-    "./imports": "./imports.ts"
+    "./imports": "./imports.ts",
+    "./typeDefs": "./schema.ts"
   },
   "scripts": {
     "codegen": "graphql-codegen --config codegen.ts --watch"
@@ -26,6 +27,7 @@
   "dependencies": {
     "@graphql-tools/schema": "^10.0.4",
     "graphql": "^16.8.1",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "graphql-tag": "^2.12.6"
   }
 }

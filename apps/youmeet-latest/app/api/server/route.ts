@@ -1,15 +1,9 @@
 import { createSchema, createYoga } from "graphql-yoga";
 import resolvers from "@/resolvers";
 import mongoose from "mongoose";
-import { join } from "path";
-import { loadSchemaSync } from "@graphql-tools/load";
-import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
+import { schema as typeDefs } from "@youmeet/gql/imports";
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
-
-const typeDefs = loadSchemaSync(join(import.meta.url, "../schema.graphql"), {
-  loaders: [new GraphQLFileLoader()],
-});
 
 const schema = createSchema({
   typeDefs,

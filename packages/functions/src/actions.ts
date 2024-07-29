@@ -37,7 +37,6 @@ import {
   createCompanyProfile,
   createConversation,
   createCustomisation,
-  createDetails,
   createError,
   createFeedback,
   createLead,
@@ -57,10 +56,8 @@ import {
   deleteProfileSharing,
   deleteVideo,
   getAffiliation,
-  getOneDetails,
   getRawUser,
   getSimpleUser,
-  getUser,
   getVideo,
   resetEmailLink,
   resetPassword,
@@ -72,7 +69,7 @@ import {
   updateQueue,
   updateUser,
   updateVideo,
-} from "@youmeet/functions/request";
+} from "./request";
 import {
   FormHandledData,
   OfferHandledData,
@@ -84,7 +81,7 @@ import {
   withData,
 } from "@youmeet/types/api/backend";
 import { z } from "zod";
-import { dev, test, uri } from "@youmeet/functions/imports";
+import { dev, test, uri } from "./imports";
 import { cookies } from "next/headers";
 import { isPayloadError, isUser } from "@youmeet/types/TypeGuards";
 import { s } from "@youmeet/utils/jwt";

@@ -13,6 +13,7 @@
       "cache": false
     },
     "codegen": {
+      "env": ["*"],
       "outputs": ["gql/generated.ts"]
     },
     "format": {},
