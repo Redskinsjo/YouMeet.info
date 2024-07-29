@@ -9,6 +9,9 @@ const nextConfig = {
   experimental: {
     serverActions: { allowedOrigins: ["localhost", "*.youmeet.info"] },
     outputFileTracingRoot: path.join(__dirname, "../../"),
+    outputFileTracingIncludes: {
+      "/api/server": ["../../packages/gql/**/*"],
+    },
   },
   swcMinify: true,
   transpilePackages: ["@youmeet/components"],
