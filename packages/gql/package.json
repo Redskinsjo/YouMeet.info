@@ -7,7 +7,8 @@
     "./generated": "./generated.ts",
     "./index": "./index.tsx",
     "./imports": "./imports.ts",
-    "./typeDefs": "./schema.ts"
+    "./typeDefs": "./schema.ts",
+    "./schema": "./schema.graphql"
   },
   "scripts": {
     "codegen": "graphql-codegen --config codegen.ts --watch"
