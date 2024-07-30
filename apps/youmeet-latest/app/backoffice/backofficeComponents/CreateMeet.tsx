@@ -1,16 +1,16 @@
 "use client";
-import SimpleField from "@youmeet/components/formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "@youmeet/ui/formulaire-profil/formComponents/fields/SimpleField";
 import { onCreateMeet, onSendEmail } from "@youmeet/functions/actions";
-import Layout from "@youmeet/components/Layout";
-import SubLayout from "@youmeet/components/SubLayout";
+import Layout from "@youmeet/ui/Layout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { resetModal, setModal } from "@youmeet/global-config/features/modal";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { Button, MenuItem } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import AvatarsField from "@youmeet/components/formulaire-profil/formComponents/fields/AvatarsField";
-import PhoneField from "@youmeet/components/formulaire-profil/formComponents/fields/PhoneField";
+import AvatarsField from "@youmeet/ui/formulaire-profil/formComponents/fields/AvatarsField";
+import PhoneField from "@youmeet/ui/formulaire-profil/formComponents/fields/PhoneField";
 import {
   BACKEND_ERRORS,
   BACKEND_MESSAGES,
@@ -30,8 +30,8 @@ import { setName } from "@youmeet/utils/setName";
 import { BackendError } from "@youmeet/utils/BackendErrorClass";
 import { submitFile } from "@youmeet/utils/submitFile";
 import { dev, uri, uriPro } from "@youmeet/functions/imports";
-import VideoComponent from "@youmeet/components/dashboard/dashboardComponents/VideoComponent";
-import SelectField from "@youmeet/components/formulaire-profil/formComponents/fields/SelectField";
+import VideoComponent from "@youmeet/ui/dashboard/dashboardComponents/VideoComponent";
+import SelectField from "@youmeet/ui/formulaire-profil/formComponents/fields/SelectField";
 
 export default function CreateProUser() {
   const dispatch = useDispatch();

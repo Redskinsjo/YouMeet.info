@@ -3,9 +3,9 @@ import {
   onAnswerConversation,
   onConversationEngagement,
 } from "@youmeet/functions/actions";
-import BoldText from "@youmeet/components/BoldText";
-import DetailComponent from "@youmeet/components/DetailComponent";
-import Logo from "@youmeet/components/Logo";
+import BoldText from "@youmeet/ui/BoldText";
+import DetailComponent from "@youmeet/ui/DetailComponent";
+import Logo from "@youmeet/ui/Logo";
 import {
   BetaQueue,
   BetaWhatsappExchange,
@@ -22,8 +22,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Button, useMediaQuery } from "@mui/material";
-import DisplayedExchange from "@youmeet/components/dashboard/conversations/conversationComponents/DisplayedExchange";
-import TooltipedAsset from "@youmeet/components/TooltipedAsset";
+import DisplayedExchange from "@youmeet/ui/dashboard/conversations/conversationComponents/DisplayedExchange";
+import TooltipedAsset from "@youmeet/ui/TooltipedAsset";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { resetModal, setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";

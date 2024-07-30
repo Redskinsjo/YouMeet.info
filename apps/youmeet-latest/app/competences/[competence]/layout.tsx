@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { logoUrl, uri } from "@youmeet/functions/imports";
 import { formatForUrl } from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
-import GoogleTagAndHotjarComponent from "@youmeet/components/GoogleTagAndHotjarComponent";
+import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { getCompetency } from "@youmeet/functions/request";
 import { GptCompetency } from "@youmeet/gql/generated";

@@ -31,7 +31,7 @@
     "@prisma/client": "^5.16.2",
     "@reduxjs/toolkit": "^2.2.6",
     "@sendinblue/client": "^3.3.1",
-    "@youmeet/components": "*",
+    "@youmeet/ui": "*",
     "@youmeet/functions": "*",
     "@youmeet/global-config": "*",
     "@youmeet/gql": "*",

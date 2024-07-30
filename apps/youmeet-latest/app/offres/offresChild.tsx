@@ -1,9 +1,9 @@
 "use client";
 import { Offer } from "@youmeet/gql/generated";
 import React from "react";
-import Footer from "@youmeet/components/Footer";
-import BigHeaderSection from "@youmeet/components/_sections/BigHeaderSection";
-import OffresComponent from "@youmeet/components/offres/offresComponent/OffresComponent";
+import Footer from "@youmeet/ui/Footer";
+import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
+import OffresComponent from "@youmeet/ui/offres/offresComponent/OffresComponent";
 
 export default function OffresChild({ offres }: { offres: Offer[] }) {
   // const { data: suggestedData, loading: suggestedLoading } = useQuery(

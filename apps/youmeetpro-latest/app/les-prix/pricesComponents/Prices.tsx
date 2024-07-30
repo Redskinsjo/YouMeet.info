@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 import PriceCard from "./PriceCard";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";

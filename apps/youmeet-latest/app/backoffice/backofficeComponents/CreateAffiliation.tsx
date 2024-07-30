@@ -1,8 +1,8 @@
 "use client";
 import { onCreateAffiliation } from "@youmeet/functions/actions";
 import { getSimpleUser, getUsers } from "@youmeet/functions/request";
-import SimpleField from "@youmeet/components/formulaire-profil/formComponents/fields/SimpleField";
-import SubLayout from "@youmeet/components/SubLayout";
+import SimpleField from "@youmeet/ui/formulaire-profil/formComponents/fields/SimpleField";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { setError } from "@youmeet/global-config/features/global";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { BetaUser } from "@youmeet/gql/generated";

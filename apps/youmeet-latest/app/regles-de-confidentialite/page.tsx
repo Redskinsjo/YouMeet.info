@@ -1,6 +1,6 @@
 "use client";
-import Footer from "@youmeet/components/Footer";
-import SubLayout from "@youmeet/components/SubLayout";
+import Footer from "@youmeet/ui/Footer";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { grey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";

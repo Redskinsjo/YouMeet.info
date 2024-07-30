@@ -1,5 +1,5 @@
 "use client";
-import SubLayout from "@youmeet/components/SubLayout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { BetaCompany } from "@youmeet/gql/generated";
 import React, { useCallback, useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
@@ -11,9 +11,9 @@ import {
   getCompanies,
   getCompany,
 } from "@youmeet/functions/request";
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
-import TooltipedAsset from "@youmeet/components/TooltipedAsset";
+import TooltipedAsset from "@youmeet/ui/TooltipedAsset";
 import { Button } from "@mui/material";
 
 export default function BackofficeCompaniesComponent({

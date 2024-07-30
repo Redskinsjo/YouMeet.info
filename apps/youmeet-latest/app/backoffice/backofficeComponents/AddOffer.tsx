@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import SubLayoutField from "@youmeet/components/SubLayoutField";
+import SubLayoutField from "@youmeet/ui/SubLayoutField";
 import { Button, MenuItem, TextField } from "@mui/material";
 import { client } from "@youmeet/gql/index";
 import {
@@ -10,11 +10,11 @@ import {
   Offer,
 } from "@youmeet/gql/generated";
 import { useRouter } from "next/navigation";
-import SelectField from "@youmeet/components/formulaire-profil/formComponents/fields/SelectField";
-import CompanyField from "@youmeet/components/formulaire-profil/formComponents/fields/CompanyField";
+import SelectField from "@youmeet/ui/formulaire-profil/formComponents/fields/SelectField";
+import CompanyField from "@youmeet/ui/formulaire-profil/formComponents/fields/CompanyField";
 import { purple } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
-import DateField from "@youmeet/components/formulaire-profil/formComponents/fields/DateField";
+import DateField from "@youmeet/ui/formulaire-profil/formComponents/fields/DateField";
 import { DataGrid } from "@mui/x-data-grid";
 import { onDeleteOffer } from "@youmeet/functions/actions";
 

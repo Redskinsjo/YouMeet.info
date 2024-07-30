@@ -1,14 +1,14 @@
-import Footer from "@youmeet/components/Footer";
+import Footer from "@youmeet/ui/Footer";
 import dynamic from "next/dynamic";
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 
-const BoldText = dynamic(() => import("@youmeet/components/BoldText"));
+const BoldText = dynamic(() => import("@youmeet/ui/BoldText"));
 const Hero = dynamic(() => import("./productComponents/Hero"));
 const ProductPunchlineCta = dynamic(
-  () => import("@youmeet/components/_homeComponents/ProductPunchlineCta")
+  () => import("@youmeet/ui/_homeComponents/ProductPunchlineCta")
 );
 const BigHeaderSection = dynamic(
-  () => import("@youmeet/components/_sections/BigHeaderSection")
+  () => import("@youmeet/ui/_sections/BigHeaderSection")
 );
 
 const punchlines = [

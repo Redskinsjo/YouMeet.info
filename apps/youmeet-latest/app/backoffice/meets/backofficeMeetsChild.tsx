@@ -1,4 +1,4 @@
-import BackofficeMeetsComponent from "@youmeet/components/backoffice/backofficeComponents/BackofficeMeetsComponent";
+import BackofficeMeetsComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficeMeetsComponent";
 import { Meet } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import Link from "next/link";

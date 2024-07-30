@@ -3,7 +3,7 @@ import { uri } from "@youmeet/functions/imports";
 import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
 import { BetaUser, Video } from "@youmeet/gql/generated";
 import { setName } from "@youmeet/utils/setName";
-import GoogleTagAndHotjarComponent from "@youmeet/components/GoogleTagAndHotjarComponent";
+import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { getUser } from "@youmeet/functions/request";
 

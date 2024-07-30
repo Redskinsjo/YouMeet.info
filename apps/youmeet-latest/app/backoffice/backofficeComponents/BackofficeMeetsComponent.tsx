@@ -1,7 +1,7 @@
 "use client";
 import { deleteMeet } from "@youmeet/functions/request";
-import Layout from "@youmeet/components/Layout";
-import SubLayout from "@youmeet/components/SubLayout";
+import Layout from "@youmeet/ui/Layout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { Meet } from "@youmeet/gql/generated";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";

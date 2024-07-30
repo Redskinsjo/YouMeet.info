@@ -1,8 +1,8 @@
 import React from "react";
 import { Offer } from "@youmeet/gql/generated";
-import PublicPageContainer from "@youmeet/components/PublicPage/PublicPageContainer";
-import OfferContent from "@youmeet/components/offres/[offre]/oneOfferComponents/OfferContent";
-import OtherOffersComponent from "@youmeet/components/offres/[offre]/oneOfferComponents/OtherOffersComponent";
+import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
+import OfferContent from "@youmeet/ui/offres/[offre]/oneOfferComponents/OfferContent";
+import OtherOffersComponent from "@youmeet/ui/offres/[offre]/oneOfferComponents/OtherOffersComponent";
 
 export default function OfferChild({
   offre,

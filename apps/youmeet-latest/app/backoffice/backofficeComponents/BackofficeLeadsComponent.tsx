@@ -1,14 +1,13 @@
-import SubLayout from "@youmeet/components/SubLayout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { Lead, BetaUser } from "@youmeet/gql/generated";
 import React from "react";
 import dynamic from "next/dynamic";
 
 const LeadsGrid = dynamic(
-  () => import("@youmeet/components/backoffice/backofficeComponents/LeadsGrid")
+  () => import("@youmeet/ui/backoffice/backofficeComponents/LeadsGrid")
 );
 const CreateLeadForm = dynamic(
-  () =>
-    import("@youmeet/components/backoffice/backofficeComponents/CreateLeadForm")
+  () => import("@youmeet/ui/backoffice/backofficeComponents/CreateLeadForm")
 );
 
 export default function BackofficeLeadsComponent({

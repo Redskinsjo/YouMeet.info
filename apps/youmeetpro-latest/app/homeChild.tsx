@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
-import Layout from "@youmeet/components/Layout";
-import HeroSection from "@youmeet/components/_sections/HeroSection";
-import Footer from "@youmeet/components/Footer";
-import HomeWhatsapp from "@youmeet/components/_homeComponents/HomeWhatsapp";
-import HomeSquares from "@youmeet/components/_homeComponents/HomeSquares";
-import TextsSection from "@youmeet/components/_sections/TextsSection";
+import Layout from "@youmeet/ui/Layout";
+import HeroSection from "@youmeet/ui/_sections/HeroSection";
+import Footer from "@youmeet/ui/Footer";
+import HomeWhatsapp from "@youmeet/ui/_homeComponents/HomeWhatsapp";
+import HomeSquares from "@youmeet/ui/_homeComponents/HomeSquares";
+import TextsSection from "@youmeet/ui/_sections/TextsSection";
 
 const BigHeaderSection = dynamic(
-  () => import("@youmeet/components/_sections/BigHeaderSection")
+  () => import("@youmeet/ui/_sections/BigHeaderSection")
 );
 
 export default function HomeChild() {

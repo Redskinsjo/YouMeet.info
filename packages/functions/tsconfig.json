@@ -4,10 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    },
-    "rootDir": "src",
-    "outDir": "dist",
-    "tsBuildInfoFile": "dist/.tsbuildinfo"
+    }
   },
-  "exclude": ["node_modules", "dist/**/*", "next.config.js"]
+  "exclude": ["node_modules", "next.config.js"]
 }

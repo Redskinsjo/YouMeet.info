@@ -1,14 +1,11 @@
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
 import React from "react";
-import BackofficeLeadsComponent from "@youmeet/components/backoffice/backofficeComponents/BackofficeLeadsComponent";
+import BackofficeLeadsComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficeLeadsComponent";
 import dynamic from "next/dynamic";
 
 const MoreFeaturesLeads = dynamic(
-  () =>
-    import(
-      "@youmeet/components/backoffice/backofficeComponents/MoreFeaturesLeads"
-    )
+  () => import("@youmeet/ui/backoffice/backofficeComponents/MoreFeaturesLeads")
 );
 
 export default function BackofficePageComponent({

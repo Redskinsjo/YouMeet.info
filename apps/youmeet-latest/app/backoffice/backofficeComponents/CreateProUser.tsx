@@ -1,15 +1,15 @@
 "use client";
-import SelectField from "@youmeet/components/formulaire-profil/formComponents/fields/SelectField";
-import SimpleField from "@youmeet/components/formulaire-profil/formComponents/fields/SimpleField";
+import SelectField from "@youmeet/ui/formulaire-profil/formComponents/fields/SelectField";
+import SimpleField from "@youmeet/ui/formulaire-profil/formComponents/fields/SimpleField";
 import { onCreateProAccount } from "@youmeet/functions/actions";
-import Layout from "@youmeet/components/Layout";
-import SubLayout from "@youmeet/components/SubLayout";
+import Layout from "@youmeet/ui/Layout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { Button } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import PhoneField from "@youmeet/components/formulaire-profil/formComponents/fields/PhoneField";
+import PhoneField from "@youmeet/ui/formulaire-profil/formComponents/fields/PhoneField";
 
 export default function CreateProUser() {
   const dispatch = useDispatch();

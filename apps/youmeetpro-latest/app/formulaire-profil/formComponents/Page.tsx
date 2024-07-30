@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mui/material";
 import { FormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 import dynamic from "next/dynamic";
 import RightPartFormComponentLoading from "./RightPartFormComponentLoading";
-import Logo from "@youmeet/components/Logo";
+import Logo from "@youmeet/ui/Logo";
 
 const RightPartFormComponent = dynamic(
   () => import("./RightPartFormComponent"),

@@ -1,0 +1,11 @@
+{
+  "extends": "@youmeet/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "rootDir": "."
+  },
+  "exclude": ["node_modules"]
+}

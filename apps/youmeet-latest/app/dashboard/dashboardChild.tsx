@@ -1,20 +1,18 @@
 import React from "react";
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import ProfilePartLoading from "@youmeet/components/ProfilePartLoading";
-import VideoPartLoading from "@youmeet/components/VideoPartLoading";
-import Discussions from "@youmeet/components/_homeComponents/Discussions";
+import ProfilePartLoading from "@youmeet/ui/ProfilePartLoading";
+import VideoPartLoading from "@youmeet/ui/VideoPartLoading";
+import Discussions from "@youmeet/ui/_homeComponents/Discussions";
 
 const ProfilePartComponent = dynamic(
-  () => import("@youmeet/components/ProfilePartComponent"),
+  () => import("@youmeet/ui/ProfilePartComponent"),
   { ssr: false, loading: () => <ProfilePartLoading /> }
 );
 const DashboardPartComponent = dynamic(
   () =>
-    import(
-      "@youmeet/components/dashboard/dashboardComponents/DashboardPartComponent"
-    ),
+    import("@youmeet/ui/dashboard/dashboardComponents/DashboardPartComponent"),
   { ssr: false, loading: () => <VideoPartLoading /> }
 );
 

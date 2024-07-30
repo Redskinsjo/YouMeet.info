@@ -1,4 +1,4 @@
-import LoginModalContent from "@youmeet/components/LoginModalContent";
+import LoginModalContent from "@youmeet/ui/LoginModalContent";
 import { Metadata } from "next";
 import { logoUrl } from "@youmeet/functions/imports";
 import { Suspense } from "react";

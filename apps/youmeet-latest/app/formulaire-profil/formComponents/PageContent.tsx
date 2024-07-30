@@ -7,10 +7,10 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import TooltipedAsset from "@youmeet/components/TooltipedAsset";
+import TooltipedAsset from "@youmeet/ui/TooltipedAsset";
 import { useTranslation } from "react-i18next";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import BoldText from "@youmeet/components/BoldText";
+import BoldText from "@youmeet/ui/BoldText";
 import { onFormData } from "@youmeet/functions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { UnknownAction } from "@reduxjs/toolkit";
@@ -31,7 +31,7 @@ import { BackendError } from "@youmeet/utils/BackendErrorClass";
 import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 import { dev } from "@youmeet/functions/imports";
 import { createError } from "@youmeet/functions/request";
-import { firstPartPages } from "@youmeet/components/formulaire-profil/formComponents/steps/FirstStep";
+import { firstPartPages } from "@youmeet/ui/formulaire-profil/formComponents/steps/FirstStep";
 
 export default function PageContent({
   defaultValues,

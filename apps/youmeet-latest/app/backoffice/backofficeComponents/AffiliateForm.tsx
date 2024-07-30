@@ -7,11 +7,11 @@ import {
   getUser,
   submitVideo,
 } from "@youmeet/functions/request";
-import VideoComponent from "@youmeet/components/dashboard/dashboardComponents/VideoComponent";
-import AvatarsField from "@youmeet/components/formulaire-profil/formComponents/fields/AvatarsField";
-import PhoneField from "@youmeet/components/formulaire-profil/formComponents/fields/PhoneField";
-import SelectField from "@youmeet/components/formulaire-profil/formComponents/fields/SelectField";
-import SimpleField from "@youmeet/components/formulaire-profil/formComponents/fields/SimpleField";
+import VideoComponent from "@youmeet/ui/dashboard/dashboardComponents/VideoComponent";
+import AvatarsField from "@youmeet/ui/formulaire-profil/formComponents/fields/AvatarsField";
+import PhoneField from "@youmeet/ui/formulaire-profil/formComponents/fields/PhoneField";
+import SelectField from "@youmeet/ui/formulaire-profil/formComponents/fields/SelectField";
+import SimpleField from "@youmeet/ui/formulaire-profil/formComponents/fields/SimpleField";
 import { resetModal, setModal } from "@youmeet/global-config/features/modal";
 import { Affiliation, BetaUser, Video } from "@youmeet/gql/generated";
 import {

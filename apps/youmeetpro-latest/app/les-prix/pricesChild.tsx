@@ -1,10 +1,10 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import BackgroundLayout from "@youmeet/components/BackgroundLayout";
-import BigHeaderSection from "@youmeet/components/_sections/BigHeaderSection";
+import BackgroundLayout from "@youmeet/ui/BackgroundLayout";
+import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
 
 const Prices = dynamic(() => import("./pricesComponents/Prices"));
-const Footer = dynamic(() => import("@youmeet/components/Footer"));
+const Footer = dynamic(() => import("@youmeet/ui/Footer"));
 
 export default function PricesChild() {
   return (

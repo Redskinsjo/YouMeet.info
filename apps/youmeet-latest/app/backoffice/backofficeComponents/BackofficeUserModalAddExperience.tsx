@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import ExperienceField from "@youmeet/components/formulaire-profil/formComponents/fields/ExperienceField";
+import ExperienceField from "@youmeet/ui/formulaire-profil/formComponents/fields/ExperienceField";
 import { FieldValues, useForm } from "react-hook-form";
 import { client } from "@youmeet/gql/index";
 import { BetaUser, CreateExperienceDocument } from "@youmeet/gql/generated";

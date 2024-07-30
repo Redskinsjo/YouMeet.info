@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import DashboardFeatures from "@youmeet/components/dashboard/dashboardComponents/dashboardFeatures";
+import DashboardFeatures from "@youmeet/ui/dashboard/dashboardComponents/dashboardFeatures";
 
 export default function Layout({
   children,

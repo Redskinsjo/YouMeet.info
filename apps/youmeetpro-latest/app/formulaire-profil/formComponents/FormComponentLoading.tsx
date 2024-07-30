@@ -1,4 +1,4 @@
-import Logo from "@youmeet/components/Logo";
+import Logo from "@youmeet/ui/Logo";
 import RightPartFormComponentLoading from "./RightPartFormComponentLoading";
 
 export default function FormComponentLoading() {

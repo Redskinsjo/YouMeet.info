@@ -1,4 +1,4 @@
-import LoginModalContent from "@youmeet/components/LoginModalContent";
+import LoginModalContent from "@youmeet/ui/LoginModalContent";
 import { Suspense } from "react";
 
 export default async function Login() {

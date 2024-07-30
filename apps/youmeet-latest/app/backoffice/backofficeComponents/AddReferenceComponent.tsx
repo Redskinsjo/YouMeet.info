@@ -11,7 +11,7 @@ import {
   ReferenceContact,
   UpdateExperienceDocument,
 } from "@youmeet/gql/generated";
-import RawExperience from "@youmeet/components/RawExperience";
+import RawExperience from "@youmeet/ui/RawExperience";
 import { Checkbox } from "@mui/material";
 import { outfit } from "@youmeet/functions/fonts";
 import { grey } from "@mui/material/colors";

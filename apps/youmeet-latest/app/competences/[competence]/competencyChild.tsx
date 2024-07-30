@@ -1,10 +1,10 @@
 import React from "react";
 import { GptCompetency } from "@youmeet/gql/generated";
-import PublicPageContainer from "@youmeet/components/PublicPage/PublicPageContainer";
-import Footer from "@youmeet/components/Footer";
-import BigHeaderSection from "@youmeet/components/_sections/BigHeaderSection";
-import CompetencyComponent from "@youmeet/components/competences/[competence]/competencyComponents/CompetencyComponent";
-import DividerSection from "@youmeet/components/_components/DividerSection";
+import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
+import Footer from "@youmeet/ui/Footer";
+import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
+import CompetencyComponent from "@youmeet/ui/competences/[competence]/competencyComponents/CompetencyComponent";
+import DividerSection from "@youmeet/ui/_components/DividerSection";
 
 export default function CompetencyChild({
   competency,

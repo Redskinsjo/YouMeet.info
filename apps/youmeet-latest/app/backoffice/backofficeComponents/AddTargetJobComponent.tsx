@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SelectField from "@youmeet/components/formulaire-profil/formComponents/fields/SelectField";
+import SelectField from "@youmeet/ui/formulaire-profil/formComponents/fields/SelectField";
 import { BetaUser } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import { FieldValues, useForm } from "react-hook-form";

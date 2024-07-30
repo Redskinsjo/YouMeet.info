@@ -1,4 +1,4 @@
-import GoogleTagAndHotjarComponent from "@youmeet/components/GoogleTagAndHotjarComponent";
+import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactNode } from "react";
 import { logoUrl } from "@youmeet/functions/imports";

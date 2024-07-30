@@ -1,6 +1,6 @@
 "use client";
 import { setModal } from "@youmeet/global-config/features/modal";
-import SubLayout from "@youmeet/components/SubLayout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { client } from "@youmeet/gql/index";
 import {
   BetaCompany,

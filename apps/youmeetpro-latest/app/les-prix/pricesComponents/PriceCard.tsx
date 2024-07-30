@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Button, useMediaQuery } from "@mui/material";
 import { blueGrey, deepPurple, grey, purple } from "@mui/material/colors";
-import BoldText from "@youmeet/components/BoldText";
+import BoldText from "@youmeet/ui/BoldText";
 import { useTranslation } from "react-i18next";
 import { RootState } from "@youmeet/global-config/store";
 import { useSelector } from "react-redux";

@@ -6,7 +6,7 @@ import { RootState } from "@youmeet/global-config/store";
 import { FormState } from "@youmeet/global-config/features/form";
 import { useTranslation } from "react-i18next";
 import { FormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
-import Logo from "@youmeet/components/Logo";
+import Logo from "@youmeet/ui/Logo";
 
 const Page = dynamic(() => import("../formulaire-profil/formComponents/Page"), {
   ssr: true,

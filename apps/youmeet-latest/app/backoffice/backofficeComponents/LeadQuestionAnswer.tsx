@@ -1,7 +1,7 @@
 import { FormControlLabel, Switch, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import DetailComponent from "@youmeet/components/DetailComponent";
-import BoldText from "@youmeet/components/BoldText";
+import DetailComponent from "@youmeet/ui/DetailComponent";
+import BoldText from "@youmeet/ui/BoldText";
 import { client } from "@youmeet/gql/index";
 import {
   FormQuestion,

@@ -1,7 +1,7 @@
-import GoogleTagAndHotjarComponent from "@youmeet/components/GoogleTagAndHotjarComponent";
+import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactNode } from "react";
-import DashboardFeatures from "@youmeet/components/dashboard/dashboardComponents/dashboardFeatures";
+import DashboardFeatures from "@youmeet/ui/dashboard/dashboardComponents/dashboardFeatures";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

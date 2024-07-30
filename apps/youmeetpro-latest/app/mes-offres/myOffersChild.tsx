@@ -1,5 +1,5 @@
 import { BetaUser } from "@youmeet/gql/generated";
-import NotificationsComponent from "@youmeet/components/dashboard/dashboardComponents/NotificationsComponent";
+import NotificationsComponent from "@youmeet/ui/dashboard/dashboardComponents/NotificationsComponent";
 
 export default function MyOffersChild({ profil }: { profil: BetaUser }) {
   return (

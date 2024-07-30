@@ -1,5 +1,5 @@
-import Layout from "@youmeet/components/Layout";
-import SubLayout from "@youmeet/components/SubLayout";
+import Layout from "@youmeet/ui/Layout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { BetaUser } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 

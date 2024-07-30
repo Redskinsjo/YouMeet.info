@@ -1,7 +1,7 @@
 "use client";
 import { onCreateLead } from "@youmeet/functions/actions";
-import PhoneField from "@youmeet/components/formulaire-profil/formComponents/fields/PhoneField";
-import SimpleField from "@youmeet/components/formulaire-profil/formComponents/fields/SimpleField";
+import PhoneField from "@youmeet/ui/formulaire-profil/formComponents/fields/PhoneField";
+import SimpleField from "@youmeet/ui/formulaire-profil/formComponents/fields/SimpleField";
 import { setError } from "@youmeet/global-config/features/global";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { BetaUser } from "@youmeet/gql/generated";

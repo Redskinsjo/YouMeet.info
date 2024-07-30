@@ -1,9 +1,9 @@
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 import { FormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
 import PageContent from "./PageContent";
-import BoldText from "@youmeet/components/BoldText";
+import BoldText from "@youmeet/ui/BoldText";
 import { Suspense } from "react";
 
 export default function RightPartFormComponent({

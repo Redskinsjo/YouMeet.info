@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import verifyTokenBrowser from "@youmeet/utils/verifyTokenBrowser";
 import ResetPasswordContent from "./resetPasswordContent";
-import Footer from "@youmeet/components/Footer";
+import Footer from "@youmeet/ui/Footer";
 import { usePathname, useRouter } from "next/navigation";
 
 export default async function ResetPassword() {

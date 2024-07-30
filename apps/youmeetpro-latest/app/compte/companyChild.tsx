@@ -1,5 +1,5 @@
 import { BetaCompany } from "@youmeet/gql/generated";
-import CompanyProfileComponent from "@youmeet/components/compte/companyComponents/CompanyProfileComponent";
+import CompanyProfileComponent from "@youmeet/ui/compte/companyComponents/CompanyProfileComponent";
 
 export default function CompanyChild({
   company,

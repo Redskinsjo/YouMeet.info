@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import GoogleTagAndHotjarComponent from "@youmeet/components/GoogleTagAndHotjarComponent";
+import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { getOffer } from "@youmeet/functions/request";
 import { Offer, Translated } from "@youmeet/gql/generated";

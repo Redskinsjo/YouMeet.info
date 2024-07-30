@@ -1,5 +1,5 @@
 "use client";
-import TooltipedAsset from "@youmeet/components/TooltipedAsset";
+import TooltipedAsset from "@youmeet/ui/TooltipedAsset";
 import { client } from "@youmeet/gql/index";
 import {
   Lead,

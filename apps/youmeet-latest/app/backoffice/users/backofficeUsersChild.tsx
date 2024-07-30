@@ -7,12 +7,11 @@ import dynamic from "next/dynamic";
 const BackofficeUsersComponent = dynamic(
   () =>
     import(
-      "@youmeet/components/backoffice/backofficeComponents/BackofficeUsersComponent"
+      "@youmeet/ui/backoffice/backofficeComponents/BackofficeUsersComponent"
     )
 );
 const CreateProUser = dynamic(
-  () =>
-    import("@youmeet/components/backoffice/backofficeComponents/CreateProUser")
+  () => import("@youmeet/ui/backoffice/backofficeComponents/CreateProUser")
 );
 
 export default function BackofficeUsersPage({ users }: { users: BetaUser[] }) {

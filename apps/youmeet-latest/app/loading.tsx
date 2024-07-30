@@ -1,5 +1,5 @@
 "use client";
-import Logo from "@youmeet/components/Logo";
+import Logo from "@youmeet/ui/Logo";
 
 export default function Loading() {
   return (

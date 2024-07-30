@@ -1,6 +1,6 @@
 "use client";
 import "./globals.css";
-import "@youmeet/components/styles";
+import "@youmeet/ui/index.css";
 import "@youmeet/i18n/index";
 import { Provider as ReduxProvider } from "react-redux";
 import {
@@ -22,8 +22,6 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           zIndex: 11000,
-          // "& .MuiPopover-root": {
-          // },
         },
       },
     },

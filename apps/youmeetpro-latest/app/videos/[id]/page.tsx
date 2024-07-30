@@ -1,5 +1,5 @@
 import { getVideo, getVideos } from "@youmeet/functions/request";
-import CandidateVideoComponent from "@youmeet/components/CandidateVideoComponent";
+import CandidateVideoComponent from "@youmeet/ui/CandidateVideoComponent";
 import { Video } from "@youmeet/gql/generated";
 import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
 import { notFound } from "next/navigation";

@@ -6,13 +6,13 @@ import {
   ReactElement,
   useCallback,
 } from "react";
-import TooltipedAsset from "@youmeet/components/TooltipedAsset";
+import TooltipedAsset from "@youmeet/ui/TooltipedAsset";
 import { useTranslation } from "react-i18next";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import {
   companyFirstPartPages,
   offerFirstPartPages,
-} from "@youmeet/components/formulaire-profil/formComponents/steps/FirstStep";
+} from "@youmeet/ui/formulaire-profil/formComponents/steps/FirstStep";
 import { onCompanyForm, onOfferForm } from "@youmeet/functions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { UnknownAction } from "@reduxjs/toolkit";

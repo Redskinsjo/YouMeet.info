@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
-import BigHeaderSection from "@youmeet/components/_sections/BigHeaderSection";
+import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
 import { Article } from "@youmeet/gql/generated";
-import Footer from "@youmeet/components/Footer";
+import Footer from "@youmeet/ui/Footer";
 
 const HomeMedia = dynamic(
-  () => import("@youmeet/components/_homeComponents/HomeMedia")
+  () => import("@youmeet/ui/_homeComponents/HomeMedia")
 );
 
 export default function BlogChild({ articles }: { articles: Article[] }) {

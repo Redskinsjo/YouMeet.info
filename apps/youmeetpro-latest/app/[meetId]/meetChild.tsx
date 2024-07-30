@@ -1,6 +1,6 @@
 "use client";
-import DetailComponent from "@youmeet/components/DetailComponent";
-import Layout from "@youmeet/components/Layout";
+import DetailComponent from "@youmeet/ui/DetailComponent";
+import Layout from "@youmeet/ui/Layout";
 import { Meet, Translated, Video } from "@youmeet/gql/generated";
 import { getLinkedinUrlFromId } from "@youmeet/utils/formatLinkedin";
 import { getUniversalFromCodeAndNumber } from "@youmeet/utils/formatPhone";
@@ -9,11 +9,11 @@ import Link from "next/link";
 import { createElement, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { FaLinkedin } from "react-icons/fa";
-import MainVideoComponent from "@youmeet/components/profils/[candidateName]/candidateProfileComponents/MainVideoComponent";
-import NewVideoComponent from "@youmeet/components/NewVideoComponent";
+import MainVideoComponent from "@youmeet/ui/profils/[candidateName]/candidateProfileComponents/MainVideoComponent";
+import NewVideoComponent from "@youmeet/ui/NewVideoComponent";
 import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
 import { useMediaQuery } from "@mui/material";
-import BoldText from "@youmeet/components/BoldText";
+import BoldText from "@youmeet/ui/BoldText";
 
 export default function MeetChild({ meet }: { meet: Meet }) {
   const {

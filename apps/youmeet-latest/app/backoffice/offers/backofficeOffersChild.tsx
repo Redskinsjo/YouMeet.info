@@ -1,4 +1,4 @@
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 import AddOffer from "../backofficeComponents/AddOffer";
 import { Offer } from "@youmeet/gql/generated";
 import Link from "next/link";

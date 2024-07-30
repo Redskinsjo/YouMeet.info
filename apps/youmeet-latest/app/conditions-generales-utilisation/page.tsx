@@ -1,8 +1,8 @@
 "use client";
-import Footer from "@youmeet/components/Footer";
-import SubLayout from "@youmeet/components/SubLayout";
-import CGUTitle from "@youmeet/components/conditions-generales-utilisation/cguComponents/CGUTitle";
-import ParagraphWithTitle from "@youmeet/components/conditions-generales-utilisation/cguComponents/ParagraphWithTitle";
+import Footer from "@youmeet/ui/Footer";
+import SubLayout from "@youmeet/ui/SubLayout";
+import CGUTitle from "@youmeet/ui/conditions-generales-utilisation/cguComponents/CGUTitle";
+import ParagraphWithTitle from "@youmeet/ui/conditions-generales-utilisation/cguComponents/ParagraphWithTitle";
 import { DynamicData, ParagraphWithTitleTypes } from "@youmeet/types/cgu";
 
 const paragraphs = [

@@ -1,4 +1,4 @@
-import CustomModal from "@youmeet/components/CustomModal";
+import CustomModal from "@youmeet/ui/CustomModal";
 
 export default function LoginModal() {
   return <CustomModal type="login" />;

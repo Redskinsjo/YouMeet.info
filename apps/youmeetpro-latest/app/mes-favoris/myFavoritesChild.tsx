@@ -1,7 +1,7 @@
 import { BetaUser } from "@youmeet/gql/generated";
 import React from "react";
-import PageListContainer from "@youmeet/components/dashboard/dashboardComponents/PageListContainer";
-import PageFilters from "@youmeet/components/dashboard/dashboardComponents/PageFilters";
+import PageListContainer from "@youmeet/ui/dashboard/dashboardComponents/PageListContainer";
+import PageFilters from "@youmeet/ui/dashboard/dashboardComponents/PageFilters";
 
 export default function MyOffersChild({ profil }: { profil: BetaUser }) {
   return (

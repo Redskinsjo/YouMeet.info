@@ -8,13 +8,8 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     serverActions: { allowedOrigins: ["localhost", "*.youmeet.info"] },
-    outputFileTracingRoot: path.join(__dirname, "../../"),
-    outputFileTracingIncludes: {
-      "/api/server": ["../../packages/gql/**/*"],
-    },
   },
   swcMinify: true,
-  transpilePackages: ["@youmeet/components"],
   headers: async () => [
     {
       source: "/",
@@ -125,8 +120,13 @@ const nextConfig = {
         },
       ],
     });
-    config.resolve.extensions.push(".jsx");
-    config.resolve.extensions.push(".tsx");
+    config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        isServer ? "isomorphic-style-loader" : "style-loader",
+        "css-loader",
+      ],
+    });
 
     if (dev || isServer) {
       config.devtool = "source-map";

@@ -1,5 +1,5 @@
 "use client";
-import SubLayout from "@youmeet/components/SubLayout";
+import SubLayout from "@youmeet/ui/SubLayout";
 import { client } from "@youmeet/gql/index";
 import { BetaUser, DeleteUserDocument, Video } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
@@ -18,7 +18,7 @@ import {
   getUsers,
   sendEmailOfferOpportunities,
 } from "@youmeet/functions/request";
-import Layout from "@youmeet/components/Layout";
+import Layout from "@youmeet/ui/Layout";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { setError } from "@youmeet/global-config/features/global";

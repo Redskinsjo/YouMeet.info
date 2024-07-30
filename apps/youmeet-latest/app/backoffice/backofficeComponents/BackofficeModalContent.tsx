@@ -6,7 +6,7 @@ import { fromNames } from "@youmeet/utils/resolvers/resolveFullname";
 import { Box, Button, Typography } from "@mui/material";
 import { deepPurple, green, red } from "@mui/material/colors";
 import React, { useCallback, useEffect, useState } from "react";
-import DetailComponent from "@youmeet/components/DetailComponent";
+import DetailComponent from "@youmeet/ui/DetailComponent";
 import {
   BetaCompany,
   BetaProfile,
@@ -34,7 +34,7 @@ import { AiFillSave } from "react-icons/ai";
 import { BiReset } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { getUniversalFromCodeAndNumber } from "@youmeet/utils/formatPhone";
-import UserInfos from "@youmeet/components/UserInfos";
+import UserInfos from "@youmeet/ui/UserInfos";
 import { ImSpinner2 } from "react-icons/im";
 import { useTranslation } from "react-i18next";
 import AddReferenceComponent from "./AddReferenceComponent";
