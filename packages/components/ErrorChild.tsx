@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
+import React from "react";
 
 export default function ErrorChild({
   error = { name: "Error", message: "Error", digest: "Error" },

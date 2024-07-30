@@ -3,6 +3,7 @@ import { useState } from "react";
 import ProfileImage from "./ProfileImage";
 import PublicProfileSlider from "./PublicProfileSlider";
 import { BetaCandidate, BetaUser } from "@youmeet/gql/generated";
+import React from "react";
 
 export default function ProfileAvatar({ profil }: { profil?: BetaUser }) {
   const [shouldSlider, setShouldSlider] = useState<boolean>(false);

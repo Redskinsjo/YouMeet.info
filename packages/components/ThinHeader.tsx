@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { setLogin } from "@youmeet/global-config/features/global";
 import { UnknownAction } from "@reduxjs/toolkit";
+import React from "react";
 
 export default function ThinHeader({
   setDark,

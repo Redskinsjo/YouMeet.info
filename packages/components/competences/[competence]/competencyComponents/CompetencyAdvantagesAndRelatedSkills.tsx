@@ -1,9 +1,9 @@
-import OneLineSkeleton from "@youmeet/components/OneLineSkeleton";
+import OneLineSkeleton from "../../../OneLineSkeleton";
 import { GptCompetency } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const BoldText = dynamic(() => import("@youmeet/components/BoldText"), {
+const BoldText = dynamic(() => import("../../../BoldText"), {
   ssr: false,
   loading: () => <OneLineSkeleton count={3} />,
 });

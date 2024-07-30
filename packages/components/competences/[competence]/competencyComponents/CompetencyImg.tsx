@@ -1,6 +1,7 @@
 "use client";
 import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
+import React from "react";
 import { useState, useEffect } from "react";
 
 const types = {

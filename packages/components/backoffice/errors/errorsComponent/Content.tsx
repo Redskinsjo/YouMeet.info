@@ -3,7 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { Error } from "@youmeet/gql/generated";
-import DetailComponent from "@youmeet/components/DetailComponent";
+import DetailComponent from "../../../DetailComponent";
 import { formatToDatetime } from "@youmeet/utils/formatToDatetime";
 import { useTranslation } from "react-i18next";
 import { Button, TextField } from "@mui/material";

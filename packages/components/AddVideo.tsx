@@ -8,6 +8,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BoldText from "./BoldText";
 import { AiOutlineEye } from "react-icons/ai";
+import React from "react";
 
 export default function AddVideo({
   profil,

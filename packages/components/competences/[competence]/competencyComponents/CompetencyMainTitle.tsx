@@ -1,4 +1,5 @@
 import { GptCompetency } from "@youmeet/gql/generated";
+import React from "react";
 
 export default function CompetencyMainTitle({
   competency,
