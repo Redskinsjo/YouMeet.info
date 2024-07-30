@@ -1,4 +1,4 @@
-import Layout from "../Layout";
+import Layout from "../../Layout";
 import { Offer } from "@youmeet/gql/generated";
 import type { Attr } from "@youmeet/types/attributes";
 import BackButton from "./BackButton";

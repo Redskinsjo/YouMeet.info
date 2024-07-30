@@ -3,8 +3,8 @@ import { Box } from "@mui/material";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
 import FrontCardRecruiter from "./FrontCardRecruiter";
 import BackCardRecruiter from "./BackCardRecruiter";
-import FrontCardOffer from "./offres/offresComponent/FrontCardOffer";
-import BackCardOffer from "./offres/offresComponent/BackCardOffer";
+import FrontCardOffer from "./src/offres/offresComponent/FrontCardOffer";
+import BackCardOffer from "./src/offres/offresComponent/BackCardOffer";
 import { CardTurnUp } from "@youmeet/types/Header";
 
 const Card = ({

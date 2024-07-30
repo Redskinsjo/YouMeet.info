@@ -125,6 +125,8 @@ const nextConfig = {
         },
       ],
     });
+    config.resolve.extensions.push(".jsx");
+    config.resolve.extensions.push(".tsx");
 
     if (dev || isServer) {
       config.devtool = "source-map";

@@ -4,8 +4,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
-    "target": "ESNext",
     "sourceMap": true,
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

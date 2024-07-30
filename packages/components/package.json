@@ -5,8 +5,9 @@
   "imports": {
     "@/*": "./*"
   },
-  "scripts": {
-    "dev": "tailwindcss -i ./styles.css -o ./dist/index.css --watch"
+  "exports": {
+    "./styles": "./index.css",
+    "./*": "./src/*"
   },
   "dependencies": {
     "@mui/material": "^5.16.5",

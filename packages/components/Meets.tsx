@@ -1,7 +1,7 @@
 import React from "react";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import CardLoading from "./offres/offresComponent/offresChildLoading";
+import CardLoading from "./src/offres/offresComponent/offresChildLoading";
 
 const Card = dynamic(() => import("./Card"), {
   ssr: false,

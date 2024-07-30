@@ -1,6 +1,6 @@
 "use client";
 import { useTranslation } from "react-i18next";
-import BoldText from "../BoldText";
+import BoldText from "../../BoldText";
 import React from "react";
 
 export default function EdgeMsg() {

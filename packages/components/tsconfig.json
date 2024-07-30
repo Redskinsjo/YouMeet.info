@@ -5,23 +5,10 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "rootDir": "",
-    "outDir": "dist"
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.test.tsx",
-    "SubLayout.tsx",
-    "SubLayoutField.tsx",
-    "SubmitBtn.tsx",
-    "SubPartContainer.tsx",
-    "SuggestedMeets.tsx",
-    "ThinHeader.tsx",
-    "TogglePersonalInfo.tsx",
-    "TooltipedAsset.tsx",
-    "UserInfos.tsx",
-    "VideoPartLoading.tsx"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules", "tailwind.config.ts", "styles.css"]
 }

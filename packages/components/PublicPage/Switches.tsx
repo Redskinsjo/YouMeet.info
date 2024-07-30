@@ -1,5 +1,5 @@
 "use client";
-import DetailComponent from "../DetailComponent";
+import DetailComponent from "../../DetailComponent";
 import { deepPurple, grey } from "@mui/material/colors";
 import { FormControlLabel, Switch, useMediaQuery } from "@mui/material";
 import { UserState } from "@youmeet/global-config/features/user";

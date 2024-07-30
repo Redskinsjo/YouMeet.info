@@ -8,7 +8,7 @@ import { Offer } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
-import BoldText from "../BoldText";
+import BoldText from "../../BoldText";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import React from "react";

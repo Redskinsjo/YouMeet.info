@@ -229,7 +229,6 @@ const req = async <T>(
       signal: controller?.signal,
     });
     const json = await response.json();
-    console.log(response.ok, "response.ok");
     if (response.ok) {
       clearTimeout(timeoutId);
       if (json) {

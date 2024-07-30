@@ -13,13 +13,13 @@ import { getName } from "@youmeet/utils/setName";
 import TooltipedAsset from "../../TooltipedAsset";
 import setFileUrl from "@youmeet/utils/setFileUrl";
 import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
-import DetailComponent from "../../DetailComponent";
-import BoldText from "../../BoldText";
+import DetailComponent from "../../../DetailComponent";
+import BoldText from "../../../BoldText";
 import isProfileEmpty from "@youmeet/utils/isProfileEmpty";
 import NewProfileComponent from "../../profils/[candidateName]/candidateProfileComponents/NewProfileComponent";
 import Link from "next/link";
 import { uri } from "@youmeet/functions/imports";
-import CustomIcon from "../../CustomIcon";
+import CustomIcon from "../../../CustomIcon";
 import { CustomIconName } from "@youmeet/types/CustomIconProps";
 import ProfileAvatar from "../../profils/[candidateName]/candidateProfileComponents/ProfileAvatar";
 
