@@ -120,13 +120,6 @@ const nextConfig = {
         },
       ],
     });
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        isServer ? "isomorphic-style-loader" : "style-loader",
-        "css-loader",
-      ],
-    });
 
     if (dev || isServer) {
       config.devtool = "source-map";

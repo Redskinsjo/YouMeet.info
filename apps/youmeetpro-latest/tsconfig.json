@@ -1,11 +1,12 @@
 {
-  "extends": "@youmeet/typescript-config/base.json",
+  "extends": "@youmeet/typescript-config/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     },
-    "noEmit": true
+    "noEmit": true,
+    "plugins": [{ "name": "next" }]
   },
   "include": [
     "next-env.d.ts",

@@ -5,6 +5,10 @@
   "imports": {
     "@/*": "./*"
   },
+  "scripts": {
+    "dev": "tailwindcss -i ./styles.css -o ./dist/index.css",
+    "build": "tailwindcss -i ./styles.css -o ./dist/index.css"
+  },
   "dependencies": {
     "@mui/material": "^5.16.5",
     "@reduxjs/toolkit": "^2.2.3",

@@ -1,11 +1,10 @@
 {
-  "extends": "@youmeet/typescript-config/base.json",
+  "extends": "@youmeet/typescript-config/react-library.json",
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
       "@/*": ["./*"]
-    },
-    "rootDir": "."
+    }
   },
   "exclude": ["node_modules"]
 }
