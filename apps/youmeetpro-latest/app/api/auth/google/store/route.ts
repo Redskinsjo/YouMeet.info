@@ -199,8 +199,8 @@ export async function GET(req: NextRequest) {
             customerId: user?.customerId
               ? user.customerId
               : customer
-                ? (customer as any).id
-                : undefined,
+              ? (customer as any).id
+              : undefined,
             userId: user?._id?.toString() || "",
             pro: user?.pro ?? false,
             user: user?.user ?? false,
@@ -221,7 +221,9 @@ export async function GET(req: NextRequest) {
             const res = NextResponse.redirect(`${uri}/${returnTo}`, {
               status: 307,
             });
-            res.cookies.set("loginPro", cookie);
+            res.cookies.set("loginPro", cookie, {
+              domain: `${process.env.API_DOMAIN}`,
+            });
 
             return res;
           } else {
