@@ -1,0 +1,1445 @@
+scalar DateTime
+scalar PositiveFloat
+scalar File
+
+type SocialAuthentication {
+  user: GoogleAuthentication
+  provider: String
+  accessToken: String
+  refreshToken: String
+  expiryDate: DateTime
+}
+
+input SocialAuthenticationInput {
+  user: GoogleAuthenticationInput
+  provider: String
+  accessToken: String
+  refreshToken: String
+  expiryDate: DateTime
+}
+
+type GoogleAuthentication {
+  network: String
+  email: String
+  email_verified: Boolean
+  family_name: String
+  given_name: String
+  locale: String
+  name: String
+  nickname: String
+  picture: String
+  sid: String
+  sub: String
+  updated_at: String
+}
+
+input GoogleAuthenticationInput {
+  network: String
+  email: String
+  email_verified: Boolean
+  family_name: String
+  given_name: String
+  locale: String
+  name: String
+  nickname: String
+  picture: String
+  sid: String
+  sub: String
+  updated_at: String
+}
+
+type InternalAuthentication {
+  email: String
+  username: String
+  salt: String
+  hash: String
+  token: String
+}
+
+input InternalAuthenticationInput {
+  email: String
+  username: String
+  salt: String
+  hash: String
+  token: String
+}
+
+type AuthDetails {
+  social: SocialAuthentication
+  internal: InternalAuthentication
+}
+
+input AuthDetailsInput {
+  social: SocialAuthenticationInput
+  internal: InternalAuthenticationInput
+}
+
+input ExperienceInput {
+  id: String
+  sector: String
+  job: String
+  company: String
+  companyName: String
+  input: Boolean
+  ending: String
+  starting: String
+  isLiveJob: Boolean
+  isTargetJob: Boolean
+  duration: Int
+  userId: ID
+}
+
+type Eager {
+  transformation: String
+  width: Int
+  height: Int
+  bytes: Int
+  format: String
+  url: String
+  secure_url: String
+}
+input EagerInput {
+  transformation: String
+  width: Int
+  height: Int
+  bytes: Int
+  format: String
+  url: String
+  secure_url: String
+}
+
+type Avatar {
+  asset_id: String
+  public_id: String
+  width: Int
+  height: Int
+  format: String
+  created_at: DateTime
+  subtitledUrl: String
+  url: String
+  secure_url: String
+  folder: String
+  original_filename: String
+  duration: PositiveFloat
+  eager: [Eager!]
+}
+input AvatarInput {
+  asset_id: String
+  public_id: String
+  width: Int
+  height: Int
+  format: String
+  created_at: DateTime
+  url: String
+  secure_url: String
+  subtitledUrl: String
+  folder: String
+  original_filename: String
+  duration: PositiveFloat
+  eager: [EagerInput!]!
+}
+
+input PhoneInput {
+  code: String
+  number: String
+}
+
+input CandidateInput {
+  firstname: String!
+  lastname: String!
+  email: String!
+  fullname: String!
+  linkedinProfileId: String!
+  avatars: [AvatarInput!]
+  phone: PhoneInput
+  age: Int
+  description: String!
+  languages: [String!]!
+  experiences: [ExperienceInput!]
+  salaryExpected: String
+  type: String
+  userId: String!
+  detailsId: String
+}
+
+input QuickCreateCandidateInput {
+  userId: ID
+}
+
+input CompanyInput {
+  id: ID
+  name: String
+  userEmail: String
+  experiences: [ExperienceInput]
+}
+
+type ProfileExperienceGivenInfos {
+  job: String
+  company: String
+  starting: String
+  ending: String
+  isLiveJob: Boolean
+  isTargetJob: Boolean
+  duration: Int
+}
+
+input UserInput {
+  firstname: String
+  lastname: String
+  fullname: String
+  picture: String
+}
+
+input PageParamsInput {
+  skip: Int
+  take: Int
+  search: String
+}
+
+type MessageGPT {
+  role: String
+  content: String
+  name: String
+}
+
+input MessageGPTInput {
+  role: String
+  content: String
+  name: String
+}
+
+type BetaCandidate {
+  id: ID
+  avatars: [Avatar]
+  competencyIds: [String]
+  salaryExpected: String
+  type: String
+  bgImage: String
+  confirmed: Boolean
+  user: BetaUser
+  userId: String
+  profile: BetaProfile
+  details: BetaDetails
+  experiences: [BetaExperience]
+  targetJob: Job
+  targetJobId: String
+  targetContractType: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Phone {
+  code: String
+  number: String
+}
+
+type BetaDetails {
+  id: ID
+  websites: String
+  twitter: String
+  facebook: String
+  birthday: String
+  phone: Phone
+  phone2: Phone
+  email: String
+  email2: String
+  principal: Boolean
+  profile: BetaProfile
+  profileId: String
+  user: BetaUser
+  userId: String
+  candidate: BetaCandidate
+  candidateId: String
+  experiences: [BetaExperience]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input BetaDetailsInput {
+  websites: String
+  twitter: String
+  facebook: String
+  birthday: String
+  phone: PhoneInput
+  email: String
+  isPhone: Boolean
+  profileId: String
+  userId: String
+  candidateId: String
+  detailsId: String
+  principal: Boolean
+}
+
+type BetaProfile {
+  id: ID
+  details: BetaDetails
+  allSkills: String
+  user: BetaUser
+  userId: String
+  refExperiences: [BetaExperience]
+  refExperiencesIds: [String]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input BetaProfileInput {
+  fullname: String
+  job: String
+  phone: PhoneInput
+  email: String
+  experienceId: String
+}
+
+type Question {
+  id: ID
+  type: String
+  prefix: String
+  text: String
+  generated: String
+  job: Job
+  jobId: String
+  origin: BetaUser
+  originId: String
+  customisation: Customisation
+  customisationId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input QuestionInput {
+  type: String
+  prefix: String
+  text: String
+}
+
+type Customisation {
+  id: ID
+  name: String
+  origin: BetaUser
+  originId: String
+  questions: [Question]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BetaQueue {
+  id: ID
+  seen: Boolean
+  origin: BetaUser
+  originId: String
+  target: BetaUser
+  targetId: String
+  status: String
+  customisation: Customisation
+  customisationId: String
+  offerTarget: Offer
+  offerTargetId: String
+  system: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BetaUser {
+  id: ID
+  age: Int
+  auth: AuthDetails
+  candidate: BetaCandidate
+  credit: PositiveFloat
+  cardPrice: PositiveFloat
+  description: String
+  email: String
+  experiences: [BetaExperience]
+  refExperiences: [BetaExperience]
+  firstname: String
+  fullname: String
+  extension: String
+  uniqueName: String
+  languages: [String]
+  lastname: String
+  linkedinProfileId: String
+  picture: String
+  profile: BetaProfile
+  customerId: String
+  trial: Boolean
+  active: Boolean
+  isPublic: Boolean
+  roles: [Job]
+  videos: [Video]
+  rolesIds: [String]
+  details: BetaDetails
+  recruiterQueues: [BetaQueue]
+  candidateQueues: [BetaQueue]
+  unlimited: Boolean
+  user: Boolean
+  pro: Boolean
+  role: String
+  scrapped: Boolean
+  video: Avatar
+  cvFile: Avatar
+  status: String
+  myOffers: [Offer]
+  candidatedOffers: [Offer]
+  candidatedOffersIds: [String]
+  unvolonteerFavorites: [Favorite]
+  cv: Boolean
+  consent: Boolean
+  company: BetaCompany
+  companyId: String
+  interviews: [InterviewOffer]
+  hiddenFields: [String]
+  professionalEmail: Boolean
+  sharings: [ProfileSharing]
+  profileViews: [ProfileView]
+  affiliation: Affiliation
+  affiliationId: String
+  affiliations: [Affiliation]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Affiliation {
+  id: ID
+  parent: BetaUser
+  parentId: String
+  children: [BetaUser]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UnlockedUser {
+  id: ID
+  target: BetaUser
+  targetId: String
+  origin: BetaUser
+  originId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type CandidatesNotes {
+  id: ID
+  content: String
+  appreciation: Int
+  candidate: BetaCandidate
+  candidateId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CandidatesNotesInput {
+  id: ID
+  content: String
+  appreciation: Int
+  userId: ID
+  candidateId: ID
+}
+
+type Offer {
+  id: ID
+  slug: String
+  extension: String
+  content: String
+  profileSearched: String
+  contractType: String
+  remote: String
+  location: String
+  requirements: [GptCompetency]
+  requirementsIds: [String]
+  revenue: Int
+  limitDate: DateTime
+  authorName: String
+  authorInterviewLink: String
+  authorEmail: String
+  rebroadcast: Boolean
+  companyName: String
+  companyLogo: String
+  jobDescriptionLink: String
+  sector: TopSector
+  sectorId: String
+  job: Job
+  jobId: String
+  author: BetaUser
+  authorId: String
+  candidates: [BetaUser]
+  candidatesIds: [String]
+  generated: String
+  company: BetaCompany
+  companyId: String
+  sharings: [ProfileSharing]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input BetaUserInput {
+  phone: PhoneInput
+  email: String
+  fullname: String
+  credit: PositiveFloat
+  cardPrice: Int
+  linkedinProfileId: String
+  userId: String
+  consent: Boolean
+  video: AvatarInput
+  cvFile: AvatarInput
+  isPublic: Boolean
+  pro: Boolean
+  user: Boolean
+  trial: Boolean
+  internal: Boolean
+  role: String
+  isVideo: Boolean
+  isPhone: Boolean
+  isLinkedin: Boolean
+  isCustomerId: Boolean
+  companyId: String
+  candidateName: String
+  uniqueName: String
+  extension: String
+  jobs: [String]
+  sectors: [String]
+  hiddenFields: [String]
+  isScrapped: Boolean
+  firstname: String
+  lastname: String
+  professionalEmail: Boolean
+  auth: AuthDetailsInput
+  affiliationId: String
+  job: ID
+  childUserId: String
+  customerId: String
+}
+
+input BetaCompanyInput {
+  name: String
+  resume: String
+  location: String
+  logo: AvatarInput
+  video: AvatarInput
+  linkedinProfileId: String
+  userId: String
+  isPublic: Boolean
+  companyId: String
+}
+
+type BetaCompany {
+  id: ID
+  name: String
+  autocompletions: [String]
+  resume: String
+  location: String
+  scrapped: Boolean
+  experiences: [BetaExperience]
+  linkedinProfilePage: String
+  logo: Avatar
+  videos: [Video]
+  video: Avatar
+  sharings: [ProfileSharing]
+  offers: [Offer]
+  isPublic: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BetaExperience {
+  id: ID
+  details: BetaDetails
+  detailsId: String
+  candidate(email: String): BetaCandidate
+  candidateId: String
+  company: BetaCompany
+  companyId: String
+  companyName: String
+  ending: String
+  starting: String
+  duration: Int
+  isLiveJob: Boolean
+  isTargetJob: Boolean
+  job: Job
+  jobId: String
+  password: String
+  previouslyEmployed: Boolean
+  confirmed: Boolean
+  referenced: Boolean
+  references(email: String): [BetaProfile]
+  referencesIds: [String]
+  user: BetaUser
+  userId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ErrorOnValidation {
+  message: String
+  field: String
+}
+
+type ScrappedInfos {
+  fullname: String
+}
+
+input JobInput {
+  id: String
+  language: String
+  title: String
+  topSectorIds: [String]
+  in: [String]
+  contains: Boolean
+}
+
+input TopSectorInput {
+  id: String
+  in: [String]
+  language: String
+}
+
+type Lead {
+  id: ID
+  name: String
+  email: String
+  phone: Phone
+  type: String
+  token: String
+  contacted: Boolean
+  prospected: Boolean
+  fr: Boolean
+  parent: BetaUser
+  parentId: String
+  linkedinProfileId: String
+  trialOffering: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input LeadInput {
+  leadId: ID
+  name: String
+  email: String
+  type: String
+  contacted: Boolean
+  fr: Boolean
+  phone: PhoneInput
+  linkedinProfileId: String
+  parentId: ID
+}
+
+input BetaQueueInput {
+  queueId: ID
+  type: String
+  status: String
+  seen: Boolean
+}
+
+input CustomisationInput {
+  queueId: ID
+  jobId: ID
+  questions: [QuestionInput]
+  id: ID
+}
+
+type Job {
+  id: ID
+  href: String
+  title: Translated
+  frTitle: String
+  enTitle: String
+  topSector: TopSector
+  topSectorId: String
+  users: [BetaUser]
+  usersIds: [String]
+  questions: [Question]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type TopSector {
+  id: ID
+  jobs: [Job]
+  title: Translated
+  bgImage: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input BetaCompanyFilters {
+  name: String
+  count: Int
+  exact: Boolean
+  isVideo: Boolean
+  isLogo: Boolean
+  isPublic: Boolean
+  scrapped: Boolean
+  pro: Boolean
+}
+
+type GptCompetency {
+  id: ID
+  slug: String
+  extension: String
+  title: String
+  definition: String
+  relatedSkills: [String]
+  advantages: [String]
+  examples: [String]
+  importance: String
+  development: String
+  conclusion: String
+  keywords: [String]
+}
+
+input OfferInput {
+  slug: String
+  content: String
+  profileSearched: String
+  authorName: String
+  authorEmail: String
+  authorInterviewLink: String
+  jobDescriptionLink: String
+  job: String
+  sector: String
+  contractType: String
+  location: String
+  requirements: [String]
+  revenue: Int
+  limitDate: String
+  userId: String
+  companyId: String
+  jobs: [String]
+  sectors: [String]
+  companyName: String
+  targetSectorId: String
+  remote: String
+  title: String
+  language: String
+}
+
+type Favorite {
+  id: ID
+  origin: BetaUser
+  originId: String
+  target: BetaUser
+  targetId: String
+  offerTarget: Offer
+  offerTargetId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type VerificationRequest {
+  id: ID
+  type: [String]
+  academicProofs: [Avatar]
+  professionalProofs: [Avatar]
+  judiciaryProofs: [Avatar]
+  origin: BetaUser
+  originId: String
+  target: BetaUser
+  targetId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input VerificationRequestInput {
+  type: [String]
+  academicProofs: [File]
+  professionalProofs: [File]
+  judiciaryProofs: [File]
+  originId: String
+  targetId: String
+}
+
+type InterviewOffer {
+  id: ID
+  status: String
+  datetime: DateTime
+  comment: String
+  origin: BetaUser
+  originId: String
+  target: BetaUser
+  targetId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input InterviewOfferInput {
+  comment: String
+  datetime: DateTime
+  originId: String
+  targetId: String
+}
+
+type Reference {
+  id: ID
+  type: String
+  content: String
+  concerned: String
+  valid: Boolean
+  user: BetaUser
+  userId: String
+  experience: BetaExperience
+  experienceId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ReferenceContact {
+  id: ID
+  name: String
+  phone: Phone
+  email: String
+  position: String
+  experience: BetaExperience
+  experienceId: String
+  user: BetaUser
+  userId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ReferenceContactInput {
+  contactId: ID
+  name: String
+  phone: PhoneInput
+  email: String
+  position: String
+  experienceId: String
+  userId: String
+}
+
+input ReferenceInput {
+  type: String
+  content: String
+  concerned: String
+  valid: Boolean
+  userId: String
+  experienceId: String
+  id: String
+}
+
+type Notification {
+  id: ID
+  type: String
+  content: String
+  status: String
+  concernedId: String
+  refusal: SharingRefusal
+  refusalId: String
+  origin: BetaUser
+  originId: String
+  target: BetaUser
+  targetId: String
+  feedback: Feedback
+  feedbackId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input NotificationInput {
+  type: String
+  content: String
+  concernedId: String
+  originId: String
+  targetId: String
+}
+
+input BetaExperienceInput {
+  referenced: Boolean
+  id: ID
+}
+
+input PersonalDetailsInput {
+  user: Boolean
+  pro: Boolean
+}
+
+type ProfileSharing {
+  id: ID
+  origin: BetaUser
+  originId: String
+  target: BetaCompany
+  targetId: String
+  offerTarget: Offer
+  offerTargetId: String
+  video: Video
+  videoId: String
+  report: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ProfileView {
+  id: ID
+  user: BetaUser
+  userId: String
+  count: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProfileViewInput {
+  userId: String
+}
+
+input ProfileSharingInput {
+  id: ID
+  originId: String
+  targetId: String
+  offerTargetId: String
+  videoId: String
+}
+
+input ProFormInput {
+  name: String
+  location: String
+  resume: String
+  linkedinProfilePage: String
+  logo: AvatarInput
+  firstname: String
+  lastname: String
+  fullname: String
+  email: String
+  linkedinProfileId: String
+  avatars: [AvatarInput]
+  phone: PhoneInput
+  age: Int
+  description: String
+  languages: [String!]
+  video: AvatarInput
+  userId: String
+  companyId: String
+}
+
+type Video {
+  id: ID
+  confidence: PositiveFloat
+  transcript: String
+  report: String
+  likes: Int
+  principal: Boolean
+  job: Job
+  jobId: String
+  user: BetaUser
+  userId: String
+  company: BetaCompany
+  companyId: String
+  exchangeId: String
+  file: Avatar
+  audio: Avatar
+  meetCandidate: MeetCandidate
+  meetCandidateId: String
+  preview: Boolean
+  sharings: [ProfileSharing]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input VideoInput {
+  id: String
+  confidence: PositiveFloat
+  transcript: String
+  report: String
+  principal: Boolean
+  jobId: String
+  userId: String
+  companyId: String
+  exchangeId: String
+  originId: String
+  targetId: String
+  file: AvatarInput
+  audio: AvatarInput
+  likes: Int
+  preview: Boolean
+  meetCandidateId: String
+}
+
+input GptCompetencyInput {
+  id: String
+  title: String
+  in: [String]
+}
+
+type FormQuestion {
+  id: ID
+  title: String
+  type: String
+  target: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type FormResponse {
+  id: ID
+  content: String
+  type: String
+  isTrue: Boolean
+  question: FormQuestion
+  questionId: String
+  lead: Lead
+  leadId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input FormResponseInput {
+  responseId: String
+  questionId: String
+  content: String
+  type: String
+  isTrue: Boolean
+  leadId: String
+}
+
+type ArticleParagraph {
+  title: Translated
+  content: Translated
+}
+
+type Translated {
+  en: String
+  fr: String
+}
+
+type ArticlesLink {
+  href: String
+  label: Translated
+}
+
+type Article {
+  id: ID!
+  slug: String!
+  extension: String
+  title: Translated!
+  description: Translated
+  introduction: Translated
+  conclusion: Translated
+  paragraphs: [ArticleParagraph]
+  links: [ArticlesLink]
+  new: Boolean
+  bgImage: String
+  alt: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input FavoriteInput {
+  jobs: [String]
+  sectors: [String]
+  isVideo: Boolean
+  isLinkedin: Boolean
+  isPhone: Boolean
+  isCustomerId: Boolean
+  isLogo: Boolean
+  originId: ID
+}
+
+input BetaCandidateInput {
+  userId: ID
+  id: ID
+  jobId: ID
+  targetContractType: String
+}
+
+type UserRemark {
+  id: ID
+  content: String
+  user: BetaUser
+  userId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input RemarkInput {
+  content: String
+  userId: String
+}
+
+input CandidateBasicInput {
+  targetJobId: String
+  avatars: [AvatarInput]
+  userId: String
+  targetContractType: String
+}
+
+input UnlockInput {
+  originId: ID
+  targetId: ID
+  credit: PositiveFloat
+}
+
+type Feedback {
+  id: ID
+  content: String
+  user: BetaUser
+  userId: String
+  author: BetaUser
+  authorId: String
+  candidate: MeetCandidate
+  candidateId: String
+  recruiter: MeetRecruiter
+  recruiterId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input FeedbackInput {
+  userId: String
+  content: String
+  authorId: String
+  candidateId: String
+  recruiterId: String
+}
+
+input ConversationInput {
+  originId: String
+  targetId: String
+  offerTargetId: String
+  jobId: String
+  questions: [QuestionInput]
+  question: QuestionInput
+  name: String
+  candidateName: String
+  companyName: String
+  customisationId: String
+}
+
+input CreateProAccountInput {
+  firstname: String
+  lastname: String
+  email: String
+  companyName: String
+  company: String
+  linkedinProfilePage: String
+  phone: PhoneInput
+}
+
+input ResponseInput {
+  content: String
+  type: String
+  exchangeId: ID
+}
+
+type Error {
+  id: ID
+  environment: String!
+  pro: Boolean!
+  query: String!
+  message: String!
+  type: Int!
+  status: Int
+  statusText: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ErrorInput {
+  environment: String!
+  pro: Boolean!
+  query: String!
+  message: String!
+  type: Int!
+  status: Int
+  statusText: String!
+}
+
+type SharingRefusal {
+  id: ID
+  reason: String
+  type: String!
+  origin: BetaCompany
+  originId: String
+  target: BetaUser
+  targetId: String
+  sharing: ProfileSharing
+  sharingId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input SharingRefusalInput {
+  reason: String
+  type: String!
+  originId: ID
+  originUserId: ID
+  targetId: ID
+  sharingId: ID
+  offerId: ID
+}
+
+input ProfileSharingInput {
+  report: String
+}
+
+type BetaWhatsappThread {
+  id: ID
+  queue: BetaQueue
+  queueId: String
+  chatId: String
+  terminated: Boolean
+  responses: [BetaWhatsappResponse]
+  exchanges: [BetaWhatsappExchange]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BetaWhatsappExchange {
+  id: ID
+  step: Int
+  thread: BetaWhatsappThread
+  threadId: String
+  question: Question
+  questionId: String
+  responses: [BetaWhatsappResponse]
+  videos: [Video]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BetaWhatsappResponse {
+  id: ID
+  type: String
+  content: String
+  user: BetaUser
+  userId: String
+  thread: BetaWhatsappThread
+  threadId: String
+  video: Video
+  videoId: String
+  exchange: BetaWhatsappExchange
+  exchangeId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type MeetCandidate {
+  id: ID
+  firstname: String
+  lastname: String
+  fullname: String
+  linkedinProfileId: String
+  email: String
+  phone: Phone
+  videos: [Video]
+  job: Job
+  jobId: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type MeetRecruiter {
+  id: ID
+  firstname: String
+  lastname: String
+  fullname: String
+  linkedinProfileId: String
+  email: String
+  phone: Phone
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Meet {
+  id: ID
+  meetCandidate: MeetCandidate
+  meetCandidateId: String
+  meetRecruiter: MeetRecruiter
+  meetRecruiterId: String
+  expired: Boolean
+  token: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input MeetInput {
+  meetCandidateId: String
+  meetRecruiterId: String
+  firstnameCandidate: String
+  lastnameCandidate: String
+  emailCandidate: String
+  linkedinProfileIdCandidate: String
+  phoneCandidate: PhoneInput
+  firstnameRecruiter: String
+  lastnameRecruiter: String
+  emailRecruiter: String
+  linkedinProfileIdRecruiter: String
+  phoneRecruiter: PhoneInput
+  expired: Boolean
+  videoMainId: String
+  videoPreview1Id: String
+  videoPreview2Id: String
+  token: String
+  jobId: ID
+}
+
+type Email {
+  success: Boolean
+  error: Boolean
+}
+
+input EmailInput {
+  email: String
+  name: String
+  token: String
+  link: String
+  templateId: Int
+  recruiterName: String
+}
+
+type Query {
+  oneMeet(id: ID): Meet
+  meets(data: MeetInput): [Meet]
+  videoByPublicId(publicId: String): Video
+  affiliation(id: ID, parentId: ID): Affiliation
+  affiliations: [Affiliation]
+  sendEmail(data: EmailInput): Email
+  oneMeetCandidate(id: ID): MeetCandidate
+  meetCandidates: [MeetCandidate]
+  sendEmailOfferOpportunities(usersIds: [ID]): [BetaUser]
+  myVideos(userId: ID): [Video]
+  videos: [Video]
+  profileViews(userId: ID): [ProfileView]
+  errors: [Error]
+  recruiterQueuesFromProfile(targetId: ID, originId: ID): [BetaQueue]
+  oneNotification(data: NotificationInput): Notification
+  uniqueCompetency(id: String, slug: String): GptCompetency
+  oneUserInterviews(userId: ID): [InterviewOffer]
+  accountInfos(userId: ID): BetaUser
+  remarks: [UserRemark]
+  oneVideo(id: String): Video
+  sendEmailProspectionLinkedin(leadsIds: [ID]): [Lead]
+  oneCandidatesNotes(data: CandidatesNotesInput): CandidatesNotes
+  myUnlockedUsers(originId: ID): [UnlockedUser]
+  oneThread(id: ID, queueId: ID): BetaWhatsappThread
+  oneTopSector(id: ID): TopSector
+  oneArticle(id: ID, slug: String): Article
+  articles: [Article]
+  oneFormResponse(leadId: ID, questionId: ID): FormResponse
+  leadFormResponses(leadId: ID): [FormResponse]
+  formQuestions: [FormQuestion]
+  myPublishedOffers(data: OfferInput): [Offer]
+  oneProfileSharing(data: ProfileSharingInput): ProfileSharing
+  myCompanyProfileSharings(targetId: String): [ProfileSharing]
+  companyOffers(companyId: ID): [Offer]
+  myReferenceContacts(userId: ID, experienceId: ID): [ReferenceContact]
+  myNotifications(
+    targetId: String
+    type: [String]
+    status: String
+    timePeriod: Int
+  ): [Notification]
+  myReferences(userId: ID): [Reference]
+  oneInterviewOffer(id: ID, status: String): InterviewOffer
+  myInterviewOffers(
+    originId: ID
+    targetId: ID
+    status: String
+  ): [InterviewOffer]
+  oneFavorite(id: ID, targetId: ID, originId: ID): Favorite
+  myFavorites(data: FavoriteInput, first: PageParamsInput): [Favorite]
+  oneOffer(id: ID, slug: String): Offer
+  offers(params: PageParamsInput, data: OfferInput): [Offer]
+  oneGptCompetency(title: String, id: ID, slug: String): GptCompetency
+  gptCompetencies(
+    data: GptCompetencyInput
+    params: PageParamsInput
+  ): [GptCompetency]
+  resetPassword(userId: ID, password: String): BetaUser
+  resetEmailLink(email: String): BetaUser
+  oneCompany(id: ID, filters: BetaCompanyFilters): BetaCompany
+  questions(jobId: ID, type: String): [Question]
+  oneJob(id: ID): Job
+  topSectors(data: TopSectorInput): [TopSector]
+  jobs(data: JobInput, first: PageParamsInput): [Job]
+  sendEmailToLead(
+    data: LeadInput
+    type: String
+    leadsIds: [String]
+    negativeAnswerForDev: Boolean
+    negativeAnswerForDesign: Boolean
+  ): [Lead]
+  oneCustomisation(id: ID, queueId: ID): Customisation
+  oneLead(id: ID, email: String): Lead
+  leads: [Lead]
+  oneCandidate(data: BetaUserInput, userId: ID, email: String): BetaCandidate
+  oneQueue(id: ID): BetaQueue
+  ownQueues(originId: ID, targetId: ID, status: [String]): [BetaQueue]
+  oneUserExperiences(userId: ID): [BetaExperience]
+  oneDetails(filter: BetaDetailsInput!): BetaDetails
+  profiles(experienceId: ID): [BetaProfile]
+  accountUser(userId: ID, details: PersonalDetailsInput): BetaUser
+  accountCandidate(userId: ID): BetaCandidate
+  accountProfile(userId: ID): BetaProfile
+  accountDetails(userId: ID): BetaDetails
+  users(first: PageParamsInput, data: BetaUserInput): [BetaUser]
+  user(uniqueName: String, userId: ID, email: String, originId: ID): BetaUser
+  experiences: [BetaExperience]
+  oneExperience(id: ID, email: String): BetaExperience
+  companies(first: PageParamsInput, filters: BetaCompanyFilters): [BetaCompany!]
+}
+
+type Mutation {
+  createAffiliation(parentId: ID, childrenIds: [ID]): Affiliation
+  deleteAffiliation(id: ID): Affiliation
+  createThread(queueId: ID): BetaWhatsappThread
+  deleteWhatsappThread(threadId: ID): BetaWhatsappThread
+  updateMeet(data: MeetInput, id: ID): Meet
+  deleteMeet(id: ID): Meet
+  createMeet(data: MeetInput): Meet
+  createMeetCandidate(data: BetaUserInput): MeetCandidate
+  createMeetRecruiter(data: BetaUserInput): MeetRecruiter
+  createSharingRefusal(data: SharingRefusalInput): SharingRefusal
+  createProfileView(data: ProfileViewInput): ProfileView
+  createError(data: ErrorInput): Error
+  createQueue(data: ConversationInput): BetaQueue
+  createCustomisation(originId: ID, jobId: ID): Customisation
+  createQuestion(data: ConversationInput): Question
+  createResponses(
+    userId: ID
+    threadId: ID
+    responses: [ResponseInput]
+  ): [BetaWhatsappResponse]
+  updateUser(data: BetaUserInput, userId: ID, uniqueName: String): BetaUser
+  deleteCompany(id: String): BetaCompany
+  createProAccount(data: CreateProAccountInput): BetaCompany
+  updateQueue(id: ID, data: BetaQueueInput): BetaQueue
+  createConversation(data: ConversationInput): BetaQueue
+  createFeedback(data: FeedbackInput): Feedback
+  updateVideo(data: VideoInput): Video
+  unlock(data: UnlockInput): BetaUser
+  createCandidateBasic(data: CandidateBasicInput): BetaCandidate
+  updateLead(data: LeadInput): Lead
+  createRemark(data: RemarkInput): UserRemark
+  deleteVideo(id: String): Video
+  createOrUpdateNotes(data: CandidatesNotesInput): CandidatesNotes
+  createUnlockedUser(originId: ID, targetId: ID): UnlockedUser
+  updateCandidate(data: BetaCandidateInput): BetaCandidate
+  deleteInterviewOffer(id: ID): InterviewOffer
+  deleteProfileSharing(id: ID): ProfileSharing
+  createFormQuestion(title: String, target: String): FormQuestion
+  updateFormResponse(data: FormResponseInput): FormResponse
+  createProfileSharing(data: ProfileSharingInput): ProfileSharing
+  updateExperience(data: BetaExperienceInput): BetaExperience
+  createReferenceContact(data: ReferenceContactInput): ReferenceContact
+  updateOneNotification(id: ID, status: String): Notification
+  updateAllMyNotifications(targetId: ID, status: String): [Notification]
+  createNotification(data: NotificationInput): Notification
+  createReference(data: ReferenceInput): Reference
+  createInterviewOffer(data: InterviewOfferInput): InterviewOffer
+  createFavorite(originId: ID, targetId: ID, offerTargetId: ID): Favorite
+  deleteOffer(id: ID): Offer
+  createOffer(data: OfferInput): Offer
+  submitVideo(data: VideoInput): Video
+  deleteGptCompetency(id: ID): GptCompetency
+  deleteUser(userId: ID): BetaUser
+  deleteLead(leadId: ID): Lead
+  createLead(data: LeadInput): Lead
+  deleteQueue(queueId: ID): BetaQueue
+  createAccount(data: QuickCreateCandidateInput): BetaCandidate
+  createUser(data: BetaUserInput): BetaUser
+  createDetails(data: BetaDetailsInput): BetaDetails
+  createClassicAccount(data: BetaUserInput): BetaUser
+  updateCompany(data: BetaCompanyInput): BetaCompany
+  updateDetails(data: BetaDetailsInput): BetaDetails
+  createCompany(data: CompanyInput): BetaCompany
+  createCandidate(data: CandidateInput): BetaCandidate
+  createCompanyProfile(data: ProFormInput): BetaCompany
+  createExperience(data: ExperienceInput): BetaExperience
+}
