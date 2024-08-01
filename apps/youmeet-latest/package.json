@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "PORT=3000 dotenv -e .env.development -- next dev",
-    "build": "dotenv -e .env.testing -- next build",
+    "build": "next build",
+    "preview": "dotenv -e .env.testing -- next build",
     "start": "PORT=3000 next start",
     "lint": "next lint",
     "addSubtitledUrl": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/addSubtitledUrl.ts",
