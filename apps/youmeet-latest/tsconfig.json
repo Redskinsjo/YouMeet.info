@@ -16,9 +16,9 @@
     ".next/types/**/*.ts",
     "**/*.mjs",
     "next.config.js",
-    "app/api/scripts/formatCompetencyTitle.mts",
-    "app/api/scripts/addSubtitledUrl.ts",
-    "app/api/scripts/formatCompetencyTitle.mts",
+    "out/api/scripts/formatCompetencyTitle.mts",
+    "out/api/scripts/addSubtitledUrl.ts",
+    "out/api/scripts/formatCompetencyTitle.mts",
     "next.config.js"
   ],
   "exclude": ["node_modules"]
