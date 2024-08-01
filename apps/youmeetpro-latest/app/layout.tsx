@@ -1,4 +1,3 @@
-"use client";
 import { ReactElement } from "react";
 import Providers from "./providers";
 import Template from "./template";
