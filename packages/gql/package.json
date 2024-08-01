@@ -6,8 +6,6 @@
     "./codegen": "./codegen.ts",
     "./generated": "./generated.ts",
     "./index": "./index.tsx",
-    "./imports": "./imports.ts",
-    "./typeDefs": "./schema.ts",
     "./schema": "./schema.graphql"
   },
   "scripts": {
