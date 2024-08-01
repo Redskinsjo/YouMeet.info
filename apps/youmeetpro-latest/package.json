@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "PORT=3001 dotenv -e .env.development -- next dev",
-    "build": "dotenv -e .env.preview -- next build",
+    "build": "next build",
+    "preview": "dotenv -e .env.preview -- next build",
     "start": "PORT=3001 next start",
     "lint": "next lint",
     "generateCookie": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/generateCookie.ts",
