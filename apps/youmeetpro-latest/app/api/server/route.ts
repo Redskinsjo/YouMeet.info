@@ -1,7 +1,7 @@
 import { createSchema, createYoga } from "graphql-yoga";
 import resolvers from "@/resolvers";
 import mongoose from "mongoose";
-import { schema as typeDefs } from "@youmeet/gql/imports";
+import typeDefs from "@youmeet/gql/schema";
 
 mongoose.connect(`${process.env.MONGODB_URI}`, {
   serverSelectionTimeoutMS: 5000,
@@ -17,9 +17,9 @@ const schema = createSchema({
 const { handleRequest } = createYoga({
   graphqlEndpoint: "/api/server",
   schema,
-  graphiql: true,
+  graphiql: false,
   cors: {
-    origin: [`${process.env.API_DOMAIN}`, `${process.env.PRO_DOMAIN}`],
+    origin: [`${process.env.API_DOMAIN}`, `${process.env.CANDIDATE_DOMAIN}`],
     allowedHeaders: ["X-Custom-Header"],
     methods: ["POST", "OPTIONS", "GET"],
     credentials: true,

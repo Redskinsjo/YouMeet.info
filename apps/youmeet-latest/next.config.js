@@ -1,6 +1,7 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const path = require("path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -9,7 +10,6 @@ const nextConfig = {
     serverActions: { allowedOrigins: ["localhost", "*.youmeet.info"] },
   },
   swcMinify: true,
-  transpilePackages: ["@youmeet/components"],
   headers: async () => [
     {
       source: "/",
@@ -68,7 +68,9 @@ const nextConfig = {
       },
     ],
   },
+
   env: {
+    TEST: process.env.TEST,
     APP: process.env.APP,
     PRO_DOMAIN: process.env.PRO_DOMAIN,
     PRO_URI: process.env.PRO_URI,
@@ -109,6 +111,15 @@ const nextConfig = {
   webpack: (config, { dev, isServer }) => {
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
+    config.module.rules.push({
+      test: /\.graphql$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: "@graphql-tools/webpack-loader",
+        },
+      ],
+    });
 
     if (dev || isServer) {
       config.devtool = "source-map";

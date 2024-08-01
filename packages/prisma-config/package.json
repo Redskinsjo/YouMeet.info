@@ -9,7 +9,8 @@
     "format": "yarn prisma format",
     "db-push-dev": "dotenv -e .env.development -- yarn prisma db push",
     "db-push": "dotenv -e .env -- yarn prisma db push",
-    "prisma-generate": "yarn prisma generate"
+    "prisma-generate": "yarn prisma generate",
+    "vercel-generate": "yarn prisma generate"
   },
   "devDependencies": {
     "prisma": "^5.16.2"

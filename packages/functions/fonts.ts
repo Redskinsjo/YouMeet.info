@@ -11,6 +11,7 @@ export const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
 });
+
 export const mate = Mate_SC({
   variable: "--font-mate",
   subsets: ["latin"],

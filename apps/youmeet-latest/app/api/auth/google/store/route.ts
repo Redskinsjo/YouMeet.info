@@ -234,14 +234,12 @@ export async function GET(req: NextRequest) {
 
             const cookie = cookies().get("login")?.value as string;
 
-            console.log(cookie, "cookie");
-
             const res = NextResponse.redirect(`${uri}/${returnTo}`, {
               status: 307,
             });
-            res.cookies.set("login", cookie);
-
-            console.log(res.cookies.get("login"), "res.cookies.get(login)");
+            res.cookies.set("login", cookie, {
+              domain: process.env.API_DOMAIN,
+            });
 
             return res;
           } else {

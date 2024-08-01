@@ -1,7 +1,7 @@
 import { createSchema, createYoga } from "graphql-yoga";
 import resolvers from "@/resolvers";
 import mongoose from "mongoose";
-import { schema as typeDefs } from "@youmeet/gql/imports";
+import typeDefs from "@youmeet/gql/schema";
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 

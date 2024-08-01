@@ -2,7 +2,7 @@ import React from "react";
 import HomeChild from "./homeChild";
 import { Metadata } from "next";
 import { logoUrl, uri } from "@youmeet/functions/imports";
-import GoogleTagAndHotjarComponent from "@youmeet/components/GoogleTagAndHotjarComponent";
+import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 
 export const metadata: Metadata = {

@@ -1,19 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "analyse": {
-      "env": ["*"],
-      "dependsOn": ["prisma-generate", "^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
     "build": {
       "env": ["*"],
-      "dependsOn": ["prisma-generate", "^build"],
+      "dependsOn": ["vercel-generate", "^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {
       "env": ["*"],
-      "dependsOn": ["prisma-generate", "codegen"],
+      "dependsOn": ["vercel-generate", "codegen"],
       "persistent": true,
       "cache": false
     },
@@ -21,22 +16,19 @@
       "env": ["*"],
       "outputs": ["gql/generated.ts"]
     },
-    "format": {
-      "dependsOn": ["^format"],
-      "env": ["*"]
-    },
+    "format": {},
     "db-push-dev": {
-      "dependsOn": ["^db-push-dev"],
-      "env": ["*"]
+      "env": ["MONGODB_URI", "NODE_ENV"],
+      "dependsOn": ["format"]
     },
     "db-push": {
-      "dependsOn": ["^db-push"],
-      "env": ["*"]
+      "env": ["MONGODB_URI", "NODE_ENV"],
+      "dependsOn": ["db-push-dev"]
     },
     "prisma-generate": {
-      "dependsOn": ["^prisma-generate"],
-      "env": ["*"]
+      "dependsOn": ["db-push"]
     },
+    "vercel-generate": { "cache": false },
     "type-check": {}
   }
 }

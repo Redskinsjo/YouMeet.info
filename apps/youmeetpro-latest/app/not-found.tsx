@@ -1,7 +1,7 @@
-import Footer from "@youmeet/components/Footer";
+import Footer from "@youmeet/ui/Footer";
 import dynamic from "next/dynamic";
 
-const ErrorChild = dynamic(() => import("@youmeet/components/ErrorChild"), {
+const ErrorChild = dynamic(() => import("@youmeet/ui/ErrorChild"), {
   ssr: false,
 });
 
