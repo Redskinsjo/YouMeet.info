@@ -145,7 +145,6 @@ export default async function Profil({
     user?.videos?.filter((d) => d) as Video[]
   );
 
-  console.log(user, principalVideo, "user and principalVideo");
   if (user && principalVideo) {
     const references = (await getMyReferences<Reference[]>({
       userId: user.id,

@@ -6,6 +6,11 @@
       "dependsOn": ["vercel-generate", "^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "preview": {
+      "env": ["*"],
+      "dependsOn": ["vercel-generate", "^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "dev": {
       "env": ["*"],
       "dependsOn": ["vercel-generate", "codegen"],

@@ -5,6 +5,7 @@ import { BACKEND_ERRORS } from "@youmeet/types/api/backend";
 
 export const noCorsMiddleware = async (context: ContextRequest) => {
   const host = context.request.headers.get("host");
+  console.log(host, "host");
   if (
     dev ||
     host === "www.youmeet.info" ||

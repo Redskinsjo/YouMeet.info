@@ -1,4 +1,5 @@
-export type PayloadBackendSuccess<T> = withData<T | undefined | never[]>;
+export type Payload<T> = T | undefined | never[];
+export type PayloadBackendSuccess<T> = withData<Payload<T>>;
 export type ResultNotHandled<T> = T | undefined;
 export type Result<T> =
   | ResultNotHandled<T>
