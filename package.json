@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "preview": "turbo preview",
     "dev": "turbo dev codegen",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
