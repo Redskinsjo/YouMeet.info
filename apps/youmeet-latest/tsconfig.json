@@ -16,24 +16,7 @@
     ".next/types/**/*.ts",
     "**/*.mjs",
     "next.config.js",
-    "app",
-    "out/[candidateName]",
-    "out/@loginModal",
-    "out/@recordModal",
-    "out/api",
-    "out/backoffice",
-    "out/blog",
-    "out/competences",
-    "out/conditions-generales-utilisation",
-    "out/dashboard",
-    "out/enregistrer",
-    "out/formulaire-profil",
-    "out/le-produit",
-    "out/medias",
-    "out/offres",
-    "out/regles-de-confidentialite",
-    "out/reinitialiser-mot-de-passe",
-    "out/se-connecter"
+    "app/**/*.{ts,tsx}"
   ],
   "exclude": ["node_modules"]
 }
