@@ -16,10 +16,24 @@
     ".next/types/**/*.ts",
     "**/*.mjs",
     "next.config.js",
-    "app/api/scripts/formatCompetencyTitle.mts",
-    "app/api/scripts/addSubtitledUrl.ts",
-    "app/api/scripts/formatCompetencyTitle.mts",
-    "next.config.js"
+    "app",
+    "app/[candidateName]",
+    "app/@loginModal",
+    "app/@recordModal",
+    "app/api",
+    "app/backoffice",
+    "app/blog",
+    "app/competences",
+    "app/conditions-generales-utilisation",
+    "app/dashboard",
+    "app/enregistrer",
+    "app/formulaire-profil",
+    "app/le-produit",
+    "app/medias",
+    "app/offres",
+    "app/regles-de-confidentialite",
+    "app/reinitialiser-mot-de-passe",
+    "app/se-connecter"
   ],
   "exclude": ["node_modules"]
 }
