@@ -11,8 +11,8 @@
     "preview": "dotenv -e .env.testing -- next build",
     "start": "PORT=3000 next start",
     "lint": "next lint",
-    "addSubtitledUrl": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/addSubtitledUrl.ts",
-    "createProfileViewsFor": "SCRIPT=true dotenv -e .env -- ts-node ./app/api/scripts/createProfileViewsFor.ts",
+    "addSubtitledUrl": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/addSubtitledUrl.ts",
+    "createProfileViewsFor": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/createProfileViewsFor.ts",
     "test": "SCRIPT=true dotenv -e .env.development -- jest"
   },
   "dependencies": {

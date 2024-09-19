@@ -11,14 +11,14 @@
     "preview": "dotenv -e .env.preview -- next build",
     "start": "PORT=3001 next start",
     "lint": "next lint",
-    "generateCookie": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/generateCookie.ts",
-    "getPassword": "SCRIPT=true dotenv -e .env -- ts-node ./app/api/scripts/getPassword.ts",
-    "deleteNonEmailUsers": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/deleteNonEmailUsers.ts",
-    "calculateCardPrices": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/calculateCardPrices.ts",
-    "handleQuestions": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/handleQuestions.ts",
-    "transcriptVideos": "SCRIPT=true dotenv -e .env.development -- ts-node ./app/api/scripts/transcriptVideos.ts",
-    "decryptToken": "SCRIPT=true dotenv -e .env -- ts-node ./app/api/scripts/decryptToken.ts",
-    "isValidObjectId": "SCRIPT=true dotenv -e .env -- ts-node ./app/api/scripts/isValidObjectId.ts"
+    "generateCookie": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/generateCookie.ts",
+    "getPassword": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/getPassword.ts",
+    "deleteNonEmailUsers": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/deleteNonEmailUsers.ts",
+    "calculateCardPrices": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/calculateCardPrices.ts",
+    "handleQuestions": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/handleQuestions.ts",
+    "transcriptVideos": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/transcriptVideos.ts",
+    "decryptToken": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/decryptToken.ts",
+    "isValidObjectId": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/isValidObjectId.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.11.1",
