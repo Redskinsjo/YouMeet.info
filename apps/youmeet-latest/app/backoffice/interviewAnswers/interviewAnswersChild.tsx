@@ -47,9 +47,9 @@ export default function InterviewAnswersChild({
             key={response.id}
             className="border-[0.5px] border-solid border-grey300 p-[12px] box-border bg-white dark:darkBg dark:text-white"
           >
-            <div>
+            <div className="text-grey700 flex gap-[12px]">
+              <div className="font-semibold">{response.question?.type}:</div>
               <div>{response.question?.title}</div>
-              <div>{response.question?.type}</div>
             </div>
             <div>{response.content}</div>
 

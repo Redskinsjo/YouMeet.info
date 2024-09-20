@@ -977,6 +977,7 @@ export const getLeadFormResponsesQuery = `query GetLeadFormResponses($leadId: ID
       question {
         id
         title
+        type
       }
       createdAt
       updatedAt
