@@ -1,5 +1,5 @@
 import {
-  GetGptCompetenciesForHomeDocument,
+  GetCompetenciesForHomeDocument,
   GetOffersForHomeDocument,
   Translated,
 } from "@youmeet/gql/generated";
@@ -15,11 +15,11 @@ export default function LinksComponent() {
     variables: { params: { take: 10 } },
   });
   const { data: data2, loading: competenciesLoading } = useQuery(
-    GetGptCompetenciesForHomeDocument,
+    GetCompetenciesForHomeDocument,
     { variables: { params: { take: 10 } } }
   );
   const offers = data?.offers;
-  const competencies = data2?.gptCompetencies;
+  const competencies = data2?.competencies;
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const md = useMediaQuery("(max-width:900px)");

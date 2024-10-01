@@ -1,6 +1,0 @@
-query GetOneGptCompetency($id: ID, $title: String) {
-  oneGptCompetency(id: $id, title: $title) {
-    id
-    title
-  }
-}

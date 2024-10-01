@@ -7,10 +7,10 @@ import GenericField from "./GenericField";
 import {
   Exact,
   GetCompaniesDocument,
-  GetGptCompetenciesDocument,
+  GetCompetenciesDocument,
   GetJobsDocument,
   GetOneCompanyDocument,
-  GetOneGptCompetencyDocument,
+  GetOneCompetencyDocument,
   GetOneJobDocument,
   GetOneTopSectorDocument,
   GetTopSectorsDocument,
@@ -65,12 +65,12 @@ const names: {
 } = {
   requirements: {
     multiple: {
-      request: GetGptCompetenciesDocument,
-      response: "gptCompetencies",
+      request: GetCompetenciesDocument,
+      response: "competencies",
     },
     single: {
-      request: GetOneGptCompetencyDocument,
-      response: "oneGptCompetency",
+      request: GetOneCompetencyDocument,
+      response: "oneCompetency",
     },
   },
   sector: {

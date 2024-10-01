@@ -7,7 +7,7 @@ import {
   BetaCompany,
   Exact,
   GetCompaniesAutocompleteDocument,
-  GetGptCompetenciesDocument,
+  GetCompetenciesDocument,
   GetJobsDocument,
   GetOneCompanyDocument,
   GetOneGptCompetencyDocument,
@@ -42,12 +42,12 @@ const names: {
 } = {
   requirements: {
     multiple: {
-      request: GetGptCompetenciesDocument,
-      response: "gptCompetencies",
+      request: GetCompetenciesDocument,
+      response: "competencies",
     },
     single: {
       request: GetOneGptCompetencyDocument,
-      response: "oneGptCompetency",
+      response: "oneCompetency",
     },
   },
   sector: {
@@ -164,6 +164,6 @@ export function Options({
       <MenuItem key={`${name}${getValue(one)}`} value={getValue(one)}>
         {getLabel(one)}
       </MenuItem>
-    ) : undefined,
+    ) : undefined
   );
 }

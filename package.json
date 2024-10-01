@@ -11,7 +11,7 @@
     "vercel-generate": "turbo vercel-generate"
   },
   "devDependencies": {
-    "turbo": "^2.0.10"
+    "turbo": "^2.1.3"
   },
   "engines": {
     "node": ">=18"

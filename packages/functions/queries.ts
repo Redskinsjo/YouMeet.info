@@ -22,8 +22,8 @@ export const getUsersParamsQuery = `query GetUsers($first: PageParamsInput, $dat
     }
   }
 }`;
-export const getCompetenciesParamsQuery = `query GetGptCompetencies($data: GptCompetencyInput, $params: PageParamsInput) {
-    gptCompetencies(data: $data, params: $params) {
+export const getCompetenciesParamsQuery = `query GetCompetencies($data: CompetencyInput, $params: PageParamsInput) {
+    competencies(data: $data, params: $params) {
       __typename
       id
       slug
@@ -56,8 +56,8 @@ export const ownQueuesParamsQuery = `query OwnQueues($originId: ID, $targetId: I
   `;
 
 ///////////// metadata
-export const getCompetencyMetadataQuery = `query GetOneGptCompetency ($title: String, $slug: String) {
-  oneGptCompetency (title: $title, slug: $slug) {
+export const getCompetencyMetadataQuery = `query GetOneCompetency ($title: String, $slug: String) {
+  oneCompetency (title: $title, slug: $slug) {
     id
     title
   }
@@ -553,8 +553,8 @@ export const getUsersQuery = `query GetUsers($first: PageParamsInput, $data: Bet
     }
   }`;
 
-export const getCompetencyQuery = `query GetOneGptCompetency ($title: String, $id: ID, $slug: String) {
-    oneGptCompetency (title: $title, id: $id, slug: $slug) {
+export const getCompetencyQuery = `query GetOneCompetency ($title: String, $id: ID, $slug: String) {
+    oneCompetency (title: $title, id: $id, slug: $slug) {
       id
       title
       definition
@@ -568,8 +568,8 @@ export const getCompetencyQuery = `query GetOneGptCompetency ($title: String, $i
     }
   }`;
 
-export const getCompetenciesQuery = `query GetGptCompetencies($data: GptCompetencyInput, $params: PageParamsInput) {
-    gptCompetencies(data: $data, params: $params) {
+export const getCompetenciesQuery = `query GetCompetencies($data: CompetencyInput, $params: PageParamsInput) {
+    competencies(data: $data, params: $params) {
       __typename
       id
       title
@@ -984,8 +984,8 @@ export const getLeadFormResponsesQuery = `query GetLeadFormResponses($leadId: ID
     }
   }`;
 
-export const getCompetencySlugQuery = `query GetOneGptCompetency ($title: String, $id: ID) {
-    oneGptCompetency (title: $title, id: $id) {
+export const getCompetencySlugQuery = `query GetOneCompetency ($title: String, $id: ID) {
+    oneCompetency (title: $title, id: $id) {
       slug
     }
   }`;
@@ -1972,8 +1972,8 @@ export const getHomeOffersQuery = `query GetOffers($params: PageParamsInput, $da
   }
 }`;
 
-export const getHomeCompetenciesQuery = `query GetGptCompetencies($data: GptCompetencyInput, $params: PageParamsInput) {
-  gptCompetencies(data: $data, params: $params) {
+export const getHomeCompetenciesQuery = `query GetCompetencies($data: CompetencyInput, $params: PageParamsInput) {
+  competencies(data: $data, params: $params) {
     __typename
     id
     slug

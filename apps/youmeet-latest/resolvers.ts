@@ -48,8 +48,8 @@ import {
   MutationCreateCompanyArgs,
   QueryResetEmailLinkArgs,
   QueryResetPasswordArgs,
-  MutationDeleteGptCompetencyArgs,
-  QueryOneGptCompetencyArgs,
+  MutationDeleteCompetencyArgs,
+  QueryOneCompetencyArgs,
   MutationCreateOfferArgs,
   QueryOneOfferArgs,
   MutationDeleteOfferArgs,
@@ -92,7 +92,7 @@ import {
   MutationDeleteProfileSharingArgs,
   QueryTopSectorsArgs,
   QueryOffersArgs,
-  QueryGptCompetenciesArgs,
+  QueryCompetenciesArgs,
   ReferenceContact,
   QuerySendEmailProspectionLinkedinArgs,
   MutationCreateExperienceArgs,
@@ -151,7 +151,7 @@ import setUniqueNameAndExtension from "@youmeet/utils/backoffice/setUniqueNameAn
 import { uri, uriPro } from "@youmeet/functions/imports";
 import { faker } from "@faker-js/faker";
 import { AuthDetails } from "@youmeet/models/types";
-import { formatForUrl } from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
+import { formatForUrl } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { setName } from "@youmeet/utils/setName";
 import { Prisma } from "@prisma/client";
 import { BackendError } from "@youmeet/utils/BackendErrorClass";
@@ -967,9 +967,9 @@ const resolvers: Resolvers = {
       }
       return null;
     },
-    oneGptCompetency: async (
+    oneCompetency: async (
       _: unknown,
-      args: QueryOneGptCompetencyArgs,
+      args: QueryOneCompetencyArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
@@ -980,10 +980,10 @@ const resolvers: Resolvers = {
       if (args.id) where.id = args.id;
       if (args.title) where.title = args.title;
 
-      const gptCompetency = await prisma.gptcompetencies.findFirst({
+      const competency = await prisma.competencies.findFirst({
         where,
       });
-      return gptCompetency;
+      return competency;
     },
     uniqueCompetency: async (
       _: unknown,
@@ -995,11 +995,11 @@ const resolvers: Resolvers = {
       const where = {} as { id: string } | { slug: string };
       if (args.id) (where as { id: string }).id = args.id;
       else if (args.slug) (where as { slug: string }).slug = args.slug;
-      return await prisma.gptcompetencies.findUnique({ where });
+      return await prisma.competencies.findUnique({ where });
     },
-    gptCompetencies: async (
+    competencies: async (
       _: unknown,
-      args: QueryGptCompetenciesArgs,
+      args: QueryCompetenciesArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
@@ -1011,7 +1011,7 @@ const resolvers: Resolvers = {
         params.skip = args.params.skip as number;
       if (args.params?.take !== undefined)
         params.take = args.params.take as number;
-      return await prisma.gptcompetencies.findMany({ where, ...params });
+      return await prisma.competencies.findMany({ where, ...params });
     },
 
     resetPassword: async (
@@ -2726,14 +2726,14 @@ const resolvers: Resolvers = {
       }
       return null;
     },
-    deleteGptCompetency: async (
+    deleteCompetency: async (
       _: unknown,
-      args: MutationDeleteGptCompetencyArgs,
+      args: MutationDeleteCompetencyArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-      return await prisma.gptcompetencies.delete({
+      return await prisma.competencies.delete({
         where: { id: args.id as string },
       });
     },

@@ -1,7 +1,7 @@
 import {
   BetaCompany,
   GetCompaniesQuery,
-  GetGptCompetenciesQuery,
+  GetCompetenciesQuery,
   GetJobsQuery,
   GetOneCompanyQuery,
   GetOneGptCompetencyQuery,
@@ -23,7 +23,7 @@ import {
 } from "react-hook-form";
 import { SimpleSelectNames } from "./SimpleSelectNames";
 
-export type Queries = GetGptCompetenciesQuery &
+export type Queries = GetCompetenciesQuery &
   GetTopSectorsQuery &
   GetJobsQuery &
   GetOneTopSectorQuery &

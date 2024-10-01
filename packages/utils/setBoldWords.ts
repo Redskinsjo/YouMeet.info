@@ -1,20 +1,17 @@
-import { getGptCompetencySlug } from "@youmeet/functions/request";
-import {
-  GetGptCompetenciesDocument,
-  GptCompetency,
-} from "@youmeet/gql/generated";
+import { getCompetencySlug } from "@youmeet/functions/request";
+import { GetCompetenciesDocument, GptCompetency } from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 export const useLinksRegex = () => {
-  const { data, loading } = useQuery(GetGptCompetenciesDocument);
+  const { data, loading } = useQuery(GetCompetenciesDocument);
   const [regex, setRegex] = useState<RegExp | string>("");
   useEffect(() => {
     if (!loading) {
-      if (data?.gptCompetencies) {
+      if (data?.competencies) {
         const regex = new RegExp(
-          data?.gptCompetencies?.map((comp) => comp?.title).join("|"),
+          data?.competencies?.map((comp) => comp?.title).join("|"),
           "gi"
         );
         setRegex(regex);

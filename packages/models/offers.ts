@@ -3,7 +3,7 @@ export {};
 import * as typegoose from "@typegoose/typegoose";
 import { BetaUserSchema } from "./betaUsers";
 import { BetaCompanySchema } from "./betaCompanies";
-import { GptCompetencySchema } from "./gptCompetencies";
+import { CompetencySchema } from "./competencies";
 import { TopSectorSchema } from "./topSectors";
 import { JobSchema } from "./jobs";
 import mongoose from "mongoose";
@@ -38,8 +38,8 @@ export class OfferSchema {
   public remote: string;
   @typegoose.prop({ index: { name: "offers_location" } })
   public location: string;
-  @typegoose.prop({ default: [], ref: () => "GptCompetency" })
-  public requirementsIds: typegoose.Ref<GptCompetencySchema>[];
+  @typegoose.prop({ default: [], ref: () => "Competency" })
+  public requirementsIds: typegoose.Ref<CompetencySchema>[];
   @typegoose.prop()
   public revenue: number;
   @typegoose.prop()

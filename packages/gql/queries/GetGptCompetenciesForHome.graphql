@@ -1,8 +1,5 @@
-query GetGptCompetenciesForHome(
-  $data: GptCompetencyInput
-  $params: PageParamsInput
-) {
-  gptCompetencies(data: $data, params: $params) {
+query GetCompetenciesForHome($data: CompetencyInput, $params: PageParamsInput) {
+  competencies(data: $data, params: $params) {
     id
     title
     slug

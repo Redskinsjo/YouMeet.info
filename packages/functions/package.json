@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@youmeet/ui": "*",
-    "next": "^14.2.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "next": "^14.2.3"
   },
   "devDependencies": {
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.2"
   }
 }

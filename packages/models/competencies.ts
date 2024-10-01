@@ -15,16 +15,16 @@ mongoose.Promise = global.Promise;
   },
   options: {
     automaticName: false,
-    customName: "GptCompetency",
+    customName: "Competency",
     allowMixed: typegoose.Severity.ALLOW,
   },
 })
-export class GptCompetencySchema {
-  @typegoose.prop({ index: { name: "gptcompetencies_slug", unique: true } })
+export class CompetencySchema {
+  @typegoose.prop({ index: { name: "competencies_slug", unique: true } })
   public slug: string;
   @typegoose.prop()
   public extension: string;
-  @typegoose.prop({ index: { name: "gptcompetencies_title" } })
+  @typegoose.prop({ index: { name: "competencies_title" } })
   public title: string;
   @typegoose.prop()
   public definition: string;
@@ -51,15 +51,14 @@ export class GptCompetencySchema {
 }
 
 const model =
-  mongoose.models.GptCompetency ||
-  typegoose.getModelForClass(GptCompetencySchema);
+  mongoose.models.GptCompetency || typegoose.getModelForClass(CompetencySchema);
 
 const myIndexes = {
   _id: { name: "_id_" },
-  title: { name: "gptcompetencies_title" },
-  slug: { name: "gptcompetencies_slug", unique: true },
+  title: { name: "competencies_title" },
+  slug: { name: "competencies_slug", unique: true },
 } as IndexList;
 
-checkingIndexes<GptCompetencySchema>(myIndexes, model);
+checkingIndexes<CompetencySchema>(myIndexes, model);
 
 export default model;

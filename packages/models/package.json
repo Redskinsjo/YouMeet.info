@@ -6,9 +6,9 @@
     "@youmeet/types": "*",
     "@youmeet/typescript-config": "*",
     "@youmeet/utils": "*",
-    "mongoose": "^8.3.4"
+    "mongoose": "^8.7.0"
   },
   "devDependencies": {
-    "@typegoose/typegoose": "^12.4.0"
+    "@typegoose/typegoose": "^12.8.0"
   }
 }
