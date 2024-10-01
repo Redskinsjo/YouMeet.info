@@ -684,6 +684,7 @@ type Competency {
   development: String
   conclusion: String
   keywords: [String]
+  appelations: [String]
 }
 
 input OfferInput {

@@ -1,11 +1,21 @@
 {
-  "extends": "@youmeet/typescript-config/nextjs.json",
+  "extends": "@youmeet/typescript-config/api.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
-    "plugins": [{ "name": "next" }]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "allowJs": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",
@@ -18,5 +28,7 @@
     "next.config.js",
     "app/**/*.{ts,tsx}"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

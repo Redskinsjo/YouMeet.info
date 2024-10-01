@@ -41,6 +41,8 @@ export class CompetencySchema {
   @typegoose.prop()
   public keywords: string[];
   @typegoose.prop()
+  public appelations: string[];
+  @typegoose.prop()
   public conclusion: string;
   @typegoose.prop({ default: [], ref: () => "Offer" })
   public offersIds: typegoose.Ref<OfferSchema>[];

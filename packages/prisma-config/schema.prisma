@@ -587,6 +587,7 @@ model competencies {
   keywords      String[]
   offers        offers[]  @relation(fields: [offersIds], references: [id])
   offersIds     String[]  @default([]) @db.ObjectId
+  appelations   String[]
   createdAt     DateTime?
   updatedAt     DateTime?
 }

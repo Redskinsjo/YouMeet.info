@@ -499,6 +499,7 @@ export type CompanyInput = {
 export type Competency = {
   __typename?: 'Competency';
   advantages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  appelations?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   conclusion?: Maybe<Scalars['String']['output']>;
   definition?: Maybe<Scalars['String']['output']>;
   development?: Maybe<Scalars['String']['output']>;
@@ -3530,6 +3531,7 @@ export type CandidatesNotesResolvers<ContextType = any, ParentType extends Resol
 
 export type CompetencyResolvers<ContextType = any, ParentType extends ResolversParentTypes['Competency'] = ResolversParentTypes['Competency']> = {
   advantages?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  appelations?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   conclusion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   definition?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   development?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

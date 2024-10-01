@@ -13,7 +13,8 @@
     "lint": "next lint",
     "addSubtitledUrl": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/addSubtitledUrl.ts",
     "createProfileViewsFor": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/createProfileViewsFor.ts",
-    "test": "SCRIPT=true dotenv -e .env.development -- jest"
+    "test": "SCRIPT=true dotenv -e .env.development -- jest",
+    "genCompetencies": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/genCompetencies.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",

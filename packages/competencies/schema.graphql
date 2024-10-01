@@ -1,0 +1,19 @@
+type Competency {
+  id: ID
+  slug: String
+  extension: String
+  title: String
+  definition: String
+  relatedSkills: [String]
+  advantages: [String]
+  examples: [String]
+  importance: String
+  development: String
+  conclusion: String
+  keywords: [String]
+  appelations: [String]
+}
+
+type Query {
+  oneCompetency(title: String, id: ID, slug: String): Competency
+}
