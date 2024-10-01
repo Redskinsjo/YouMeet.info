@@ -11,7 +11,8 @@
   "scripts": {
     "codegen": "graphql-codegen --config codegen.ts",
     "dev": "PORT=4000 dotenv -e .env -- ts-node-dev --exit-child --respawn index.ts",
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "build": "tsc"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

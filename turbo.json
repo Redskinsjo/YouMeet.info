@@ -18,7 +18,7 @@
       "cache": false
     },
     "start": {
-      "env": ["vercel-generate", "*"]
+      "env": ["*"]
     },
     "codegen": {
       "env": ["*"],
