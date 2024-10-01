@@ -1,0 +1,11 @@
+query GetCompetencies($data: CompetencyInput, $params: PageParamsInput) {
+  competencies(data: $data, params: $params) {
+    id
+    title
+    advantages
+    conclusion
+    definition
+    examples
+    relatedSkills
+  }
+}
