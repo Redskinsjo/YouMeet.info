@@ -1,11 +1,9 @@
 {
-  "extends": "@youmeet/typescript-config/api.json",
+  "extends": "@youmeet/typescript-config/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "plugins": [
       {
@@ -28,7 +26,5 @@
     "next.config.js",
     "app/**/*.{ts,tsx}"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
