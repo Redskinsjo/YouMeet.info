@@ -1,5 +1,5 @@
 import OneLineSkeleton from "../../../OneLineSkeleton";
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -12,7 +12,7 @@ const CompetencyTitle = dynamic(() => import("./CompetencyTitle"));
 export default function CompetencyConclusion({
   competency,
 }: {
-  competency: GptCompetency;
+  competency: Competency;
 }) {
   return (
     <section className="flex-center w-full">

@@ -53,7 +53,7 @@ export class CompetencySchema {
 }
 
 const model =
-  mongoose.models.GptCompetency || typegoose.getModelForClass(CompetencySchema);
+  mongoose.models.Competency || typegoose.getModelForClass(CompetencySchema);
 
 const myIndexes = {
   _id: { name: "_id_" },

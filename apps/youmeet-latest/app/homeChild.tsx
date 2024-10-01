@@ -1,4 +1,4 @@
-import { GptCompetency, Offer } from "@youmeet/gql/generated";
+import { Competency, Offer } from "@youmeet/gql/generated";
 import React from "react";
 import OfferSection from "@youmeet/ui/_sections/OfferSection";
 import CompetencySection from "@youmeet/ui/_sections/CompetencySection";
@@ -24,7 +24,7 @@ export default async function Home({
   competences,
 }: {
   offers: Offer[];
-  competences: GptCompetency[];
+  competences: Competency[];
 }) {
   return (
     <main>

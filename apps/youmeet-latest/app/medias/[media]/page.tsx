@@ -11,7 +11,7 @@ import MediaChild from "./mediaChild";
 import {
   formatForDb,
   inFormatForDb,
-} from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
+} from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { Article } from "@youmeet/gql/generated";
 
 type Props = {

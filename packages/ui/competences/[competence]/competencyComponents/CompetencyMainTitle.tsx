@@ -1,10 +1,9 @@
-import { GptCompetency } from "@youmeet/gql/generated";
-import React from "react";
+import { Competency } from "@youmeet/gql/generated";
 
 export default function CompetencyMainTitle({
   competency,
 }: {
-  competency: GptCompetency;
+  competency: Competency;
 }) {
   const title = competency?.title
     ? competency?.title[0].toUpperCase() + competency?.title.slice(1)

@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import setFileUrl from "@youmeet/utils/setFileUrl";
-import { GptCompetency, Offer, Translated } from "@youmeet/gql/generated";
+import { Competency, Offer, Translated } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
 import { isCompetency, isOffer } from "@youmeet/types/TypeGuards";
 import BoldText from "@youmeet/ui/BoldText";
 import React from "react";
 
-export default function MainInfos({ el }: { el: Offer | GptCompetency }) {
+export default function MainInfos({ el }: { el: Offer | Competency }) {
   const {
     t,
     i18n: { language },
@@ -61,10 +61,7 @@ export default function MainInfos({ el }: { el: Offer | GptCompetency }) {
         </div>
       </div>
     );
-  } else if (
-    el.__typename === "GptCompetency" &&
-    isCompetency(el as GptCompetency)
-  ) {
+  } else if (el.__typename === "Competency" && isCompetency(el as Competency)) {
     return (
       <div className="p-[24px] flex flex-col gap-[12px]">
         <div className="h-[0.5px] bg-blueGrey500"></div>

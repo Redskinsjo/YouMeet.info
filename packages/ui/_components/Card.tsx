@@ -1,5 +1,5 @@
 "use client";
-import { GptCompetency, Offer } from "@youmeet/gql/generated";
+import { Competency, Offer } from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-export default function Card({ el }: { el: Offer | GptCompetency }) {
+export default function Card({ el }: { el: Offer | Competency }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   let className =
@@ -17,7 +17,7 @@ export default function Card({ el }: { el: Offer | GptCompetency }) {
   let aos = "fade-left";
   let href = `/offres/${el.slug}`;
 
-  if (el.__typename === "GptCompetency" && isCompetency(el)) {
+  if (el.__typename === "Competency" && isCompetency(el)) {
     className =
       "w-[400px] xs:w-[350px] sm:w-[350px] h-full xs:h-full sm:h-full rounded-[7px] border-[3px] shadow-xl shadow-grey300 border-solid border-grey400 dark:border-grey900 bg-white dark:lightDarkBg box-border cursor-pointer";
     aos = "fade-right";

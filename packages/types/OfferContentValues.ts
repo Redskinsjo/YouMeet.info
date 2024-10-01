@@ -1,10 +1,10 @@
-import { Avatar, GptCompetency } from "@youmeet/gql/generated";
+import { Avatar, Competency } from "@youmeet/gql/generated";
 
 export type OfferContentValues = {
   jobTitle: string;
   content: string;
   profileSearched: string;
-  requirements: GptCompetency[];
+  requirements: Competency[];
   revenue: string;
   remote: string;
   contractType: string;

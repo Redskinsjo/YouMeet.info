@@ -11,7 +11,7 @@ import OfferChild from "./offerChild";
 import {
   formatForDb,
   inFormatForDb,
-} from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
+} from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import Custom404 from "@/app/not-found";
 
 type Props = {

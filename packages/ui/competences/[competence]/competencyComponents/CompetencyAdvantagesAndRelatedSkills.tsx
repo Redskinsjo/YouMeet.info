@@ -1,7 +1,6 @@
 import OneLineSkeleton from "../../../OneLineSkeleton";
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import React from "react";
 
 const BoldText = dynamic(() => import("../../../BoldText"), {
   ssr: false,
@@ -12,7 +11,7 @@ const CompetencyTitle = dynamic(() => import("./CompetencyTitle"));
 export default function CompetencyAdvantagesAndRelatedSkills({
   competency,
 }: {
-  competency: GptCompetency;
+  competency: Competency;
 }) {
   return (
     <section className="bg-grey50 dark:lightDarkBg flex-center gap-[48px] w-full p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] box-border xs:flex-col sm:flex-col md:flex-col md2:flex-col">

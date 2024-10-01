@@ -4,11 +4,11 @@ import {
   GetCompetenciesQuery,
   GetJobsQuery,
   GetOneCompanyQuery,
-  GetOneGptCompetencyQuery,
+  GetOneCompetencyQuery,
   GetOneJobQuery,
   GetOneTopSectorQuery,
   GetTopSectorsQuery,
-  GptCompetency,
+  Competency,
   Job,
   TopSector,
 } from "@youmeet/gql/generated";
@@ -28,20 +28,20 @@ export type Queries = GetCompetenciesQuery &
   GetJobsQuery &
   GetOneTopSectorQuery &
   GetOneJobQuery &
-  GetOneGptCompetencyQuery &
+  GetOneCompetencyQuery &
   GetCompaniesQuery &
   GetOneCompanyQuery;
 
 export type QueriesResponses = keyof Queries;
 
 export type QueriesDocuments =
-  | GptCompetency[]
+  | Competency[]
   | TopSector[]
   | Job[]
   | BetaCompany[];
-export type QueriesOneDocument = GptCompetency | TopSector | Job | BetaCompany;
+export type QueriesOneDocument = Competency | TopSector | Job | BetaCompany;
 export type PartialQueriesDocuments =
-  | Partial<GptCompetency>[]
+  | Partial<Competency>[]
   | Partial<TopSector>[]
   | Partial<Job>[]
   | Partial<BetaCompany>[];

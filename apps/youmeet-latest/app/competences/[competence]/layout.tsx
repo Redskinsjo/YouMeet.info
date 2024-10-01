@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 import { logoUrl, uri } from "@youmeet/functions/imports";
-import { formatForUrl } from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
+import { formatForUrl } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { getCompetency } from "@youmeet/functions/request";
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 
 export default async function Layout({
   children,
@@ -13,9 +13,9 @@ export default async function Layout({
   children: ReactElement;
   params: { competence: string };
 }) {
-  const competency = (await getCompetency<GptCompetency>({
+  const competency = (await getCompetency<Competency>({
     slug: decodeURIComponent(params.competence),
-  })) as GptCompetency;
+  })) as Competency;
   if (competency?.title) {
     const title = competency?.title
       ? competency?.title[0].toUpperCase() + competency?.title.slice(1)

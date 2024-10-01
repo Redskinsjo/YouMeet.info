@@ -1,5 +1,5 @@
 import { getCompetencySlug } from "@youmeet/functions/request";
-import { GetCompetenciesDocument, GptCompetency } from "@youmeet/gql/generated";
+import { GetCompetenciesDocument, Competency } from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
@@ -46,15 +46,15 @@ export const setBoldWords = async (
   noEndingFormatting: boolean = false
 ): Promise<undefined | { text: string; slugs: { [key: number]: string } }> => {
   if (text && regex) {
-    const found = [...new Set(text.match(regex))] || [];
+    const found = [...new Set(text.match(regex))];
 
     let copy = text;
     let slugs = {};
     for (let i = 0; i < found.length; i++) {
       const keyword = found[i];
-      const comp = (await getGptCompetencySlug<GptCompetency>({
+      const comp = (await getCompetencySlug<Competency>({
         title: keyword,
-      })) as GptCompetency;
+      })) as Competency;
       if (comp && isCompetency(comp)) {
         if (comp?.slug && !isIntertwining(copy, keyword)) {
           (slugs as any)[i] = comp.slug;

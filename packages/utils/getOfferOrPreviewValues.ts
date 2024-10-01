@@ -1,7 +1,7 @@
 import { getCompany, getCompetency, getJob } from "@youmeet/functions/request";
 import {
   BetaCompany,
-  GptCompetency,
+  Competency,
   Job,
   Offer,
   Translated,
@@ -24,7 +24,7 @@ export default async function getOfferOrPreviewValues(
     ] as string;
     values.content = typ(offre)?.content as string;
     values.profileSearched = typ(offre)?.profileSearched as string;
-    values.requirements = typ(offre)?.requirements as GptCompetency[];
+    values.requirements = typ(offre)?.requirements as Competency[];
     values.contractType = typ(offre)?.contractType as string;
     values.location = typ(offre).location as string;
     values.revenue = String(typ(offre)?.revenue as number);
@@ -51,9 +51,9 @@ export default async function getOfferOrPreviewValues(
       const requirements = await Promise.all(
         typ(offre).requirements.map(
           async (req) =>
-            (await getCompetency<GptCompetency>({
+            (await getCompetency<Competency>({
               id: req as string,
-            })) as GptCompetency
+            })) as Competency
         )
       );
       values.requirements = requirements;

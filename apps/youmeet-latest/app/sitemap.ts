@@ -5,12 +5,7 @@ import {
   getOffersParams,
   getUsersParams,
 } from "@youmeet/functions/request";
-import {
-  Article,
-  BetaUser,
-  GptCompetency,
-  Offer,
-} from "@youmeet/gql/generated";
+import { Article, BetaUser, Competency, Offer } from "@youmeet/gql/generated";
 
 export default async function sitemap(): Promise<any> {
   const offers = (await getOffersParams<Offer[]>()) as Offer[];
@@ -23,8 +18,8 @@ export default async function sitemap(): Promise<any> {
     },
   })) as BetaUser[];
   const competencies = (await getCompetenciesParams<
-    GptCompetency[]
-  >()) as GptCompetency[];
+    Competency[]
+  >()) as Competency[];
   const articles = (await getArticlesParams<Article[]>()) as Article[];
 
   return [

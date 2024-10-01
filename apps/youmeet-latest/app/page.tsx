@@ -5,7 +5,7 @@ import { logoUrl, uri } from "@youmeet/functions/imports";
 import HomeChild from "./homeChild";
 import Script from "next/script";
 import { getHomeCompetencies, getHomeOffers } from "@youmeet/functions/request";
-import { GptCompetency, Offer } from "@youmeet/gql/generated";
+import { Competency, Offer } from "@youmeet/gql/generated";
 
 export const metadata: Metadata = {
   title: "YouMeet - Mise en Relation Professionnelle et ATS par Vidéo et IA",
@@ -58,7 +58,7 @@ export default async function Home() {
   })) as Offer[];
   const competences = (await getHomeCompetencies({
     params: { take: 2 },
-  })) as GptCompetency[];
+  })) as Competency[];
   return (
     <div className="overflow-hidden max-w-screen">
       <link rel="preconnect" href="https://res.cloudinary.com/" />

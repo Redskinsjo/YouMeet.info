@@ -1,10 +1,10 @@
 "use client";
-import { GptCompetency, Offer } from "@youmeet/gql/generated";
+import { Competency, Offer } from "@youmeet/gql/generated";
 import Link from "next/link";
 import React from "react";
 import { useMemo, useState } from "react";
 
-export default function SeeMore({ el }: { el: Offer | GptCompetency }) {
+export default function SeeMore({ el }: { el: Offer | Competency }) {
   const [click, setClick] = useState(false);
 
   const component = useMemo(() => {

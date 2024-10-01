@@ -18,8 +18,7 @@
       "cache": false
     },
     "start": {
-      "env": ["*"],
-      "dependsOn": ["codegen"]
+      "env": ["*"]
     },
     "codegen": {
       "env": ["*"],

@@ -10,11 +10,11 @@ import {
   GetCompetenciesDocument,
   GetJobsDocument,
   GetOneCompanyDocument,
-  GetOneGptCompetencyDocument,
+  GetOneCompetencyDocument,
   GetOneJobDocument,
   GetOneTopSectorDocument,
   GetTopSectorsDocument,
-  GptCompetency,
+  Competency,
   Job,
   TopSector,
   Translated,
@@ -46,7 +46,7 @@ const names: {
       response: "competencies",
     },
     single: {
-      request: GetOneGptCompetencyDocument,
+      request: GetOneCompetencyDocument,
       response: "oneCompetency",
     },
   },
@@ -152,7 +152,7 @@ export function Options({
     if (name === "job")
       return ((one as Job).title as Translated)[language as "fr" | "en"];
     if (name === "company") return (one as BetaCompany).name;
-    if (name === "requirements") return (one as GptCompetency).title;
+    if (name === "requirements") return (one as Competency).title;
     if (name === "sector")
       ((one as TopSector).title as Translated)[language as "fr" | "en"];
 

@@ -1,5 +1,5 @@
 import BoldText from "@youmeet/ui/BoldText";
-import { GptCompetency, Offer } from "@youmeet/gql/generated";
+import { Competency, Offer } from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -10,12 +10,12 @@ const SectionTitle = dynamic(() => import("./SectionTitle"));
 export default function DataSection({
   data,
 }: {
-  data: (Offer | GptCompetency)[];
+  data: (Offer | Competency)[];
 }) {
   let translation = "jobs-to-be-filled";
   let p = "Proposez votre profil à +une des opportunités= suivantes.+";
 
-  if (data[0]?.__typename === "GptCompetency" && isCompetency(data[0])) {
+  if (data[0]?.__typename === "Competency" && isCompetency(data[0])) {
     translation = "skills-to-be-valued";
     p = "Découvrez des exemples de +compétences à valoriser= sur votre CV.+";
 

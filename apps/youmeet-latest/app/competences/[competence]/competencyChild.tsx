@@ -1,5 +1,5 @@
 import React from "react";
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
 import Footer from "@youmeet/ui/Footer";
 import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
@@ -9,7 +9,7 @@ import DividerSection from "@youmeet/ui/_components/DividerSection";
 export default function CompetencyChild({
   competency,
 }: {
-  competency: GptCompetency;
+  competency: Competency;
 }) {
   return (
     <div className="min-h-screen flex-center flex-col">

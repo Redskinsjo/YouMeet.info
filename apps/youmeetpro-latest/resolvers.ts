@@ -43,8 +43,8 @@ import {
   MutationCreateCompanyArgs,
   QueryResetEmailLinkArgs,
   QueryResetPasswordArgs,
-  MutationDeleteGptCompetencyArgs,
-  QueryOneGptCompetencyArgs,
+  MutationDeleteCompetencyArgs,
+  QueryOneCompetencyArgs,
   MutationSubmitVideoArgs,
   MutationCreateOfferArgs,
   QueryOneOfferArgs,
@@ -128,7 +128,7 @@ import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDur
 import { s } from "@youmeet/utils/jwt";
 import * as SendinBlue from "@sendinblue/client";
 import CryptoJS from "crypto-js";
-import { formatForDb } from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
+import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { uri, uriCandidates } from "@youmeet/functions/imports";
 import { FilterText } from "@youmeet/types/api/WhereArgs";
 import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueNameAndExtension";
@@ -897,9 +897,9 @@ const resolvers: Resolvers = {
         },
       });
     },
-    oneGptCompetency: async (
+    oneCompetency: async (
       _: unknown,
-      args: QueryOneGptCompetencyArgs,
+      args: QueryOneCompetencyArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
@@ -910,10 +910,10 @@ const resolvers: Resolvers = {
         });
       }
       if (formatForDb(args.title as string)) {
-        const gptCompetency = await prisma.competencies.findFirst({
+        const competency = await prisma.competencies.findFirst({
           where: { title: formatForDb(args.title as string) },
         });
-        return gptCompetency;
+        return competency;
       }
       return null;
     },
@@ -2867,9 +2867,9 @@ const resolvers: Resolvers = {
       }
       return null;
     },
-    deleteGptCompetency: async (
+    deleteCompetency: async (
       _: unknown,
-      args: MutationDeleteGptCompetencyArgs,
+      args: MutationDeleteCompetencyArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
