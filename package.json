@@ -3,7 +3,8 @@
   "scripts": {
     "build": "turbo build",
     "preview": "turbo preview",
-    "dev": "turbo dev codegen",
+    "dev": "turbo dev",
+    "start": "turbo start",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",

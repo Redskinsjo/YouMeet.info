@@ -17,6 +17,10 @@
       "persistent": true,
       "cache": false
     },
+    "start": {
+      "env": ["*"],
+      "dependsOn": ["codegen"]
+    },
     "codegen": {
       "env": ["*"],
       "outputs": ["gql/generated.ts"]
