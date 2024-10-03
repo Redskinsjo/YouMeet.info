@@ -125,7 +125,7 @@ export default function DisplayedExchange({
               </div>
             </div>
             <BoldText
-              text={`${exchange?.question?.generated}` ?? ""}
+              text={`${exchange?.question?.generated}`}
               links
               fontSizeClass="p-[12px] bg-cyan50 dark:extraLightDarkBg shadow-custom rounded-[14px]"
               formatDisplay

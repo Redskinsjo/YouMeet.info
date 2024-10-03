@@ -435,14 +435,16 @@ const VideoAddingModal = ({ type, cta, title, content }: CustomModalProps) => {
           {!checkAvailableVideos ? (
             <form
               className="w-full flex flex-col gap-[24px]"
-              action={customOnApplying.bind(null, {
-                originId: user.id,
-                targetId: offer?.company?.id ?? "",
-                videoId:
-                  (chosenVideo?.id as string) ||
-                  (getPrincipalVideo(user.videos)?.id as string),
-                offerTargetId: offer?.id as string,
-              })}
+              action={() => {
+                customOnApplying.bind(null, {
+                  originId: user.id,
+                  targetId: offer?.company?.id ?? "",
+                  videoId:
+                    (chosenVideo?.id as string) ||
+                    (getPrincipalVideo(user.videos)?.id as string),
+                  offerTargetId: offer?.id as string,
+                });
+              }}
             >
               <div>
                 <BoldText
@@ -659,7 +661,9 @@ const FeedBackModal = ({ type }: CustomModalProps) => {
           </h3>
           <form
             ref={formRef}
-            action={formHandler}
+            action={(formData: FormData) => {
+              formHandler(formData);
+            }}
             className="xs:text-[22px] sm:text-[22px] md:text-[22px] text-blueGrey700 text-[19px] text-center flex-center flex-col gap-[12px]"
           >
             {modals && modals[type] && modals[type].content && (

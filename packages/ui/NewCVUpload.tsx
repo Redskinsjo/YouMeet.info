@@ -46,7 +46,9 @@ export default function NewCVUpload({
         {cvFile?.url && cvFile.secure_url ? (
           <form
             ref={formRef}
-            action={customeOnDeleteCV.bind(null, profil?.id as string)}
+            action={() => {
+              customeOnDeleteCV.bind(null, profil?.id as string);
+            }}
             className="flex-bet w-full"
           >
             {upload === "r-cv" ? (

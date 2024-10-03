@@ -173,9 +173,11 @@ export default function MainVideoComponent({
         <div>
           {!principalVideo?.transcript && (
             <form
-              action={customOnTranscriptVideo.bind(null, {
-                videoId: principalVideo?.id || "",
-              })}
+              action={() => {
+                customOnTranscriptVideo.bind(null, {
+                  videoId: principalVideo?.id || "",
+                });
+              }}
               className="flex items-center p-[12px] gap-[12px]"
             >
               <Button type="submit">Transcrire vidéo</Button>
@@ -184,9 +186,11 @@ export default function MainVideoComponent({
 
           {!setFileUrl(principalVideo?.audio) && principalVideo?.transcript ? (
             <form
-              action={customOnAnalyzeVideo.bind(null, {
-                videoId: principalVideo?.id || "",
-              })}
+              action={() => {
+                customOnAnalyzeVideo.bind(null, {
+                  videoId: principalVideo?.id || "",
+                });
+              }}
               className="flex items-center p-[12px] gap-[12px]"
             >
               <Button type="submit">Analyser IA</Button>

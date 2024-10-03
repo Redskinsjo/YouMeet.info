@@ -51,7 +51,9 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
       {upload === "a-cv" ? <Logo gif /> : undefined}
       <form
         ref={cvRef}
-        action={customOnAddCV.bind(null, profil?.id as string)}
+        action={() => {
+          customOnAddCV.bind(null, profil?.id as string);
+        }}
         className="w-full min-w-[245px] flex-center rounded-xl cursor-pointer relative"
       >
         <label

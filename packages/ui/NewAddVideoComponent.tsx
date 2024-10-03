@@ -111,10 +111,12 @@ export default function NewAddVideoComponent({
         </Link>
         <form
           ref={addVideoRef}
-          action={customOnAddVideo.bind(null, {
-            publicId,
-            jobId,
-          })}
+          action={() => {
+            customOnAddVideo.bind(null, {
+              publicId,
+              jobId,
+            });
+          }}
           className="flex-center rounded-xl cursor-pointer relative"
         >
           <label

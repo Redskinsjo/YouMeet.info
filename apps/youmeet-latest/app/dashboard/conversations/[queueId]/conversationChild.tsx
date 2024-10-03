@@ -138,9 +138,11 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
       ) : (
         <form
           className="flex-center flex-col"
-          action={customOnAnswerConversation.bind(null, {
-            exchanges: thread.exchanges as BetaWhatsappExchange[],
-          })}
+          action={() => {
+            customOnAnswerConversation.bind(null, {
+              exchanges: thread.exchanges as BetaWhatsappExchange[],
+            });
+          }}
         >
           {(thread.exchanges ?? [])?.map((exchange, index) => {
             if (exchange) {

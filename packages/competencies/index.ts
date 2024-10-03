@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import { createServer } from "node:http";
 import { createYoga, createSchema } from "graphql-yoga";
 import { readFileSync } from "node:fs";
+import dotenv from "dotenv";
+dotenv.config();
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 
@@ -16,9 +18,12 @@ const schema = createSchema({
 function main() {
   const yoga = createYoga({ schema, graphiql: true });
   const server = createServer(yoga);
-  server.listen(4000, () => {
-    console.info("Server is running on http://localhost:4000/graphql");
-  });
+  server.listen(
+    process.env.NODE_ENV === "developement" ? 4000 : process.env.API_URI,
+    () => {
+      console.info("Server is running on http://localhost:4000/graphql");
+    }
+  );
 }
 
 main();

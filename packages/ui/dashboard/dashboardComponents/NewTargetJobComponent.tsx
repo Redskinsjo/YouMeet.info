@@ -57,10 +57,12 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
 
   return (
     <form
-      action={customOnTargetJobUpdate.bind(null, {
-        userId: profil.id as string,
-        jobId: watch("job"),
-      })}
+      action={() => {
+        customOnTargetJobUpdate.bind(null, {
+          userId: profil.id as string,
+          jobId: watch("job"),
+        });
+      }}
     >
       {!isValidated ? (
         <div className="flex-bet gap-[12px]">

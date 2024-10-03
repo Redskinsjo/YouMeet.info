@@ -120,7 +120,12 @@ export default function MenuAuthenticatedUser() {
             />
           )}
 
-        <form action={customOnLogout} className="flex-center">
+        <form
+          action={() => {
+            customOnLogout();
+          }}
+          className="flex-center"
+        >
           <MenuItem
             component={LogoutBtn}
             sx={{
