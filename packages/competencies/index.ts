@@ -26,8 +26,9 @@ function main() {
     },
   });
   const server = createServer(yoga);
+
   server.listen(
-    process.env.NODE_ENV === "development" ? 4000 : process.env.API_URI,
+    process.env.TS_NODE_DEV === "true" ? 4000 : process.env.API_URI,
     () => {
       console.info("Server is running on http://localhost:4000/graphql");
     }
