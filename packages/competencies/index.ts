@@ -16,10 +16,20 @@ const schema = createSchema({
 });
 
 function main() {
-  const yoga = createYoga({ schema, graphiql: true });
+  const yoga = createYoga({
+    schema,
+    graphiql: true,
+    graphqlEndpoint: "/",
+    cors: {
+      origin: [`${process.env.WWW_DOMAIN}`, `${process.env.PRO_DOMAIN}`],
+      allowedHeaders: ["X-Custom-Header"],
+      methods: ["POST", "OPTIONS", "GET"],
+      credentials: true,
+    },
+  });
   const server = createServer(yoga);
   server.listen(
-    process.env.NODE_ENV === "developement" ? 4000 : process.env.API_URI,
+    process.env.NODE_ENV === "development" ? 4000 : process.env.API_URI,
     () => {
       console.info("Server is running on http://localhost:4000/graphql");
     }
