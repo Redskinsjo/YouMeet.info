@@ -19,20 +19,17 @@ function main() {
   const yoga = createYoga({
     schema,
     graphiql: true,
-    graphqlEndpoint: "/",
+    graphqlEndpoint: "/graphql",
     cors: {
-      origin: [`${process.env.WWW_DOMAIN}`, `${process.env.PRO_DOMAIN}`],
+      origin: [`*`],
       methods: ["POST", "OPTIONS", "GET"],
     },
   });
   const server = createServer(yoga);
 
-  server.listen(
-    process.env.TS_NODE_DEV === "true" ? 4000 : process.env.API_URI,
-    () => {
-      console.info("Server is running on http://localhost:4000/graphql");
-    }
-  );
+  server.listen(process.env.PORT, () => {
+    console.info("Server is running on http://localhost:4000/graphql");
+  });
 }
 
 main();
