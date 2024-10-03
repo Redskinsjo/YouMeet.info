@@ -22,9 +22,7 @@ function main() {
     graphqlEndpoint: "/",
     cors: {
       origin: [`${process.env.WWW_DOMAIN}`, `${process.env.PRO_DOMAIN}`],
-      allowedHeaders: ["X-Custom-Header"],
       methods: ["POST", "OPTIONS", "GET"],
-      credentials: true,
     },
   });
   const server = createServer(yoga);
