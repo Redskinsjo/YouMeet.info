@@ -7,7 +7,6 @@ import MainInfos from "./MainInfos";
 import SeeMore from "./SeeMore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 export default function Card({ el }: { el: Offer | Competency }) {
   const router = useRouter();

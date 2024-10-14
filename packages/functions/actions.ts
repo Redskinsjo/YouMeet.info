@@ -2543,3 +2543,38 @@ export const onAnalyzeVideo = async (
     return { error: true, type: err.type, message: err.message };
   }
 };
+
+export const generateCV = async (formData: FormData) => {
+  const schema = z.object({
+    job: z.string().min(1),
+  });
+
+  const obj = Object.fromEntries(
+    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
+      entry[0],
+      entry[1].toString().trim(),
+    ])
+  );
+
+  const toBeParsed = obj;
+
+  try {
+    const valid = schema.parse(toBeParsed);
+    console.log(valid, "valid");
+    if (valid) {
+      const response = await fetch(`${uri}/api/generateCV`, {
+        body: JSON.stringify({ job: valid.job }),
+        method: "POST",
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.ok ? "done" : response.ok);
+      const result = await response.arrayBuffer();
+      return result;
+    }
+  } catch (err: any) {
+    console.log(err, "err");
+  }
+};

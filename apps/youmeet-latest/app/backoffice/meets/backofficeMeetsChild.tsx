@@ -29,6 +29,9 @@ export default function BackofficeMeetsPage({ meets }: { meets: Meet[] }) {
         <Link href={`/backoffice/affiliations`} className="no-underline">
           <Button>Voir Affiliations</Button>
         </Link>
+        <Link href={`/backoffice/cv`} className="no-underline">
+          <Button>Voir CV</Button>
+        </Link>
       </div>
 
       <BackofficeMeetsComponent data={meets} />

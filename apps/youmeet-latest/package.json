@@ -10,11 +10,7 @@
     "build": "next build",
     "preview": "dotenv -e .env.testing -- next build",
     "start": "PORT=3000 next start",
-    "lint": "next lint",
-    "addSubtitledUrl": "SCRIPT=true dotenv -e .env.development -- ts-node ./scripts/addSubtitledUrl.ts",
-    "createProfileViewsFor": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/createProfileViewsFor.ts",
-    "test": "SCRIPT=true dotenv -e .env.development -- jest",
-    "genCompetencies": "SCRIPT=true dotenv -e .env -- ts-node ./scripts/genCompetencies.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
@@ -61,6 +57,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0",
     "next": "^14.2.5",
+    "puppeteer": "^23.5.1",
     "react": "^19.0.0-canary-fd0da3eef-20240404",
     "react-dom": "^19.0.0-canary-fd0da3eef-20240404",
     "react-hook-form": "^7.53.0",

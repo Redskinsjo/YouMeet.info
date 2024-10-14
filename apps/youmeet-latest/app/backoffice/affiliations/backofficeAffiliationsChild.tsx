@@ -33,6 +33,9 @@ export default function BackofficeAffiliationsChild({
         <Link href={`/backoffice/meets`} className="no-underline">
           <Button>Voir Rencontres</Button>
         </Link>
+        <Link href={`/backoffice/cv`} className="no-underline">
+          <Button>Voir CV</Button>
+        </Link>
       </div>
       <BackofficeAffiliationsComponent data={affiliations} />
       <CreateAffiliation />

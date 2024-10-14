@@ -34,6 +34,9 @@ export default function InterviewAnswersChild({
           <Link href={`/backoffice/affiliations`} className="no-underline">
             <Button>Voir Affiliations</Button>
           </Link>
+          <Link href={`/backoffice/cv`} className="no-underline">
+            <Button>Voir CV</Button>
+          </Link>
         </div>
         <SubLayout>
           <div className="flex flex-col gap-[6px]">

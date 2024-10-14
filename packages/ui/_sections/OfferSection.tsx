@@ -1,7 +1,6 @@
 import { Offer } from "@youmeet/gql/generated";
 import DataSection from "../_components/DataSection";
 import dynamic from "next/dynamic";
-import React from "react";
 
 const ImgSection = dynamic(() => import("../_components/ImgSection"));
 

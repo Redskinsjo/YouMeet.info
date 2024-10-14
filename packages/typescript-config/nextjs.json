@@ -11,13 +11,11 @@
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
+    "moduleResolution": "Node",
     "strict": true
   },
   "include": ["src", "next-env.d.ts"],
-  "exclude": ["node_modules"],
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  }
+  "exclude": ["node_modules"]
 }
