@@ -48,10 +48,9 @@ export default function ConversationComponent({
     reset,
   } = useForm<FieldValues>({ defaultValues: { themes: [] } });
 
-  const isInProgressConversation =
-    !!profil.recruiterQueues?.some(
-      (qu) => qu?.status === "pending" || qu?.status === "in-progress"
-    ) ?? false;
+  const isInProgressConversation = !!profil.recruiterQueues?.some(
+    (qu) => qu?.status === "pending" || qu?.status === "in-progress"
+  );
 
   const { t } = useTranslation();
 
