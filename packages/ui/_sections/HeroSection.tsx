@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import DividerSection from "../_components/DividerSection";
 import Image from "next/image";
-import React from "react";
 
 const HeroText = dynamic(() => import("../_components/HeroText"));
 const HeroVideo = dynamic(() => import("../_components/HeroVideo"));
@@ -27,8 +26,8 @@ export default function HeroSection() {
         alt="Un entretien professionnel entre un candidat et une Directrice des Ressources Humaines concluent un contrat d'embaûche en se serrant la main grâce à la mise en relation YouMeet."
       />
       <HeroText />
-      <DividerSection type="hero" />
-      <HeroVideo />
+      {/* <DividerSection type="hero" /> */}
+      {/* <HeroVideo /> */}
     </section>
   );
 }

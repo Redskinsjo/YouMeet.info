@@ -1367,7 +1367,13 @@ type Query {
   accountProfile(userId: ID): BetaProfile
   accountDetails(userId: ID): BetaDetails
   users(first: PageParamsInput, data: BetaUserInput): [BetaUser]
-  user(uniqueName: String, userId: ID, email: String, originId: ID): BetaUser
+  user(
+    uniqueName: String
+    userId: ID
+    email: String
+    originId: ID
+    fullname: String
+  ): BetaUser
   experiences: [BetaExperience]
   oneExperience(id: ID, email: String): BetaExperience
   companies(first: PageParamsInput, filters: BetaCompanyFilters): [BetaCompany!]

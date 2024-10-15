@@ -1,4 +1,5 @@
 import prisma from "@youmeet/prisma-config/prisma";
+
 import {
   MutationCreateCandidateArgs,
   Resolvers,
@@ -1539,6 +1540,15 @@ const resolvers: Resolvers = {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
       const where = {} as Prisma.betausersWhereUniqueInput;
+
+      if (args.fullname) {
+        return await prisma.betausers.findFirst({
+          where: {
+            fullname: { equals: args.fullname, mode: "insensitive" },
+            videos: { some: { id: { not: undefined } } },
+          },
+        });
+      }
 
       if (args.uniqueName) where.uniqueName = args.uniqueName;
       if (args.userId) where.id = args.userId;

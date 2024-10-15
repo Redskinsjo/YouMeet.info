@@ -58,6 +58,7 @@ import {
   getAffiliation,
   getRawUser,
   getSimpleUser,
+  getUser,
   getVideo,
   resetEmailLink,
   resetPassword,
@@ -69,6 +70,7 @@ import {
   updateQueue,
   updateUser,
   updateVideo,
+  searchSomeone,
 } from "./request";
 import {
   FormHandledData,
@@ -2560,7 +2562,7 @@ export const generateCV = async (formData: FormData) => {
 
   try {
     const valid = schema.parse(toBeParsed);
-    console.log(valid, "valid");
+
     if (valid) {
       const response = await fetch(`${uri}/api/generateCV`, {
         body: JSON.stringify({ job: valid.job }),
@@ -2577,4 +2579,59 @@ export const generateCV = async (formData: FormData) => {
   } catch (err: any) {
     console.log(err, "err");
   }
+};
+
+export const searchSomeoneRequest = async (formData: FormData) => {
+  const schema = z.object({
+    search: z.string().min(1),
+  });
+
+  const obj = Object.fromEntries(
+    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
+      entry[0],
+      entry[1].toString().trim(),
+    ])
+  );
+
+  const toBeParsed = obj;
+
+  let result: BetaUser = {};
+  try {
+    const valid = schema.parse(toBeParsed);
+
+    if (valid) {
+      result = (await searchSomeone<BetaUser>({
+        fullname: valid.search,
+      })) as BetaUser;
+
+      if (result && isPayloadError(result)) {
+        throw new BackendError(result.type, result.message);
+      } else if (!result || !result?.uniqueName) {
+        throw new BackendError(
+          BACKEND_ERRORS.NO_USER,
+          BACKEND_MESSAGES.NO_USER
+        );
+      }
+    }
+  } catch (err: any) {
+    console.log(err, "err");
+    const zodErr = err.errors;
+    return {
+      status: err.status,
+      error: true,
+      type:
+        zodErr && zodErr[0].code === "invalid_type"
+          ? BACKEND_ERRORS.DATATYPE_INVALID
+          : err.type
+          ? err.type
+          : BACKEND_ERRORS.UNKNOWN,
+      message:
+        zodErr && zodErr[0].code === "invalid_type"
+          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
+          : err.message
+          ? err.message
+          : BACKEND_MESSAGES.UNKNOWN,
+    };
+  }
+  redirect(`/${result.uniqueName}`);
 };

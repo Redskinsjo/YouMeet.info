@@ -163,6 +163,7 @@ import {
   ownQueuesParamsQuery,
   resetEmailLinkQuery,
   resetPasswordQuery,
+  searchSomeoneQuery,
   sendEmailOfferOpportunitiesQuery,
   sendEmailQuery,
   sendEmailToLeadQuery,
@@ -2111,6 +2112,25 @@ export const getUserCandidate = async <T>(
     "user",
     multiple,
     getUserCandidateQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const searchSomeone = async <T>(
+  variables: QueryUserArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "user",
+    multiple,
+    searchSomeoneQuery,
     variables,
     revalidate,
     handling

@@ -4,6 +4,7 @@ import OfferSection from "@youmeet/ui/_sections/OfferSection";
 import CompetencySection from "@youmeet/ui/_sections/CompetencySection";
 import DividerSection from "@youmeet/ui/_components/DividerSection";
 import PromotionSection from "@youmeet/ui/_sections/PromotionSection";
+import MasterSearch from "@youmeet/ui/_sections/MasterSearch";
 import HeroSection from "@youmeet/ui/_sections/HeroSection";
 import InsightSection from "@youmeet/ui/_sections/InsightSection";
 import BandSection from "@youmeet/ui/_sections/BandSection";
@@ -29,9 +30,16 @@ export default async function Home({
   return (
     <main>
       <BigHeaderSection />
-      <HeroSection />
-      <DividerSection />
-      <PromotionSection />
+      <div className="flex-center flex-col">
+        <div className="box-border w-3/4 xs:w-full sm:w-full md:w-full p-[72px] xs:p-[12px] sm:p-[12px] md:p-[12px]">
+          <HeroSection />
+          <DividerSection />
+          <MasterSearch />
+        </div>
+
+        <DividerSection />
+        <PromotionSection />
+      </div>
       <DividerSection />
       <OfferSection offers={offers} />
       <DividerSection />

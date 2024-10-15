@@ -183,14 +183,14 @@ const product = {
   "cv-not-enough":
     "Faites mieux qu'un simple CV. Le CV n'est pas suffisant, +faites un CV vidéo.=+",
   "home-hero-light":
-    "Voyez ce qu'une +IA= peut vous apprendre sur un +humain= et ses compétences +",
+    "Voyez ce que vous pouvez apprendre sur un +humain= et ses compétences +",
   "professional-connecting": "Mise en relation professionnelle",
-  productTitleMain: "Mise en Relation Professionnelle et ATS",
+  productTitleMain: "Mise en Relation Professionnelle",
   by: "par",
   and: "et",
   video: "Vidéo",
   ai: "IA",
-  productDescription: "Faites la Lumière grâce à la Vidéo et l'IA",
+  productDescription: "Faites la Lumière grâce à la Vidéo",
   "insight-title": "Créer un profil professionnel complet",
   "improve-your-applications":
     "Améliorez vos candidatures et permettez aux recruteurs de mieux vous connaître et +gagnez du temps=.+",
@@ -683,6 +683,8 @@ const partners = {
   search: "Rechercher",
   "search-by-job": "Rechercher par titre de l'emploi",
   "search-by-name-job": "Rechercher par nom, expérience",
+  "search-by-fullname": "Rechercher par nom complet",
+  "search-for-someone": "Tapez pour rechercher quelqu'un",
   consult: "Consulter",
 };
 

@@ -1907,6 +1907,7 @@ export type QueryUniqueCompetencyArgs = {
 
 export type QueryUserArgs = {
   email?: InputMaybe<Scalars['String']['input']>;
+  fullname?: InputMaybe<Scalars['String']['input']>;
   originId?: InputMaybe<Scalars['ID']['input']>;
   uniqueName?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['ID']['input']>;

@@ -168,8 +168,8 @@ export const getRawUserQuery = `query GetUser($uniqueName: String, $userId: ID, 
       id
     }
   }`;
-export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID) {
-    user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId) {
+export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID, $fullname: String) {
+    user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId, fullname: $fullname) {
         __typename
         id
         auth {
@@ -1451,8 +1451,8 @@ export const getSimpleCompanyQuery = `query GetOneCompany($id: ID, $filters: Bet
 }
 `;
 
-export const getSimpleUserQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID) {
-  user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId) {
+export const getSimpleUserQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID, $fullname: String) {
+  user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId, fullname: $fullname) {
     __typename
     id
     auth {
@@ -2196,8 +2196,8 @@ export const videoByPublicIdQuery = `query GetVideoByPublicId($publicId: String)
   }
 }`;
 
-export const getUserCandidateQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID) {
-  user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId) {
+export const getUserCandidateQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID, $fullname: String) {
+  user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId, fullname: $fullname) {
       __typename
       id
       auth {
@@ -2337,5 +2337,14 @@ export const getUserCandidateQuery = `query GetUser($uniqueName: String, $userId
         createdAt
         updatedAt
       }
+  }
+}`;
+
+export const searchSomeoneQuery = `query SearchSomeone($uniqueName: String, $userId: ID, $email: String, $originId: ID, $fullname: String) {
+  user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId, fullname: $fullname) {
+    __typename
+    id
+    fullname
+    uniqueName
   }
 }`;
