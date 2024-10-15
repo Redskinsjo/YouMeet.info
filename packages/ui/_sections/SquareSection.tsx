@@ -1,9 +1,4 @@
-import dynamic from "next/dynamic";
-import React from "react";
-
-const HomeSquares = dynamic(() => import("../_homeComponents/HomeSquares"), {
-  ssr: false,
-});
+import HomeSquares from "../_homeComponents/HomeSquares";
 
 export default function SquareSection() {
   return (

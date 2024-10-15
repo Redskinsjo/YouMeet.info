@@ -17,7 +17,6 @@ import {
   isSuspensionPoint,
 } from "@youmeet/utils/textToFormat";
 import { Attr } from "@youmeet/types/attributes";
-import React from "react";
 
 export default function BoldText({
   text,

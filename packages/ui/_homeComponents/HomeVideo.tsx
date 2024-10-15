@@ -1,8 +1,15 @@
 import { outfit } from "@youmeet/functions/fonts";
-import BoldText from "../BoldText";
-import SectionTitle from "../_components/SectionTitle";
-import SimpleText from "./SimpleText";
-import React from "react";
+import dynamic from "next/dynamic";
+
+const SectionTitle = dynamic(() => import("../_components/SectionTitle"), {
+  ssr: false,
+});
+const BoldText = dynamic(() => import("../BoldText"), {
+  ssr: false,
+});
+const SimpleText = dynamic(() => import("./SimpleText"), {
+  ssr: false,
+});
 
 export default function HomeVideo() {
   return (

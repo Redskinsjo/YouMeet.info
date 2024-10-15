@@ -4,8 +4,12 @@ import { Metadata } from "next";
 import { logoUrl, uri } from "@youmeet/functions/imports";
 import HomeChild from "./homeChild";
 import Script from "next/script";
-import { getHomeCompetencies, getHomeOffers } from "@youmeet/functions/request";
-import { Competency, Offer } from "@youmeet/gql/generated";
+import {
+  getHomeCompetencies,
+  getHomeOffers,
+  getVideos,
+} from "@youmeet/functions/request";
+import { Competency, Offer, Video } from "@youmeet/gql/generated";
 
 export const metadata: Metadata = {
   title: "YouMeet - Mise en Relation Professionnelle et ATS par Vidéo et IA",
@@ -53,12 +57,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const offers = (await getHomeOffers<Offer>({
-    params: { take: 3 },
-  })) as Offer[];
-  const competences = (await getHomeCompetencies({
-    params: { take: 2 },
-  })) as Competency[];
+  // const offers = (await getHomeOffers<Offer>({
+  //   params: { take: 3 },
+  // })) as Offer[];
+  // const competences = (await getHomeCompetencies({
+  //   params: { take: 2 },
+  // })) as Competency[];
+  const videos = (await getVideos<Video[]>()) as Video[];
+
   return (
     <div className="overflow-hidden max-w-screen">
       <link rel="preconnect" href="https://res.cloudinary.com/" />
@@ -95,7 +101,7 @@ export default async function Home() {
         key="product-jsonld"
       />
 
-      <HomeChild offers={offers} competences={competences} />
+      <HomeChild offers={[]} competences={[]} videos={videos.slice(0, 3)} />
     </div>
   );
 }

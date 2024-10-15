@@ -1608,12 +1608,18 @@ export const getMyVideosQuery = `query GetMyVideos ($userId: ID) {
 }`;
 export const getVideosQuery = `query GetVideos {
   videos {
+    __typename
     id
     transcript
     confidence
     report
+    job {
+      id
+      frTitle
+    }
     user {
       id
+      uniqueName
     }
     file {
       eager {

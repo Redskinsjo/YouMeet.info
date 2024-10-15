@@ -1,31 +1,39 @@
 "use client";
-import { Competency, Offer } from "@youmeet/gql/generated";
+import { Competency, Offer, Video } from "@youmeet/gql/generated";
 import Link from "next/link";
-import React from "react";
 import { useMemo, useState } from "react";
 
-export default function SeeMore({ el }: { el: Offer | Competency }) {
+export default function SeeMore({ el }: { el: Offer | Competency | Video }) {
   const [click, setClick] = useState(false);
 
+  if (el.__typename === "Video") {
+    return null;
+  }
+
   const component = useMemo(() => {
-    let href = `/competences/${el.slug}`;
-    let cta = "Voir plus";
-    let title = "Voir plus sur cette compétence";
+    let attributes = {
+      href: `/competences/${(el as Offer).slug}`,
+      cta: "Voir plus",
+      title: "Voir plus sur cette compétence",
+    };
     if (el.__typename === "Offer") {
-      href = `/offres/${el.slug}`;
-      cta = "Postuler";
-      title = "Postuler à cette offre";
+      attributes = {
+        href: `/offres/${el.slug}`,
+        cta: "Postuler",
+        title: "Postuler à cette offre",
+      };
     }
+
     return (
       <div className="flex-bet w-full">
         <Link
           role="link"
-          title={title}
-          href={href}
+          title={attributes.title}
+          href={attributes.href}
           onClick={() => setClick(true)}
           className={click ? "fadeToRight seeMoreJob" : "seeMoreJob"}
         >
-          <span>{cta}</span>
+          <span>{attributes.cta}</span>
         </Link>
         <div />
       </div>

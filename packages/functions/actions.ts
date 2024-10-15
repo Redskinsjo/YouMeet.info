@@ -2601,7 +2601,7 @@ export const searchSomeoneRequest = async (formData: FormData) => {
 
     if (valid) {
       result = (await searchSomeone<BetaUser>({
-        fullname: valid.search,
+        fullname: valid.search.trim(),
       })) as BetaUser;
 
       if (result && isPayloadError(result)) {

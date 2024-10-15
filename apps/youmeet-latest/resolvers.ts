@@ -358,7 +358,9 @@ const resolvers: Resolvers = {
     videos: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      return await prisma.videos.findMany();
+      return await prisma.videos.findMany({
+        include: { job: true, user: true },
+      });
     },
     myVideos: async (
       _: unknown,

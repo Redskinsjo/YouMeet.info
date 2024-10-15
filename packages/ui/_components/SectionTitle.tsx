@@ -1,5 +1,5 @@
 "use client";
-import { createElement, useEffect, useState } from "react";
+import { createElement } from "react";
 import { useTranslation } from "react-i18next";
 
 const classnames = {
@@ -21,7 +21,7 @@ export default function SectionTitle({
   className?: string;
 }) {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(true);
+
   const Component = createElement(
     component,
     {
@@ -33,9 +33,5 @@ export default function SectionTitle({
     t(translation)
   );
 
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  return !loading && Component;
+  return Component;
 }

@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
-import React from "react";
+import InsightText from "../_components/InsightText";
 
-const InsightImg = dynamic(() => import("../_homeComponents/InsightImg"));
-const InsightText = dynamic(() => import("../_components/InsightText"));
+const InsightImg = dynamic(() => import("../_homeComponents/InsightImg"), {
+  ssr: false,
+});
 
 export default function InsightSection() {
   return (

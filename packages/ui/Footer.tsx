@@ -1,8 +1,18 @@
-import React from "react";
+import dynamic from "next/dynamic";
 import Layout from "./Layout";
-import FooterList from "./_homeComponents/FooterList";
-import FooterList2 from "./_homeComponents/FooterList2";
-import FooterProposedBy from "./_homeComponents/FooterProposedBy";
+
+const FooterList = dynamic(() => import("./_homeComponents/FooterList"), {
+  ssr: false,
+});
+const FooterList2 = dynamic(() => import("./_homeComponents/FooterList2"), {
+  ssr: false,
+});
+const FooterProposedBy = dynamic(
+  () => import("./_homeComponents/FooterProposedBy"),
+  {
+    ssr: false,
+  }
+);
 
 export default function Footer() {
   return (
