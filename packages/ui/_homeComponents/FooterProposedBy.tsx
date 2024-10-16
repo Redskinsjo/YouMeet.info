@@ -8,7 +8,7 @@ export default function FooterProposedBy() {
     <div className="subItem xs:legend sm:legend dark:text-blueGrey100 mb-[12px] w-max">
       {t("proposed-by")}
       <Link
-        href="https://youmeet-git-new-product-design-youmeet.vercel.app/Jonathan-Carnos"
+        href="https://www.youmeet.info/Jonathan-Carnos_R_S8DZ"
         target="_blank"
         passHref
         className="no-underline group focus-visible:outline-0"

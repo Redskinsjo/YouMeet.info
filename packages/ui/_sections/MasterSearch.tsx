@@ -26,7 +26,7 @@ export default function MasterSearch() {
 
   return (
     <form
-      className="border-[0.5px] border-grey900 rounded-[8px] p-[12px] w-full"
+      className="border-[0.5px] border-grey900 rounded-[8px] p-[12px] w-full box-border"
       action={customSearchSomeoneRequest}
     >
       <MasterSearchComponent
