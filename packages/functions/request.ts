@@ -74,6 +74,7 @@ import {
   QueryUserArgs,
   QueryUsersArgs,
   QueryVideoByPublicIdArgs,
+  QueryCompetenciesArgs,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -121,6 +122,7 @@ import {
   getCompanyQuery,
   getCompetenciesParamsQuery,
   getCompetenciesQuery,
+  getCompetenciesTitleQuery,
   getCompetencyMetadataQuery,
   getCompetencyQuery,
   getCompetencySlugQuery,
@@ -2131,6 +2133,25 @@ export const searchSomeone = async <T>(
     "user",
     multiple,
     searchSomeoneQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getCompetenciesTitle = async <T>(
+  variables: QueryCompetenciesArgs,
+  revalidate: number = 1000,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = true;
+  const result = await reqFnc(
+    "competencies",
+    multiple,
+    getCompetenciesTitleQuery,
     variables,
     revalidate,
     handling

@@ -26,14 +26,15 @@ export default function CompetencyAdvantagesAndRelatedSkills({
           >
             {((competency?.advantages as string[]) || []).map(
               (adv: string, i: number) => (
-                <li className="darkLi" key={`${adv?.slice(0, 9)} ${i}`}>
-                  <BoldText
-                    links
-                    containerStyle={{ fontSize: "16px", textIndent: "0px" }}
-                    align="justify"
-                    text={adv}
-                  />
-                </li>
+                <BoldText
+                  links
+                  key={`${adv?.slice(0, 9)} ${i}`}
+                  containerStyle={{ fontSize: "16px", textIndent: "0px" }}
+                  align="justify"
+                  text={adv}
+                  component="li"
+                  fontSizeClass="darkLi"
+                />
               )
             )}
           </ul>
@@ -51,14 +52,15 @@ export default function CompetencyAdvantagesAndRelatedSkills({
             >
               {((competency.relatedSkills as string[]) || []).map(
                 (skill: string, i: number) => (
-                  <li className="darkLi" key={`${skill?.slice(0, 9)} ${i}`}>
-                    <BoldText
-                      links
-                      containerStyle={{ fontSize: "16px", textIndent: "0px" }}
-                      align="justify"
-                      text={skill[0].toUpperCase() + skill.slice(1)}
-                    />
-                  </li>
+                  <BoldText
+                    key={`${skill?.slice(0, 9)} ${i}`}
+                    links
+                    fontSizeClass="darkLi"
+                    component="li"
+                    containerStyle={{ fontSize: "16px", textIndent: "0px" }}
+                    align="justify"
+                    text={skill[0].toUpperCase() + skill.slice(1)}
+                  />
                 )
               )}
             </ul>

@@ -40,14 +40,15 @@ export default function CompetencyExamples({
           >
             {((competency?.examples as string[]) || [])?.map(
               (example: string, i: number) => (
-                <li className="darkLi" key={`${example?.slice(0, 9)} ${i}`}>
-                  <BoldText
-                    links
-                    containerStyle={{ fontSize: "16px", textIndent: "0px" }}
-                    align="justify"
-                    text={example}
-                  />
-                </li>
+                <BoldText
+                  component="li"
+                  fontSizeClass="darkLi"
+                  key={`${example?.slice(0, 9)} ${i}`}
+                  links
+                  containerStyle={{ fontSize: "16px", textIndent: "0px" }}
+                  align="justify"
+                  text={example}
+                />
               )
             )}
           </ul>

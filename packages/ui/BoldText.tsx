@@ -50,7 +50,6 @@ export default function BoldText({
   const preFormatText = useCallback(async () => {
     if (textToFormat && regex) {
       const res = await setBoldWords(t(text), regex, noEnding);
-
       if (res?.text) {
         setTextToFormat(res?.text);
       }

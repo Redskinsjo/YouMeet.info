@@ -1,5 +1,6 @@
-"use client";
-import Logo from "@youmeet/ui/Logo";
+import dynamic from "next/dynamic";
+
+const Logo = dynamic(() => import("@youmeet/ui/Logo"), { ssr: false });
 
 export default function Loading() {
   return (

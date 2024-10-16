@@ -107,10 +107,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
         <MenuHeaderForMobile />
         {!xs && !sm && !md && (
-          <div
-            className="flex-center gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px]"
-            style={{ height: "100%" }}
-          >
+          <div className="flex-center gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full">
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
@@ -122,11 +119,9 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 style={{ textDecoration: "none", height: "100%" }}
               >
                 <div className="flex-center h-full">
-                  <div className="p-[6px] relative cursor-pointer h-full flex-center">
-                    <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
-                      {t("home")}
-                    </span>
-                  </div>
+                  <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
+                    {t("home")}
+                  </span>
                   <div
                     className={
                       pathname === "/"
@@ -148,11 +143,9 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 style={{ textDecoration: "none", height: "100%" }}
               >
                 <div className="flex-center h-full">
-                  <div className="p-[6px] relative cursor-pointer h-full flex-center">
-                    <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
-                      {t("product")}
-                    </span>
-                  </div>
+                  <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
+                    {t("product")}
+                  </span>
                   <div
                     className={
                       pathname === "/le-produit/mise-en-relation" ||
@@ -175,11 +168,9 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 style={{ textDecoration: "none", height: "100%" }}
               >
                 <div className="flex-center h-full">
-                  <div className="p-[6px] relative cursor-pointer h-full flex-center">
-                    <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
-                      {t("blog")}
-                    </span>
-                  </div>
+                  <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
+                    {t("blog")}
+                  </span>
                   <div
                     className={
                       pathname === "/blog"

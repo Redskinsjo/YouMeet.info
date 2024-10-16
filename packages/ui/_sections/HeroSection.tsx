@@ -25,7 +25,7 @@ export default function HeroSection() {
         alt="Un entretien professionnel entre un candidat et une Directrice des Ressources Humaines concluent un contrat d'embaûche en se serrant la main grâce à la mise en relation YouMeet."
       />
       <HeroText />
-      {/* <DividerSection type="hero" /> */}
+      {/* <DividerSection  /> */}
       {/* <HeroVideo /> */}
     </section>
   );

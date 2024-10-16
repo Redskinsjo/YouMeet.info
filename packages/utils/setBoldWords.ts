@@ -1,11 +1,14 @@
 import { getCompetencySlug } from "@youmeet/functions/request";
-import { GetCompetenciesDocument, Competency } from "@youmeet/gql/generated";
+import {
+  GetCompetenciesTitleDocument,
+  Competency,
+} from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 export const useLinksRegex = () => {
-  const { data, loading } = useQuery(GetCompetenciesDocument);
+  const { data, loading } = useQuery(GetCompetenciesTitleDocument);
   const [regex, setRegex] = useState<RegExp | string>("");
   useEffect(() => {
     if (!loading) {

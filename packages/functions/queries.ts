@@ -1989,6 +1989,12 @@ export const getHomeCompetenciesQuery = `query GetCompetencies($data: Competency
   }
 }`;
 
+export const getCompetenciesTitleQuery = `query GetCompetencies($data: CompetencyInput, $params: PageParamsInput) {
+  competencies(data: $data, params: $params) {
+    title
+  }
+}`;
+
 export const updateVideoMutation = `mutation UpdateVideo($data: VideoInput) {
   updateVideo(data: $data) {
     id

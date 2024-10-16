@@ -58,7 +58,7 @@ export default function PriceCard({
     >
       <div className="w-full flex-1 min-w-[300px]">
         <div className="sentences dark:text-white">{t("features")}:</div>
-        <ul
+        <div
           className="mb-0 flex w-full flex-col flex-1 items-center justify-start break-word min-h-[288px] max-w-[300px]"
           style={{
             paddingLeft: xss ? 4 : xs ? 8 : sm ? 12 : 24,
@@ -78,7 +78,7 @@ export default function PriceCard({
               />
             );
           })}
-        </ul>
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col items-center justify-center">
