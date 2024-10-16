@@ -226,13 +226,11 @@ export default function FrontCard({
         <div className="flex flex-col">
           {!shouldSee ? (
             <form
-              action={() => {
-                customOnUnlockCandidate.bind(null, {
-                  cardPrice,
-                  originId: appUser.id ?? "",
-                  targetId: user.id ?? "",
-                });
-              }}
+              action={customOnUnlockCandidate.bind(null, {
+                cardPrice,
+                originId: appUser.id ?? "",
+                targetId: user.id ?? "",
+              })}
               className="cursor-pointer"
             >
               <TooltipedAsset asset={t("unlock-candidate")}>

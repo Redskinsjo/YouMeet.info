@@ -37,9 +37,7 @@ export default function CreateProUser() {
         <div className="overflow-x-scroll w-full p-[6px]">
           <form
             className="grid grid-cols-4 grid-rows-2 gap-[6px]"
-            action={(formData: FormData) => {
-              customeOnCreateProAccount(formData);
-            }}
+            action={customeOnCreateProAccount}
           >
             <SimpleField
               id={1}

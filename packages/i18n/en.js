@@ -442,6 +442,7 @@ const translations = {
   principalVideo: "Principal Video",
   "set-as-principal": "Set as principal",
   affiliates: "Affiliates",
+  "search-wait": "Wait for some time...",
 };
 
 const presentation = {

@@ -48,9 +48,7 @@ export default function CreateAffiliation() {
 
   return (
     <form
-      action={(formData: FormData) => {
-        customOnCreateAffilitation(formData);
-      }}
+      action={customOnCreateAffilitation}
       className="w-full h-[500px] flex-center flex-col"
     >
       <SubLayout>

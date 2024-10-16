@@ -174,9 +174,7 @@ export default function PageContent({
       </div>
       <div className="h-full flex-center flex-col w-full my-[24px]">
         <form
-          action={() => {
-            customOnFormData.bind(null, { userId: user.id });
-          }}
+          action={customOnFormData.bind(null, { userId: user.id })}
           className={
             transitioned
               ? "slide_out relative w-full flex flex-col gap-[12px]"

@@ -1,8 +1,8 @@
 "use client";
-import { useTranslation } from "react-i18next";
-import { FieldValues, useForm } from "react-hook-form";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
+import MasterSearchComponent from "../_homeComponents/MasterSearchComponent";
 import { searchSomeoneRequest } from "@youmeet/functions/actions";
+import { FieldValues, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 export default function MasterSearch() {
   const {
@@ -14,30 +14,25 @@ export default function MasterSearch() {
   });
   const { t } = useTranslation();
 
+  const customSearchSomeoneRequest = async (formData: FormData) => {
+    const response = await searchSomeoneRequest(formData);
+    if (response?.error) {
+      setError("search", {
+        type: response?.type,
+        message: t(response?.message),
+      });
+    }
+  };
+
   return (
-    <form
-      action={async (formData: FormData) => {
-        const response = await searchSomeoneRequest(formData);
-        if (response?.error) {
-          setError("search", {
-            type: response?.type,
-            message: t(response?.message),
-          });
-        }
-      }}
-    >
-      <h2 className="underline underline-offset-[2px]">
-        {t("search-for-someone")}
-      </h2>
-      <SimpleField
-        id={1}
-        label={t("search")}
+    <form className="bg-purple100" action={customSearchSomeoneRequest}>
+      <MasterSearchComponent
         setError={setError}
         clearErrors={clearErrors}
-        name="search"
-        type="text"
         errors={errors}
-        placeholder={t("search-by-fullname")}
+        name=""
+        id={1}
+        type=""
       />
     </form>
   );

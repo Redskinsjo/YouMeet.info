@@ -516,8 +516,8 @@ export default function CandidateVideo({
                       className="play-pause-btn flex-center"
                       onClick={(e) => togglePlay(e)}
                     >
-                      <Play className="play-icon" />
-                      <Pause className="pause-icon" />
+                      <Play className="play-icon" name="play" />
+                      <Pause className="pause-icon" name="pause" />
                     </button>
                     <div className="volume-container flex items-center">
                       <button
@@ -528,10 +528,11 @@ export default function CandidateVideo({
                           if (video) toggleMute(video);
                         }}
                       >
-                        <Unmute className="volume-high-icon" />
-                        <Mute className="volume-muted-icon" />
+                        <Unmute className="volume-high-icon" name="unmute" />
+                        <Mute className="volume-muted-icon" name="mute" />
                       </button>
                       <input
+                        aria-label="volume-slider"
                         ref={appVolumeSlider}
                         type="range"
                         min="0"
@@ -594,8 +595,9 @@ export default function CandidateVideo({
                       onClick={() => {
                         if (appVideo) toggleMiniPlayer();
                       }}
+                      name="toggle-mini-player"
                     >
-                      <MiniPlayerScreen />
+                      <MiniPlayerScreen name="mini-player" />
                     </button>
 
                     {isCarousel && (
@@ -603,17 +605,25 @@ export default function CandidateVideo({
                         ref={theater}
                         className="theater-btn"
                         onClick={() => toggleTheater()}
+                        name="toggle-theater"
                       >
-                        <TheaterScreen />
+                        <TheaterScreen name="theater" />
                       </button>
                     )}
                     <button
                       className="full-screen-btn flex-center"
                       onClick={() => toggleFullScreen()}
+                      name="toggle-full-screen"
                     >
-                      <MdFullscreen className="open-icon text-white" />
+                      <MdFullscreen
+                        className="open-icon text-white"
+                        name="full-screen"
+                      />
 
-                      <BiExitFullscreen className="close-icon text-white" />
+                      <BiExitFullscreen
+                        className="close-icon text-white"
+                        name="exit-full-screen"
+                      />
                     </button>
                   </div>
                 </div>

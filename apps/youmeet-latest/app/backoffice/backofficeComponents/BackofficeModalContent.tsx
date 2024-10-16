@@ -872,11 +872,7 @@ export default function BackofficeModalContent({
         noPadding
         label="Video"
         value={
-          <form
-            action={() => {
-              if (video?.id) customOnDeleteVideo(video?.id as string);
-            }}
-          >
+          <form action={customOnDeleteVideo.bind(null, video?.id as string)}>
             {!!video && <Button type="submit">Supprimer vidéo</Button>}
             <span>{!!video ? "Oui" : "Non"}</span>
           </form>

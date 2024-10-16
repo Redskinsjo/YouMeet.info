@@ -93,9 +93,7 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
   return (
     <form
       ref={formRef}
-      action={(formData: FormData) => {
-        handle(formData);
-      }}
+      action={handle}
       name="subscribing"
       className="auth-form-content dark:mediumDarkBg"
       onClick={(e) => e.stopPropagation()}
@@ -251,9 +249,7 @@ const WhenLogin = ({
       </Suspense>
       <form
         ref={formRef}
-        action={(formData: FormData) => {
-          handle(formData);
-        }}
+        action={handle}
         name="classic-signin"
         className="auth-form-content justify-start flex-1 dark:mediumDarkBg"
       >
@@ -352,9 +348,7 @@ const WhenForgotten = ({ type, setIsForgotten }: CustomModalProps) => {
       ref={formRef}
       name="forgotten"
       className="auth-form-content dark:mediumDarkBg"
-      action={(formData: FormData) => {
-        handle(formData);
-      }}
+      action={handle}
       onClick={(e) => e.stopPropagation()}
     >
       <Logo />

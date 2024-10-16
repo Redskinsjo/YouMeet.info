@@ -16,6 +16,7 @@ import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/submitFile";
 import Link from "next/link";
 import { getPublicIdFirstPart } from "@youmeet/utils/getPublicId";
+import { Button } from "@mui/material";
 
 export default function NewAddVideoComponent({
   profil,
@@ -31,6 +32,7 @@ export default function NewAddVideoComponent({
   setVideoId?: (videoId: string) => void;
 }) {
   const addVideoRef = useRef<HTMLFormElement | null>(null);
+  const submitVideoRef = useRef<HTMLButtonElement | null>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -87,7 +89,7 @@ export default function NewAddVideoComponent({
         name="video"
         accept=".mp4,.mov,.webm"
         onChange={(e) => {
-          (addVideoRef.current as HTMLFormElement).requestSubmit();
+          (submitVideoRef.current as HTMLButtonElement).click();
         }}
       />
     ),
@@ -111,12 +113,10 @@ export default function NewAddVideoComponent({
         </Link>
         <form
           ref={addVideoRef}
-          action={() => {
-            customOnAddVideo.bind(null, {
-              publicId,
-              jobId,
-            });
-          }}
+          action={customOnAddVideo.bind(null, {
+            publicId,
+            jobId,
+          })}
           className="flex-center rounded-xl cursor-pointer relative"
         >
           <label
@@ -126,6 +126,12 @@ export default function NewAddVideoComponent({
             {t("add-video")}
           </label>
           {inputElement}
+          <Button
+            hidden
+            type="submit"
+            className="hidden"
+            ref={submitVideoRef}
+          />
         </form>
       </div>
     </div>

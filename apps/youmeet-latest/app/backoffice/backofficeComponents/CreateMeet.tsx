@@ -212,17 +212,17 @@ export default function CreateProUser() {
               );
             } else {
               dispatch(resetModal("ok") as UnknownAction);
-              return dispatch(
+              dispatch(
                 setModal({ display: "backofficeConfirm" }) as UnknownAction
               );
             }
           }
+        } else {
+          throw new BackendError(
+            BACKEND_ERRORS.PROCESSING,
+            BACKEND_MESSAGES.PROCESSING
+          );
         }
-
-        throw new BackendError(
-          BACKEND_ERRORS.PROCESSING,
-          BACKEND_MESSAGES.PROCESSING
-        );
       }
     } catch (err: any) {
       await createError({
@@ -291,9 +291,7 @@ export default function CreateProUser() {
         <div className="overflow-x-scroll w-full p-[6px]">
           <form
             className="flex flex-col gap-[6px]"
-            action={(formData: FormData) => {
-              customeOnCreateMeet(formData);
-            }}
+            action={customeOnCreateMeet}
           >
             <div className="w-full grid grid-cols-2 gap-[12px]">
               <h2 className="col-start-1 col-end-3">Candidat</h2>

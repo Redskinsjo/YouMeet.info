@@ -260,13 +260,11 @@ export default function NotificationsComponent({
             <div onClick={(e) => e.stopPropagation()}>
               <TooltipedAsset asset={t("unlock-candidate")}>
                 <form
-                  action={() => {
-                    customOnUnlockCandidate.bind(null, {
-                      cardPrice: row.row.cardPrice,
-                      originId: user.id,
-                      targetId: row.row.origin?.id,
-                    });
-                  }}
+                  action={customOnUnlockCandidate.bind(null, {
+                    cardPrice: row.row.cardPrice,
+                    originId: user.id,
+                    targetId: row.row.origin?.id,
+                  })}
                   className={
                     user.professionalEmail
                       ? "cursor-pointer group flex-center"

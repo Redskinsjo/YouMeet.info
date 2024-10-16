@@ -63,12 +63,10 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
 
   return (
     <form
-      action={() => {
-        customOnTargetContractTypeUpdate.bind(null, {
-          userId: profil.id as string,
-          contractType: watch("targetContractType"),
-        });
-      }}
+      action={customOnTargetContractTypeUpdate.bind(null, {
+        userId: profil.id as string,
+        contractType: watch("targetContractType"),
+      })}
     >
       {!isValidated ? (
         <div className="flex-bet gap-[12px]">

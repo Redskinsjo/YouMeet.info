@@ -62,35 +62,39 @@ export default function MainVideoComponent({
 
   const customOnTranscriptVideo = async (extras: { videoId: string }) => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
-    if (!extras.videoId) return dispatch(setError("requestNotCompleted"));
-    const result = await onTranscriptVideo(extras.videoId);
+    if (!extras.videoId) dispatch(setError("requestNotCompleted"));
+    else {
+      const result = await onTranscriptVideo(extras.videoId);
 
-    if (result && isPayloadError(result)) {
-      dispatch(resetModal("ok") as UnknownAction);
-      dispatch(setError("requestNotCompleted"));
-    } else if (!result?.data) {
-      dispatch(resetModal("ok") as UnknownAction);
-      dispatch(setError("requestNotCompleted"));
-    } else {
-      dispatch(resetModal("ok") as UnknownAction);
-      dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+      if (result && isPayloadError(result)) {
+        dispatch(resetModal("ok") as UnknownAction);
+        dispatch(setError("requestNotCompleted"));
+      } else if (!result?.data) {
+        dispatch(resetModal("ok") as UnknownAction);
+        dispatch(setError("requestNotCompleted"));
+      } else {
+        dispatch(resetModal("ok") as UnknownAction);
+        dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+      }
     }
   };
 
   const customOnAnalyzeVideo = async (extras: { videoId: string }) => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
-    if (!extras.videoId) return dispatch(setError("requestNotCompleted"));
-    const result = await onAnalyzeVideo(extras.videoId);
+    if (!extras.videoId) dispatch(setError("requestNotCompleted"));
+    else {
+      const result = await onAnalyzeVideo(extras.videoId);
 
-    if (result && isPayloadError(result)) {
-      dispatch(resetModal("ok") as UnknownAction);
-      dispatch(setError("requestNotCompleted"));
-    } else if (!result?.data) {
-      dispatch(resetModal("ok") as UnknownAction);
-      dispatch(setError("requestNotCompleted"));
-    } else {
-      dispatch(resetModal("ok") as UnknownAction);
-      dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+      if (result && isPayloadError(result)) {
+        dispatch(resetModal("ok") as UnknownAction);
+        dispatch(setError("requestNotCompleted"));
+      } else if (!result?.data) {
+        dispatch(resetModal("ok") as UnknownAction);
+        dispatch(setError("requestNotCompleted"));
+      } else {
+        dispatch(resetModal("ok") as UnknownAction);
+        dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+      }
     }
   };
 
@@ -173,11 +177,9 @@ export default function MainVideoComponent({
         <div>
           {!principalVideo?.transcript && (
             <form
-              action={() => {
-                customOnTranscriptVideo.bind(null, {
-                  videoId: principalVideo?.id || "",
-                });
-              }}
+              action={customOnTranscriptVideo.bind(null, {
+                videoId: principalVideo?.id || "",
+              })}
               className="flex items-center p-[12px] gap-[12px]"
             >
               <Button type="submit">Transcrire vidéo</Button>
@@ -186,11 +188,9 @@ export default function MainVideoComponent({
 
           {!setFileUrl(principalVideo?.audio) && principalVideo?.transcript ? (
             <form
-              action={() => {
-                customOnAnalyzeVideo.bind(null, {
-                  videoId: principalVideo?.id || "",
-                });
-              }}
+              action={customOnAnalyzeVideo.bind(null, {
+                videoId: principalVideo?.id || "",
+              })}
               className="flex items-center p-[12px] gap-[12px]"
             >
               <Button type="submit">Analyser IA</Button>

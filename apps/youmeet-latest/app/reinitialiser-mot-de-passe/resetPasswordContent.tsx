@@ -38,9 +38,7 @@ export default function ResetPasswordContent({ userId }: { userId: string }) {
   return (
     <form
       className="flex-center flex-col box-border w-full xs:p-[12px] sm:p-[12px] gap-[24px] appear-slowly afterHeader"
-      action={() => {
-        customOnResetPassword.bind(null, { userId });
-      }}
+      action={customOnResetPassword.bind(null, { userId })}
     >
       <div className="flex-center">
         <Image

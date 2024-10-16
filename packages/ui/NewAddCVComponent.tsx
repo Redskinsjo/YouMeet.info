@@ -14,7 +14,6 @@ import { setCvFile } from "@youmeet/global-config/features/user";
 import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/submitFile";
-import React from "react";
 
 export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const cvRef = useRef<HTMLFormElement | null>(null);
@@ -51,9 +50,7 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
       {upload === "a-cv" ? <Logo gif /> : undefined}
       <form
         ref={cvRef}
-        action={() => {
-          customOnAddCV.bind(null, profil?.id as string);
-        }}
+        action={customOnAddCV.bind(null, profil?.id as string)}
         className="w-full min-w-[245px] flex-center rounded-xl cursor-pointer relative"
       >
         <label

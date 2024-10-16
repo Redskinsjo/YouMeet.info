@@ -52,11 +52,13 @@ export default function DataSection({
         text={attributes.text}
         containerStyle={attributes.containerStyle}
       />
-      <div className="flex flex-col gap-[12px] w-fit p-[12px] xs:p-0 w-full">
-        {data.map((el) => (
-          <Card key={el.id} el={el} />
-        ))}
-      </div>
+      {!!data.length && (
+        <div className="flex-center xs:flex-col sm:flex-col md:flex-col flex-wrap gap-[12px] w-fit p-[12px] xs:p-0 w-full">
+          {data.map((el) => (
+            <Card key={el?.id} el={el} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,6 @@ import React from "react";
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import { Metadata } from "next";
 import { logoUrl, uri } from "@youmeet/functions/imports";
-import HomeChild from "./homeChild";
 import Script from "next/script";
 import {
   getHomeCompetencies,
@@ -10,6 +9,9 @@ import {
   getVideos,
 } from "@youmeet/functions/request";
 import { Competency, Offer, Video } from "@youmeet/gql/generated";
+import dynamic from "next/dynamic";
+
+const HomeChild = dynamic(() => import("./homeChild"), { ssr: false });
 
 export const metadata: Metadata = {
   title: "YouMeet - Mise en Relation Professionnelle et ATS par Vidéo et IA",

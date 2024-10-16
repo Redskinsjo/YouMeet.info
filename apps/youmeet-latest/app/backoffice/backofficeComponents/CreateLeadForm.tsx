@@ -32,9 +32,7 @@ export default function CreateLeadForm({ users }: { users: BetaUser[] }) {
   return (
     <form
       ref={formRef}
-      action={(formData: FormData) => {
-        customOnCreateLead(formData);
-      }}
+      action={customOnCreateLead}
       className="w-full flex-center flex-col gap-[24px]"
     >
       <SimpleField

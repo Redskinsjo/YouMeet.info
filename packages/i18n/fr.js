@@ -478,6 +478,7 @@ const translations = {
   "cgu-initials": "CGUs",
   "confidentiality-rules": "Règles de confidentialité",
   "password-modified-success": "Votre mot de passe a été modifié avec succès",
+  "search-wait": "Patientez un peu...",
 };
 
 const presentation = {

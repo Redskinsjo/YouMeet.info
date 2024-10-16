@@ -166,7 +166,7 @@ export default function SimpleField({
         multiline={multiline ?? false}
         rows={multiline ? rows : undefined}
         onChange={getOnChange()[set(name)]}
-        SelectProps={{ multiple: !!multiple }}
+        slotProps={{ select: { multiple: !!multiple } }}
         autoFocus
         style={{
           animation:

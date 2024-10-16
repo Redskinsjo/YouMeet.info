@@ -3,7 +3,6 @@ import Image from "next/image";
 import setFileUrl from "@youmeet/utils/setFileUrl";
 import {
   Avatar,
-  BetaUser,
   Competency,
   Offer,
   Translated,

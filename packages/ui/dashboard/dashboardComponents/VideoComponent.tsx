@@ -212,12 +212,10 @@ export default function VideoComponent({
                     {!video.principal && !affiliated ? (
                       <form
                         ref={setVideoAsDefaultFormRef}
-                        action={() => {
-                          customOnSetVideoAsDefault.bind(null, {
-                            videoId: video?.id as string,
-                            userId: profil.id as string,
-                          });
-                        }}
+                        action={customOnSetVideoAsDefault.bind(null, {
+                          videoId: video?.id as string,
+                          userId: profil.id as string,
+                        })}
                       >
                         <div
                           onClick={(e) =>
@@ -237,9 +235,10 @@ export default function VideoComponent({
                       <div className="flex-bet gap-[12px]">
                         <form
                           ref={deleteVideoFormRef}
-                          action={() => {
-                            customOnDeleteVideo.bind(null, video?.id as string);
-                          }}
+                          action={customOnDeleteVideo.bind(
+                            null,
+                            video?.id as string
+                          )}
                         >
                           <div
                             onClick={(e) =>
