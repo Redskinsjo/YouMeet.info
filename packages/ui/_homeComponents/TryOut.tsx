@@ -18,7 +18,7 @@ export default function TryOut() {
       title="Essayer l'application YouMeet.info et se connecter en se créant un profil"
       LinkComponent={"a"}
       role="link"
-      className="w-[240px] bg-yellow700 text-white font-bold sentences xs:subItem sm:subItem rounded-2xl focus-visible:linear-gradient2"
+      className="w-[240px] bg-yellow500 text-white font-bold sentences xs:subItem sm:subItem rounded-2xl focus-visible:linear-gradient2"
     >
       {t("try")}
     </Button>

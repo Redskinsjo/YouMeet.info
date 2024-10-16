@@ -20,7 +20,7 @@ export default function HeroSection() {
           objectFit: "cover",
           opacity: 0.3,
         }}
-        loading="eager"
+        priority
         src="https://res.cloudinary.com/de822mdsy/image/upload/v1704134597/youmeet-official/webp/ywetbtmzpbrzaz2nppqb.webp"
         alt="Un entretien professionnel entre un candidat et une Directrice des Ressources Humaines concluent un contrat d'embaûche en se serrant la main grâce à la mise en relation YouMeet."
       />
