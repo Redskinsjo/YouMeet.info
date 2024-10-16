@@ -1,8 +1,8 @@
 import InterviewAnswersChild from "./interviewAnswersChild";
 import { getLeadFormResponses } from "@youmeet/functions/request";
 import { FormResponse } from "@youmeet/gql/generated";
-import Custom404 from "@/app/not-found";
 import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import { notFound } from "next/navigation";
 
 export default async function BackofficeRemarks() {
   const verified = await verifyTokenServer();
@@ -16,5 +16,5 @@ export default async function BackofficeRemarks() {
     if (formResponses)
       return <InterviewAnswersChild formResponses={formResponses} />;
   }
-  return <Custom404 />;
+  return notFound();
 }

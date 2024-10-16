@@ -1,6 +1,5 @@
 import { logoUrl, uri } from "@youmeet/functions/imports";
 import { Metadata, ResolvingMetadata } from "next";
-import Custom404 from "@/app/not-found";
 import {
   getArticle,
   getArticleMetadata,
@@ -13,6 +12,7 @@ import {
   inFormatForDb,
 } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { Article } from "@youmeet/gql/generated";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { media: string };
@@ -110,5 +110,5 @@ export default async function Page({ params }: { params: { media: string } }) {
   const articles = (await getArticles<Article[]>()) as Article[];
 
   if (media) return <MediaChild media={media} articles={articles} />;
-  return <Custom404 />;
+  return notFound();
 }

@@ -6,7 +6,6 @@ import {
   getUserCandidate,
   getUsersParams,
 } from "@youmeet/functions/request";
-import Custom404 from "@/app/not-found";
 import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import { isUser } from "@youmeet/types/TypeGuards";

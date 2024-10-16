@@ -5,13 +5,13 @@ import {
 } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { Metadata, ResolvingMetadata } from "next";
 import CompetencyChild from "./competencyChild";
-import Custom404 from "@/app/not-found";
 import {
   getCompetenciesParams,
   getCompetency,
   getCompetencyMetadata,
 } from "@youmeet/functions/request";
 import { Competency } from "@youmeet/gql/generated";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { competence: string };
@@ -116,5 +116,5 @@ export default async function Page({
   })) as Competency;
 
   if (competency) return <CompetencyChild competency={competency} />;
-  return <Custom404 />;
+  return notFound();
 }

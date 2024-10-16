@@ -1,6 +1,6 @@
 "use client";
 import Header from "../Header";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function BigHeaderSection() {
   const [scrollY, setScrollY] = useState(0);
@@ -16,17 +16,21 @@ export default function BigHeaderSection() {
 
   return (
     <section className="flex flex-col w-full">
-      <Header />
+      <Suspense>
+        <Header />
+      </Suspense>
 
       {scrollY >= 100 && !scrollingDown && (
-        <Header
-          newStyles={{
-            zIndex: 90,
-            top: 0,
-            position: "fixed",
-            animation: "fadeIn 0.8s 1 ease-in-out",
-          }}
-        />
+        <Suspense>
+          <Header
+            newStyles={{
+              zIndex: 90,
+              top: 0,
+              position: "fixed",
+              animation: "fadeIn 0.8s 1 ease-in-out",
+            }}
+          />
+        </Suspense>
       )}
     </section>
   );
