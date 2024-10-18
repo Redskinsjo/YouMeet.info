@@ -11,7 +11,10 @@ const words = [
 ];
 
 export default function HeroStyledText() {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const [word, setWord] = useState<ReactElement | undefined>();
   const [counting, setCounting] = useState(0);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | undefined>();
@@ -48,7 +51,19 @@ export default function HeroStyledText() {
         }}
         align="left"
       />
-      {word}.
+      {word}
+      {language === "en" && (
+        <BoldText
+          text={t("competencies")}
+          containerStyle={{
+            color: grey[200],
+            fontSize: "20px",
+            display: "inline",
+          }}
+          align="left"
+        />
+      )}
+      .
     </div>
   );
 }

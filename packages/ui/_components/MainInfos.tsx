@@ -118,9 +118,8 @@ export default function MainInfos({ el }: { el: Offer | Competency | Video }) {
           notAutoPlay
           newStyles={{
             maxWidth: "100vw",
-            width: "100px",
-            height: "250px",
             minWidth: "300px",
+            minHeight: "280px",
           }}
           containerNewStyles={{
             maxWidth: "100%",

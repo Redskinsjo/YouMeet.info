@@ -151,9 +151,10 @@ const search = {
 };
 
 const product = {
-  "and-its-technical-competencies": "technical competencies",
-  "and-its-general-competencies": "general competencies",
-  "and-its-behavioral-competencies": "behavioral competencies",
+  competencies: "competencies",
+  "and-its-technical-competencies": "technical",
+  "and-its-general-competencies": "general",
+  "and-its-behavioral-competencies": "behavioral",
   "no-job-without-a-meeting":
     "No recruiter decides without an interview. Our service allows you to +prepare for this interview=.+",
   "some-explanations-on-making-video": "Some advices on making a video",
