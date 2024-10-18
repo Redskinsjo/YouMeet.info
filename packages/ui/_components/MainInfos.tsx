@@ -125,7 +125,7 @@ export default function MainInfos({ el }: { el: Offer | Competency | Video }) {
             minWidth: "300px",
             minHeight: "280px",
             maxWidth: "100%",
-            maxHeight: "100%",
+            maxHeight: "100px",
           }}
         />
       </div>
