@@ -372,7 +372,11 @@ export default function CandidateVideo({
     !loading && (
       <div
         className="relative h-full flex w-full xs:flex-col-reverse sm:flex-col-reverse md:flex-col-reverse justify-between"
-        style={{ ...containerNewStyles }}
+        style={{
+          ...containerNewStyles,
+          minHeight: inFullScreen ? "100%" : containerNewStyles?.minHeight,
+          minWidth: inFullScreen ? "100%" : containerNewStyles?.minWidth,
+        }}
       >
         {!loading && (
           <div
