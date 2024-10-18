@@ -196,7 +196,12 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
   const childVideo = getPrincipalVideo(child?.videos as Video[]);
 
   return (
-    <form className="flex flex-col gap-[6px]" action={customOnCreateMeet}>
+    <form
+      className="flex flex-col gap-[6px]"
+      action={(formData: FormData) => {
+        customOnCreateMeet(formData);
+      }}
+    >
       <div className="w-full grid grid-cols-2 gap-[12px]">
         <div className="flex-bet">
           <SimpleField

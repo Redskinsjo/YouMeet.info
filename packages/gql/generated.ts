@@ -496,6 +496,29 @@ export type CompanyInput = {
   userEmail?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Competency = {
+  __typename?: 'Competency';
+  advantages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  appelations?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  conclusion?: Maybe<Scalars['String']['output']>;
+  definition?: Maybe<Scalars['String']['output']>;
+  development?: Maybe<Scalars['String']['output']>;
+  examples?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  extension?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  importance?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  relatedSkills?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  slug?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+export type CompetencyInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ConversationInput = {
   candidateName?: InputMaybe<Scalars['String']['input']>;
   companyName?: InputMaybe<Scalars['String']['input']>;
@@ -730,28 +753,6 @@ export type GoogleAuthenticationInput = {
   updated_at?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type GptCompetency = {
-  __typename?: 'GptCompetency';
-  advantages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  conclusion?: Maybe<Scalars['String']['output']>;
-  definition?: Maybe<Scalars['String']['output']>;
-  development?: Maybe<Scalars['String']['output']>;
-  examples?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  extension?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  importance?: Maybe<Scalars['String']['output']>;
-  keywords?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  relatedSkills?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  slug?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-export type GptCompetencyInput = {
-  id?: InputMaybe<Scalars['String']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type InternalAuthentication = {
   __typename?: 'InternalAuthentication';
   email?: Maybe<Scalars['String']['output']>;
@@ -962,7 +963,7 @@ export type Mutation = {
   createUser?: Maybe<BetaUser>;
   deleteAffiliation?: Maybe<Affiliation>;
   deleteCompany?: Maybe<BetaCompany>;
-  deleteGptCompetency?: Maybe<GptCompetency>;
+  deleteCompetency?: Maybe<Competency>;
   deleteInterviewOffer?: Maybe<InterviewOffer>;
   deleteLead?: Maybe<Lead>;
   deleteMeet?: Maybe<Meet>;
@@ -1187,7 +1188,7 @@ export type MutationDeleteCompanyArgs = {
 };
 
 
-export type MutationDeleteGptCompetencyArgs = {
+export type MutationDeleteCompetencyArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1366,7 +1367,7 @@ export type Offer = {
   profileSearched?: Maybe<Scalars['String']['output']>;
   rebroadcast?: Maybe<Scalars['Boolean']['output']>;
   remote?: Maybe<Scalars['String']['output']>;
-  requirements?: Maybe<Array<Maybe<GptCompetency>>>;
+  requirements?: Maybe<Array<Maybe<Competency>>>;
   requirementsIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   revenue?: Maybe<Scalars['Int']['output']>;
   sector?: Maybe<TopSector>;
@@ -1507,10 +1508,10 @@ export type Query = {
   articles?: Maybe<Array<Maybe<Article>>>;
   companies?: Maybe<Array<BetaCompany>>;
   companyOffers?: Maybe<Array<Maybe<Offer>>>;
+  competencies?: Maybe<Array<Maybe<Competency>>>;
   errors?: Maybe<Array<Maybe<Error>>>;
   experiences?: Maybe<Array<Maybe<BetaExperience>>>;
   formQuestions?: Maybe<Array<Maybe<FormQuestion>>>;
-  gptCompetencies?: Maybe<Array<Maybe<GptCompetency>>>;
   jobs?: Maybe<Array<Maybe<Job>>>;
   leadFormResponses?: Maybe<Array<Maybe<FormResponse>>>;
   leads?: Maybe<Array<Maybe<Lead>>>;
@@ -1530,12 +1531,12 @@ export type Query = {
   oneCandidate?: Maybe<BetaCandidate>;
   oneCandidatesNotes?: Maybe<CandidatesNotes>;
   oneCompany?: Maybe<BetaCompany>;
+  oneCompetency?: Maybe<Competency>;
   oneCustomisation?: Maybe<Customisation>;
   oneDetails?: Maybe<BetaDetails>;
   oneExperience?: Maybe<BetaExperience>;
   oneFavorite?: Maybe<Favorite>;
   oneFormResponse?: Maybe<FormResponse>;
-  oneGptCompetency?: Maybe<GptCompetency>;
   oneInterviewOffer?: Maybe<InterviewOffer>;
   oneJob?: Maybe<Job>;
   oneLead?: Maybe<Lead>;
@@ -1563,7 +1564,7 @@ export type Query = {
   sendEmailProspectionLinkedin?: Maybe<Array<Maybe<Lead>>>;
   sendEmailToLead?: Maybe<Array<Maybe<Lead>>>;
   topSectors?: Maybe<Array<Maybe<TopSector>>>;
-  uniqueCompetency?: Maybe<GptCompetency>;
+  uniqueCompetency?: Maybe<Competency>;
   user?: Maybe<BetaUser>;
   users?: Maybe<Array<Maybe<BetaUser>>>;
   videoByPublicId?: Maybe<Video>;
@@ -1614,8 +1615,8 @@ export type QueryCompanyOffersArgs = {
 };
 
 
-export type QueryGptCompetenciesArgs = {
-  data?: InputMaybe<GptCompetencyInput>;
+export type QueryCompetenciesArgs = {
+  data?: InputMaybe<CompetencyInput>;
   params?: InputMaybe<PageParamsInput>;
 };
 
@@ -1718,6 +1719,13 @@ export type QueryOneCompanyArgs = {
 };
 
 
+export type QueryOneCompetencyArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type QueryOneCustomisationArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   queueId?: InputMaybe<Scalars['ID']['input']>;
@@ -1745,13 +1753,6 @@ export type QueryOneFavoriteArgs = {
 export type QueryOneFormResponseArgs = {
   leadId?: InputMaybe<Scalars['ID']['input']>;
   questionId?: InputMaybe<Scalars['ID']['input']>;
-};
-
-
-export type QueryOneGptCompetencyArgs = {
-  id?: InputMaybe<Scalars['ID']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -1906,6 +1907,7 @@ export type QueryUniqueCompetencyArgs = {
 
 export type QueryUserArgs = {
   email?: InputMaybe<Scalars['String']['input']>;
+  fullname?: InputMaybe<Scalars['String']['input']>;
   originId?: InputMaybe<Scalars['ID']['input']>;
   uniqueName?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['ID']['input']>;
@@ -2317,12 +2319,12 @@ export type CreateUserRemarkMutationVariables = Exact<{
 
 export type CreateUserRemarkMutation = { __typename?: 'Mutation', createRemark?: { __typename?: 'UserRemark', id?: string | null, content?: string | null } | null };
 
-export type DeleteGptCompetencyMutationVariables = Exact<{
+export type DeleteCompetencyMutationVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
 }>;
 
 
-export type DeleteGptCompetencyMutation = { __typename?: 'Mutation', deleteGptCompetency?: { __typename?: 'GptCompetency', id?: string | null } | null };
+export type DeleteCompetencyMutation = { __typename?: 'Mutation', deleteCompetency?: { __typename?: 'Competency', id?: string | null } | null };
 
 export type DeleteLeadMutationVariables = Exact<{
   leadId?: InputMaybe<Scalars['ID']['input']>;
@@ -2415,6 +2417,38 @@ export type GetCompanyOffersQueryVariables = Exact<{
 
 export type GetCompanyOffersQuery = { __typename?: 'Query', companyOffers?: Array<{ __typename?: 'Offer', id?: string | null, content?: string | null, authorName?: string | null, authorInterviewLink?: string | null, authorEmail?: string | null, jobDescriptionLink?: string | null, createdAt?: any | null, updatedAt?: any | null, sector?: { __typename?: 'TopSector', id?: string | null } | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, author?: { __typename?: 'BetaUser', id?: string | null, firstname?: string | null, lastname?: string | null, fullname?: string | null, linkedinProfileId?: string | null } | null, candidates?: Array<{ __typename?: 'BetaUser', id?: string | null } | null> | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null } | null } | null> | null };
 
+export type GetCompetenciesQueryVariables = Exact<{
+  data?: InputMaybe<CompetencyInput>;
+  params?: InputMaybe<PageParamsInput>;
+}>;
+
+
+export type GetCompetenciesQuery = { __typename?: 'Query', competencies?: Array<{ __typename?: 'Competency', id?: string | null, title?: string | null, advantages?: Array<string | null> | null, conclusion?: string | null, definition?: string | null, examples?: Array<string | null> | null, relatedSkills?: Array<string | null> | null } | null> | null };
+
+export type GetCompetenciesForBoldQueryVariables = Exact<{
+  data?: InputMaybe<CompetencyInput>;
+  params?: InputMaybe<PageParamsInput>;
+}>;
+
+
+export type GetCompetenciesForBoldQuery = { __typename?: 'Query', competencies?: Array<{ __typename?: 'Competency', id?: string | null, title?: string | null } | null> | null };
+
+export type GetCompetenciesForHomeQueryVariables = Exact<{
+  data?: InputMaybe<CompetencyInput>;
+  params?: InputMaybe<PageParamsInput>;
+}>;
+
+
+export type GetCompetenciesForHomeQuery = { __typename?: 'Query', competencies?: Array<{ __typename?: 'Competency', id?: string | null, title?: string | null, slug?: string | null } | null> | null };
+
+export type GetCompetenciesTitleQueryVariables = Exact<{
+  data?: InputMaybe<CompetencyInput>;
+  params?: InputMaybe<PageParamsInput>;
+}>;
+
+
+export type GetCompetenciesTitleQuery = { __typename?: 'Query', competencies?: Array<{ __typename?: 'Competency', title?: string | null } | null> | null };
+
 export type GetExperiencePasswordQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
 }>;
@@ -2426,30 +2460,6 @@ export type GetFormQuestionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetFormQuestionsQuery = { __typename?: 'Query', formQuestions?: Array<{ __typename?: 'FormQuestion', id?: string | null, title?: string | null, target?: string | null, type?: string | null, createdAt?: any | null, updatedAt?: any | null } | null> | null };
-
-export type GetGptCompetenciesQueryVariables = Exact<{
-  data?: InputMaybe<GptCompetencyInput>;
-  params?: InputMaybe<PageParamsInput>;
-}>;
-
-
-export type GetGptCompetenciesQuery = { __typename?: 'Query', gptCompetencies?: Array<{ __typename?: 'GptCompetency', id?: string | null, title?: string | null, advantages?: Array<string | null> | null, conclusion?: string | null, definition?: string | null, examples?: Array<string | null> | null, relatedSkills?: Array<string | null> | null } | null> | null };
-
-export type GetGptCompetenciesForBoldQueryVariables = Exact<{
-  data?: InputMaybe<GptCompetencyInput>;
-  params?: InputMaybe<PageParamsInput>;
-}>;
-
-
-export type GetGptCompetenciesForBoldQuery = { __typename?: 'Query', gptCompetencies?: Array<{ __typename?: 'GptCompetency', id?: string | null, title?: string | null } | null> | null };
-
-export type GetGptCompetenciesForHomeQueryVariables = Exact<{
-  data?: InputMaybe<GptCompetencyInput>;
-  params?: InputMaybe<PageParamsInput>;
-}>;
-
-
-export type GetGptCompetenciesForHomeQuery = { __typename?: 'Query', gptCompetencies?: Array<{ __typename?: 'GptCompetency', id?: string | null, title?: string | null, slug?: string | null } | null> | null };
 
 export type GetJobsQueryVariables = Exact<{
   data?: InputMaybe<JobInput>;
@@ -2510,7 +2520,7 @@ export type GetMyPublishedOffersQueryVariables = Exact<{
 }>;
 
 
-export type GetMyPublishedOffersQuery = { __typename?: 'Query', myPublishedOffers?: Array<{ __typename?: 'Offer', id?: string | null, contractType?: string | null, createdAt?: any | null, jobDescriptionLink?: string | null, limitDate?: any | null, location?: string | null, authorEmail?: string | null, revenue?: number | null, authorInterviewLink?: string | null, authorName?: string | null, author?: { __typename?: 'BetaUser', id?: string | null, firstname?: string | null, lastname?: string | null, fullname?: string | null, email?: string | null, linkedinProfileId?: string | null } | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, sector?: { __typename?: 'TopSector', id?: string | null } | null, requirements?: Array<{ __typename?: 'GptCompetency', id?: string | null, title?: string | null } | null> | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null } | null } | null> | null };
+export type GetMyPublishedOffersQuery = { __typename?: 'Query', myPublishedOffers?: Array<{ __typename?: 'Offer', id?: string | null, contractType?: string | null, createdAt?: any | null, jobDescriptionLink?: string | null, limitDate?: any | null, location?: string | null, authorEmail?: string | null, revenue?: number | null, authorInterviewLink?: string | null, authorName?: string | null, author?: { __typename?: 'BetaUser', id?: string | null, firstname?: string | null, lastname?: string | null, fullname?: string | null, email?: string | null, linkedinProfileId?: string | null } | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, sector?: { __typename?: 'TopSector', id?: string | null } | null, requirements?: Array<{ __typename?: 'Competency', id?: string | null, title?: string | null } | null> | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null } | null } | null> | null };
 
 export type GetMyReferenceContactsQueryVariables = Exact<{
   userId?: InputMaybe<Scalars['ID']['input']>;
@@ -2540,7 +2550,7 @@ export type GetOffersQueryVariables = Exact<{
 }>;
 
 
-export type GetOffersQuery = { __typename?: 'Query', offers?: Array<{ __typename?: 'Offer', id?: string | null, jobDescriptionLink?: string | null, limitDate?: any | null, location?: string | null, content?: string | null, revenue?: number | null, contractType?: string | null, authorName?: string | null, authorInterviewLink?: string | null, authorEmail?: string | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, requirements?: Array<{ __typename?: 'GptCompetency', title?: string | null, id?: string | null } | null> | null, sector?: { __typename?: 'TopSector', id?: string | null, bgImage?: string | null } | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, location?: string | null, logo?: { __typename?: 'Avatar', secure_url?: string | null, url?: string | null } | null } | null, author?: { __typename?: 'BetaUser', id?: string | null, firstname?: string | null, lastname?: string | null, fullname?: string | null, email?: string | null, linkedinProfileId?: string | null } | null } | null> | null };
+export type GetOffersQuery = { __typename?: 'Query', offers?: Array<{ __typename?: 'Offer', id?: string | null, jobDescriptionLink?: string | null, limitDate?: any | null, location?: string | null, content?: string | null, revenue?: number | null, contractType?: string | null, authorName?: string | null, authorInterviewLink?: string | null, authorEmail?: string | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, requirements?: Array<{ __typename?: 'Competency', title?: string | null, id?: string | null } | null> | null, sector?: { __typename?: 'TopSector', id?: string | null, bgImage?: string | null } | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, location?: string | null, logo?: { __typename?: 'Avatar', secure_url?: string | null, url?: string | null } | null } | null, author?: { __typename?: 'BetaUser', id?: string | null, firstname?: string | null, lastname?: string | null, fullname?: string | null, email?: string | null, linkedinProfileId?: string | null } | null } | null> | null };
 
 export type GetOffersForHomeQueryVariables = Exact<{
   params?: InputMaybe<PageParamsInput>;
@@ -2579,6 +2589,14 @@ export type GetOneCompanyQueryVariables = Exact<{
 
 
 export type GetOneCompanyQuery = { __typename?: 'Query', oneCompany?: { __typename?: 'BetaCompany', id?: string | null, location?: string | null, name?: string | null, resume?: string | null, scrapped?: boolean | null, experiences?: Array<{ __typename?: 'BetaExperience', id?: string | null, starting?: string | null, ending?: string | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, references?: Array<{ __typename?: 'BetaProfile', id?: string | null, user?: { __typename?: 'BetaUser', id?: string | null, fullname?: string | null, email?: string | null, linkedinProfileId?: string | null } | null } | null> | null, user?: { __typename?: 'BetaUser', id?: string | null, fullname?: string | null, linkedinProfileId?: string | null, email?: string | null } | null, details?: { __typename?: 'BetaDetails', id?: string | null, phone?: { __typename?: 'Phone', code?: string | null, number?: string | null } | null } | null } | null> | null } | null };
+
+export type GetOneCompetencyQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetOneCompetencyQuery = { __typename?: 'Query', oneCompetency?: { __typename?: 'Competency', id?: string | null, title?: string | null } | null };
 
 export type GetOneCustomisationQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -2619,14 +2637,6 @@ export type GetOneFormResponseQueryVariables = Exact<{
 
 export type GetOneFormResponseQuery = { __typename?: 'Query', oneFormResponse?: { __typename?: 'FormResponse', id?: string | null, isTrue?: boolean | null, content?: string | null, type?: string | null, createdAt?: any | null, question?: { __typename?: 'FormQuestion', id?: string | null } | null, lead?: { __typename?: 'Lead', id?: string | null } | null } | null };
 
-export type GetOneGptCompetencyQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetOneGptCompetencyQuery = { __typename?: 'Query', oneGptCompetency?: { __typename?: 'GptCompetency', id?: string | null, title?: string | null } | null };
-
 export type GetOneInterviewOfferQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
@@ -2655,14 +2665,14 @@ export type GetOneOfferQueryVariables = Exact<{
 }>;
 
 
-export type GetOneOfferQuery = { __typename?: 'Query', oneOffer?: { __typename?: 'Offer', id?: string | null, content?: string | null, profileSearched?: string | null, contractType?: string | null, remote?: string | null, limitDate?: any | null, authorInterviewLink?: string | null, authorName?: string | null, createdAt?: any | null, updatedAt?: any | null, jobDescriptionLink?: string | null, authorEmail?: string | null, location?: string | null, revenue?: number | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, location?: string | null, logo?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null, eager?: Array<{ __typename?: 'Eager', transformation?: string | null }> | null } | null } | null, author?: { __typename?: 'BetaUser', id?: string | null, email?: string | null, firstname?: string | null, fullname?: string | null, lastname?: string | null } | null, requirements?: Array<{ __typename?: 'GptCompetency', id?: string | null, title?: string | null } | null> | null, job?: { __typename?: 'Job', title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, sector?: { __typename?: 'TopSector', id?: string | null } | null } | null };
+export type GetOneOfferQuery = { __typename?: 'Query', oneOffer?: { __typename?: 'Offer', id?: string | null, content?: string | null, profileSearched?: string | null, contractType?: string | null, remote?: string | null, limitDate?: any | null, authorInterviewLink?: string | null, authorName?: string | null, createdAt?: any | null, updatedAt?: any | null, jobDescriptionLink?: string | null, authorEmail?: string | null, location?: string | null, revenue?: number | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, location?: string | null, logo?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null, eager?: Array<{ __typename?: 'Eager', transformation?: string | null }> | null } | null } | null, author?: { __typename?: 'BetaUser', id?: string | null, email?: string | null, firstname?: string | null, fullname?: string | null, lastname?: string | null } | null, requirements?: Array<{ __typename?: 'Competency', id?: string | null, title?: string | null } | null> | null, job?: { __typename?: 'Job', title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, sector?: { __typename?: 'TopSector', id?: string | null } | null } | null };
 
 export type GetOneProfileSharingQueryVariables = Exact<{
   data?: InputMaybe<ProfileSharingInput>;
 }>;
 
 
-export type GetOneProfileSharingQuery = { __typename?: 'Query', oneProfileSharing?: { __typename?: 'ProfileSharing', id?: string | null, report?: string | null, createdAt?: any | null, updatedAt?: any | null, origin?: { __typename?: 'BetaUser', id?: string | null, firstname?: string | null, lastname?: string | null, fullname?: string | null, linkedinProfileId?: string | null, email?: string | null, uniqueName?: string | null } | null, target?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, linkedinProfilePage?: string | null, resume?: string | null, location?: string | null, logo?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null } | null } | null, offerTarget?: { __typename?: 'Offer', id?: string | null, content?: string | null, profileSearched?: string | null, contractType?: string | null, remote?: string | null, limitDate?: any | null, authorInterviewLink?: string | null, authorName?: string | null, createdAt?: any | null, updatedAt?: any | null, jobDescriptionLink?: string | null, authorEmail?: string | null, location?: string | null, revenue?: number | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, location?: string | null } | null, author?: { __typename?: 'BetaUser', id?: string | null, email?: string | null, firstname?: string | null, fullname?: string | null, lastname?: string | null } | null, requirements?: Array<{ __typename?: 'GptCompetency', id?: string | null, title?: string | null } | null> | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, sector?: { __typename?: 'TopSector', id?: string | null } | null } | null, video?: { __typename?: 'Video', id?: string | null, transcript?: string | null, confidence?: any | null, report?: string | null, audio?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null } | null, file?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null, subtitledUrl?: string | null, eager?: Array<{ __typename?: 'Eager', transformation?: string | null, url?: string | null, secure_url?: string | null }> | null } | null } | null } | null };
+export type GetOneProfileSharingQuery = { __typename?: 'Query', oneProfileSharing?: { __typename?: 'ProfileSharing', id?: string | null, report?: string | null, createdAt?: any | null, updatedAt?: any | null, origin?: { __typename?: 'BetaUser', id?: string | null, firstname?: string | null, lastname?: string | null, fullname?: string | null, linkedinProfileId?: string | null, email?: string | null, uniqueName?: string | null } | null, target?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, linkedinProfilePage?: string | null, resume?: string | null, location?: string | null, logo?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null } | null } | null, offerTarget?: { __typename?: 'Offer', id?: string | null, content?: string | null, profileSearched?: string | null, contractType?: string | null, remote?: string | null, limitDate?: any | null, authorInterviewLink?: string | null, authorName?: string | null, createdAt?: any | null, updatedAt?: any | null, jobDescriptionLink?: string | null, authorEmail?: string | null, location?: string | null, revenue?: number | null, company?: { __typename?: 'BetaCompany', id?: string | null, name?: string | null, location?: string | null } | null, author?: { __typename?: 'BetaUser', id?: string | null, email?: string | null, firstname?: string | null, fullname?: string | null, lastname?: string | null } | null, requirements?: Array<{ __typename?: 'Competency', id?: string | null, title?: string | null } | null> | null, job?: { __typename?: 'Job', id?: string | null, title?: { __typename?: 'Translated', fr?: string | null, en?: string | null } | null } | null, sector?: { __typename?: 'TopSector', id?: string | null } | null } | null, video?: { __typename?: 'Video', id?: string | null, transcript?: string | null, confidence?: any | null, report?: string | null, audio?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null } | null, file?: { __typename?: 'Avatar', url?: string | null, secure_url?: string | null, subtitledUrl?: string | null, eager?: Array<{ __typename?: 'Eager', transformation?: string | null, url?: string | null, secure_url?: string | null }> | null } | null } | null } | null };
 
 export type GetOneQueueQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -3021,6 +3031,8 @@ export type ResolversTypes = {
   CandidatesNotes: ResolverTypeWrapper<CandidatesNotes>;
   CandidatesNotesInput: CandidatesNotesInput;
   CompanyInput: CompanyInput;
+  Competency: ResolverTypeWrapper<Competency>;
+  CompetencyInput: CompetencyInput;
   ConversationInput: ConversationInput;
   CreateProAccountInput: CreateProAccountInput;
   Customisation: ResolverTypeWrapper<Customisation>;
@@ -3044,8 +3056,6 @@ export type ResolversTypes = {
   FormResponseInput: FormResponseInput;
   GoogleAuthentication: ResolverTypeWrapper<GoogleAuthentication>;
   GoogleAuthenticationInput: GoogleAuthenticationInput;
-  GptCompetency: ResolverTypeWrapper<GptCompetency>;
-  GptCompetencyInput: GptCompetencyInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   InternalAuthentication: ResolverTypeWrapper<InternalAuthentication>;
@@ -3141,6 +3151,8 @@ export type ResolversParentTypes = {
   CandidatesNotes: CandidatesNotes;
   CandidatesNotesInput: CandidatesNotesInput;
   CompanyInput: CompanyInput;
+  Competency: Competency;
+  CompetencyInput: CompetencyInput;
   ConversationInput: ConversationInput;
   CreateProAccountInput: CreateProAccountInput;
   Customisation: Customisation;
@@ -3164,8 +3176,6 @@ export type ResolversParentTypes = {
   FormResponseInput: FormResponseInput;
   GoogleAuthentication: GoogleAuthentication;
   GoogleAuthenticationInput: GoogleAuthenticationInput;
-  GptCompetency: GptCompetency;
-  GptCompetencyInput: GptCompetencyInput;
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   InternalAuthentication: InternalAuthentication;
@@ -3528,6 +3538,23 @@ export type CandidatesNotesResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CompetencyResolvers<ContextType = any, ParentType extends ResolversParentTypes['Competency'] = ResolversParentTypes['Competency']> = {
+  advantages?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  appelations?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  conclusion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  definition?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  development?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  examples?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  extension?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  importance?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  keywords?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  relatedSkills?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CustomisationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Customisation'] = ResolversParentTypes['Customisation']> = {
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
@@ -3650,22 +3677,6 @@ export type GoogleAuthenticationResolvers<ContextType = any, ParentType extends 
   sid?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sub?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type GptCompetencyResolvers<ContextType = any, ParentType extends ResolversParentTypes['GptCompetency'] = ResolversParentTypes['GptCompetency']> = {
-  advantages?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  conclusion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  definition?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  development?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  examples?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  extension?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  importance?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  keywords?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  relatedSkills?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3815,7 +3826,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createUser?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType, Partial<MutationCreateUserArgs>>;
   deleteAffiliation?: Resolver<Maybe<ResolversTypes['Affiliation']>, ParentType, ContextType, Partial<MutationDeleteAffiliationArgs>>;
   deleteCompany?: Resolver<Maybe<ResolversTypes['BetaCompany']>, ParentType, ContextType, Partial<MutationDeleteCompanyArgs>>;
-  deleteGptCompetency?: Resolver<Maybe<ResolversTypes['GptCompetency']>, ParentType, ContextType, Partial<MutationDeleteGptCompetencyArgs>>;
+  deleteCompetency?: Resolver<Maybe<ResolversTypes['Competency']>, ParentType, ContextType, Partial<MutationDeleteCompetencyArgs>>;
   deleteInterviewOffer?: Resolver<Maybe<ResolversTypes['InterviewOffer']>, ParentType, ContextType, Partial<MutationDeleteInterviewOfferArgs>>;
   deleteLead?: Resolver<Maybe<ResolversTypes['Lead']>, ParentType, ContextType, Partial<MutationDeleteLeadArgs>>;
   deleteMeet?: Resolver<Maybe<ResolversTypes['Meet']>, ParentType, ContextType, Partial<MutationDeleteMeetArgs>>;
@@ -3886,7 +3897,7 @@ export type OfferResolvers<ContextType = any, ParentType extends ResolversParent
   profileSearched?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   rebroadcast?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   remote?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  requirements?: Resolver<Maybe<Array<Maybe<ResolversTypes['GptCompetency']>>>, ParentType, ContextType>;
+  requirements?: Resolver<Maybe<Array<Maybe<ResolversTypes['Competency']>>>, ParentType, ContextType>;
   requirementsIds?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   revenue?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sector?: Resolver<Maybe<ResolversTypes['TopSector']>, ParentType, ContextType>;
@@ -3955,10 +3966,10 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   articles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Article']>>>, ParentType, ContextType>;
   companies?: Resolver<Maybe<Array<ResolversTypes['BetaCompany']>>, ParentType, ContextType, Partial<QueryCompaniesArgs>>;
   companyOffers?: Resolver<Maybe<Array<Maybe<ResolversTypes['Offer']>>>, ParentType, ContextType, Partial<QueryCompanyOffersArgs>>;
+  competencies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Competency']>>>, ParentType, ContextType, Partial<QueryCompetenciesArgs>>;
   errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['Error']>>>, ParentType, ContextType>;
   experiences?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaExperience']>>>, ParentType, ContextType>;
   formQuestions?: Resolver<Maybe<Array<Maybe<ResolversTypes['FormQuestion']>>>, ParentType, ContextType>;
-  gptCompetencies?: Resolver<Maybe<Array<Maybe<ResolversTypes['GptCompetency']>>>, ParentType, ContextType, Partial<QueryGptCompetenciesArgs>>;
   jobs?: Resolver<Maybe<Array<Maybe<ResolversTypes['Job']>>>, ParentType, ContextType, Partial<QueryJobsArgs>>;
   leadFormResponses?: Resolver<Maybe<Array<Maybe<ResolversTypes['FormResponse']>>>, ParentType, ContextType, Partial<QueryLeadFormResponsesArgs>>;
   leads?: Resolver<Maybe<Array<Maybe<ResolversTypes['Lead']>>>, ParentType, ContextType>;
@@ -3978,12 +3989,12 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   oneCandidate?: Resolver<Maybe<ResolversTypes['BetaCandidate']>, ParentType, ContextType, Partial<QueryOneCandidateArgs>>;
   oneCandidatesNotes?: Resolver<Maybe<ResolversTypes['CandidatesNotes']>, ParentType, ContextType, Partial<QueryOneCandidatesNotesArgs>>;
   oneCompany?: Resolver<Maybe<ResolversTypes['BetaCompany']>, ParentType, ContextType, Partial<QueryOneCompanyArgs>>;
+  oneCompetency?: Resolver<Maybe<ResolversTypes['Competency']>, ParentType, ContextType, Partial<QueryOneCompetencyArgs>>;
   oneCustomisation?: Resolver<Maybe<ResolversTypes['Customisation']>, ParentType, ContextType, Partial<QueryOneCustomisationArgs>>;
   oneDetails?: Resolver<Maybe<ResolversTypes['BetaDetails']>, ParentType, ContextType, RequireFields<QueryOneDetailsArgs, 'filter'>>;
   oneExperience?: Resolver<Maybe<ResolversTypes['BetaExperience']>, ParentType, ContextType, Partial<QueryOneExperienceArgs>>;
   oneFavorite?: Resolver<Maybe<ResolversTypes['Favorite']>, ParentType, ContextType, Partial<QueryOneFavoriteArgs>>;
   oneFormResponse?: Resolver<Maybe<ResolversTypes['FormResponse']>, ParentType, ContextType, Partial<QueryOneFormResponseArgs>>;
-  oneGptCompetency?: Resolver<Maybe<ResolversTypes['GptCompetency']>, ParentType, ContextType, Partial<QueryOneGptCompetencyArgs>>;
   oneInterviewOffer?: Resolver<Maybe<ResolversTypes['InterviewOffer']>, ParentType, ContextType, Partial<QueryOneInterviewOfferArgs>>;
   oneJob?: Resolver<Maybe<ResolversTypes['Job']>, ParentType, ContextType, Partial<QueryOneJobArgs>>;
   oneLead?: Resolver<Maybe<ResolversTypes['Lead']>, ParentType, ContextType, Partial<QueryOneLeadArgs>>;
@@ -4011,7 +4022,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   sendEmailProspectionLinkedin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Lead']>>>, ParentType, ContextType, Partial<QuerySendEmailProspectionLinkedinArgs>>;
   sendEmailToLead?: Resolver<Maybe<Array<Maybe<ResolversTypes['Lead']>>>, ParentType, ContextType, Partial<QuerySendEmailToLeadArgs>>;
   topSectors?: Resolver<Maybe<Array<Maybe<ResolversTypes['TopSector']>>>, ParentType, ContextType, Partial<QueryTopSectorsArgs>>;
-  uniqueCompetency?: Resolver<Maybe<ResolversTypes['GptCompetency']>, ParentType, ContextType, Partial<QueryUniqueCompetencyArgs>>;
+  uniqueCompetency?: Resolver<Maybe<ResolversTypes['Competency']>, ParentType, ContextType, Partial<QueryUniqueCompetencyArgs>>;
   user?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType, Partial<QueryUserArgs>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaUser']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   videoByPublicId?: Resolver<Maybe<ResolversTypes['Video']>, ParentType, ContextType, Partial<QueryVideoByPublicIdArgs>>;
@@ -4189,6 +4200,7 @@ export type Resolvers<ContextType = any> = {
   BetaWhatsappResponse?: BetaWhatsappResponseResolvers<ContextType>;
   BetaWhatsappThread?: BetaWhatsappThreadResolvers<ContextType>;
   CandidatesNotes?: CandidatesNotesResolvers<ContextType>;
+  Competency?: CompetencyResolvers<ContextType>;
   Customisation?: CustomisationResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Eager?: EagerResolvers<ContextType>;
@@ -4201,7 +4213,6 @@ export type Resolvers<ContextType = any> = {
   FormQuestion?: FormQuestionResolvers<ContextType>;
   FormResponse?: FormResponseResolvers<ContextType>;
   GoogleAuthentication?: GoogleAuthenticationResolvers<ContextType>;
-  GptCompetency?: GptCompetencyResolvers<ContextType>;
   InternalAuthentication?: InternalAuthenticationResolvers<ContextType>;
   InterviewOffer?: InterviewOfferResolvers<ContextType>;
   Job?: JobResolvers<ContextType>;
@@ -4254,7 +4265,7 @@ export const CreateReferenceContactDocument = {"kind":"Document","definitions":[
 export const CreateUnlockedUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUnlockedUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"originId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"targetId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUnlockedUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"originId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"originId"}}},{"kind":"Argument","name":{"kind":"Name","value":"targetId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"targetId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"target"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}}]}},{"kind":"Field","name":{"kind":"Name","value":"origin"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}}]}}]}}]}}]} as unknown as DocumentNode<CreateUnlockedUserMutation, CreateUnlockedUserMutationVariables>;
 export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BetaUserInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
 export const CreateUserRemarkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUserRemark"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"RemarkInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createRemark"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]} as unknown as DocumentNode<CreateUserRemarkMutation, CreateUserRemarkMutationVariables>;
-export const DeleteGptCompetencyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteGptCompetency"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteGptCompetency"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteGptCompetencyMutation, DeleteGptCompetencyMutationVariables>;
+export const DeleteCompetencyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteCompetency"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteCompetency"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteCompetencyMutation, DeleteCompetencyMutationVariables>;
 export const DeleteLeadDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteLead"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"leadId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteLead"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"leadId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"leadId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteLeadMutation, DeleteLeadMutationVariables>;
 export const DeleteOfferDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteOffer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteOffer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteOfferMutation, DeleteOfferMutationVariables>;
 export const DeleteOneInterviewOfferDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteOneInterviewOffer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteInterviewOffer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteOneInterviewOfferMutation, DeleteOneInterviewOfferMutationVariables>;
@@ -4268,11 +4279,12 @@ export const GetArticlesDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const GetCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BetaCompanyFilters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"resume"}},{"kind":"Field","name":{"kind":"Name","value":"scrapped"}},{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"secure_url"}},{"kind":"Field","name":{"kind":"Name","value":"eager"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transformation"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"video"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"secure_url"}},{"kind":"Field","name":{"kind":"Name","value":"eager"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transformation"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"experiences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"job"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"en"}},{"kind":"Field","name":{"kind":"Name","value":"fr"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"starting"}},{"kind":"Field","name":{"kind":"Name","value":"ending"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"linkedinProfileId"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"linkedinProfileId"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"details"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"number"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCompaniesQuery, GetCompaniesQueryVariables>;
 export const GetCompaniesAutocompleteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompaniesAutocomplete"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BetaCompanyFilters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetCompaniesAutocompleteQuery, GetCompaniesAutocompleteQueryVariables>;
 export const GetCompanyOffersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyOffers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"companyId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companyOffers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"companyId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"companyId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"authorName"}},{"kind":"Field","name":{"kind":"Name","value":"authorInterviewLink"}},{"kind":"Field","name":{"kind":"Name","value":"authorEmail"}},{"kind":"Field","name":{"kind":"Name","value":"jobDescriptionLink"}},{"kind":"Field","name":{"kind":"Name","value":"sector"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"job"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fr"}},{"kind":"Field","name":{"kind":"Name","value":"en"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"linkedinProfileId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetCompanyOffersQuery, GetCompanyOffersQueryVariables>;
+export const GetCompetenciesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompetencies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CompetencyInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"competencies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"advantages"}},{"kind":"Field","name":{"kind":"Name","value":"conclusion"}},{"kind":"Field","name":{"kind":"Name","value":"definition"}},{"kind":"Field","name":{"kind":"Name","value":"examples"}},{"kind":"Field","name":{"kind":"Name","value":"relatedSkills"}}]}}]}}]} as unknown as DocumentNode<GetCompetenciesQuery, GetCompetenciesQueryVariables>;
+export const GetCompetenciesForBoldDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompetenciesForBold"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CompetencyInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"competencies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetCompetenciesForBoldQuery, GetCompetenciesForBoldQueryVariables>;
+export const GetCompetenciesForHomeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompetenciesForHome"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CompetencyInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"competencies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<GetCompetenciesForHomeQuery, GetCompetenciesForHomeQueryVariables>;
+export const GetCompetenciesTitleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompetenciesTitle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CompetencyInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"competencies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetCompetenciesTitleQuery, GetCompetenciesTitleQueryVariables>;
 export const GetExperiencePasswordDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetExperiencePassword"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneExperience"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"password"}}]}}]}}]} as unknown as DocumentNode<GetExperiencePasswordQuery, GetExperiencePasswordQueryVariables>;
 export const GetFormQuestionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFormQuestions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formQuestions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"target"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetFormQuestionsQuery, GetFormQuestionsQueryVariables>;
-export const GetGptCompetenciesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGptCompetencies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"GptCompetencyInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gptCompetencies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"advantages"}},{"kind":"Field","name":{"kind":"Name","value":"conclusion"}},{"kind":"Field","name":{"kind":"Name","value":"definition"}},{"kind":"Field","name":{"kind":"Name","value":"examples"}},{"kind":"Field","name":{"kind":"Name","value":"relatedSkills"}}]}}]}}]} as unknown as DocumentNode<GetGptCompetenciesQuery, GetGptCompetenciesQueryVariables>;
-export const GetGptCompetenciesForBoldDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGptCompetenciesForBold"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"GptCompetencyInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gptCompetencies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetGptCompetenciesForBoldQuery, GetGptCompetenciesForBoldQueryVariables>;
-export const GetGptCompetenciesForHomeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGptCompetenciesForHome"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"GptCompetencyInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"params"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gptCompetencies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"Variable","name":{"kind":"Name","value":"params"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<GetGptCompetenciesForHomeQuery, GetGptCompetenciesForHomeQueryVariables>;
 export const GetJobsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJobs"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"JobInput"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageParamsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jobs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"en"}},{"kind":"Field","name":{"kind":"Name","value":"fr"}}]}},{"kind":"Field","name":{"kind":"Name","value":"topSector"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fr"}},{"kind":"Field","name":{"kind":"Name","value":"en"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetJobsQuery, GetJobsQueryVariables>;
 export const GetLeadFormResponsesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLeadFormResponses"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"leadId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"leadFormResponses"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"leadId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"leadId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isTrue"}},{"kind":"Field","name":{"kind":"Name","value":"lead"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"question"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetLeadFormResponsesQuery, GetLeadFormResponsesQueryVariables>;
 export const GetLeadsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLeads"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"leads"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacted"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"trialOffering"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetLeadsQuery, GetLeadsQueryVariables>;
@@ -4290,12 +4302,12 @@ export const GetOneArticleDocument = {"kind":"Document","definitions":[{"kind":"
 export const GetOneCandidateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneCandidate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneCandidate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"userId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"confirmed"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"targetJob"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fr"}},{"kind":"Field","name":{"kind":"Name","value":"en"}}]}},{"kind":"Field","name":{"kind":"Name","value":"topSector"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fr"}},{"kind":"Field","name":{"kind":"Name","value":"en"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetOneCandidateQuery, GetOneCandidateQueryVariables>;
 export const GetOneCandidatesNotesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneCandidatesNotes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"CandidatesNotesInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneCandidatesNotes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"appreciation"}}]}}]}}]} as unknown as DocumentNode<GetOneCandidatesNotesQuery, GetOneCandidatesNotesQueryVariables>;
 export const GetOneCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneCompany"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BetaCompanyFilters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneCompany"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"resume"}},{"kind":"Field","name":{"kind":"Name","value":"scrapped"}},{"kind":"Field","name":{"kind":"Name","value":"experiences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"job"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fr"}},{"kind":"Field","name":{"kind":"Name","value":"en"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"starting"}},{"kind":"Field","name":{"kind":"Name","value":"ending"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"linkedinProfileId"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"linkedinProfileId"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"details"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"phone"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"number"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetOneCompanyQuery, GetOneCompanyQueryVariables>;
+export const GetOneCompetencyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneCompetency"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneCompetency"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetOneCompetencyQuery, GetOneCompetencyQueryVariables>;
 export const GetOneCustomisationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneCustomisation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"queueId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneCustomisation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"queueId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"queueId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"questions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"job"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"customisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneCustomisationQuery, GetOneCustomisationQueryVariables>;
 export const GetOneDetailsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneDetails"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BetaDetailsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneDetails"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"profileId"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"linkedinProfileId"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneDetailsQuery, GetOneDetailsQueryVariables>;
 export const GetOneExperienceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneExperience"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneExperience"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"job"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fr"}},{"kind":"Field","name":{"kind":"Name","value":"en"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"details"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"candidate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"profiles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"experienceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneExperienceQuery, GetOneExperienceQueryVariables>;
 export const GetOneFavoriteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneFavorite"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"targetId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"originId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneFavorite"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"targetId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"targetId"}}},{"kind":"Argument","name":{"kind":"Name","value":"originId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"originId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"target"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"origin"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneFavoriteQuery, GetOneFavoriteQueryVariables>;
 export const GetOneFormResponseDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneFormResponse"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"leadId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"questionId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneFormResponse"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"leadId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"leadId"}}},{"kind":"Argument","name":{"kind":"Name","value":"questionId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"questionId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isTrue"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"question"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lead"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneFormResponseQuery, GetOneFormResponseQueryVariables>;
-export const GetOneGptCompetencyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneGptCompetency"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneGptCompetency"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetOneGptCompetencyQuery, GetOneGptCompetencyQueryVariables>;
 export const GetOneInterviewOfferDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneInterviewOffer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"status"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneInterviewOffer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"status"},"value":{"kind":"Variable","name":{"kind":"Name","value":"status"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"comment"}},{"kind":"Field","name":{"kind":"Name","value":"datetime"}},{"kind":"Field","name":{"kind":"Name","value":"origin"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}},{"kind":"Field","name":{"kind":"Name","value":"linkedinProfileId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"target"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetOneInterviewOfferQuery, GetOneInterviewOfferQueryVariables>;
 export const GetOneJobDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneJob"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneJob"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fr"}},{"kind":"Field","name":{"kind":"Name","value":"en"}}]}},{"kind":"Field","name":{"kind":"Name","value":"topSector"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"questions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneJobQuery, GetOneJobQueryVariables>;
 export const GetOneLeadDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneLead"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"oneLead"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetOneLeadQuery, GetOneLeadQueryVariables>;

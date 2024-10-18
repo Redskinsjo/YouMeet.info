@@ -1,10 +1,6 @@
 "use client";
 import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect, useState } from "react";
-import React from "react";
 
 type Type = "offer" | "competency" | "square1" | "square2";
 type Size = { sm: number; lg: number };
@@ -47,35 +43,22 @@ const types = {
 export default function ImgSection({ type }: { type: Type }) {
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
-  const [loading, setLoading] = useState(true);
 
   const width = types[type].width;
   const height = types[type].height;
   const src = types[type].src;
   const alt = types[type].alt;
-  let aos = "fade-in";
-
-  useEffect(() => {
-    AOS.init();
-  });
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
 
   return (
-    !loading && (
-      <div className="flex-1 flex-center homeImgBg p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] dark:darkHomeSectionBg">
-        <Image
-          role="img"
-          title={alt}
-          data-aos={aos}
-          width={xs || sm ? width.sm : width.lg}
-          height={xs || sm ? height.sm : height.lg}
-          alt={alt}
-          src={src}
-        />
-      </div>
-    )
+    <div className="flex-1 flex-center homeImgBg p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] dark:darkHomeSectionBg">
+      <Image
+        role="img"
+        title={alt}
+        width={xs || sm ? width.sm : width.lg}
+        height={xs || sm ? height.sm : height.lg}
+        alt={alt}
+        src={src}
+      />
+    </div>
   );
 }

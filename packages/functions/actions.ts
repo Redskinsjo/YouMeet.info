@@ -58,6 +58,7 @@ import {
   getAffiliation,
   getRawUser,
   getSimpleUser,
+  getUser,
   getVideo,
   resetEmailLink,
   resetPassword,
@@ -69,6 +70,7 @@ import {
   updateQueue,
   updateUser,
   updateVideo,
+  searchSomeone,
 } from "./request";
 import {
   FormHandledData,
@@ -2542,4 +2544,94 @@ export const onAnalyzeVideo = async (
   } catch (err: any) {
     return { error: true, type: err.type, message: err.message };
   }
+};
+
+export const generateCV = async (formData: FormData) => {
+  const schema = z.object({
+    job: z.string().min(1),
+  });
+
+  const obj = Object.fromEntries(
+    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
+      entry[0],
+      entry[1].toString().trim(),
+    ])
+  );
+
+  const toBeParsed = obj;
+
+  try {
+    const valid = schema.parse(toBeParsed);
+
+    if (valid) {
+      const response = await fetch(`${uri}/api/generateCV`, {
+        body: JSON.stringify({ job: valid.job }),
+        method: "POST",
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.ok ? "done" : response.ok);
+      const result = await response.arrayBuffer();
+      return result;
+    }
+  } catch (err: any) {
+    console.log(err, "err");
+  }
+};
+
+export const searchSomeoneRequest = async (formData: FormData) => {
+  const schema = z.object({
+    search: z.string().min(1),
+  });
+
+  const obj = Object.fromEntries(
+    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
+      entry[0],
+      entry[1].toString().trim(),
+    ])
+  );
+
+  const toBeParsed = obj;
+
+  let result: BetaUser = {};
+  try {
+    const valid = schema.parse(toBeParsed);
+
+    if (valid) {
+      result = (await searchSomeone<BetaUser>({
+        fullname: valid.search.trim(),
+      })) as BetaUser;
+
+      if (result && isPayloadError(result)) {
+        throw new BackendError(result.type, result.message);
+      } else if (!result || !result?.uniqueName) {
+        throw new BackendError(
+          BACKEND_ERRORS.NO_USER,
+          BACKEND_MESSAGES.NO_USER
+        );
+      }
+    }
+  } catch (err: any) {
+    console.log(err, "err");
+    const zodErr = err.errors;
+    return {
+      status: err.status,
+      error: true,
+      type:
+        zodErr && zodErr[0].code === "invalid_type"
+          ? BACKEND_ERRORS.DATATYPE_INVALID
+          : err.type
+          ? err.type
+          : BACKEND_ERRORS.UNKNOWN,
+      message:
+        zodErr && zodErr[0].code === "invalid_type"
+          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
+          : err.message
+          ? err.message
+          : BACKEND_MESSAGES.UNKNOWN,
+    };
+  }
+  redirect(`/${result.uniqueName}`);
 };

@@ -572,7 +572,7 @@ model leads {
   updatedAt         DateTime?
 }
 
-model gptcompetencies {
+model competencies {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   slug          String?   @unique
   extension     String?
@@ -587,6 +587,7 @@ model gptcompetencies {
   keywords      String[]
   offers        offers[]  @relation(fields: [offersIds], references: [id])
   offersIds     String[]  @default([]) @db.ObjectId
+  appelations   String[]
   createdAt     DateTime?
   updatedAt     DateTime?
 }
@@ -610,7 +611,7 @@ model offers {
   jobId                  String?           @db.ObjectId
   content                String?
   profileSearched        String?
-  requirements           gptcompetencies[] @relation(fields: [requirementsIds], references: [id])
+  requirements           competencies[]    @relation(fields: [requirementsIds], references: [id])
   requirementsIds        String[]          @default([]) @db.ObjectId
   jobDescriptionLink     String?
   revenue                Int?

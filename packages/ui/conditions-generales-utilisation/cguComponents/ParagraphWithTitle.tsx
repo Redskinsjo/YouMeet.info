@@ -79,26 +79,25 @@ export default function ParagraphWithTitle({
         <ul className="flex flex-col">
           {points.map((point) =>
             (point as DynamicData)?.variable ? (
-              <li
+              <BoldText
                 key={(point as DynamicData)
                   .content((point as DynamicData)?.variable)
                   .slice(0, 20)}
-                className="dark:darkLi legend"
-              >
-                <BoldText
-                  text={`${(point as DynamicData).content(
-                    (point as DynamicData).variable
-                  )}+`}
-                  align="justify"
-                />
-              </li>
+                component="li"
+                fontSizeClass="dark:darkLi legend"
+                text={`${(point as DynamicData).content(
+                  (point as DynamicData).variable
+                )}+`}
+                align="justify"
+              />
             ) : (
-              <li
+              <BoldText
                 key={(point as string).slice(0, 20)}
-                className="dark:darkLi legend"
-              >
-                <BoldText text={`${point}+`} align="justify" />
-              </li>
+                component="li"
+                fontSizeClass="dark:darkLi legend"
+                text={`${point}+`}
+                align="justify"
+              />
             )
           )}
         </ul>

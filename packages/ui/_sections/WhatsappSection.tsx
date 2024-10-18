@@ -1,4 +1,3 @@
-import React from "react";
 import HomePicture2AndHomeWhatsapp from "../_homeComponents/HomePicture2";
 
 export default function WhatsappSection() {

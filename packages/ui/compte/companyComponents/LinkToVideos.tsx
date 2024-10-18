@@ -11,7 +11,7 @@ export default function LinkToVideos() {
       <IoChevronBack className="dark:text-white" />
       <Link
         href={"/dashboard"}
-        className="no-underline hover:underline underline-offset-[4px] dark:decoration-white decoration-black"
+        className="no-underline hover:underline underline-offset-[2px] dark:decoration-white decoration-black"
       >
         <div className="dark:text-white text-black">{t("see-videos")}</div>
       </Link>

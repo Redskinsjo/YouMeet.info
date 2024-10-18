@@ -212,17 +212,17 @@ export default function CreateProUser() {
               );
             } else {
               dispatch(resetModal("ok") as UnknownAction);
-              return dispatch(
+              dispatch(
                 setModal({ display: "backofficeConfirm" }) as UnknownAction
               );
             }
           }
+        } else {
+          throw new BackendError(
+            BACKEND_ERRORS.PROCESSING,
+            BACKEND_MESSAGES.PROCESSING
+          );
         }
-
-        throw new BackendError(
-          BACKEND_ERRORS.PROCESSING,
-          BACKEND_MESSAGES.PROCESSING
-        );
       }
     } catch (err: any) {
       await createError({

@@ -1,15 +1,17 @@
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 import DataSection from "../_components/DataSection";
 import dynamic from "next/dynamic";
-import React from "react";
 
-const ImgSection = dynamic(() => import("../_components/ImgSection"));
+const ImgSection = dynamic(() => import("../_components/ImgSection"), {
+  ssr: false,
+});
 
 export default function CompetencySection({
   competences,
 }: {
-  competences: GptCompetency[];
+  competences: Competency[];
 }) {
+  console.log(competences, "competneces");
   return (
     <section className="flex xs:flex-col sm:flex-col md:flex-col">
       <DataSection data={competences} />

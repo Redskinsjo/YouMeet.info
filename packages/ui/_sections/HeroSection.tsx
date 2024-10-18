@@ -1,10 +1,9 @@
 import dynamic from "next/dynamic";
-import DividerSection from "../_components/DividerSection";
+// import DividerSection from "../_components/DividerSection";
 import Image from "next/image";
-import React from "react";
 
 const HeroText = dynamic(() => import("../_components/HeroText"));
-const HeroVideo = dynamic(() => import("../_components/HeroVideo"));
+// const HeroVideo = dynamic(() => import("../_components/HeroVideo"));
 
 export default function HeroSection() {
   return (
@@ -21,14 +20,13 @@ export default function HeroSection() {
           objectFit: "cover",
           opacity: 0.3,
         }}
-        loading="eager"
+        priority
         src="https://res.cloudinary.com/de822mdsy/image/upload/v1704134597/youmeet-official/webp/ywetbtmzpbrzaz2nppqb.webp"
-        data-aos="fade-down"
         alt="Un entretien professionnel entre un candidat et une Directrice des Ressources Humaines concluent un contrat d'embaûche en se serrant la main grâce à la mise en relation YouMeet."
       />
       <HeroText />
-      <DividerSection type="hero" />
-      <HeroVideo />
+      {/* <DividerSection  /> */}
+      {/* <HeroVideo /> */}
     </section>
   );
 }

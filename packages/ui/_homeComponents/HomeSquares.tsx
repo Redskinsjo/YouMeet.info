@@ -1,7 +1,14 @@
-import BoldText from "../BoldText";
-import ImgSection from "../_components/ImgSection";
-import SectionTitle from "../_components/SectionTitle";
-import React from "react";
+import dynamic from "next/dynamic";
+
+const BoldText = dynamic(() => import("../BoldText"), {
+  ssr: false,
+});
+const SectionTitle = dynamic(() => import("../_components/SectionTitle"), {
+  ssr: false,
+});
+const ImgSection = dynamic(() => import("../_components/ImgSection"), {
+  ssr: false,
+});
 
 export default function HomeSquares() {
   return (

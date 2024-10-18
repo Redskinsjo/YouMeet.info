@@ -51,7 +51,7 @@ export default function BlogMenuNav({
 
     if (scrollContainer && listItems.length > 0)
       scrollContainer.addEventListener("scroll", () =>
-        updateBlur(scrollContainer, listItems as HTMLLIElement[]),
+        updateBlur(scrollContainer, listItems as HTMLLIElement[])
       );
   }, [articleEls]);
 

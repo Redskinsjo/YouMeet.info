@@ -11,8 +11,8 @@ import OfferChild from "./offerChild";
 import {
   formatForDb,
   inFormatForDb,
-} from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
-import Custom404 from "@/app/not-found";
+} from "@youmeet/utils/resolvers/formatCompetencyTitle";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { offre: string };
@@ -119,5 +119,5 @@ export default async function OfferComponent({
   }
 
   if (offer) return <OfferChild offre={offer} offers={offers} />;
-  return <Custom404 />;
+  return notFound();
 }

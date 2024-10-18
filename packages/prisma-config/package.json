@@ -13,10 +13,10 @@
     "vercel-generate": "yarn prisma generate"
   },
   "devDependencies": {
-    "prisma": "^5.16.2"
+    "prisma": "^5.20.0"
   },
   "dependencies": {
-    "@prisma/client": "^5.16.2",
+    "@prisma/client": "^5.20.0",
     "dotenv": "^16.4.5"
   }
 }

@@ -1,8 +1,8 @@
 import BackofficeUsersChild from "./backofficeUsersChild";
 import { getUsers } from "@youmeet/functions/request";
 import { BetaUser } from "@youmeet/gql/generated";
-import Custom404 from "@/app/not-found";
 import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import { notFound } from "next/navigation";
 
 export default async function BackofficeUsers() {
   const verified = await verifyTokenServer();
@@ -16,5 +16,5 @@ export default async function BackofficeUsers() {
     )) as BetaUser[];
     if (users) return <BackofficeUsersChild users={users} />;
   }
-  return <Custom404 />;
+  return notFound();
 }

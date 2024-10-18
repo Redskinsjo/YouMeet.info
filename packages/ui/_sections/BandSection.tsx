@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
-import React from "react";
 
 const HomeExplanationsOnReferences = dynamic(
-  () => import("../_homeComponents/HomeExplanationsOnReferences")
+  () => import("../_homeComponents/HomeExplanationsOnReferences"),
+  { ssr: false }
 );
 
 export default function BandSection() {

@@ -310,7 +310,7 @@ const AddOffer = ({ offers }: { offers: Offer[] }) => {
                 renderCell: (row: any) => {
                   return (
                     <div className="flex-center">
-                      <form action={() => customOnDeleteOffer(row.id)}>
+                      <form action={customOnDeleteOffer.bind(null, row.id)}>
                         <Button type="submit">Supprimer</Button>
                       </form>
                     </div>

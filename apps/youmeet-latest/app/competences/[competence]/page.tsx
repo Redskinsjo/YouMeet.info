@@ -2,16 +2,16 @@ import { logoUrl, uri } from "@youmeet/functions/imports";
 import {
   formatForDb,
   inFormatForDb,
-} from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
+} from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { Metadata, ResolvingMetadata } from "next";
 import CompetencyChild from "./competencyChild";
-import Custom404 from "@/app/not-found";
 import {
   getCompetenciesParams,
   getCompetency,
   getCompetencyMetadata,
 } from "@youmeet/functions/request";
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { competence: string };
@@ -20,8 +20,8 @@ type Props = {
 
 export async function generateStaticParams() {
   const competencies = (await getCompetenciesParams<
-    GptCompetency[]
-  >()) as GptCompetency[];
+    Competency[]
+  >()) as Competency[];
   return competencies?.map((competency) => {
     return {
       competence: competency.slug,
@@ -35,7 +35,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const competency = (await getCompetencyMetadata({
     slug: decodeURIComponent(params.competence),
-  })) as GptCompetency;
+  })) as Competency;
 
   const title = competency?.title;
 
@@ -113,8 +113,8 @@ export default async function Page({
 }) {
   const competency = (await getCompetency({
     slug: decodeURIComponent(params.competence),
-  })) as GptCompetency;
+  })) as Competency;
 
   if (competency) return <CompetencyChild competency={competency} />;
-  return <Custom404 />;
+  return notFound();
 }

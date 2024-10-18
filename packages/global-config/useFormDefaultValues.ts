@@ -97,7 +97,7 @@ export default async function useFormDefaultValues(
         location: user?.company?.location || "",
         name: user?.company?.name || "",
         resume: user?.company?.resume || "",
-        logo: [user?.company?.logo] || null,
+        logo: [user?.company?.logo],
         firstname: user?.firstname || "",
         lastname: user?.lastname || "",
         linkedinProfileId: user?.linkedinProfileId || "",

@@ -1,8 +1,11 @@
-import TryOut from "../_homeComponents/TryOut";
-import BoldText from "@youmeet/ui/BoldText";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
-import SectionTitle from "./SectionTitle";
-import React from "react";
+import dynamic from "next/dynamic";
+
+const SectionTitle = dynamic(() => import("./SectionTitle"), { ssr: false });
+const BoldText = dynamic(() => import("@youmeet/ui/BoldText"), { ssr: false });
+const TryOut = dynamic(() => import("../_homeComponents/TryOut"), {
+  ssr: false,
+});
 
 export default function InsightText() {
   return (

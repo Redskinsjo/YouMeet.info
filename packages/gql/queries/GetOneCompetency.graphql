@@ -1,0 +1,6 @@
+query GetOneCompetency($id: ID, $title: String) {
+  oneCompetency(id: $id, title: $title) {
+    id
+    title
+  }
+}

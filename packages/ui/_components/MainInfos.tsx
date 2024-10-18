@@ -1,13 +1,19 @@
 "use client";
 import Image from "next/image";
 import setFileUrl from "@youmeet/utils/setFileUrl";
-import { GptCompetency, Offer, Translated } from "@youmeet/gql/generated";
+import {
+  Avatar,
+  Competency,
+  Offer,
+  Translated,
+  Video,
+} from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
 import { isCompetency, isOffer } from "@youmeet/types/TypeGuards";
 import BoldText from "@youmeet/ui/BoldText";
-import React from "react";
+import CandidateVideo from "../CandidateVideo";
 
-export default function MainInfos({ el }: { el: Offer | GptCompetency }) {
+export default function MainInfos({ el }: { el: Offer | Competency | Video }) {
   const {
     t,
     i18n: { language },
@@ -61,10 +67,7 @@ export default function MainInfos({ el }: { el: Offer | GptCompetency }) {
         </div>
       </div>
     );
-  } else if (
-    el.__typename === "GptCompetency" &&
-    isCompetency(el as GptCompetency)
-  ) {
+  } else if (el.__typename === "Competency" && isCompetency(el as Competency)) {
     return (
       <div className="p-[24px] flex flex-col gap-[12px]">
         <div className="h-[0.5px] bg-blueGrey500"></div>
@@ -95,6 +98,36 @@ export default function MainInfos({ el }: { el: Offer | GptCompetency }) {
             return undefined;
           })}
         </ul>
+      </div>
+    );
+  } else {
+    return (
+      <div className="p-[24px] flex flex-col gap-[12px]">
+        <div className="h-[0.5px] bg-blueGrey500"></div>
+        {!!(el as Video)?.job?.frTitle && (
+          <h3
+            role="heading"
+            className="my-[3px] text-[16px] dark:text-white"
+          >{`${((el as Video)?.job?.frTitle as string)[0].toUpperCase()}${(
+            el as Video
+          ).job?.frTitle?.slice(1)}`}</h3>
+        )}
+
+        <CandidateVideo
+          video={(el as Video)?.file as Avatar}
+          notAutoPlay
+          newStyles={{
+            maxWidth: "100vw",
+            minWidth: "300px",
+            minHeight: "280px",
+          }}
+          containerNewStyles={{
+            minWidth: "300px",
+            minHeight: "280px",
+            maxWidth: "100%",
+            maxHeight: "100%",
+          }}
+        />
       </div>
     );
   }

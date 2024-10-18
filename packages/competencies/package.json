@@ -1,0 +1,46 @@
+{
+  "name": "@youmeet/competencies",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./codegen": "./codegen.ts",
+    "./generated": "./generated.ts",
+    "./index": "./index.ts",
+    "./schema": "./schema.graphql"
+  },
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts",
+    "dev": "PORT=4000 dotenv -e .env -- ts-node-dev --exit-child --respawn index.ts",
+    "start": "dotenv -e .env -- ts-node index.ts",
+    "build": "dotenv -e .env -- tsc"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/introspection": "^4.0.3",
+    "@graphql-codegen/typed-document-node": "^5.0.6",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
+    "@graphql-codegen/typescript-resolvers": "^4.0.6",
+    "@graphql-eslint/eslint-plugin": "^3.20.1",
+    "@parcel/watcher": "^2.4.1",
+    "eslint": "^9.11.1",
+    "eslint-config-next": "^14.2.13",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@graphql-tools/schema": "^10.0.6",
+    "@youmeet/prisma-config": "*",
+    "@youmeet/types": "*",
+    "@youmeet/utils": "*",
+    "dotenv": "^16.4.5",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
+    "graphql-yoga": "^5.7.0",
+    "mongoose": "^8.7.0",
+    "node": "^22.9.0",
+    "openai": "^4.66.1",
+    "server-only": "^0.0.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0"
+  }
+}

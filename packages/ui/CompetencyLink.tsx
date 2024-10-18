@@ -1,9 +1,9 @@
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 import { outfit } from "@youmeet/functions/fonts";
 import Link from "next/link";
 import React from "react";
 
-const CompetencyLink = ({ requirement }: { requirement: GptCompetency }) => {
+const CompetencyLink = ({ requirement }: { requirement: Competency }) => {
   return requirement?.title ? (
     <Link
       href={`/competences/${requirement.slug}`}

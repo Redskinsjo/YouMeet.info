@@ -1,4 +1,5 @@
 import prisma from "@youmeet/prisma-config/prisma";
+
 import {
   MutationCreateCandidateArgs,
   Resolvers,
@@ -48,8 +49,8 @@ import {
   MutationCreateCompanyArgs,
   QueryResetEmailLinkArgs,
   QueryResetPasswordArgs,
-  MutationDeleteGptCompetencyArgs,
-  QueryOneGptCompetencyArgs,
+  MutationDeleteCompetencyArgs,
+  QueryOneCompetencyArgs,
   MutationCreateOfferArgs,
   QueryOneOfferArgs,
   MutationDeleteOfferArgs,
@@ -92,7 +93,7 @@ import {
   MutationDeleteProfileSharingArgs,
   QueryTopSectorsArgs,
   QueryOffersArgs,
-  QueryGptCompetenciesArgs,
+  QueryCompetenciesArgs,
   ReferenceContact,
   QuerySendEmailProspectionLinkedinArgs,
   MutationCreateExperienceArgs,
@@ -138,6 +139,7 @@ import {
   MutationCreateAffiliationArgs,
   QueryAffiliationArgs,
   QueryVideoByPublicIdArgs,
+  FormResponse,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
@@ -150,7 +152,7 @@ import setUniqueNameAndExtension from "@youmeet/utils/backoffice/setUniqueNameAn
 import { uri, uriPro } from "@youmeet/functions/imports";
 import { faker } from "@faker-js/faker";
 import { AuthDetails } from "@youmeet/models/types";
-import { formatForUrl } from "@youmeet/utils/resolvers/formatGptCompetencyTitle";
+import { formatForUrl } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { setName } from "@youmeet/utils/setName";
 import { Prisma } from "@prisma/client";
 import { BackendError } from "@youmeet/utils/BackendErrorClass";
@@ -356,7 +358,9 @@ const resolvers: Resolvers = {
     videos: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      return await prisma.videos.findMany();
+      return await prisma.videos.findMany({
+        include: { job: true, user: true },
+      });
     },
     myVideos: async (
       _: unknown,
@@ -554,6 +558,7 @@ const resolvers: Resolvers = {
       if (args.leadId) where.leadId = args.leadId;
       const responses = await prisma.formResponses.findMany({
         where,
+        include: { question: true },
       });
       return responses;
     },
@@ -965,9 +970,9 @@ const resolvers: Resolvers = {
       }
       return null;
     },
-    oneGptCompetency: async (
+    oneCompetency: async (
       _: unknown,
-      args: QueryOneGptCompetencyArgs,
+      args: QueryOneCompetencyArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
@@ -978,10 +983,10 @@ const resolvers: Resolvers = {
       if (args.id) where.id = args.id;
       if (args.title) where.title = args.title;
 
-      const gptCompetency = await prisma.gptcompetencies.findFirst({
+      const competency = await prisma.competencies.findFirst({
         where,
       });
-      return gptCompetency;
+      return competency;
     },
     uniqueCompetency: async (
       _: unknown,
@@ -993,11 +998,11 @@ const resolvers: Resolvers = {
       const where = {} as { id: string } | { slug: string };
       if (args.id) (where as { id: string }).id = args.id;
       else if (args.slug) (where as { slug: string }).slug = args.slug;
-      return await prisma.gptcompetencies.findUnique({ where });
+      return await prisma.competencies.findUnique({ where });
     },
-    gptCompetencies: async (
+    competencies: async (
       _: unknown,
-      args: QueryGptCompetenciesArgs,
+      args: QueryCompetenciesArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
@@ -1009,7 +1014,7 @@ const resolvers: Resolvers = {
         params.skip = args.params.skip as number;
       if (args.params?.take !== undefined)
         params.take = args.params.take as number;
-      return await prisma.gptcompetencies.findMany({ where, ...params });
+      return await prisma.competencies.findMany({ where, ...params });
     },
 
     resetPassword: async (
@@ -1537,6 +1542,15 @@ const resolvers: Resolvers = {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
       const where = {} as Prisma.betausersWhereUniqueInput;
+
+      if (args.fullname) {
+        return await prisma.betausers.findFirst({
+          where: {
+            fullname: { equals: args.fullname, mode: "insensitive" },
+            videos: { some: { id: { not: undefined } } },
+          },
+        });
+      }
 
       if (args.uniqueName) where.uniqueName = args.uniqueName;
       if (args.userId) where.id = args.userId;
@@ -2724,14 +2738,14 @@ const resolvers: Resolvers = {
       }
       return null;
     },
-    deleteGptCompetency: async (
+    deleteCompetency: async (
       _: unknown,
-      args: MutationDeleteGptCompetencyArgs,
+      args: MutationDeleteCompetencyArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-      return await prisma.gptcompetencies.delete({
+      return await prisma.competencies.delete({
         where: { id: args.id as string },
       });
     },
@@ -3437,10 +3451,10 @@ const resolvers: Resolvers = {
       candidate.targetJob
         ? candidate.targetJob
         : candidate.targetJobId
-          ? await prisma.jobs.findUnique({
-              where: { id: candidate.targetJobId as string },
-            })
-          : null,
+        ? await prisma.jobs.findUnique({
+            where: { id: candidate.targetJobId as string },
+          })
+        : null,
     experiences: async (candidate: BetaCandidate) => {
       const experiences = await prisma.betaexperiences.findMany({
         where: {
@@ -3478,15 +3492,25 @@ const resolvers: Resolvers = {
       return details;
     },
   },
+  FormResponse: {
+    question: async (response: FormResponse) =>
+      response.question
+        ? response.question
+        : response.questionId
+        ? await prisma.formQuestions.findUnique({
+            where: { id: response.questionId },
+          })
+        : null,
+  },
   BetaExperience: {
     job: async (experience: BetaExperience) =>
       experience.job
         ? experience.job
         : experience.jobId
-          ? await prisma.jobs.findUnique({
-              where: { id: experience.jobId },
-            })
-          : null,
+        ? await prisma.jobs.findUnique({
+            where: { id: experience.jobId },
+          })
+        : null,
     references: async (
       experience: BetaExperience,
       args: BetaExperienceReferencesArgs
@@ -3504,10 +3528,10 @@ const resolvers: Resolvers = {
       experience.company
         ? experience.company
         : experience.companyId
-          ? await prisma.betacompanies.findFirst({
-              where: { id: experience.companyId },
-            })
-          : null,
+        ? await prisma.betacompanies.findFirst({
+            where: { id: experience.companyId },
+          })
+        : null,
     user: async (experience: BetaExperience) => {
       return (await prisma.betausers.findFirst({
         where: {
@@ -3560,19 +3584,19 @@ const resolvers: Resolvers = {
       return details.user
         ? details.user
         : details.userId
-          ? await prisma.betausers.findFirst({
-              where: { id: details.userId },
-            })
-          : null;
+        ? await prisma.betausers.findFirst({
+            where: { id: details.userId },
+          })
+        : null;
     },
     candidate: async (details: BetaDetails) => {
       return details.candidate
         ? details.candidate
         : details.candidateId
-          ? await prisma.betacandidates.findFirst({
-              where: { id: details.candidateId },
-            })
-          : null;
+        ? await prisma.betacandidates.findFirst({
+            where: { id: details.candidateId },
+          })
+        : null;
     },
   },
   Meet: {
@@ -3580,18 +3604,18 @@ const resolvers: Resolvers = {
       meet.meetCandidate
         ? meet.meetCandidate
         : meet.meetCandidateId
-          ? await prisma.meetcandidates.findUnique({
-              where: { id: meet.meetCandidateId as string },
-            })
-          : null,
+        ? await prisma.meetcandidates.findUnique({
+            where: { id: meet.meetCandidateId as string },
+          })
+        : null,
     meetRecruiter: async (meet: Meet) =>
       meet.meetRecruiter
         ? meet.meetRecruiter
         : meet.meetRecruiterId
-          ? await prisma.meetrecruiters.findUnique({
-              where: { id: meet.meetRecruiterId as string },
-            })
-          : null,
+        ? await prisma.meetrecruiters.findUnique({
+            where: { id: meet.meetRecruiterId as string },
+          })
+        : null,
   },
   MeetCandidate: {
     videos: async (candidate: MeetCandidate) =>
@@ -3631,16 +3655,16 @@ const resolvers: Resolvers = {
       user.company
         ? user.company
         : user.companyId
-          ? await prisma.betacompanies.findFirst({
-              where: { id: user.companyId },
-            })
-          : null,
+        ? await prisma.betacompanies.findFirst({
+            where: { id: user.companyId },
+          })
+        : null,
     videos: async (user: BetaUser) =>
       user.videos
         ? user.videos
         : user.id
-          ? await prisma.videos.findMany({ where: { userId: user.id } })
-          : [],
+        ? await prisma.videos.findMany({ where: { userId: user.id } })
+        : [],
     candidateQueues: async (user: BetaUser) =>
       user.candidateQueues
         ? user.candidateQueues
@@ -3655,34 +3679,34 @@ const resolvers: Resolvers = {
       queue.offerTarget
         ? queue.offerTarget
         : queue.offerTargetId
-          ? await prisma.offers.findUnique({
-              where: { id: queue.offerTargetId },
-            })
-          : null,
+        ? await prisma.offers.findUnique({
+            where: { id: queue.offerTargetId },
+          })
+        : null,
     customisation: async (queue: BetaQueue) =>
       queue.customisation
         ? queue.customisation
         : queue.customisationId
-          ? await prisma.customisations.findUnique({
-              where: { id: queue.customisationId },
-            })
-          : null,
+        ? await prisma.customisations.findUnique({
+            where: { id: queue.customisationId },
+          })
+        : null,
     target: async (queue: BetaQueue) =>
       queue.target
         ? queue.target
         : queue.targetId
-          ? await prisma.betausers.findUnique({
-              where: { id: queue.targetId },
-            })
-          : null,
+        ? await prisma.betausers.findUnique({
+            where: { id: queue.targetId },
+          })
+        : null,
     origin: async (queue: BetaQueue) =>
       queue.origin
         ? queue.origin
         : queue.originId
-          ? await prisma.betausers.findUnique({
-              where: { id: queue.originId },
-            })
-          : null,
+        ? await prisma.betausers.findUnique({
+            where: { id: queue.originId },
+          })
+        : null,
   },
   BetaWhatsappThread: {
     responses: async (thread: BetaWhatsappThread) => {
@@ -3696,12 +3720,12 @@ const resolvers: Resolvers = {
       thread.queue
         ? thread.queue
         : thread.queueId
-          ? await prisma.betaqueues.findFirst({
-              where: {
-                id: thread.queueId as string,
-              },
-            })
-          : null,
+        ? await prisma.betaqueues.findFirst({
+            where: {
+              id: thread.queueId as string,
+            },
+          })
+        : null,
     exchanges: async (thread: BetaWhatsappThread) =>
       thread.exchanges
         ? thread.exchanges
@@ -3714,10 +3738,10 @@ const resolvers: Resolvers = {
       return response.exchange
         ? response.exchange
         : response.exchangeId
-          ? await prisma.betawhatsappexchanges.findUnique({
-              where: { id: response.exchangeId },
-            })
-          : null;
+        ? await prisma.betawhatsappexchanges.findUnique({
+            where: { id: response.exchangeId },
+          })
+        : null;
     },
   },
   Job: {
@@ -3725,10 +3749,10 @@ const resolvers: Resolvers = {
       job.topSector
         ? job.topSector
         : job.topSectorId
-          ? await prisma.topsectors.findUnique({
-              where: { id: job.topSectorId as string },
-            })
-          : null,
+        ? await prisma.topsectors.findUnique({
+            where: { id: job.topSectorId as string },
+          })
+        : null,
     questions: async (job: Job) =>
       job.questions
         ? job.questions
@@ -3741,62 +3765,62 @@ const resolvers: Resolvers = {
       favorite.origin
         ? favorite.origin
         : favorite.originId
-          ? await prisma.betausers.findFirst({
-              where: { id: favorite.originId },
-            })
-          : null,
+        ? await prisma.betausers.findFirst({
+            where: { id: favorite.originId },
+          })
+        : null,
     target: async (favorite: Favorite) =>
       favorite.target
         ? favorite.target
         : favorite.targetId
-          ? await prisma.betausers.findFirst({
-              where: { id: favorite.targetId },
-            })
-          : null,
+        ? await prisma.betausers.findFirst({
+            where: { id: favorite.targetId },
+          })
+        : null,
   },
   VerificationRequest: {
     origin: async (request: VerificationRequest) =>
       request.origin
         ? request.origin
         : request.originId
-          ? await prisma.betausers.findFirst({
-              where: { id: request.originId },
-            })
-          : null,
+        ? await prisma.betausers.findFirst({
+            where: { id: request.originId },
+          })
+        : null,
     target: async (request: VerificationRequest) =>
       request.target
         ? request.target
         : request.targetId
-          ? await prisma.betausers.findFirst({
-              where: { id: request.targetId },
-            })
-          : null,
+        ? await prisma.betausers.findFirst({
+            where: { id: request.targetId },
+          })
+        : null,
   },
   UserRemark: {
     user: async (remark: UserRemark) =>
       remark.user
         ? remark.user
         : remark.userId
-          ? await prisma.betausers.findUnique({ where: { id: remark.userId } })
-          : null,
+        ? await prisma.betausers.findUnique({ where: { id: remark.userId } })
+        : null,
   },
   InterviewOffer: {
     origin: async (interview: InterviewOffer) =>
       interview.origin
         ? interview.origin
         : interview.originId
-          ? await prisma.betausers.findFirst({
-              where: { id: interview.originId },
-            })
-          : null,
+        ? await prisma.betausers.findFirst({
+            where: { id: interview.originId },
+          })
+        : null,
     target: async (interview: InterviewOffer) =>
       interview.target
         ? interview.target
         : interview.targetId
-          ? await prisma.betausers.findFirst({
-              where: { id: interview.targetId },
-            })
-          : null,
+        ? await prisma.betausers.findFirst({
+            where: { id: interview.targetId },
+          })
+        : null,
   },
   Customisation: {
     questions: async (customisation: Customisation) => {
@@ -3814,10 +3838,10 @@ const resolvers: Resolvers = {
       exchange.question
         ? exchange.question
         : exchange.questionId
-          ? await prisma.questions.findUnique({
-              where: { id: exchange.questionId },
-            })
-          : null,
+        ? await prisma.questions.findUnique({
+            where: { id: exchange.questionId },
+          })
+        : null,
     responses: async (exchange: BetaWhatsappExchange) =>
       exchange.responses
         ? exchange.responses
@@ -3830,87 +3854,87 @@ const resolvers: Resolvers = {
       return offer.author
         ? offer.author
         : offer.authorId
-          ? await prisma.betausers.findUnique({
-              where: {
-                id: offer.authorId as string,
-              },
-            })
-          : null;
+        ? await prisma.betausers.findUnique({
+            where: {
+              id: offer.authorId as string,
+            },
+          })
+        : null;
     },
     sector: async (offer: Offer) => {
       return offer.sector
         ? offer.sector
         : offer.sectorId
-          ? await prisma.topsectors.findUnique({
-              where: {
-                id: offer.sectorId as string,
-              },
-            })
-          : null;
+        ? await prisma.topsectors.findUnique({
+            where: {
+              id: offer.sectorId as string,
+            },
+          })
+        : null;
     },
     job: async (offer: Offer) => {
       return offer.job
         ? offer.job
         : offer.jobId
-          ? await prisma.jobs.findUnique({
-              where: {
-                id: offer.jobId as string,
-              },
-            })
-          : null;
+        ? await prisma.jobs.findUnique({
+            where: {
+              id: offer.jobId as string,
+            },
+          })
+        : null;
     },
     company: async (offer: Offer) => {
       return offer.company
         ? offer.company
         : offer.companyId
-          ? await prisma.betacompanies.findUnique({
-              where: {
-                id: offer.companyId as string,
-              },
-            })
-          : null;
+        ? await prisma.betacompanies.findUnique({
+            where: {
+              id: offer.companyId as string,
+            },
+          })
+        : null;
     },
     requirements: async (offer: Offer) => {
       return offer.requirements
         ? offer.requirements
         : offer.requirementsIds
-          ? await prisma.references.findMany({
-              where: {
-                id: { in: offer.requirementsIds as string[] },
-              },
-            })
-          : [];
+        ? await prisma.references.findMany({
+            where: {
+              id: { in: offer.requirementsIds as string[] },
+            },
+          })
+        : [];
     },
     sharings: async (offer: Offer) =>
       offer.sharings
         ? offer.sharings
         : offer.id
-          ? await prisma.profileSharings.findMany({
-              where: { offerTargetId: offer.id },
-            })
-          : [],
+        ? await prisma.profileSharings.findMany({
+            where: { offerTargetId: offer.id },
+          })
+        : [],
   },
   ReferenceContact: {
     experience: async (contact: ReferenceContact) =>
       contact.experience
         ? contact.experience
         : contact.experienceId
-          ? await prisma.betaexperiences.findUnique({
-              where: { id: contact.experienceId as string },
-            })
-          : null,
+        ? await prisma.betaexperiences.findUnique({
+            where: { id: contact.experienceId as string },
+          })
+        : null,
   },
   Reference: {
     experience: async (reference: Reference) => {
       return reference.experience
         ? reference.experience
         : reference.experienceId
-          ? await prisma.betaexperiences.findUnique({
-              where: {
-                id: reference.experienceId,
-              },
-            })
-          : null;
+        ? await prisma.betaexperiences.findUnique({
+            where: {
+              id: reference.experienceId,
+            },
+          })
+        : null;
     },
   },
   Video: {
@@ -3918,26 +3942,26 @@ const resolvers: Resolvers = {
       video.company
         ? video.company
         : video.companyId
-          ? await prisma.betacompanies.findUnique({
-              where: { id: video.companyId as string },
-            })
-          : null,
+        ? await prisma.betacompanies.findUnique({
+            where: { id: video.companyId as string },
+          })
+        : null,
     user: async (video: Video) =>
       video.user
         ? video.user
         : video.userId
-          ? await prisma.betausers.findUnique({
-              where: { id: video.userId as string },
-            })
-          : null,
+        ? await prisma.betausers.findUnique({
+            where: { id: video.userId as string },
+          })
+        : null,
     job: async (video: Video) =>
       video.job
         ? video.job
         : video.jobId
-          ? await prisma.jobs.findUnique({
-              where: { id: video.jobId as string },
-            })
-          : null,
+        ? await prisma.jobs.findUnique({
+            where: { id: video.jobId as string },
+          })
+        : null,
     sharings: async (video: Video) =>
       video.sharings
         ? video.sharings
@@ -3948,70 +3972,70 @@ const resolvers: Resolvers = {
       video.meetCandidate
         ? video.meetCandidate
         : video.meetCandidateId
-          ? await prisma.meetcandidates.findUnique({
-              where: { id: video.meetCandidateId as string },
-            })
-          : null,
+        ? await prisma.meetcandidates.findUnique({
+            where: { id: video.meetCandidateId as string },
+          })
+        : null,
   },
   Notification: {
     origin: async (notif: Notification) =>
       notif.origin
         ? notif.origin
         : notif.originId
-          ? await prisma.betausers.findUnique({
-              where: { id: notif.originId as string },
-            })
-          : null,
+        ? await prisma.betausers.findUnique({
+            where: { id: notif.originId as string },
+          })
+        : null,
     target: async (notif: Notification) =>
       notif.target
         ? notif.target
         : notif.targetId
-          ? await prisma.betausers.findUnique({
-              where: { id: notif.targetId as string },
-            })
-          : null,
+        ? await prisma.betausers.findUnique({
+            where: { id: notif.targetId as string },
+          })
+        : null,
     feedback: async (notif: Notification) =>
       notif.feedback
         ? notif.feedback
         : notif.feedbackId
-          ? await prisma.feedback.findUnique({
-              where: { id: notif.feedbackId as string },
-            })
-          : null,
+        ? await prisma.feedback.findUnique({
+            where: { id: notif.feedbackId as string },
+          })
+        : null,
     refusal: async (notif: Notification) =>
       notif.refusal
         ? notif.refusal
         : notif.refusalId
-          ? await prisma.sharingRefusals.findUnique({
-              where: { id: notif.refusalId as string },
-            })
-          : null,
+        ? await prisma.sharingRefusals.findUnique({
+            where: { id: notif.refusalId as string },
+          })
+        : null,
   },
   ProfileSharing: {
     origin: async (sharing: ProfileSharing) =>
       sharing.origin
         ? sharing.origin
         : sharing.originId
-          ? await prisma.betausers.findUnique({
-              where: { id: sharing.originId as string },
-            })
-          : null,
+        ? await prisma.betausers.findUnique({
+            where: { id: sharing.originId as string },
+          })
+        : null,
     target: async (sharing: ProfileSharing) =>
       sharing.target
         ? sharing.target
         : sharing.targetId
-          ? await prisma.betacompanies.findUnique({
-              where: { id: sharing.targetId as string },
-            })
-          : null,
+        ? await prisma.betacompanies.findUnique({
+            where: { id: sharing.targetId as string },
+          })
+        : null,
     offerTarget: async (sharing: ProfileSharing) =>
       sharing.offerTarget
         ? sharing.offerTarget
         : sharing.offerTargetId
-          ? await prisma.offers.findUnique({
-              where: { id: sharing.offerTargetId as string },
-            })
-          : null,
+        ? await prisma.offers.findUnique({
+            where: { id: sharing.offerTargetId as string },
+          })
+        : null,
   },
 };
 

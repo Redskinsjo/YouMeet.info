@@ -7,14 +7,14 @@ import {
   BetaCompany,
   Exact,
   GetCompaniesAutocompleteDocument,
-  GetGptCompetenciesDocument,
+  GetCompetenciesDocument,
   GetJobsDocument,
   GetOneCompanyDocument,
-  GetOneGptCompetencyDocument,
+  GetOneCompetencyDocument,
   GetOneJobDocument,
   GetOneTopSectorDocument,
   GetTopSectorsDocument,
-  GptCompetency,
+  Competency,
   Job,
   TopSector,
   Translated,
@@ -42,12 +42,12 @@ const names: {
 } = {
   requirements: {
     multiple: {
-      request: GetGptCompetenciesDocument,
-      response: "gptCompetencies",
+      request: GetCompetenciesDocument,
+      response: "competencies",
     },
     single: {
-      request: GetOneGptCompetencyDocument,
-      response: "oneGptCompetency",
+      request: GetOneCompetencyDocument,
+      response: "oneCompetency",
     },
   },
   sector: {
@@ -152,7 +152,7 @@ export function Options({
     if (name === "job")
       return ((one as Job).title as Translated)[language as "fr" | "en"];
     if (name === "company") return (one as BetaCompany).name;
-    if (name === "requirements") return (one as GptCompetency).title;
+    if (name === "requirements") return (one as Competency).title;
     if (name === "sector")
       ((one as TopSector).title as Translated)[language as "fr" | "en"];
 
@@ -164,6 +164,6 @@ export function Options({
       <MenuItem key={`${name}${getValue(one)}`} value={getValue(one)}>
         {getLabel(one)}
       </MenuItem>
-    ) : undefined,
+    ) : undefined
   );
 }

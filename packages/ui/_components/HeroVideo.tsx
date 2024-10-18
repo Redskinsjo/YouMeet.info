@@ -3,9 +3,7 @@ import BoldText from "@youmeet/ui/BoldText";
 import { useMediaQuery } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import AOS from "aos";
-import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
-import React from "react";
 
 export default function HeroVideo() {
   const { t } = useTranslation();

@@ -3,7 +3,7 @@ import {
   CreateCandidateMutationVariables,
   GetAccountInfosQueryVariables,
   GetArticlesQueryVariables,
-  GetGptCompetenciesQueryVariables,
+  GetCompetenciesQueryVariables,
   GetOffersQueryVariables,
   GetOneOfferQueryVariables,
   GetOneUserExperiencesQueryVariables,
@@ -55,7 +55,7 @@ import {
   QueryOneCandidateArgs,
   QueryOneCompanyArgs,
   QueryOneDetailsArgs,
-  QueryOneGptCompetencyArgs,
+  QueryOneCompetencyArgs,
   QueryOneJobArgs,
   QueryOneLeadArgs,
   QueryOneMeetArgs,
@@ -74,6 +74,7 @@ import {
   QueryUserArgs,
   QueryUsersArgs,
   QueryVideoByPublicIdArgs,
+  QueryCompetenciesArgs,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -121,6 +122,7 @@ import {
   getCompanyQuery,
   getCompetenciesParamsQuery,
   getCompetenciesQuery,
+  getCompetenciesTitleQuery,
   getCompetencyMetadataQuery,
   getCompetencyQuery,
   getCompetencySlugQuery,
@@ -163,6 +165,7 @@ import {
   ownQueuesParamsQuery,
   resetEmailLinkQuery,
   resetPasswordQuery,
+  searchSomeoneQuery,
   sendEmailOfferOpportunitiesQuery,
   sendEmailQuery,
   sendEmailToLeadQuery,
@@ -386,7 +389,7 @@ export const getCompetenciesParams = async <T>(
 ): Promise<Result<T>> => {
   const multiple = true;
   const result = await reqFnc(
-    "gptCompetencies",
+    "competencies",
     multiple,
     getCompetenciesParamsQuery,
     variables,
@@ -438,13 +441,13 @@ export const getUserMetadata = async <T>(
 };
 
 export const getCompetencyMetadata = async <T>(
-  variables?: QueryOneGptCompetencyArgs,
+  variables?: QueryOneCompetencyArgs,
   revalidate: number = 0,
   handling: true | undefined = undefined
 ): Promise<Result<T>> => {
   const multiple = false;
   const result = await reqFnc(
-    "oneGptCompetency",
+    "oneCompetency",
     multiple,
     getCompetencyMetadataQuery,
     variables,
@@ -742,13 +745,13 @@ export const createCandidate = async <T>(
 };
 
 export const getCompetency = async <T>(
-  variables?: QueryOneGptCompetencyArgs,
+  variables?: QueryOneCompetencyArgs,
   revalidate: number = 30,
   handling: true | undefined = undefined
 ): Promise<Result<T>> => {
   const multiple = false;
   const result = await reqFnc(
-    "oneGptCompetency",
+    "oneCompetency",
     multiple,
     getCompetencyQuery,
     variables,
@@ -761,13 +764,13 @@ export const getCompetency = async <T>(
 };
 
 export const getCompetencies = async <T>(
-  variables?: GetGptCompetenciesQueryVariables,
+  variables?: GetCompetenciesQueryVariables,
   revalidate: number = 0,
   handling: true | undefined = undefined
 ): Promise<Result<T>> => {
   const multiple = true;
   const result = await reqFnc(
-    "gptCompetencies",
+    "competencies",
     multiple,
     getCompetenciesQuery,
     variables,
@@ -779,13 +782,13 @@ export const getCompetencies = async <T>(
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
 export const getHomeCompetencies = async <T>(
-  variables?: GetGptCompetenciesQueryVariables,
+  variables?: GetCompetenciesQueryVariables,
   revalidate: number = 0,
   handling: true | undefined = undefined
 ): Promise<Result<T>> => {
   const multiple = true;
   const result = await reqFnc(
-    "gptCompetencies",
+    "competencies",
     multiple,
     getHomeCompetenciesQuery,
     variables,
@@ -930,14 +933,14 @@ export const createCandidateBasic = async <T>(
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
 
-export const getGptCompetencySlug = async <T>(
-  variables?: QueryOneGptCompetencyArgs,
+export const getCompetencySlug = async <T>(
+  variables?: QueryOneCompetencyArgs,
   revalidate: number = 0,
   handling: true | undefined = undefined
 ): Promise<Result<T>> => {
   const multiple = false;
   const result = await reqFnc(
-    "oneGptCompetency",
+    "oneCompetency",
     multiple,
     getCompetencySlugQuery,
     variables,
@@ -2111,6 +2114,44 @@ export const getUserCandidate = async <T>(
     "user",
     multiple,
     getUserCandidateQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const searchSomeone = async <T>(
+  variables: QueryUserArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "user",
+    multiple,
+    searchSomeoneQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getCompetenciesTitle = async <T>(
+  variables: QueryCompetenciesArgs,
+  revalidate: number = 1000,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = true;
+  const result = await reqFnc(
+    "competencies",
+    multiple,
+    getCompetenciesTitleQuery,
     variables,
     revalidate,
     handling

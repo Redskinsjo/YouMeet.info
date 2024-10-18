@@ -5,8 +5,17 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "plugins": [{ "name": "next" }]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "allowJs": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve"
   },
+  "ts-node": { "esm": true },
   "include": [
     "next-env.d.ts",
     "**/*.ts",

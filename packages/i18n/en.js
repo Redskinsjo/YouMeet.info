@@ -151,23 +151,24 @@ const search = {
 };
 
 const product = {
-  "and-its-technical-competencies": "technical competencies",
-  "and-its-general-competencies": "general competencies",
-  "and-its-behavioral-competencies": "behavioral competencies",
+  competencies: "competencies",
+  "and-its-technical-competencies": "technical",
+  "and-its-general-competencies": "general",
+  "and-its-behavioral-competencies": "behavioral",
   "no-job-without-a-meeting":
     "No recruiter decides without an interview. Our service allows you to +prepare for this interview=.+",
   "some-explanations-on-making-video": "Some advices on making a video",
   "connecting-you-with-recruiters": "Connecting you with recruiters",
   "cv-not-enough":
     "Do better than just a CV. Your CV is not enough, +make a Video CV.=+",
-  "home-hero-light": "See what +AI= can teach you about +humans= and its +",
+  "home-hero-light": "See what you can discover about +humans= and its +",
   "professional-connecting": "Professional Connecting",
-  productTitleMain: "Professional Connecting and ATS",
+  productTitleMain: "Professional Connecting",
   by: "by",
   and: "and",
   video: "Video",
   ai: "AI",
-  productDescription: "Shed Light with Video and AI",
+  productDescription: "Shed Light with Video",
   "insight-title": "Create a profile that stands out",
   "improve-your-applications":
     "Improve your applications with a video presentation and professional references and +gain time=.+",
@@ -442,6 +443,7 @@ const translations = {
   principalVideo: "Principal Video",
   "set-as-principal": "Set as principal",
   affiliates: "Affiliates",
+  "search-wait": "Wait for some time...",
 };
 
 const presentation = {
@@ -658,6 +660,9 @@ const partners = {
   search: "Search",
   job: "Job",
   "search-by-job": "Search by the job title",
+  "search-by-name-job": "Search by the name, job title",
+  "search-by-fullname": "Search by the fullname",
+  "search-for-someone": "Type the name of the person you are looking for",
   consult: "Consult",
 };
 

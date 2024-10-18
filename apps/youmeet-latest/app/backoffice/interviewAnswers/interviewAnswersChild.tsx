@@ -34,6 +34,9 @@ export default function InterviewAnswersChild({
           <Link href={`/backoffice/affiliations`} className="no-underline">
             <Button>Voir Affiliations</Button>
           </Link>
+          <Link href={`/backoffice/cv`} className="no-underline">
+            <Button>Voir CV</Button>
+          </Link>
         </div>
         <SubLayout>
           <div className="flex flex-col gap-[6px]">
@@ -47,11 +50,11 @@ export default function InterviewAnswersChild({
             key={response.id}
             className="border-[0.5px] border-solid border-grey300 p-[12px] box-border bg-white dark:darkBg dark:text-white"
           >
-            <div>{response.content}</div>
-            <div>
+            <div className="text-grey700 flex gap-[12px]">
+              <div className="font-semibold">{response.question?.type}:</div>
               <div>{response.question?.title}</div>
-              <div>{response.question?.type}</div>
             </div>
+            <div>{response.content}</div>
 
             <div>
               <div>{response.lead?.name}</div>

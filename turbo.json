@@ -17,6 +17,9 @@
       "persistent": true,
       "cache": false
     },
+    "start": {
+      "env": ["*"]
+    },
     "codegen": {
       "env": ["*"],
       "outputs": ["gql/generated.ts"]

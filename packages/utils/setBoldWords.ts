@@ -1,20 +1,20 @@
-import { getGptCompetencySlug } from "@youmeet/functions/request";
+import { getCompetencySlug } from "@youmeet/functions/request";
 import {
-  GetGptCompetenciesDocument,
-  GptCompetency,
+  GetCompetenciesTitleDocument,
+  Competency,
 } from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 export const useLinksRegex = () => {
-  const { data, loading } = useQuery(GetGptCompetenciesDocument);
+  const { data, loading } = useQuery(GetCompetenciesTitleDocument);
   const [regex, setRegex] = useState<RegExp | string>("");
   useEffect(() => {
     if (!loading) {
-      if (data?.gptCompetencies) {
+      if (data?.competencies) {
         const regex = new RegExp(
-          data?.gptCompetencies?.map((comp) => comp?.title).join("|"),
+          data?.competencies?.map((comp) => comp?.title).join("|"),
           "gi"
         );
         setRegex(regex);
@@ -49,15 +49,15 @@ export const setBoldWords = async (
   noEndingFormatting: boolean = false
 ): Promise<undefined | { text: string; slugs: { [key: number]: string } }> => {
   if (text && regex) {
-    const found = [...new Set(text.match(regex))] || [];
+    const found = [...new Set(text.match(regex))];
 
     let copy = text;
     let slugs = {};
     for (let i = 0; i < found.length; i++) {
       const keyword = found[i];
-      const comp = (await getGptCompetencySlug<GptCompetency>({
+      const comp = (await getCompetencySlug<Competency>({
         title: keyword,
-      })) as GptCompetency;
+      })) as Competency;
       if (comp && isCompetency(comp)) {
         if (comp?.slug && !isIntertwining(copy, keyword)) {
           (slugs as any)[i] = comp.slug;

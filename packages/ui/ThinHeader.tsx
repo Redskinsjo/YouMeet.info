@@ -57,7 +57,7 @@ export default function ThinHeader({
           <Logo />
         </div>
         <div className="cursor-pointer p-[1px] box-border flex-center gap-[12px]">
-          {!pathname.includes("/offres") &&
+          {/* {!pathname.includes("/offres") &&
             pathname !== "/" &&
             pathname !== "/blog" &&
             !pathname.includes("/medias") && (
@@ -71,7 +71,7 @@ export default function ThinHeader({
                   {t("company-offers")}
                 </div>
               </Link>
-            )}
+            )} */}
           <div className="flex-center h-[25px] w-[25px]">
             <CgDarkMode
               className="w-full h-full"

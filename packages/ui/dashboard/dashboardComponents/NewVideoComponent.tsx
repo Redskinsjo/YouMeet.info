@@ -2,7 +2,6 @@ import NewAddVideoComponent from "../../NewAddVideoComponent";
 import VideoComponent from "./VideoComponent";
 import { BetaUser } from "@youmeet/gql/generated";
 import { useMediaQuery } from "@mui/material";
-import React from "react";
 
 export default function NewVideoComponent({ profil }: { profil: BetaUser }) {
   const xs = useMediaQuery("(max-width:600px)");

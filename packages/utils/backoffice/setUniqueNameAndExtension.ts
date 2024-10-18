@@ -3,7 +3,7 @@ import { setName } from "../setName";
 import {
   formatForUrl,
   inFormatForUrl,
-} from "../resolvers/formatGptCompetencyTitle";
+} from "../resolvers/formatCompetencyTitle";
 import uid2 from "uid2";
 
 const setUniqueNameAndExtension = async (

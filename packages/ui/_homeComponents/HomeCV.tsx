@@ -1,7 +1,12 @@
-import BoldText from "../BoldText";
+import dynamic from "next/dynamic";
 import { mate } from "@youmeet/functions/fonts";
-import SectionTitle from "../_components/SectionTitle";
-import React from "react";
+
+const SectionTitle = dynamic(() => import("../_components/SectionTitle"), {
+  ssr: false,
+});
+const BoldText = dynamic(() => import("../BoldText"), {
+  ssr: false,
+});
 
 export default function HomeCV() {
   return (

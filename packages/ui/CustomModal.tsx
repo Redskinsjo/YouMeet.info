@@ -323,9 +323,10 @@ const VideoAddingModal = ({ type, cta, title, content }: CustomModalProps) => {
   }) => {
     const result = await onApplying(extras);
     if (result && isPayloadError(result)) {
-      return dispatch(setError("not-completed"));
+      dispatch(setError("not-completed"));
+    } else {
+      dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
-    dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
   };
 
   useEffect(() => {

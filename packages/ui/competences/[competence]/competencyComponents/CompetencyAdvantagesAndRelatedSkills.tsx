@@ -1,7 +1,6 @@
 import OneLineSkeleton from "../../../OneLineSkeleton";
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import React from "react";
 
 const BoldText = dynamic(() => import("../../../BoldText"), {
   ssr: false,
@@ -12,7 +11,7 @@ const CompetencyTitle = dynamic(() => import("./CompetencyTitle"));
 export default function CompetencyAdvantagesAndRelatedSkills({
   competency,
 }: {
-  competency: GptCompetency;
+  competency: Competency;
 }) {
   return (
     <section className="bg-grey50 dark:lightDarkBg flex-center gap-[48px] w-full p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] box-border xs:flex-col sm:flex-col md:flex-col md2:flex-col">
@@ -27,14 +26,15 @@ export default function CompetencyAdvantagesAndRelatedSkills({
           >
             {((competency?.advantages as string[]) || []).map(
               (adv: string, i: number) => (
-                <li className="darkLi" key={`${adv?.slice(0, 9)} ${i}`}>
-                  <BoldText
-                    links
-                    containerStyle={{ fontSize: "16px", textIndent: "0px" }}
-                    align="justify"
-                    text={adv}
-                  />
-                </li>
+                <BoldText
+                  links
+                  key={`${adv?.slice(0, 9)} ${i}`}
+                  containerStyle={{ fontSize: "16px", textIndent: "0px" }}
+                  align="justify"
+                  text={adv}
+                  component="li"
+                  fontSizeClass="darkLi"
+                />
               )
             )}
           </ul>
@@ -52,14 +52,15 @@ export default function CompetencyAdvantagesAndRelatedSkills({
             >
               {((competency.relatedSkills as string[]) || []).map(
                 (skill: string, i: number) => (
-                  <li className="darkLi" key={`${skill?.slice(0, 9)} ${i}`}>
-                    <BoldText
-                      links
-                      containerStyle={{ fontSize: "16px", textIndent: "0px" }}
-                      align="justify"
-                      text={skill[0].toUpperCase() + skill.slice(1)}
-                    />
-                  </li>
+                  <BoldText
+                    key={`${skill?.slice(0, 9)} ${i}`}
+                    links
+                    fontSizeClass="darkLi"
+                    component="li"
+                    containerStyle={{ fontSize: "16px", textIndent: "0px" }}
+                    align="justify"
+                    text={skill[0].toUpperCase() + skill.slice(1)}
+                  />
                 )
               )}
             </ul>

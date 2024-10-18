@@ -1,8 +1,5 @@
-import dynamic from "next/dynamic";
-import React from "react";
-
-const HomeCV = dynamic(() => import("../_homeComponents/HomeCV"));
-const HomeVideo = dynamic(() => import("../_homeComponents/HomeVideo"));
+import HomeCV from "../_homeComponents/HomeCV";
+import HomeVideo from "../_homeComponents/HomeVideo";
 
 export default function PromotionSection() {
   return (

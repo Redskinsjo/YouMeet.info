@@ -73,7 +73,7 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
         >
           Démarchage Linkedin
         </Button>
-        <form action={() => customOnSendEmailToLead(rowsIdsSelected)}>
+        <form action={customOnSendEmailToLead.bind(null, rowsIdsSelected)}>
           <Button type="submit" disabled={rowsIdsSelected.length === 0}>
             Envoyer Trial et Connexion Automatique
           </Button>
@@ -216,16 +216,14 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
                 return (
                   <div className="overflow-hidden overflow-x-scroll flex-center">
                     <form
-                      action={() =>
-                        customeOnUpdateLead({
-                          contacted: false,
-                          leadId: row.row.id as string,
-                        })
-                      }
+                      action={customeOnUpdateLead.bind(null, {
+                        contacted: false,
+                        leadId: row.row.id as string,
+                      })}
                     >
                       <Button type="submit">Réinitialise Contacté</Button>
                     </form>
-                    <form action={() => customOnDeleteLead(row.id)}>
+                    <form action={customOnDeleteLead.bind(null, row.id)}>
                       <Button type="submit">Supprimer</Button>
                     </form>
                   </div>

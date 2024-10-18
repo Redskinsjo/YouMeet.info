@@ -443,7 +443,7 @@ type Offer {
   contractType: String
   remote: String
   location: String
-  requirements: [GptCompetency]
+  requirements: [Competency]
   requirementsIds: [String]
   revenue: Int
   limitDate: DateTime
@@ -671,7 +671,7 @@ input BetaCompanyFilters {
   pro: Boolean
 }
 
-type GptCompetency {
+type Competency {
   id: ID
   slug: String
   extension: String
@@ -684,6 +684,7 @@ type GptCompetency {
   development: String
   conclusion: String
   keywords: [String]
+  appelations: [String]
 }
 
 input OfferInput {
@@ -951,7 +952,7 @@ input VideoInput {
   meetCandidateId: String
 }
 
-input GptCompetencyInput {
+input CompetencyInput {
   id: String
   title: String
   in: [String]
@@ -1299,7 +1300,7 @@ type Query {
   errors: [Error]
   recruiterQueuesFromProfile(targetId: ID, originId: ID): [BetaQueue]
   oneNotification(data: NotificationInput): Notification
-  uniqueCompetency(id: String, slug: String): GptCompetency
+  uniqueCompetency(id: String, slug: String): Competency
   oneUserInterviews(userId: ID): [InterviewOffer]
   accountInfos(userId: ID): BetaUser
   remarks: [UserRemark]
@@ -1336,11 +1337,8 @@ type Query {
   myFavorites(data: FavoriteInput, first: PageParamsInput): [Favorite]
   oneOffer(id: ID, slug: String): Offer
   offers(params: PageParamsInput, data: OfferInput): [Offer]
-  oneGptCompetency(title: String, id: ID, slug: String): GptCompetency
-  gptCompetencies(
-    data: GptCompetencyInput
-    params: PageParamsInput
-  ): [GptCompetency]
+  oneCompetency(title: String, id: ID, slug: String): Competency
+  competencies(data: CompetencyInput, params: PageParamsInput): [Competency]
   resetPassword(userId: ID, password: String): BetaUser
   resetEmailLink(email: String): BetaUser
   oneCompany(id: ID, filters: BetaCompanyFilters): BetaCompany
@@ -1369,7 +1367,13 @@ type Query {
   accountProfile(userId: ID): BetaProfile
   accountDetails(userId: ID): BetaDetails
   users(first: PageParamsInput, data: BetaUserInput): [BetaUser]
-  user(uniqueName: String, userId: ID, email: String, originId: ID): BetaUser
+  user(
+    uniqueName: String
+    userId: ID
+    email: String
+    originId: ID
+    fullname: String
+  ): BetaUser
   experiences: [BetaExperience]
   oneExperience(id: ID, email: String): BetaExperience
   companies(first: PageParamsInput, filters: BetaCompanyFilters): [BetaCompany!]
@@ -1427,7 +1431,7 @@ type Mutation {
   deleteOffer(id: ID): Offer
   createOffer(data: OfferInput): Offer
   submitVideo(data: VideoInput): Video
-  deleteGptCompetency(id: ID): GptCompetency
+  deleteCompetency(id: ID): Competency
   deleteUser(userId: ID): BetaUser
   deleteLead(leadId: ID): Lead
   createLead(data: LeadInput): Lead

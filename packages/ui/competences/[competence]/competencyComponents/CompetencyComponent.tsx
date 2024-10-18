@@ -1,5 +1,4 @@
-import React from "react";
-import { GptCompetency } from "@youmeet/gql/generated";
+import { Competency } from "@youmeet/gql/generated";
 import CompetencyDefinition from "./CompetencyDefinition";
 import CompetencyImportance from "./CompetencyImportance";
 import CompetencyDevelopment from "./CompetencyDevelopment";
@@ -11,7 +10,7 @@ import CompetencyMainTitle from "./CompetencyMainTitle";
 export default function CompetencyComponent({
   competency,
 }: {
-  competency: GptCompetency;
+  competency: Competency;
 }) {
   return (
     <main className="flex flex-col items-center gap-[96px] w-full h-full">

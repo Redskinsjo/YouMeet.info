@@ -14,7 +14,6 @@ import { setCvFile } from "@youmeet/global-config/features/user";
 import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/submitFile";
-import React from "react";
 
 export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const cvRef = useRef<HTMLFormElement | null>(null);

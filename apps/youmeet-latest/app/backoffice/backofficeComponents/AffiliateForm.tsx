@@ -73,8 +73,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           watch("job")
         )) as withData<BetaUser> | PayloadBackendError;
 
-        console.log(result, "result");
-
         if (result && isPayloadError(result)) {
           throw new BackendError(
             BACKEND_ERRORS.PROCESSING,
@@ -125,17 +123,18 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
                   );
                 } else {
                   dispatch(resetModal("ok") as UnknownAction);
-                  return dispatch(
+                  dispatch(
                     setModal({ display: "backofficeConfirm" }) as UnknownAction
                   );
                 }
               }
             }
+          } else {
+            throw new BackendError(
+              BACKEND_ERRORS.PROCESSING,
+              BACKEND_MESSAGES.PROCESSING
+            );
           }
-          throw new BackendError(
-            BACKEND_ERRORS.PROCESSING,
-            BACKEND_MESSAGES.PROCESSING
-          );
         }
       } catch (err: any) {
         await createError({

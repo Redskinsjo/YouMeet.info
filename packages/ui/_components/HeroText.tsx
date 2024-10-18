@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
-import React from "react";
 
-const HeroTitles = dynamic(() => import("./HeroTitles"));
-const HeroStyledText = dynamic(() => import("./HeroStyledText"));
+const HeroTitles = dynamic(() => import("./HeroTitles"), { ssr: false });
+const HeroStyledText = dynamic(() => import("./HeroStyledText"), {
+  ssr: false,
+});
 
 export default function HeroText() {
   return (

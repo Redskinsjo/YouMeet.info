@@ -1,14 +1,14 @@
 import {
   BetaCompany,
   GetCompaniesQuery,
-  GetGptCompetenciesQuery,
+  GetCompetenciesQuery,
   GetJobsQuery,
   GetOneCompanyQuery,
-  GetOneGptCompetencyQuery,
+  GetOneCompetencyQuery,
   GetOneJobQuery,
   GetOneTopSectorQuery,
   GetTopSectorsQuery,
-  GptCompetency,
+  Competency,
   Job,
   TopSector,
 } from "@youmeet/gql/generated";
@@ -23,25 +23,25 @@ import {
 } from "react-hook-form";
 import { SimpleSelectNames } from "./SimpleSelectNames";
 
-export type Queries = GetGptCompetenciesQuery &
+export type Queries = GetCompetenciesQuery &
   GetTopSectorsQuery &
   GetJobsQuery &
   GetOneTopSectorQuery &
   GetOneJobQuery &
-  GetOneGptCompetencyQuery &
+  GetOneCompetencyQuery &
   GetCompaniesQuery &
   GetOneCompanyQuery;
 
 export type QueriesResponses = keyof Queries;
 
 export type QueriesDocuments =
-  | GptCompetency[]
+  | Competency[]
   | TopSector[]
   | Job[]
   | BetaCompany[];
-export type QueriesOneDocument = GptCompetency | TopSector | Job | BetaCompany;
+export type QueriesOneDocument = Competency | TopSector | Job | BetaCompany;
 export type PartialQueriesDocuments =
-  | Partial<GptCompetency>[]
+  | Partial<Competency>[]
   | Partial<TopSector>[]
   | Partial<Job>[]
   | Partial<BetaCompany>[];
