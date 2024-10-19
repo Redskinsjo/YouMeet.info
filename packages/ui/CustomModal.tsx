@@ -289,7 +289,6 @@ const modals: { [type in CustomModalType]: ModalContentProps } = {
 };
 
 const VideoAddingModal = ({ type, cta, title, content }: CustomModalProps) => {
-  const md = useMediaQuery("(max-width:900px)");
   const user = useSelector(
     (state: RootState) => state?.user as unknown as UserState
   );
@@ -303,7 +302,6 @@ const VideoAddingModal = ({ type, cta, title, content }: CustomModalProps) => {
   const [checkAvailableVideos, setCheckAvailableVideos] = useState(false);
   const [loading, setLoading] = useState(true);
   const [chosenVideo, setChosenVideo] = useState<Video | undefined>();
-  const [displayAdvices, setDisplayAdvices] = useState(false);
 
   const fetchOffer = useCallback(async () => {
     if (modal.publicOffer?.id) {
@@ -499,13 +497,9 @@ const CustomModalContent = ({
   const [choice, setChoice] = useState(
     type === "accountCandidate" ? "cv" : "premium"
   );
-  const xs = useMediaQuery("(max-width:600px)");
-  const sm = useMediaQuery("(max-width:720px)");
-  const md = useMediaQuery("(max-width:900px)");
   const user = useSelector(
     (state: RootState) => state?.user as unknown as UserState
   );
-  const dispatch = useDispatch();
   const {
     t,
     i18n: { language },
@@ -703,7 +697,6 @@ const FeedBackModal = ({ type }: CustomModalProps) => {
 
 const NotificationsModalComponent = () => {
   const user = useSelector((state: RootState) => state.user as UserState);
-  const modal = useSelector((state: RootState) => state.modal as ModalState);
   const { data, refetch, loading } = useQuery(GetMyNotificationsDocument, {
     variables: {
       targetId: user.id,
@@ -995,8 +988,6 @@ export function ModalWrapper({ children }: { children: ReactElement }) {
 }
 
 const CustomModal = ({ type, setDisplayModal, children }: CustomModalProps) => {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
   const modal = useSelector((state: RootState) => state.modal as ModalState);
   const router = useRouter();
 
@@ -1033,10 +1024,6 @@ const CustomModal = ({ type, setDisplayModal, children }: CustomModalProps) => {
     [type]
   );
 
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
   const aboveError =
     type === "fileTooLarge" ||
     type === "not-completed" ||
@@ -1045,46 +1032,44 @@ const CustomModal = ({ type, setDisplayModal, children }: CustomModalProps) => {
     type === "backofficeConfirm";
 
   return (
-    !loading && (
-      <div
-        className="absolute h-full w-full fadeIn"
-        style={{
-          zIndex: aboveError ? 1101 : 1100,
-          background: "rgba(0,0,0,0.5)",
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (type === "login" || type === "record") router.back();
-          if (setDisplayModal)
-            setDisplayModal(
-              type === "consent2" ||
-                type === "consent3" ||
-                type === "retrieval" ||
-                type === "video"
-                ? undefined
-                : false
-            );
-        }}
-      >
-        {type === "video" ? (
-          <div className="w-full h-screen">{modalContent}</div>
-        ) : (
-          <div className="h-screen flex fixed w-full">
-            <div className="relative m-auto box-border xs:w-screen sm:w-screen md:w-screen w-[600px] xs:h-screen sm:h-screen md:h-screen max-h-screen flex-center">
-              <div
-                className={
-                  type === "login"
-                    ? "box-border h-full xs:w-screen sm:w-screen xs:h-screen sm:h-screen md:h-screen rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 flex-center w-full"
-                    : "box-border rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 bg-white xs:h-full sm:h-full md:h-full dark:darkBg flex-center w-full"
-                }
-              >
-                {children ?? modalContent}
-              </div>
+    <div
+      className="absolute h-full w-full fadeIn"
+      style={{
+        zIndex: aboveError ? 1101 : 1100,
+        background: "rgba(0,0,0,0.5)",
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        if (type === "login" || type === "record") router.back();
+        if (setDisplayModal)
+          setDisplayModal(
+            type === "consent2" ||
+              type === "consent3" ||
+              type === "retrieval" ||
+              type === "video"
+              ? undefined
+              : false
+          );
+      }}
+    >
+      {type === "video" ? (
+        <div className="w-full h-screen">{modalContent}</div>
+      ) : (
+        <div className="h-screen flex fixed w-full">
+          <div className="relative m-auto box-border xs:w-screen sm:w-screen md:w-screen w-[600px] xs:h-screen sm:h-screen md:h-screen max-h-screen flex-center">
+            <div
+              className={
+                type === "login"
+                  ? "box-border h-full xs:w-screen sm:w-screen xs:h-screen sm:h-screen md:h-screen rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 flex-center w-full"
+                  : "box-border rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 bg-white xs:h-full sm:h-full md:h-full dark:darkBg flex-center w-full"
+              }
+            >
+              {children ?? modalContent}
             </div>
           </div>
-        )}
-      </div>
-    )
+        </div>
+      )}
+    </div>
   );
 };
 

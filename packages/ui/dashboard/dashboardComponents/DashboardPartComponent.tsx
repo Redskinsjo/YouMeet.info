@@ -6,7 +6,7 @@ import NewTargetContractTypeComponent from "./NewTargetContractTypeComponent";
 import NewVideoComponent from "./NewVideoComponent";
 import ProfileViewsComponent from "./ProfileViewsComponent";
 import { Tab, Tabs, useMediaQuery } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import UserNotices from "./UserNotices";
 import AffiliatesComponent from "./AffiliatesComponent";
@@ -51,10 +51,13 @@ export default function DashboardPartComponent({
   const [loading, setLoading] = useState(true);
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-    localStorage.setItem("dashboardTab", newValue.toString());
-  };
+  const handleChange = useCallback(
+    (event: React.SyntheticEvent, newValue: number) => {
+      setValue(newValue);
+      localStorage.setItem("dashboardTab", newValue.toString());
+    },
+    []
+  );
 
   useEffect(() => {
     const tab = localStorage.getItem("dashboardTab");
@@ -103,6 +106,10 @@ export default function DashboardPartComponent({
                 width={xs || sm ? 300 : 400}
                 height={xs || sm ? 225 : 300}
                 profil={profil}
+                hideTooltip={() => {}}
+                showTooltip={() => {}}
+                tooltipOpen={false}
+                updateTooltip={() => {}}
               />
             </div>
             {/* <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">

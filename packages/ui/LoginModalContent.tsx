@@ -1,12 +1,6 @@
 "use client";
-import { Button, Checkbox, useMediaQuery } from "@mui/material";
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  Suspense,
-} from "react";
+import { Button, useMediaQuery } from "@mui/material";
+import { useCallback, useEffect, useRef, useState, Suspense } from "react";
 import {
   CustomModalProps,
   SignupCookiePayload,
@@ -51,8 +45,6 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
   const [status, setStatus] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
   const router = useRouter();
-
-  const dispatch = useDispatch();
 
   const keydownListener = useCallback(
     (e: any) => {

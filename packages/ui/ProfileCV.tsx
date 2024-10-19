@@ -2,7 +2,6 @@
 import { dev } from "@youmeet/functions/imports";
 import { BetaUser } from "@youmeet/gql/generated";
 import Link from "next/link";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 export default function ProfileCV({ profil }: { profil: BetaUser }) {

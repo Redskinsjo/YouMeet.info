@@ -4,7 +4,6 @@ import BoldText from "./BoldText";
 import { useTranslation } from "react-i18next";
 import NewLinkComponent from "./NewLinkComponent";
 import ProfileCV from "./ProfileCV";
-import React from "react";
 
 export default function ProfileCVComponent({
   account,

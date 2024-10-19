@@ -54,7 +54,9 @@ export type AreaProps = {
   margin?: { top: number; right: number; bottom: number; left: number };
 };
 
-export default withTooltip<AreaProps, TooltipData>(
+const ProfileViewsComponent: React.FC<
+  AreaProps & WithTooltipProvidedProps<TooltipData>
+> = withTooltip<AreaProps, TooltipData>(
   ({
     width,
     height,
@@ -286,3 +288,5 @@ export default withTooltip<AreaProps, TooltipData>(
     );
   }
 );
+
+export default ProfileViewsComponent;

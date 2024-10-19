@@ -5,7 +5,6 @@ import NewProfileComponent from "./NewProfileComponent";
 import isProfileEmpty from "@youmeet/utils/isProfileEmpty";
 import { BetaDetails, BetaUser } from "@youmeet/gql/generated";
 import ProfileDescription from "./ProfileDescription";
-import React from "react";
 
 export default function PersonalInfos({
   profil,

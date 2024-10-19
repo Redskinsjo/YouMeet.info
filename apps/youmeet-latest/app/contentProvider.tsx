@@ -8,6 +8,7 @@ import { outfit } from "@youmeet/functions/fonts";
 import Modals from "@youmeet/ui/_homeComponents/Modals";
 import ThinHeader from "@youmeet/ui/ThinHeader";
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 
 export default function ContentProvider({
   children,

@@ -8,7 +8,7 @@ import {
 } from "@youmeet/gql/generated";
 import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { getLead } from "@youmeet/functions/request";
 import { getUniversalFromCodeAndNumber } from "@youmeet/utils/formatPhone";
@@ -31,17 +31,18 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
   const [rowsIdsSelected, setRowsIdsSelected] = useState<string[]>([]);
   const dispatch = useDispatch();
 
-  const customOnDeleteLead = async (id: string) => {
+  const customOnDeleteLead = useCallback(async (id: string) => {
     await onDeleteLead(id);
-  };
+  }, []);
 
-  const customeOnUpdateLead = async (
-    updates: MutationUpdateLeadArgs["data"]
-  ) => {
-    await onUpdateLead(updates);
-  };
+  const customeOnUpdateLead = useCallback(
+    async (updates: MutationUpdateLeadArgs["data"]) => {
+      await onUpdateLead(updates);
+    },
+    []
+  );
 
-  const customOnSendEmailToLead = async (leadsIds: string[]) => {
+  const customOnSendEmailToLead = useCallback(async (leadsIds: string[]) => {
     const result = await onSendEmailToLead(leadsIds);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed") as UnknownAction);
@@ -50,7 +51,7 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
-  };
+  }, []);
 
   return (
     <>

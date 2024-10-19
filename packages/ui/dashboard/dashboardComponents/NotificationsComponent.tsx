@@ -1,5 +1,11 @@
 "use client";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   BetaUser,
   GetOneInterviewOfferDocument,
@@ -113,33 +119,40 @@ export default function NotificationsComponent({
   > | null>(null);
   const [rows, setRows] = useState<RowNotification[]>([]);
 
-  const isSubscribedPro = subscription
-    ? subscription?.subscriptions.find(
-        (sub) =>
-          (sub.plan.id === chatbotProduct && (sub.plan as any).active) ||
-          (sub.plan.id === premiumProduct && (sub.plan as any).active)
-      )
-    : undefined;
+  const isSubscribedPro = useMemo(
+    () =>
+      subscription
+        ? subscription?.subscriptions.find(
+            (sub) =>
+              (sub.plan.id === chatbotProduct && (sub.plan as any).active) ||
+              (sub.plan.id === premiumProduct && (sub.plan as any).active)
+          )
+        : undefined,
+    [subscription]
+  );
 
-  const shouldSee = (not: ProfileSharing) =>
-    (not.origin?.id && unlockedIds?.includes(not.origin?.id as string)) ||
-    isSubscribedPro
-      ? true
-      : false;
+  const shouldSee = useCallback(
+    (not: ProfileSharing) =>
+      (not.origin?.id && unlockedIds?.includes(not.origin?.id as string)) ||
+      isSubscribedPro
+        ? true
+        : false,
+    [unlockedIds, isSubscribedPro]
+  );
 
-  const handleCloseSnackbar = () => setSnackbar(null);
+  const handleCloseSnackbar = useCallback(() => setSnackbar(null), []);
 
-  const handleEntered = () => {
+  const handleEntered = useCallback(() => {
     noButtonRef.current?.focus();
-  };
+  }, [noButtonRef.current]);
 
-  const handleNo = () => {
+  const handleNo = useCallback(() => {
     const { resolve } = promiseArguments;
     resolve("cancelled");
     setPromiseArguments(null);
-  };
+  }, [promiseArguments]);
 
-  const handleYes = async (id: string, type: "s" | "o" | "i-o") => {
+  const handleYes = useCallback(async (id: string, type: "s" | "o" | "i-o") => {
     const { reject, resolve } = promiseArguments;
 
     const result = await onDeleteNotification(id, type);
@@ -160,18 +173,18 @@ export default function NotificationsComponent({
       resolve("success");
       setPromiseArguments(null);
     }
-  };
+  }, []);
 
-  const handleDeleteClick = async (
-    id: GridRowId,
-    type: "s" | "o" | "i-o"
-  ): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      setPromiseArguments({ resolve, reject, id, type });
-    });
-  };
+  const handleDeleteClick = useCallback(
+    async (id: GridRowId, type: "s" | "o" | "i-o"): Promise<string> => {
+      return new Promise((resolve, reject) => {
+        setPromiseArguments({ resolve, reject, id, type });
+      });
+    },
+    []
+  );
 
-  const renderConfirmDialog = () => {
+  const renderConfirmDialog = useCallback(() => {
     if (!promiseArguments) {
       return null;
     }
@@ -201,7 +214,7 @@ export default function NotificationsComponent({
         </DialogActions>
       </Dialog>
     );
-  };
+  }, [promiseArguments]);
 
   const customOnUnlockCandidate = useCallback(
     async (extras: {
@@ -238,57 +251,60 @@ export default function NotificationsComponent({
     [user]
   );
 
-  const deleteColumn = {
-    field: "actions",
-    headerClassName:
-      "text-blueGrey900 dark:text-grey500 font-extralight flex-center",
-    headerName: "Actions",
-    minWidth: sharings ? 180 : 120,
-    renderCell: (row: any) => {
-      return (
-        <div className="flex-center h-full gap-[6px]">
-          <Button
-            onClick={async (e) => {
-              e.stopPropagation();
-              await handleDeleteClick(
-                row.row.id,
-                sharings ? "s" : offers ? "o" : "i-o"
-              );
-            }}
-          >
-            {t("delete")}
-          </Button>
-          {sharings && !shouldSee(row.row) && (
-            <div onClick={(e) => e.stopPropagation()}>
-              <TooltipedAsset asset={t("unlock-candidate")}>
-                <form
-                  action={customOnUnlockCandidate.bind(null, {
-                    cardPrice: row.row.cardPrice,
-                    originId: user.id,
-                    targetId: row.row.origin?.id,
-                  })}
-                  className={
-                    user.professionalEmail
-                      ? "cursor-pointer group flex-center"
-                      : "cursor-not-allowed group flex-center"
-                  }
-                >
-                  <Button
-                    type="submit"
-                    className="bg-transparent hover:bg-deepPurple50 dark:hover:extraLightDarkBg animate-pulse hover:animate-none"
+  const deleteColumn = useMemo(
+    () => ({
+      field: "actions",
+      headerClassName:
+        "text-blueGrey900 dark:text-grey500 font-extralight flex-center",
+      headerName: "Actions",
+      minWidth: sharings ? 180 : 120,
+      renderCell: (row: any) => {
+        return (
+          <div className="flex-center h-full gap-[6px]">
+            <Button
+              onClick={async (e) => {
+                e.stopPropagation();
+                await handleDeleteClick(
+                  row.row.id,
+                  sharings ? "s" : offers ? "o" : "i-o"
+                );
+              }}
+            >
+              {t("delete")}
+            </Button>
+            {sharings && !shouldSee(row.row) && (
+              <div onClick={(e) => e.stopPropagation()}>
+                <TooltipedAsset asset={t("unlock-candidate")}>
+                  <form
+                    action={customOnUnlockCandidate.bind(null, {
+                      cardPrice: row.row.cardPrice,
+                      originId: user.id,
+                      targetId: row.row.origin?.id,
+                    })}
+                    className={
+                      user.professionalEmail
+                        ? "cursor-pointer group flex-center"
+                        : "cursor-not-allowed group flex-center"
+                    }
                   >
-                    <FaLockOpen className="group-hover:font-bold item text-deepPurple900 dark:text-white" />
-                  </Button>
-                </form>
-              </TooltipedAsset>
-            </div>
-          )}
-        </div>
-      );
-    },
-  };
+                    <Button
+                      type="submit"
+                      className="bg-transparent hover:bg-deepPurple50 dark:hover:extraLightDarkBg animate-pulse hover:animate-none"
+                    >
+                      <FaLockOpen className="group-hover:font-bold item text-deepPurple900 dark:text-white" />
+                    </Button>
+                  </form>
+                </TooltipedAsset>
+              </div>
+            )}
+          </div>
+        );
+      },
+    }),
+    []
+  );
 
-  const getRows = () => {
+  const getRows = useCallback(() => {
     const rows = (
       (notifications || [])?.filter((not) => not) as (
         | ProfileSharing
@@ -336,7 +352,7 @@ export default function NotificationsComponent({
     });
 
     setRows(rows);
-  };
+  }, [notifications, language]);
 
   useEffect(() => {
     getRows();

@@ -1,4 +1,3 @@
-import React from "react";
 import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 

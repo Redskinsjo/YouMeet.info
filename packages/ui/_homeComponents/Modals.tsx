@@ -1,10 +1,11 @@
-import CustomModal from "../CustomModal";
 import { GlobalState, setError } from "@youmeet/global-config/features/global";
 import { ModalState, resetModal } from "@youmeet/global-config/features/modal";
 import { RootState } from "@youmeet/global-config/store";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import React from "react";
+import dynamic from "next/dynamic";
+
+const CustomModal = dynamic(() => import("../CustomModal"), { ssr: false });
 
 export default function Modals() {
   const error = useSelector(
