@@ -1,7 +1,7 @@
 import { BetaUser } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import CreateAffiliateUser from "../backofficeComponents/CreateAffiliateUser";
+import CreateAffiliateUser from "@youmeet/ui/backoffice/backofficeComponents/CreateAffiliateUser";
 import dynamic from "next/dynamic";
 
 const BackofficeUsersComponent = dynamic(

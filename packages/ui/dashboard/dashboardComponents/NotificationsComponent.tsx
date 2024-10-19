@@ -227,11 +227,13 @@ export default function NotificationsComponent({
               originId: profil.id,
             })) as UnlockedUser[];
             setMyUnlockedUsers(unlockedUsers);
-            return;
           }
+        } else {
+          dispatch(setError("creditTooLow"));
         }
+      } else {
+        dispatch(setError("creditTooLow"));
       }
-      dispatch(setError("creditTooLow"));
     },
     [user]
   );

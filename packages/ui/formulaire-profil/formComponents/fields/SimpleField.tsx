@@ -1,7 +1,6 @@
 "use client";
 import { TextField, useMediaQuery } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { purple } from "@mui/material/colors";
+import React, { useEffect, useId, useState } from "react";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
 import {
   linkedinIdRegex,
@@ -27,7 +26,6 @@ const set = (name: string) => {
 };
 
 export default function SimpleField({
-  id,
   name,
   label,
   required,
@@ -48,6 +46,7 @@ export default function SimpleField({
   fromYouMeet,
   category,
 }: NewFieldProps) {
+  const id = useId();
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const user = useSelector((state: RootState) => state.user as UserState);

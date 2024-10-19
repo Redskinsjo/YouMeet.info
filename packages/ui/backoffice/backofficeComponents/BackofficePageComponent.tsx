@@ -1,10 +1,11 @@
 import Layout from "../../Layout";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
-import React from "react";
 import BackofficeLeadsComponent from "./BackofficeLeadsComponent";
 import dynamic from "next/dynamic";
 
-const MoreFeaturesLeads = dynamic(() => import("./MoreFeaturesLeads"));
+const MoreFeaturesLeads = dynamic(() => import("./MoreFeaturesLeads"), {
+  ssr: false,
+});
 
 export default function BackofficePageComponent({
   leads,

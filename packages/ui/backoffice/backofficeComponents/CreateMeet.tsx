@@ -213,17 +213,17 @@ export default function CreateProUser() {
               );
             } else {
               dispatch(resetModal("ok") as UnknownAction);
-              return dispatch(
+              dispatch(
                 setModal({ display: "backofficeConfirm" }) as UnknownAction
               );
             }
           }
+        } else {
+          throw new BackendError(
+            BACKEND_ERRORS.PROCESSING,
+            BACKEND_MESSAGES.PROCESSING
+          );
         }
-
-        throw new BackendError(
-          BACKEND_ERRORS.PROCESSING,
-          BACKEND_MESSAGES.PROCESSING
-        );
       }
     } catch (err: any) {
       await createError({
@@ -268,7 +268,6 @@ export default function CreateProUser() {
         </SubLayout>
 
         <SimpleField
-          id={13}
           name="chosen"
           type="text"
           label="Choisir candidat"
@@ -302,7 +301,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={1}
                 name="firstnameCandidate"
                 type="text"
                 label="Prénom"
@@ -314,7 +312,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={2}
                 name="lastnameCandidate"
                 type="text"
                 label="Nom de famille"
@@ -326,7 +323,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={3}
                 name="emailCandidate"
                 type="text"
                 label="Email"
@@ -338,7 +334,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={String(4)}
                 name="job"
                 type="text"
                 label="Job Title"
@@ -352,7 +347,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={5}
                 name="linkedinProfileIdCandidate"
                 type="text"
                 label="Page Linkedin"
@@ -366,7 +360,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={6}
                 name="phoneCandidate"
                 type="text"
                 label="Téléphone"
@@ -385,7 +378,6 @@ export default function CreateProUser() {
                     type="file"
                     label="Vidéo Principale"
                     name="videoMain"
-                    id={String(7)}
                     location="videoMain"
                   />
                 </div>
@@ -408,7 +400,6 @@ export default function CreateProUser() {
                     type="file"
                     label="Vidéo Preview 1"
                     name="videoPreview1"
-                    id={String(8)}
                     location="videoPreview1"
                   />
                   <AvatarsField
@@ -416,7 +407,6 @@ export default function CreateProUser() {
                     type="file"
                     label="Vidéo Preview 2"
                     name="videoPreview2"
-                    id={String(9)}
                     location="videoPreview2"
                   />
                 </div>
@@ -431,7 +421,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={1}
                 name="firstnameRecruiter"
                 type="text"
                 label="Prénom"
@@ -443,7 +432,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={2}
                 name="lastnameRecruiter"
                 type="text"
                 label="Nom de famille"
@@ -455,7 +443,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={3}
                 name="emailRecruiter"
                 type="text"
                 label="Email"
@@ -468,7 +455,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={5}
                 name="linkedinProfileIdRecruiter"
                 type="text"
                 label="Page Linkedin"
@@ -479,7 +465,6 @@ export default function CreateProUser() {
                 setError={setError}
                 errors={errors}
                 clearErrors={clearErrors}
-                id={6}
                 name="phoneRecruiter"
                 type="text"
                 label="Téléphone"

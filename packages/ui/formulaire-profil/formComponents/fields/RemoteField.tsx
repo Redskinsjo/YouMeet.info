@@ -1,7 +1,7 @@
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import { MenuItem, TextField } from "@mui/material";
 import { purple } from "@mui/material/colors";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import React from "react";
 
@@ -11,12 +11,12 @@ export default function RemoteField({
   errors,
   placeholder,
   label,
-  id,
   setValue,
   type,
   value,
   name,
 }: GenericFieldProps) {
+  const id = useId();
   const [fieldVal, setFieldVal] = useState(value);
   const { t } = useTranslation();
   return (

@@ -11,7 +11,6 @@ import { Button, Checkbox, MenuItem } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import React from "react";
 
 export default function CreateLeadForm({ users }: { users: BetaUser[] }) {
   const dispatch = useDispatch();
@@ -36,30 +35,17 @@ export default function CreateLeadForm({ users }: { users: BetaUser[] }) {
       action={customOnCreateLead}
       className="w-full flex-center flex-col gap-[24px]"
     >
+      <SimpleField required name="name" label="Nom complet" type="text" />
+      <SimpleField required name="email" label="Email" type="text" />
+      <PhoneField name="phone" type="text" label="Phone" />
       <SimpleField
         required
-        id={1}
-        name="name"
-        label="Nom complet"
-        type="text"
-      />
-      <SimpleField required id={2} name="email" label="Email" type="text" />
-      <PhoneField id={3} name="phone" type="text" label="Phone" />
-      <SimpleField
-        required
-        id={4}
         name="type"
         label="Type recruiter - candidate - newsletter"
         type="text"
       />
-      <SimpleField id={4} name="linkedin" label="Linkedin" type="text" />
-      <SimpleField
-        id={13}
-        name="parentId"
-        type="text"
-        label="Choisir parent"
-        select
-      >
+      <SimpleField name="linkedin" label="Linkedin" type="text" />
+      <SimpleField name="parentId" type="text" label="Choisir parent" select>
         {users
           .concat([{ id: "", firstname: "Choisir", lastname: "candidat" }])
           .map((user) => (

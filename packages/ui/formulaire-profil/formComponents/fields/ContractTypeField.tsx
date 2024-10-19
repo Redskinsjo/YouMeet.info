@@ -1,7 +1,7 @@
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import { MenuItem, TextField } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import React from "react";
 
@@ -13,10 +13,10 @@ const ContractTypeField = ({
   placeholder,
   label,
   type,
-  id,
   name,
   border = `1px solid ${grey[500]}`,
 }: GenericFieldProps) => {
+  const id = useId();
   const [fieldVal, setFieldVal] = useState(value);
   const { t } = useTranslation();
   return (

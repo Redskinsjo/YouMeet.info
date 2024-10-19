@@ -184,7 +184,7 @@ export default function PageContent({
           <div className="rounded-[30px] w-full">
             <div className="w-full flex-center flex-col bg-grey100 border-[0.5px] border-solid border-grey300 dark:extraLightDarkBg rounded-xl p-[8px] box-border">
               {firstPartPages.map((field) => {
-                const currentField = firstPartPages[field.props.id - 1];
+                const currentField = firstPartPages[field.props.id ?? 1 - 1];
                 const currentValue = watch(currentField.props.name);
 
                 return createElement(

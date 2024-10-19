@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
-import React from "react";
 import { grey } from "@mui/material/colors";
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
+import { useId } from "react";
 import { IoIosSearch } from "react-icons/io";
 
 const GenericField = ({
@@ -21,8 +21,8 @@ const GenericField = ({
   fetchData,
   border = `1px solid ${grey[500]}`,
   type,
-  id,
 }: GenericFieldProps) => {
+  const id = useId();
   let registerParams = {};
   let specificNameParams = {};
   let autoCompleteParams = {};

@@ -8,7 +8,6 @@ import phoneCodes from "@youmeet/raw-data/phoneCodes.json";
 import React from "react";
 
 export default function PhoneField({
-  id,
   name,
   label,
   type,
@@ -23,7 +22,6 @@ export default function PhoneField({
     <div className="flex w-full gap-[3px]">
       <div className="w-[120px] xs:w-[130px] sm:w-[130px]">
         <SimpleField
-          id={40}
           name="phonecode"
           type={type}
           label="Code"
@@ -69,7 +67,6 @@ export default function PhoneField({
         </SimpleField>
       </div>
       <SimpleField
-        id={id}
         label={label}
         name={name}
         type={type}

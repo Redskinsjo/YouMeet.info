@@ -63,14 +63,12 @@ export default function ResetPasswordContent({ userId }: { userId: string }) {
           <SimpleField
             type="password"
             name="password"
-            id={1}
             label="Mot de passe"
             required
           />
           <SimpleField
             type="password"
             name="confirmPassword"
-            id={2}
             label="Confirmer Mot de passe"
             required
           />

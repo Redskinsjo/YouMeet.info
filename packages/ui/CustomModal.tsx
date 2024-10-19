@@ -669,7 +669,6 @@ const FeedBackModal = ({ type }: CustomModalProps) => {
               />
             )}
             <SimpleField
-              id={1}
               name="feedback"
               type="text"
               label="Feedback"
@@ -678,14 +677,12 @@ const FeedBackModal = ({ type }: CustomModalProps) => {
               required
             />
             <SimpleField
-              id={2}
               name="userId"
               type="hidden"
               value={modal.user.id}
               required
             />
             <SimpleField
-              id={3}
               name="authorId"
               type="hidden"
               value={user.id}
