@@ -1,15 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Layout from "@youmeet/ui/Layout";
 import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import ProfilePartLoading from "@youmeet/ui/ProfilePartLoading";
 import VideoPartLoading from "@youmeet/ui/VideoPartLoading";
 import Discussions from "@youmeet/ui/_homeComponents/Discussions";
+import ProfilePartComponent from "@youmeet/ui/ProfilePartComponent";
 
-const ProfilePartComponent = dynamic(
-  () => import("@youmeet/ui/ProfilePartComponent"),
-  { ssr: false, loading: () => <ProfilePartLoading /> }
-);
 const DashboardPartComponent = dynamic(
   () =>
     import("@youmeet/ui/dashboard/dashboardComponents/DashboardPartComponent"),
