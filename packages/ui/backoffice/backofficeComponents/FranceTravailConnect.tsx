@@ -40,6 +40,11 @@ export default function FranceTravailConnect() {
 
         const uri =
           "https://entreprise.francetravail.fr/connexion/oauth2/access_token";
+
+        const params = new URLSearchParams({ realm: "/partenaire" });
+
+        const endpoint = uri + "?" + params.toString();
+
         const response = await fetch(uri, {
           method: "POST",
           headers: {
