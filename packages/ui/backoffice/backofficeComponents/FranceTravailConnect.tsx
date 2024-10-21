@@ -21,7 +21,7 @@ export default function FranceTravailConnect() {
         const realm = "individu";
         const client_id = `${process.env.FRANCE_TRAVAIL_CLIENT_ID}`;
         const client_secret = `${process.env.FRANCE_TRAVAIL_CLIENT_SECRET}`;
-        const scope = "api_stats-perspectives-retour-emploiv1 retouremploi";
+        // const scope = "api_stats-perspectives-retour-emploiv1 retouremploi";
         const redirect_uri = "https://www.youmeet.info/api/auth/francetravail";
 
         // const params = new URLSearchParams({
@@ -42,6 +42,9 @@ export default function FranceTravailConnect() {
           "https://entreprise.francetravail.fr/connexion/oauth2/access_token";
 
         const params = new URLSearchParams({ realm: "/partenaire" });
+        const grant_type = "client_credentials";
+        const scope = "api_offresdemploiv2 o2dsoffre";
+        const body = `grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&scope=${scope}`;
 
         const endpoint = uri + "?" + params.toString();
 
@@ -50,12 +53,7 @@ export default function FranceTravailConnect() {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: JSON.stringify({
-            grant_type: "client_credentials",
-            client_id,
-            client_secret,
-            scope: "api_offresdemploiv2 o2dsoffre",
-          }),
+          body,
           mode: "no-cors",
         });
         const data = await response.json();
