@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
 import BackofficeComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficePageComponent";
+import FranceTravailConnect from "@youmeet/ui/backoffice/backofficeComponents/FranceTravailConnect";
 
 export default function BackofficeChild({
   leads,
@@ -38,6 +39,8 @@ export default function BackofficeChild({
           <Button>Voir CV</Button>
         </Link>
       </div>
+      <FranceTravailConnect />
+
       <BackofficeComponent leads={leads} users={users} />
     </div>
   );
