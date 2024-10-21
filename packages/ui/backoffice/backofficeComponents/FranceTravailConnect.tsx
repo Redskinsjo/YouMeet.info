@@ -17,12 +17,14 @@ export default function FranceTravailConnect() {
       data-mode="light"
       onClick={async () => {
         const uri =
-          "https://authentification-candidat.francetravail.fr/connexion/oauth2/authorize/individu";
+          "https://authentification-candidat.francetravail.fr/connexion/oauth2/authorize";
+        const realm = "individu";
         const client_id = `${process.env.FRANCE_TRAVAIL_CLIENT_ID}`;
         const scope = "api_stats-perspectives-retour-emploiv1 retouremploi";
         const redirect_uri = "https://www.youmeet.info/api/auth/francetravail";
 
         const params = new URLSearchParams({
+          realm,
           response_type: "code",
           client_id,
           scope,
