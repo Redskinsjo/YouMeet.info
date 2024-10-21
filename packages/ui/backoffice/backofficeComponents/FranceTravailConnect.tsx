@@ -44,11 +44,17 @@ export default function FranceTravailConnect() {
         const params = new URLSearchParams({ realm: "/partenaire" });
         const grant_type = "client_credentials";
         const scope = "api_offresdemploiv2 o2dsoffre";
-        const body = `grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&scope=${scope}`;
+        // const body = `grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&scope=${scope}`;
+        const body = new URLSearchParams({
+          grant_type,
+          client_id,
+          client_secret,
+          scope,
+        });
 
         const endpoint = uri + "?" + params.toString();
 
-        const response = await fetch(uri, {
+        const response = await fetch(endpoint, {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
