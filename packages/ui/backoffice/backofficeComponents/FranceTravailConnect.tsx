@@ -43,7 +43,9 @@ export default function FranceTravailConnect() {
 
         const params = new URLSearchParams({ realm: "/partenaire" });
         const grant_type = "client_credentials";
+        console.log("1");
         const scope = "api_offresdemploiv2 o2dsoffre";
+        console.log("2");
         // const body = `grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&scope=${scope}`;
         const body = new URLSearchParams({
           grant_type,
@@ -60,7 +62,6 @@ export default function FranceTravailConnect() {
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body,
-          mode: "no-cors",
         });
         const data = await response.json();
         console.log(data, "data");
