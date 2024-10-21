@@ -16,20 +16,24 @@ export default function FranceTravailConnect() {
     <ft-connect
       data-mode="..."
       onClick={async () => {
+        const uri =
+          "https://authentification-candidat.francetravail.fr/connexion/oauth2/authorize/individu";
         const client_id = `${process.env.FRANCE_TRAVAIL_CLIENT_ID}`;
-        console.log("clicked", client_id);
+        const scope = "api_stats-perspectives-retour-emploiv1 retouremploi";
+        const redirect_uri = "https://www.youmeet.info/api/auth/francetravail";
+
         const params = new URLSearchParams({
           response_type: "code",
           client_id,
-          scope: "",
-          redirect_uri: "",
+          scope,
+          redirect_uri,
           state: "ABC",
           nonce: "DEF",
         });
-        // await fetch(
-        //   "https://authentification-candidat.francetravail.fr/connexion/oauth2/authorize/individu",
-        //   { method: "Get" }
-        // );
+        console.log(params.toString(), "params");
+
+        const endpoint = uri + "?" + params.toString();
+        await fetch(endpoint, { method: "GET" });
       }}
     ></ft-connect>
   );
