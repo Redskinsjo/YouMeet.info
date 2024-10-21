@@ -14,7 +14,7 @@ declare global {
 export default function FranceTravailConnect() {
   return (
     <ft-connect
-      data-mode="..."
+      data-mode="light"
       onClick={async () => {
         const uri =
           "https://authentification-candidat.francetravail.fr/connexion/oauth2/authorize/individu";
