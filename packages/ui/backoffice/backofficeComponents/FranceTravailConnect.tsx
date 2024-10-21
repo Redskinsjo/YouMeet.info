@@ -62,6 +62,7 @@ export default function FranceTravailConnect() {
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body,
+          mode: "no-cors",
         });
         const data = await response.json();
         console.log(data, "data");
