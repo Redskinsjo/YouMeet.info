@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
     const response = await fetch(endpoint, {
       method: "GET",
     });
-    console.log(response, "repsonse");
+    console.log(response, "response");
     const data = await response.json();
     console.log(data, "data");
     return Response.json({ data }, { status: 200 });
