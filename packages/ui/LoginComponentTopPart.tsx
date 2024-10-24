@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Button, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -6,8 +6,10 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { renderUrlQuery } from "@youmeet/utils/renderUrlQuery";
 import Logo from "./Logo";
 import AdmitCGU from "./AdmitCGU";
+import FranceTravailConnect from "./backoffice/backofficeComponents/FranceTravailConnect";
 
 export default function LoginComponentTopPart() {
+  const ftConnectRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -18,6 +20,15 @@ export default function LoginComponentTopPart() {
     ? "dashboard"
     : pathname;
 
+  useEffect(() => {
+    if (ftConnectRef) {
+      const root = ftConnectRef.current?.shadowRoot;
+      const styles =
+        "background-color: white;color: black;width: 100%;font-size: 14px; height: 42.5px";
+      root?.querySelector("button")?.setAttribute("style", styles);
+    }
+  }, []);
+
   return (
     <div className="flex-center flex-col flex-1 gap-[36px] xs:gap-[18px] sm:gap-[18px] md:gap-[18px]">
       <Logo />
@@ -25,7 +36,7 @@ export default function LoginComponentTopPart() {
         {t("login")}
       </h1>
       <div className="w-full flex flex-col gap-[24px]">
-        {process.env.APP === "candidate" && (
+        {/* {process.env.APP === "candidate" && (
           <form
             name="google-signin"
             method="POST"
@@ -40,7 +51,8 @@ export default function LoginComponentTopPart() {
             tabIndex={-1}
           >
             <Button
-              className="subItem w-full flex-center gap-[12px] dark:darkBg dark:text-white lightBg text-black"
+              className="subItem w-full flex-center gap-[12px] rounded-full text-black bg-white border-[1px] border-black"
+              style={{ height: 42.5, fontSize: "14px" }}
               tabIndex={-1}
               type="submit"
             >
@@ -48,7 +60,11 @@ export default function LoginComponentTopPart() {
               <FcGoogle className="item" />
             </Button>
           </form>
-        )}
+        )} */}
+        <FranceTravailConnect
+          className="dark:FTConnectDark FTConnect"
+          ref={ftConnectRef}
+        />
         <AdmitCGU />
         <Divider />
       </div>

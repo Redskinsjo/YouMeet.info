@@ -1,6 +1,7 @@
 "use client";
 
 import { uri } from "@youmeet/functions/imports";
+import { forwardRef, Reference } from "react";
 
 declare global {
   namespace JSX {
@@ -13,17 +14,25 @@ declare global {
   }
 }
 
-export default function FranceTravailConnect() {
+function FranceTravailConnect({ className }: { className?: string }, ref: any) {
   return (
     <ft-connect
-      data-mode="light"
+      data-mode=""
+      ref={ref}
+      className={className}
       onClick={async () => {
-        const response = await fetch(`${uri}/api/access_francetravail`, {
-          method: "GET",
-        });
+        const search = new URLSearchParams({ realm: "/individu" });
+        const response = await fetch(
+          `${uri}/api/auth/francetravail/consent?${search}`,
+          {
+            method: "GET",
+          }
+        );
         const data = await response.json();
         console.log(data, "data");
       }}
     ></ft-connect>
   );
 }
+
+export default forwardRef(FranceTravailConnect);

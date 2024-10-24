@@ -235,7 +235,7 @@ const WhenLogin = ({
       <Suspense>
         <LoginComponentTopPart />
       </Suspense>
-      <form
+      {/* <form
         ref={formRef}
         action={handle}
         name="classic-signin"
@@ -290,7 +290,7 @@ const WhenLogin = ({
             )}
           </div>
         </div>
-      </form>
+      </form> */}
       {type !== "loginPage" && <LoginModalClose type={type} />}
     </div>
   );
