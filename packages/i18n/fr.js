@@ -186,7 +186,7 @@ const product = {
   "home-hero-light":
     "Voyez ce que vous pouvez apprendre sur un +humain= et ses compétences +",
   "professional-connecting": "Mise en relation professionnelle",
-  productTitleMain: "Mise en Relation Professionnelle",
+  "pro-connecting": "Mise en Relation Professionnelle",
   by: "par",
   and: "et",
   video: "Vidéo",
@@ -680,7 +680,7 @@ const partners = {
   tendency: "Tendance et Innovation",
   brand: "Marque et Portefeuilles",
   historic: "Historique",
-  informations: "Informations",
+
   "return-button": "Retour",
   search: "Rechercher",
   "search-by-job": "Rechercher par titre de l'emploi",
@@ -782,6 +782,7 @@ const compte = {
   info: "Informations",
   company: "Entreprise",
   profile: "Profil",
+  information: "information",
   "here-the-hidden-fields":
     "Voici les informations qui +ne s'afficheront pas= sur votre profil.+",
   "explain-hide-field": "Cette information est visible.",
@@ -951,6 +952,9 @@ const prisesDeRef = {
     "Selon la loi, vous devez obtenir le contentement avant de contacter une référence.",
   "professional-consent": "le consentement du professionnel",
   "whom-do-referencing": "pour lequel faire la prise de références et",
+  "about-candidates": "sur des candidats et chercheurs d'emplois",
+  "reliable-pro-infos": "professionnelles et fiables",
+  informations: "Informations",
   "the-ref-contacts": "les contacts (email et téléphone)",
   "least-one-ref": "d'au moins une référence",
   "add-ref": "Ajouter ici une référence",
