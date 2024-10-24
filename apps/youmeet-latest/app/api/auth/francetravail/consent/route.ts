@@ -20,8 +20,7 @@ export async function GET(req: NextRequest) {
       "https://authentification-candidat.francetravail.fr/connexion/oauth2/authorize";
 
     const client_id = `${process.env.FRANCE_TRAVAIL_CLIENT_ID}`;
-    const scope =
-      "api_peconnect-experiencesprofessionellesdeclareesparlemployeurv1 passeprofessionnel";
+    const scope = "api_peconnect-individuv1 openid profile email";
 
     const searchParams = new URLSearchParams({
       realm,
@@ -35,13 +34,13 @@ export async function GET(req: NextRequest) {
 
     const endpoint = `${uri}?${searchParams}`;
 
-    return new Response(null, {
-      status: 307,
-      headers: { Location: `${endpoint}` },
-    });
+    console.log(endpoint, "endpoint");
 
     const response = await fetch(endpoint, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     console.log(response, "response");
     const data = await response.json();
