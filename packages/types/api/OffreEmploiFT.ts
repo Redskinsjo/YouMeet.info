@@ -385,1218 +385,89 @@ riasecmineur,riasecmajeur,libelle,code */
   q: string;
 };
 export type JobFT = {
-  // accesEmploi
-  // string
-  // Acces emploi.
-
-  // Example:
-  // Ce métier est accessible avec un CAP/BEP Agricole en travaux forestiers et bûcheronnage.
-  // appellations
-  // array[object]
-  // Liste des appellations rattachées.
-
-  // appellationEsco
-  // object
-  // Appellation ESCO (en provenance du référentiel 'ESCO')
-
-  // appellationsEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationsProches
-  // array[object]
-  // deprecated
-  // Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // classification
-  // string
-  // Classification.
-
-  // Allowed values:
-  // PRINCIPALE
-  // SYNONYME
-  // code
-  // string
-  // Code unique de l'appellation.
-
-  // Example:
-  // 12374
-  // competencesCles
-  // array[object]
-  // Liste des Compétences clés rattachées.
-
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // emploiCadre
-  // boolean
-  // Emploi cadre: oui/non. Ce champ est optionnel.
-
-  // emploiReglemente
-  // boolean
-  // Emploi règlementé: oui/non. Ce champ est optionnel.
-
-  // libelle
-  // string
-  // Libellé de l'appellation.
-
-  // Example:
-  // Chef / Cheffe de station fruitière
-  // libelleCourt
-  // string
-  // Libellé court de l'appellation. Ce champ est optionnel.
-
-  // Example:
-  // Chef de station fruitière
-  // metier
-  // object
-  // Métier
-
-  // metiersEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // metiersProches
-  // array[object]
-  // deprecated
-  // Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // transitionDemographique
-  // boolean
-  // Transition démographique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologique
-  // boolean
-  // Transition écologique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologiqueDetaillee
-  // string
-  // Transition écologique détaillée. Ce champ est optionnel.
-
-  // Allowed values:
-  // EMPLOI_STRATEGIQUE
-  // EMPLOI_VERT
-  // EMPLOI_BLANC
-  // EMPLOI_BRUN
-  // transitionNumerique
-  // boolean
-  // Transition numérique: oui/non. Ce champ est optionnel.
-
-  // appellationsEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationEsco
-  // object
-  // Appellation ESCO (en provenance du référentiel 'ESCO')
-
-  // appellationsEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationsProches
-  // array[object]
-  // deprecated
-  // Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // classification
-  // string
-  // Classification.
-
-  // Allowed values:
-  // PRINCIPALE
-  // SYNONYME
-  // code
-  // string
-  // Code unique de l'appellation.
-
-  // Example:
-  // 12374
-  // competencesCles
-  // array[object]
-  // Liste des Compétences clés rattachées.
-
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // emploiCadre
-  // boolean
-  // Emploi cadre: oui/non. Ce champ est optionnel.
-
-  // emploiReglemente
-  // boolean
-  // Emploi règlementé: oui/non. Ce champ est optionnel.
-
-  // libelle
-  // string
-  // Libellé de l'appellation.
-
-  // Example:
-  // Chef / Cheffe de station fruitière
-  // libelleCourt
-  // string
-  // Libellé court de l'appellation. Ce champ est optionnel.
-
-  // Example:
-  // Chef de station fruitière
-  // metier
-  // object
-  // Métier
-
-  // metiersEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // metiersProches
-  // array[object]
-  // deprecated
-  // Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // transitionDemographique
-  // boolean
-  // Transition démographique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologique
-  // boolean
-  // Transition écologique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologiqueDetaillee
-  // string
-  // Transition écologique détaillée. Ce champ est optionnel.
-
-  // Allowed values:
-  // EMPLOI_STRATEGIQUE
-  // EMPLOI_VERT
-  // EMPLOI_BLANC
-  // EMPLOI_BRUN
-  // transitionNumerique
-  // boolean
-  // Transition numérique: oui/non. Ce champ est optionnel.
-
-  // appellationsProches
-  // array[object]
-  // deprecated
-  // Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationEsco
-  // object
-  // Appellation ESCO (en provenance du référentiel 'ESCO')
-
-  // appellationsEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationsProches
-  // array[object]
-  // deprecated
-  // Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // classification
-  // string
-  // Classification.
-
-  // Allowed values:
-  // PRINCIPALE
-  // SYNONYME
-  // code
-  // string
-  // Code unique de l'appellation.
-
-  // Example:
-  // 12374
-  // competencesCles
-  // array[object]
-  // Liste des Compétences clés rattachées.
-
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // emploiCadre
-  // boolean
-  // Emploi cadre: oui/non. Ce champ est optionnel.
-
-  // emploiReglemente
-  // boolean
-  // Emploi règlementé: oui/non. Ce champ est optionnel.
-
-  // libelle
-  // string
-  // Libellé de l'appellation.
-
-  // Example:
-  // Chef / Cheffe de station fruitière
-  // libelleCourt
-  // string
-  // Libellé court de l'appellation. Ce champ est optionnel.
-
-  // Example:
-  // Chef de station fruitière
-  // metier
-  // object
-  // Métier
-
-  // metiersEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // metiersProches
-  // array[object]
-  // deprecated
-  // Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // transitionDemographique
-  // boolean
-  // Transition démographique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologique
-  // boolean
-  // Transition écologique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologiqueDetaillee
-  // string
-  // Transition écologique détaillée. Ce champ est optionnel.
-
-  // Allowed values:
-  // EMPLOI_STRATEGIQUE
-  // EMPLOI_VERT
-  // EMPLOI_BLANC
-  // EMPLOI_BRUN
-  // transitionNumerique
-  // boolean
-  // Transition numérique: oui/non. Ce champ est optionnel.
-
-  // centresInterets
-  // array[object]
-  // Liste des centres d'intérêts liés.
-
-  // code
-  // string
-  // Code unique du centre d'intérêt.
-
-  // Example:
-  // 25
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // definition
-  // string
-  // Définition du centre d'intérêt. Ce champs est optionnel.
-
-  // libelle
-  // string
-  // Libellé du centre d'intérêts.
-
-  // Example:
-  // Je suis amateur / amatrice de sensations fortes
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // code
-  // string
-  // Code unique du métier.
-
-  // Example:
-  // A1201
-  // codeIsco
-  // string
-  // Code ISCO (International Standard Classification of Occupations ou CITP en français). Ce champ est optionnel.
-
-  // Example:
-  // 6210
-  // competencesMobilisees
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // code
-  // string
-  // Code unique de la compétence.
-
-  // Example:
-  // 100007
-  // codeOgr
-  // string
-  // deprecated
-  // Code OGR. Cet attribut est déprécié et n'est plus présent que pour des raisons de rétro-compatibilités
-
-  // libelle
-  // string
-  // Libellé de la compétence.
-
-  // Example:
-  // Techniques de soudage
-  // type
-  // string
-  // Cette propriété est forcément à la valeur 'COMPETENCE-DETAILLEE'.
-
-  // riasecMajeur
-  // string
-  // Riasec Majeur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // riasecMineur
-  // string
-  // Riasec Mineur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // competencesMobiliseesEmergentes
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // code
-  // string
-  // Code unique de la compétence.
-
-  // Example:
-  // 100007
-  // codeOgr
-  // string
-  // deprecated
-  // Code OGR. Cet attribut est déprécié et n'est plus présent que pour des raisons de rétro-compatibilités
-
-  // libelle
-  // string
-  // Libellé de la compétence.
-
-  // Example:
-  // Techniques de soudage
-  // type
-  // string
-  // Cette propriété est forcément à la valeur 'COMPETENCE-DETAILLEE'.
-
-  // riasecMajeur
-  // string
-  // Riasec Majeur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // riasecMineur
-  // string
-  // Riasec Mineur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // competencesMobiliseesPrincipales
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // code
-  // string
-  // Code unique de la compétence.
-
-  // Example:
-  // 100007
-  // codeOgr
-  // string
-  // deprecated
-  // Code OGR. Cet attribut est déprécié et n'est plus présent que pour des raisons de rétro-compatibilités
-
-  // libelle
-  // string
-  // Libellé de la compétence.
-
-  // Example:
-  // Techniques de soudage
-  // type
-  // string
-  // Cette propriété est forcément à la valeur 'COMPETENCE-DETAILLEE'.
-
-  // riasecMajeur
-  // string
-  // Riasec Majeur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // riasecMineur
-  // string
-  // Riasec Mineur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // contextesTravail
-  // array[object]
-  // Liste des contextes de travail liés.
-
-  // categorie
-  // string
-  // Catégorie de contexte de travail.
-
-  // Allowed values:
-  // CONDITIONS_TRAVAIL
-  // TYPE_BENEFICIAIRE
-  // LIEU_ET_DEPLACEMENT
-  // HORAIRE_ET_DUREE_TRAVAIL
-  // TYPE_STRUCTURE_ACCUEIL
-  // STATUT_EMPLOI
-  // code
-  // string
-  // Code unique du contexte de travail.
-
-  // Example:
-  // 403091
-  // libelle
-  // string
-  // Libellé du contexte de travail.
-
-  // Example:
-  // En club sportif
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // definition
-  // string
-  // Définition.
-
-  // Example:
-  // Réalise des opérations de coupe et d'entretien d'arbres
-  // divisionsNaf
-  // array[object]
-  // Liste des divisions NAF liées.
-
-  // code
-  // string
-  // Code unique de la division NAF.
-
-  // Example:
-  // 24
-  // libelle
-  // string
-  // Libellé de la division NAF.
-
-  // Example:
-  // Métallurgie
-  // domaineProfessionnel
-  // object
-  // Domaine professionnel
-
-  // code
-  // string
-  // Code unique du domaine professionnel.
-
-  // Example:
-  // A14
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // grandDomaine
-  // object
-  // Grand Domaine
-
-  // libelle
-  // string
-  // Libellé du domaine professionnel.
-
-  // Example:
-  // Production
-  // metiers
-  // array[object]
-  // Liste des métiers rattachés.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // emploiCadre
-  // boolean
-  // Emploi cadre: oui/non. Ce champ est optionnel.
-
-  // emploiReglemente
-  // boolean
-  // Emploi réglementé: oui/non. Ce champ est optionnel.
-
-  // formacodes
-  // array[object]
-  // Liste des formacodes liés.
-
-  // code
-  // string
-  // Code unique du formacode V13.
-
-  // Example:
-  // 21317
-  // libelle
-  // string
-  // Libellé du formacode.
-
-  // Example:
-  // culture algue
-  // label
-  // string
-  // Label (code métier d'origine). Cette valeur est utilisée dans le cas où un métier a été divisé en plusieurs métiers. Ce champ est optionnel.
-
-  // Example:
-  // A1201
-  // libelle
-  // string
-  // Libellé du métier.
-
-  // Example:
-  // Bûcheronnage et élagage
-  // metiersEnProximite
-  // array[object]
-  // Liste des métiers en proximité.
-
-  // accesEmploi
-  // string
-  // Acces emploi.
-
-  // Example:
-  // Ce métier est accessible avec un CAP/BEP Agricole en travaux forestiers et bûcheronnage.
-  // appellations
-  // array[object]
-  // Liste des appellations rattachées.
-
-  // appellationsEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationsProches
-  // array[object]
-  // deprecated
-  // Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // centresInterets
-  // array[object]
-  // Liste des centres d'intérêts liés.
-
-  // code
-  // string
-  // Code unique du métier.
-
-  // Example:
-  // A1201
-  // codeIsco
-  // string
-  // Code ISCO (International Standard Classification of Occupations ou CITP en français). Ce champ est optionnel.
-
-  // Example:
-  // 6210
-  // competencesMobilisees
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // competencesMobiliseesEmergentes
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // competencesMobiliseesPrincipales
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // contextesTravail
-  // array[object]
-  // Liste des contextes de travail liés.
-
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // definition
-  // string
-  // Définition.
-
-  // Example:
-  // Réalise des opérations de coupe et d'entretien d'arbres
-  // divisionsNaf
-  // array[object]
-  // Liste des divisions NAF liées.
-
-  // domaineProfessionnel
-  // object
-  // Domaine professionnel
-
-  // emploiCadre
-  // boolean
-  // Emploi cadre: oui/non. Ce champ est optionnel.
-
-  // emploiReglemente
-  // boolean
-  // Emploi réglementé: oui/non. Ce champ est optionnel.
-
-  // formacodes
-  // array[object]
-  // Liste des formacodes liés.
-
-  // label
-  // string
-  // Label (code métier d'origine). Cette valeur est utilisée dans le cas où un métier a été divisé en plusieurs métiers. Ce champ est optionnel.
-
-  // Example:
-  // A1201
-  // libelle
-  // string
-  // Libellé du métier.
-
-  // Example:
-  // Bûcheronnage et élagage
-  // metiersEnProximite
-  // array[object]
-  // Liste des métiers en proximité.
-
-  // metiersEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // metiersProches
-  // array[object]
-  // deprecated
-  // Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // riasecMajeur
-  // string
-  // Riasec Majeur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // riasecMineur
-  // string
-  // Riasec Mineur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // secteursActivites
-  // array[object]
-  // Liste des secteurs d'activites liés.
-
-  // themes
-  // array[object]
-  // Liste des thèmes liés.
-
-  // transitionDemographique
-  // boolean
-  // Transition démographique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologique
-  // boolean
-  // Transition écologique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologiqueDetaillee
-  // string
-  // Transition écologique détaillée. Ce champ est optionnel.
-
-  // Allowed values:
-  // EMPLOI_STRATEGIQUE
-  // EMPLOI_VERT
-  // EMPLOI_BLANC
-  // EMPLOI_BRUN
-  // transitionNumerique
-  // boolean
-  // Transition numérique: oui/non. Ce champ est optionnel.
-
-  // metiersEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // accesEmploi
-  // string
-  // Acces emploi.
-
-  // Example:
-  // Ce métier est accessible avec un CAP/BEP Agricole en travaux forestiers et bûcheronnage.
-  // appellations
-  // array[object]
-  // Liste des appellations rattachées.
-
-  // appellationsEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationsProches
-  // array[object]
-  // deprecated
-  // Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // centresInterets
-  // array[object]
-  // Liste des centres d'intérêts liés.
-
-  // code
-  // string
-  // Code unique du métier.
-
-  // Example:
-  // A1201
-  // codeIsco
-  // string
-  // Code ISCO (International Standard Classification of Occupations ou CITP en français). Ce champ est optionnel.
-
-  // Example:
-  // 6210
-  // competencesMobilisees
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // competencesMobiliseesEmergentes
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // competencesMobiliseesPrincipales
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // contextesTravail
-  // array[object]
-  // Liste des contextes de travail liés.
-
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // definition
-  // string
-  // Définition.
-
-  // Example:
-  // Réalise des opérations de coupe et d'entretien d'arbres
-  // divisionsNaf
-  // array[object]
-  // Liste des divisions NAF liées.
-
-  // domaineProfessionnel
-  // object
-  // Domaine professionnel
-
-  // emploiCadre
-  // boolean
-  // Emploi cadre: oui/non. Ce champ est optionnel.
-
-  // emploiReglemente
-  // boolean
-  // Emploi réglementé: oui/non. Ce champ est optionnel.
-
-  // formacodes
-  // array[object]
-  // Liste des formacodes liés.
-
-  // label
-  // string
-  // Label (code métier d'origine). Cette valeur est utilisée dans le cas où un métier a été divisé en plusieurs métiers. Ce champ est optionnel.
-
-  // Example:
-  // A1201
-  // libelle
-  // string
-  // Libellé du métier.
-
-  // Example:
-  // Bûcheronnage et élagage
-  // metiersEnProximite
-  // array[object]
-  // Liste des métiers en proximité.
-
-  // metiersEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // metiersProches
-  // array[object]
-  // deprecated
-  // Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // riasecMajeur
-  // string
-  // Riasec Majeur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // riasecMineur
-  // string
-  // Riasec Mineur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // secteursActivites
-  // array[object]
-  // Liste des secteurs d'activites liés.
-
-  // themes
-  // array[object]
-  // Liste des thèmes liés.
-
-  // transitionDemographique
-  // boolean
-  // Transition démographique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologique
-  // boolean
-  // Transition écologique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologiqueDetaillee
-  // string
-  // Transition écologique détaillée. Ce champ est optionnel.
-
-  // Allowed values:
-  // EMPLOI_STRATEGIQUE
-  // EMPLOI_VERT
-  // EMPLOI_BLANC
-  // EMPLOI_BRUN
-  // transitionNumerique
-  // boolean
-  // Transition numérique: oui/non. Ce champ est optionnel.
-
-  // metiersProches
-  // array[object]
-  // deprecated
-  // Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // accesEmploi
-  // string
-  // Acces emploi.
-
-  // Example:
-  // Ce métier est accessible avec un CAP/BEP Agricole en travaux forestiers et bûcheronnage.
-  // appellations
-  // array[object]
-  // Liste des appellations rattachées.
-
-  // appellationsEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // appellationsProches
-  // array[object]
-  // deprecated
-  // Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // centresInterets
-  // array[object]
-  // Liste des centres d'intérêts liés.
-
-  // code
-  // string
-  // Code unique du métier.
-
-  // Example:
-  // A1201
-  // codeIsco
-  // string
-  // Code ISCO (International Standard Classification of Occupations ou CITP en français). Ce champ est optionnel.
-
-  // Example:
-  // 6210
-  // competencesMobilisees
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // competencesMobiliseesEmergentes
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // competencesMobiliseesPrincipales
-  // array (oneOf) [CompetenceDetaillee]array (oneOf) [MacroSavoirEtreProfessionnel]array (oneOf) [MacroSavoirFaire]array (oneOf) [Savoir]
-
-  // array (oneOf) [CompetenceDetaillee]
-  // Compétence détaillée (en provenance du référentiel 'Compétences').
-
-  // contextesTravail
-  // array[object]
-  // Liste des contextes de travail liés.
-
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // definition
-  // string
-  // Définition.
-
-  // Example:
-  // Réalise des opérations de coupe et d'entretien d'arbres
-  // divisionsNaf
-  // array[object]
-  // Liste des divisions NAF liées.
-
-  // domaineProfessionnel
-  // object
-  // Domaine professionnel
-
-  // emploiCadre
-  // boolean
-  // Emploi cadre: oui/non. Ce champ est optionnel.
-
-  // emploiReglemente
-  // boolean
-  // Emploi réglementé: oui/non. Ce champ est optionnel.
-
-  // formacodes
-  // array[object]
-  // Liste des formacodes liés.
-
-  // label
-  // string
-  // Label (code métier d'origine). Cette valeur est utilisée dans le cas où un métier a été divisé en plusieurs métiers. Ce champ est optionnel.
-
-  // Example:
-  // A1201
-  // libelle
-  // string
-  // Libellé du métier.
-
-  // Example:
-  // Bûcheronnage et élagage
-  // metiersEnProximite
-  // array[object]
-  // Liste des métiers en proximité.
-
-  // metiersEnvisageables
-  // array[object]
-  // deprecated
-  // Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // metiersProches
-  // array[object]
-  // deprecated
-  // Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // riasecMajeur
-  // string
-  // Riasec Majeur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // riasecMineur
-  // string
-  // Riasec Mineur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // secteursActivites
-  // array[object]
-  // Liste des secteurs d'activites liés.
-
-  // themes
-  // array[object]
-  // Liste des thèmes liés.
-
-  // transitionDemographique
-  // boolean
-  // Transition démographique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologique
-  // boolean
-  // Transition écologique: oui/non. Ce champ est optionnel.
-
-  // transitionEcologiqueDetaillee
-  // string
-  // Transition écologique détaillée. Ce champ est optionnel.
-
-  // Allowed values:
-  // EMPLOI_STRATEGIQUE
-  // EMPLOI_VERT
-  // EMPLOI_BLANC
-  // EMPLOI_BRUN
-  // transitionNumerique
-  // boolean
-  // Transition numérique: oui/non. Ce champ est optionnel.
-
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // riasecMajeur
-  // string
-  // Riasec Majeur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // riasecMineur
-  // string
-  // Riasec Mineur. Ce champ est optionnel.
-
-  // Allowed values:
-  // R
-  // I
-  // A
-  // S
-  // E
-  // C
-  // secteursActivites
-  // array[object]
-  // Liste des secteurs d'activites liés.
-
-  // code
-  // string
-  // Code unique du secteur d'activité.
-
-  // Example:
-  // 79
-  // dateFin
-  // string
-  // <date-time>
-  // date de fin de validité (renseignée si l'entité est obsolete)
-
-  // definition
-  // string
-  // Définition du secteur d'activité. Ce champ est optionnel.
-
-  // libelle
-  // string
-  // Libellé du secteur d'activité.
-
-  // Example:
-  // Agriculture et élevage
-  // obsolete
-  // boolean
-  // boolean définissant si l'entité est obsolete
-
-  // secteurActivite
-  // object
-  // Secteur d'activités. Il y a seulement deux niveaux de secteur d'activités: l'un qui dispose de sous-secteurs d'activités et l'autre qui dispose d'un secteur d'activité parent et de métiers rattachés.
-
-  // sousSecteurs
-  // array[object]
-  // Sous-secteur d'activités rattachés.
-
-  // /** Liste des thèmes liés. */
-  // themes
-  // array[object]
-
-  // /** Code unique du thème.
-
-  // Example:
-  // 12 */
-  // code: string;
+  /** Liste des secteurs d'activites liés. */
+  secteursActivites: {}[];
+
+  /** Liste des thèmes liés. */
+  themes: Theme[];
+
+  /** boolean définissant si l'entité est obsolete */
+  obsolete: boolean;
+
+  /** Transition démographique: oui/non. Ce champ est optionnel. */
+  transitionDemographique: boolean;
+
+  /** Transition écologique: oui/non. Ce champ est optionnel. */
+  transitionEcologique: boolean;
+
+  /** Transition écologique détaillée. Ce champ est optionnel.
+   *
+   * Allowed values:
+   * EMPLOI_STRATEGIQUE
+   * EMPLOI_VERT
+   * EMPLOI_BLANC
+   * EMPLOI_BRUN
+   *  */
+  transitionEcologiqueDetaillee: string;
+
+  /** Transition numérique: oui/non. Ce champ est optionnel. */
+  transitionNumerique: boolean;
+};
+
+type CompetenceDetaillee = {
+  /** Code unique de la compétence.
+
+Example:
+100007 */
+  code: string;
+
+  /** deprecated
+Code OGR. Cet attribut est déprécié et n'est plus présent que pour des raisons de rétro-compatibilités @deprecated */
+  codeOgr: string;
+
+  /** Libellé de la compétence.
+
+Example:
+Techniques de soudage */
+  libelle: string;
+
+  /** Cette propriété est forcément à la valeur 'COMPETENCE-DETAILLEE'. */
+  type: string;
+
+  /** Riasec Majeur. Ce champ est optionnel.
+
+Allowed values:
+R
+I
+A
+S
+E
+C
+@optional
+*/
+  riasecMajeur: string;
+
+  /** Riasec Mineur. Ce champ est optionnel.
+   *
+   * Allowed values:
+   * R
+   * I
+   * A
+   * S
+   * E
+   * C
+   *
+   * @optional
+   * */
+  riasecMineur: string;
+};
+
+type Theme = {
+  /** Code unique du thème.
+
+Example:
+12 */
+  code: string;
 
   /** <date-time>
 date de fin de validité (renseignée si l'entité est obsolete) */
@@ -1611,14 +482,136 @@ Métiers liés à l'éducation, l'enseignement, l'animation, aux loisirs et aux 
   /** Libellé du thème.
 
 Example:
-Métiers auprès des enfants
-metiers
-array[object]
-Métiers rattachés. */
+Métiers auprès des enfants */
   libelle: string;
+
+  /** Métiers rattachés. */
+  metiers: Metier[];
 
   /** boolean définissant si l'entité est obsolete */
   obsolete: boolean;
+};
+
+type Metier = {
+  /** Acces emploi.
+
+Example:
+Ce métier est accessible avec un CAP/BEP Agricole en travaux forestiers et bûcheronnage. */
+  accesEmploi: string;
+
+  /** Liste des appellations rattachées. */
+  appellations: {}[];
+
+  /** Liste des appellations envisageable. Cette mobilité est obsolète mais conservée pour compatibilité ascendante. @deprecated */
+  appellationsEnvisageables: {}[];
+
+  /** Liste des appellations proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante. @deprecated */
+  appellationsProches: {}[];
+
+  /** Liste des centres d'intérêts liés. */
+  centresInterets: {}[];
+
+  /** Code unique du métier.
+
+Example:
+A1201 */
+  code: string;
+
+  /** Code ISCO (International Standard Classification of Occupations ou CITP en français). Ce champ est optionnel.
+
+Example:
+6210 */
+  codeIsco: string;
+
+  /** Compétence détaillée (en provenance du référentiel 'Compétences'). */
+  competencesMobilisees: CompetenceDetaillee[];
+
+  /** Compétence détaillée (en provenance du référentiel 'Compétences'). */
+  competencesMobiliseesEmergentes: CompetenceDetaillee[];
+
+  /** Compétence détaillée (en provenance du référentiel 'Compétences'). */
+  competencesMobiliseesPrincipales: CompetenceDetaillee[];
+
+  /** Liste des contextes de travail liés. */
+  contextesTravail: {}[];
+
+  /** <date-time>
+date de fin de validité (renseignée si l'entité est obsolete)
+
+definition
+string
+Définition.
+
+Example:
+Réalise des opérations de coupe et d'entretien d'arbres */
+  dateFin: string;
+
+  /** Liste des divisions NAF liées. */
+  divisionsNaf: {}[];
+
+  /** Domaine professionnel */
+  domaineProfessionnel: {};
+
+  /** Emploi cadre: oui/non. Ce champ est optionnel. @optional */
+  emploiCadre: boolean;
+
+  /** Emploi réglementé: oui/non. Ce champ est optionnel. @optional */
+  emploiReglemente: boolean;
+
+  /** Liste des formacodes liés. */
+  formacodes: {}[];
+
+  /** Label (code métier d'origine). Cette valeur est utilisée dans le cas où un métier a été divisé en plusieurs métiers. Ce champ est optionnel.
+
+Example:
+A1201
+libelle
+string
+Libellé du métier.
+
+Example:
+Bûcheronnage et élagage */
+  label: string;
+
+  /** Liste des métiers en proximité. */
+  metiersEnProximite: {}[];
+
+  /** Liste des métiers envisageables. Cette mobilité est obsolète mais conservée pour compatibilité ascendante. @deprecated */
+  metiersEnvisageables: {}[];
+
+  /** Liste des métiers proches. Cette mobilité est obsolète mais conservée pour compatibilité ascendante. @deprecated */
+  metiersProches: {}[];
+
+  /** boolean définissant si l'entité est obsolete */
+  obsolete: boolean;
+
+  /** Riasec Majeur. Ce champ est optionnel.
+
+Allowed values:
+R
+I
+A
+S
+E
+C */
+  riasecMajeur: string;
+
+  /** Riasec Mineur. Ce champ est optionnel.
+
+Allowed values:
+R
+I
+A
+S
+E
+C */
+  riasecMineur: string;
+
+  /** Liste des secteurs d'activites liés. */
+  secteursActivites: {}[];
+
+  /** Liste des thèmes liés. */
+  themes: {}[];
 
   /** Transition démographique: oui/non. Ce champ est optionnel. */
   transitionDemographique: boolean;
