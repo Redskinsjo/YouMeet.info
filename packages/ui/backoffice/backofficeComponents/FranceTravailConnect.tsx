@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-function FranceTravailConnect({ className }: { className: string }, ref: any) {
+function FranceTravailConnect({ className }: { className?: string }, ref: any) {
   return (
     <ft-connect
       data-mode=""
