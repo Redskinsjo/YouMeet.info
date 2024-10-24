@@ -72,12 +72,12 @@ export default function ThinHeader({
                 </div>
               </Link>
             )} */}
-          <div className="flex-center h-[25px] w-[25px]">
+          {/* <div className="flex-center h-[25px] w-[25px]">
             <CgDarkMode
               className="w-full h-full"
               onClick={() => setDark((dark) => !dark)}
             />
-          </div>
+          </div> */}
           {pathname === "/dashboard" && <NotificationsIconComponent />}
           {!user.id && pathname !== "/se-connecter" ? (
             <Link
