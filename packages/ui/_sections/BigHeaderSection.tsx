@@ -1,7 +1,8 @@
 "use client";
 import dynamic from "next/dynamic";
-import Header from "../Header";
 import { Suspense, useEffect, useState } from "react";
+
+const Header = dynamic(() => import("../Header"), { ssr: false });
 
 export default function BigHeaderSection() {
   const [scrollY, setScrollY] = useState(0);

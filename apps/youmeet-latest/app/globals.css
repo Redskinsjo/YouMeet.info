@@ -152,7 +152,7 @@ p {
 
 @keyframes slide_in {
   0% {
-    translate: 100px;
+    translate: 60px;
     opacity: 0;
   }
   100% {

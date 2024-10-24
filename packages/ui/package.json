@@ -6,7 +6,7 @@
     "@/*": "./*"
   },
   "scripts": {
-    "dev": "tailwindcss -i ./styles.css -o ./dist/index.css",
+    "dev": "tailwindcss -i ./styles.css -o ./dist/index.css --watch",
     "build": "tailwindcss -i ./styles.css -o ./dist/index.css"
   },
   "dependencies": {

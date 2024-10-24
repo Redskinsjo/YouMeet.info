@@ -53,7 +53,6 @@ export enum BACKEND_ERRORS {
   DATATYPE_INVALID = 20,
   EMAIL_FAIL = 21,
   NOT_VALID = 22,
-  NO_PAYLOAD = 22,
   NO_LEAD = 23,
   NOT_CANDIDATE = 24,
   NO_QUERY = 25,
@@ -65,6 +64,7 @@ export enum BACKEND_ERRORS {
   CUSTOMER_NOT_CREATED = 31,
   NO_CHOICE = 32,
   NOT_AUTHENTICATED = 33,
+  NO_PAYLOAD = 34,
 }
 
 export enum BACKEND_MESSAGES {
@@ -97,4 +97,5 @@ export enum BACKEND_MESSAGES {
   TRY_GOOGLE = "Mauvaise connexion. Tentez avec Google.",
   CONFIDENTIAL = "Le nom d'utilisateur ou le mot de passe est incorrecte.",
   NOT_AUTHENTICATED = "Vous n'êtes pas autentifié.",
+  NO_QUERY = "Aucune requête n'a été trouvée.",
 }
