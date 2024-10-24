@@ -1,16 +1,44 @@
-import React from "react";
+import { Skeleton } from "@mui/material";
 import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
+import PersonalInfos from "./PersonalInfos";
 
 const NewReferencesComponent = dynamic(
-  () => import("./NewReferencesComponent")
+  () => import("./NewReferencesComponent"),
+  { ssr: false }
 );
-const ProfileNameAndJob = dynamic(() => import("./ProfileNameAndJob"));
+const ProfileNameAndJob = dynamic(() => import("./ProfileNameAndJob"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[93.5px] flex-center flex-col shadow-custom">
+      <Skeleton width={"40%"} height={24} />
+      <Skeleton width={"20%"} height={14} />
+    </div>
+  ),
+});
 const ProfileAvatar = dynamic(() => import("./ProfileAvatar"));
-const ProfileCVComponent = dynamic(() => import("./ProfileCVComponent"));
-const PersonalInfos = dynamic(() => import("./PersonalInfos"));
-const NewCVUpload = dynamic(() => import("@youmeet/ui/NewCVUpload"));
-const DiscoverMoreUsers = dynamic(() => import("./DiscoverMoreUsers"));
+const ProfileCVComponent = dynamic(() => import("./ProfileCVComponent"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex-center flex-col w-full">
+      <Skeleton width={"100%"} height={18} />
+      <Skeleton width={"65%"} height={18} />
+    </div>
+  ),
+});
+
+const NewCVUpload = dynamic(() => import("@youmeet/ui/NewCVUpload"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex-bet w-full px-[12px] box-border">
+      <div />
+      <Skeleton width={65} height={18} />
+    </div>
+  ),
+});
+const DiscoverMoreUsers = dynamic(() => import("./DiscoverMoreUsers"), {
+  ssr: false,
+});
 
 export default function ProfilePartComponent({
   profil,

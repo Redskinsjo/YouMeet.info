@@ -302,10 +302,10 @@ export const firstPartPages = [
     field: SelectSimpleField,
     props: {
       name: "languages",
-      select: true,
-      multiple: true,
       id: 8,
       label: "Langues",
+      select: true,
+      multiple: true,
     },
   },
   {

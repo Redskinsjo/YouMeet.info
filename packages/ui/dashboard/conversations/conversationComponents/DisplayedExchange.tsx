@@ -165,7 +165,6 @@ export default function DisplayedExchange({
               />
             ) : (
               <SimpleField
-                id={step + 1}
                 name={`exchange-${step}`}
                 type={type}
                 label={t("internship-response-label")}

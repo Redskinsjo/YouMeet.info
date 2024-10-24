@@ -1,5 +1,11 @@
 "use client";
-import React, { Dispatch, SetStateAction, useMemo, useRef } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import BoldText from "../../BoldText";
 import { useTranslation } from "react-i18next";
 import { Avatar, BetaUser, MeetCandidate, Video } from "@youmeet/gql/generated";
@@ -79,7 +85,7 @@ export default function VideoComponent({
     );
   }, [video]);
 
-  const customOnDeleteVideo = async (videoId: string) => {
+  const customOnDeleteVideo = useCallback(async (videoId: string) => {
     dispatch(setUpload(`r-video/${videoId}`));
     const result = (await onDeleteVideo(videoId)) as
       | PayloadBackendError
@@ -95,28 +101,25 @@ export default function VideoComponent({
     }
 
     dispatch(setUpload(null));
-  };
+  }, []);
 
-  const customOnSetVideoAsDefault = async ({
-    videoId,
-    userId,
-  }: {
-    videoId: string;
-    userId: string;
-  }) => {
-    const result = (await onSetVideoAsDefault(videoId, userId)) as
-      | PayloadBackendError
-      | withData<Video>;
+  const customOnSetVideoAsDefault = useCallback(
+    async ({ videoId, userId }: { videoId: string; userId: string }) => {
+      const result = (await onSetVideoAsDefault(videoId, userId)) as
+        | PayloadBackendError
+        | withData<Video>;
 
-    if (!result || isPayloadError(result)) {
-      dispatch(setError("not-completed"));
-      // handle error
-    } else if (!result?.data) {
-      dispatch(setError("not-completed"));
-    } else {
-      dispatch(removeVideo((result as withData<Video>).data));
-    }
-  };
+      if (!result || isPayloadError(result)) {
+        dispatch(setError("not-completed"));
+        // handle error
+      } else if (!result?.data) {
+        dispatch(setError("not-completed"));
+      } else {
+        dispatch(removeVideo((result as withData<Video>).data));
+      }
+    },
+    []
+  );
 
   const videos = profil.videos;
 

@@ -2,7 +2,7 @@ import BackofficeMeetsComponent from "@youmeet/ui/backoffice/backofficeComponent
 import { Meet } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import CreateMeet from "../backofficeComponents/CreateMeet";
+import CreateMeet from "@youmeet/ui/backoffice/backofficeComponents/CreateMeet";
 
 export default function BackofficeMeetsPage({ meets }: { meets: Meet[] }) {
   return (

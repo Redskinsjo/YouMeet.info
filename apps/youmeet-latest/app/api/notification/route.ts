@@ -6,6 +6,7 @@ import { BackendError } from "@youmeet/utils/BackendErrorClass";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
 import { updateVideo, videoByPublicId } from "@youmeet/functions/request";
 import { Eager, Video } from "@youmeet/gql/generated";
+import { handleActionError } from "@youmeet/utils/handleActionError";
 dotenv.config();
 
 cloudinary.config({
@@ -75,9 +76,6 @@ export async function POST(req: NextRequest) {
       BACKEND_MESSAGES.NOT_AUTHORIZED
     );
   } catch (err: any) {
-    return Response.json(
-      { message: err.message, type: err.type },
-      { status: 200 }
-    );
+    return Response.json(await handleActionError(err), { status: 200 });
   }
 }

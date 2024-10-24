@@ -22,9 +22,6 @@ const PublicProfileSlider = ({
 }: PublicProfileSliderTypes) => {
   const [avatarPosition, setAvatarPosition] = useState<number>(0);
   const [everyAvatarsLength, setEveryAvatarsLength] = useState<number>(0);
-  const xs = useMediaQuery("(max-width:600px)");
-  const sm = useMediaQuery("(max-width:720px)");
-  const md = useMediaQuery("(max-width:900px)");
 
   const displayedAvatars = useMemo(() => {
     const candidateAvatars: (Avatar & { user?: boolean; pro?: boolean })[] =

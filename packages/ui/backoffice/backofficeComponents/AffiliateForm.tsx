@@ -126,17 +126,28 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
                   );
                 } else {
                   dispatch(resetModal("ok") as UnknownAction);
-                  return dispatch(
+                  dispatch(
                     setModal({ display: "backofficeConfirm" }) as UnknownAction
                   );
                 }
+              } else {
+                throw new BackendError(
+                  BACKEND_ERRORS.PROCESSING,
+                  BACKEND_MESSAGES.PROCESSING
+                );
               }
+            } else {
+              throw new BackendError(
+                BACKEND_ERRORS.PROCESSING,
+                BACKEND_MESSAGES.PROCESSING
+              );
             }
+          } else {
+            throw new BackendError(
+              BACKEND_ERRORS.PROCESSING,
+              BACKEND_MESSAGES.PROCESSING
+            );
           }
-          throw new BackendError(
-            BACKEND_ERRORS.PROCESSING,
-            BACKEND_MESSAGES.PROCESSING
-          );
         }
       } catch (err: any) {
         await createError({
@@ -196,16 +207,10 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
   const childVideo = getPrincipalVideo(child?.videos as Video[]);
 
   return (
-    <form
-      className="flex flex-col gap-[6px]"
-      action={(formData: FormData) => {
-        customOnCreateMeet(formData);
-      }}
-    >
+    <form className="flex flex-col gap-[6px]" action={customOnCreateMeet}>
       <div className="w-full grid grid-cols-2 gap-[12px]">
         <div className="flex-bet">
           <SimpleField
-            id={13}
             name="parentId"
             type="text"
             label="Choisir parent"
@@ -222,7 +227,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
               ))}
           </SimpleField>
           <SimpleField
-            id={14}
             name="childId"
             type="text"
             label="Choisir child"
@@ -246,7 +250,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           setError={setError}
           errors={errors}
           clearErrors={clearErrors}
-          id={1}
           name="firstnameChild"
           type="text"
           label="Prénom"
@@ -258,7 +261,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           setError={setError}
           errors={errors}
           clearErrors={clearErrors}
-          id={2}
           name="lastnameChild"
           type="text"
           label="Nom de famille"
@@ -270,7 +272,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           setError={setError}
           errors={errors}
           clearErrors={clearErrors}
-          id={3}
           name="emailChild"
           type="text"
           label="Email"
@@ -282,7 +283,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           setError={setError}
           errors={errors}
           clearErrors={clearErrors}
-          id={String(4)}
           name="job"
           type="text"
           label="Job Title"
@@ -296,7 +296,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           setError={setError}
           errors={errors}
           clearErrors={clearErrors}
-          id={5}
           name="linkedinProfileIdChild"
           type="text"
           label="Page Linkedin"
@@ -307,7 +306,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           setError={setError}
           errors={errors}
           clearErrors={clearErrors}
-          id={6}
           name="phoneChild"
           type="text"
           label="Téléphone"
@@ -334,7 +332,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
               type="file"
               label="Vidéo Principale"
               name="videoMain"
-              id={String(7)}
               location="video"
             />
           </div>

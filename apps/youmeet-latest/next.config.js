@@ -70,6 +70,8 @@ const nextConfig = {
   },
 
   env: {
+    FRANCE_TRAVAIL_CLIENT_ID: process.env.FRANCE_TRAVAIL_CLIENT_ID,
+    FRANCE_TRAVAIL_CLIENT_SECRET: process.env.FRANCE_TRAVAIL_CLIENT_SECRET,
     TEST: process.env.TEST,
     APP: process.env.APP,
     PRO_DOMAIN: process.env.PRO_DOMAIN,

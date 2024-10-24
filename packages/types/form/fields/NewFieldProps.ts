@@ -12,7 +12,7 @@ export type NewFieldProps = {
   name: string;
   label?: string;
   required?: boolean;
-  id: number;
+  id?: number;
   select?: boolean;
   multiple?: boolean;
   type: string;

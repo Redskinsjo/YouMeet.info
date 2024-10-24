@@ -1,6 +1,8 @@
 "use client";
 import MasterSearchComponent from "../_homeComponents/MasterSearchComponent";
 import { searchSomeoneRequest } from "@youmeet/functions/actions";
+import { PayloadBackendError } from "@youmeet/types/api/backend";
+import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { FieldValues, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -15,11 +17,12 @@ export default function MasterSearch() {
   const { t } = useTranslation();
 
   const customSearchSomeoneRequest = async (formData: FormData) => {
-    const response = await searchSomeoneRequest(formData);
-    if (response?.error) {
+    const result = (await searchSomeoneRequest(
+      formData
+    )) as PayloadBackendError;
+    if (result && isPayloadError(result)) {
       setError("search", {
-        type: response?.type,
-        message: t(response?.message),
+        message: t(result?.message),
       });
     }
   };

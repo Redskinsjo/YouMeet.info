@@ -1,4 +1,4 @@
-import React, { createElement, useEffect } from "react";
+import React, { createElement, useEffect, useMemo } from "react";
 import { getProfilePhone } from "@youmeet/utils/formatPhone";
 import TooltipedAsset from "./TooltipedAsset";
 import { HiPencil } from "react-icons/hi";
@@ -31,12 +31,14 @@ export default function NewProfileComponent({
     router.prefetch("/formulaire-profil?step=1");
   }, []);
 
-  let linkedin;
-  if (profil.linkedinProfileId) {
-    if (linkedinIdRegex.test(profil?.linkedinProfileId || ""))
-      linkedin = profil?.linkedinProfileId;
-    else linkedin = getLinkedinUrlFromId(profil?.linkedinProfileId || "");
-  }
+  const linkedin = useMemo(() => {
+    if (profil.linkedinProfileId) {
+      if (linkedinIdRegex.test(profil?.linkedinProfileId || ""))
+        return profil?.linkedinProfileId;
+      else return getLinkedinUrlFromId(profil?.linkedinProfileId || "");
+    }
+    return "";
+  }, [profil.linkedinProfileId]);
 
   return (
     <div className="infos-component">

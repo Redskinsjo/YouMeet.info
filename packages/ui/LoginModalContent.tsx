@@ -1,12 +1,6 @@
 "use client";
-import { Button, Checkbox, useMediaQuery } from "@mui/material";
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  Suspense,
-} from "react";
+import { Button, useMediaQuery } from "@mui/material";
+import { useCallback, useEffect, useRef, useState, Suspense } from "react";
 import {
   CustomModalProps,
   SignupCookiePayload,
@@ -51,8 +45,6 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
   const [status, setStatus] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
   const router = useRouter();
-
-  const dispatch = useDispatch();
 
   const keydownListener = useCallback(
     (e: any) => {
@@ -110,7 +102,6 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
           value={firstname}
           name="firstname"
           label={t("firstname")}
-          id={1}
           type="text"
         />
         <SimpleField
@@ -118,7 +109,6 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
           value={lastname}
           name="lastname"
           label={t("lastname")}
-          id={2}
           type="text"
         />
         <div className="col-span-2">
@@ -127,24 +117,22 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
             value={email}
             name="email"
             label={t("email")}
-            id={3}
             type="email"
           />
         </div>
         <div className="col-span-2">
-          <PhoneField name="phone" label={t("phone")} id={4} type="number" />
+          <PhoneField name="phone" label={t("phone")} type="number" />
         </div>
         <div className="col-span-2">
           <SimpleField
             required
             name="password"
             label={t("password")}
-            id={5}
             type="password"
           />
         </div>
 
-        <SimpleField value={redirect} name="redirect" id={6} type="hidden" />
+        <SimpleField value={redirect} name="redirect" type="hidden" />
       </div>
       {!!status && (
         <span
@@ -255,20 +243,14 @@ const WhenLogin = ({
       >
         <div className="flex flex-col gap-[12px] xs:gap-[6px] sm:gap-[6px] md:gap-[6px] w-full">
           <SimpleField
-            id={1}
             name="email"
             value={email}
             required
             type="email"
             label={t("email")}
           />
-          <SimpleField
-            name="password"
-            id={2}
-            type="password"
-            label={t("password")}
-          />
-          <SimpleField value={redirect} name="redirect" id={3} type="hidden" />
+          <SimpleField name="password" type="password" label={t("password")} />
+          <SimpleField value={redirect} name="redirect" type="hidden" />
         </div>
         {!!status && (
           <span
@@ -357,13 +339,7 @@ const WhenForgotten = ({ type, setIsForgotten }: CustomModalProps) => {
       </h1>
 
       <div className="flex flex-col gap-[12px] w-full">
-        <SimpleField
-          id={1}
-          name="email"
-          required
-          label={t("email")}
-          type="email"
-        />
+        <SimpleField name="email" required label={t("email")} type="email" />
       </div>
       {!!status && (
         <div

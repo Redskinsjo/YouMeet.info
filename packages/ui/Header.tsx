@@ -11,7 +11,6 @@ import { useMediaQuery } from "@mui/material";
 import { UserState } from "@youmeet/global-config/features/user";
 import { HeaderComponentProps } from "@youmeet/types/Header";
 import { useTranslation } from "react-i18next";
-import { outfit } from "@youmeet/functions/fonts";
 import RecruiterSpace from "./RecruiterSpace";
 import NotificationsComponent from "./NotificationsIconComponent";
 import AOS from "aos";

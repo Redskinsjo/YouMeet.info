@@ -9,6 +9,7 @@ import Logo from "@youmeet/ui/Logo";
 import {
   BetaQueue,
   BetaWhatsappExchange,
+  BetaWhatsappResponse,
   BetaWhatsappThread,
 } from "@youmeet/gql/generated";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
@@ -29,6 +30,7 @@ import { resetModal, setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { FieldValues, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 
 export default function ConversationChild({ queue }: { queue: BetaQueue }) {
   const [loading, setLoading] = useState(true);
@@ -67,13 +69,13 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
     exchanges: BetaWhatsappExchange[];
   }) => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
-    const result = await onAnswerConversation(
+    const result = (await onAnswerConversation(
       watch(),
       extras.exchanges,
       queue.target?.id ?? "",
       thread?.id ?? ""
-    );
-    if (!result?.data || isPayloadError(result)) {
+    )) as withData<BetaWhatsappResponse[]> | PayloadBackendError;
+    if (result && isPayloadError(result)) {
       dispatch(resetModal("ok") as UnknownAction);
       dispatch(
         setModal({

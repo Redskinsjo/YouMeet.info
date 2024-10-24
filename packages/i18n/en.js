@@ -8,6 +8,7 @@ const meProfile = {
   email: "Email",
   analytics: "Analytics",
   notice: "Notice",
+  "select-your-role": "Select your role",
   "toggle-personal-infos": "Toggle Personal Infos",
   "me-profile-personal-infos": "Personal",
   "me-profile-job-infos": "Professional",

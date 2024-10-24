@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BetaCandidate, BetaUser } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -34,20 +34,20 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
   const md = useMediaQuery("(max-width:900px)");
   const lg = useMediaQuery("(max-width:1050px)");
 
-  const customOnTargetJobUpdate = async (extras: {
-    userId: string;
-    jobId: string;
-  }) => {
-    const result = (await onTargetJobUpdate(extras)) as
-      | PayloadBackendError
-      | withData<BetaCandidate>;
-    if (result && isPayloadError(result)) dispatch(setError("not-completed"));
-    else if (!result?.data) dispatch(setError("not-completed"));
-    else {
-      setCandidateValidated((result as withData<BetaCandidate>).data);
-      setIsValidated(true);
-    }
-  };
+  const customOnTargetJobUpdate = useCallback(
+    async (extras: { userId: string; jobId: string }) => {
+      const result = (await onTargetJobUpdate(extras)) as
+        | PayloadBackendError
+        | withData<BetaCandidate>;
+      if (result && isPayloadError(result)) dispatch(setError("not-completed"));
+      else if (!result?.data) dispatch(setError("not-completed"));
+      else {
+        setCandidateValidated((result as withData<BetaCandidate>).data);
+        setIsValidated(true);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     if (profil?.candidate?.targetJob?.id) {

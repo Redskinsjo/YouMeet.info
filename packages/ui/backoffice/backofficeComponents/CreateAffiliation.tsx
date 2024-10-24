@@ -58,7 +58,6 @@ export default function CreateAffiliation() {
         </div>
       </SubLayout>
       <SimpleField
-        id={13}
         name="parentId"
         type="text"
         label="Choisir candidat"

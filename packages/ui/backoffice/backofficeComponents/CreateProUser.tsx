@@ -40,46 +40,25 @@ export default function CreateProUser() {
             className="grid grid-cols-4 grid-rows-2 gap-[6px]"
             action={customeOnCreateProAccount}
           >
+            <SimpleField name="firstname" type="text" label="Prénom" required />
             <SimpleField
-              id={1}
-              name="firstname"
-              type="text"
-              label="Prénom"
-              required
-            />
-            <SimpleField
-              id={2}
               name="lastname"
               type="text"
               label="Nom de famille"
               required
             />
+            <SimpleField name="email" type="text" label="Email" required />
             <SimpleField
-              id={3}
-              name="email"
-              type="text"
-              label="Email"
-              required
-            />
-            <SimpleField
-              id={4}
               name="companyName"
               type="text"
               label="Nom de l'entreprise"
             />
             <SimpleField
-              id={5}
               name="linkedinProfilePage"
               type="text"
               label="Page Linkedin de l'entreprise"
             />
-            <PhoneField
-              name="phone"
-              label="Téléphone"
-              type="text"
-              required
-              id={6}
-            />
+            <PhoneField name="phone" label="Téléphone" type="text" required />
             <SelectField
               label="Entreprises existantes"
               name="company"

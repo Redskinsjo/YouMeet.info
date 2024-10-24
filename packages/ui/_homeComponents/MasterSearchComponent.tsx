@@ -17,7 +17,6 @@ export default function MasterSearchComponent({
         {t("search-for-someone")}
       </h2>
       <SimpleField
-        id={1}
         label={t("search")}
         setError={setError}
         clearErrors={clearErrors}

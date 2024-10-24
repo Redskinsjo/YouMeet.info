@@ -1,5 +1,5 @@
 import { Menu, MenuItem, useMediaQuery } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -32,17 +32,20 @@ export default function MenuAuthenticatedUser() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleClick = (event: React.MouseEvent, type: "logout" | "lang") => {
-    setAnchorEl({ el: event.currentTarget, type });
-  };
-  const handleClose = () => {
+  const handleClick = useCallback(
+    (event: React.MouseEvent, type: "logout" | "lang") => {
+      setAnchorEl({ el: event.currentTarget, type });
+    },
+    []
+  );
+  const handleClose = useCallback(() => {
     setAnchorEl(undefined);
-  };
+  }, []);
 
-  const customOnLogout = async () => {
+  const customOnLogout = useCallback(async () => {
     await onLogout();
     dispatch(removeUser("ok"));
-  };
+  }, []);
 
   useEffect(() => {
     router.prefetch("/");

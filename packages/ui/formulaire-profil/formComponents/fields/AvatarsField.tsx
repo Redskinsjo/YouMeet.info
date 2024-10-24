@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import Image from "next/image";
 import { MdUpload } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
@@ -13,7 +13,6 @@ import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
 
 export default function AvatarsField({
-  id,
   name,
   type,
   value,
@@ -23,7 +22,8 @@ export default function AvatarsField({
   setValue,
   required,
   dataType = "image",
-}: GenericFieldProps & Omit<NewFieldProps, "id">) {
+}: GenericFieldProps & NewFieldProps) {
+  const id = useId();
   const [src, setSrc] = useState("");
   const [fieldVal, setFieldVal] = useState<
     File | Partial<Avatar> | undefined

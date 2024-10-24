@@ -52,7 +52,6 @@ export type SelectFieldProps = {
   location: string;
   placeholder?: string;
   label: string;
-  id?: string;
   type: string;
   value?: any | any[];
   step?: number;

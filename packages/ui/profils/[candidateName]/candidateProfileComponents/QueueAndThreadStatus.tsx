@@ -25,7 +25,7 @@ import DetailComponent from "../../../DetailComponent";
 import { MdOutlineCancel } from "react-icons/md";
 import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
 import TooltipedAsset from "../../../TooltipedAsset";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { outfit } from "@youmeet/functions/fonts";
 import { onCancelConversation } from "@youmeet/functions/actions";
@@ -34,7 +34,6 @@ import { client } from "@youmeet/gql/index";
 import BoldText from "../../../BoldText";
 import { setName } from "@youmeet/utils/setName";
 import OneLineSkeleton from "../../../OneLineSkeleton";
-import React from "react";
 
 export default function QueueAndThreadStatus({ queue }: { queue: BetaQueue }) {
   const user = useSelector((state: RootState) => state.user as UserState);
@@ -59,46 +58,49 @@ export default function QueueAndThreadStatus({ queue }: { queue: BetaQueue }) {
     if (thread) setThread(thread);
   };
 
-  const handleCloseSnackbar = () => setSnackbar(null);
+  const handleCloseSnackbar = useCallback(() => setSnackbar(null), []);
 
-  const handleEntered = () => {
+  const handleEntered = useCallback(() => {
     noButtonRef.current?.focus();
-  };
+  }, [noButtonRef.current]);
 
-  const handleNo = () => {
+  const handleNo = useCallback(() => {
     const { resolve } = promiseArguments;
     resolve("cancelled");
     setPromiseArguments(null);
-  };
+  }, [promiseArguments]);
 
-  const handleYes = async (id: string) => {
-    const { reject, resolve } = promiseArguments;
+  const handleYes = useCallback(
+    async (id: string) => {
+      const { reject, resolve } = promiseArguments;
 
-    const result = await onCancelConversation(id, { status: "cancelled" });
-    if (result && isPayloadError(result)) {
-      setSnackbar({
-        children: "La conversation n'a pas pu être annulée",
-        severity: "error",
-      });
-      reject("failed");
-      setPromiseArguments(null);
-    } else {
-      setSnackbar({
-        children: "La conversation a bien été annulée",
-        severity: "success",
-      });
-      resolve("success");
-      setPromiseArguments(null);
-    }
-  };
+      const result = await onCancelConversation(id, { status: "cancelled" });
+      if (result && isPayloadError(result)) {
+        setSnackbar({
+          children: "La conversation n'a pas pu être annulée",
+          severity: "error",
+        });
+        reject("failed");
+        setPromiseArguments(null);
+      } else {
+        setSnackbar({
+          children: "La conversation a bien été annulée",
+          severity: "success",
+        });
+        resolve("success");
+        setPromiseArguments(null);
+      }
+    },
+    [promiseArguments]
+  );
 
-  const handleCancelClick = async (id: string): Promise<string> => {
+  const handleCancelClick = useCallback(async (id: string): Promise<string> => {
     return new Promise((resolve, reject) => {
       setPromiseArguments({ resolve, reject, id });
     });
-  };
+  }, []);
 
-  const renderConfirmDialog = () => {
+  const renderConfirmDialog = useCallback(() => {
     if (!promiseArguments) {
       return null;
     }
@@ -128,11 +130,11 @@ export default function QueueAndThreadStatus({ queue }: { queue: BetaQueue }) {
         </DialogActions>
       </Dialog>
     );
-  };
+  }, [promiseArguments]);
 
   useEffect(() => {
     getThread();
-  });
+  }, []);
 
   return (
     <div className="w-full">

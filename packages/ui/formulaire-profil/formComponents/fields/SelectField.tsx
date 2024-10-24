@@ -97,7 +97,6 @@ const names: {
 };
 
 const SelectField = ({
-  id,
   setValue,
   required,
   label,
@@ -342,7 +341,6 @@ const SelectField = ({
           return (
             <GenericField
               step={step}
-              id={String(id)}
               type={type}
               location={location}
               params={params}

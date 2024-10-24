@@ -3,7 +3,6 @@ import { BetaUser } from "@youmeet/gql/generated";
 import DetailComponent from "./DetailComponent";
 import BoldText from "./BoldText";
 import { useTranslation } from "react-i18next";
-import React from "react";
 
 export default function ProfileDescription({
   profil,

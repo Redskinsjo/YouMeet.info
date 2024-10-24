@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -17,7 +16,6 @@ export default function Logo({
   gif?: boolean;
   size?: number;
 }) {
-  const pathname = usePathname();
   const user = useSelector((state: RootState) => state.user as UserState);
 
   return gif ? (

@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { BetaUser } from "@youmeet/gql/generated";
 import { useDispatch, useSelector } from "react-redux";

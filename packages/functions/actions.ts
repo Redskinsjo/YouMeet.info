@@ -91,6 +91,7 @@ import setUniqueNameAndExtension from "@youmeet/utils/backoffice/setUniqueNameAn
 import CryptoJS from "crypto-js";
 import { BackendError } from "@youmeet/utils/BackendErrorClass";
 import { setName } from "@youmeet/utils/setName";
+import { handleActionError } from "@youmeet/utils/handleActionError";
 import { redirect } from "next/navigation";
 import { getUserIdFromPublicId } from "@youmeet/utils/getPublicId";
 
@@ -132,18 +133,7 @@ const saveFormData = async (
       return { data: result };
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -176,7 +166,7 @@ const saveFormDataPro = async (
       return { data: result3.data };
     }
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -198,18 +188,7 @@ export const onFormData = async (
       return { data: result.data };
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -242,18 +221,7 @@ export const onAddCV = async (
 
     throw new BackendError(BACKEND_ERRORS.UNKNOWN, BACKEND_MESSAGES.UNKNOWN);
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -276,18 +244,7 @@ export const onDeleteCV = async (
     if (!test) revalidatePath("/dashboard");
     return { data: undefined };
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -323,23 +280,7 @@ export const onDeleteVideo = async (
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return {
-      status: err.status,
-      error: true,
-      type: err.type,
-      message: err.message,
-    };
+    return await handleActionError(err);
   }
 };
 export const onSetVideoAsDefault = async (
@@ -374,23 +315,7 @@ export const onSetVideoAsDefault = async (
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return {
-      status: err.status,
-      error: true,
-      type: err.type,
-      message: err.message,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -433,18 +358,7 @@ export const onAddVideo = async (
     }
     throw new BackendError(BACKEND_ERRORS.NO_FILE, BACKEND_MESSAGES.NO_FILE);
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -494,34 +408,7 @@ export const onAddFeedback = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -551,18 +438,7 @@ export const onUpdateTargetJob = async (
       BACKEND_MESSAGES.UNKNOWN
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -618,34 +494,7 @@ export const onCreateProAccount = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -691,23 +540,7 @@ export const onTargetJobUpdate = async (extras: {
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return {
-      status: err.status,
-      error: true,
-      type: err.type,
-      message: err.message,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -754,23 +587,7 @@ export const onTargetContractTypeUpdate = async (extras: {
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return {
-      status: err.status,
-      error: true,
-      type: err.type,
-      message: err.type,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -885,34 +702,7 @@ export const onLogin = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
   redirect(`${uri}/${returnTo}`);
 };
@@ -956,34 +746,7 @@ export const onEmailForgotten = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1097,34 +860,7 @@ export const onSigninUp = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1188,34 +924,7 @@ export const onApplying = async (extras: {
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1273,34 +982,7 @@ export const onResetPassword = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1339,34 +1021,7 @@ export const onConversationEngagement = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1423,34 +1078,7 @@ export const onAnswerConversation = async (
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1482,34 +1110,7 @@ export const onUpdateisPublic = async (userId: string, isPublic: boolean) => {
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1586,36 +1187,9 @@ export const onCreateMeet = async (formData: FormData, jobId: string) => {
       BACKEND_MESSAGES.NOT_VALID
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
+    return await handleActionError(err, () => {
+      revalidatePath("/backoffice/meets");
     });
-
-    const zodErr = err.errors;
-    revalidatePath("/backoffice/meets");
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
   }
 };
 
@@ -1636,23 +1210,7 @@ export const onSendEmail = async (params: QuerySendEmailArgs["data"]) => {
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
-    });
-    return {
-      status: err.status,
-      error: true,
-      type: err.type ? err.type : BACKEND_ERRORS.UNKNOWN,
-      message: err.message ? err.message : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -1678,36 +1236,9 @@ export const onCreateAffiliation = async (formData: FormData) => {
       return { data: result.data };
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
+    return await handleActionError(err, () => {
+      revalidatePath("/backoffice/affiliations");
     });
-
-    const zodErr = err.errors;
-    revalidatePath("/backoffice/affiliations");
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
   }
 };
 export const onCreateChildUser = async (
@@ -1776,36 +1307,9 @@ export const onCreateChildUser = async (
       BACKEND_MESSAGES.NOT_VALID
     );
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
+    return await handleActionError(err, () => {
+      revalidatePath("/backoffice/users");
     });
-
-    const zodErr = err.errors;
-    revalidatePath("/backoffice/users");
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
   }
 };
 
@@ -1876,36 +1380,9 @@ export const onCreateLead = async (formData: FormData) => {
       );
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
+    return await handleActionError(err, () => {
+      revalidatePath("/backoffice/users");
     });
-
-    const zodErr = err.errors;
-    revalidatePath("/backoffice/users");
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
   }
 };
 
@@ -1938,37 +1415,10 @@ export const onSendEmailToLead = async (leadsIds: string[]) => {
       return { data: result.data };
     }
   } catch (err: any) {
-    await createError({
-      data: {
-        environment: dev ? "development" : "production",
-        message: err.message,
-        pro: false,
-        query: "unknown",
-        status: err.status,
-        statusText: err.statusText ?? "",
-        type: err.type,
-      },
+    return await handleActionError(err, () => {
+      revalidatePath("/backoffice");
+      revalidatePath("/backoffice/users");
     });
-
-    const zodErr = err.errors;
-    revalidatePath("/backoffice");
-    revalidatePath("/backoffice/users");
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
   }
 };
 
@@ -1999,7 +1449,7 @@ export const onCompanyForm = async (
       return { data: "compte" };
     }
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
   // return result;
 };
@@ -2027,7 +1477,7 @@ export const onOfferForm = async (
       return { data: "dashboard" };
     }
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -2066,23 +1516,7 @@ export const onUnlockCandidate = async (args: {
       );
     }
   } catch (err: any) {
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -2132,7 +1566,7 @@ export const onDeleteNotification = async (
       );
     }
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -2209,23 +1643,7 @@ export const onAddConversationTheme = async (
       );
     }
   } catch (err: any) {
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -2257,7 +1675,7 @@ export const onAddCustomisation = async (
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -2320,7 +1738,7 @@ export const onAddQuestion = async (
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -2364,7 +1782,7 @@ export const onAddQueue = async (extras: {
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -2390,7 +1808,7 @@ export const onCancelConversation = async (
       );
     }
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -2455,23 +1873,7 @@ export const onRefuseApplication = async (
       BACKEND_MESSAGES.MISSING_ARGUMENT
     );
   } catch (err: any) {
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
 };
 
@@ -2511,7 +1913,7 @@ export const onTranscriptVideo = async (
       );
     }
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 export const onAnalyzeVideo = async (
@@ -2542,7 +1944,7 @@ export const onAnalyzeVideo = async (
       );
     }
   } catch (err: any) {
-    return { error: true, type: err.type, message: err.message };
+    return await handleActionError(err);
   }
 };
 
@@ -2614,24 +2016,7 @@ export const searchSomeoneRequest = async (formData: FormData) => {
       }
     }
   } catch (err: any) {
-    console.log(err, "err");
-    const zodErr = err.errors;
-    return {
-      status: err.status,
-      error: true,
-      type:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? BACKEND_ERRORS.DATATYPE_INVALID
-          : err.type
-          ? err.type
-          : BACKEND_ERRORS.UNKNOWN,
-      message:
-        zodErr && zodErr[0].code === "invalid_type"
-          ? `${BACKEND_MESSAGES.DATATYPE_INVALID} ${zodErr[0].path[0]}`
-          : err.message
-          ? err.message
-          : BACKEND_MESSAGES.UNKNOWN,
-    };
+    return await handleActionError(err);
   }
   redirect(`/${result.uniqueName}`);
 };

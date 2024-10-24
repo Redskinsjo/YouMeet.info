@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { BetaCompany } from "@youmeet/gql/generated";
-import BackofficeCompaniesComponent from "../backofficeComponents/BackofficeCompaniesComponent";
+import BackofficeCompaniesComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficeCompaniesComponent";
 
 export default function BackofficeChild({
   companies,

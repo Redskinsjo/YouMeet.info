@@ -75,8 +75,7 @@ const names: {
 
 export default function SelectSimpleField({
   name,
-  id,
-  type,
+  type = "text",
   label,
   value,
   multiple,
@@ -84,6 +83,7 @@ export default function SelectSimpleField({
   clearErrors,
   setError,
   placeholder,
+  select,
 }: NewFieldProps & {
   name: SimpleSelectNames;
 }) {
@@ -101,15 +101,14 @@ export default function SelectSimpleField({
     fetchData();
   }, []);
 
-  return type !== "hidden" ? (
+  return (
     <SimpleField
       name={name}
       label={label}
       type={type}
       value={value}
       multiple={multiple}
-      select
-      id={id}
+      select={select}
       errors={errors}
       setError={setError}
       placeholder={placeholder}
@@ -117,18 +116,6 @@ export default function SelectSimpleField({
     >
       <Options name={name} data={data} />
     </SimpleField>
-  ) : (
-    <SimpleField
-      name={name}
-      label={label}
-      type={"hidden"}
-      value={value}
-      id={id}
-      placeholder={placeholder}
-      errors={errors}
-      setError={setError}
-      clearErrors={clearErrors}
-    />
   );
 }
 
