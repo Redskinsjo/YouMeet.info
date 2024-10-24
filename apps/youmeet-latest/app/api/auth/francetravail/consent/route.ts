@@ -35,6 +35,11 @@ export async function GET(req: NextRequest) {
 
     const endpoint = `${uri}?${searchParams}`;
 
+    return new Response(null, {
+      status: 307,
+      headers: { Location: `${endpoint}` },
+    });
+
     const response = await fetch(endpoint, {
       method: "GET",
     });
