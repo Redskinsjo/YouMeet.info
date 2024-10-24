@@ -35,8 +35,9 @@ export async function GET(req: NextRequest) {
     const endpoint = `${uri}?${searchParams}`;
 
     console.log(endpoint, "endpoint");
+    console.log(encodeURIComponent(endpoint), "encode");
 
-    const response = await fetch(endpoint, {
+    const response = await fetch(encodeURIComponent(endpoint), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
