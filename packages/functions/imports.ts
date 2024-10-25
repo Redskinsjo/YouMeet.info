@@ -32,7 +32,7 @@ export const oldLogoUrl =
   "https://res.cloudinary.com/de822mdsy/image/upload/v1691348066/youmeet-official/webp/logo-favicon_yvmhxq.webp";
 
 export const logoUrl =
-  "https://res.cloudinary.com/de822mdsy/image/upload/v1716496496/chbvyqxsyd2flxfav0qg.webp";
+  "https://res.cloudinary.com/de822mdsy/image/upload/v1729873044/loziyj98phsszj2nxri6.webp";
 // export const logoUrl =
 //   "https://res.cloudinary.com/de822mdsy/image/upload/v1715684378/prise2ref/logo/dnibfsnzw74wvwdxa15n.webp";
 export const prise2RefDarkLogo =

@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
