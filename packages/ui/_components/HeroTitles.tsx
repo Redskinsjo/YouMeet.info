@@ -12,7 +12,7 @@ export default function HeroTitles() {
       role="heading"
       className="text-white flex flex-col text-wrap font-bold whitespace-nowrap xs:whitespace-normal sm:whitespace-normal md:whitespace-normal text-[36px] w-full"
     >
-      <div>
+      <div className="flex flex-wrap">
         <span className="ml-[3px] text-cyan200 shadow-lg px-[6px]">
           {t("informations")}
         </span>
@@ -27,7 +27,7 @@ export default function HeroTitles() {
       role="heading"
       className="text-white flex flex-col text-wrap font-bold whitespace-nowrap xs:whitespace-normal sm:whitespace-normal md:whitespace-normal text-[36px] w-full"
     >
-      <div>
+      <div className="flex flex-wrap">
         {t("reliable-pro-infos")}
         <span className="ml-[3px] text-cyan200 shadow-lg px-[6px]">
           {t("information")}
