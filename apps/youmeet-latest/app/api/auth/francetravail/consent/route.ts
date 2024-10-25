@@ -22,19 +22,19 @@ export async function GET(req: NextRequest) {
     const client_id = `${process.env.FRANCE_TRAVAIL_CLIENT_ID}`;
     const scope = "api_peconnect-individuv1 openid profile email";
 
-    const encoded = `scope=${encodeURIComponent(
-      scope
-    )}&redirect_uri=${encodeURIComponent(
-      `${youmeetUri}/api/auth/francetravail/connexion`
-    )}`;
+    const encoded = new URLSearchParams({
+      scope,
+      redirect_uri: `${youmeetUri}/api/auth/francetravail/connexion`,
+      realm,
+    });
 
-    const searchParams = `realm=${realm}&response_type=code&client_id=${client_id}&state=ABC&nonce=CBA&${encoded}`;
+    const searchParams = `${encoded}&response_type=code&client_id=${client_id}&state=ABC&nonce=CBA&${encoded}`;
 
     const endpoint = `${uri}?${searchParams}`;
 
     console.log(endpoint, "endpoint");
 
-    const response = await fetch(encodeURIComponent(endpoint), {
+    const response = await fetch(endpoint, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

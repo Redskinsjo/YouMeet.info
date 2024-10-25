@@ -131,6 +131,10 @@ const nextConfig = {
         },
       ],
     });
+    config.module = {
+      ...config.module,
+      exprContextCritical: false,
+    };
 
     if (dev || isServer) {
       config.devtool = "source-map";
