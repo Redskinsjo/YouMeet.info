@@ -13,7 +13,7 @@ export default function FooterProposedBy() {
         passHref
         className="no-underline group focus-visible:outline-0"
       >
-        <div className="ml-2 text-blueGrey900 dark:text-white font-semibold cursor-pointer group-focus-visible:bg-grey100 rounded-xl">
+        <div className="ml-2 text-blueGrey900 dark:text-white text-blueGrey700 hover:opacity-50 font-semibold cursor-pointer group-focus-visible:bg-grey100 rounded-xl">
           Jonathan Carnos
         </div>
       </Link>
