@@ -23,12 +23,15 @@ export async function GET(req: NextRequest) {
     const scope = "api_peconnect-individuv1 openid profile email";
 
     const encoded = new URLSearchParams({
+      realm,
       scope,
       redirect_uri: `${youmeetUri}/api/auth/francetravail/connexion`,
-      realm,
+      client_id,
     });
 
-    const searchParams = `${encoded}&response_type=code&client_id=${client_id}&state=ABC&nonce=CBA&${encoded}`;
+    console.log(encoded, "encoded");
+
+    const searchParams = `${encoded}&response_type=code&state=ABC&nonce=CBA`;
 
     const endpoint = `${uri}?${searchParams}`;
 

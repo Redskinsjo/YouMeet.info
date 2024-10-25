@@ -136,10 +136,6 @@ const nextConfig = {
       exprContextCritical: false,
     };
 
-    if (dev || isServer) {
-      config.devtool = "source-map";
-    }
-
     return config;
   },
 };
