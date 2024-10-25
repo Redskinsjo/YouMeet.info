@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { mate } from "@youmeet/functions/fonts";
 
 const SectionTitle = dynamic(() => import("../_components/SectionTitle"), {
   ssr: false,
@@ -24,7 +23,6 @@ export default function HomeCV() {
         text={"no-job-without-a-meeting"}
         align="center"
         containerStyle={{
-          ...mate.style,
           maxWidth: "400px",
           fontSize: "20px",
         }}

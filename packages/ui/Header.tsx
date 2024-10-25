@@ -218,14 +218,14 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         <div
           data-aos="fade-in"
           onClick={() => setMegaMenu(false)}
-          className="absolute h-screen top-[75px] z-[11001] shadow-inner"
+          className="absolute h-screen top-[75px] z-[11001] shadow-inner opacity-70"
         >
           <div
             onMouseEnter={() => setMegaMenu(true)}
             onMouseLeave={() => setMegaMenu(false)}
-            className="flex justify-center gap-[24px] w-screen bg-white h-[300px] m-[2px] dark:lightDarkBg"
+            className="flex justify-center gap-[24px] w-screen bg-white opacity-70 h-[300px] m-[2px] dark:lightDarkBg"
           >
-            <div className="w-[200px]">
+            <div className="w-[200px] opacity-70">
               <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
                 {t("product")}
               </h3>

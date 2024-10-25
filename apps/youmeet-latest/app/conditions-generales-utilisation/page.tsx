@@ -126,6 +126,7 @@ export default function GeneralConditions() {
             <CGUTitle />
             {paragraphs.map((p) => (
               <ParagraphWithTitle
+                key={p.title}
                 title={p.title}
                 paragraph={p.paragraph}
                 paragraphs={p.paragraphs}

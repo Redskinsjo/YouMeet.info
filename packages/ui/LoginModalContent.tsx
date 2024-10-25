@@ -8,7 +8,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LoginComponentTopPart from "./LoginComponentTopPart";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useFormState } from "react-dom";
 import {
   onEmailForgotten,
@@ -235,7 +235,7 @@ const WhenLogin = ({
       <Suspense>
         <LoginComponentTopPart />
       </Suspense>
-      {/* <form
+      <form
         ref={formRef}
         action={handle}
         name="classic-signin"
@@ -290,7 +290,7 @@ const WhenLogin = ({
             )}
           </div>
         </div>
-      </form> */}
+      </form>
       {type !== "loginPage" && <LoginModalClose type={type} />}
     </div>
   );

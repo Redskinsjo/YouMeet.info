@@ -27,7 +27,7 @@ export default function NewLinkComponent({ profil }: { profil: BetaUser }) {
       asset={displayLinkCopied ? t("link-copied") : t("link-copy")}
     >
       <div
-        className="flex-center text-center text-[14px] font-bold break-any cursor-pointer w-fit rounded-[14px] text-blue500 dark:text-cyan300 dark:lightDarkBg px-[6px]"
+        className="flex-center text-center text-[14px] font-semibold break-any cursor-pointer w-fit rounded-[14px] text-cyan500 dark:text-cyan300 dark:lightDarkBg px-[6px]"
         style={{
           textRendering: "geometricPrecision",
           cursor: profil.isPublic ? "pointer" : "not-allowed",

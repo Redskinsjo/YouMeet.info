@@ -1,4 +1,4 @@
-import { Nunito, Outfit, Mate_SC, Comfortaa } from "next/font/google";
+import { Nunito, Outfit, Indie_Flower } from "next/font/google";
 
 export const nunito = Nunito({
   display: "swap",
@@ -12,16 +12,9 @@ export const outfit = Outfit({
   display: "swap",
 });
 
-export const mate = Mate_SC({
+export const indie_flower = Indie_Flower({
   variable: "--font-mate",
   subsets: ["latin"],
   display: "swap",
   weight: ["400"],
-});
-
-export const comfortaa = Comfortaa({
-  variable: "--font-mate",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
 });

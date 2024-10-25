@@ -1,7 +1,5 @@
-"use client";
-
 import { uri } from "@youmeet/functions/imports";
-import { forwardRef, Reference } from "react";
+import { forwardRef } from "react";
 
 declare global {
   namespace JSX {
@@ -14,10 +12,16 @@ declare global {
   }
 }
 
-function FranceTravailConnect({ className }: { className?: string }, ref: any) {
+function FranceTravailConnect(
+  {
+    className,
+    mode = "light",
+  }: { className?: string; mode?: "light" | "dark" },
+  ref: any
+) {
   return (
     <ft-connect
-      data-mode=""
+      data-mode={mode}
       ref={ref}
       className={className}
       onClick={async () => {

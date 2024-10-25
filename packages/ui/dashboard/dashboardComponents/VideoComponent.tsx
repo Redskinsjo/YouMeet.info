@@ -165,7 +165,7 @@ export default function VideoComponent({
             >
               <div className="flex flex-col gap-[24px] w-full">
                 <div className="flex justify-start">
-                  <h3 className="font-light subItem my-0 whitespace-nowrap dark:text-grey300">
+                  <h3 className="font-light subItem my-0 whitespace-nowrap text-grey700 dark:text-grey300">
                     {t("video")}{" "}
                     {video?.job &&
                     video.job.title &&

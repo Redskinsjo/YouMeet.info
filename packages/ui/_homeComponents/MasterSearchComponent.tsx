@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
 import { useFormStatus } from "react-dom";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
+import { indie_flower } from "@youmeet/functions/fonts";
 
 export default function MasterSearchComponent({
   setError,
@@ -13,7 +14,14 @@ export default function MasterSearchComponent({
 
   return (
     <>
-      <h2 className="underline underline-offset-[2px]">
+      <h2
+        className="underline font-light"
+        style={{
+          ...indie_flower.style,
+          textDecorationThickness: "1px",
+          textUnderlineOffset: "3px",
+        }}
+      >
         {t("search-for-someone")}
       </h2>
       <SimpleField

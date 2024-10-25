@@ -148,7 +148,7 @@ const ProfileViewsComponent: React.FC<
         labelNoWrap
         account
         label={
-          <h3 className="font-light subItem my-0 dark:text-grey300">
+          <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
             {t("profile-views")}
           </h3>
         }

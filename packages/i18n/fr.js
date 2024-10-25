@@ -680,7 +680,7 @@ const partners = {
   tendency: "Tendance et Innovation",
   brand: "Marque et Portefeuilles",
   historic: "Historique",
-
+  "add-ft-experiences": "Ajouter vos expériences par FranceTravail",
   "return-button": "Retour",
   search: "Rechercher",
   "search-by-job": "Rechercher par titre de l'emploi",
@@ -706,7 +706,7 @@ const compte = {
   "profile-views": "Vues de profil",
   loading: "Chargement",
   "use-this-link":
-    "Utilisez ce lien comme +CV vidéo= et insérez le dans votre CV après l'avoir +rendu visible=.+",
+    "Partagez ce lien avec les recruteurs, insérez le dans votre CV.+",
   welcome: "Bienvenue",
   dashboard: "Dashboard",
   "add-remark": "Ajouter une remarque",

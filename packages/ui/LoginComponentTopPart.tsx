@@ -36,7 +36,7 @@ export default function LoginComponentTopPart() {
         {t("login")}
       </h1>
       <div className="w-full flex flex-col gap-[24px]">
-        {/* {process.env.APP === "candidate" && (
+        {process.env.APP === "candidate" && (
           <form
             name="google-signin"
             method="POST"
@@ -60,7 +60,7 @@ export default function LoginComponentTopPart() {
               <FcGoogle className="item" />
             </Button>
           </form>
-        )} */}
+        )}
         <FranceTravailConnect
           className="dark:FTConnectDark FTConnect"
           ref={ftConnectRef}

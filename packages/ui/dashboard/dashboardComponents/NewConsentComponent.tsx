@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { FormControlLabel, Switch } from "@mui/material";
 import { BetaUser } from "@youmeet/gql/generated";
 import DetailComponent from "../../DetailComponent";
@@ -33,7 +33,7 @@ const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
       labelNoWrap
       account
       label={
-        <h3 className="font-light subItem my-0 dark:text-grey300">
+        <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
           {t("give-consent")}
         </h3>
       }

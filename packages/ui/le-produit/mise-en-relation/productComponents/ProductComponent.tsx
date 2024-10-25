@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { mate } from "@youmeet/functions/fonts";
 import { useMediaQuery } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ReactElement, useEffect, useMemo, useState } from "react";
@@ -236,10 +235,7 @@ export default function ProductComponent() {
           }}
         />
 
-        <div
-          className="min-w-[495px] xs:w-screen sm:w-screen xs:min-w-0 sm:min-w-0 md:min-w-screen p-[48px] py-[72px] xs:p-[24px] xs:py-[36px] sm:p-[24px] sm:py-[36px] md:p-[48px] box-border flex flex-col flex-1"
-          style={{ ...mate.style }}
-        >
+        <div className="min-w-[495px] xs:w-screen sm:w-screen xs:min-w-0 sm:min-w-0 md:min-w-screen p-[48px] py-[72px] xs:p-[24px] xs:py-[36px] sm:p-[24px] sm:py-[36px] md:p-[48px] box-border flex flex-col flex-1">
           <div className="flex flex-col gap-[12px]">
             <h1 className="dark:text-white font-bold my-0 text-white">
               {t("homeTitleSecondary")}

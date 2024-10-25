@@ -666,8 +666,9 @@ const partners = {
   "search-by-job": "Search by the job title",
   "search-by-name-job": "Search by the name, job title",
   "search-by-fullname": "Search by the fullname",
-  "search-for-someone": "Type the name of the person you are looking for",
+  "search-for-someone": "Type to search for someone",
   consult: "Consult",
+  "add-ft-experiences": "Add your experiences with FranceTravail",
 };
 
 const recruiters = {
@@ -678,7 +679,7 @@ const recruiters = {
   "profile-views": "Profile views",
   loading: "Loading",
   "use-this-link":
-    "Use this link as +Video CV= and insert it in your CV after setting it +to visible=.+",
+    "Share this link with the recruiters, insert it in your CV.+",
   welcome: "Welcome",
   dashboard: "Dashboard",
   "add-remark": "Add a feedback",

@@ -76,7 +76,7 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
               labelNoWrap
               reversePlacement
               label={
-                <h3 className="font-light subItem my-0 dark:text-grey300">
+                <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
                   {t("say-us-which-job")}
                 </h3>
               }
@@ -131,7 +131,7 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
             labelNoWrap
             reversePlacement
             label={
-              <h3 className="font-light subItem my-0 dark:text-grey300">
+              <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
                 {t("me-profile-infos-label-job")}
               </h3>
             }

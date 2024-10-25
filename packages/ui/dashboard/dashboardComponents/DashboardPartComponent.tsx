@@ -10,6 +10,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import UserNotices from "./UserNotices";
 import AffiliatesComponent from "./AffiliatesComponent";
+import dynamic from "next/dynamic";
+
+const DashboardAddFTExperiences = dynamic(
+  () => import("./DashboardAddFTExperiences"),
+  { ssr: false }
+);
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -48,7 +54,6 @@ export default function DashboardPartComponent({
   const { t } = useTranslation();
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
-  const [loading, setLoading] = useState(true);
   const [value, setValue] = useState(0);
 
   const handleChange = useCallback(
@@ -62,12 +67,12 @@ export default function DashboardPartComponent({
   useEffect(() => {
     const tab = localStorage.getItem("dashboardTab");
     if (tab) setValue(parseInt(tab));
-    setLoading(false);
   }, []);
 
   return (
-    !loading && (
-      <div className="xs:max-w-full sm:max-w-full md:max-w-full w-full flex flex-col gap-[6px] xs:gap-[1px] sm:gap-[1px] md:gap-[1px]">
+    <div className="w-full flex flex-col gap-[6px] xs:gap-[1px] sm:gap-[1px] md:gap-[1px] bg-white dark:extraLightDarkBg">
+      <DashboardAddFTExperiences />
+      <div className="border-[0.5px] border-solid border-grey300 dark:border-grey900 xs:max-w-full sm:max-w-full md:max-w-full w-full flex flex-col gap-[6px] xs:gap-[1px] sm:gap-[1px] md:gap-[1px] bg-white dark-extraLightDarkBg">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -115,9 +120,9 @@ export default function DashboardPartComponent({
             {/* <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
               <NewIsPublicComponent profil={profil} />
             </div> */}
-            <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
+            {/* <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
               <NewConsentComponent profil={profil} />
-            </div>
+            </div> */}
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
             <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
@@ -148,6 +153,6 @@ export default function DashboardPartComponent({
       </div> */}
         </div>
       </div>
-    )
+    </div>
   );
 }

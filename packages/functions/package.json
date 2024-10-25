@@ -13,7 +13,6 @@
     "@youmeet/global-config": "*",
     "@youmeet/gql": "*",
     "@youmeet/types": "*",
-    "@youmeet/ui": "*",
     "@youmeet/utils": "*",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",

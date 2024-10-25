@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Layout from "@youmeet/ui/Layout";
 import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
@@ -32,7 +32,7 @@ export default function DashboardChild({
           padding: "0px",
         }}
       >
-        <div className="flex md:flex-wrap w-full gap-[6px] xs:gap-[1px] sm:gap-[1px] md:gap-[1px] relative xs:flex-col sm:flex-col md:flex-col">
+        <div className="flex md:flex-wrap w-full gap-[3px] xs:gap-[1px] sm:gap-[1px] md:gap-[1px] relative xs:flex-col sm:flex-col md:flex-col lightBg">
           <ProfilePartComponent
             profil={profil}
             details={profil?.details as BetaDetails}

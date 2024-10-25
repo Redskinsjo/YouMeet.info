@@ -82,7 +82,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
               name="targetContractType"
               reversePlacement
               label={
-                <h3 className="font-light subItem my-0 dark:text-grey300">
+                <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
                   {t("say-us-which-contract-type")}
                 </h3>
               }
@@ -137,7 +137,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
             noLabelColon
             labelNoWrap
             label={
-              <h3 className="font-light subItem my-0 dark:text-grey300">
+              <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
                 {t("contractType")}
               </h3>
             }

@@ -15,6 +15,7 @@
     "@youmeet/global-config": "*",
     "@youmeet/gql": "*",
     "@youmeet/utils": "*",
+    "@youmeet/functions": "*",
     "next": "^14.2.3",
     "react": "^19.0.0-canary-fd0da3eef-20240404",
     "react-calendar": "^5.0.0",
