@@ -125,7 +125,7 @@ export default function OfferContent({ offre }: { offre: Offer }) {
                   <BoldText
                     formatDisplay
                     fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg"
-                    skeletonCount={3}
+                    skeleton={{ count: 3 }}
                     links
                     align="justify"
                     text={values.content || ""}
@@ -161,7 +161,7 @@ export default function OfferContent({ offre }: { offre: Offer }) {
                     formatDisplay
                     fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg"
                     links
-                    skeletonCount={3}
+                    skeleton={{ count: 3 }}
                     align="justify"
                     text={values.profileSearched || ""}
                     containerStyle={{

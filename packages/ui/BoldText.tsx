@@ -25,7 +25,11 @@ export default function BoldText({
   align = "left",
   links,
   noEnding = false,
-  skeletonCount = 1,
+  skeleton = {
+    width: "100%",
+    count: 1,
+    height: "10px",
+  },
   formatDisplay = false,
   questionsHighlight,
   component = "p",
@@ -36,14 +40,17 @@ export default function BoldText({
   align?: "left" | "justify" | "right" | "center";
   links?: boolean;
   noEnding?: boolean;
-  skeletonCount?: number;
+  skeleton?: {
+    count?: number;
+    width?: string;
+    height?: string;
+  };
   formatDisplay?: boolean;
   questionsHighlight?: boolean;
   component?: "p" | "li" | "span";
 }) {
   const { t } = useTranslation();
   const regex = useLinksRegex();
-  const [loading, setLoading] = useState(false);
   const [textSlugs, setTextSlugs] = useState({});
   const [textToFormat, setTextToFormat] = useState("");
 
@@ -213,15 +220,16 @@ export default function BoldText({
   useEffect(() => {
     if (links) preFormatText();
     if (!textToFormat) setTextToFormat(t(text));
-    setLoading(false);
   }, [links, regex]);
 
   return (
     <>
-      {!loading && paragraph ? (
-        paragraph
-      ) : (
-        <OneLineSkeleton count={skeletonCount} />
+      {paragraph ?? (
+        <OneLineSkeleton
+          count={skeleton.count}
+          height={skeleton.height}
+          width={skeleton.width}
+        />
       )}
     </>
   );

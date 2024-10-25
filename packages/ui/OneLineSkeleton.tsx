@@ -1,40 +1,29 @@
-"use client";
 import { Skeleton } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
-import React from "react";
-import { useState, useEffect } from "react";
 
 export default function OneLineSkeleton({
   width = "100%",
   count = 1,
+  height = "10px",
 }: {
   count?: number;
   width?: string;
+  height?: string;
 }) {
-  const [loading, setLoading] = useState(true);
+  const array = Array.from(new Array(count));
 
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-  return (
-    !loading && (
-      <div className="flex flex-col gap-[6px]">
-        {Array.from(new Array(count)).map((line, i, arr) => (
-          <Skeleton
-            key={i}
-            className="fadeIn"
-            animation="wave"
-            variant="rounded"
-            width={i === arr.length - 1 ? "45%" : width}
-            height="10px"
-            style={{
-              margin: "0px 4px",
-              gap: "4px",
-              backgroundColor: deepPurple[50],
-            }}
-          />
-        ))}
-      </div>
-    )
-  );
+  return array.map((line, i, arr) => (
+    <Skeleton
+      key={i}
+      className="fadeIn"
+      animation="wave"
+      variant="rounded"
+      width={arr.length > 1 && i === arr.length - 1 ? "45%" : width}
+      height={height}
+      style={{
+        margin: "0px 8px",
+        backgroundColor: deepPurple[50],
+      }}
+    />
+  ));
 }

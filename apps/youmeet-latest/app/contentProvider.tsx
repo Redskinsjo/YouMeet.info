@@ -6,9 +6,14 @@ import { ReactElement, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { outfit } from "@youmeet/functions/fonts";
 import Modals from "@youmeet/ui/_homeComponents/Modals";
-import ThinHeader from "@youmeet/ui/ThinHeader";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
+import OneLineSkeleton from "@youmeet/ui/OneLineSkeleton";
+
+const ThinHeader = dynamic(() => import("@youmeet/ui/ThinHeader"), {
+  ssr: false,
+  loading: () => <OneLineSkeleton height="39px" />,
+});
 
 export default function ContentProvider({
   children,

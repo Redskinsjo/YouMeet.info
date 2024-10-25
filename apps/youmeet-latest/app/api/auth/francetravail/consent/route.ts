@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
       "https://authentification-candidat.francetravail.fr/connexion/oauth2/authorize";
 
     const client_id = `${process.env.FRANCE_TRAVAIL_CLIENT_ID}`;
-    const scope = "api_peconnect-individuv1 openid profile email";
+    const scope = "api_peconnect-experiencesv1 pfcexperiences";
 
     const encoded = new URLSearchParams({
       realm,

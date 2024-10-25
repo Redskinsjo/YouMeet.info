@@ -4,9 +4,9 @@ export type DynamicData = {
 };
 
 export type ParagraphWithTitleTypes = {
-  title: string;
+  title?: string;
   paragraph?: DynamicData | string;
-  paragraphs?: DynamicData[] | string[];
+  paragraphs?: Omit<ParagraphWithTitleTypes[], "paragraphs">;
   points?: string[] | DynamicData[];
   detail?: DynamicData;
   titles?: ParagraphWithTitleTypes[];
