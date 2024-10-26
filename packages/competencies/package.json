@@ -27,7 +27,10 @@
   "exports": {
     "./resolvers": "./resolvers.ts",
     "./schema": "./schema.graphql",
-    ".": "./index.ts"
+    ".": {
+      "types": "./src/types/index.d.ts",
+      "default": "./index.ts"
+    }
   },
   "scripts": {
     "codegen": "graphql-codegen --config codegen.ts --watch",
