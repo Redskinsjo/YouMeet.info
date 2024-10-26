@@ -32,9 +32,28 @@ export type Competency = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
+export type CompetencyInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageParamsInput = {
+  search?: InputMaybe<Scalars['String']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  competencies?: Maybe<Array<Maybe<Competency>>>;
   oneCompetency?: Maybe<Competency>;
+};
+
+
+export type QueryCompetenciesArgs = {
+  data?: InputMaybe<CompetencyInput>;
+  params?: InputMaybe<PageParamsInput>;
 };
 
 
@@ -117,7 +136,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Competency: ResolverTypeWrapper<Competency>;
+  CompetencyInput: CompetencyInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  PageParamsInput: PageParamsInput;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
 };
@@ -126,7 +148,10 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Competency: Competency;
+  CompetencyInput: CompetencyInput;
   ID: Scalars['ID']['output'];
+  Int: Scalars['Int']['output'];
+  PageParamsInput: PageParamsInput;
   Query: {};
   String: Scalars['String']['output'];
 };
@@ -149,6 +174,7 @@ export type CompetencyResolvers<ContextType = any, ParentType extends ResolversP
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  competencies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Competency']>>>, ParentType, ContextType, Partial<QueryCompetenciesArgs>>;
   oneCompetency?: Resolver<Maybe<ResolversTypes['Competency']>, ParentType, ContextType, Partial<QueryOneCompetencyArgs>>;
 };
 

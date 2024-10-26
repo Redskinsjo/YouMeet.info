@@ -43,6 +43,7 @@
     "@youmeet/raw-data": "*",
     "@youmeet/ui": "*",
     "@youmeet/utils": "*",
+    "@youmeet/competencies": "*",
     "aos": "^2.3.4",
     "cloudinary": "^2.5.0",
     "cookie": "^0.6.0",

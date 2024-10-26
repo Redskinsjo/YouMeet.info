@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./codegen": "./codegen.ts",
     "./generated": "./generated.ts",
     "./index": "./index.tsx",
     "./schema": "./schema.graphql"

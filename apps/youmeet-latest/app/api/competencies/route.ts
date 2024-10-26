@@ -1,7 +1,7 @@
-import { createSchema, createYoga } from "graphql-yoga";
-import resolvers from "@/resolvers";
+import resolvers from "@youmeet/competencies/resolvers";
 import mongoose from "mongoose";
-import typeDefs from "@youmeet/gql/schema";
+import typeDefs from "@youmeet/competencies/schema";
+import { createSchema, createYoga } from "graphql-yoga";
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 
@@ -11,14 +11,12 @@ const schema = createSchema({
 });
 
 const { handleRequest } = createYoga({
-  graphqlEndpoint: "/api/server",
+  graphqlEndpoint: "/api/competencies",
   schema,
-  graphiql: false,
+  graphiql: true,
   cors: {
-    origin: [`${process.env.API_DOMAIN}`, `${process.env.PRO_DOMAIN}`],
-    allowedHeaders: ["X-Custom-Header"],
-    methods: ["POST", "OPTIONS", "GET"],
-    credentials: true,
+    origin: "*",
+    methods: ["POST", "OPTIONS"],
   },
   async context(context: any) {
     context.request.headers.set(

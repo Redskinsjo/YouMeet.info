@@ -1,4 +1,8 @@
-import { QueryOneCompetencyArgs, Resolvers } from "@youmeet/gql/generated";
+import {
+  QueryCompetenciesArgs,
+  QueryOneCompetencyArgs,
+  Resolvers,
+} from "./generated";
 import { ContextRequest } from "@youmeet/types/ContextRequest";
 import { noCorsMiddleware } from "@youmeet/utils/resolvers/noCorsMiddleware";
 import prisma from "@youmeet/prisma-config/prisma";
@@ -26,6 +30,20 @@ const resolvers: Resolvers = {
         where,
       });
       return competency;
+    },
+    competencies: async (
+      _: unknown,
+      args: QueryCompetenciesArgs,
+      context: ContextRequest
+    ) => {
+      const where = {} as { id: { in: string[] } };
+      const params = {} as { take?: number; skip?: number };
+      if (args.data?.in) where.id = { in: (args.data.in as string[]) || [] };
+      if (args.params?.skip !== undefined)
+        params.skip = args.params.skip as number;
+      if (args.params?.take !== undefined)
+        params.take = args.params.take as number;
+      return await prisma.competencies.findMany({ where, ...params });
     },
   },
 };

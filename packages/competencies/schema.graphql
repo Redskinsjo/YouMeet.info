@@ -14,6 +14,19 @@ type Competency {
   appelations: [String]
 }
 
+input CompetencyInput {
+  id: String
+  title: String
+  in: [String]
+}
+
+input PageParamsInput {
+  skip: Int
+  take: Int
+  search: String
+}
+
 type Query {
   oneCompetency(title: String, id: ID, slug: String): Competency
+  competencies(data: CompetencyInput, params: PageParamsInput): [Competency]
 }
