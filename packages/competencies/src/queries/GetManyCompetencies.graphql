@@ -1,0 +1,5 @@
+query GetManyCompetency($data: CompetencyInput, $params: PageParamsInput) {
+  competencies(data: $data, params: $params) {
+    id
+  }
+}

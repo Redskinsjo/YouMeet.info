@@ -2,9 +2,10 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: `schema.graphql`,
+  documents: ["./src/queries/*.graphql"],
   emitLegacyCommonJSImports: false,
   generates: {
-    "./generated.ts": {
+    "./src/types/generated.ts": {
       plugins: [
         "typescript",
         "typescript-operations",
@@ -16,7 +17,6 @@ const config: CodegenConfig = {
       plugins: ["introspection"],
     },
   },
-  require: ["ts-node"],
   overwrite: true,
 };
 

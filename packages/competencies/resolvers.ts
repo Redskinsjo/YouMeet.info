@@ -2,7 +2,7 @@ import {
   QueryCompetenciesArgs,
   QueryOneCompetencyArgs,
   Resolvers,
-} from "./generated";
+} from "./src/types/generated";
 import { ContextRequest } from "@youmeet/types/ContextRequest";
 import { noCorsMiddleware } from "@youmeet/utils/resolvers/noCorsMiddleware";
 import prisma from "@youmeet/prisma-config/prisma";

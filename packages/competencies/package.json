@@ -1,13 +1,37 @@
 {
   "name": "@youmeet/competencies",
   "version": "0.0.0",
+  "description": "Centralize competencies titles. Fastly get unique competencies from all sectors (mainly, for recruitment enterprises). Helps finding competency that was derived. For example, request for whether react, ReactJS, or react.js, always get the unique React.js. Can be used in the frontend or the backend. This package is part of the YouMeet.info project.",
+  "keywords": [
+    "competencies",
+    "centralize",
+    "titles",
+    "unique",
+    "sectors",
+    "recruitment",
+    "enterprises",
+    "derived",
+    "request",
+    "YouMeet.info"
+  ],
   "private": true,
+  "main": "./index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Redskinsjo/YouMeet.info/tree/main/packages/competencies"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "license": "MIT",
   "exports": {
     "./resolvers": "./resolvers.ts",
-    "./schema": "./schema.graphql"
+    "./schema": "./schema.graphql",
+    ".": "./index.ts"
   },
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.ts --watch"
+    "codegen": "graphql-codegen --config codegen.ts --watch",
+    "publish": "npm publish --access public"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
@@ -19,12 +43,24 @@
     "@graphql-eslint/eslint-plugin": "^3.20.1",
     "@parcel/watcher": "^2.4.1",
     "eslint": "^9.11.1",
-    "eslint-config-next": "^14.2.13"
+    "eslint-config-next": "^14.2.13",
+    "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^8.0.2",
+    "@graphql-tools/load": "^8.0.3",
     "@graphql-tools/schema": "^10.0.6",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "server-only": "^0.0.1"
+  },
+  "author": {
+    "name": "Jonathan Carnos",
+    "email": "contact@youmeet.info",
+    "url": "https://github.com/Redskinsjo"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://paypal.me/yoka999999999?country.x=FR&locale.x=fr_FR"
   }
 }
