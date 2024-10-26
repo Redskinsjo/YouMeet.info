@@ -1,3 +1,4 @@
+"use client";
 import { uri } from "@youmeet/functions/imports";
 import { forwardRef } from "react";
 
