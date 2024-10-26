@@ -17,13 +17,11 @@ type Competency {
 input CompetencyInput {
   id: String
   title: String
-  in: [String]
 }
 
 input PageParamsInput {
   skip: Int
   take: Int
-  search: String
 }
 
 type Query {

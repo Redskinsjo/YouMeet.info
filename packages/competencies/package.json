@@ -28,7 +28,7 @@
     "./resolvers": "./resolvers.ts",
     "./schema": "./schema.graphql",
     ".": {
-      "types": "./src/types/index.d.ts",
+      "types": "./types/index.d.ts",
       "default": "./index.ts"
     }
   },
