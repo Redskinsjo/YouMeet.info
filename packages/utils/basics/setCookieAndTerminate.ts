@@ -1,10 +1,10 @@
 import { BetaUser } from "@youmeet/gql/generated";
-import { formatReturnTo } from "../formatReturnTo";
+import { formatReturnTo } from "../basics/formatReturnTo";
 import { isUser } from "@youmeet/types/TypeGuards";
-import { s } from "../jwt";
+import { s } from "../basics/jwt";
 import { uri } from "@youmeet/functions/imports";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
-import { BackendError } from "../BackendErrorClass";
+import { BackendError } from "../basics/BackendErrorClass";
 import { NextResponse } from "next/server";
 import { redir } from "../checkout/functions";
 

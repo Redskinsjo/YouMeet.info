@@ -13,6 +13,9 @@ import Footer from "@youmeet/ui/Footer";
 import "aos/dist/aos.css";
 import dynamic from "next/dynamic";
 import DataSection from "@youmeet/ui/_components/DataSection";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import Custom404 from "./[candidateName]/not-found";
+import ErrorChild from "@youmeet/ui/ErrorChild";
 
 const BigHeaderSection = dynamic(
   () => import("@youmeet/ui/_sections/BigHeaderSection"),

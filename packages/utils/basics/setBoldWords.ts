@@ -14,7 +14,10 @@ export const useLinksRegex = () => {
     if (!loading) {
       if (data?.competencies) {
         const regex = new RegExp(
-          data?.competencies?.map((comp) => comp?.title).join("|"),
+          data?.competencies
+            ?.map((comp) => comp?.title?.toLowerCase())
+            .join("|")
+            .replaceAll("+", "\\+"),
           "gi"
         );
         setRegex(regex);
