@@ -1,12 +1,12 @@
-import BetaUser from "@youmeet/models/betaUsers";
-import { setName } from "../setName";
+import { setName } from "../basics/setName";
 import {
   formatForUrl,
   inFormatForUrl,
 } from "../resolvers/formatCompetencyTitle";
 import uid2 from "uid2";
+import prisma from "@youmeet/prisma-config/prisma";
 
-const setUniqueNameAndExtension = async (
+export const setUniqueNameAndExtension = async (
   firstname: string,
   lastname: string,
   forCount: number
@@ -17,8 +17,8 @@ const setUniqueNameAndExtension = async (
   // si le prénom ou le nom est manquant
   if (!firstname.trim() || !lastname.trim()) extension = uid2(6);
 
-  const userWithSameFullname = await BetaUser.find({
-    fullname: uniqueName,
+  const userWithSameFullname = await prisma.betausers.findMany({
+    where: { fullname: uniqueName },
   });
 
   uniqueName = formatForUrl(uniqueName);
@@ -31,11 +31,10 @@ const setUniqueNameAndExtension = async (
   return { uniqueName: inFormatForUrl(uniqueName), extension };
 };
 
-export const setUniqueSlugAndExtension = (
+export const setUniqueSlugAndExtension = async (
   title: string,
   forCount: number,
-  type: "offers" | "articles" | "competencies",
-  list: any[]
+  type: "offers" | "articles" | "competencies"
 ) => {
   let extension = "";
 
@@ -44,16 +43,21 @@ export const setUniqueSlugAndExtension = (
 
   let found = [];
   if (type === "offers") {
-    found = list.filter(
-      (offer) => offer.job.title.fr.toLowerCase() === title.toLowerCase()
+    const offers = await prisma.offers.findMany({
+      include: { job: true },
+    });
+    found = offers.filter(
+      (offer) => offer?.job?.title?.fr?.toLowerCase() === title.toLowerCase()
     );
   } else if (type === "articles") {
-    found = list.filter(
-      (offer) => offer.title.fr.toLowerCase() === title.toLowerCase()
+    const articles = await prisma.articles.findMany();
+    found = articles.filter(
+      (article) => article.title.fr?.toLowerCase() === title.toLowerCase()
     );
   } else if (type === "competencies") {
-    found = list.filter(
-      (offer) => offer.title.toLowerCase() === title.toLowerCase()
+    const competencies = await prisma.competencies.findMany();
+    found = competencies.filter(
+      (competency) => competency.title.toLowerCase() === title.toLowerCase()
     );
   }
   title = formatForUrl(title);
@@ -66,4 +70,4 @@ export const setUniqueSlugAndExtension = (
   return { slug: inFormatForUrl(title), extension };
 };
 
-export default setUniqueNameAndExtension;
+export default { setUniqueNameAndExtension, setUniqueSlugAndExtension };

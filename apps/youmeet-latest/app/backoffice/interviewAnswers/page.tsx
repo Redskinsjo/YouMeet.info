@@ -1,7 +1,7 @@
 import InterviewAnswersChild from "./interviewAnswersChild";
 import { getLeadFormResponses } from "@youmeet/functions/request";
 import { FormResponse } from "@youmeet/gql/generated";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import { notFound } from "next/navigation";
 
 export default async function BackofficeRemarks() {

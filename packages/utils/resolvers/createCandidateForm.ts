@@ -1,7 +1,7 @@
 import { AvatarInput, CandidateInput } from "@youmeet/gql/generated";
 import prisma from "@youmeet/prisma-config/prisma";
 import { v2 as cloudinary } from "cloudinary";
-import { BackendError } from "../BackendErrorClass";
+import { BackendError } from "../basics/BackendErrorClass";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
 
 export const createDetails = async (its: CandidateInput) => {

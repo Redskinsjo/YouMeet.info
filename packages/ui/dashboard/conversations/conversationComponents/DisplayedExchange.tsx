@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import SimpleField from "../../../formulaire-profil/formComponents/fields/SimpleField";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { useMediaQuery } from "@mui/material";

@@ -3,7 +3,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import RawValue from "./RawValue";
 import { useTranslation } from "react-i18next";
-import { formatToDatetime } from "@youmeet/utils/formatToDatetime";
+import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
 import { BetaExperience } from "@youmeet/gql/generated";
 import { outfit } from "@youmeet/functions/fonts";
 

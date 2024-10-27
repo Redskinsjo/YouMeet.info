@@ -3,7 +3,7 @@ import { BetaUser, Translated } from "@youmeet/gql/generated";
 import BoldText from "./BoldText";
 import Link from "next/link";
 import { uri } from "@youmeet/functions/imports";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 

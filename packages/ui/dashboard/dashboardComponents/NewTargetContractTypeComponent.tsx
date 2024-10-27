@@ -15,7 +15,7 @@ import { setError } from "@youmeet/global-config/features/global";
 import { Button, useMediaQuery } from "@mui/material";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { renderContractType } from "@youmeet/utils/renderContractType";
+import { renderContractType } from "@youmeet/utils/basics/renderContractType";
 
 const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
   const [isValidated, setIsValidated] = useState(true);

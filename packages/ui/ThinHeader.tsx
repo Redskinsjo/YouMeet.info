@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState, storeUser } from "@youmeet/global-config/features/user";
 import MenuAuthenticatedUser from "./MenuAuthenticatedUser";
-import verifyTokenBrowser from "@youmeet/utils/verifyTokenBrowser";
+import verifyTokenBrowser from "@youmeet/utils/basics/verifyTokenBrowser";
 import { getUser } from "@youmeet/functions/request";
 import { usePathname } from "next/navigation";
 import NotificationsIconComponent from "./NotificationsIconComponent";

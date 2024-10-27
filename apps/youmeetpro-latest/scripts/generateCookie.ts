@@ -1,4 +1,4 @@
-import { s } from "@youmeet/utils/jwt";
+import { s } from "@youmeet/utils/basics/jwt";
 import dotenv from "dotenv";
 import BetaUser from "@youmeet/models/betaUsers";
 dotenv.config();

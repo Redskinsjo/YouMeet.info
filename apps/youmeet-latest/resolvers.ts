@@ -145,26 +145,26 @@ import { v2 as cloudinary } from "cloudinary";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
 import { createUpdateCandidate } from "@youmeet/utils/resolvers/createCandidateForm";
 import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDuration";
-import { s } from "@youmeet/utils/jwt";
+import { s } from "@youmeet/utils/basics/jwt";
 import * as SendinBlue from "@sendinblue/client";
 import CryptoJS from "crypto-js";
-import setUniqueNameAndExtension from "@youmeet/utils/backoffice/setUniqueNameAndExtension";
+import { setUniqueNameAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
 import { uri, uriPro } from "@youmeet/functions/imports";
 import { faker } from "@faker-js/faker";
 import { AuthDetails } from "@youmeet/models/types";
 import { formatForUrl } from "@youmeet/utils/resolvers/formatCompetencyTitle";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { Prisma } from "@prisma/client";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
-import { getCompanyName } from "@youmeet/utils/formatForEmails";
+import { getCompanyName } from "@youmeet/utils/basics/formatForEmails";
 import { ContextRequest } from "@youmeet/types/ContextRequest";
 import { noCorsMiddleware } from "@youmeet/utils/resolvers/noCorsMiddleware";
 import {
   setCandidatePayload,
   setDetailPayload,
   setUserPayload,
-} from "@youmeet/utils/setPayload";
+} from "@youmeet/utils/basics/setPayload";
 
 export const apiInstance = new SendinBlue.TransactionalEmailsApi();
 

@@ -1,5 +1,5 @@
 "use client";
-import { updateLocalThemes } from "@youmeet/utils/updateLocalThemes";
+import { updateLocalThemes } from "@youmeet/utils/basics/updateLocalThemes";
 import { MenuItem, TextField } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { FieldErrors, FieldValues, UseFormSetValue } from "react-hook-form";

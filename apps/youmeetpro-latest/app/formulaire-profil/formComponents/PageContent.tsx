@@ -26,24 +26,24 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
 import { StepContentProps } from "@youmeet/types/form/StepContent";
-import { proExternallyHandleData } from "@youmeet/utils/handleProfileSubmit";
+import { proExternallyHandleData } from "@youmeet/utils/basics/handleProfileSubmit";
 import { setError as setGlobalError } from "@youmeet/global-config/features/global";
 import {
   OfferHandledData,
   ProFormHandledData,
 } from "@youmeet/types/form/FormHandledData";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { submitFile } from "@youmeet/utils/submitFile";
+import { submitFile } from "@youmeet/utils/basics/submitFile";
 import { createCompanyProfile } from "@youmeet/functions/request";
 import { AvatarInput, BetaCompany, ProFormInput } from "@youmeet/gql/generated";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import {
   BACKEND_ERRORS,
   BACKEND_MESSAGES,
   PayloadBackendError,
   withData,
 } from "@youmeet/types/api/backend";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 
 export default function PageContent({
   defaultValues,

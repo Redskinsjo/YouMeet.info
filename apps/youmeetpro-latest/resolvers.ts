@@ -125,27 +125,33 @@ import {
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
 import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDuration";
-import { s } from "@youmeet/utils/jwt";
+import { s } from "@youmeet/utils/basics/jwt";
 import * as SendinBlue from "@sendinblue/client";
 import CryptoJS from "crypto-js";
 import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { uri, uriCandidates } from "@youmeet/functions/imports";
 import { FilterText } from "@youmeet/types/api/WhereArgs";
-import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueNameAndExtension";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import {
   generateChat,
   getSystemCxt,
   questionCtx,
-} from "@youmeet/utils/generateChat";
-import { setName } from "@youmeet/utils/setName";
+} from "@youmeet/utils/basics/generateChat";
+import { setName } from "@youmeet/utils/basics/setName";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
-import { getCompanyName, getJobTitle } from "@youmeet/utils/formatForEmails";
+import {
+  getCompanyName,
+  getJobTitle,
+} from "@youmeet/utils/basics/formatForEmails";
 import { ContextRequest } from "@youmeet/types/ContextRequest";
-import { noCorsMiddleware } from "@youmeet/utils/noCorsMiddleware";
+import { noCorsMiddleware } from "@youmeet/utils/basics/noCorsMiddleware";
 import { isValidObjectId } from "mongoose";
-import setFileUrl from "@youmeet/utils/setFileUrl";
-import { setDetailPayload, setUserPayload } from "@youmeet/utils/setPayload";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
+import {
+  setDetailPayload,
+  setUserPayload,
+} from "@youmeet/utils/basics/setPayload";
 import {
   createDetailsResolver,
   createUserResolver,
@@ -2806,14 +2812,10 @@ const resolvers: Resolvers = {
           where: { id: data?.job as string },
         });
         if (resultingJob) {
-          const offers = await prisma.offers.findMany({
-            include: { job: true },
-          });
-          const res = setUniqueSlugAndExtension(
+          const res = await setUniqueSlugAndExtension(
             resultingJob?.title?.fr as string,
             0,
-            "offers",
-            offers
+            "offers"
           );
 
           if (res.extension) creates.extension = res.extension;

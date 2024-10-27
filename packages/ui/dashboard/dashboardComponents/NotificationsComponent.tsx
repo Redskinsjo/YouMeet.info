@@ -29,8 +29,11 @@ import { client } from "@youmeet/gql/index";
 import { useTranslation } from "react-i18next";
 import BoldText from "../../BoldText";
 import { DataGrid, GridLocaleText, GridRowId } from "@mui/x-data-grid";
-import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
-import { setHiddenName, setName } from "@youmeet/utils/setName";
+import {
+  formatToDatetime,
+  giveTimeAgo,
+} from "@youmeet/utils/basics/formatToDatetime";
+import { setHiddenName, setName } from "@youmeet/utils/basics/setName";
 import { setModal } from "@youmeet/global-config/features/modal";
 import {
   SelectionState,
@@ -58,7 +61,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Snackbar from "@mui/material/Snackbar";
-import getOfferOrPreviewValues from "@youmeet/utils/getOfferOrPreviewValues";
+import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import { OfferContentValues } from "@youmeet/types/OfferContentValues";
 import {
   isInterviewOffer,

@@ -1,7 +1,7 @@
 import { Meet, MeetCandidate } from "@youmeet/gql/generated";
 import { uri } from "@youmeet/functions/imports";
 import MeetChild from "./meetChild";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { Metadata, ResolvingMetadata } from "next";
 import { getMeetsParams, getOneMeet } from "@youmeet/functions/request";
 import { notFound } from "next/navigation";

@@ -3,7 +3,7 @@ import BetaDetails from "@youmeet/models/betaDetails";
 import BetaUser from "@youmeet/models/betaUsers";
 import Lead from "@youmeet/models/leads";
 import { NextRequest, NextResponse } from "next/server";
-import { s, verif } from "@youmeet/utils/jwt";
+import { s, verif } from "@youmeet/utils/basics/jwt";
 import { dev, uri } from "@youmeet/functions/imports";
 import { cookies } from "next/headers";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";

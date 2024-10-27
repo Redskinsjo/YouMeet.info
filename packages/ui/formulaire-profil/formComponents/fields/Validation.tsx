@@ -3,7 +3,7 @@ import { UserState } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
-import getOfferOrPreviewValues from "@youmeet/utils/getOfferOrPreviewValues";
+import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { usePathname } from "next/navigation";
 import React from "react";

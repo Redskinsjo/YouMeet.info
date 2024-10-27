@@ -1,7 +1,7 @@
 import BackofficeCompaniesChild from "./backofficeCompaniesChild";
 import { getCompanies } from "@youmeet/functions/request";
 import { BetaCompany } from "@youmeet/gql/generated";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import { notFound } from "next/navigation";
 
 export default async function BackofficeCompanies() {

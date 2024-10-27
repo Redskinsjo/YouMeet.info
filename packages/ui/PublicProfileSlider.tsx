@@ -1,5 +1,5 @@
 import { Avatar, BetaCandidate, BetaUser } from "@youmeet/gql/generated";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import { useMediaQuery } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import Image from "next/image";

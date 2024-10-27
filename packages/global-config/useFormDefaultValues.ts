@@ -9,7 +9,7 @@ import {
   ProfileFormDefaultValues,
 } from "@youmeet/types/form/useFormDefaultValues";
 import { isUser } from "@youmeet/types/TypeGuards";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 
 export default async function useFormDefaultValues(
   category: "profile" | "organisation" | "offer",

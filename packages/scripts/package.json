@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
-  "type": "module",
   "publishConfig": {
     "access": "public"
   },
@@ -11,7 +10,8 @@
     "addSubtitledUrl": "SCRIPT=true dotenv -e .env.development -- ts-node ./addSubtitledUrl.ts",
     "createProfileViewsFor": "SCRIPT=true dotenv -e .env -- ts-node ./createProfileViewsFor.ts",
     "test": "SCRIPT=true dotenv -e .env.development -- jest",
-    "genCompetencies": "SCRIPT=true dotenv -e .env -- ts-node ./genCompetencies.ts",
+    "genCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./genCompetencies.ts",
+    "transferCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./transferCompetencies.ts",
     "deleteCompetencies": "SCRIPT=true dotenv -e .env -- ts-node ./deleteCompetencies.ts"
   },
   "dependencies": {
@@ -19,10 +19,11 @@
     "@youmeet/gql": "*",
     "@youmeet/models": "*",
     "@youmeet/prisma-config": "*",
+    "@youmeet/utils": "*",
     "cloudinary": "^2.5.1",
     "dotenv": "^16.4.5",
-    "mongoose": "^8.7.1",
-    "openai": "^4.67.3",
+    "mongoose": "^8.7.3",
+    "openai": "^4.68.4",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {}

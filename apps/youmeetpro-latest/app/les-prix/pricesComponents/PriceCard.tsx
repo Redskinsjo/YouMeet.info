@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { UserState } from "@youmeet/global-config/features/user";
 import { Subscription } from "@youmeet/types/app";
 import { uri } from "@youmeet/functions/imports";
-import { renderUrlQuery } from "@youmeet/utils/renderUrlQuery";
+import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 
 const contents = [
   "contentPremium1",

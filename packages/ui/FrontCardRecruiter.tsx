@@ -7,7 +7,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import { blueGrey, grey, purple } from "@mui/material/colors";
 import { HiVideoCamera } from "react-icons/hi";
 import { HiArrowUturnRight } from "react-icons/hi2";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { CardTurnUp } from "@youmeet/types/Header";
 
 const FrontCardRecruiter = ({

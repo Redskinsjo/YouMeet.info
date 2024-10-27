@@ -2,7 +2,7 @@
 import { BetaExperience } from "@youmeet/gql/generated";
 import { Tooltip } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
-import { getColor, getTooltip } from "@youmeet/utils/TooltipedChild";
+import { getColor, getTooltip } from "@youmeet/ui/TooltipedChild";
 import { grey } from "@mui/material/colors";
 
 type AttributeCss = { [key: string]: number | string };

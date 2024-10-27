@@ -1,5 +1,5 @@
 import { dev } from "@youmeet/functions/imports";
-import { verif } from "@youmeet/utils/jwt";
+import { verif } from "@youmeet/utils/basics/jwt";
 import { NextRequest } from "next/server";
 const stripe = require("stripe")(
   dev ? `${process.env.STRIPE_SECRET}` : `${process.env.STRIPE_SECRET_PROD}`

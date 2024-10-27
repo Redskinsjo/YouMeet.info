@@ -12,7 +12,10 @@ import {
   getCompany,
 } from "@youmeet/functions/request";
 import Layout from "../../Layout";
-import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
+import {
+  formatToDatetime,
+  giveTimeAgo,
+} from "@youmeet/utils/basics/formatToDatetime";
 import TooltipedAsset from "../../TooltipedAsset";
 import { Button } from "@mui/material";
 

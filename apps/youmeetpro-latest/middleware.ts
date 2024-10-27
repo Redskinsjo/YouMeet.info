@@ -1,11 +1,11 @@
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
-import { verif } from "@youmeet/utils/jwt";
+import { verif } from "@youmeet/utils/basics/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getOneMeet, sendEmail } from "@youmeet/functions/request";
 import { Email, Meet } from "@youmeet/gql/generated";
-import { choseCookie } from "@youmeet/utils/choseCookie";
-import { setName } from "@youmeet/utils/setName";
+import { choseCookie } from "@youmeet/utils/basics/choseCookie";
+import { setName } from "@youmeet/utils/basics/setName";
 
 export async function middleware(request: NextRequest) {
   const privatePages = [

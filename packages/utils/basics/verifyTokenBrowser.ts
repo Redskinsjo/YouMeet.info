@@ -1,4 +1,4 @@
-import { verif } from "./jwt";
+import { verif } from "../basics/jwt";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import Cookies from "js-cookie";
 

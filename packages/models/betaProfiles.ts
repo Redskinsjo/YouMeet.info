@@ -4,7 +4,7 @@ import * as typegoose from "@typegoose/typegoose";
 import { BetaUserSchema } from "./betaUsers";
 import { BetaExperienceSchema } from "./betaExperiences";
 import mongoose from "mongoose";
-import { checkingIndexes } from "@youmeet/utils/checkingIndexes";
+import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 import { IndexList } from "@youmeet/types/IndexList";
 mongoose.connect(`${process.env.MONGODB_URI}`);
 mongoose.Promise = global.Promise;

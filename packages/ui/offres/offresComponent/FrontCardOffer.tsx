@@ -4,7 +4,7 @@ import { FrontCardProps } from "@youmeet/types/FrontCardProps";
 import { Offer, Translated } from "@youmeet/gql/generated";
 import { useMediaQuery } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { formatToDatetime } from "@youmeet/utils/formatToDatetime";
+import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
 import TooltipedAsset from "../../TooltipedAsset";
 import Link from "next/link";
 import CustomIcon from "../../CustomIcon";

@@ -2,7 +2,7 @@ import BackofficeChild from "./backofficeChild";
 import { getLeads, getUsers } from "@youmeet/functions/request";
 import { redirect } from "next/navigation";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 
 export default async function Backoffice() {
   const verified = await verifyTokenServer();

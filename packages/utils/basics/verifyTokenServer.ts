@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { verif } from "./jwt";
+import { verif } from "../basics/jwt";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import { redirect } from "next/navigation";
 

@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-import verifyTokenBrowser from "@youmeet/utils/verifyTokenBrowser";
+import verifyTokenBrowser from "@youmeet/utils/basics/verifyTokenBrowser";
 import ResetPasswordContent from "./resetPasswordContent";
 import Footer from "@youmeet/ui/Footer";
 import { usePathname, useRouter } from "next/navigation";

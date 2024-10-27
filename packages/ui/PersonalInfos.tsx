@@ -1,6 +1,6 @@
 "use client";
 import { Suspense, useState } from "react";
-import isProfileEmpty from "@youmeet/utils/isProfileEmpty";
+import isProfileEmpty from "@youmeet/utils/basics/isProfileEmpty";
 import { BetaDetails, BetaUser } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@mui/material";

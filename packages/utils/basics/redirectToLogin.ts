@@ -1,5 +1,5 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { verif } from "./jwt";
+import { verif } from "../jwt";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import Cookies from "js-cookie";
 import { uri } from "@youmeet/functions/imports";

@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 import { NextRequest } from "next/server";
 import { uri } from "@youmeet/functions/imports";
-import { renderUrlQuery } from "@youmeet/utils/renderUrlQuery";
+import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 
 export async function POST(req: NextRequest) {
   const query = req.nextUrl.searchParams;

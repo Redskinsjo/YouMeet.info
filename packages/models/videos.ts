@@ -7,7 +7,7 @@ import { JobSchema } from "./jobs";
 import type { Avatars } from "./types";
 import mongoose from "mongoose";
 import { IndexList } from "@youmeet/types/IndexList";
-import { checkingIndexes } from "@youmeet/utils/checkingIndexes";
+import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 import { MeetCandidateSchema } from "./meetCandidates";
 import { BetaWhatsappExchangeSchema } from "./betaWhatsappExchanges";
 mongoose.connect(`${process.env.MONGODB_URI}`);

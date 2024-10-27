@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState, removeUser } from "@youmeet/global-config/features/user";
 import { outfit } from "@youmeet/functions/fonts";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { onLogout } from "@youmeet/functions/actions";
 import { useRouter } from "next/navigation";
 import LogoutBtn from "./LogoutBtn";

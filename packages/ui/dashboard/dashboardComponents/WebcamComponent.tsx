@@ -8,7 +8,7 @@ import { BsRecordCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState, addVideo } from "@youmeet/global-config/features/user";
-import { submitFile } from "@youmeet/utils/submitFile";
+import { submitFile } from "@youmeet/utils/basics/submitFile";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { setError } from "@youmeet/global-config/features/global";
 import { onAddVideo } from "@youmeet/functions/actions";

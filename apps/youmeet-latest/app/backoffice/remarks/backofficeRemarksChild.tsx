@@ -1,7 +1,7 @@
 import Layout from "@youmeet/ui/Layout";
 import SubLayout from "@youmeet/ui/SubLayout";
 import { UserRemark } from "@youmeet/gql/generated";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { Button } from "@mui/material";
 import { blueGrey, deepPurple } from "@mui/material/colors";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 import BackofficeUsersChild from "./backofficeUsersChild";
 import { getUsers } from "@youmeet/functions/request";
 import { BetaUser } from "@youmeet/gql/generated";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import { notFound } from "next/navigation";
 
 export default async function BackofficeUsers() {

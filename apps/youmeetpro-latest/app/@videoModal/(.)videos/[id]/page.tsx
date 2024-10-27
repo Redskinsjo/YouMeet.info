@@ -1,7 +1,7 @@
 import { getVideo, getVideos } from "@youmeet/functions/request";
 import CustomModal from "@youmeet/ui/CustomModal";
 import { Video } from "@youmeet/gql/generated";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {

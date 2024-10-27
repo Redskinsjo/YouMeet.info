@@ -5,23 +5,23 @@ import {
   updateUser,
 } from "@youmeet/functions/request";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
-import setUniqueNameAndExtension from "../backoffice/setUniqueNameAndExtension";
-import { isProfessionalEmail } from "../isProfessionalEmail";
+import { setUniqueNameAndExtension } from "../backoffice/setUniqueInput";
+import { isProfessionalEmail } from "../basics/isProfessionalEmail";
 import { EmailingParams, StripeParams } from "@youmeet/types/api/StripeParams";
-import { BackendError } from "../BackendErrorClass";
+import { BackendError } from "../basics/BackendErrorClass";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
-import verifyTokenServer from "../verifyTokenServer";
+import verifyTokenServer from "../basics/verifyTokenServer";
 import {
   createCustomer,
   createSession,
   createSubscription,
   getCustomer,
 } from "./stripe";
-import { setCookieAndTerminate } from "../setCookieAndTerminate";
-import { formatReturnTo } from "../formatReturnTo";
+import { setCookieAndTerminate } from "../basics/setCookieAndTerminate";
+import { formatReturnTo } from "../basics/formatReturnTo";
 import { NextResponse } from "next/server";
 import { handleRedirect } from "../backoffice/classic-login";
-import { setName } from "../setName";
+import { setName } from "../basics/setName";
 
 const processChoice = async (
   customer: any,

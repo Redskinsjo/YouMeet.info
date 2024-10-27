@@ -3,7 +3,7 @@ import { BetaUser, UpdateVideoDocument, Video } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
+import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { BiSolidLike } from "react-icons/bi";
 import { TbMessageDots } from "react-icons/tb";
 import TooltipedAsset from "../../TooltipedAsset";

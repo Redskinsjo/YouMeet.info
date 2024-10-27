@@ -1,12 +1,12 @@
 import React, { createElement, useEffect, useMemo } from "react";
-import { getProfilePhone } from "@youmeet/utils/formatPhone";
+import { getProfilePhone } from "@youmeet/utils/basics/formatPhone";
 import TooltipedAsset from "./TooltipedAsset";
 import { HiPencil } from "react-icons/hi";
 import { setUpCase } from "@youmeet/utils/resolvers/resolveFullname";
 import {
   getLinkedinUrlFromId,
   linkedinIdRegex,
-} from "@youmeet/utils/formatLinkedin";
+} from "@youmeet/utils/basics/formatLinkedin";
 import { FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
 import DetailComponent from "./DetailComponent";

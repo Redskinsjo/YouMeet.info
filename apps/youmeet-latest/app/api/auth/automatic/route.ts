@@ -1,6 +1,6 @@
 import { handleRedirect } from "@youmeet/utils/backoffice/classic-login";
 import { NextRequest, NextResponse } from "next/server";
-import { s } from "@youmeet/utils/jwt";
+import { s } from "@youmeet/utils/basics/jwt";
 import { uri } from "@youmeet/functions/imports";
 import { cookies } from "next/headers";
 import {
@@ -18,10 +18,10 @@ import {
   BetaUser,
   Lead,
 } from "@youmeet/gql/generated";
-import setUniqueNameAndExtension from "@youmeet/utils/backoffice/setUniqueNameAndExtension";
+import { setUniqueNameAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;

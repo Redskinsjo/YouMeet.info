@@ -4,7 +4,7 @@ import CandidateVideo from "./CandidateVideo";
 import { FaAngleRight as Next, FaAngleLeft as Previous } from "react-icons/fa";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import { Avatar, BetaUser, Video } from "@youmeet/gql/generated";
-import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
+import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { ModalState } from "@youmeet/global-config/features/modal";

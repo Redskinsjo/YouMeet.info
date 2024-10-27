@@ -10,7 +10,7 @@ import {
 } from "@youmeet/types/api/OffreEmploiFT";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { notFound } from "next/navigation";
 import { NextRequest } from "next/server";
 

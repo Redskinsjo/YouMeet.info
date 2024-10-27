@@ -7,7 +7,7 @@ import { BetaCandidateSchema } from "./betaCandidates";
 import type { Phone } from "./types";
 import mongoose from "mongoose";
 import { IndexList } from "@youmeet/types/IndexList";
-import { checkingIndexes } from "@youmeet/utils/checkingIndexes";
+import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 mongoose.connect(`${process.env.MONGODB_URI}`);
 mongoose.Promise = global.Promise;
 

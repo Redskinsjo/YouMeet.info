@@ -28,12 +28,15 @@ import {
   setModalUserExperiences,
 } from "@youmeet/global-config/features/modal";
 import Image from "next/image";
-import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
+import {
+  formatToDatetime,
+  giveTimeAgo,
+} from "@youmeet/utils/basics/formatToDatetime";
 import { HiPencil } from "react-icons/hi";
 import { AiFillSave } from "react-icons/ai";
 import { BiReset } from "react-icons/bi";
 import { useForm } from "react-hook-form";
-import { getUniversalFromCodeAndNumber } from "@youmeet/utils/formatPhone";
+import { getUniversalFromCodeAndNumber } from "@youmeet/utils/basics/formatPhone";
 import UserInfos from "../../UserInfos";
 import { ImSpinner2 } from "react-icons/im";
 import { useTranslation } from "react-i18next";
@@ -42,11 +45,11 @@ import Link from "next/link";
 import LeadForm from "./LeadForm";
 import { uri } from "@youmeet/functions/imports";
 import BackofficeUserModalAddExperience from "./BackofficeUserModalAddExperience";
-import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
+import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import AddTargetJobComponent from "./AddTargetJobComponent";
 import { UnknownAction } from "@reduxjs/toolkit";
-import setFileUrl from "@youmeet/utils/setFileUrl";
-import { setName } from "@youmeet/utils/setName";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
+import { setName } from "@youmeet/utils/basics/setName";
 import { setError, setUpload } from "@youmeet/global-config/features/global";
 import { removeVideo } from "@youmeet/global-config/features/user";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";

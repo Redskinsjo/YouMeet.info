@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import {
   Avatar,
   Competency,

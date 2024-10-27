@@ -1,9 +1,9 @@
 import { google } from "googleapis";
-import { s } from "@youmeet/utils/jwt";
-import { setName } from "@youmeet/utils/setName";
+import { s } from "@youmeet/utils/basics/jwt";
+import { setName } from "@youmeet/utils/basics/setName";
 import { handleRedirect } from "@youmeet/utils/backoffice/classic-login";
 import { parsePrms } from "@youmeet/utils/backoffice/parseParams";
-import setUniqueNameAndExtension from "@youmeet/utils/backoffice/setUniqueNameAndExtension";
+import { setUniqueNameAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
 import { DocumentType } from "@typegoose/typegoose";
 import { NextRequest, NextResponse } from "next/server";
 import { uri } from "@youmeet/functions/imports";
@@ -11,7 +11,7 @@ import BetaDetails from "@youmeet/models/betaDetails";
 import BetaUser from "@youmeet/models/betaUsers";
 import { BetaUserSchema } from "@youmeet/models/betaUsers";
 import { cookies } from "next/headers";
-import { isProfessionalEmail } from "@youmeet/utils/isProfessionalEmail";
+import { isProfessionalEmail } from "@youmeet/utils/basics/isProfessionalEmail";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
 
 export async function GET(req: NextRequest) {

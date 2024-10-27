@@ -22,8 +22,8 @@ import {
   getDatesBetween,
   getMultiplyingRatio,
   getStockFromViews,
-} from "@youmeet/utils/getDatesBetween";
-import { formatToDatetime } from "@youmeet/utils/formatToDatetime";
+} from "@youmeet/utils/basics/getDatesBetween";
+import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
 
 type TooltipData = AppleStock;
 

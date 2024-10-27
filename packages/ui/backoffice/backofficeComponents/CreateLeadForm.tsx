@@ -6,7 +6,7 @@ import { setError } from "@youmeet/global-config/features/global";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { BetaUser } from "@youmeet/gql/generated";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { Button, Checkbox, MenuItem } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useRef } from "react";

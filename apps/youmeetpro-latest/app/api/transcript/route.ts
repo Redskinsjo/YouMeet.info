@@ -1,5 +1,5 @@
 import { Video } from "@youmeet/gql/generated";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import { NextRequest } from "next/server";
 import { v1 as VideoIntelligence } from "@google-cloud/video-intelligence";
 import { updateVideo } from "@youmeet/functions/request";
@@ -10,7 +10,7 @@ import {
   PayloadBackendError,
   withData,
 } from "@youmeet/types/api/backend";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 
 const credentials = {
   type: "service_account",

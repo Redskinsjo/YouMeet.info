@@ -11,19 +11,19 @@
     "codegen": "graphql-codegen --config codegen.ts --watch"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/introspection": "^4.0.3",
-    "@graphql-codegen/typed-document-node": "^5.0.6",
-    "@graphql-codegen/typescript": "^4.0.6",
-    "@graphql-codegen/typescript-operations": "^4.2.0",
-    "@graphql-codegen/typescript-resolvers": "^4.0.6",
+    "@graphql-codegen/typed-document-node": "^5.0.10",
+    "@graphql-codegen/typescript": "^4.1.0",
+    "@graphql-codegen/typescript-operations": "^4.3.0",
+    "@graphql-codegen/typescript-resolvers": "^4.3.0",
     "@graphql-eslint/eslint-plugin": "^3.20.1",
     "@parcel/watcher": "^2.4.1",
-    "eslint": "^9.11.1",
-    "eslint-config-next": "^14.2.13"
+    "eslint": "^9.13.0",
+    "eslint-config-next": "^15.0.1"
   },
   "dependencies": {
-    "@graphql-tools/schema": "^10.0.6",
+    "@graphql-tools/schema": "^10.0.7",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "server-only": "^0.0.1"

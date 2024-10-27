@@ -13,7 +13,7 @@ import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
 import { FieldValues, useForm } from "react-hook-form";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { useSearchParams } from "next/navigation";
 import {
   onAddCustomisation,
@@ -22,7 +22,7 @@ import {
 } from "@youmeet/functions/actions";
 import { BetaUser } from "@youmeet/gql/generated";
 import ConversationsInProgress from "./ConversationsInProgress";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
 import React from "react";
 

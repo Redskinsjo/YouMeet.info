@@ -1,9 +1,9 @@
 import React, { createElement, useEffect } from "react";
-import { getProfilePhone } from "@youmeet/utils/formatPhone";
+import { getProfilePhone } from "@youmeet/utils/basics/formatPhone";
 import TooltipedAsset from "../../../TooltipedAsset";
 import { HiPencil } from "react-icons/hi";
 import { setUpCase } from "@youmeet/utils/resolvers/resolveFullname";
-import { getLinkedinUrlFromId } from "@youmeet/utils/formatLinkedin";
+import { getLinkedinUrlFromId } from "@youmeet/utils/basics/formatLinkedin";
 import { FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
 import DetailComponent from "../../../DetailComponent";

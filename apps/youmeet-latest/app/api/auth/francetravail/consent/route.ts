@@ -1,6 +1,6 @@
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
-import { handleActionError } from "@youmeet/utils/handleActionError";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
+import { handleActionError } from "@youmeet/utils/basics/handleActionError";
 import { NextRequest } from "next/server";
 import { uri as youmeetUri } from "@youmeet/functions/imports";
 

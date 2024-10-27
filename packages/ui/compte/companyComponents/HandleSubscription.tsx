@@ -6,7 +6,7 @@ import SubPartContainer from "../../SubPartContainer";
 import { uri } from "@youmeet/functions/imports";
 import { useDispatch, useSelector } from "react-redux";
 import { GlobalState } from "@youmeet/global-config/features/global";
-import isSubscribedPro from "@youmeet/utils/isSubscribedPro";
+import isSubscribedPro from "@youmeet/utils/basics/isSubscribedPro";
 import { RootState } from "@youmeet/global-config/store";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { setModal } from "@youmeet/global-config/features/modal";

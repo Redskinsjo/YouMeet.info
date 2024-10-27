@@ -6,12 +6,15 @@ import {
   SendEmailProspectionLinkedinDocument,
   MutationUpdateLeadArgs,
 } from "@youmeet/gql/generated";
-import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
+import {
+  formatToDatetime,
+  giveTimeAgo,
+} from "@youmeet/utils/basics/formatToDatetime";
 import { Button } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { getLead } from "@youmeet/functions/request";
-import { getUniversalFromCodeAndNumber } from "@youmeet/utils/formatPhone";
+import { getUniversalFromCodeAndNumber } from "@youmeet/utils/basics/formatPhone";
 import {
   onDeleteLead,
   onSendEmailToLead,

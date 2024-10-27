@@ -8,7 +8,7 @@ import {
 } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import { useCallback, useMemo, useRef } from "react";
-import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
+import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { BiSolidLike } from "react-icons/bi";
 import { TbMessageDots } from "react-icons/tb";
 import TooltipedAsset from "../../../TooltipedAsset";
@@ -23,7 +23,7 @@ import { Attr } from "@youmeet/types/attributes";
 import { onTranscriptVideo, onAnalyzeVideo } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { Button } from "@mui/material";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import { useTranslation } from "react-i18next";
 import DetailComponent from "../../../DetailComponent";
 import BoldText from "../../../BoldText";

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import TogglePersonalInfo from "./TogglePersonalInfo";
 import NewProfileComponent from "./NewProfileComponent";
-import isProfileEmpty from "@youmeet/utils/isProfileEmpty";
+import isProfileEmpty from "@youmeet/utils/basics/isProfileEmpty";
 import { BetaDetails, BetaUser } from "@youmeet/gql/generated";
 import ProfileDescription from "./ProfileDescription";
 import React from "react";

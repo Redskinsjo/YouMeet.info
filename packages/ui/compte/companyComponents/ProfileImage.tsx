@@ -2,7 +2,7 @@ import { BetaCompany } from "@youmeet/gql/generated";
 import React from "react";
 import Image from "next/image";
 import { ImImage } from "react-icons/im";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 
 export type ProfileImageTypes = {
   company: BetaCompany | null | undefined;

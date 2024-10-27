@@ -3,7 +3,7 @@ import {
   BACKEND_MESSAGES,
   PayloadBackendError,
 } from "@youmeet/types/api/backend";
-import { BackendError } from "./BackendErrorClass";
+import { BackendError } from "../basics/BackendErrorClass";
 import { AvatarInput, BetaUser, Lead } from "@youmeet/gql/generated";
 import { dev, uri } from "@youmeet/functions/imports";
 import {
@@ -11,7 +11,7 @@ import {
   getLead,
   getSimpleUser,
 } from "@youmeet/functions/request";
-import { getPublicIdFull, getUserIdFromPublicId } from "./getPublicId";
+import { getPublicIdFull, getUserIdFromPublicId } from "../basics/getPublicId";
 import { CookieListItem } from "next/dist/compiled/@edge-runtime/cookies";
 
 const setSearchAndFormData = (

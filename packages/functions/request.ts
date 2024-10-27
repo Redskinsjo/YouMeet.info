@@ -188,7 +188,7 @@ import {
   ResultNotHandled,
   withData,
 } from "@youmeet/types/api/backend";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { isNotHandledReq, isPayloadError } from "@youmeet/types/TypeGuards";
 
 export const createError = async <T>(

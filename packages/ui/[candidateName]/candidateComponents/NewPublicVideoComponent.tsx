@@ -2,7 +2,7 @@ import React from "react";
 import CandidateVideo from "@youmeet/ui/CandidateVideo";
 import { BetaUser, Video } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import SubPartContainer from "@youmeet/ui/SubPartContainer";
 import BoldText from "@youmeet/ui/BoldText";
 

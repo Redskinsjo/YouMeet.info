@@ -1,4 +1,4 @@
-import { s } from "@youmeet/utils/jwt";
+import { s } from "@youmeet/utils/basics/jwt";
 import BetaUser from "@youmeet/models/betaUsers";
 import { uri } from "@youmeet/functions/imports";
 import { NextRequest, NextResponse } from "next/server";

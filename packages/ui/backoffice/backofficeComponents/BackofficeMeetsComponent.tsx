@@ -5,7 +5,7 @@ import SubLayout from "../../SubLayout";
 import { Meet } from "@youmeet/gql/generated";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";

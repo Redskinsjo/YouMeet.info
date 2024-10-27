@@ -5,15 +5,15 @@ import { useTranslation } from "react-i18next";
 import BoldText from "../../../BoldText";
 import DetailComponent from "../../../DetailComponent";
 import CompetencyLink from "../../../CompetencyLink";
-import { formatToDatetime } from "@youmeet/utils/formatToDatetime";
+import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
 import { OfferContentValues } from "@youmeet/types/OfferContentValues";
 import Link from "next/link";
 import { CiLink } from "react-icons/ci";
 import { createElement, useEffect, useState } from "react";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import Image from "next/image";
 import { Offer } from "@youmeet/gql/generated";
-import getOfferOrPreviewValues from "@youmeet/utils/getOfferOrPreviewValues";
+import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import React from "react";
 
 export default function OfferContent({ offre }: { offre: Offer }) {

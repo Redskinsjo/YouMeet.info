@@ -23,7 +23,10 @@ import { useSelector } from "react-redux";
 import { IoChevronDown } from "react-icons/io5";
 import DetailComponent from "../../../DetailComponent";
 import { MdOutlineCancel } from "react-icons/md";
-import { formatToDatetime, giveTimeAgo } from "@youmeet/utils/formatToDatetime";
+import {
+  formatToDatetime,
+  giveTimeAgo,
+} from "@youmeet/utils/basics/formatToDatetime";
 import TooltipedAsset from "../../../TooltipedAsset";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
@@ -32,7 +35,7 @@ import { onCancelConversation } from "@youmeet/functions/actions";
 import { FaRegEye } from "react-icons/fa";
 import { client } from "@youmeet/gql/index";
 import BoldText from "../../../BoldText";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import OneLineSkeleton from "../../../OneLineSkeleton";
 
 export default function QueueAndThreadStatus({ queue }: { queue: BetaQueue }) {

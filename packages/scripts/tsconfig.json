@@ -4,9 +4,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "Node",
-    "outDir": "dist",
     "allowJs": true
   },
-  "ts-node": { "esm": true },
   "include": ["**/*.ts", "**/*.tsx"]
 }

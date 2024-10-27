@@ -1,6 +1,6 @@
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import { getUser } from "@youmeet/functions/request";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import DashboardChild from "./dashboardChild";
 import { redirect } from "next/navigation";
 import { isUser } from "@youmeet/types/TypeGuards";

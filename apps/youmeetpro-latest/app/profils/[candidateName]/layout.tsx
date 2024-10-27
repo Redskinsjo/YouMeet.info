@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { uri } from "@youmeet/functions/imports";
-import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
+import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { BetaUser, Video } from "@youmeet/gql/generated";
-import { setName } from "@youmeet/utils/setName";
+import { setName } from "@youmeet/utils/basics/setName";
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { getUser } from "@youmeet/functions/request";

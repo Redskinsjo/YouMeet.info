@@ -6,7 +6,7 @@ import { JobSchema } from "./jobs";
 import { OfferSchema } from "./offers";
 import mongoose from "mongoose";
 import { BetaCompanySchema } from "./betaCompanies";
-import { checkingIndexes } from "@youmeet/utils/checkingIndexes";
+import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 import { IndexList } from "@youmeet/types/IndexList";
 import { AffiliationSchema } from "./affiliations";
 mongoose.connect(`${process.env.MONGODB_URI}`);

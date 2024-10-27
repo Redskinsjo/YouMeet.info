@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Button, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
-import { renderUrlQuery } from "@youmeet/utils/renderUrlQuery";
+import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 import Logo from "./Logo";
 import AdmitCGU from "./AdmitCGU";
 import FranceTravailConnect from "./backoffice/backofficeComponents/FranceTravailConnect";

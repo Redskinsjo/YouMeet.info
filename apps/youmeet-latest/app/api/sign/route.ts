@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
-import { verif } from "@youmeet/utils/jwt";
+import { verif } from "@youmeet/utils/basics/jwt";
 import BetaUser from "@youmeet/models/betaUsers";
 import { NextRequest } from "next/server";
 import { BACKEND_ERRORS } from "@youmeet/types/api/backend";

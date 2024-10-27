@@ -1,7 +1,7 @@
 import BackofficeMeetsChild from "./backofficeMeetsChild";
 import { getMeets } from "@youmeet/functions/request";
 import { Meet } from "@youmeet/gql/generated";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import { notFound } from "next/navigation";
 
 export const maxDuration = 60;

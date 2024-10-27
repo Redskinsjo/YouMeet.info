@@ -8,7 +8,7 @@ import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { RootState } from "@youmeet/global-config/store";
 import { GlobalState } from "@youmeet/global-config/features/global";
-import isSubscribedPro from "@youmeet/utils/isSubscribedPro";
+import isSubscribedPro from "@youmeet/utils/basics/isSubscribedPro";
 import OneLineSkeleton from "../../OneLineSkeleton";
 
 export default function BecomePremium() {

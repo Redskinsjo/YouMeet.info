@@ -1,5 +1,8 @@
 "use client";
-import { setBoldWords, useLinksRegex } from "@youmeet/utils/setBoldWords";
+import {
+  setBoldWords,
+  useLinksRegex,
+} from "@youmeet/utils/basics/setBoldWords";
 import Link from "next/link";
 import {
   createElement,
@@ -15,7 +18,7 @@ import {
   isFakeDash,
   isFakePoint,
   isSuspensionPoint,
-} from "@youmeet/utils/textToFormat";
+} from "@youmeet/utils/basics/textToFormat";
 import { Attr } from "@youmeet/types/attributes";
 
 export default function BoldText({

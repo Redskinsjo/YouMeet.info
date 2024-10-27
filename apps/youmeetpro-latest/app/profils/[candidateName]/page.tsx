@@ -6,7 +6,7 @@ import {
   getUserCandidate,
   getUsersParams,
 } from "@youmeet/functions/request";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import { isUser } from "@youmeet/types/TypeGuards";
 import { redirect } from "next/navigation";

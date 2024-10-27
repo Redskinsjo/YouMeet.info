@@ -21,11 +21,11 @@ import {
   withData,
 } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
-import { getUniversalFromCodeAndNumber } from "@youmeet/utils/formatPhone";
-import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
-import { setName } from "@youmeet/utils/setName";
-import { submitFile } from "@youmeet/utils/submitFile";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
+import { getUniversalFromCodeAndNumber } from "@youmeet/utils/basics/formatPhone";
+import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
+import { setName } from "@youmeet/utils/basics/setName";
+import { submitFile } from "@youmeet/utils/basics/submitFile";
 import { Button, MenuItem } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useCallback, useEffect, useState } from "react";

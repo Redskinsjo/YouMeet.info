@@ -2,11 +2,11 @@ import { NextRequest } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 import { uri } from "@youmeet/functions/imports";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
 import { updateVideo, videoByPublicId } from "@youmeet/functions/request";
 import { Eager, Video } from "@youmeet/gql/generated";
-import { handleActionError } from "@youmeet/utils/handleActionError";
+import { handleActionError } from "@youmeet/utils/basics/handleActionError";
 dotenv.config();
 
 cloudinary.config({

@@ -25,8 +25,8 @@ import {
   Video,
 } from "@youmeet/gql/generated";
 import { ConversationTheme } from "@youmeet/types/ConversationTheme";
-import { analyseVideo } from "@youmeet/utils/analyseVideo";
-import { externallyHandleData } from "@youmeet/utils/handleProfileSubmit";
+import { analyseVideo } from "@youmeet/utils/basics/analyseVideo";
+import { externallyHandleData } from "@youmeet/utils/basics/handleProfileSubmit";
 import { revalidatePath } from "next/cache";
 import { FieldValues } from "react-hook-form";
 import {
@@ -86,14 +86,14 @@ import { z } from "zod";
 import { dev, test, uri } from "./imports";
 import { cookies } from "next/headers";
 import { isPayloadError, isUser } from "@youmeet/types/TypeGuards";
-import { s } from "@youmeet/utils/jwt";
-import setUniqueNameAndExtension from "@youmeet/utils/backoffice/setUniqueNameAndExtension";
+import { s } from "@youmeet/utils/basics/jwt";
+import { setUniqueNameAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
 import CryptoJS from "crypto-js";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
-import { setName } from "@youmeet/utils/setName";
-import { handleActionError } from "@youmeet/utils/handleActionError";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
+import { setName } from "@youmeet/utils/basics/setName";
+import { handleActionError } from "@youmeet/utils/basics/handleActionError";
 import { redirect } from "next/navigation";
-import { getUserIdFromPublicId } from "@youmeet/utils/getPublicId";
+import { getUserIdFromPublicId } from "@youmeet/utils/basics/getPublicId";
 
 ///// backendisées avec gestion d'erreur
 

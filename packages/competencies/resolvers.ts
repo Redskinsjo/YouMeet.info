@@ -5,6 +5,7 @@ import {
 } from "./types/generated";
 import prisma from "@youmeet/prisma-config/prisma";
 import { Prisma } from "@prisma/client";
+import { getWhereTitle } from "@youmeet/utils/resolvers/competenciesApi";
 
 const resolvers: Resolvers = {
   Query: {
@@ -28,19 +29,16 @@ const resolvers: Resolvers = {
     competencies: async (_: unknown, args: QueryCompetenciesArgs) => {
       const where = {} as Prisma.competenciesWhereInput;
       const params = {} as { take?: number; skip?: number };
+
       if (!args.data) return null;
-      if (args.data.title)
-        where.OR = [
-          { keywords: { hasSome: [args.data.title.toLowerCase()] } },
-          { title: { mode: "insensitive", equals: args.data.title } },
-        ];
+      if (args.data.title) where.OR = getWhereTitle(args.data.title as string);
       if (args.data.id) where.id = args.data.id;
       if (args.params?.skip !== undefined)
         params.skip = args.params.skip as number;
       if (args.params?.take !== undefined)
         params.take = args.params.take as number;
 
-      console.log("where", where);
+      if (where.OR) console.log("where.OR", where.OR, where.OR[1], where.OR[2]);
       return await prisma.competencies.findMany({ where, ...params });
     },
   },

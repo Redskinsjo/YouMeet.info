@@ -1,4 +1,4 @@
-import verifyTokenBrowser from "@youmeet/utils/verifyTokenBrowser";
+import verifyTokenBrowser from "@youmeet/utils/basics/verifyTokenBrowser";
 import { getUser } from "./request";
 import { getSubscriptionStatus2 } from "@youmeet/global-config/useSubscriptionStatus";
 import { BetaUser } from "@youmeet/gql/generated";

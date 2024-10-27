@@ -5,7 +5,7 @@ import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
 import {
   linkedinIdRegex,
   linkedinPageRegex,
-} from "@youmeet/utils/formatLinkedin";
+} from "@youmeet/utils/basics/formatLinkedin";
 import { getSimpleCompany } from "@youmeet/functions/request";
 import { BetaCompany } from "@youmeet/gql/generated";
 import { isCompany } from "@youmeet/types/TypeGuards";

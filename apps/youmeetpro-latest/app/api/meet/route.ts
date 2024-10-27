@@ -1,7 +1,7 @@
 import { uri, uriCandidates } from "@youmeet/functions/imports";
 import { NextRequest, NextResponse } from "next/server";
 import Meet from "@youmeet/models/meets";
-import { s } from "@youmeet/utils/jwt";
+import { s } from "@youmeet/utils/basics/jwt";
 import { cookies } from "next/headers";
 
 export const maxDuration = 60;

@@ -2,7 +2,7 @@
 import { UserState } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { Offer, OwnQueuesDocument } from "@youmeet/gql/generated";
-import { getCompanyName } from "@youmeet/utils/formatForEmails";
+import { getCompanyName } from "@youmeet/utils/basics/formatForEmails";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
 import { useState } from "react";

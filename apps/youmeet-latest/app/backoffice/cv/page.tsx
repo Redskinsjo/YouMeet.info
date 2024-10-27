@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import BackofficeCvChild from "./backofficeCvChild";
-import verifyTokenServer from "@youmeet/utils/verifyTokenServer";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 
 export default async function BackofficeUsers() {
   const verified = await verifyTokenServer();

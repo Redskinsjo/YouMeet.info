@@ -4,7 +4,7 @@ import * as typegoose from "@typegoose/typegoose";
 import { BetaUserSchema } from "./betaUsers";
 import mongoose from "mongoose";
 import { IndexList } from "@youmeet/types/IndexList";
-import { checkingIndexes } from "@youmeet/utils/checkingIndexes";
+import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 import { MeetRecruiterSchema } from "./meetRecruiters";
 import { MeetCandidateSchema } from "./meetCandidates";
 mongoose.connect(`${process.env.MONGODB_URI}`);

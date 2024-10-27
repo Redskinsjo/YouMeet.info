@@ -26,9 +26,9 @@ import {
   getSimpleUser,
   submitVideo,
 } from "@youmeet/functions/request";
-import { setName } from "@youmeet/utils/setName";
-import { BackendError } from "@youmeet/utils/BackendErrorClass";
-import { submitFile } from "@youmeet/utils/submitFile";
+import { setName } from "@youmeet/utils/basics/setName";
+import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
+import { submitFile } from "@youmeet/utils/basics/submitFile";
 import { dev, uri, uriPro } from "@youmeet/functions/imports";
 import VideoComponent from "../../dashboard/dashboardComponents/VideoComponent";
 import SelectField from "../../formulaire-profil/formComponents/fields/SelectField";

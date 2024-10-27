@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { Button, useMediaQuery } from "@mui/material";
 import SubPartContainer from "../../SubPartContainer";
-import { formatToDatetime } from "@youmeet/utils/formatToDatetime";
+import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
 import DetailComponent from "../../DetailComponent";
 import {
   GlobalState,

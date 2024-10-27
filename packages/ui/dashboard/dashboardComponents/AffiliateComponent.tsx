@@ -1,11 +1,11 @@
 "use client";
 import DetailComponent from "../../DetailComponent";
 import { BetaUser, Translated, Video } from "@youmeet/gql/generated";
-import { getProfilePhone } from "@youmeet/utils/formatPhone";
-import { setName } from "@youmeet/utils/setName";
+import { getProfilePhone } from "@youmeet/utils/basics/formatPhone";
+import { setName } from "@youmeet/utils/basics/setName";
 import VideoComponent from "./VideoComponent";
 import { useTranslation } from "react-i18next";
-import { getPrincipalVideo } from "@youmeet/utils/getPrincipalVideo";
+import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa";
 import { createElement } from "react";

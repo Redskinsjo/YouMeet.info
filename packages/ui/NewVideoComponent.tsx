@@ -1,7 +1,7 @@
 import React from "react";
 import CandidateVideo from "./CandidateVideo";
 import { BetaUser, Video } from "@youmeet/gql/generated";
-import setFileUrl from "@youmeet/utils/setFileUrl";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import SubPartContainer from "./SubPartContainer";
 import BoldText from "./BoldText";
 import { Attr } from "@youmeet/types/attributes";

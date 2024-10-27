@@ -15,7 +15,7 @@ import RawExperience from "../../RawExperience";
 import { Checkbox } from "@mui/material";
 import { outfit } from "@youmeet/functions/fonts";
 import { grey } from "@mui/material/colors";
-import { getUniversalFromCodeAndNumber } from "@youmeet/utils/formatPhone";
+import { getUniversalFromCodeAndNumber } from "@youmeet/utils/basics/formatPhone";
 import { useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { ModalState } from "@youmeet/global-config/features/modal";

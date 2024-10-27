@@ -1,5 +1,5 @@
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
-import { verif } from "@youmeet/utils/jwt";
+import { verif } from "@youmeet/utils/basics/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import {
@@ -8,7 +8,7 @@ import {
   getUser,
 } from "@youmeet/functions/request";
 import { BetaQueue, BetaUser } from "@youmeet/gql/generated";
-import { choseCookie } from "@youmeet/utils/choseCookie";
+import { choseCookie } from "@youmeet/utils/basics/choseCookie";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;

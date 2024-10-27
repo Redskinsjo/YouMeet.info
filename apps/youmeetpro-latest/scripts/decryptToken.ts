@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { verif } from "@youmeet/utils/jwt";
+import { verif } from "@youmeet/utils/basics/jwt";
 import process from "process";
 dotenv.config();
 
