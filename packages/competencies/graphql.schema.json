@@ -213,18 +213,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "title",
             "description": null,
             "type": {
@@ -322,6 +310,18 @@
                 "deprecationReason": null
               },
               {
+                "name": "includeDefinition",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "params",
                 "description": null,
                 "type": {
@@ -351,11 +351,11 @@
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "data",
                 "description": null,
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "ID",
+                  "kind": "INPUT_OBJECT",
+                  "name": "CompetencyInput",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -363,23 +363,11 @@
                 "deprecationReason": null
               },
               {
-                "name": "slug",
+                "name": "includeDefinition",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "title",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "name": "Boolean",
                   "ofType": null
                 },
                 "defaultValue": null,

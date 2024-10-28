@@ -13,9 +13,6 @@ const config: CodegenConfig = {
         "typed-document-node",
       ],
     },
-    "./graphql.schema.json": {
-      plugins: ["introspection"],
-    },
   },
   overwrite: true,
 };
