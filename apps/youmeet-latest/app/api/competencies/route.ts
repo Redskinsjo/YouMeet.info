@@ -1,11 +1,14 @@
 import resolvers from "@youmeet/competencies/resolvers";
 import mongoose from "mongoose";
 import { createSchema, createYoga } from "graphql-yoga";
-import { loadFiles } from "@graphql-tools/load-files";
+import { loadSchemaSync } from "@graphql-tools/load";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 
-const typeDefs = await loadFiles("./schema.graphql");
+const typeDefs = loadSchemaSync("competenciesAPISchema.graphql", {
+  loaders: [new GraphQLFileLoader()],
+});
 
 const schema = createSchema({
   typeDefs,

@@ -12,9 +12,8 @@ const resolvers: Resolvers = {
     oneCompetency: async (_: unknown, args: QueryOneCompetencyArgs) => {
       const where = {} as Prisma.competenciesWhereInput;
 
-      if (args.slug) where.slug = args.slug;
-      if (args.id) where.id = args.id;
-      if (args.title) where.OR = getWhereTitle(args.title as string);
+      if (!args.title || typeof args.title !== "string") return null;
+      where.OR = getWhereTitle(args.title as string);
 
       const competency = await prisma.competencies.findFirst({
         where,
@@ -26,8 +25,8 @@ const resolvers: Resolvers = {
       const params = {} as { take?: number; skip?: number };
 
       if (!args.data) return null;
+      if (!args.data.title || typeof args.data.title !== "string") return null;
       if (args.data.title) where.OR = getWhereTitle(args.data.title as string);
-      if (args.data.id) where.id = args.data.id;
       if (args.params?.skip !== undefined)
         params.skip = args.params.skip as number;
       if (args.params?.take !== undefined)
