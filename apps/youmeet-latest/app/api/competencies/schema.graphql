@@ -1,0 +1,33 @@
+type Competency {
+  id: ID
+  slug: String
+  extension: String
+  title: String
+  definition: String
+  relatedSkills: [String]
+  advantages: [String]
+  examples: [String]
+  importance: String
+  development: String
+  conclusion: String
+  keywords: [String]
+  appelations: [String]
+}
+
+input CompetencyInput {
+  title: String
+}
+
+input PageParamsInput {
+  skip: Int
+  take: Int
+}
+
+type Query {
+  oneCompetency(data: CompetencyInput, includeDefinition: Boolean): Competency
+  competencies(
+    data: CompetencyInput
+    params: PageParamsInput
+    includeDefinition: Boolean
+  ): [Competency]
+}
