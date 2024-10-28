@@ -1,4 +1,7 @@
-query GetOneCompetency($data: CompetencyInput, $includeDefinition: Boolean) {
+query GetOneCompetency(
+  $data: CompetencyInput
+  $includeDefinition: Boolean = false
+) {
   oneCompetency(data: $data, includeDefinition: $includeDefinition) {
     title
     definition @include(if: $includeDefinition)

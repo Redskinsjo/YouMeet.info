@@ -1,7 +1,7 @@
 query GetManyCompetencies(
   $data: CompetencyInput
   $params: PageParamsInput
-  $includeDefinition: Boolean
+  $includeDefinition: Boolean = false
 ) {
   competencies(
     data: $data
