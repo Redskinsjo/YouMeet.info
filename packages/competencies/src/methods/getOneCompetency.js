@@ -1,11 +1,10 @@
 import { uri, method, headers } from "./imports";
+import { loadDocuments } from "@graphql-tools/load";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 
-const getOneCompetencyQuery = `query GetOneCompetency($title: String, $id: ID, $slug: String) {
-  oneCompetency(title: $title, id: $id, slug: $slug) {
-    id
-  }
-}
-`;
+const query = loadDocuments("../queries/GetOneCompetency.graphql", {
+  loaders: [new GraphQLFileLoader()],
+});
 
 export default async function getOneCompetency(variables) {
   try {
@@ -13,7 +12,7 @@ export default async function getOneCompetency(variables) {
       method,
       headers,
       body: JSON.stringify({
-        query: getOneCompetencyQuery,
+        query,
         variables,
       }),
       cache: "no-store",

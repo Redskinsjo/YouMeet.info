@@ -1,5 +1,15 @@
-query GetOneCompetency($title: String, $id: ID, $slug: String) {
-  oneCompetency(title: $title, id: $id, slug: $slug) {
-    id
+query GetOneCompetency($data: CompetencyInput, $includeDefinition: Boolean) {
+  oneCompetency(data: $data, includeDefinition: $includeDefinition) {
+    title
+    definition @include(if: $includeDefinition)
+    relatedSkills @include(if: $includeDefinition)
+    advantages @include(if: $includeDefinition)
+    examples @include(if: $includeDefinition)
+    importance @include(if: $includeDefinition)
+    development @include(if: $includeDefinition)
+    keywords @include(if: $includeDefinition)
+    conclusion @include(if: $includeDefinition)
+    extension @include(if: $includeDefinition)
+    slug @include(if: $includeDefinition)
   }
 }

@@ -1,5 +1,23 @@
-query GetManyCompetencies($data: CompetencyInput, $params: PageParamsInput) {
-  competencies(data: $data, params: $params) {
-    id
+query GetManyCompetencies(
+  $data: CompetencyInput
+  $params: PageParamsInput
+  $includeDefinition: Boolean
+) {
+  competencies(
+    data: $data
+    params: $params
+    includeDefinition: $includeDefinition
+  ) {
+    title
+    definition @include(if: $includeDefinition)
+    relatedSkills @include(if: $includeDefinition)
+    advantages @include(if: $includeDefinition)
+    examples @include(if: $includeDefinition)
+    importance @include(if: $includeDefinition)
+    development @include(if: $includeDefinition)
+    keywords @include(if: $includeDefinition)
+    conclusion @include(if: $includeDefinition)
+    extension @include(if: $includeDefinition)
+    slug @include(if: $includeDefinition)
   }
 }

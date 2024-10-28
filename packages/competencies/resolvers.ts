@@ -14,12 +14,7 @@ const resolvers: Resolvers = {
 
       if (args.slug) where.slug = args.slug;
       if (args.id) where.id = args.id;
-      if (args.title) {
-        where.OR = [
-          { title: { mode: "insensitive", equals: args.title } },
-          { appelations: { hasSome: [args.title.toLowerCase()] } },
-        ];
-      }
+      if (args.title) where.OR = getWhereTitle(args.title as string);
 
       const competency = await prisma.competencies.findFirst({
         where,
@@ -38,7 +33,6 @@ const resolvers: Resolvers = {
       if (args.params?.take !== undefined)
         params.take = args.params.take as number;
 
-      if (where.OR) console.log("where.OR", where.OR, where.OR[1], where.OR[2]);
       return await prisma.competencies.findMany({ where, ...params });
     },
   },

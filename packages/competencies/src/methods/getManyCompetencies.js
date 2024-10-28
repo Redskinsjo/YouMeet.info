@@ -1,11 +1,10 @@
 import { uri, method, headers } from "./imports";
+import { loadDocuments } from "@graphql-tools/load";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 
-const getManyCompetenciesQuery = `query GetManyCompetencies($data: CompetencyInput, $params: PageParamsInput) {
-  competencies(data: $data, params: $params) {
-    id
-  }
-}
-`;
+const query = loadDocuments("../queries/GetManyCompetencies.graphql", {
+  loaders: [new GraphQLFileLoader()],
+});
 
 export default async function getManyCompetency(variables) {
   try {
@@ -13,7 +12,7 @@ export default async function getManyCompetency(variables) {
       method,
       headers,
       body: JSON.stringify({
-        query: getManyCompetenciesQuery,
+        query,
         variables,
       }),
       cache: "no-store",
