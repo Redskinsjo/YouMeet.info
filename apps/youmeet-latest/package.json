@@ -36,6 +36,7 @@
     "@visx/shape": "^3.5.0",
     "@visx/tooltip": "^3.3.0",
     "@visx/vendor": "^3.5.0",
+    "@youmeet/competencies-api-schema": "*",
     "@youmeet/competencies": "*",
     "@youmeet/functions": "*",
     "@youmeet/global-config": "*",

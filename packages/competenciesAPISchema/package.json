@@ -1,0 +1,9 @@
+{
+  "name": "@youmeet/competencies-api-schema",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./schema.graphql"
+  },
+  "dependencies": {}
+}
