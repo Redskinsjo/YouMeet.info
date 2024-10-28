@@ -1,7 +1,7 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: `http://localhost:3000/api/competencies`,
+  schema: `https://www.youmeet.info/api/competencies`,
   documents: ["./src/queries/*.graphql"],
   emitLegacyCommonJSImports: false,
   generates: {
