@@ -5,9 +5,9 @@ import {
 
 /**
  * Récupérer une compétence.
- * @param {string} variables.id - ID de la compétence.
+ * @argument {object} variables - Argument à passer. Requis.
  * @param {string} variables.title - Titre de la compétence.
- * @param {string} variables.slug - Slug de la compétence.
+ * @param {boolean} variables.includeDefinition - True, si vou souhaitez récupérer plus d'informations que seulement le title.
  */
 
 export declare function getOneCompetency(
@@ -16,13 +16,13 @@ export declare function getOneCompetency(
 
 /**
  * Récupérer plusieurs compétence.
- * @argument {object} variables - Argument. Requis.
+ * @argument {object} variables - Argument à passer. Requis.
  * @param {object} variables.data - Données à fournir pour filtrer les résultats.
- * @property {string} variables.data.id - ID de la compétence.
  * @property {string} variables.data.title - Titre de la compétence.
  * @param {object} variables.params - Paramètres supplémentaires.
  * @property {number} variables.params.skip - Nombre de compétences à ignorer.
  * @property {number} variables.params.take - Nombre de compétences à récupérer. Défaut: 10.
+ * @param {boolean} variables.includeDefinition - True, si vou souhaitez récupérer plus d'informations que seulement le title.
  */
 export declare function getManyCompetencies(
   variables: GetManyCompetenciesQueryVariables
