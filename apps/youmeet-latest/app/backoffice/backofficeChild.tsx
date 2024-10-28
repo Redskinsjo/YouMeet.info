@@ -12,8 +12,8 @@ export default async function BackofficeChild({
   leads: Lead[];
   users: BetaUser[];
 }) {
-  const competencies = await getManyCompetencies({ data: { title: "react" } });
-  console.log(competencies, "competencies");
+  // const competencies = await getManyCompetencies({ data: { title: "react" } });
+  // console.log(competencies, "competencies");
   return (
     <div className="relative flex-1 flex-center flex-col h-full lightBg dark:darkBg">
       <div className="flex-center">
