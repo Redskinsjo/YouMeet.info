@@ -19,14 +19,14 @@ export default function FooterList() {
             {t("home")}
           </Link>
         </li>
-        <li className="subItem xs:legend sm:legend hover:text-blueGrey500 cursor-pointer group-focus-visible:bg-grey100 rounded-xl group-focus-visible:px-[6px]">
+        {/* <li className="subItem xs:legend sm:legend hover:text-blueGrey500 cursor-pointer group-focus-visible:bg-grey100 rounded-xl group-focus-visible:px-[6px]">
           <Link
             href={"/offres"}
             className="no-underline dark:text-white text-blueGrey700 hover:opacity-50 focus-visible:outline-0"
           >
             {t("all-offers")}
           </Link>
-        </li>
+        </li> */}
         <li className="subItem xs:legend sm:legend hover:text-blueGrey500 cursor-pointer group-focus-visible:bg-grey100 rounded-xl group-focus-visible:px-[6px]">
           <Link
             href={"/formulaire-profil"}
