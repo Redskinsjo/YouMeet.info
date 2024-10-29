@@ -22,7 +22,7 @@ export default function Footer() {
           <div className="flex xs:flex-col gap-[96px]">
             <FooterList />
             <FooterList2 />
-            <FooterProposedBy />
+            {/* <FooterProposedBy /> */}
           </div>
         </Layout>
       </div>
