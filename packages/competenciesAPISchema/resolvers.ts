@@ -2,7 +2,7 @@ import {
   QueryCompetenciesArgs,
   QueryOneCompetencyArgs,
   Resolvers,
-} from "./src/types/generated";
+} from "../competencies/src/types/generated";
 import prisma from "@youmeet/prisma-config/prisma";
 import { Prisma } from "@prisma/client";
 import { getWhereTitle } from "@youmeet/utils/resolvers/competenciesApi";

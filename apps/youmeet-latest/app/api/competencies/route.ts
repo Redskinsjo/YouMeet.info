@@ -1,7 +1,7 @@
-import resolvers from "@youmeet/competencies/resolvers";
+import resolvers from "@youmeet/competencies-api-schema/resolvers";
 import mongoose from "mongoose";
 import { createSchema, createYoga } from "graphql-yoga";
-import typeDefs from "@youmeet/competencies-api-schema";
+import typeDefs from "@youmeet/competencies-api-schema/schema";
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 

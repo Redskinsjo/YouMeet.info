@@ -25,8 +25,7 @@
     ".next/types/**/*.ts",
     "**/*.mjs",
     "next.config.js",
-    "app/**/*.{ts,tsx}",
-    "../../packages/competencies/resolvers.ts"
+    "app/**/*.{ts,tsx}"
   ],
   "exclude": ["node_modules"]
 }
