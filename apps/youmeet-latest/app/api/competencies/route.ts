@@ -13,7 +13,7 @@ const schema = createSchema({
 const { handleRequest } = createYoga({
   graphqlEndpoint: "/api/competencies",
   schema,
-  graphiql: true,
+  graphiql: false,
   cors: {
     origin: "*",
     methods: ["POST", "OPTIONS"],
