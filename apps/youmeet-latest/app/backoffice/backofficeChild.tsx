@@ -3,7 +3,6 @@ import Link from "next/link";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
 import BackofficeComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficePageComponent";
 import FranceTravailConnect from "@youmeet/ui/backoffice/backofficeComponents/FranceTravailConnect";
-import { getManyCompetencies } from "@youmeet/competencies";
 
 export default async function BackofficeChild({
   leads,
@@ -12,8 +11,6 @@ export default async function BackofficeChild({
   leads: Lead[];
   users: BetaUser[];
 }) {
-  const competencies = await getManyCompetencies({ data: { title: "react" } });
-  console.log(competencies, "competencies");
   return (
     <div className="relative flex-1 flex-center flex-col h-full lightBg dark:darkBg">
       <div className="flex-center">
