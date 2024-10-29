@@ -1,6 +1,6 @@
 {
   "name": "@youmeet/competencies",
-  "version": "1.0.0",
+  "version": "1.0.15",
   "description": "Centralize competencies titles. Fastly get unique competencies from all sectors (mainly, for recruitment enterprises). Helps finding competency that was derived. For example, request for whether react, ReactJS, or react.js, always get the unique React.js. Can be used in the frontend or the backend. This package is part of the YouMeet.info project.",
   "keywords": [
     "competencies",
@@ -14,22 +14,29 @@
     "request",
     "YouMeet.info"
   ],
-  "private": true,
-  "main": "./index.ts",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Redskinsjo/YouMeet.info/tree/main/packages/competencies"
+    "url": "git+https://github.com/Redskinsjo/YouMeet.info.git#main"
   },
   "engines": {
-    "node": ">=20.9.0"
+    "node": ">=14.9.0"
   },
   "license": "MIT",
   "exports": {
-    "./resolvers": "./resolvers.ts",
-    "./schema": "./schema.graphql",
     ".": {
-      "types": "./types/index.d.ts",
-      "default": "./index.ts"
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "default": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     }
   },
   "scripts": {
@@ -53,7 +60,6 @@
     "@graphql-tools/graphql-file-loader": "^8.0.2",
     "@graphql-tools/load": "^8.0.3",
     "@graphql-tools/schema": "^10.0.7",
-    "@youmeet/utils": "*",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "server-only": "^0.0.1"

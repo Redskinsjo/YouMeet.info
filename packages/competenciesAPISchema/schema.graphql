@@ -24,9 +24,9 @@ input PageParamsInput {
 }
 
 type Query {
-  oneCompetency(data: CompetencyInput, includeDefinition: Boolean): Competency
+  oneCompetency(data: CompetencyInput!, includeDefinition: Boolean): Competency
   competencies(
-    data: CompetencyInput
+    data: CompetencyInput!
     params: PageParamsInput
     includeDefinition: Boolean
   ): [Competency]

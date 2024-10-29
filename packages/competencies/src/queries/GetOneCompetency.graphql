@@ -1,5 +1,5 @@
 query GetOneCompetency(
-  $data: CompetencyInput
+  $data: CompetencyInput!
   $includeDefinition: Boolean = false
 ) {
   oneCompetency(data: $data, includeDefinition: $includeDefinition) {

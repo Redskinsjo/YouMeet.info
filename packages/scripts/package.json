@@ -12,9 +12,11 @@
     "test": "SCRIPT=true dotenv -e .env.development -- jest",
     "genCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./genCompetencies.ts",
     "transferCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./transferCompetencies.ts",
-    "deleteCompetencies": "SCRIPT=true dotenv -e .env.development -- ts-node ./deleteCompetencies.ts"
+    "deleteCompetencies": "SCRIPT=true dotenv -e .env.development -- ts-node ./deleteCompetencies.ts",
+    "testingAPIPackage": "npx tsx ./testingAPIPackage.ts"
   },
   "dependencies": {
+    "@youmeet/competencies": "^1.0.15",
     "@youmeet/functions": "*",
     "@youmeet/gql": "*",
     "@youmeet/models": "*",

@@ -6,5 +6,4 @@ declare module "*.css" {
 }
 
 declare module "@youmeet/gql/schema";
-declare module "@youmeet/competencies/schema";
 declare module "@youmeet/competencies-api-schema";
