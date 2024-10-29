@@ -2,7 +2,7 @@ import {
   QueryCompetenciesArgs,
   QueryOneCompetencyArgs,
   Resolvers,
-} from "./types/generated";
+} from "./src/types/generated";
 import prisma from "@youmeet/prisma-config/prisma";
 import { Prisma } from "@prisma/client";
 import { getWhereTitle } from "@youmeet/utils/resolvers/competenciesApi";
@@ -12,8 +12,8 @@ const resolvers: Resolvers = {
     oneCompetency: async (_: unknown, args: QueryOneCompetencyArgs) => {
       const where = {} as Prisma.competenciesWhereInput;
 
-      if (!args.data || typeof args.data !== "string") return null;
-      where.OR = getWhereTitle(args.data as string);
+      if (!args.data || typeof args.data.title !== "string") return null;
+      where.OR = getWhereTitle(args.data.title as string);
 
       const competency = await prisma.competencies.findFirst({
         where,

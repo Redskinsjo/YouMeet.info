@@ -23,5 +23,8 @@
     "apps/*",
     "packages/*"
   ],
+  "nohoist": [
+    "@youmeet/competencies"
+  ],
   "version": "0.0.0"
 }

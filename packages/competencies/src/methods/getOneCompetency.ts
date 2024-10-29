@@ -1,9 +1,11 @@
 import { uri, method, headers } from "./imports";
-import { loadDocuments } from "@graphql-tools/load";
+import { loadDocumentsSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { Competency, GetOneCompetencyQueryVariables } from "../types/generated";
+import path from "path";
 
-const query = loadDocuments("../queries/GetOneCompetency.graphql", {
+const queryPath = path?.join(__dirname, "../queries/GetOneCompetency.graphql");
+const query = loadDocumentsSync(queryPath, {
   loaders: [new GraphQLFileLoader()],
 });
 
@@ -22,14 +24,14 @@ export default async function getOneCompetency(
       method,
       headers,
       body: JSON.stringify({
-        query,
+        query: query[0].rawSDL,
         variables,
       }),
       cache: "no-store",
     });
-    const data = await response.json();
+    const res = await response.json();
 
-    return data;
+    return res.data.oneCompetency;
   } catch (error) {
     console.error("Error fetching data:", error);
     return null;

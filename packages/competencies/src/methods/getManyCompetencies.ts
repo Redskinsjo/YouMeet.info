@@ -1,12 +1,17 @@
 import { uri, method, headers } from "./imports";
-import { loadDocuments } from "@graphql-tools/load";
+import { loadDocumentsSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import {
   Competency,
   GetManyCompetenciesQueryVariables,
 } from "../types/generated";
+import path from "path";
 
-const query = loadDocuments("../queries/GetManyCompetencies.graphql", {
+const queryPath = path.join(
+  __dirname,
+  "../queries/GetManyCompetencies.graphql"
+);
+const query = loadDocumentsSync(queryPath, {
   loaders: [new GraphQLFileLoader()],
 });
 
@@ -28,14 +33,14 @@ export default async function getManyCompetency(
       method,
       headers,
       body: JSON.stringify({
-        query,
+        query: query[0].rawSDL,
         variables,
       }),
       cache: "no-store",
     });
-    const data = await response.json();
+    const res = await response.json();
 
-    return data;
+    return res.data.competencies;
   } catch (error) {
     console.error("Error fetching data:", error);
     return null;

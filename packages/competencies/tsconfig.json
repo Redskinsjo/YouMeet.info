@@ -11,8 +11,9 @@
     "declarationMap": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/queries/*.graphql"],
   "exclude": ["node_modules"]
 }

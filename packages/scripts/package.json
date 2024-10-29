@@ -16,7 +16,7 @@
     "testingAPIPackage": "npx tsx ./testingAPIPackage.ts"
   },
   "dependencies": {
-    "@youmeet/competencies": "^1.0.15",
+    "@youmeet/competencies": "^1.1.1",
     "@youmeet/functions": "*",
     "@youmeet/gql": "*",
     "@youmeet/models": "*",
