@@ -1,5 +1,4 @@
 import { Skeleton } from "@mui/material";
-import { blueGrey } from "@mui/material/colors";
 
 export default function VideoPartLoading() {
   return (

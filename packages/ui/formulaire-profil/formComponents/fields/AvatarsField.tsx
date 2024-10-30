@@ -2,7 +2,6 @@ import React, { useEffect, useId, useState } from "react";
 import Image from "next/image";
 import { MdUpload } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { red } from "@mui/material/colors";
 import { useMediaQuery } from "@mui/material";
 import BoldText from "../../../BoldText";
@@ -45,7 +44,7 @@ export default function AvatarsField({
 
   return (
     <div
-      className="xs:fadeIn sm:fadeIn col-span-2 flex-center"
+      className="appear_slowly col-span-2 flex-center"
       style={{ display: type === "hidden" ? "none" : "block" }}
     >
       <div className="flex flex-col">
@@ -137,55 +136,39 @@ export default function AvatarsField({
               </div>
             )}
 
-            {!!loading && (
-              <LoadingButton
-                size="small"
-                loading={true}
-                variant="text"
-                style={{
-                  position: "absolute",
-                  backgroundColor: "unset",
-                  zIndex: 10,
-                }}
-                disabled
-              />
-            )}
-            {!loading && !src && (
+            {!src && (
               <label htmlFor={String(id)} className="cursor-pointer">
                 <MdUpload className="xs:text-[28px] sm:text-[28px] text-[40px] dark:text-grey300" />
               </label>
             )}
 
-            {!loading && (
-              <input
-                name={name}
-                required={required}
-                id={String(id)}
-                className="hidden"
-                type={"file"}
-                onChange={(e) => {
-                  setLoading(true);
-                  const files = (e.target as HTMLInputElement)
-                    .files as FileList;
-                  if (typeof files[0] === "object") {
-                    setSrc(URL.createObjectURL(files[0]));
-                    if (name === "video") {
-                      if (files[0].size >= 100000000)
-                        if (setError)
-                          setError(name, {
-                            message: "La taille de la vidéo est trop élevée.",
-                          });
-                      setFieldVal(files[0]);
-                    }
-                    if (setValue) setValue(name, files[0]);
+            <input
+              name={name}
+              required={required}
+              id={String(id)}
+              className="hidden"
+              type={"file"}
+              onChange={(e) => {
+                setLoading(true);
+                const files = (e.target as HTMLInputElement).files as FileList;
+                if (typeof files[0] === "object") {
+                  setSrc(URL.createObjectURL(files[0]));
+                  if (name === "video") {
+                    if (files[0].size >= 100000000)
+                      if (setError)
+                        setError(name, {
+                          message: "La taille de la vidéo est trop élevée.",
+                        });
+                    setFieldVal(files[0]);
                   }
-                  setLoading(false);
-                }}
-                accept={
-                  name === "logo" ? ".png,.jpg,.jpeg,.webp" : ".mov,.mp4,.webm"
+                  if (setValue) setValue(name, files[0]);
                 }
-              />
-            )}
+                setLoading(false);
+              }}
+              accept={
+                name === "logo" ? ".png,.jpg,.jpeg,.webp" : ".mov,.mp4,.webm"
+              }
+            />
           </div>
         </div>
         {!!errors && !!errors[name] && type !== "hidden" && (

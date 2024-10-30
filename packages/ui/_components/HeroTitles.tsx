@@ -18,7 +18,7 @@ export default function HeroTitles() {
         </span>
         {t("reliable-pro-infos")}
       </div>
-      <span className="text-[20px] text-grey200 font-extralight ml-[6px]">
+      <span className="sentences text-grey200 font-extralight ml-[6px]">
         {t("about-candidates")}
       </span>
     </h1>
@@ -33,7 +33,7 @@ export default function HeroTitles() {
           {t("information")}
         </span>
       </div>
-      <span className="text-[20px] text-grey200 font-extralight ml-[6px]">
+      <span className="sentences text-grey200 font-extralight ml-[6px]">
         {t("about-candidates")}
       </span>
     </h1>

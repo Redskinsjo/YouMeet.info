@@ -128,10 +128,10 @@ p {
   }
 }
 
-.appear-slowly {
+.appear_slowly {
   animation: appear_slowly 1.3s ease-in;
 }
-.appear-slowly-product {
+.appear_slowly-product {
   animation: appear_slowly 0.3s ease-in;
 }
 
@@ -757,13 +757,13 @@ p {
     @apply p-[16px] gap-[6px] w-full flex flex-col items-center relative box-border dark:extraLightDarkBg border-[0.5px] border-solid border-grey300 dark:border-grey900;
   }
   .modal-content {
-    @apply flex-col overflow-hidden overflow-y-scroll p-[24px] bg-white flex-1 xs:p-[12px] sm:p-[12px] xs:gap-[12px] sm:gap-[12px] gap-[24px] xs:max-h-full sm:max-h-full md:max-h-full max-h-[92vh] xs:h-full sm:h-full md:h-full relative box-border appear-slowly flex-center dark:mediumDarkBg rounded-[14px];
+    @apply flex-col overflow-hidden overflow-y-scroll p-[24px] bg-white flex-1 xs:p-[12px] sm:p-[12px] xs:gap-[12px] sm:gap-[12px] gap-[24px] xs:max-h-full sm:max-h-full md:max-h-full max-h-[92vh] xs:h-full sm:h-full md:h-full relative box-border appear_slowly flex-center dark:mediumDarkBg rounded-[14px];
   }
   .auth-to-signin {
     @apply flex flex-col hover:cursor-pointer w-[144px];
   }
   .auth-form-content {
-    @apply flex-center flex-col w-full p-[36px] flex-1 h-full xs:p-[12px] sm:p-[12px] gap-[36px] relative bg-white appear-slowly box-border md:border-[2px] md:border-solid md:border-grey300;
+    @apply flex-center flex-col w-full p-[36px] flex-1 h-full xs:p-[12px] sm:p-[12px] gap-[36px] relative bg-white appear_slowly box-border md:border-[2px] md:border-solid md:border-grey300;
   }
   .sm-auth-container {
     @apply h-full flex flex-col items-center w-full box-border p-[4px] rounded-lg shadow-2xl;

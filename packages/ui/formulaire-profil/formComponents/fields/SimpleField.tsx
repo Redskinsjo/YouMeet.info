@@ -50,7 +50,9 @@ export default function SimpleField({
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const user = useSelector((state: RootState) => state.user as UserState);
-  const [fieldVal, setFieldVal] = useState(value);
+  const [fieldVal, setFieldVal] = useState(
+    !value && multiple ? [] : !value && !multiple ? "" : value
+  );
   const [timer, setTimer] = useState<NodeJS.Timeout | undefined>();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -165,46 +167,45 @@ export default function SimpleField({
         multiline={multiline ?? false}
         rows={multiline ? rows : undefined}
         onChange={getOnChange()[set(name)]}
-        slotProps={{ select: { multiple: !!multiple } }}
+        slotProps={{
+          select: { multiple: !!multiple },
+          input: {
+            className: "subItem h-[60px]",
+          },
+          inputLabel: {
+            className: "subItem",
+            sx: {
+              "&.Mui-focused": {
+                transform:
+                  xs || sm
+                    ? "translate(14px,-9px) scale(0.75)"
+                    : "translate(14px,-11px) scale(0.75)",
+              },
+              "&:not(.Mui-focused)": {
+                transform:
+                  (xs || sm) && value
+                    ? "translate(9px,2px) scale(0.75)"
+                    : value
+                    ? "translate(14px,-11px) scale(0.75)"
+                    : (xs || sm) && !value
+                    ? "translate(9px,2px) scale(1)"
+                    : !value
+                    ? "translate(13px,15px) scale(1)"
+                    : "",
+              },
+            },
+          },
+        }}
         autoFocus
         style={{
-          animation:
-            xs || sm
-              ? "slide_in_mobile 0.8s ease-in-out"
-              : "slide_in 0.8s ease-in-out",
+          animation: "appear_slowly 1.3s ease-in",
         }}
         label={label}
         className={
           !!errors && errors[name]
-            ? "xs:fadeIn sm:fadeIn sm:col-span-2 w-full subItem errorFieldset dark:darkErrorFieldset dark:darkLabel dark:darkInput"
-            : "xs:fadeIn sm:fadeIn sm:col-span-2 w-full subItem dark:darkFieldset dark:darkLabel dark:darkInput"
+            ? "sm:col-span-2 w-full subItem errorFieldset dark:darkErrorFieldset dark:darkLabel dark:darkInput"
+            : "sm:col-span-2 w-full subItem dark:darkFieldset dark:darkLabel dark:darkInput"
         }
-        InputLabelProps={{
-          className: "subItem",
-          sx: {
-            "&.Mui-focused": {
-              transform:
-                xs || sm
-                  ? "translate(14px,-9px) scale(0.75)"
-                  : "translate(14px,-11px) scale(0.75)",
-            },
-            "&:not(.Mui-focused)": {
-              transform:
-                (xs || sm) && value
-                  ? "translate(9px,2px) scale(0.75)"
-                  : value
-                  ? "translate(14px,-11px) scale(0.75)"
-                  : (xs || sm) && !value
-                  ? "translate(9px,2px) scale(1)"
-                  : !value
-                  ? "translate(13px,15px) scale(1)"
-                  : "",
-            },
-          },
-        }}
-        InputProps={{
-          className: "subItem h-[60px]",
-        }}
         autoComplete={"off"}
       >
         {children}

@@ -1,3 +1,4 @@
+"use client";
 import { Button, useMediaQuery } from "@mui/material";
 import {
   createElement,
@@ -13,14 +14,9 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import BoldText from "@youmeet/ui/BoldText";
 import { onFormData } from "@youmeet/functions/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { UnknownAction } from "@reduxjs/toolkit";
-import {
-  FormState,
-  setLoading,
-  setProfileStep,
-} from "@youmeet/global-config/features/form";
+import { FormState, setLoading } from "@youmeet/global-config/features/form";
 import { FieldValues, useForm } from "react-hook-form";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
@@ -39,13 +35,10 @@ export default function PageContent({
   defaultValues: Partial<ProfileFormDefaultValues> | undefined;
 }) {
   const [transitioned, setTransitioned] = useState(false);
-  const [last, setLast] = useState(false);
-  const xs = useMediaQuery("(max-width:600px)");
   const md = useMediaQuery("(max-width:900px)");
   const { t } = useTranslation();
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageIndex, setPageIndex] = useState(0);
   const dispatch = useDispatch();
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const step = useSelector(
@@ -62,28 +55,19 @@ export default function PageContent({
     values: defaultValues,
   });
 
-  const currentField = firstPartPages[pageIndex - 1];
+  const currentField = firstPartPages[pageIndex];
   const currentFieldName = currentField.props.name;
   const pages = { count: firstPartPages.length, index: pageIndex };
+  const last = pages.count - 1 === pages.index;
 
   const onNext = (setTransitioned: Dispatch<SetStateAction<boolean>>) => {
     setTransitioned(true);
-    setTimeout(() => {
-      setPageIndex(
-        pageIndex + 1 < firstPartPages.length + 1 ? pageIndex + 1 : 1
-      );
-      setTransitioned(false);
-    }, 700);
-    setPageIndex(pageIndex + 1 < firstPartPages.length + 1 ? pageIndex + 1 : 1);
+    setPageIndex(pageIndex + 1 < firstPartPages.length ? pageIndex + 1 : 0);
     setTransitioned(false);
   };
   const onBack = (setTransitioned: Dispatch<SetStateAction<boolean>>) => {
     setTransitioned(true);
-    setTimeout(() => {
-      setPageIndex(pageIndex - 1 > 0 ? pageIndex - 1 : 1);
-      setTransitioned(false);
-    }, 700);
-    setPageIndex(pageIndex - 1 > 0 ? pageIndex - 1 : 1);
+    setPageIndex(pageIndex - 1 >= 0 ? pageIndex - 1 : 0);
     setTransitioned(false);
   };
 
@@ -91,8 +75,6 @@ export default function PageContent({
     extras: { userId: string },
     formData: FormData
   ) => {
-    dispatch(setLoading(true) as UnknownAction);
-
     const uploadedList = [] as AvatarInput[];
     const files: File[] = [];
 
@@ -122,7 +104,7 @@ export default function PageContent({
           type: err.type,
         },
       });
-      setPageIndex(1);
+      setPageIndex(0);
       if (err.type === 8) {
         dispatch(setAppError("fileTooLarge"));
       } else {
@@ -134,27 +116,15 @@ export default function PageContent({
     const result = await onFormData(extras, formData, uploadedList);
 
     if (result && isPayloadError(result)) {
-      setPageIndex(1);
+      setPageIndex(0);
       dispatch(setAppError("not-completed"));
       dispatch(setLoading(false));
     } else {
       router.push("/dashboard");
     }
-    dispatch(setLoading(false) as UnknownAction);
   };
 
   useEffect(() => {
-    if (pages) {
-      setLast(pages.count === pages.index);
-    }
-    setLoading(false);
-  }, [pages]);
-
-  useEffect(() => {
-    const query = searchParams;
-    if (query.get("step")) {
-      dispatch(setProfileStep(Number(query.get("step")) as 1 | 2 | 3));
-    }
     router.prefetch("/dashboard");
   }, []);
 
@@ -163,12 +133,14 @@ export default function PageContent({
       <div className="flex-center">
         {currentFieldName === "linkedinProfileId" ? (
           <>
-            {!md && (
-              <BoldText text={t("subscribe-linkedin-format")} align="left" />
-            )}
-            {md && (
-              <BoldText text={t("subscribe-linkedin-copylink")} align="left" />
-            )}
+            <BoldText
+              text={
+                md
+                  ? t("subscribe-linkedin-copylink")
+                  : t("subscribe-linkedin-format")
+              }
+              align="left"
+            />
           </>
         ) : undefined}
       </div>
@@ -177,14 +149,14 @@ export default function PageContent({
           action={customOnFormData.bind(null, { userId: user.id })}
           className={
             transitioned
-              ? "slide_out relative w-full flex flex-col gap-[12px]"
+              ? "appear_slowly relative w-full flex flex-col gap-[12px]"
               : "relative w-full flex flex-col gap-[12px]"
           }
         >
           <div className="rounded-[30px] w-full">
             <div className="w-full flex-center flex-col bg-grey100 border-[0.5px] border-solid border-grey300 dark:extraLightDarkBg rounded-xl p-[8px] box-border">
               {firstPartPages.map((field) => {
-                const currentField = firstPartPages[field.props.id ?? 1 - 1];
+                const currentField = firstPartPages[field.props.id ?? 0];
                 const currentValue = watch(currentField.props.name);
 
                 return createElement(
@@ -206,13 +178,8 @@ export default function PageContent({
               })}
             </div>
           </div>
-          <div
-            className={"flex gap-[12px] items-center justify-end h-[40px]"}
-            style={{
-              right: xs ? 0 : 48,
-            }}
-          >
-            {pages?.index && pages.index > 1 ? (
+          <div className="flex gap-[12px] items-center justify-end h-[40px] xs:right-0 right-[48px]">
+            {pages?.index && pages.index > 1 && !last ? (
               <TooltipedAsset placement="top" asset={t("form-come-back")}>
                 <div className="flex-center">
                   <Button
@@ -254,7 +221,7 @@ export default function PageContent({
                     : "bg-purple900 hover:bg-purple500 text-white subItem"
                 }
               >
-                {last ? t("validate") : t("next")}
+                {!last && t("next")}
               </Button>
             </TooltipedAsset>
           </div>

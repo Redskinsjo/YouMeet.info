@@ -8,7 +8,6 @@ import {
   submitVideo,
 } from "@youmeet/functions/request";
 import VideoComponent from "../../dashboard/dashboardComponents/VideoComponent";
-import AvatarsField from "../../formulaire-profil/formComponents/fields/AvatarsField";
 import PhoneField from "../../formulaire-profil/formComponents/fields/PhoneField";
 import SelectField from "../../formulaire-profil/formComponents/fields/SelectField";
 import SimpleField from "../../formulaire-profil/formComponents/fields/SimpleField";
@@ -31,7 +30,28 @@ import { UnknownAction } from "@reduxjs/toolkit";
 import { useCallback, useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import React from "react";
+import dynamic from "next/dynamic";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+const AvatarsField = dynamic(
+  () => import("../../formulaire-profil/formComponents/fields/AvatarsField"),
+  {
+    ssr: false,
+    loading: () => (
+      <LoadingButton
+        size="small"
+        loading={true}
+        variant="text"
+        style={{
+          position: "absolute",
+          backgroundColor: "unset",
+          zIndex: 10,
+        }}
+        disabled
+      />
+    ),
+  }
+);
 
 export default function AffiliateForm({ users }: { users: BetaUser[] }) {
   const dispatch = useDispatch();

@@ -9,7 +9,6 @@ import { Button, MenuItem } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import AvatarsField from "../../formulaire-profil/formComponents/fields/AvatarsField";
 import PhoneField from "../../formulaire-profil/formComponents/fields/PhoneField";
 import {
   BACKEND_ERRORS,
@@ -32,7 +31,28 @@ import { submitFile } from "@youmeet/utils/basics/submitFile";
 import { dev, uri, uriPro } from "@youmeet/functions/imports";
 import VideoComponent from "../../dashboard/dashboardComponents/VideoComponent";
 import SelectField from "../../formulaire-profil/formComponents/fields/SelectField";
-import React from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
+import dynamic from "next/dynamic";
+
+const AvatarsField = dynamic(
+  () => import("../../formulaire-profil/formComponents/fields/AvatarsField"),
+  {
+    ssr: false,
+    loading: () => (
+      <LoadingButton
+        size="small"
+        loading={true}
+        variant="text"
+        style={{
+          position: "absolute",
+          backgroundColor: "unset",
+          zIndex: 10,
+        }}
+        disabled
+      />
+    ),
+  }
+);
 
 export default function CreateProUser() {
   const dispatch = useDispatch();

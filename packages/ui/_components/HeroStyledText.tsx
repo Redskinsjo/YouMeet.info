@@ -44,9 +44,9 @@ export default function HeroStyledText() {
     <div className="xs:p-0 sm:p-0 md:-0 inline">
       <BoldText
         text={t("home-hero-light")}
+        fontSizeClass="sentences"
         containerStyle={{
           color: grey[200],
-          fontSize: "20px",
           display: "inline",
         }}
         align="left"
@@ -55,9 +55,9 @@ export default function HeroStyledText() {
       {language === "en" && (
         <BoldText
           text={t("competencies")}
+          fontSizeClass="sentences"
           containerStyle={{
             color: grey[200],
-            fontSize: "20px",
             display: "inline",
           }}
           align="left"

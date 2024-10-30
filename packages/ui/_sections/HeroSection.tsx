@@ -1,8 +1,7 @@
-import dynamic from "next/dynamic";
 // import DividerSection from "../_components/DividerSection";
 import Image from "next/image";
+import HeroText from "../_components/HeroText";
 
-const HeroText = dynamic(() => import("../_components/HeroText"));
 // const HeroVideo = dynamic(() => import("../_components/HeroVideo"));
 
 export default function HeroSection() {

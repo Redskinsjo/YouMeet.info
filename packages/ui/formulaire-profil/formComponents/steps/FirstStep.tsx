@@ -1,4 +1,3 @@
-import AvatarsField from "../fields/AvatarsField";
 import Validation from "../fields/Validation";
 import SimpleField from "../fields/SimpleField";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
@@ -9,6 +8,25 @@ import { purple } from "@mui/material/colors";
 import SelectField from "../fields/SelectField";
 import ContractTypeField from "../fields/ContractTypeField";
 import RemoteField from "../fields/RemoteField";
+import dynamic from "next/dynamic";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+const AvatarsField = dynamic(() => import("../fields/AvatarsField"), {
+  ssr: false,
+  loading: () => (
+    <LoadingButton
+      size="small"
+      loading={true}
+      variant="text"
+      style={{
+        position: "absolute",
+        backgroundColor: "unset",
+        zIndex: 10,
+      }}
+      disabled
+    />
+  ),
+});
 
 export const companyFirstPartPages = [
   {
@@ -241,7 +259,7 @@ export const firstPartPages = [
     field: SimpleField,
     props: {
       name: "firstname",
-      id: 1,
+      id: 0,
       required: true,
       label: "Prénom",
     },
@@ -250,7 +268,7 @@ export const firstPartPages = [
     field: SimpleField,
     props: {
       name: "lastname",
-      id: 2,
+      id: 1,
       required: true,
       label: "Nom",
     },
@@ -259,7 +277,7 @@ export const firstPartPages = [
     field: SimpleField,
     props: {
       name: "email",
-      id: 3,
+      id: 2,
       required: true,
       label: "Email",
     },
@@ -268,7 +286,7 @@ export const firstPartPages = [
     field: PhoneField,
     props: {
       name: "phone",
-      id: 4,
+      id: 3,
       label: "Téléphone",
     },
   },
@@ -276,7 +294,7 @@ export const firstPartPages = [
     field: SimpleField,
     props: {
       name: "linkedinProfileId",
-      id: 5,
+      id: 4,
       label: "Linkedin",
     },
   },
@@ -284,7 +302,7 @@ export const firstPartPages = [
     field: SimpleField,
     props: {
       name: "description",
-      id: 6,
+      id: 5,
       multiline: true,
       rows: 6,
       label: "Description",
@@ -294,7 +312,7 @@ export const firstPartPages = [
     field: AvatarsField,
     props: {
       name: "avatars",
-      id: 7,
+      id: 6,
       label: "Images",
     },
   },
@@ -302,7 +320,7 @@ export const firstPartPages = [
     field: SelectSimpleField,
     props: {
       name: "languages",
-      id: 8,
+      id: 7,
       label: "Langues",
       select: true,
       multiple: true,
@@ -312,7 +330,7 @@ export const firstPartPages = [
     field: SimpleField,
     props: {
       name: "age",
-      id: 9,
+      id: 8,
       label: "Âge",
     },
   },
@@ -320,7 +338,7 @@ export const firstPartPages = [
     field: SimpleField,
     props: {
       name: "salaryExpected",
-      id: 10,
+      id: 9,
       label: "Salaire, TJM souhaité. Précisez (par an, par mois, par jour)",
     },
   },
@@ -328,7 +346,7 @@ export const firstPartPages = [
     field: Validation,
     props: {
       name: "validation",
-      id: 11,
+      id: 10,
     },
   },
 ] as { field: any; props: NewFieldProps }[];

@@ -90,11 +90,13 @@ export default function SelectSimpleField({
   const [data, setData] = useState<QueriesDocuments>([]);
 
   const fetchData = useCallback(async () => {
-    const response = await client.query({
-      query: names[name].multiple.request,
-    });
-    const resData = response.data[names[name].multiple.response];
-    if (resData) setData(resData as QueriesDocuments);
+    if (names[name]?.multiple.request) {
+      const response = await client.query({
+        query: names[name]?.multiple.request,
+      });
+      const resData = response.data[names[name]?.multiple.response];
+      if (resData) setData(resData as QueriesDocuments);
+    }
   }, [name]);
 
   useEffect(() => {

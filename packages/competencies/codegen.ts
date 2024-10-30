@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   documents: ["./src/queries/*.graphql"],
   emitLegacyCommonJSImports: false,
   generates: {
-    "./types/generated.ts": {
+    "./src/types/generated.ts": {
       plugins: [
         "typescript",
         "typescript-operations",

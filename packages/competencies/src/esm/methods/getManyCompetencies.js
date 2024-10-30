@@ -1,15 +1,11 @@
-import { uri, method, headers } from "./imports";
+import { uri, method, headers } from "../../imports";
 import { loadDocumentsSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
-import {
-  Competency,
-  GetManyCompetenciesQueryVariables,
-} from "../types/generated";
 import path from "path";
 
 const queryPath = path.join(
   __dirname,
-  "../queries/GetManyCompetencies.graphql"
+  "../../queries/GetManyCompetencies.graphql"
 );
 const query = loadDocumentsSync(queryPath, {
   loaders: [new GraphQLFileLoader()],
@@ -25,9 +21,7 @@ const query = loadDocumentsSync(queryPath, {
  * @property {number} variables.params.take - Nombre de compétences à récupérer. Défaut: 10.
  * @param {boolean} variables.includeDefinition - True, si vou souhaitez récupérer plus d'informations que seulement le title.
  */
-export default async function getManyCompetency(
-  variables: GetManyCompetenciesQueryVariables
-): Promise<Competency[] | null> {
+export default async function getManyCompetency(variables) {
   try {
     const response = await fetch(uri, {
       method,

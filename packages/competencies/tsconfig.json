@@ -8,12 +8,21 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "target": "ESNext",
     "declaration": true,
-    "declarationMap": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts", "src/queries/*.graphql"],
+  "include": [
+    "src/**/*.ts",
+    "src/queries/*.graphql",
+    "src/imports.js",
+    "src/cjs/methods/getManyCompetencies.js",
+    "src/cjs/methods/getOneCompetency.js",
+    "src/cjs/index.js",
+    "src/esm/index.js",
+    "src/esm/methods/getManyCompetencies.js",
+    "src/esm/methods/getOneCompetency.js"
+  ],
   "exclude": ["node_modules"]
 }

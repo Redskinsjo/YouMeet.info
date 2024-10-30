@@ -1,9 +1,11 @@
 import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import useFormDefaultValues from "@youmeet/global-config/useFormDefaultValues";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
-import FormChild from "./formChild";
 import { redirect } from "next/navigation";
 import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
+import dynamic from "next/dynamic";
+
+const FormChild = dynamic(() => import("./formChild"), { ssr: false });
 
 export default async function Form() {
   const verified = await verifyTokenServer();

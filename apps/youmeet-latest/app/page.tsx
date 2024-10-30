@@ -14,11 +14,13 @@ import dynamic from "next/dynamic";
 const HomeChild = dynamic(() => import("./homeChild"), { ssr: false });
 
 export const metadata: Metadata = {
-  title: "YouMeet - Mise en Relation Professionnelle et ATS par Vidéo et IA",
+  title:
+    "YouMeet - Informations professionnelles et fiables sur des candidats et chercheurs d'emplois",
   description:
     "Bienvenue sur notre plateforme de recrutement innovante. Découvrez des opportunités passionnantes et connectez-vous avec des talents exceptionnels.",
   openGraph: {
-    title: "YouMeet - Mise en Relation Professionnelle et ATS par Vidéo et IA",
+    title:
+      "YouMeet - Informations professionnelles et fiables sur des candidats et chercheurs d'emplois",
     description:
       "Bienvenue sur notre plateforme de recrutement innovante. Découvrez des opportunités passionnantes et connectez-vous avec des talents exceptionnels.",
     type: "website",
@@ -87,7 +89,7 @@ export default async function Home() {
           __html: JSON.stringify({
             "@context": "http://schema.org",
             "@type": "WebSite",
-            name: "YouMeet - Mise en Relation Professionnelle et ATS par Vidéo et IA",
+            name: "YouMeet - Informations professionnelles et fiables sur des candidats et chercheurs d'emplois",
             description:
               "Bienvenue sur notre plateforme de recrutement innovante. Découvrez des opportunités passionnantes et connectez-vous avec des talents exceptionnels.",
             url: "https://www.youmeet.info/",

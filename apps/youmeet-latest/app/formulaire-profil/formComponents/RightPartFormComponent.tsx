@@ -1,20 +1,18 @@
 import Layout from "@youmeet/ui/Layout";
 import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
-import { useTranslation } from "react-i18next";
-import { useMediaQuery } from "@mui/material";
 import PageContent from "./PageContent";
-import BoldText from "@youmeet/ui/BoldText";
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+const PageContentTitle = dynamic(() => import("./PageContentTitle"), {
+  ssr: false,
+});
 
 export default function RightPartFormComponent({
   defaultValues,
 }: {
   defaultValues: Partial<ProfileFormDefaultValues> | undefined;
 }) {
-  const { t } = useTranslation();
-  const xs = useMediaQuery("(max-width:600px)");
-  const sm = useMediaQuery("(max-width:720px)");
-  const md = useMediaQuery("(max-width:900px)");
   return (
     <Layout
       newClasses="dark:darkBg lightBg flex-1"
@@ -23,24 +21,17 @@ export default function RightPartFormComponent({
         padding: "0px 40px",
         justifyContent: "center",
         height: "unset",
-        width: xs || sm || md ? "100vw" : "50vw",
         boxSizing: "border-box",
       }}
     >
-      <div className="flex w-full flex-col">
-        <div className="w-full flex-center flex-col gap-[24px]">
-          <h1 className="text-center my-[36px] dark:text-white">
-            {t("the-form")}
-          </h1>
-          <BoldText
-            text={t("fulfill-perso-form")}
-            fontSizeClass="text-[16px]"
-          />
-        </div>
+      <div className="xs:w-screen sm:w-screen md:w-screen w-[50vw] box-border flex flex-1 justify-center">
+        <div className="flex w-full flex-col">
+          <PageContentTitle />
 
-        <Suspense>
-          <PageContent defaultValues={defaultValues} />
-        </Suspense>
+          <Suspense>
+            <PageContent defaultValues={defaultValues} />
+          </Suspense>
+        </div>
       </div>
     </Layout>
   );
