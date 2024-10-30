@@ -8,6 +8,7 @@ import { purple } from "@mui/material/colors";
 import SelectField from "../fields/SelectField";
 import ContractTypeField from "../fields/ContractTypeField";
 import RemoteField from "../fields/RemoteField";
+import LanguagesField from "../fields/LanguagesField";
 import dynamic from "next/dynamic";
 import LoadingButton from "@mui/lab/LoadingButton";
 
@@ -317,7 +318,7 @@ export const firstPartPages = [
     },
   },
   {
-    field: SelectSimpleField,
+    field: LanguagesField,
     props: {
       name: "languages",
       id: 7,

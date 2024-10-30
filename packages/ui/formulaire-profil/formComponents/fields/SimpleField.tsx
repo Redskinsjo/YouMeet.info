@@ -19,7 +19,8 @@ const set = (name: string) => {
     name === "company" ||
     name === "linkedinProfileId" ||
     name == "linkedinProfilePage" ||
-    name === "chosen"
+    name === "chosen" ||
+    name === "phonecode"
   )
     return name;
   return "default";
@@ -81,6 +82,10 @@ export default function SimpleField({
 
   const getOnChange = () => {
     return {
+      phonecode: (e: any) => {
+        if (clearErrors) clearErrors();
+        if (setValue) setValue(name, e.target.value);
+      },
       name: async (e: any) => {
         if (clearErrors) clearErrors();
         if (timer) clearTimeout(timer);

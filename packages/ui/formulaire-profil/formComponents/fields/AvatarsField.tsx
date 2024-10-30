@@ -166,7 +166,9 @@ export default function AvatarsField({
                 setLoading(false);
               }}
               accept={
-                name === "logo" ? ".png,.jpg,.jpeg,.webp" : ".mov,.mp4,.webm"
+                name === "logo" || name === "avatars"
+                  ? ".png,.jpg,.jpeg,.webp"
+                  : ".mov,.mp4,.webm"
               }
             />
           </div>

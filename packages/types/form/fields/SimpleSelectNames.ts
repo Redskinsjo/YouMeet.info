@@ -21,6 +21,9 @@ export type SimpleSelectNames =
   | "reason"
   | "videoMain"
   | "videoPreview1"
-  | "videoPreview2";
+  | "videoPreview2"
+  | "avatars"
+  | "phonecode"
+  | "languages";
 
 export type SimpleSelectData = { value: string; label: string };

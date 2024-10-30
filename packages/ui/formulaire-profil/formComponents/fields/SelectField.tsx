@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactElement, useCallback, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
@@ -28,6 +28,8 @@ import {
 } from "@youmeet/types/form/fields/SelectFieldProps";
 import { IoClose } from "react-icons/io5";
 import { FormState } from "@youmeet/global-config/features/form";
+import phoneCodes from "@youmeet/raw-data/phoneCodes.json";
+import { PhoneCodes } from "@youmeet/types/form/fields/PhoneCodes";
 
 const filter = createFilterOptions<string>();
 
@@ -38,6 +40,7 @@ const renderOption = (
   inputValue?: string
 ) => {
   if (option) {
+    if (name === "phonecode") return option.name + " " + option.dial_code;
     if (name === "requirements") {
       return option.title[0].toUpperCase() + option.title.slice(1);
     }
@@ -115,7 +118,7 @@ const SelectField = ({
   const step = useSelector(
     (state: RootState) => (state.form as FormState).profileStep
   );
-  const [data, setData] = useState<QueriesDocuments>([]);
+  const [data, setData] = useState<QueriesDocuments | PhoneCodes[]>([]);
   const [added, setAdded] = useState<string[] | undefined>([]);
   const {
     i18n: { language },
@@ -148,6 +151,7 @@ const SelectField = ({
     async (value: string) => {
       const variables = {} as any;
 
+      if (name === "phonecode") return setData(phoneCodes);
       if (name === "job") {
         variables.data = { title: value };
       }
@@ -182,6 +186,7 @@ const SelectField = ({
         else if (added && typeof added === "string")
           variables.id = added as never;
       }
+      if (name === "phonecode") return phoneCodes.find((c) => c.code === value);
 
       const response = await client.query({
         query: names[name][multiple ? "multiple" : "single"].request,
@@ -294,9 +299,10 @@ const SelectField = ({
               key={option.id}
             >
               <li
-                className="darkLi hover:bg-grey100 flex items-center cursor-pointer min-h-[48px] text-[16px] px-[12px]"
+                className="darkLi hover:bg-grey100 flex items-center cursor-pointer min-h-[48px] text-[16px] px-[12px] flex-bet"
                 onClick={() => {
-                  const addedValues = option.id;
+                  const addedValues =
+                    name === "phonecode" ? option.code : option.id;
                   setAdded(
                     multiple && added ? [...added, addedValues] : addedValues
                   );

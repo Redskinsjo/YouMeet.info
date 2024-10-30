@@ -171,8 +171,7 @@ export default function PageContent({
                     clearErrors,
                     setError,
                     setValue,
-                    phonecode:
-                      field.props.id === 4 ? watch("phonecode") : undefined,
+                    phonecode: watch("phonecode"),
                   }
                 );
               })}

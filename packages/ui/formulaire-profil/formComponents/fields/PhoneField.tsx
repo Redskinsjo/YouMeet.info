@@ -1,26 +1,29 @@
-"use client";
 import { MenuItem } from "@mui/material";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { purple } from "@mui/material/colors";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
-import SimpleField from "./SimpleField";
 import phoneCodes from "@youmeet/raw-data/phoneCodes.json";
-import React from "react";
+import dynamic from "next/dynamic";
+
+const SimpleField = dynamic(() => import("./SimpleField"), {
+  ssr: false,
+});
 
 export default function PhoneField({
   name,
   label,
   type,
-  phonecode,
   value,
   required,
   errors,
+  phonecode,
   setError,
   clearErrors,
+  setValue,
 }: NewFieldProps) {
   return (
     <div className="flex w-full gap-[3px]">
-      <div className="w-[120px] xs:w-[130px] sm:w-[130px]">
+      <div className="w-[220px] xs:w-[130px] sm:w-[130px]">
         <SimpleField
           name="phonecode"
           type={type}
@@ -28,22 +31,14 @@ export default function PhoneField({
           value={phonecode as string}
           required={required}
           select
+          setValue={setValue}
           errors={errors}
           setError={setError}
           clearErrors={clearErrors}
         >
           {phoneCodes.map((c) => (
-            <MenuItem
-              key={c.name}
-              sx={{
-                width: "100%",
-                maxWidth: "400px",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-              value={c.dial_code}
-            >
-              <div className="flex-bet w-full">
+            <MenuItem key={c.name} value={c.dial_code}>
+              <div className="flex-bet w-full box-border">
                 <div>{c.name}</div>
 
                 <div className="w-full flex items-center justify-end text-purple500">
@@ -54,10 +49,6 @@ export default function PhoneField({
                       color: purple[100],
                     }}
                     className="me-profile-phonecode-menu-icon"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      document.querySelector(".MuiMenu-paper")?.scroll(0, 0);
-                    }}
                   />
                   {c.dial_code}
                 </div>
