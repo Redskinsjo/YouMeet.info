@@ -1,5 +1,5 @@
 import { Skeleton } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
+import { blueGrey, yellow } from "@mui/material/colors";
 
 export default function OneLineSkeleton({
   width = "100%",
@@ -22,7 +22,7 @@ export default function OneLineSkeleton({
       height={height}
       style={{
         margin: "0px 8px",
-        backgroundColor: deepPurple[50],
+        backgroundColor: blueGrey[50],
       }}
     />
   ));
