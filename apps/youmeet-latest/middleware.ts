@@ -31,6 +31,7 @@ export async function middleware(request: NextRequest) {
     ];
     const pages = [
       "le-produit",
+      "with",
       "blog",
       "competences",
       "favicon.ico",
@@ -39,6 +40,7 @@ export async function middleware(request: NextRequest) {
       "offres",
       "regles-de-confidentialite",
       "se-connecter",
+      "robots.txt",
       ...privatePages,
     ];
     const match = pathname.match(regex);

@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 
 export default function VideoPartLoading() {
   return (
-    <div className="flex flex-col gap-[12px] flex-1">
+    <div className="flex flex-col gap-[12px] flex-1 bg-white">
       <div className="indent-4 xs:indent-0 sm:indent-0 md:indent-0 text-justify p-[12px] h-[86px] box-border shadow-custom">
         <Skeleton width={"100%"} height={16} />
         <Skeleton width={"100%"} height={16} />

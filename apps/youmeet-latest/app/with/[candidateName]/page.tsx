@@ -66,7 +66,7 @@ export async function generateMetadata(
       description:
         "Découvrez le profil du candidat, visionnez sa vidéo de présentation, consultez ses références professionnelles et académiques, et notifiez-le d'une proposition d'entretien sur notre plateforme de recrutement.",
       openGraph: {
-        url: `${uri}/${uniqueName}`,
+        url: `${uri}/with/${uniqueName}`,
         title: `YouMeet - ${name}`,
         images: ogImages,
         type: "video.other",
@@ -100,6 +100,7 @@ export async function generateMetadata(
       "Découvrez le profil du candidat, visionnez sa vidéo de présentation, consultez ses références professionnelles et académiques, et notifiez-le d'une proposition d'entretien sur notre plateforme de recrutement.",
     openGraph: {
       title: `YouMeet - Voici quelqu'un qui va peut-être travailler avec vous`,
+      url: `${uri}/with/${uniqueName}`,
       type: "video.other",
       locale: "fr_FR",
       description:

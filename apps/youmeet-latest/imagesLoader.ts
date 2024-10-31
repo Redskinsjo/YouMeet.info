@@ -8,6 +8,12 @@ export default function cloudinaryLoader({
   width: string;
   quality: string;
 }) {
-  const params = ["f_auto", "c_limit", `w_${width}`, `q_${quality || "auto"}`];
+  const params = [
+    "f_auto",
+    "c_limit",
+    `w_${width}`,
+    `q_${quality || "auto"}`,
+    "vc_auto",
+  ];
   return `${src}?${params.join(",")}`;
 }

@@ -6,6 +6,7 @@ Allow: /se-connecter
 Allow: /offres/
 Allow: /competences/
 Allow: /medias/
+Allow: /with/
 Allow: /blog
 Allow: /le-produit/mise-en-relation
 

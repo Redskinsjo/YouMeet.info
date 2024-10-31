@@ -11,7 +11,7 @@ export default function NewLinkComponent({ profil }: { profil: BetaUser }) {
 
   useEffect(() => {
     if (copyLink) {
-      navigator.clipboard.writeText(`${uri}/${profil.uniqueName}`);
+      navigator.clipboard.writeText(`${uri}/with/${profil.uniqueName}`);
       setDisplayLinkCopied(true);
 
       setTimeout(() => setCopyLink(false), 500);
@@ -36,7 +36,7 @@ export default function NewLinkComponent({ profil }: { profil: BetaUser }) {
           if (profil.isPublic) setCopyLink(true);
         }}
       >
-        {`${uri}/${profil.uniqueName}`}
+        {`${uri}/with/${profil.uniqueName}`}
       </div>
     </TooltipedAsset>
   );

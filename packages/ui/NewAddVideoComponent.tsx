@@ -105,12 +105,13 @@ export default function NewAddVideoComponent({
     <div className="w-full p-[6px] box-border flex-bet h-[39px]">
       {upload === "a-video" ? <Logo gif png /> : undefined}
 
-      <div className="w-full flex justify-end items-center gap-[12px] xs:gap-[12px] sm:gap-[6px] md:gap-[6px]">
+      <div className="w-full flex justify-end items-center gap-[24px] xs:gap-[12px] sm:gap-[6px] md:gap-[6px]">
         <Link href={"/enregistrer"} className="no-underline">
           <div className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold">
             {t("record-video")}
           </div>
         </Link>
+        <div className="w-[1px] bg-grey300" style={{ height: "18px" }} />
         <form
           ref={addVideoRef}
           action={customOnAddVideo.bind(null, {

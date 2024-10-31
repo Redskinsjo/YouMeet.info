@@ -519,6 +519,7 @@ export default function CandidateVideo({
                     <button
                       className="play-pause-btn flex-center"
                       onClick={(e) => togglePlay(e)}
+                      name="play-pause"
                     >
                       <Play className="play-icon" name="play" />
                       <Pause className="pause-icon" name="pause" />
@@ -527,6 +528,7 @@ export default function CandidateVideo({
                       <button
                         ref={muteBtn}
                         className="mute-btn flex-center"
+                        name="mute"
                         onClick={() => {
                           const video = appVideo.current as HTMLVideoElement;
                           if (video) toggleMute(video);
@@ -581,6 +583,7 @@ export default function CandidateVideo({
                     <button
                       ref={appSpeedBtn}
                       className="speed-btn wide-btn hidden-fullscreen"
+                      name="speed"
                       onClick={() => {
                         const video = appVideo.current as HTMLVideoElement;
                         const speedBtn =
@@ -599,7 +602,7 @@ export default function CandidateVideo({
                       onClick={() => {
                         if (appVideo) toggleMiniPlayer();
                       }}
-                      name="toggle-mini-player"
+                      name="mini-player"
                     >
                       <MiniPlayerScreen name="mini-player" />
                     </button>
@@ -609,7 +612,7 @@ export default function CandidateVideo({
                         ref={theater}
                         className="theater-btn"
                         onClick={() => toggleTheater()}
-                        name="toggle-theater"
+                        name="theater"
                       >
                         <TheaterScreen name="theater" />
                       </button>
@@ -617,7 +620,7 @@ export default function CandidateVideo({
                     <button
                       className="full-screen-btn flex-center"
                       onClick={() => toggleFullScreen()}
-                      name="toggle-full-screen"
+                      name="full-screen"
                     >
                       <MdFullscreen
                         className="open-icon text-white"

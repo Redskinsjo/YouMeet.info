@@ -10,7 +10,7 @@ export default function FooterList() {
       <h3 className="subItem xs:legend sm:legend dark:text-blueGrey100 font-light">
         {t("platform-navigate")}
       </h3>
-      <ul className="flex flex-col">
+      <ul className="flex flex-col gap-[12px]">
         <li className="subItem xs:legend sm:legend hover:text-blueGrey500 cursor-pointer group-focus-visible:bg-grey100 rounded-xl group-focus-visible:px-[6px]">
           <Link
             href={"/"}

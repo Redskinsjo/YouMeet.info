@@ -61,7 +61,7 @@ export default async function sitemap(): Promise<any> {
       priority: 1,
     })) as any,
     users.map((user) => ({
-      url: `${uri}/${user.uniqueName}`,
+      url: `${uri}/with/${user.uniqueName}`,
       lastModified: new Date(),
       changeFrequency: "always",
       priority: 1,
