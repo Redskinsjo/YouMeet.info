@@ -15,7 +15,7 @@ export default (
     const regex = /(?<=video\/upload\/)[v0-9]+(?=\/youmeet-official)/;
     const match = url.match(regex);
     if (match && video) {
-      url = url.replace(match[0], "q_50:qmax_50,vc_auto");
+      url = url.replace(match[0], "q_50,vc_auto");
       const split = url.split(".");
       const lastEl = split[split.length - 1];
       const index = url.lastIndexOf(lastEl);
