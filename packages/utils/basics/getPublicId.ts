@@ -1,5 +1,5 @@
 // À changer si on veut changer le séparateur
-const separator = "_";
+const separator = "-";
 ////////////////////////////////////////////:
 
 export const getPublicIdFirstPart = (userId: string, videosLength: number) => {

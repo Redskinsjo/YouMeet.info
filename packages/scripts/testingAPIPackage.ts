@@ -1,35 +1,19 @@
 import prisma from "@youmeet/prisma-config/prisma";
-import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
+import getUptodateVideos from "@youmeet/utils/resolvers/getUptodateVideos";
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 (async () => {
-  const competencies = await prisma.competencies.findMany({
-    where: { extension: { equals: "" } },
-  });
-  for (let i = 0; i < competencies.length; i++) {
-    const competency = competencies[i];
-    const { extension, slug } = await setUniqueSlugAndExtension(
-      competency.title.toLowerCase(),
-      0,
-      "competencies"
-    );
-    try {
-      const updated = await prisma.competencies.update({
-        where: {
-          id: competency.id,
-        },
-        data: {
-          extension,
-          slug,
-        },
-      });
-      if (!updated) {
-        console.log(`Competency ${competency.id} has no child`);
-        continue;
-      }
-      console.log(`Competency ${competency.id} has a child`);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-  process.exit(0);
+  const videos = await prisma.videos.findMany();
+  console.log(videos.length, "len");
+  const result = await getUptodateVideos(videos);
+  console.log(result, "result");
 })();

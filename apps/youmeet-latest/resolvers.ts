@@ -142,6 +142,7 @@ import {
   FormResponse,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
+import getUptodateVideos from "@youmeet/utils/resolvers/getUptodateVideos";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
 import { createUpdateCandidate } from "@youmeet/utils/resolvers/createCandidateForm";
 import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDuration";
@@ -358,9 +359,12 @@ const resolvers: Resolvers = {
     videos: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      return await prisma.videos.findMany({
+      const videos = await prisma.videos.findMany({
         include: { job: true, user: true },
       });
+      // const result = await getUptodateVideos(videos);
+      // return result;
+      return videos;
     },
     myVideos: async (
       _: unknown,
@@ -3659,12 +3663,17 @@ const resolvers: Resolvers = {
             where: { id: user.companyId },
           })
         : null,
-    videos: async (user: BetaUser) =>
-      user.videos
-        ? user.videos
-        : user.id
-        ? await prisma.videos.findMany({ where: { userId: user.id } })
-        : [],
+    videos: async (user: BetaUser) => {
+      let videos: Video[] = [];
+      if (user.videos) videos = user.videos as Video[];
+      else if (user.id)
+        videos = await prisma.videos.findMany({ where: { userId: user.id } });
+      // console.log("videos", videos);
+      // const result = await getUptodateVideos(videos);
+      // console.log(result, "result");
+      // return result;
+      return videos;
+    },
     candidateQueues: async (user: BetaUser) =>
       user.candidateQueues
         ? user.candidateQueues

@@ -346,6 +346,10 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
           file {
             eager {
               transformation
+              secure_url
+              url
+              width
+              height
             }
             url
             secure_url
@@ -1621,13 +1625,17 @@ export const getVideosQuery = `query GetVideos {
     file {
       eager {
         transformation
+        url
+        secure_url
+        width
+        height
       }
       url
       secure_url
-      subtitledUrl
       width
-      format
       height
+      subtitledUrl
+      format
       original_filename
       public_id
     }

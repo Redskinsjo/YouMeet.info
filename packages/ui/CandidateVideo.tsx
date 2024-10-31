@@ -407,7 +407,7 @@ export default function CandidateVideo({
               id="video"
               className="h-full"
               style={{ maxWidth: "100%", ...newStyles }}
-              src={setFileUrl(video) as string}
+              src={setFileUrl(video, true) as string}
               onClick={(e) => togglePlay(e)}
               onPause={() => {
                 const videoContainer =
