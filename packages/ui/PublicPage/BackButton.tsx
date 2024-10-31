@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { IoCaretBackOutline } from "react-icons/io5";
 
 export default function BackButton() {

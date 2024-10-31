@@ -7,7 +7,9 @@ const BoldText = dynamic(() => import("../../../BoldText"), {
   ssr: false,
   loading: () => <OneLineSkeleton count={3} />,
 });
-const CompetencyTitle = dynamic(() => import("./CompetencyTitle"));
+const CompetencyTitle = dynamic(() => import("./CompetencyTitle"), {
+  ssr: false,
+});
 
 export default function CompetencyDefinition({
   competency,

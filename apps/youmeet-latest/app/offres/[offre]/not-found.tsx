@@ -1,14 +1,17 @@
 import Footer from "@youmeet/ui/Footer";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
-const ErrorChild = dynamic(() => import("@youmeet/ui/ErrorChild"), {
+const NotFoundChild = dynamic(() => import("@youmeet/ui/NotFoundChild"), {
   ssr: false,
 });
 
 export default async function Custom404() {
   return (
     <div className="flex flex-col h-screen">
-      <ErrorChild />
+      <Suspense>
+        <NotFoundChild />
+      </Suspense>
       <Footer />
     </div>
   );

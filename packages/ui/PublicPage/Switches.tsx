@@ -6,7 +6,6 @@ import { UserState } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import React from "react";
 
 export default function Switches() {
   const xs = useMediaQuery("(max-width:600px)");

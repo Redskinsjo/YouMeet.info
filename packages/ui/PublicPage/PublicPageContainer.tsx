@@ -2,10 +2,12 @@ import Layout from "../Layout";
 import { Offer } from "@youmeet/gql/generated";
 import type { Attr } from "@youmeet/types/attributes";
 import BackButton from "./BackButton";
-import Switches from "./Switches";
-import ApplyBtn from "./ApplyBtn";
-import EdgeMsg from "./EdgeMsg";
-import React from "react";
+import React, { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+const EdgeMsg = dynamic(() => import("./EdgeMsg"), { ssr: false });
+const Switches = dynamic(() => import("./Switches"), { ssr: false });
+const ApplyBtn = dynamic(() => import("./ApplyBtn"), { ssr: false });
 
 export default function PublicPageContainer({
   children,
@@ -37,7 +39,9 @@ export default function PublicPageContainer({
         <div className="flex flex-col w-full gap-[6px]">
           {!noReturnHeader && (
             <div className="mediumBg dark:mediumDarkBg flex-bet w-full p-[3px] rounded-[14px] box-border">
-              <BackButton />
+              <Suspense>
+                <BackButton />
+              </Suspense>
               {apply && (
                 <div className="flex items-center xs:items-end sm:items-end md:items-end xs:flex-col sm:flex-col md:flex-col gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px]">
                   <EdgeMsg />

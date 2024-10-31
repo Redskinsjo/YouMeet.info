@@ -11,7 +11,6 @@ import { UserState } from "@youmeet/global-config/features/user";
 import BoldText from "../BoldText";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import React from "react";
 
 export default function ApplyBtn({ offre }: { offre?: Offer }) {
   const dispatch = useDispatch();

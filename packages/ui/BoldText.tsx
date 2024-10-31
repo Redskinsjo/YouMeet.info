@@ -20,6 +20,7 @@ import {
   isSuspensionPoint,
 } from "@youmeet/utils/basics/textToFormat";
 import { Attr } from "@youmeet/types/attributes";
+import { Translated } from "@youmeet/gql/generated";
 
 export default function BoldText({
   text,
@@ -36,9 +37,10 @@ export default function BoldText({
   formatDisplay = false,
   questionsHighlight,
   component = "p",
+  lang = false,
 }: {
   fontSizeClass?: string;
-  text: string;
+  text: string | Translated;
   containerStyle?: Attr;
   align?: "left" | "justify" | "right" | "center";
   links?: boolean;
@@ -51,15 +53,27 @@ export default function BoldText({
   formatDisplay?: boolean;
   questionsHighlight?: boolean;
   component?: "p" | "li" | "span";
+  lang?: boolean;
 }) {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const regex = useLinksRegex();
   const [textSlugs, setTextSlugs] = useState({});
   const [textToFormat, setTextToFormat] = useState("");
 
   const preFormatText = useCallback(async () => {
     if (textToFormat && regex) {
-      const res = await setBoldWords(t(text), regex, noEnding);
+      const res = await setBoldWords(
+        t(
+          lang
+            ? `${(text as Translated)[language as "fr" | "en"]}`
+            : (text as string)
+        ),
+        regex,
+        noEnding
+      );
       if (res?.text) {
         setTextToFormat(res?.text);
       }
@@ -222,7 +236,14 @@ export default function BoldText({
 
   useEffect(() => {
     if (links) preFormatText();
-    if (!textToFormat) setTextToFormat(t(text));
+    if (!textToFormat)
+      setTextToFormat(
+        t(
+          lang
+            ? `${(text as Translated)[language as "fr" | "en"]}`
+            : (text as string)
+        )
+      );
   }, [links, regex]);
 
   return (

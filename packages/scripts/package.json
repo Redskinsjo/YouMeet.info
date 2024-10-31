@@ -13,7 +13,7 @@
     "genCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./genCompetencies.ts",
     "transferCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./transferCompetencies.ts",
     "deleteCompetencies": "SCRIPT=true dotenv -e .env.development -- ts-node ./deleteCompetencies.ts",
-    "testingAPIPackage": "npx tsx ./testingAPIPackage.ts"
+    "testingAPIPackage": "SCRIPT=true dotenv -e .env.development -- npx tsx ./testingAPIPackage.ts"
   },
   "dependencies": {
     "@youmeet/competencies": "^1.1.1",

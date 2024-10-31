@@ -2,9 +2,14 @@ import React from "react";
 import { Competency } from "@youmeet/gql/generated";
 import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
 import Footer from "@youmeet/ui/Footer";
-import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
 import CompetencyComponent from "@youmeet/ui/competences/[competence]/competencyComponents/CompetencyComponent";
 import DividerSection from "@youmeet/ui/_components/DividerSection";
+import dynamic from "next/dynamic";
+
+const BigHeaderSection = dynamic(
+  () => import("@youmeet/ui/_sections/BigHeaderSection"),
+  { ssr: false }
+);
 
 export default function CompetencyChild({
   competency,

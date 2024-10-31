@@ -24,10 +24,7 @@ export const getUsersParamsQuery = `query GetUsers($first: PageParamsInput, $dat
 }`;
 export const getCompetenciesParamsQuery = `query GetCompetencies($data: CompetencyInput, $params: PageParamsInput) {
     competencies(data: $data, params: $params) {
-      __typename
-      id
       slug
-      title
     }
   }`;
 export const getOffersParamsQuery = `query GetOffers($params: PageParamsInput, $data: OfferInput) {
