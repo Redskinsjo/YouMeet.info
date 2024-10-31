@@ -47,7 +47,7 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
 
   return profil?.cvFile ? undefined : (
     <div className="w-full flex-bet p-[6px] h-[39px]">
-      {upload === "a-cv" ? <Logo gif /> : undefined}
+      {upload === "a-cv" ? <Logo gif png /> : undefined}
       <form
         ref={cvRef}
         action={customOnAddCV.bind(null, profil?.id as string)}

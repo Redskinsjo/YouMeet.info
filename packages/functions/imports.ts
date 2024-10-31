@@ -28,15 +28,11 @@ export const creditProduct =
     ? "price_1OajrND5Cg0Rg5MbPunT7RwB"
     : "price_1Oaj0zD5Cg0Rg5Mbh4uRcQKn";
 
-export const oldLogoUrl =
-  "https://res.cloudinary.com/de822mdsy/image/upload/v1691348066/youmeet-official/webp/logo-favicon_yvmhxq.webp";
-
 export const logoUrl =
   "https://res.cloudinary.com/de822mdsy/image/upload/v1729873044/loziyj98phsszj2nxri6.webp";
-// export const logoUrl =
-//   "https://res.cloudinary.com/de822mdsy/image/upload/v1715684378/prise2ref/logo/dnibfsnzw74wvwdxa15n.webp";
-export const prise2RefDarkLogo =
-  "https://res.cloudinary.com/de822mdsy/image/upload/v1715684651/prise2ref/logo/bwbgacvvgrugpkhrh3mz.webp";
+
+export const logoUrlPng =
+  "https://res.cloudinary.com/de822mdsy/image/upload/v1730373711/negja1g575k1e1gk3xkd.png";
 
 export const trialSettings = {
   trial_period_days: 14,

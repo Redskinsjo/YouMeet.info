@@ -4,25 +4,29 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, logoUrlPng } from "@youmeet/functions/imports";
 
 export default function Logo({
   gif,
   size = 25,
   link = true,
+  png = false,
 }: {
   link?: boolean;
   gif?: boolean;
   size?: number;
+  png?: boolean;
 }) {
   const user = useSelector((state: RootState) => state.user as UserState);
+
+  const url = png ? logoUrlPng : logoUrl;
 
   return gif ? (
     <>
       <Image
         role="img"
         className="animate-pulse dark:hidden"
-        src={logoUrl}
+        src={url}
         alt="logo de YouMeet.info"
         title="logo de YouMeet.info"
         width={size}
@@ -34,7 +38,7 @@ export default function Logo({
       <Image
         role="img"
         className="animate-pulse hidden dark:block"
-        src={logoUrl}
+        src={url}
         alt="logo de YouMeet.info"
         title="logo de YouMeet.info"
         width={size}
@@ -55,7 +59,7 @@ export default function Logo({
       <Image
         role="img"
         className="dark:hidden"
-        src={logoUrl}
+        src={url}
         alt="logo de YouMeet.info"
         title="logo de YouMeet.info"
         width={size}
@@ -67,7 +71,7 @@ export default function Logo({
       <Image
         role="img"
         className="hidden dark:block"
-        src={logoUrl}
+        src={url}
         alt="logo de YouMeet.info"
         title="logo de YouMeet.info"
         width={size}
@@ -82,7 +86,7 @@ export default function Logo({
       <Image
         role="img"
         className="dark:hidden"
-        src={logoUrl}
+        src={url}
         alt="logo de YouMeet.info"
         title="logo de YouMeet.info"
         width={size}
@@ -91,7 +95,7 @@ export default function Logo({
       <Image
         role="img"
         className="hidden dark:block"
-        src={logoUrl}
+        src={url}
         alt="logo de YouMeet.info"
         title="logo de YouMeet.info"
         width={size}

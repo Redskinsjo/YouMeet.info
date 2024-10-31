@@ -605,7 +605,7 @@ const UploadModalContent = () => {
     <ModalWrapper>
       <>
         <div className="w-full flex-center flex-col gap-[24px]">
-          <Logo gif />
+          <Logo gif png />
 
           <div className="dark:text-white">{t("loading")}</div>
         </div>

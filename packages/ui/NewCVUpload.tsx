@@ -50,7 +50,7 @@ export default function NewCVUpload({
             className="flex-bet w-full"
           >
             {upload === "r-cv" ? (
-              <Logo gif />
+              <Logo gif png />
             ) : (
               <Link
                 href={dev ? cvFile?.url : cvFile?.secure_url}

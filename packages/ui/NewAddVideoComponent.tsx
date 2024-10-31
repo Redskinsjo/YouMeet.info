@@ -103,7 +103,7 @@ export default function NewAddVideoComponent({
 
   return (
     <div className="w-full p-[6px] box-border flex-bet h-[39px]">
-      {upload === "a-video" ? <Logo gif /> : undefined}
+      {upload === "a-video" ? <Logo gif png /> : undefined}
 
       <div className="w-full flex justify-end items-center gap-[12px] xs:gap-[12px] sm:gap-[6px] md:gap-[6px]">
         <Link href={"/enregistrer"} className="no-underline">

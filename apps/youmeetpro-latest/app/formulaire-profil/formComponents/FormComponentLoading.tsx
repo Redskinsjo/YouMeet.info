@@ -11,7 +11,7 @@ export default function FormComponentLoading() {
           height: "auto",
         }}
       >
-        <Logo size={80} link={false} />
+        <Logo size={80} link={false} png />
       </div>
       <RightPartFormComponentLoading />
     </div>

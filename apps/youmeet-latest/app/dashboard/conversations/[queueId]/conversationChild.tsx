@@ -33,7 +33,6 @@ import { useRouter } from "next/navigation";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 
 export default function ConversationChild({ queue }: { queue: BetaQueue }) {
-  const [loading, setLoading] = useState(true);
   const [thread, setThread] = useState<BetaWhatsappThread | undefined>();
   const [pageIndex, setPageIndex] = useState(1);
   const { t } = useTranslation();
@@ -54,7 +53,6 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
   });
 
   const customOnConversationEngagement = async () => {
-    setLoading(true);
     if (queue.id) {
       const result = await onConversationEngagement(queue.id);
 
@@ -62,7 +60,6 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
         setThread(result.data);
       }
     }
-    setLoading(false);
   };
 
   const customOnAnswerConversation = async (extras: {
@@ -123,18 +120,13 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
     if (pages) {
       setLast(pages.count === pages.index);
     }
-    setLoading(false);
   }, [pages]);
 
   return (
     <div className="overflow-hidden min-h-screen">
-      {loading ? (
+      {!thread || thread.exchanges?.length === 0 ? (
         <div className="w-full h-[120px] flex-center flex-col text-red:600">
-          <Logo gif />
-        </div>
-      ) : !thread || thread.exchanges?.length === 0 ? (
-        <div className="w-full h-[120px] flex-center flex-col text-red:600">
-          <Logo />
+          <Logo png />
           <BoldText text={t("conversation-not-available")} align="center" />
         </div>
       ) : (

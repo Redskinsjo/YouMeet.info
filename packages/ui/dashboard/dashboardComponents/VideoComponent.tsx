@@ -255,7 +255,7 @@ export default function VideoComponent({
 
                         {upload?.includes("r-video") &&
                         upload.split("/")[1] === video.id ? (
-                          <Logo gif />
+                          <Logo gif png />
                         ) : undefined}
                       </div>
                     )}

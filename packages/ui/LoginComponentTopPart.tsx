@@ -31,7 +31,7 @@ export default function LoginComponentTopPart() {
 
   return (
     <div className="flex-center flex-col flex-1 gap-[36px] xs:gap-[18px] sm:gap-[18px] md:gap-[18px]">
-      <Logo />
+      <Logo png />
       <h1 className="m-0 p-0 titles text-center dark:text-white">
         {t("login")}
       </h1>

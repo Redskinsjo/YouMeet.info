@@ -34,7 +34,7 @@ const Page = ({
               height: "auto",
             }}
           >
-            <Logo size={80} link={false} />
+            <Logo size={80} link={false} png />
           </div>
         )}
 

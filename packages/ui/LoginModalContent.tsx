@@ -90,7 +90,7 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
       className="auth-form-content dark:mediumDarkBg"
       onClick={(e) => e.stopPropagation()}
     >
-      <Logo />
+      <Logo png />
 
       <h1 className="m-0 p-0 titles text-center dark:text-white">
         {t("signin")}
@@ -333,7 +333,7 @@ const WhenForgotten = ({ type, setIsForgotten }: CustomModalProps) => {
       action={handle}
       onClick={(e) => e.stopPropagation()}
     >
-      <Logo />
+      <Logo png />
       <h1 className="m-0 p-0 titles text-center dark:text-white">
         {t("reset-password")}
       </h1>

@@ -33,7 +33,7 @@ export default function FormChild({
       {form.loading ? (
         <div className="flex-center flex-col gap-[12px]">
           <h3 className="dark:text-white">{t("saving-data")}</h3>
-          <Logo gif />
+          <Logo gif png />
         </div>
       ) : undefined}
 
