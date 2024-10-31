@@ -41,7 +41,8 @@ export const submitFile = async (
     const unique_filename = false;
     const use_filename = false;
     const overwrite = true;
-    let eager = "q_auto,w_350,h_280,c_crop";
+    let eager = "q_auto";
+    if (type === "avatar" || type === "logo") eager = ",w_400,h_300,c_crop";
     if (type === "video") eager += ",vc_auto,f_auto";
     const avatar = type === "avatar";
     const cv = type === "cv";
