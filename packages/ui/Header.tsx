@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Locale from "./Locale";
 import { GoTriangleLeft } from "react-icons/go";
-import { useSearchParams, usePathname } from "next/navigation";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import TooltipedAsset from "./TooltipedAsset";
 import { useSelector } from "react-redux";
@@ -35,6 +35,11 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     { id?: string; title: Translated; slug?: string }[]
   >([]);
   const [megaMenuLoading, setMegaMenuLoading] = useState(true);
+  const router = useRouter();
+  router.prefetch(`/${searchParams.get("candidate")}`);
+  router.prefetch("/le-produit/mise-en-relation");
+  router.prefetch("/");
+  router.prefetch("/blog");
 
   const scrollTo = (window: Window, type: "solutions" | "prices") => {
     window.scrollTo({
@@ -63,7 +68,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
 
   useEffect(() => {
     AOS.init();
-  });
+  }, []);
 
   return (
     <div className="relative">
@@ -78,7 +83,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         }}
         onMouseLeave={() => setMegaMenu(false)}
       >
-        <div className="flex-center gap-[24px]">
+        <div className="flex items-center justify-start flex-1 gap-[24px]">
           {pathname.includes("/competencies") && (
             <TooltipedAsset
               asset={`Profil de ${
@@ -106,7 +111,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
         <MenuHeaderForMobile />
         {!xs && !sm && !md && (
-          <div className="flex-center gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full">
+          <div className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full">
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
@@ -188,8 +193,8 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             pathname !== "/les-prix" &&
             pathname !== "/le-produit/mise-en-relation" &&
             pathname !== "/le-produit/ats"
-              ? "flex items-center gap-[12px]"
-              : "flex items-center xs:gap-[12px] sm:gap-[12px] gap-[24px]"
+              ? "flex flex-1 items-center justify-end gap-[12px]"
+              : "flex flex-1 items-center justify-end xs:gap-[12px] sm:gap-[12px] gap-[24px]"
           }
         >
           {/* {pathname !== "/offres" && (
@@ -263,7 +268,9 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
               <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
                 {t("blog")}
               </h3>
-              <BlogMenuNav articles={articles} />
+              <Suspense>
+                <BlogMenuNav articles={articles} />
+              </Suspense>
             </div>
           </div>
         </div>

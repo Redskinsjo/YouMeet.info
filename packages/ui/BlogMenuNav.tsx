@@ -1,5 +1,6 @@
 import { Translated } from "@youmeet/gql/generated";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,22 +12,26 @@ export default function BlogMenuNav({
   const {
     i18n: { language },
   } = useTranslation();
+  const router = useRouter();
 
-  const articleEls = articles.map((article) => (
-    <li
-      key={article.id}
-      className="darkLi article list-none cursor-pointer text-[16px] font-light hover:font-semibold hover:opacity-100"
-    >
-      <Link
-        href={`/medias/${article.slug}`}
-        className="no-underline text-black"
+  const articleEls = articles.map((article) => {
+    router.prefetch(`/medias/${article.slug}`);
+    return (
+      <li
+        key={article.id}
+        className="darkLi article list-none cursor-pointer text-[16px] font-light hover:font-semibold hover:opacity-100"
       >
-        <span className="dark:text-white">
-          {article.title[language as "fr" | "en"]?.slice(0, 40)}
-        </span>
-      </Link>
-    </li>
-  ));
+        <Link
+          href={`/medias/${article.slug}`}
+          className="no-underline text-black"
+        >
+          <span className="dark:text-white">
+            {article.title[language as "fr" | "en"]?.slice(0, 40)}
+          </span>
+        </Link>
+      </li>
+    );
+  });
 
   const updateBlur = (scrollContainer: any, listItems: HTMLLIElement[]) => {
     const containerHeight = scrollContainer.offsetHeight;
