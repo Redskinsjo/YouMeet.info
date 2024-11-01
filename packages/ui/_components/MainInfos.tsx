@@ -114,6 +114,7 @@ export default function MainInfos({ el }: { el: Offer | Competency | Video }) {
         )}
 
         <CandidateVideo
+          onTheFly
           video={(el as Video)?.file as Avatar}
           notAutoPlay
           newStyles={{

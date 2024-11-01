@@ -8,11 +8,11 @@ export default (
 ): string | undefined => {
   let url;
   if (file && isAvatar(file)) {
-    if (file.subtitledUrl) url = file.subtitledUrl;
+    if (file.subtitledUrl) return file.subtitledUrl;
     else if (dev) url = file.url as string;
     else url = file.secure_url as string;
 
-    const regex = /(?<=video\/upload\/)[v0-9]+(?=\/youmeet-official)/;
+    const regex = /(?<=video\/upload\/).+(?=\/youmeet-official)/;
     const match = url.match(regex);
     if (match && video) {
       url = url.replace(match[0], "q_auto,vc_auto");

@@ -41,6 +41,7 @@ export default function CandidateVideo({
   newStyles,
   containerNewStyles,
   profil,
+  onTheFly,
 }: {
   video: Avatar;
   name?: string;
@@ -52,6 +53,7 @@ export default function CandidateVideo({
   newStyles?: Attr;
   containerNewStyles?: Attr;
   profil?: BetaUser;
+  onTheFly?: true;
 }) {
   const [isScrubbing, setIsScrubbing] = useState(false);
   const [wasPaused, setWasPaused] = useState(false);
@@ -407,7 +409,7 @@ export default function CandidateVideo({
               id="video"
               className="h-full"
               style={{ maxWidth: "100%", ...newStyles }}
-              src={setFileUrl(video, true) as string}
+              src={setFileUrl(video, onTheFly) as string}
               onClick={(e) => togglePlay(e)}
               onPause={() => {
                 const videoContainer =
