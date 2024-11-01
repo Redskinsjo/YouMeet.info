@@ -8,6 +8,7 @@ const formProfile = {
   email: "Email",
   analytics: "Analytiques",
   notice: "Avis",
+  "link-broken": "Lien cassé. Ajoutez une vidéo.",
   "select-your-role": "Sélectionnez votre rôle",
   "where-to-find-competency":
     "Dans quelle circonstance trouver cette compétence ?",

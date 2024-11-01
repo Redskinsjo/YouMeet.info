@@ -124,7 +124,6 @@ export default async function Profil({
 }: {
   params: { candidateName: string };
 }) {
-  console.log(params.candidateName, "ok");
   const user = (await getUser(
     {
       uniqueName: decodeURIComponent(params.candidateName),
