@@ -16,10 +16,7 @@ const HomeTexts = () => {
         maxWidth: xs || sm || md ? "100vw" : "1000px",
       }}
     >
-      <div
-        data-aos="fade-up"
-        className="h-full w-full flex gap-[48px] xs:gap-[12px] sm:gap-[12px] md:gap-[12px] xs:flex-col p-[12px] z-20"
-      >
+      <div className="h-full w-full flex gap-[48px] xs:gap-[12px] sm:gap-[12px] md:gap-[12px] xs:flex-col p-[12px] z-20">
         {!xs && !sm && !md && (
           <div className="dark:darkBg lightBg w-screen border-[1px] border-solid border-black">
             <div className="w-full px-[6px] box-border">

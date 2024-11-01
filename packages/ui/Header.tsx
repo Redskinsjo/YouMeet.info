@@ -13,7 +13,6 @@ import { HeaderComponentProps } from "@youmeet/types/Header";
 import { useTranslation } from "react-i18next";
 import RecruiterSpace from "./RecruiterSpace";
 import NotificationsComponent from "./NotificationsIconComponent";
-import AOS from "aos";
 import MenuHeaderForMobile from "./MenuHeaderForMobile";
 import { Article, Translated } from "@youmeet/gql/generated";
 import { getArticlesParams } from "@youmeet/functions/request";
@@ -65,10 +64,6 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
       setMegaMenuLoading(false);
     }
   }, [megaMenu]);
-
-  useEffect(() => {
-    AOS.init();
-  }, []);
 
   return (
     <div className="relative">
@@ -221,7 +216,6 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
 
       {!!megaMenu && !megaMenuLoading && (
         <div
-          data-aos="fade-in"
           onClick={() => setMegaMenu(false)}
           className="absolute h-screen top-[75px] z-[11001] shadow-inner"
         >

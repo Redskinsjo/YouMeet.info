@@ -30,7 +30,6 @@ export default function InsightImg() {
             </h2>
             <div className="z-10 shadow-2xl shadow-grey900 rounded">
               <video
-                data-aos="fade-up"
                 muted
                 autoPlay
                 loop

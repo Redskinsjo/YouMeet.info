@@ -1,6 +1,7 @@
 import { Competency, Offer, Video } from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const Card = dynamic(() => import("./Card"), { ssr: false });
 const SectionTitle = dynamic(() => import("./SectionTitle"), { ssr: false });
@@ -55,7 +56,9 @@ export default function DataSection({
       {!!data.length && (
         <div className="flex-center xs:flex-col sm:flex-col md:flex-col flex-wrap gap-[12px] w-fit p-[12px] xs:p-0 w-full">
           {data.map((el) => (
-            <Card key={el?.id} el={el} />
+            <Suspense>
+              <Card key={el?.id} el={el} />
+            </Suspense>
           ))}
         </div>
       )}
