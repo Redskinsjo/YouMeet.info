@@ -2018,5 +2018,5 @@ export const searchSomeoneRequest = async (formData: FormData) => {
   } catch (err: any) {
     return await handleActionError(err);
   }
-  redirect(`/with/${result.uniqueName}`);
+  redirect(`/on/${result.uniqueName}`);
 };

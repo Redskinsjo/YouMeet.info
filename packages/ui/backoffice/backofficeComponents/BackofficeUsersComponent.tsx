@@ -178,7 +178,7 @@ export default function BackofficeUsersComponent({
                 renderCell: (row: any) => {
                   return (
                     <Link
-                      href={`${uri}/with/${row.row.uniqueName}`}
+                      href={`${uri}/on/${row.row.uniqueName}`}
                       target="_blank"
                       onClick={(e) => e.stopPropagation()}
                     >

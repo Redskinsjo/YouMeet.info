@@ -220,7 +220,7 @@ export default function BackCard({
               <CustomIcon
                 onClick={async () => {
                   navigator.clipboard.writeText(
-                    `${uriCandidates}/with/${user?.uniqueName}`
+                    `${uriCandidates}/on/${user?.uniqueName}`
                   );
                   dispatch(setModal({ display: "shareProfile" }));
                 }}

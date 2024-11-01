@@ -31,7 +31,7 @@ export default function DiscoverMoreUsers({
               user.id !== profil?.id && (
                 <Link
                   key={user.id}
-                  href={`${uri}/with/${user.uniqueName}`}
+                  href={`${uri}/on/${user.uniqueName}`}
                   className="flex-center p-[12px] bg-grey50 dark:mediumDarkBg rounded-[14px] no-underline group"
                 >
                   <div className="flex-center flex-col gap-[2px]">

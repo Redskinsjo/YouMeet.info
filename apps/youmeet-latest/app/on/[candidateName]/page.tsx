@@ -66,7 +66,7 @@ export async function generateMetadata(
       description:
         "Découvrez le profil du candidat, visionnez sa vidéo de présentation, consultez ses références professionnelles et académiques, et notifiez-le d'une proposition d'entretien sur notre plateforme de recrutement.",
       openGraph: {
-        url: `${uri}/with/${uniqueName}`,
+        url: `${uri}/on/${uniqueName}`,
         title: `YouMeet - ${name}`,
         images: ogImages,
         type: "video.other",
@@ -100,7 +100,7 @@ export async function generateMetadata(
       "Découvrez le profil du candidat, visionnez sa vidéo de présentation, consultez ses références professionnelles et académiques, et notifiez-le d'une proposition d'entretien sur notre plateforme de recrutement.",
     openGraph: {
       title: `YouMeet - Voici quelqu'un qui va peut-être travailler avec vous`,
-      url: `${uri}/with/${uniqueName}`,
+      url: `${uri}/on/${uniqueName}`,
       type: "video.other",
       locale: "fr_FR",
       description:
@@ -124,6 +124,7 @@ export default async function Profil({
 }: {
   params: { candidateName: string };
 }) {
+  console.log(params.candidateName, "ok");
   const user = (await getUser(
     {
       uniqueName: decodeURIComponent(params.candidateName),

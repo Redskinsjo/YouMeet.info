@@ -1077,7 +1077,7 @@ export default function BackofficeModalContent({
           Ajouter Expérience
         </Button>
       )}
-      <Link href={`${uri}/with/${data?.data.uniqueName}`} target="_blank">
+      <Link href={`${uri}/on/${data?.data.uniqueName}`} target="_blank">
         <Button>Voir profil</Button>
       </Link>
     </div>
