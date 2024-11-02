@@ -190,6 +190,7 @@ import {
 } from "@youmeet/types/api/backend";
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { isNotHandledReq, isPayloadError } from "@youmeet/types/TypeGuards";
+import { AES } from "crypto-js";
 
 export const createError = async <T>(
   variables?: MutationCreateErrorArgs,
@@ -219,11 +220,15 @@ const req = async <T>(
   try {
     const nextParams = {} as { next?: { revalidate: number } };
     if (process.env.SCRIPT === undefined) nextParams.next = { revalidate };
+
+    const encrypt = AES.encrypt("app", `${process.env.JWT_SECRET}`).toString();
     const response = await fetch(`${uri}/api/server`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "x-domain-youmeet": encrypt,
+        origin: "https://www.youmeet.info",
       },
       mode: "same-origin",
       credentials: "same-origin",

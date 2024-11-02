@@ -15,6 +15,7 @@
     "@mui/material": "^6.1.5",
     "@youmeet/prisma-config": "*",
     "cloudinary": "^2.5.1",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
     "js-cookie": "^3.0.5",
     "next": "^14.2.3",

@@ -1876,7 +1876,7 @@ const resolvers: Resolvers = {
       args: MutationCreateErrorArgs,
       context: ContextRequest
     ) => {
-      const noCors = await noCorsMiddleware(context);
+      const noCors = await noCorsMiddleware(context, true);
       if (!noCors) return null;
       const data = args.data;
       if (data) {
