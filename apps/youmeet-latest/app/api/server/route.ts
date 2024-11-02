@@ -2,6 +2,7 @@ import { createSchema, createYoga } from "graphql-yoga";
 import resolvers from "@/resolvers";
 import mongoose from "mongoose";
 import typeDefs from "@youmeet/gql/schema";
+import { useDisableIntrospection } from "@graphql-yoga/plugin-disable-introspection";
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 
@@ -20,6 +21,7 @@ const { handleRequest } = createYoga({
     methods: ["POST", "OPTIONS", "GET"],
     credentials: true,
   },
+  plugins: [useDisableIntrospection()],
   async context(context) {
     context.request.headers.set(
       "Access-Control-Allow-Methods",
