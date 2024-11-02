@@ -18,8 +18,6 @@ const regex = /(?<=\/\/)[^\/_&?]+/gm;
 const authLink = setContext((_, { headers }) => {
   const origin = headers.get("origin") || "";
 
-  console.log("origin1", origin);
-
   const match = origin.match(regex);
   const originHost = match ? match[0] : "";
   const encrypt = AES.encrypt(
