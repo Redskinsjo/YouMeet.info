@@ -13,7 +13,7 @@ import Footer from "@youmeet/ui/Footer";
 import "aos/dist/aos.css";
 import dynamic from "next/dynamic";
 import DataSection from "@youmeet/ui/_components/DataSection";
-console.log("DataSection", DataSection);
+
 const BigHeaderSection = dynamic(
   () => import("@youmeet/ui/_sections/BigHeaderSection"),
   { ssr: false }
