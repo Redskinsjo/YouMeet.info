@@ -11,9 +11,7 @@ import {
 import { Competency, Offer, Video } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
-const HomeChild = dynamic(() => import("./homeChild"), {
-  loading: () => <div></div>,
-});
+const HomeChild = dynamic(() => import("./homeChild"));
 
 export const metadata: Metadata = {
   title:
@@ -69,7 +67,7 @@ export default async function Home() {
   // const competences = (await getHomeCompetencies({
   //   params: { take: 2 },
   // })) as Competency[];
-  const videos = (await getVideos<Video[]>()) as Video[];
+  const videos = (await getVideos<Video[]>({}, 0)) as Video[];
 
   return (
     <div className="overflow-hidden max-w-screen">

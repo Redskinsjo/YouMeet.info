@@ -16,8 +16,7 @@ import { submitFile } from "@youmeet/utils/basics/submitFile";
 import Link from "next/link";
 import { getPublicIdFirstPart } from "@youmeet/utils/basics/getPublicId";
 import { Button } from "@mui/material";
-import dynamic from "next/dynamic";
-const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
+
 export default function NewAddVideoComponent({
   profil,
   setChosenVideo,
@@ -47,7 +46,14 @@ export default function NewAddVideoComponent({
     },
     formData: FormData
   ) => {
-    dispatch(setUpload("a-video"));
+    dispatch(setUpload("upload"));
+    let count = 0;
+    const intervalId = setInterval(() => {
+      count++;
+      if (count === 10) {
+        dispatch(setUpload("upload-50"));
+      }
+    }, 1000);
 
     const videoFile = formData.get("video") as File;
 
@@ -78,6 +84,7 @@ export default function NewAddVideoComponent({
       }
     }
     dispatch(setUpload(null));
+    clearInterval(intervalId);
   };
 
   const inputElement = useMemo(
@@ -103,8 +110,6 @@ export default function NewAddVideoComponent({
 
   return (
     <div className="w-full p-[6px] box-border flex-bet h-[39px]">
-      {upload === "a-video" ? <Logo gif png /> : undefined}
-
       <div className="w-full flex justify-end items-center gap-[24px] xs:gap-[12px] sm:gap-[6px] md:gap-[6px]">
         <Link href={"/enregistrer"} className="no-underline">
           <div className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold">

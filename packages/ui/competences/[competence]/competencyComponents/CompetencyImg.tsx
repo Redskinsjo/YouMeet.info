@@ -1,8 +1,6 @@
 "use client";
 import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
-import React from "react";
-import { useState, useEffect } from "react";
 
 const types = {
   definition: {
@@ -40,26 +38,19 @@ export default function CompetencyImg({
 }) {
   const xs = useMediaQuery("(max-width: 600px)");
   const sm = useMediaQuery("(max-width: 720px)");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
 
   return (
-    !loading && (
-      <div className="flex-1 flex justify-end">
-        <Image
-          width={
-            xs || sm ? types[type].sizes.sm.width : types[type].sizes.lg.width
-          }
-          height={
-            xs || sm ? types[type].sizes.sm.height : types[type].sizes.lg.height
-          }
-          alt={types[type].alt}
-          src={types[type].src}
-        />
-      </div>
-    )
+    <div className="flex-1 flex justify-end">
+      <Image
+        width={
+          xs || sm ? types[type].sizes.sm.width : types[type].sizes.lg.width
+        }
+        height={
+          xs || sm ? types[type].sizes.sm.height : types[type].sizes.lg.height
+        }
+        alt={types[type].alt}
+        src={types[type].src}
+      />
+    </div>
   );
 }

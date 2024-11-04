@@ -1,14 +1,13 @@
-import Footer from "@youmeet/ui/Footer";
 import SubLayout from "@youmeet/ui/SubLayout";
 import { ParagraphWithTitleTypes } from "@youmeet/types/cgu";
 import dynamic from "next/dynamic";
 
+const Footer = dynamic(() => import("@youmeet/ui/Footer"));
 const CGUTitle = dynamic(
   () =>
     import(
-      "@youmeet/ui/conditions-generales-utilisation/cguComponents/CGUTitle"
-    ),
-  { ssr: false }
+      "@youmeet/ui/conditions-generales-utilisation/cguComponents/CGUTitleChild"
+    )
 );
 
 const ParagraphWithTitle = dynamic(

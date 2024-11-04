@@ -7,7 +7,7 @@ import { BetaUser } from "@youmeet/gql/generated";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-const MyOffersChild = dynamic(() => import("./myOffersChild"), { ssr: false });
+const MyOffersChild = dynamic(() => import("./myOffersComponentChild"));
 
 export const maxDuration = 60;
 

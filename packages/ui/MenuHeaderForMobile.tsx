@@ -34,6 +34,7 @@ export default function MenuHeaderForMobile() {
       >
         <RxHamburgerMenu className="w-full h-full" />
       </div>
+
       <Menu
         id="basic-menu"
         anchorEl={anchorEl && (anchorEl.el as Element)}

@@ -1,7 +1,7 @@
 import { DynamicData } from "@youmeet/types/cgu";
 import dynamic from "next/dynamic";
 
-const BoldText = dynamic(() => import("../../BoldText"), { ssr: false });
+const BoldText = dynamic(() => import("../../TextChild"));
 
 export default function Paragraph({
   paragraph,

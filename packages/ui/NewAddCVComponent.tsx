@@ -26,7 +26,7 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   );
 
   const customOnAddCV = async (userId: string, formData: FormData) => {
-    dispatch(setUpload("a-cv"));
+    dispatch(setUpload("upload"));
     const cvFile = formData.get("cvFile") as File;
     const fileFormData = new FormData();
     fileFormData.append("file", cvFile);
@@ -49,7 +49,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
 
   return profil?.cvFile ? undefined : (
     <div className="w-full flex-bet p-[6px] h-[39px]">
-      {upload === "a-cv" ? <Logo gif png /> : undefined}
       <form
         ref={cvRef}
         action={customOnAddCV.bind(null, profil?.id as string)}

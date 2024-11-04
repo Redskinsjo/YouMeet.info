@@ -13,9 +13,9 @@ export async function generateStaticParams() {
 export default async function VideoPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const id = decodeURIComponent(params.id);
+  const id = decodeURIComponent((await params).id);
   await verifyTokenServer(undefined, "dashboard");
   const video = (await getVideo({
     id,

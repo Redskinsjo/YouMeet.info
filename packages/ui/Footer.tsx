@@ -9,7 +9,7 @@ const FooterProposedBy = dynamic(
 
 export default function Footer() {
   return (
-    <div className="flex flex-col relative z-50 border-t-[1px] border-0 border-solid border-grey500 dark:darkBg lightBg">
+    <div className="flex flex-col relative z-50 border-t-[1px] border-0 border-solid border-grey500 dark:darkBg lightBg w-full">
       <div className="py-[48px]">
         <Layout newStyles={{ boxShadow: "none", background: "unset" }}>
           <div className="flex xs:flex-col gap-[96px]">

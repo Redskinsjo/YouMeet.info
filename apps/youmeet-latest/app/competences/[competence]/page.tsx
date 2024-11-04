@@ -14,8 +14,8 @@ import { Competency } from "@youmeet/gql/generated";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: { competence: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ competence: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -33,8 +33,9 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const prms = await params;
   const competency = (await getCompetencyMetadata({
-    slug: decodeURIComponent(params.competence),
+    slug: decodeURIComponent(prms.competence),
   })) as Competency;
 
   const title = competency?.title;
@@ -49,7 +50,7 @@ export async function generateMetadata(
       title: `YouMeet - ${title}`,
       description: `Découvrez notre expertise en ${title}. Obtenez des informations détaillées, des exemples concrets et des ressources pour approfondir vos connaissances dans le domaine de ${title}.`,
       openGraph: {
-        url: `${uri}/competences/${params.competence}`,
+        url: `${uri}/competences/${prms.competence}`,
         title: `YouMeet - ${title}`,
         images: ogImages,
         type: "article",
@@ -75,14 +76,14 @@ export async function generateMetadata(
     };
   }
   let competence = decodeURIComponent(
-    inFormatForDb(params.competence).split(" ")[0]
+    inFormatForDb(prms.competence).split(" ")[0]
   );
   competence = formatForDb(competence);
   return {
     title: `YouMeet - Voici une compétence que vous allez maitriser`,
     description: `Découvrez la définition de ${competence} Obtenez des informations détaillées, des exemples concrets et des ressources pour approfondir vos connaissances dans le domaine de ${competence}.`,
     openGraph: {
-      url: `${uri}/competences/${decodeURIComponent(params.competence)}`,
+      url: `${uri}/competences/${decodeURIComponent(prms.competence)}`,
       title: `YouMeet - Voici une compétence que vous allez maitriser`,
       type: "article",
       description: `Découvrez la définition de ${competence} Obtenez des informations détaillées, des exemples concrets et des ressources pour approfondir vos connaissances dans le domaine de ${competence}.`,
@@ -109,10 +110,10 @@ export async function generateMetadata(
 export default async function Page({
   params,
 }: {
-  params: { competence: string };
+  params: Promise<{ competence: string }>;
 }) {
   const competency = (await getCompetency({
-    slug: decodeURIComponent(params.competence),
+    slug: decodeURIComponent((await params).competence),
   })) as Competency;
 
   if (competency) return <CompetencyChild competency={competency} />;

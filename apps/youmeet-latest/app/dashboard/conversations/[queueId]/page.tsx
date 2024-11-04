@@ -6,8 +6,8 @@ import { redirect } from "next/navigation";
 import ConversationChild from "./conversationChild";
 
 type Props = {
-  params: { queueId: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ queueId: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -23,11 +23,12 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const queueId = decodeURIComponent(params.queueId);
+  const prms = await params;
+  const queueId = decodeURIComponent(prms.queueId);
 
   const queue = (await getOneQueue<BetaQueue>(
     {
-      id: params.queueId,
+      id: queueId,
     },
     10
   )) as BetaQueue;
@@ -38,7 +39,7 @@ export async function generateMetadata(
       title: `YouMeet - ${name}`,
       description: `Découvrez les questions de l'entreprise ${queue.origin?.company?.name} et répondez-y pour avancer dans le processus de candidature`,
       openGraph: {
-        url: `https://www.youmeet.info/dashboard/converations/${params.queueId}`,
+        url: `https://www.youmeet.info/dashboard/converations/${queueId}`,
         title: `YouMeet - ${name}`,
         type: "website",
         locale: "fr_FR",
@@ -88,11 +89,12 @@ export async function generateMetadata(
 export default async function Conversation({
   params,
 }: {
-  params: { queueId: string };
+  params: Promise<{ queueId: string }>;
 }) {
+  const prms = await params;
   const queue = (await getOneQueue<BetaQueue>(
     {
-      id: decodeURIComponent(params.queueId),
+      id: decodeURIComponent(prms.queueId),
     },
     10
   )) as BetaQueue;

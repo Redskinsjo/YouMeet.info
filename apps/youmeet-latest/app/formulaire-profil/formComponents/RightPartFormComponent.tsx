@@ -1,12 +1,10 @@
 import Layout from "@youmeet/ui/Layout";
 import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
-import PageContent from "./PageContent";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 
-const PageContentTitle = dynamic(() => import("./PageContentTitle"), {
-  ssr: false,
-});
+const PageContentTitle = dynamic(() => import("./PageContentTitleChild"));
+const PageContent = dynamic(() => import("./PageContentChild"));
 
 export default function RightPartFormComponent({
   defaultValues,

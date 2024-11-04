@@ -14,7 +14,7 @@ export interface GlobalState {
   locale: string;
   background: number;
   lastModification: number;
-  upload: "a-cv" | "r-cv" | "a-video" | string | null;
+  upload: "upload" | "upload-50" | "delete" | null;
   error: GlobalError | null;
   login: boolean;
   subscription: AppSubscription | undefined | false;
@@ -46,7 +46,7 @@ export const globalSlice = createSlice({
     },
     setUpload: (
       state,
-      action: PayloadAction<"a-cv" | "r-cv" | "a-video" | string | null>
+      action: PayloadAction<"upload" | "upload-50" | "delete" | null>
     ) => {
       state.upload = action.payload;
     },

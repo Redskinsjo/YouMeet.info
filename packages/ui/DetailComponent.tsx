@@ -1,5 +1,5 @@
 "use client";
-
+import { Suspense } from "react";
 import { BetaUser } from "@youmeet/gql/generated";
 import OneLineSkeleton from "./OneLineSkeleton";
 import dynamic from "next/dynamic";
@@ -36,5 +36,9 @@ export default function DetailComponentWrapper(params: {
   labelComponent?: "div" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   valueColor?: string;
 }) {
-  return <DetailComponent {...params} />;
+  return (
+    <Suspense>
+      <DetailComponent {...params} />;
+    </Suspense>
+  );
 }

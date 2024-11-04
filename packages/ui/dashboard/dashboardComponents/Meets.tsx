@@ -1,14 +1,12 @@
 import SubPartContainer from "../../SubPartContainer";
 import { BetaUser } from "@youmeet/gql/generated";
-import CandidatesTitle from "./CandidatesTitle";
 import dynamic from "next/dynamic";
 import MeetsLoading from "./MeetsLoading";
-import React from "react";
 
-const CardsComponent = dynamic(() => import("./CardsComponent"), {
-  ssr: false,
+const CardsComponent = dynamic(() => import("./CardsComponentChild"), {
   loading: () => <MeetsLoading />,
 });
+const CandidatesTitle = dynamic(() => import("./CandidatesTitleChild"));
 
 export default function Meets({
   type,

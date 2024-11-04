@@ -11,10 +11,11 @@ export default async function Layout({
   params,
 }: {
   children: ReactElement;
-  params: { competence: string };
+  params: Promise<{ competence: string }>;
 }) {
+  const prms = await params;
   const competency = (await getCompetency<Competency>({
-    slug: decodeURIComponent(params.competence),
+    slug: decodeURIComponent(prms.competence),
   })) as Competency;
   if (competency?.title) {
     const title = competency?.title

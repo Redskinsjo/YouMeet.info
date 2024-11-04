@@ -3,9 +3,8 @@ import VideoFilter from "./VideoFilter";
 import PhoneFilter from "./PhoneFilter";
 import LinkedinFilter from "./LinkedinFilter";
 import MoreFiltersTitle from "./MoreFiltersTitle";
-import React from "react";
 
-const SearchComponentField = dynamic(() => import("./SearchComponentField"));
+const SearchComponentField = dynamic(() => import("./SearchComponentChild"));
 
 export default function PageFilters() {
   return (

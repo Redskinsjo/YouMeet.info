@@ -1,5 +1,5 @@
 import FranceTravailConnect from "../../backoffice/backofficeComponents/FranceTravailConnect";
-import DetailComponent from "../../DetailComponentContent";
+import DetailComponent from "../../DetailComponent";
 import { useTranslation } from "react-i18next";
 
 export default function () {

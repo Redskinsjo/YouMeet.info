@@ -78,7 +78,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         }}
         onMouseLeave={() => setMegaMenu(false)}
       >
-        <div className="flex items-center justify-start flex-1 gap-[24px]">
+        <div className="flex items-center justify-start flex-1 gap-[24px] xs:hidden sm:hidden md:hidden">
           {pathname.includes("/competencies") && (
             <TooltipedAsset
               asset={`Profil de ${

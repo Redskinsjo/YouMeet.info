@@ -26,7 +26,7 @@ export default function BlogMenuNav({
           className="no-underline text-black"
         >
           <span className="dark:text-white">
-            {article.title[language as "fr" | "en"]?.slice(0, 40)}
+            {article.title[language as "fr" | "en"]}
           </span>
         </Link>
       </li>

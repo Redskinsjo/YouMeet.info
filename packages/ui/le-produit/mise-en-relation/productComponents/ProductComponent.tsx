@@ -8,9 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import products from "@youmeet/raw-data/produits.json";
 import { ModalState } from "@youmeet/global-config/features/modal";
-import React from "react";
 
-const BoldText = dynamic(() => import("../../../BoldText"));
+const BoldText = dynamic(() => import("../../../TextChild"));
 
 const images = [
   "https://res.cloudinary.com/de822mdsy/image/upload/v1716233816/ygprotpwltkl9efosbat.webp",
@@ -47,7 +46,10 @@ export default function ProductComponent() {
   const [word, setWord] = useState<ReactElement | undefined>();
   const [counting, setCounting] = useState(0);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | undefined>();
-  const [displayed, setDisplayed] = useState([]);
+  const [displayed, setDisplayed] = useState<any>([]);
+  const texts = [0, 3, 4, 7, 8, 11, 12, 15, 16];
+  const imgs = [1, 2, 5, 6, 9, 10, 13, 14];
+  const mobile = [0, 2, 4, 6, 8, 10, 12, 14];
 
   const punchlines = products[0].punchlines;
 
@@ -56,33 +58,22 @@ export default function ProductComponent() {
       return (
         <div className="product-grid box-border">
           {displayed.map(
-            (punchline: { text: string; cta: string }, i: number) => {
+            (
+              punchline: { text: string; cta: string; img: string },
+              i: number
+            ) => {
               return (
                 <div
                   key={punchline.cta || i}
                   className={
-                    i === 0 ||
-                    i === 3 ||
-                    i === 4 ||
-                    i === 7 ||
-                    i === 8 ||
-                    i === 11 ||
-                    i === 12 ||
-                    i === 15 ||
-                    i === 16
+                    (mobile.includes(i) && (xs || sm || md)) ||
+                    (texts.includes(i) && !xs && !sm && !md)
                       ? "w-full min-h-[480px] xs:min-h-[360px] sm:min-h-[360px] md:min-h-[360px] bg-deepPurple50 dark:extraLightDarkBg flex-center flex-col group shadow-2xl gap-[24px] p-[24px] xs:p-[12px] sm:p-[12px] box-border"
                       : "w-full min-h-[480px] xs:min-h-[360px] sm:min-h-[360px] md:min-h-[360px] bg-white dark:mediumDarkBg flex-center flex-col group shadow-2xl gap-[24px] p-[24px] xs:p-[12px] sm:p-[12px] box-border"
                   }
                 >
-                  {i === 0 ||
-                  i === 3 ||
-                  i === 4 ||
-                  i === 7 ||
-                  i === 8 ||
-                  i === 11 ||
-                  i === 12 ||
-                  i === 15 ||
-                  i === 16 ? (
+                  {(mobile.includes(i) && (xs || sm || md)) ||
+                  (texts.includes(i) && !xs && !sm && !md) ? (
                     <div className="flex flex-col gap-[12px]">
                       <div className="flex-1 flex flex-col flex-center m-0 p-0">
                         <h3 className="text-blueGrey900 dark:text-white sentences px-[48px] xs:px-0 text-center">
@@ -90,15 +81,8 @@ export default function ProductComponent() {
                         </h3>
                         <span
                           className={
-                            i === 0 ||
-                            i === 3 ||
-                            i === 4 ||
-                            i === 7 ||
-                            i === 8 ||
-                            i === 11 ||
-                            i === 12 ||
-                            i === 15 ||
-                            i === 16
+                            (mobile.includes(i) && (xs || sm || md)) ||
+                            (texts.includes(i) && !xs && !sm && !md)
                               ? "w-[25%] h-[2px] group-hover:bg-blueGrey900 dark:group-hover:bg-white"
                               : "w-[25%] h-[2px]"
                           }
@@ -106,15 +90,8 @@ export default function ProductComponent() {
                       </div>
                       <div
                         className={
-                          i === 0 ||
-                          i === 3 ||
-                          i === 4 ||
-                          i === 7 ||
-                          i === 8 ||
-                          i === 11 ||
-                          i === 12 ||
-                          i === 15 ||
-                          i === 16
+                          (mobile.includes(i) && (xs || sm || md)) ||
+                          (texts.includes(i) && !xs && !sm && !md)
                             ? "text-blueGrey900 text-justify indent-8 xss:indent-2 xs:indent-2 sm:indent-4 px-[48px] xs:px-[12px] sm:px-[12px] md:px-[12px] max-w-[65%] xs:max-w-full sm:max-w-full md:max-w-[90%] flex-[2] overflow-scroll"
                             : "text-blueGrey900 text-justify indent-8 xss:indent-2 xs:indent-2 sm:indent-4 px-[48px] xs:px-[12px] sm:px-[12px] md:px-[12px] max-w-[65%] xs:max-w-full sm:max-w-full md:max-w-full flex-[2] overflow-scroll"
                         }
@@ -127,30 +104,10 @@ export default function ProductComponent() {
                         />
                       </div>
                     </div>
-                  ) : (
+                  ) : punchline.img ? (
                     <Image
                       alt="une image représentant un métier"
-                      src={
-                        images[
-                          i === 1
-                            ? 0
-                            : i === 2
-                            ? 1
-                            : i === 5
-                            ? 2
-                            : i === 6
-                            ? 3
-                            : i === 9
-                            ? 4
-                            : i === 10
-                            ? 5
-                            : i === 13
-                            ? 6
-                            : i === 14
-                            ? 7
-                            : 8
-                        ]
-                      }
+                      src={punchline.img}
                       width={0}
                       height={0}
                       style={{
@@ -159,7 +116,7 @@ export default function ProductComponent() {
                         objectFit: "cover",
                       }}
                     />
-                  )}
+                  ) : undefined}
                 </div>
               );
             }
@@ -168,7 +125,7 @@ export default function ProductComponent() {
       );
     }
     return [];
-  }, [scrollY, i18n.language, xs, sm, displayed]);
+  }, [scrollY, i18n.language, xs, sm, md, displayed]);
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -183,20 +140,26 @@ export default function ProductComponent() {
 
   useEffect(() => {
     const displayed = (punchlines as any[]).reduce((acc, curr, i) => {
-      const followedByImg = i === 0 || i === 2 || i === 4 || i === 6;
-
-      if (followedByImg) {
-        acc.push(curr);
-        acc.push({ cta: "", text: "" });
-        acc.push({ cta: "", text: "" });
-        return acc;
+      if (!xs && !sm && !md) {
+        const followedByImg = i === 0 || i === 2 || i === 4 || i === 6;
+        const displayImgs = [[0, 1], "", [2, 3], "", [4, 5], "", [6, 7]];
+        if (followedByImg) {
+          acc.push(curr);
+          acc.push({ img: images[displayImgs[i][0] as any] });
+          acc.push({ img: images[displayImgs[i][1] as any] });
+          return acc;
+        } else {
+          acc.push(curr);
+          return acc;
+        }
       } else {
         acc.push(curr);
+        acc.push({ img: images[i] });
         return acc;
       }
     }, []);
     setDisplayed(displayed);
-  }, [dispatch]);
+  }, [dispatch, xs, sm, md]);
 
   useEffect(() => {
     if (intervalId) clearInterval(intervalId);

@@ -3,9 +3,7 @@ import { BetaUser, Lead } from "@youmeet/gql/generated";
 import BackofficeLeadsComponent from "./BackofficeLeadsComponent";
 import dynamic from "next/dynamic";
 
-const MoreFeaturesLeads = dynamic(() => import("./MoreFeaturesLeads"), {
-  ssr: false,
-});
+const MoreFeaturesLeads = dynamic(() => import("./MoreFeaturesLeadChild"));
 
 export default function BackofficePageComponent({
   leads,
