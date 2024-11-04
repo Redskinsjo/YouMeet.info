@@ -6,7 +6,6 @@ import {
   MenuItem,
   Select,
   Switch,
-  useMediaQuery,
 } from "@mui/material";
 import React, {
   ReactElement,

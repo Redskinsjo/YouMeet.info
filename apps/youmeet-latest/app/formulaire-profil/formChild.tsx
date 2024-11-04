@@ -1,9 +1,9 @@
 import React from "react";
 import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 import dynamic from "next/dynamic";
-import Logo from "@youmeet/ui/Logo";
 import RightPartFormComponentLoading from "./formComponents/RightPartFormComponentLoading";
 
+const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 const RightPartFormComponent = dynamic(
   () => import("./formComponents/RightPartFormComponent"),
   { ssr: false, loading: () => <RightPartFormComponentLoading /> }

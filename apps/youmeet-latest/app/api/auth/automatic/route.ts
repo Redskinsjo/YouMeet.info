@@ -115,11 +115,11 @@ export async function GET(req: NextRequest) {
             const payload = await s(beforeCookie);
 
             if (payload) {
-              cookies().set("login", payload, {
+              (await cookies()).set("login", payload, {
                 domain: process.env.API_DOMAIN,
               });
 
-              const cookie = cookies().get("login")?.value as string;
+              const cookie = (await cookies()).get("login")?.value as string;
 
               const res = NextResponse.redirect(`${uri}/dashboard`, {
                 status: 307,

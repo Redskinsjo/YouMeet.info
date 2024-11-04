@@ -9,11 +9,13 @@ import {
   setUpload,
 } from "@youmeet/global-config/features/global";
 import { RootState } from "@youmeet/global-config/store";
-import Logo from "./Logo";
 import { setCvFile } from "@youmeet/global-config/features/user";
 import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/basics/submitFile";
+import dynamic from "next/dynamic";
+
+const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 
 export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const cvRef = useRef<HTMLFormElement | null>(null);

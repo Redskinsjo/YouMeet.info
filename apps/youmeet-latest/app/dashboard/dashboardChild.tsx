@@ -2,14 +2,11 @@ import React from "react";
 import Layout from "@youmeet/ui/Layout";
 import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import VideoPartLoading from "@youmeet/ui/VideoPartLoading";
 import Discussions from "@youmeet/ui/_homeComponents/Discussions";
 import ProfilePartComponent from "@youmeet/ui/ProfilePartComponent";
 
 const DashboardPartComponent = dynamic(
-  () =>
-    import("@youmeet/ui/dashboard/dashboardComponents/DashboardPartComponent"),
-  { ssr: false, loading: () => <VideoPartLoading /> }
+  () => import("@youmeet/ui/dashboard/dashboardComponents/DashboardPartChild")
 );
 
 export default function DashboardChild({

@@ -1,10 +1,11 @@
-import React from "react";
-import DetailComponent from "./DetailComponent";
 import { Reference } from "@youmeet/gql/generated";
 import SubPartContainer from "./SubPartContainer";
 import ReferenceLabel from "./ReferenceLabel";
 import ReferenceValue from "./ReferenceValue";
-import ReferenceComponentTitle from "./ReferenceComponentTitle";
+import dynamic from "next/dynamic";
+
+const ReferenceTitle = dynamic(() => import("./ReferenceTitleChild"));
+const DetailComponent = dynamic(() => import("./DetailComponent"));
 
 export default function NewReferencesComponent({
   references,
@@ -25,7 +26,7 @@ export default function NewReferencesComponent({
       }}
     >
       <div className="relative flex flex-col p-[24px] xs:p-[12px] sm:p-[12px] md:p-[12px]">
-        <ReferenceComponentTitle />
+        <ReferenceTitle />
         <div className="flex flex-col w-full gap-[24px]">
           <div className="flex flex-col gap-[12px] w-full box-border">
             <div className={"relative flex flex-col gap-[6px]"}>

@@ -10,14 +10,14 @@ import {
   setUpload,
 } from "@youmeet/global-config/features/global";
 import { onAddVideo } from "@youmeet/functions/actions";
-import Logo from "./Logo";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/basics/submitFile";
 import Link from "next/link";
 import { getPublicIdFirstPart } from "@youmeet/utils/basics/getPublicId";
 import { Button } from "@mui/material";
-
+import dynamic from "next/dynamic";
+const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 export default function NewAddVideoComponent({
   profil,
   setChosenVideo,

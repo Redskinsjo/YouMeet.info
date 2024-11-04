@@ -4,10 +4,10 @@ import { Button, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
 import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
-import Logo from "./Logo";
 import AdmitCGU from "./AdmitCGU";
 import FranceTravailConnect from "./backoffice/backofficeComponents/FranceTravailConnect";
-
+import dynamic from "next/dynamic";
+const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 export default function LoginComponentTopPart() {
   const ftConnectRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
