@@ -1,14 +1,8 @@
 import dynamic from "next/dynamic";
 
-const BoldText = dynamic(() => import("../BoldText"), {
-  ssr: false,
-});
-const SectionTitle = dynamic(() => import("../_components/SectionTitle"), {
-  ssr: false,
-});
-const ImgSection = dynamic(() => import("../_components/ImgSection"), {
-  ssr: false,
-});
+const BoldText = dynamic(() => import("../TextChild"));
+const SectionTitle = dynamic(() => import("../_components/SectionTitleChild"));
+const ImgSection = dynamic(() => import("../_components/ImgSection"));
 
 export default function HomeSquares() {
   return (

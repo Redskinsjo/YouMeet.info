@@ -2,13 +2,10 @@ import OneLineSkeleton from "../../../OneLineSkeleton";
 import { Competency } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
-const BoldText = dynamic(() => import("../../../BoldText"), {
-  ssr: false,
+const BoldText = dynamic(() => import("../../../TextChild"), {
   loading: () => <OneLineSkeleton count={3} />,
 });
-const CompetencyTitle = dynamic(() => import("./CompetencyTitle"), {
-  ssr: false,
-});
+const CompetencyTitle = dynamic(() => import("./CompetencyTitleChild"));
 
 export default function CompetencyAdvantagesAndRelatedSkills({
   competency,

@@ -24,10 +24,10 @@ export async function GET(req: NextRequest) {
         pro: user.pro ?? false,
       });
       if (signed) {
-        cookies().set("reset", `${signed}`, {
+        (await cookies()).set("reset", `${signed}`, {
           domain: `${process.env.API_DOMAIN}`,
         });
-        const cookie = cookies().get("reset")?.value as string;
+        const cookie = (await cookies()).get("reset")?.value as string;
 
         const response = NextResponse.redirect(
           `${uri}/reinitialiser-mot-de-passe`,

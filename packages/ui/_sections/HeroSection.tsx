@@ -6,7 +6,7 @@ import HeroText from "../_components/HeroText";
 
 export default function HeroSection() {
   return (
-    <section className="flex xs:flex-col sm:flex-col md:flex-col homeLightning relative min-h-[330px]">
+    <section className="flex xs:flex-col sm:flex-col md:flex-col homeLightning relative min-h-[440px]">
       <Image
         role="img"
         width={0}

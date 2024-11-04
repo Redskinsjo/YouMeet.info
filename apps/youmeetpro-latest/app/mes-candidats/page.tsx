@@ -5,11 +5,7 @@ import { redirect } from "next/navigation";
 import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser, UnlockedUser } from "@youmeet/gql/generated";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-const MyCandidatesChild = dynamic(() => import("./myCandidatesChild"), {
-  ssr: false,
-});
+import MyCandidatesChild from "./myCandidatesChild";
 
 export const maxDuration = 60;
 

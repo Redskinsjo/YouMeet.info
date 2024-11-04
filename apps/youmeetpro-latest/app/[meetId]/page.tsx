@@ -7,8 +7,8 @@ import { getMeetsParams, getOneMeet } from "@youmeet/functions/request";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: { meetId: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ meetId: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -27,7 +27,8 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const id = decodeURIComponent(params.meetId);
+  const prms = await params;
+  const id = decodeURIComponent(prms.meetId);
   const meet = (await getOneMeet<Meet>({ id })) as Meet;
 
   const name = setName(meet.meetCandidate as MeetCandidate);
@@ -97,9 +98,10 @@ export async function generateMetadata(
 export default async function Profil({
   params,
 }: {
-  params: { meetId: string };
+  params: Promise<{ meetId: string }>;
 }) {
-  const id = decodeURIComponent(params.meetId);
+  const prms = await params;
+  const id = decodeURIComponent(prms.meetId);
   const meet = (await getOneMeet({
     id,
   })) as Meet;

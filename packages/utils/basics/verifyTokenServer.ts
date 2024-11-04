@@ -11,8 +11,8 @@ export default async function verifyTokenServer(
 ): Promise<LoginCookiePayload> {
   let cookie = cookieInput;
 
-  if (!cookie && cookies().has(cookieName)) {
-    cookie = cookies().get(cookieName)?.value;
+  if (!cookie && (await cookies()).has(cookieName)) {
+    cookie = (await cookies()).get(cookieName)?.value;
   }
   if (!!cookie) {
     const verified = await verif(cookie);

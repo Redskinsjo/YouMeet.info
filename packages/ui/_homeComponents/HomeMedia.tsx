@@ -2,20 +2,10 @@ import { Suspense } from "react";
 import Layout from "../Layout";
 import { Article } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import OneLineSkeleton from "../OneLineSkeleton";
 
-const SectionTitle = dynamic(() => import("../_components/SectionTitle"), {
-  ssr: false,
-  loading: () => <OneLineSkeleton height="20px" width="200px" />,
-});
-const BoldText = dynamic(() => import("../BoldText"), {
-  ssr: false,
-  loading: () => <OneLineSkeleton height="12px" width="500px" />,
-});
-const HomeMediaCard = dynamic(() => import("./HomeMediaCard"), {
-  ssr: false,
-  loading: () => <OneLineSkeleton count={1} height="360px" width="550px" />,
-});
+const SectionTitle = dynamic(() => import("../_components/SectionTitleChild"));
+const BoldText = dynamic(() => import("../TextChild"));
+const HomeMediaCard = dynamic(() => import("./MediaCardChild"));
 
 export default function HomeMedia({ articles }: { articles: Article[] }) {
   return (

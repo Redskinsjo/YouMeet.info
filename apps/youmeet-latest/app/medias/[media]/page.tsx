@@ -15,8 +15,8 @@ import { Article } from "@youmeet/gql/generated";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: { media: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ media: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -32,8 +32,9 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const prms = await params;
   const article = (await getArticleMetadata({
-    slug: decodeURIComponent(params.media),
+    slug: decodeURIComponent(prms.media),
   })) as Article;
 
   if (article?.title?.fr) {
@@ -48,7 +49,7 @@ export async function generateMetadata(
       description:
         "Découvrez ce nouvel article, informez-vous des dernières actualités dans le recrutement pour être toujours le premier sur les nouvelles tendances.",
       openGraph: {
-        url: `${uri}/medias/${decodeURIComponent(params.media)}`,
+        url: `${uri}/medias/${decodeURIComponent(prms.media)}`,
         title: `YouMeet - ${title}`,
         images: ogImages,
         type: "article",
@@ -73,7 +74,7 @@ export async function generateMetadata(
       creator: "Jonathan Carnos",
     };
   }
-  let media = decodeURIComponent(inFormatForDb(params.media).split(" ")[0]);
+  let media = decodeURIComponent(inFormatForDb(prms.media).split(" ")[0]);
   media = formatForDb(media);
   return {
     title: `YouMeet - ${media}`,
@@ -103,9 +104,14 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page({ params }: { params: { media: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ media: string }>;
+}) {
+  const prms = await params;
   const media = (await getArticle<Article>({
-    slug: decodeURIComponent(params.media),
+    slug: decodeURIComponent(prms.media),
   })) as Article;
   const articles = (await getArticles<Article[]>()) as Article[];
 

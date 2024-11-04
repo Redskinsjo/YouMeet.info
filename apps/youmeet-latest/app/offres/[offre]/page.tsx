@@ -15,8 +15,8 @@ import {
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: { offre: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ offre: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -28,8 +28,9 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const prms = await params;
   const offre = (await getOfferMetadata({
-    slug: decodeURIComponent(params.offre),
+    slug: decodeURIComponent(prms.offre),
   })) as Offer;
 
   if (offre) {
@@ -71,14 +72,14 @@ export async function generateMetadata(
       creator: "Jonathan Carnos",
     };
   }
-  let title = decodeURIComponent(inFormatForDb(params.offre).split(" ")[0]);
+  let title = decodeURIComponent(inFormatForDb(prms.offre).split(" ")[0]);
   title = formatForDb(title);
   return {
     title: `YouMeet - ${title}`,
     description:
       "Découvrez les détails de cette offre d'emploi, y compris les qualifications requises, les responsabilités, et les informations sur l'entreprise. Candidatez dès maintenant sur notre plateforme de recrutement.",
     openGraph: {
-      url: `${uri}/offres/${decodeURIComponent(params.offre)}`,
+      url: `${uri}/offres/${decodeURIComponent(prms.offre)}`,
       title: `YouMeet - ${title}`,
       images: [logoUrl],
       type: "video.other",
@@ -101,10 +102,11 @@ export async function generateMetadata(
 export default async function OfferComponent({
   params,
 }: {
-  params: { offre: string };
+  params: Promise<{ offre: string }>;
 }) {
+  const prms = await params;
   const offer = (await getOffer({
-    slug: decodeURIComponent(params.offre),
+    slug: decodeURIComponent(prms.offre),
   })) as Offer;
 
   let offers = [] as Offer[];

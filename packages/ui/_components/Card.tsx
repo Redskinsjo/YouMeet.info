@@ -1,7 +1,7 @@
 "use client";
 import { Competency, Offer, Video } from "@youmeet/gql/generated";
 import { isCompetency } from "@youmeet/types/TypeGuards";
-// import AOS from "aos";
+import AOS from "aos";
 import MainInfos from "./MainInfos";
 import SeeMore from "./SeeMore";
 import { useEffect } from "react";
@@ -35,15 +35,15 @@ export default function Card({ el }: { el: Offer | Competency | Video }) {
     };
   }
 
-  // useEffect(() => {
-  //   AOS.init();
-  // });
+  useEffect(() => {
+    AOS.init();
+  });
 
   return (
     <div
       key={el.id}
       className={attributes.className}
-      // data-aos={attributes.aos}
+      data-aos={attributes.aos}
       onClick={() => {
         router.push(attributes.href);
       }}

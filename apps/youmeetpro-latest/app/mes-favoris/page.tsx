@@ -6,10 +6,7 @@ import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser } from "@youmeet/gql/generated";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-
-const MyFavoritesChild = dynamic(() => import("./myFavoritesChild"), {
-  ssr: false,
-});
+import MyFavoritesChild from "./myFavoritesChild";
 
 export const maxDuration = 60;
 

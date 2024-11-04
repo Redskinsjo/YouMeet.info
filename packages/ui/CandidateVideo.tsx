@@ -378,12 +378,14 @@ export default function CandidateVideo({
           ...containerNewStyles,
           minHeight: inFullScreen ? "100%" : containerNewStyles?.minHeight,
           minWidth: inFullScreen ? "100%" : containerNewStyles?.minWidth,
+          height: inFullScreen ? "100%" : containerNewStyles?.height,
+          width: inFullScreen ? "100%" : containerNewStyles?.width,
         }}
       >
         {!loading && (
           <div
             ref={appVideoContainer}
-            className="video-container paused group flex-1 w-full"
+            className="video-container paused group flex-1 w-full h-full"
             style={{
               backgroundImage:
                 profil && profil.candidate?.targetJob?.topSector?.bgImage
@@ -408,7 +410,14 @@ export default function CandidateVideo({
               autoPlay={notAutoPlay ? false : true}
               id="video"
               className="h-full"
-              style={{ maxWidth: "100%", ...newStyles }}
+              style={{
+                maxWidth: "100%",
+                ...newStyles,
+                minHeight: inFullScreen ? "100%" : newStyles?.minHeight,
+                minWidth: inFullScreen ? "100%" : newStyles?.minWidth,
+                height: inFullScreen ? "100%" : newStyles?.height,
+                width: inFullScreen ? "100%" : newStyles?.height,
+              }}
               src={setFileUrl(video, onTheFly) as string}
               onClick={(e) => togglePlay(e)}
               onPause={() => {

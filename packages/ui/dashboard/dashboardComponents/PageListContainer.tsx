@@ -2,9 +2,8 @@ import Layout from "../../Layout";
 import { BetaUser } from "@youmeet/gql/generated";
 import Meets from "./Meets";
 import dynamic from "next/dynamic";
-import React from "react";
 
-const BoldText = dynamic(() => import("../../BoldText"));
+const BoldText = dynamic(() => import("../../TextChild"));
 
 export default function PageListContainer({
   profil,

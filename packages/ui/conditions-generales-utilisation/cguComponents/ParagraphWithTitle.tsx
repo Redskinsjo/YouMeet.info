@@ -1,4 +1,4 @@
-import BoldText from "../../BoldText";
+import BoldText from "../../TextChild";
 import { DynamicData, ParagraphWithTitleTypes } from "@youmeet/types/cgu";
 import { grey } from "@mui/material/colors";
 import Paragraph from "./Paragraph";

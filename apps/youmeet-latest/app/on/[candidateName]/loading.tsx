@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const Logo = dynamic(() => import("@youmeet/ui/Logo"), { ssr: false });
+const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 
 export default function Loading() {
   return (

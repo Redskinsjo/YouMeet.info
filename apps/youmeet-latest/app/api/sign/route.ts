@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
   const cookies = req.cookies;
 
   const loginCookie =
-    cookies.get("login")?.value ?? headers().getSetCookie()[0];
+    cookies.get("login")?.value ?? (await headers()).getSetCookie()[0];
 
   if (loginCookie) {
     const verified = await verif(loginCookie);

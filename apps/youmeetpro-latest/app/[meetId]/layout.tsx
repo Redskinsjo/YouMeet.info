@@ -11,9 +11,10 @@ export default async function Layout({
   params,
 }: {
   children: ReactElement;
-  params: { meetId: string };
+  params: Promise<{ meetId: string }>;
 }) {
-  const id = decodeURIComponent(params.meetId);
+  const prms = await params;
+  const id = decodeURIComponent(prms.meetId);
   const meet = (await getOneMeet<Meet>({ id })) as Meet;
 
   return (
@@ -21,7 +22,7 @@ export default async function Layout({
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href={`${uri}/${params.meetId}`} />
+      <link rel="canonical" href={`${uri}/${prms.meetId}`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -46,7 +47,7 @@ export default async function Layout({
             //     : meet?.picture
             // }`,
             // description: `${meet?.description}`,
-            url: `${uri}/${params.meetId}`,
+            url: `${uri}/${prms.meetId}`,
             // potentialAction: [
             //   {
             //     "@type": "WatchAction",

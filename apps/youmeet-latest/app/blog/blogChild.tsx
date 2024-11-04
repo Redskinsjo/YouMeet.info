@@ -4,8 +4,7 @@ import Footer from "@youmeet/ui/Footer";
 import HomeMedia from "@youmeet/ui/_homeComponents/HomeMedia";
 
 const BigHeaderSection = dynamic(
-  () => import("@youmeet/ui/_sections/BigHeaderSection"),
-  { ssr: false }
+  () => import("@youmeet/ui/_sections/BigHeaderSectionChild")
 );
 
 export default function BlogChild({ articles }: { articles: Article[] }) {

@@ -9,7 +9,6 @@ const nextConfig = {
   experimental: {
     serverActions: { allowedOrigins: ["localhost", "*.youmeet.info"] },
   },
-  swcMinify: true,
   headers: async () => [
     {
       source: "/",

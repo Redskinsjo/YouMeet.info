@@ -3,11 +3,7 @@ import { Article } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
 const SectionTitle = dynamic(
-  () => import("../../../_components/SectionTitle"),
-  {
-    ssr: false,
-    loading: () => <OneLineSkeleton height="20px" width="200px" count={1} />,
-  }
+  () => import("../../../_components/SectionTitleChild")
 );
 
 export default function MediaTitle({ media }: { media: Article }) {

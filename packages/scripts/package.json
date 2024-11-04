@@ -24,8 +24,8 @@
     "@youmeet/utils": "*",
     "cloudinary": "^2.5.1",
     "dotenv": "^16.4.5",
-    "mongoose": "^8.7.3",
-    "openai": "^4.68.4",
+    "mongoose": "^8.8.0",
+    "openai": "^4.70.3",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {}

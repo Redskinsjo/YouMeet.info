@@ -36,11 +36,11 @@ export async function GET(req: NextRequest) {
         const payload = await s(beforeCookie);
 
         if (payload) {
-          cookies().set("meet", payload, {
+          (await cookies()).set("meet", payload, {
             domain: `${process.env.API_DOMAIN}`,
           });
 
-          const cookie = cookies().get("meet")?.value as string;
+          const cookie = (await cookies()).get("meet")?.value as string;
 
           const res = NextResponse.redirect(`${uri}/${meet._id.toString()}`, {
             status: 307,

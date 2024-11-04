@@ -5,9 +5,9 @@ import BackButton from "./BackButton";
 import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 
-const EdgeMsg = dynamic(() => import("./EdgeMsg"), { ssr: false });
-const Switches = dynamic(() => import("./Switches"), { ssr: false });
-const ApplyBtn = dynamic(() => import("./ApplyBtn"), { ssr: false });
+const EdgeMsg = dynamic(() => import("./EdgeMsg"));
+const Switches = dynamic(() => import("./SwitchesChild"));
+const ApplyBtn = dynamic(() => import("./ApplyBtnChild"));
 
 export default function PublicPageContainer({
   children,
