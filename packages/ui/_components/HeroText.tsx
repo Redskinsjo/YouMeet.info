@@ -1,9 +1,7 @@
 import dynamic from "next/dynamic";
 
-const HeroTitles = dynamic(() => import("./HeroTitles"), { ssr: false });
-const HeroStyledText = dynamic(() => import("./HeroStyledText"), {
-  ssr: false,
-});
+const HeroTitles = dynamic(() => import("./HeroTitlesChild"));
+const HeroStyledText = dynamic(() => import("./HeroTextChild"));
 
 export default function HeroText() {
   return (

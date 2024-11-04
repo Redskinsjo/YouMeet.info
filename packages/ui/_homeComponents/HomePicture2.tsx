@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const HomeWhatsapp = dynamic(() => import("./HomeWhatsapp"), { ssr: false });
+const HomeWhatsapp = dynamic(() => import("./WhatsappChild"));
 
 export default function HomePicture2() {
   return (

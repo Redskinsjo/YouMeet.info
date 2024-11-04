@@ -1,17 +1,10 @@
 import dynamic from "next/dynamic";
 import Layout from "./Layout";
 
-const FooterList = dynamic(() => import("./_homeComponents/FooterList"), {
-  ssr: false,
-});
-const FooterList2 = dynamic(() => import("./_homeComponents/FooterList2"), {
-  ssr: false,
-});
+const FooterList = dynamic(() => import("./footer/FooterListChild"));
+const FooterList2 = dynamic(() => import("./footer/FooterList2Child"));
 const FooterProposedBy = dynamic(
-  () => import("./_homeComponents/FooterProposedBy"),
-  {
-    ssr: false,
-  }
+  () => import("./footer/FooterProposedByChild")
 );
 
 export default function Footer() {

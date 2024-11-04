@@ -15,16 +15,13 @@ import dynamic from "next/dynamic";
 import DataSection from "@youmeet/ui/_components/DataSection";
 
 const BigHeaderSection = dynamic(
-  () => import("@youmeet/ui/_sections/BigHeaderSection"),
-  { ssr: false }
+  () => import("@youmeet/ui/_sections/BigHeaderSectionChild")
 );
 const BrandsSection = dynamic(
-  () => import("@youmeet/ui/_sections/BrandsSection"),
-  { ssr: false }
+  () => import("@youmeet/ui/_sections/BrandsSectionChild")
 );
 const MasterSearch = dynamic(
-  () => import("@youmeet/ui/_sections/MasterSearch"),
-  { ssr: false }
+  () => import("@youmeet/ui/_sections/MasterSearchChild")
 );
 
 export default async function Home({

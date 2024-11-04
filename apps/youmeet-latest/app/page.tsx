@@ -11,7 +11,9 @@ import {
 import { Competency, Offer, Video } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
-const HomeChild = dynamic(() => import("./homeChild"), { ssr: false });
+const HomeChild = dynamic(() => import("./homeChild"), {
+  loading: () => <div></div>,
+});
 
 export const metadata: Metadata = {
   title:

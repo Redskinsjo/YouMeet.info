@@ -1,13 +1,10 @@
-"use client";
-import { useTranslation } from "react-i18next";
-import BoldText from "../BoldText";
-import React from "react";
+import dynamic from "next/dynamic";
+const BoldText = dynamic(() => import("../TextChild"));
 
 export default function EdgeMsg() {
-  const { t } = useTranslation();
   return (
     <BoldText
-      text={t("edge-apply")}
+      text={"edge-apply"}
       align="right"
       containerStyle={{
         margin: "0px 6px",

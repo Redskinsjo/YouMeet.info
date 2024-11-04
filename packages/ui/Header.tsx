@@ -110,7 +110,8 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
-            pathname === "/blog" ? (
+            pathname.includes("blog") ||
+            pathname.includes("medias") ? (
               <Link
                 title="Naviguer vers la page d'accueil de YouMeet.info"
                 href={"/"}
@@ -134,6 +135,8 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             {pathname === "/" ||
             pathname.includes("le-produit") ||
             pathname.includes("competences") ||
+            pathname.includes("blog") ||
+            pathname.includes("medias") ||
             pathname === "/blog" ? (
               <Link
                 title="Naviguer vers le produit de mise en relation de YouMeet.info"
@@ -159,6 +162,8 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             {pathname === "/" ||
             pathname.includes("le-produit") ||
             pathname.includes("competences") ||
+            pathname.includes("blog") ||
+            pathname.includes("medias") ||
             pathname === "/blog" ? (
               <Link
                 title="Naviguer vers le blog de YouMeet.info"

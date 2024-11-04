@@ -7,8 +7,7 @@ import dynamic from "next/dynamic";
 import MediaContent from "@youmeet/ui/medias/[media]/mediaComponents/MediaContent";
 
 const BigHeaderSection = dynamic(
-  () => import("@youmeet/ui/_sections/BigHeaderSection"),
-  { ssr: false }
+  () => import("@youmeet/ui/_sections/BigHeaderSectionChild")
 );
 
 export default function MediaChild({

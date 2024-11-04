@@ -54,7 +54,7 @@ import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 import { UnknownAction } from "@reduxjs/toolkit";
 import SimpleField from "./formulaire-profil/formComponents/fields/SimpleField";
 import { onAddFeedback, onApplying } from "@youmeet/functions/actions";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { useQuery } from "@apollo/client";
 import CustomIcon from "./CustomIcon";
 import { CustomIconName } from "@youmeet/types/CustomIconProps";
@@ -616,7 +616,7 @@ const UploadModalContent = () => {
 };
 
 const FeedBackModal = ({ type }: CustomModalProps) => {
-  const [state, formHandler] = useFormState(onAddFeedback, {
+  const [state, formHandler] = useActionState(onAddFeedback, {
     data: false,
   });
   const {

@@ -6,7 +6,7 @@ import MediaTitle from "./MediaTitle";
 import MediaText from "./MediaText";
 import MediaParagraphs from "./MediaParagraphs";
 
-const MediaLinks = dynamic(() => import("./MediaLinks"), { ssr: false });
+const MediaLinks = dynamic(() => import("./MediaLinksChild"));
 
 export default function MediaContent({ media }: { media: Article }) {
   return (
