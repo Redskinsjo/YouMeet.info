@@ -61,10 +61,10 @@ export default function LoginComponentTopPart() {
             </Button>
           </form>
         )}
-        {/* <FranceTravailConnect
+        <FranceTravailConnect
           className="dark:FTConnectDark FTConnect"
           ref={ftConnectRef}
-        /> */}
+        />
         <AdmitCGU />
         <Divider />
       </div>
