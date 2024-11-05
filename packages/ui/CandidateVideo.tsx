@@ -385,7 +385,7 @@ export default function CandidateVideo({
         {!loading && (
           <div
             ref={appVideoContainer}
-            className="video-container paused group flex-1 w-full h-full"
+            className="video-container paused group flex-1 w-full"
             style={{
               backgroundImage:
                 profil && profil.candidate?.targetJob?.topSector?.bgImage
@@ -409,7 +409,6 @@ export default function CandidateVideo({
               ref={appVideo}
               autoPlay={notAutoPlay ? false : true}
               id="video"
-              className="h-full"
               style={{
                 maxWidth: "100%",
                 ...newStyles,
@@ -486,7 +485,7 @@ export default function CandidateVideo({
             ></track> */}
             </video>
 
-            <div className="absolute w-full left-0 bottom-0 bg-black/30">
+            <div className="absolute w-full left-0 bottom-0 bg-black">
               <div className="video-controls-container">
                 <div
                   ref={appTimelineContainer}

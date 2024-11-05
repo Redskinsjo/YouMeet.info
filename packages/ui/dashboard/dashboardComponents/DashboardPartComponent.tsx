@@ -71,7 +71,7 @@ export default function DashboardPartComponent({
 
   return (
     <div className="w-full flex flex-col gap-[6px] xs:gap-[1px] sm:gap-[1px] md:gap-[1px] bg-white dark:extraLightDarkBg">
-      <DashboardAddFTExperiences />
+      {/* <DashboardAddFTExperiences /> */}
       <div className="border-[0.5px] border-solid border-grey300 dark:border-grey900 xs:max-w-full sm:max-w-full md:max-w-full w-full flex flex-col gap-[6px] xs:gap-[1px] sm:gap-[1px] md:gap-[1px] bg-white dark-extraLightDarkBg">
         <Tabs
           value={value}
