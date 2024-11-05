@@ -20,6 +20,7 @@ export default function NewPublicVideoComponent({
       radius="0px"
       newStyles={{
         padding: "0px",
+        maxWidth: "599px",
       }}
     >
       <div className="p-[6px] rounded-b-0">
@@ -38,8 +39,11 @@ export default function NewPublicVideoComponent({
           profil={profil}
           video={principalVideo?.file}
           name={principalVideo?.file?.original_filename as string}
-          newStyles={{ maxWidth: "100vw", width: "100%", maxHeight: "100%" }}
-          containerNewStyles={{ maxHeight: "77vh" }}
+          newStyles={{ width: "100%", maxHeight: "400px" }}
+          containerNewStyles={{
+            maxHeight: "400px",
+            width: "100%",
+          }}
         />
       </div>
     </SubPartContainer>
