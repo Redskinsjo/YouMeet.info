@@ -1165,8 +1165,6 @@ const resolvers: Resolvers = {
         });
       }
 
-      // if (d?.title && d.language)
-      //   whereOr.push({ title: { [d.language]: d.title } })
       if (d?.topSectorIds && d.topSectorIds.length > 0)
         whereOr.push({
           topSectorId: { in: (d?.topSectorIds as string[]) || [] },
