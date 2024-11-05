@@ -142,7 +142,6 @@ import {
   FormResponse,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
-import getUptodateVideos from "@youmeet/utils/resolvers/getUptodateVideos";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
 import { createUpdateCandidate } from "@youmeet/utils/resolvers/createCandidateForm";
 import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDuration";
@@ -359,12 +358,9 @@ const resolvers: Resolvers = {
     videos: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      const videos = await prisma.videos.findMany({
+      return await prisma.videos.findMany({
         include: { job: true, user: true },
       });
-      // const result = await getUptodateVideos(videos);
-      // return result;
-      return videos;
     },
     myVideos: async (
       _: unknown,
@@ -3668,7 +3664,6 @@ const resolvers: Resolvers = {
       if (user.videos) videos = user.videos as Video[];
       else if (user.id)
         videos = await prisma.videos.findMany({ where: { userId: user.id } });
-      // const result = await getUptodateVideos(videos);
       // return result;
       return videos;
     },
