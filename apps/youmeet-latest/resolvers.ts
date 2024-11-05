@@ -3668,9 +3668,7 @@ const resolvers: Resolvers = {
       if (user.videos) videos = user.videos as Video[];
       else if (user.id)
         videos = await prisma.videos.findMany({ where: { userId: user.id } });
-      // console.log("videos", videos);
       // const result = await getUptodateVideos(videos);
-      // console.log(result, "result");
       // return result;
       return videos;
     },
