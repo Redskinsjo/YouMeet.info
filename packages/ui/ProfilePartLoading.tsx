@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 
 export default function ProfilePartLoading() {
   return (
-    <div className="flex flex-col w-[22%] xs:w-full sm:w-full md:w-full min-w-[390px] xs:min-w-full sm:min-w-full md:min-w-full h-auto gap-[12px] max-h-screen">
+    <div className="dark:extraLightDarkBg flex flex-col gap-[6px] w-[499px] xs:w-screen sm:w-screen">
       <div className="h-[93.5px] flex-center flex-col shadow-custom">
         <Skeleton width={"40%"} height={24} />
         <Skeleton width={"20%"} height={14} />

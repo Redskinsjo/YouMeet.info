@@ -10,6 +10,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import NewTargetContractTypeComponent from "../dashboard/dashboardComponents/NewTargetContractTypeComponent";
 import AddVideo from "../AddVideo";
+import LoginModalClose from "../LoginModalClose";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 const NewTargetJobComponent = dynamic(
@@ -46,6 +47,7 @@ export default function FulfillModal({ type }: CustomModalProps) {
               <AddVideo profil={modal.user} />
             </div>
           </div>
+          <LoginModalClose />
         </>
       </ModalWrapper>
     )

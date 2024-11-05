@@ -38,7 +38,7 @@ export default function DetailComponentWrapper(params: {
 }) {
   return (
     <Suspense>
-      <DetailComponent {...params} />;
+      <DetailComponent {...params} />
     </Suspense>
   );
 }

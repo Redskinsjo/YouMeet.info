@@ -24,14 +24,13 @@ export default function Profil({
     <div className="min-h-screen flex flex-col">
       <Layout
         newStyles={{
-          maxWidth: "100vw",
           flex: 1,
           margin: "0px",
-          justifyContent: "flex-start",
+          justifyContent: "center",
           padding: "6px 6px 24px 6px",
         }}
       >
-        <div className="flex w-full gap-[6px] xs:flex-col sm:flex-col md:flex-col">
+        <div className="flex flex-col gap-[6px] w-[600px]">
           <ProfilePartComponent
             profil={profil}
             details={profil.details as BetaDetails}

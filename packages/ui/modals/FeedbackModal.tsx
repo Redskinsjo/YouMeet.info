@@ -19,6 +19,7 @@ import { useActionState, useRef } from "react";
 import dynamic from "next/dynamic";
 import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
 import { modals } from "./modals";
+import LoginModalClose from "../LoginModalClose";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 
@@ -51,52 +52,55 @@ export default function FeedBackModal({ type }: CustomModalProps) {
   return (
     !!modal.user && (
       <ModalWrapper>
-        <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] p-[12px]">
-          <h3 className="text-purple900 sentences">
-            {modals && modals[type] && modals[type].title && (
-              <BoldText
-                text={`${t((modals[type].title as trads)[language])}`}
+        <>
+          <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] p-[12px]">
+            <h3 className="text-purple900 sentences">
+              {modals && modals[type] && modals[type].title && (
+                <BoldText
+                  text={`${t((modals[type].title as trads)[language])}`}
+                />
+              )}
+            </h3>
+            <form
+              ref={formRef}
+              action={formHandler}
+              className="xs:text-[22px] sm:text-[22px] md:text-[22px] text-blueGrey700 text-[19px] text-center flex-center flex-col gap-[12px]"
+            >
+              {modals && modals[type] && modals[type].content && (
+                <BoldText
+                  text={`${t((modals[type].content as trads)[language])}`}
+                />
+              )}
+              <SimpleField
+                name="feedback"
+                type="text"
+                label="Feedback"
+                multiline={true}
+                rows={3}
+                required
               />
-            )}
-          </h3>
-          <form
-            ref={formRef}
-            action={formHandler}
-            className="xs:text-[22px] sm:text-[22px] md:text-[22px] text-blueGrey700 text-[19px] text-center flex-center flex-col gap-[12px]"
-          >
-            {modals && modals[type] && modals[type].content && (
-              <BoldText
-                text={`${t((modals[type].content as trads)[language])}`}
+              <SimpleField
+                name="userId"
+                type="hidden"
+                value={modal.user.id}
+                required
               />
+              <SimpleField
+                name="authorId"
+                type="hidden"
+                value={user.id}
+                required
+              />
+              <Button type="submit">{t("validate")}</Button>
+            </form>
+            {status && (
+              <div className="text-green500 text-[16px]">
+                Votre commentaire a bien été fait
+              </div>
             )}
-            <SimpleField
-              name="feedback"
-              type="text"
-              label="Feedback"
-              multiline={true}
-              rows={3}
-              required
-            />
-            <SimpleField
-              name="userId"
-              type="hidden"
-              value={modal.user.id}
-              required
-            />
-            <SimpleField
-              name="authorId"
-              type="hidden"
-              value={user.id}
-              required
-            />
-            <Button type="submit">{t("validate")}</Button>
-          </form>
-          {status && (
-            <div className="text-green500 text-[16px]">
-              Votre commentaire a bien été fait
-            </div>
-          )}
-        </div>
+          </div>
+          <LoginModalClose />
+        </>
       </ModalWrapper>
     )
   );
