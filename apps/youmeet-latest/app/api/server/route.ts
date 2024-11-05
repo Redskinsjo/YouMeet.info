@@ -1,5 +1,5 @@
 import { createSchema, createYoga } from "graphql-yoga";
-import resolvers from "@/resolvers";
+import resolvers from "../../../resolvers";
 import mongoose from "mongoose";
 import typeDefs from "@youmeet/gql/schema";
 import { useDisableIntrospection } from "@graphql-yoga/plugin-disable-introspection";

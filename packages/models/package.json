@@ -6,6 +6,7 @@
     "@youmeet/types": "*",
     "@youmeet/typescript-config": "*",
     "@youmeet/utils": "*",
+    "dotenv": "^16.4.5",
     "mongoose": "^8.8.0"
   },
   "devDependencies": {

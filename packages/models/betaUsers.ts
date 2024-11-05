@@ -9,6 +9,7 @@ import { BetaCompanySchema } from "./betaCompanies";
 import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 import { IndexList } from "@youmeet/types/IndexList";
 import { AffiliationSchema } from "./affiliations";
+import dotenv from "dotenv";
 mongoose.connect(`${process.env.MONGODB_URI}`);
 
 mongoose.Promise = global.Promise;

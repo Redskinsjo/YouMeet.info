@@ -417,7 +417,7 @@ export default function CandidateVideo({
                 height: inFullScreen ? "100%" : newStyles?.height,
                 width: inFullScreen ? "100%" : newStyles?.height,
               }}
-              src={setFileUrl(video, onTheFly) as string}
+              src={setFileUrl(video) as string}
               onClick={(e) => togglePlay(e)}
               onPause={() => {
                 const videoContainer =

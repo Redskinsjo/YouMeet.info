@@ -4,12 +4,12 @@
     "build": {
       "env": ["*"],
       "dependsOn": ["vercel-generate", "^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "preview": {
       "env": ["*"],
       "dependsOn": ["vercel-generate", "^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "dev": {
       "env": ["*"],
