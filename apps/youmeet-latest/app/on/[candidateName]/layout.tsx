@@ -12,10 +12,11 @@ export default async function Layout({
   params,
 }: {
   children: ReactElement;
-  params: { candidateName: string };
+  params: Promise<{ candidateName: string }>;
 }) {
+  const prms = await params;
   const user = (await getUser(
-    { uniqueName: params.candidateName },
+    { uniqueName: prms.candidateName },
     30
   )) as BetaUser;
   return (
@@ -23,7 +24,7 @@ export default async function Layout({
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href={`${uri}/${params.candidateName}`} />
+      <link rel="canonical" href={`${uri}/${prms.candidateName}`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -48,7 +49,7 @@ export default async function Layout({
                 : user?.picture
             }`,
             description: `${user?.description}`,
-            url: `${uri}/${params.candidateName}`,
+            url: `${uri}/${prms.candidateName}`,
             potentialAction: [
               {
                 "@type": "WatchAction",
@@ -65,7 +66,7 @@ export default async function Layout({
                 name: "Consulter les Références",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: `${uri}/${params.candidateName}`,
+                  urlTemplate: `${uri}/${prms.candidateName}`,
                 },
               },
               {
@@ -73,7 +74,7 @@ export default async function Layout({
                 name: "Notifier d'une Proposition d'Entretien",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: `${uri}/${params.candidateName}`,
+                  urlTemplate: `${uri}/${prms.candidateName}`,
                 },
               },
             ],

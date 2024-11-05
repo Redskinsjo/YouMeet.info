@@ -14,8 +14,8 @@ import React from "react";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: { candidateName: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ candidateName: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -34,7 +34,8 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const uniqueName = decodeURIComponent(params.candidateName);
+  const prms = await params;
+  const uniqueName = decodeURIComponent(prms.candidateName);
 
   const user = (await getUserMetadata<BetaUser>({ uniqueName })) as BetaUser;
 
@@ -122,11 +123,12 @@ export async function generateMetadata(
 export default async function Profil({
   params,
 }: {
-  params: { candidateName: string };
+  params: Promise<{ candidateName: string }>;
 }) {
+  const prms = await params;
   const user = (await getUser(
     {
-      uniqueName: decodeURIComponent(params.candidateName),
+      uniqueName: decodeURIComponent(prms.candidateName),
     },
     10
   )) as BetaUser;

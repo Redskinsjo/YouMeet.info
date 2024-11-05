@@ -41,7 +41,7 @@ export default function BoldText({
 }: {
   fontSizeClass?: string;
   text: string | Translated;
-  containerStyle?: Attr;
+  containerStyle?: Attr | {};
   align?: "left" | "justify" | "right" | "center";
   links?: boolean;
   noEnding?: boolean;

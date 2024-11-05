@@ -9,10 +9,11 @@ export default async function Layout({
   params,
 }: {
   children: ReactElement;
-  params: { offre: string };
+  params: Promise<{ offre: string }>;
 }) {
+  const prms = await params;
   const offre = (await getOffer<Offer>({
-    slug: decodeURIComponent(params.offre),
+    slug: decodeURIComponent(prms.offre),
   })) as Offer;
   return (
     <div>

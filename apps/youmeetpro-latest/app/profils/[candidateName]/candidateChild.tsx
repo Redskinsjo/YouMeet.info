@@ -1,23 +1,13 @@
 import React from "react";
 import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
 import Layout from "@youmeet/ui/Layout";
-import ProfilePartLoading from "@youmeet/ui/profils/[candidateName]/candidateProfileComponents/ProfilePartLoading";
-import VideoPartLoading from "@youmeet/ui/profils/[candidateName]/candidateProfileComponents/VideoPartLoading";
 import dynamic from "next/dynamic";
 
 const ProfilePartComponent = dynamic(
-  () =>
-    import(
-      "@youmeet/ui/profils/[candidateName]/candidateProfileComponents/ProfilePartComponent"
-    ),
-  { ssr: false, loading: () => <ProfilePartLoading /> }
+  () => import("@youmeet/ui/ProfilePartChild")
 );
 const VideoPartComponent = dynamic(
-  () =>
-    import(
-      "@youmeet/ui/profils/[candidateName]/candidateProfileComponents/VideoPartComponent"
-    ),
-  { ssr: false, loading: () => <VideoPartLoading /> }
+  () => import("@youmeet/ui/[candidateName]/candidateComponents/VideoPartChild")
 );
 
 export default function Profil({

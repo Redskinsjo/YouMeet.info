@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import { Dispatch, SetStateAction, useCallback, useMemo, useRef } from "react";
 import BoldText from "../../BoldText";
 import { useTranslation } from "react-i18next";
 import { Avatar, BetaUser, MeetCandidate, Video } from "@youmeet/gql/generated";
@@ -21,7 +15,6 @@ import {
   setUpload,
 } from "@youmeet/global-config/features/global";
 import { onDeleteVideo, onSetVideoAsDefault } from "@youmeet/functions/actions";
-import Logo from "../../Logo";
 import { RootState } from "@youmeet/global-config/store";
 import { IoIosCamera } from "react-icons/io";
 import { removeVideo } from "@youmeet/global-config/features/user";
@@ -58,9 +51,6 @@ export default function VideoComponent({
   const sm = useMediaQuery("(max-width:720px)");
   const md = useMediaQuery("(max-width:900px)");
   const dispatch = useDispatch();
-  const upload = useSelector(
-    (state: RootState) => (state.global as GlobalState).upload
-  );
   const deleteVideoFormRef = useRef<HTMLFormElement>(null);
   const setVideoAsDefaultFormRef = useRef<HTMLFormElement>(null);
 
@@ -86,7 +76,7 @@ export default function VideoComponent({
   }, [video]);
 
   const customOnDeleteVideo = useCallback(async (videoId: string) => {
-    dispatch(setUpload(`r-video/${videoId}`));
+    dispatch(setUpload(`delete`));
     const result = (await onDeleteVideo(videoId)) as
       | PayloadBackendError
       | withData<Video>;
@@ -252,11 +242,6 @@ export default function VideoComponent({
                             {t("delete")}
                           </div>
                         </form>
-
-                        {upload?.includes("r-video") &&
-                        upload.split("/")[1] === video.id ? (
-                          <Logo gif png />
-                        ) : undefined}
                       </div>
                     )}
 

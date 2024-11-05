@@ -4,17 +4,14 @@ import dynamic from "next/dynamic";
 import OneLineSkeleton from "./OneLineSkeleton";
 
 const OtherArticleLink = dynamic(
-  () => import("./medias/[media]/mediaComponents/OtherArticleLink"),
-  { ssr: false }
+  () => import("./medias/[media]/mediaComponents/OtherArticleLinkChild")
 );
 const OtherArticleImg = dynamic(
-  () => import("./medias/[media]/mediaComponents/OtherArticleImg"),
-  { ssr: false }
+  () => import("./medias/[media]/mediaComponents/OtherArticleImgChild")
 );
 
-const BoldText = dynamic(() => import("./BoldText"), {
-  ssr: false,
-  loading: () => <OneLineSkeleton height="300px" width="300px" count={1} />,
+const BoldText = dynamic(() => import("./TextChild"), {
+  loading: () => <OneLineSkeleton height="300px" width="300px" />,
 });
 
 export default function OtherArticle({ article }: { article: Article }) {

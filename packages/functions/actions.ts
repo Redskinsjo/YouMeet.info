@@ -662,9 +662,13 @@ export const onLogin = async (
 
               const payload = await s(beforeCookie);
               if (payload) {
-                cookies().set(isCandidate ? "login" : "loginPro", payload, {
-                  domain: process.env.API_DOMAIN,
-                });
+                (await cookies()).set(
+                  isCandidate ? "login" : "loginPro",
+                  payload,
+                  {
+                    domain: process.env.API_DOMAIN,
+                  }
+                );
               } else {
                 throw new BackendError(
                   BACKEND_ERRORS.UNKNOWN,
@@ -843,7 +847,7 @@ export const onSigninUp = async (
         };
         const payload = await s(beforeCookie);
         if (payload) {
-          cookies().set("login", payload, {
+          (await cookies()).set("login", payload, {
             domain: process.env.API_DOMAIN,
           });
           return { data: `${returnTo}` };
@@ -865,7 +869,7 @@ export const onSigninUp = async (
 };
 
 export const onLogout = async () => {
-  cookies().delete({
+  (await cookies()).delete({
     name: process.env.APP === "candidate" ? "login" : "loginPro",
     path: "/",
     domain: `${process.env.API_DOMAIN}`,
@@ -1928,7 +1932,10 @@ export const onAnalyzeVideo = async (
       if (result && isPayloadError(result)) {
         throw new BackendError(result.type, result.message);
       } else {
-        const result2 = await analyseVideo(result.data, cookies().getAll());
+        const result2 = await analyseVideo(
+          result.data,
+          (await cookies()).getAll()
+        );
         if (result2.success) {
           revalidatePath("/dashboard");
           revalidatePath("/profils/[candidateName]", "page");

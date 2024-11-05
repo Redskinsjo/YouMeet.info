@@ -3,7 +3,7 @@ import { OffreEmploiFT } from "@youmeet/types/api/OffreEmploiFT";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 
-const RoleQuestion = dynamic(() => import("./RoleQuestion"), { ssr: false });
+const RoleQuestion = dynamic(() => import("./RoleQuestionChild"));
 
 export default function OffresEmploiFT({
   offres,

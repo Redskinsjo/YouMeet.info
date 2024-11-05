@@ -12,8 +12,8 @@ import { isUser } from "@youmeet/types/TypeGuards";
 import { redirect } from "next/navigation";
 
 type Props = {
-  params: { candidateName: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ candidateName: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -33,15 +33,16 @@ export const maxDuration = 60;
 export default async function Profil({
   params,
 }: {
-  params: { candidateName: string };
+  params: Promise<{ candidateName: string }>;
 }) {
+  const prms = await params;
   const verified = await verifyTokenServer(
     undefined,
-    `profils/${params.candidateName}`
+    `profils/${prms.candidateName}`
   );
   const user = (await getUserCandidate(
     {
-      uniqueName: decodeURIComponent(params.candidateName),
+      uniqueName: decodeURIComponent(prms.candidateName),
       originId: (verified as LoginCookiePayload).userId,
     },
     0

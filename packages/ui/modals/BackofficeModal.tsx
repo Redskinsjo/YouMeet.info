@@ -1,16 +1,17 @@
 "use client";
-import BackofficeModalContent from "../backoffice/backofficeComponents/BackofficeModalContent";
-import { ModalState } from "@youmeet/global-config/features/modal";
+
 import { RootState } from "@youmeet/global-config/store";
-import { CustomModalProps } from "@youmeet/types/CustomModal";
+import { useSelector } from "react-redux";
+import { ModalState } from "@youmeet/global-config/features/modal";
 import {
   BackofficeModalData,
   BackofficeModalDataType,
 } from "@youmeet/types/modal";
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
+import BackofficeModalContent from "../backoffice/backofficeComponents/BackofficeModalContent";
+import { CustomModalProps } from "@youmeet/types/CustomModal";
 
-export default function BackofficeModalComponent({ type }: CustomModalProps) {
+export default function BackofficeModalComponent(props: CustomModalProps) {
   const modal = useSelector((state: RootState) => state.modal as ModalState);
 
   const content = useMemo(() => {

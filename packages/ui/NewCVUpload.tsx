@@ -13,7 +13,6 @@ import {
   setUpload,
 } from "@youmeet/global-config/features/global";
 import { onDeleteCV } from "@youmeet/functions/actions";
-import Logo from "./Logo";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 
 export default function NewCVUpload({
@@ -32,7 +31,7 @@ export default function NewCVUpload({
   );
 
   const customeOnDeleteCV = async (userId: string, formData: FormData) => {
-    dispatch(setUpload("r-cv"));
+    dispatch(setUpload("delete"));
     const result = await onDeleteCV(userId);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed"));
@@ -49,17 +48,13 @@ export default function NewCVUpload({
             action={customeOnDeleteCV.bind(null, profil?.id as string)}
             className="flex-bet w-full"
           >
-            {upload === "r-cv" ? (
-              <Logo gif png />
-            ) : (
-              <Link
-                href={dev ? cvFile?.url : cvFile?.secure_url}
-                target="_blank"
-                className="dark:text-deepPurple200 text-deepPurple700 font-bold"
-              >
-                {t("view-CV")}
-              </Link>
-            )}
+            <Link
+              href={dev ? cvFile?.url : cvFile?.secure_url}
+              target="_blank"
+              className="dark:text-deepPurple200 text-deepPurple700 font-bold"
+            >
+              {t("view-CV")}
+            </Link>
 
             <span
               className="font-extralight cursor-pointer dark:text-white"

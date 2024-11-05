@@ -113,7 +113,7 @@ export default function BackofficeModalContent({
   }, [(data?.data as Job).id]);
 
   const customOnDeleteVideo = async (videoId: string) => {
-    dispatch(setUpload(`r-video/${videoId}`));
+    dispatch(setUpload(`upload`));
     const result = (await onDeleteVideo(videoId)) as
       | PayloadBackendError
       | withData<Video>;

@@ -3,13 +3,10 @@ import CompetencyImg from "./CompetencyImg";
 import OneLineSkeleton from "../../../OneLineSkeleton";
 import dynamic from "next/dynamic";
 
-const BoldText = dynamic(() => import("../../../BoldText"), {
-  ssr: false,
+const BoldText = dynamic(() => import("../../../TextChild"), {
   loading: () => <OneLineSkeleton count={3} />,
 });
-const CompetencyTitle = dynamic(() => import("./CompetencyTitle"), {
-  ssr: false,
-});
+const CompetencyTitle = dynamic(() => import("./CompetencyTitleChild"));
 
 export default function CompetencyImportance({
   competency,

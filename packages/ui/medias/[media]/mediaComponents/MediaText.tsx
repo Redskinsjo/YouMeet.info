@@ -2,9 +2,8 @@ import { Article, Translated } from "@youmeet/gql/generated";
 import OneLineSkeleton from "../../../OneLineSkeleton";
 import dynamic from "next/dynamic";
 
-const BoldText = dynamic(() => import("@youmeet/ui/BoldText"), {
-  ssr: false,
-  loading: () => <OneLineSkeleton height="300px" width="100%" count={1} />,
+const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), {
+  loading: () => <OneLineSkeleton height="300px" width="100%" />,
 });
 
 export default function MediaText({

@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LoginComponentTopPart from "./LoginComponentTopPart";
 import { useSelector } from "react-redux";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import {
   onEmailForgotten,
   onLogin,
@@ -30,7 +30,7 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const [state, handle] = useFormState(onSigninUp, { data: "" });
+  const [state, handle] = useActionState(onSigninUp, { data: "" });
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const searchRedirect = encodeURIComponent(searchParams.get("redirect") || "");
@@ -179,7 +179,7 @@ const WhenLogin = ({
   setIsSubscribing,
 }: CustomModalProps) => {
   const [email, setEmail] = useState("");
-  const [state, handle] = useFormState<
+  const [state, handle] = useActionState<
     withData<string | null> | PayloadBackendError,
     FormData
   >(onLogin, { data: null });
@@ -297,7 +297,7 @@ const WhenLogin = ({
 };
 
 const WhenForgotten = ({ type, setIsForgotten }: CustomModalProps) => {
-  const [state, handle] = useFormState(onEmailForgotten, { data: false });
+  const [state, handle] = useActionState(onEmailForgotten, { data: false });
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const { t } = useTranslation();

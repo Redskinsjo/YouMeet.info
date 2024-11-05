@@ -9,10 +9,11 @@ export default async function Layout({
   params,
 }: {
   children: ReactNode;
-  params: { media: string };
+  params: Promise<{ media: string }>;
 }) {
+  const prms = await params;
   const article = (await getArticle<Article>({
-    slug: decodeURIComponent(params.media),
+    slug: decodeURIComponent(prms.media),
   })) as Article;
   return (
     <div className="dark:mediumDarkBg mediumBg">

@@ -3,9 +3,9 @@ import { isCompetency } from "@youmeet/types/TypeGuards";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-const Card = dynamic(() => import("./Card"), { ssr: false });
-const SectionTitle = dynamic(() => import("./SectionTitle"), { ssr: false });
-const BoldText = dynamic(() => import("@youmeet/ui/BoldText"), { ssr: false });
+const Card = dynamic(() => import("./Card"));
+const SectionTitle = dynamic(() => import("./SectionTitleChild"));
+const BoldText = dynamic(() => import("@youmeet/ui/TextChild"));
 
 export default function DataSection({
   data,

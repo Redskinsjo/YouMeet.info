@@ -7,8 +7,7 @@ import DividerSection from "@youmeet/ui/_components/DividerSection";
 import dynamic from "next/dynamic";
 
 const BigHeaderSection = dynamic(
-  () => import("@youmeet/ui/_sections/BigHeaderSection"),
-  { ssr: false }
+  () => import("@youmeet/ui/_sections/BigHeaderSectionChild")
 );
 
 export default function CompetencyChild({

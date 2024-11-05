@@ -2,13 +2,14 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { ReactNode } from "react";
 
-export default function Layout({
+export default async function Layout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: { queueId: string };
+  params: Promise<{ queueId: string }>;
 }) {
+  const prms = await params;
   return (
     <div className="p-[6px]">
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
@@ -16,7 +17,7 @@ export default function Layout({
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
       <link
         rel="canonical"
-        href={`https://www.youmeet.info/dashboard/converations/${params.queueId}`}
+        href={`https://www.youmeet.info/dashboard/converations/${prms.queueId}`}
       />
       <link rel="icon" href="/favicon.ico" />
       <meta
@@ -35,14 +36,14 @@ export default function Layout({
             name: "Conversation Candidat-Recruteur - Plateforme de Recrutement",
             description:
               "Le recruteur a démarré une converation avec vous. Répondez aux questions pour faire suite à votre candidature.",
-            url: `https://www.youmeet.info/dashboard/converations/${params.queueId}`,
+            url: `https://www.youmeet.info/dashboard/converations/${prms.queueId}`,
             potentialAction: [
               {
                 "@type": "ViewAction",
                 name: "Voir les Questions du Recruteur",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: `https://www.youmeet.info/dashboard/converations/${params.queueId}`,
+                  urlTemplate: `https://www.youmeet.info/dashboard/converations/${prms.queueId}`,
                 },
               },
               {
@@ -50,7 +51,7 @@ export default function Layout({
                 name: "Répondre aux Questions du Recruteur",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: `https://www.youmeet.info/dashboard/converations/${params.queueId}`,
+                  urlTemplate: `https://www.youmeet.info/dashboard/converations/${prms.queueId}`,
                 },
               },
             ],

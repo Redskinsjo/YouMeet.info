@@ -24,7 +24,6 @@ import { BetaUser } from "@youmeet/gql/generated";
 import ConversationsInProgress from "./ConversationsInProgress";
 import { setName } from "@youmeet/utils/basics/setName";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
-import React from "react";
 
 const EmptyTheme = { type: "general", prefix: "", text: "" };
 

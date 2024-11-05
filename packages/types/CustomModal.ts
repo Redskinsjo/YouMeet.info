@@ -12,6 +12,7 @@ export type CustomModalType =
   | "login"
   | "loginPage"
   | "upload"
+  | "upload-50"
   | "video"
   | "accountCandidate"
   | "fileTooLarge"
@@ -36,7 +37,8 @@ export type CustomModalType =
   | "creditTooLow"
   | "interviewOffer"
   | "shareProfile"
-  | "requestNotCompleted";
+  | "requestNotCompleted"
+  | "delete";
 
 export type SignupCookiePayload = {
   email: string;

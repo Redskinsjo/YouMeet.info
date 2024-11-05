@@ -1,22 +1,26 @@
 "use client";
 
-import { Button } from "@mui/material";
-import BoldText from "../BoldText";
-import { ModalWrapper } from "../CustomModal";
-import { UnknownAction } from "@reduxjs/toolkit";
-import { onAddFeedback } from "@youmeet/functions/actions";
-import { setError } from "@youmeet/global-config/features/global";
-import { ModalState, resetModal } from "@youmeet/global-config/features/modal";
-import { UserState } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
-import { withData } from "@youmeet/types/api/backend";
-import { CustomModalProps, trads } from "@youmeet/types/CustomModal";
-import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { useEffect, useRef, useState } from "react";
-import { useActionState } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { UserState } from "@youmeet/global-config/features/user";
+import ModalWrapper from "./ModalWrapper";
+import { useTranslation } from "react-i18next";
+import { resetModal } from "@youmeet/global-config/features/modal";
+import { UnknownAction } from "@reduxjs/toolkit";
+import { CustomModalProps, trads } from "@youmeet/types/CustomModal";
+import { useEffect, useState } from "react";
+import { ModalState } from "@youmeet/global-config/features/modal";
+import { isPayloadError } from "@youmeet/types/TypeGuards";
+import { setError } from "@youmeet/global-config/features/global";
+import { onAddFeedback } from "@youmeet/functions/actions";
+import { Button } from "@mui/material";
+import { withData } from "@youmeet/types/api/backend";
+import { useActionState, useRef } from "react";
+import dynamic from "next/dynamic";
 import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
+import { modals } from "./modals";
+
+const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 
 export default function FeedBackModal({ type }: CustomModalProps) {
   const [state, formHandler] = useActionState(onAddFeedback, {
@@ -44,16 +48,25 @@ export default function FeedBackModal({ type }: CustomModalProps) {
     }
   }, [state]);
 
+<<<<<<< HEAD
   const modals: any = undefined;
 
+=======
+>>>>>>> 05028fecbea842ad720d3e46e568f0105ae8ac9d
   return (
     !!modal.user && (
       <ModalWrapper>
         <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] p-[12px]">
           <h3 className="text-purple900 sentences">
+<<<<<<< HEAD
             {modals && modals[type] && modals[type]?.title && (
               <BoldText
                 text={`${t((modals[type]?.title as trads)[language])}`}
+=======
+            {modals && modals[type] && modals[type].title && (
+              <BoldText
+                text={`${t((modals[type].title as trads)[language])}`}
+>>>>>>> 05028fecbea842ad720d3e46e568f0105ae8ac9d
               />
             )}
           </h3>
@@ -62,9 +75,15 @@ export default function FeedBackModal({ type }: CustomModalProps) {
             action={formHandler}
             className="xs:text-[22px] sm:text-[22px] md:text-[22px] text-blueGrey700 text-[19px] text-center flex-center flex-col gap-[12px]"
           >
+<<<<<<< HEAD
             {modals && modals[type] && modals[type]?.content && (
               <BoldText
                 text={`${t((modals[type]?.content as trads)[language])}`}
+=======
+            {modals && modals[type] && modals[type].content && (
+              <BoldText
+                text={`${t((modals[type].content as trads)[language])}`}
+>>>>>>> 05028fecbea842ad720d3e46e568f0105ae8ac9d
               />
             )}
             <SimpleField

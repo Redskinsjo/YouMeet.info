@@ -1,16 +1,21 @@
 "use client";
-import { ModalWrapper } from "../CustomModal";
-import BoldText from "../BoldText";
+
+import ModalWrapper from "./ModalWrapper";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
-import { CustomModalProps } from "@youmeet/types/CustomModal";
+import { useSelector } from "react-redux";
 import { ModalState } from "@youmeet/global-config/features/modal";
+import { CustomModalProps } from "@youmeet/types/CustomModal";
 import Image from "next/image";
-import NewTargetJobComponent from "../dashboard/dashboardComponents/NewTargetJobComponent";
+import dynamic from "next/dynamic";
 import NewTargetContractTypeComponent from "../dashboard/dashboardComponents/NewTargetContractTypeComponent";
 import AddVideo from "../AddVideo";
 
+const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
+const NewTargetJobComponent = dynamic(
+  () => import("../dashboard/dashboardComponents/NewTargetJobComponent"),
+  { ssr: false }
+);
 export default function FulfillModal({ type }: CustomModalProps) {
   const { t } = useTranslation();
   const modal = useSelector((state: RootState) => state.modal as ModalState);
