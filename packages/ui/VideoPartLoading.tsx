@@ -1,14 +1,8 @@
 import { Skeleton } from "@mui/material";
 
-export default function VideoPartLoading({
-  width,
-}: {
-  width: "full" | "600px";
-}) {
-  const w = width === "full" ? "w-full" : width === "600px" ? `w-[600px]` : "";
-  const className = `flex flex-col gap-[6px] h-[400px] ${w} xs:w-screen sm:w-screen`;
+export default function VideoPartLoading() {
   return (
-    <div className={className}>
+    <div className="flex flex-col gap-[6px] h-[400px] w-[600px] xs:w-screen sm:w-screen">
       <div className="indent-4 xs:indent-0 sm:indent-0 md:indent-0 text-justify p-[12px] h-[86px] box-border shadow-custom">
         <Skeleton width={"100%"} height={16} />
         <Skeleton width={"100%"} height={16} />

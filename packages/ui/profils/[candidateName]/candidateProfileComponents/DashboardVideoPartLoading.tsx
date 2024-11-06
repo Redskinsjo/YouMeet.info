@@ -1,7 +1,7 @@
 import { Skeleton } from "@mui/material";
 import React from "react";
 
-export default function VideoPartLoading() {
+export default function DashboardVideoPartLoading() {
   return (
     <div className="flex flex-col gap-[12px] flex-1">
       <div className="indent-4 xs:indent-0 sm:indent-0 md:indent-0 text-justify p-[12px] h-[86px] box-border shadow-custom">
