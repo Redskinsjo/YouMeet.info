@@ -30,7 +30,7 @@ export default function Profil({
           padding: "6px 6px 24px 6px",
         }}
       >
-        <div className="flex flex-col gap-[6px] w-[600px]">
+        <div className="flex-center flex-col gap-[6px] w-[600px]">
           <ProfilePartComponent
             profil={profil}
             details={profil.details as BetaDetails}
