@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
       });
       if (signed) {
         (await cookies()).set("reset", `${signed}`, {
+          path: "/",
           domain: `${process.env.API_DOMAIN}`,
         });
         const cookie = (await cookies()).get("reset")?.value as string;

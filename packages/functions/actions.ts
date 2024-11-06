@@ -666,6 +666,7 @@ export const onLogin = async (
                   isCandidate ? "login" : "loginPro",
                   payload,
                   {
+                    path: "/",
                     domain: process.env.API_DOMAIN,
                   }
                 );
@@ -848,6 +849,7 @@ export const onSigninUp = async (
         const payload = await s(beforeCookie);
         if (payload) {
           (await cookies()).set("login", payload, {
+            path: "/",
             domain: process.env.API_DOMAIN,
           });
           return { data: `${returnTo}` };
