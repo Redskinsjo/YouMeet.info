@@ -8,8 +8,9 @@ export default (
 ): string | undefined => {
   let url;
   if (file && isAvatar(file)) {
-    if (file.subtitledUrl) return file.subtitledUrl;
-    else if (dev) url = file.url as string;
+    // if (file.subtitledUrl) return file.subtitledUrl;
+    // else if (dev) url = file.url as string;
+    if (dev) url = file.url as string;
     else url = file.secure_url as string;
 
     const regex = /(?<=video\/upload\/).+(?=\/youmeet-official)/;
