@@ -18,8 +18,8 @@
     "dist/queries/*.graphql"
   ],
   "type": "module",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "typescript": {
     "definition": "dist/types/index.d.ts"
   },
@@ -36,15 +36,15 @@
     ".": {
       "require": {
         "types": "./dist/types/index.d.cts",
-        "default": "./dist/cjs/index.js"
+        "default": "./dist/index.js"
       },
       "import": {
         "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.js"
+        "default": "./dist/index.js"
       },
       "default": {
         "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.js"
+        "default": "./dist/index.js"
       }
     }
   },
@@ -56,6 +56,7 @@
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/typescript": "^4.1.1",
     "@graphql-codegen/typescript-operations": "^4.3.1",
+    "@graphql-codegen/typescript-resolvers": "^4.4.0",
     "typescript": "^5.6.3"
   },
   "dependencies": {

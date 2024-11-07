@@ -7,10 +7,7 @@ import type {
 } from "./types/generated";
 import { headers, method, uri } from "./imports";
 
-const queryPath = path.join(
-  __dirname,
-  "../../queries/GetManyCompetencies.graphql"
-);
+const queryPath = path.join(__dirname, "./queries/GetManyCompetencies.graphql");
 const query = loadDocumentsSync(queryPath, {
   loaders: [new GraphQLFileLoader()],
 });

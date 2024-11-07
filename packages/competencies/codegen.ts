@@ -6,7 +6,7 @@ const config: CodegenConfig = {
   emitLegacyCommonJSImports: false,
   generates: {
     "./src/types/generated.ts": {
-      plugins: ["typescript", "typescript-operations"],
+      plugins: ["typescript", "typescript-operations", "typescript-resolvers"],
     },
   },
   overwrite: true,
