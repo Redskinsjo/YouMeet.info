@@ -7,10 +7,7 @@ import { loadDocumentsSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { headers, method, uri } from "./imports";
 
-const queryPath = path?.join(
-  __dirname,
-  "../../queries/GetOneCompetency.graphql"
-);
+const queryPath = path?.join(__dirname, "./queries/GetOneCompetency.graphql");
 const query = loadDocumentsSync(queryPath, {
   loaders: [new GraphQLFileLoader()],
 });

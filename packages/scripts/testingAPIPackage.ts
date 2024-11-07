@@ -13,10 +13,11 @@ cloudinary.config({
 });
 
 (async () => {
-  const videos = await prisma.videos.findMany();
-  console.log(videos.length, "len");
-  const result = await getUptodateVideos(videos);
-  console.log(result, "result");
+  // const videos = await prisma.videos.findMany();
+  // console.log(videos.length, "len");
+  // const result = await getUptodateVideos(videos);
+  // console.log(result, "result");
 
-  const competency = await getOne({});
+  const competency = await getOne({ data: { title: "react" } });
+  console.log(competency, "competency");
 })();
