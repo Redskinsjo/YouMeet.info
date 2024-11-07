@@ -2,27 +2,54 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Default",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "allowJs": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "ESNext",
-    "declaration": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    /* If transpiling with TypeScript: */
+    "module": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceMap": true,
+
+    /* AND if you're building for a library: */
+    "declaration": true,
+
+    /* AND if you're building for a library in a monorepo: */
+    "declarationMap": true
   },
   "include": [
-    "src/**/*.ts",
     "src/queries/*.graphql",
-    "src/imports.js",
-    "src/cjs/methods/getManyCompetencies.js",
-    "src/cjs/methods/getOneCompetency.js",
+    "src/cjs/getMany.js",
+    "src/cjs/getMany.ts",
+    "src/cjs/getOne.js",
+    "src/cjs/getOne.ts",
     "src/cjs/index.js",
+    "src/cjs/imports.js",
+    "src/esm/getMany.js",
+    "src/esm/getMany.ts",
+    "src/esm/getOne.js",
+    "src/esm/getOne.ts",
     "src/esm/index.js",
-    "src/esm/methods/getManyCompetencies.js",
-    "src/esm/methods/getOneCompetency.js"
+    "src/esm/imports.js",
+    "src/types/generated.d.cts",
+    "src/types/getMany.d.cts",
+    "src/types/getOne.d.cts",
+    "src/types/index.d.cts",
+    "src/types/generated.d.ts",
+    "src/types/getMany.d.ts",
+    "src/types/getOne.d.ts",
+    "src/types/index.d.ts"
   ],
   "exclude": ["node_modules"]
 }

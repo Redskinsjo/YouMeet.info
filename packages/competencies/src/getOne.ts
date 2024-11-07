@@ -1,7 +1,11 @@
-const { uri, method, headers } = require("../../imports");
-const { loadDocumentsSync } = require("@graphql-tools/load");
-const { GraphQLFileLoader } = require("@graphql-tools/graphql-file-loader");
-const path = require("path");
+import path from "path";
+import type {
+  Competency,
+  GetOneCompetencyQueryVariables,
+} from "./types/generated";
+import { loadDocumentsSync } from "@graphql-tools/load";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
+import { headers, method, uri } from "./imports";
 
 const queryPath = path?.join(
   __dirname,
@@ -11,8 +15,6 @@ const query = loadDocumentsSync(queryPath, {
   loaders: [new GraphQLFileLoader()],
 });
 
-Object.defineProperty(exports, "__esModule", { value: true });
-
 /**
  * Récupérer une compétence.
  * @argument {object} variables - Argument à passer. Requis.
@@ -20,13 +22,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @property {string} variables.data.title - Titre de la compétence.
  * @param {boolean} variables.includeDefinition - True, si vou souhaitez récupérer plus d'informations que seulement le title.
  */
-async function getOneCompetency(variables) {
+export const getOne = async function (
+  variables: GetOneCompetencyQueryVariables
+): Promise<Competency | null> {
   try {
+    if (!query || !query[0]) console.log("Query is null");
     const response = await fetch(uri, {
       method,
       headers,
       body: JSON.stringify({
-        query: query[0].rawSDL,
+        query: query[0]?.rawSDL,
         variables,
       }),
       cache: "no-store",
@@ -38,5 +43,4 @@ async function getOneCompetency(variables) {
     console.error("Error fetching data:", error);
     return null;
   }
-}
-exports.getOneCompetency = getOneCompetency;
+};
