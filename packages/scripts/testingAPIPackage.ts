@@ -2,7 +2,7 @@ import prisma from "@youmeet/prisma-config/prisma";
 import getUptodateVideos from "@youmeet/utils/resolvers/getUptodateVideos";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
-import { getOne } from "@youmeet/competencies";
+import { getMany, getOne } from "@youmeet/competencies";
 dotenv.config();
 
 cloudinary.config({
@@ -18,6 +18,6 @@ cloudinary.config({
   // const result = await getUptodateVideos(videos);
   // console.log(result, "result");
 
-  const competency = await getOne({ data: { title: "react" } });
+  const competency = await getMany({});
   console.log(competency, "competency");
 })();

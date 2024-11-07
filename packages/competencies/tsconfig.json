@@ -17,7 +17,7 @@
     "noImplicitOverride": true,
 
     /* If transpiling with TypeScript: */
-    "module": "Preserve",
+    "module": "ES2020",
     "moduleResolution": "Bundler",
     "outDir": "dist",
     "rootDir": "src",
@@ -27,21 +27,26 @@
     "declaration": true,
 
     /* AND if you're building for a library in a monorepo: */
-    "declarationMap": true
+    "declarationMap": true,
+
+    "paths": {
+      "types/*": ["./src/types/*"]
+    }
   },
   "include": [
     "src/queries/*.graphql",
-    "src/getMany.ts",
-    "src/getMany.ts",
-    "src/index.ts",
-    "src/imports.ts",
-    "src/types/generated.ts",
-    "src/types/getMany.d.cts",
-    "src/types/getOne.d.cts",
-    "src/types/index.d.cts",
-    "src/types/getMany.d.ts",
-    "src/types/getOne.d.ts",
-    "src/types/index.d.ts"
+    "src/cjs/getMany.js",
+    "src/esm/getMany.js",
+    "src/cjs/getOne.js",
+    "src/esm/getOne.js",
+    "src/cjs/imports.js",
+    "src/esm/imports.js",
+    "src/cjs/index.js",
+    "src/esm/index.js",
+    "src/types/getMany.ts",
+    "src/types/getOne.ts",
+    "src/types/index.ts",
+    "src/types/methods.d.ts"
   ],
   "exclude": ["node_modules"]
 }
