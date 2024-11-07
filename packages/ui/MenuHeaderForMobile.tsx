@@ -42,7 +42,6 @@ export default function MenuHeaderForMobile() {
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
-          "aria-hidden": "true",
         }}
       >
         <MenuItemRouter

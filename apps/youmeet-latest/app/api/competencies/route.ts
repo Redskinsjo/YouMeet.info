@@ -21,7 +21,6 @@ const { handleRequest } = createYoga({
     methods: ["POST", "OPTIONS"],
   },
   plugins: [
-    useDisableIntrospection(),
     maxDepthPlugin({
       n: 3,
     }),

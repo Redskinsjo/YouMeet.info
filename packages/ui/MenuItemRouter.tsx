@@ -32,8 +32,8 @@ const MenuItemRouter = ({
         cursor: disabled
           ? "not-allowed"
           : pathname === route
-            ? "default"
-            : "pointer",
+          ? "default"
+          : "pointer",
         "&:hover": {
           backgroundColor: deepPurple[50],
           color: deepPurple[900],
@@ -67,7 +67,6 @@ const MenuItemRouter = ({
       title={`Naviguer vers la page ${itemText}`}
       href={route}
       style={{ textDecorationLine: "none", color: deepPurple[500] }}
-      aria-hidden="true"
     >
       <MenuItem
         className="subItem"

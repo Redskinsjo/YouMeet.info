@@ -37,6 +37,7 @@ export async function GET(req: NextRequest) {
 
         if (payload) {
           (await cookies()).set("meet", payload, {
+            path: "/",
             domain: `${process.env.API_DOMAIN}`,
           });
 

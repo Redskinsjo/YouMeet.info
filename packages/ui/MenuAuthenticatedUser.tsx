@@ -91,7 +91,6 @@ export default function MenuAuthenticatedUser() {
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
-          "aria-hidden": "true",
         }}
       >
         <div

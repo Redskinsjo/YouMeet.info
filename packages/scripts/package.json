@@ -16,7 +16,7 @@
     "testingAPIPackage": "SCRIPT=true dotenv -e .env.development -- npx tsx ./testingAPIPackage.ts"
   },
   "dependencies": {
-    "@youmeet/competencies": "^1.1.1",
+    "@youmeet/competencies": "*",
     "@youmeet/functions": "*",
     "@youmeet/gql": "*",
     "@youmeet/models": "*",
