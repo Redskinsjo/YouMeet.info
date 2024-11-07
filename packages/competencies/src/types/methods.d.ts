@@ -1,4 +1,4 @@
-import type {
+export type {
   Competency,
   GetManyCompetenciesQueryVariables,
   GetOneCompetencyQueryVariables,

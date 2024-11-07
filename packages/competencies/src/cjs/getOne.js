@@ -1,13 +1,12 @@
 import path from "path";
-import type {
-  Competency,
-  GetOneCompetencyQueryVariables,
-} from "./types/generated";
 import { loadDocumentsSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { headers, method, uri } from "./imports";
 
-const queryPath = path?.join(__dirname, "./queries/GetOneCompetency.graphql");
+const queryPath = path?.join(
+  __dirname,
+  "./../queries/GetOneCompetency.graphql"
+);
 const query = loadDocumentsSync(queryPath, {
   loaders: [new GraphQLFileLoader()],
 });
@@ -19,9 +18,7 @@ const query = loadDocumentsSync(queryPath, {
  * @property {string} variables.data.title - Titre de la compétence.
  * @param {boolean} variables.includeDefinition - True, si vou souhaitez récupérer plus d'informations que seulement le title.
  */
-export const getOne = async function (
-  variables: GetOneCompetencyQueryVariables
-): Promise<Competency | null> {
+export const getOne = async function (variables) {
   try {
     if (!query || !query[0]) console.log("Query is null");
     const response = await fetch(uri, {

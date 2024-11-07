@@ -1,6 +1,6 @@
 {
   "name": "@youmeet/competencies",
-  "version": "1.1.15",
+  "version": "1.2.1",
   "description": "Centralize competencies titles. Fastly get unique competencies from all sectors (mainly, for recruitment enterprises). Helps finding competency that was derived. For example, request for whether react, ReactJS, or react.js, always get the unique React.js. Can be used in the frontend or the backend. This package is part of the YouMeet.info project.",
   "keywords": [
     "competencies",
@@ -18,8 +18,8 @@
     "dist/queries/*.graphql"
   ],
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "typescript": {
     "definition": "dist/types/index.d.ts"
   },
@@ -28,32 +28,32 @@
     "url": "git+https://github.com/Redskinsjo/YouMeet.info.git#main"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=16.0.0"
   },
   "license": "MIT",
   "exports": {
     "./generated": "./src/types/generated.ts",
     ".": {
       "require": {
-        "types": "./dist/types/index.d.cts",
-        "default": "./dist/index.js"
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
       },
       "import": {
         "types": "./dist/types/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./dist/esm/index.js"
       },
       "default": {
         "types": "./dist/types/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./dist/esm/index.js"
       }
     }
   },
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.ts --watch",
-    "publish": "npm publish --access public"
+    "codegen": "graphql-codegen --config codegen.ts --watch"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/typed-document-node": "^5.0.11",
     "@graphql-codegen/typescript": "^4.1.1",
     "@graphql-codegen/typescript-operations": "^4.3.1",
     "@graphql-codegen/typescript-resolvers": "^4.4.0",
@@ -73,5 +73,6 @@
   "funding": {
     "type": "individual",
     "url": "https://paypal.me/yoka999999999?country.x=FR&locale.x=fr_FR"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
