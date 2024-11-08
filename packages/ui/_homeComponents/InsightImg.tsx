@@ -36,7 +36,7 @@ export default function InsightImg() {
                 title="un aperçu de l'interface de YouMeet proposé pour diffuser le profil complet du candidat aux recruteurs"
                 width={xs || sm ? 250 : 300}
                 height={xs || sm ? 250 * (2240 / 1034) : 300 * (2240 / 1034)}
-                src="https://res.cloudinary.com/de822mdsy/video/upload/v1719232172/chdftcz1ju9xvgfulfaq.webm"
+                src="https://res.cloudinary.com/de822mdsy/video/upload/q_auto,vc_auto/v1731075829/lvmfhl3i572o7ga8mvnr.webm"
               />
             </div>
           </div>
