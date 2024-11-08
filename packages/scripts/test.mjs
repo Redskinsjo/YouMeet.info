@@ -1,4 +1,4 @@
-const { getMany } = require("@youmeet/competencies");
+import { getMany } from "@youmeet/competencies";
 
 (async () => {
   const competencies = await getMany({ data: { title: "communication" } });
