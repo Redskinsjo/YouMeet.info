@@ -1,7 +1,7 @@
-import path from "path";
-import { loadDocumentsSync } from "@graphql-tools/load";
-import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
-import { headers, method, uri } from "./imports";
+const { GraphQLFileLoader } = require("@graphql-tools/graphql-file-loader");
+const { loadDocumentsSync } = require("@graphql-tools/load");
+const path = require("path");
+const { headers, method, uri } = require("./imports");
 
 const queryPath = path?.join(
   __dirname,
@@ -18,7 +18,7 @@ const query = loadDocumentsSync(queryPath, {
  * @property {string} variables.data.title - Titre de la compétence.
  * @param {boolean} variables.includeDefinition - True, si vou souhaitez récupérer plus d'informations que seulement le title.
  */
-export const getOne = async function (variables) {
+const getOne = async function (variables) {
   try {
     if (!query || !query[0]) console.log("Query is null");
     const response = await fetch(uri, {
@@ -38,3 +38,4 @@ export const getOne = async function (variables) {
     return null;
   }
 };
+exports.getOne = getOne;
