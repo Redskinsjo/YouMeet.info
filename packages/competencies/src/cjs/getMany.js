@@ -1,7 +1,7 @@
-import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
-import { loadDocumentsSync } from "@graphql-tools/load";
-import path from "path";
-import { headers, method, uri } from "./imports";
+const { GraphQLFileLoader } = require("@graphql-tools/graphql-file-loader");
+const { loadDocumentsSync } = require("@graphql-tools/load");
+const path = require("path");
+const { headers, method, uri } = require("./imports");
 
 const queryPath = path.join(
   __dirname,
@@ -21,7 +21,7 @@ const query = loadDocumentsSync(queryPath, {
  * @property {number} variables.params.take - Nombre de compétences à récupérer. Défaut: 10.
  * @param {boolean} variables.includeDefinition - True, si vou souhaitez récupérer plus d'informations que seulement le title.
  */
-export const getMany = async function (variables) {
+const getMany = async function (variables) {
   if (!query || !query[0]) console.log("Query is null");
   try {
     const response = await fetch(uri, {
@@ -41,3 +41,4 @@ export const getMany = async function (variables) {
     return null;
   }
 };
+exports.getMany = getMany;

@@ -1,8 +1,8 @@
-export type {
+import {
   Competency,
   GetManyCompetenciesQueryVariables,
   GetOneCompetencyQueryVariables,
-} from "./generated";
+} from "./generated.js";
 
 export declare function getOne(
   variables: GetOneCompetencyQueryVariables
