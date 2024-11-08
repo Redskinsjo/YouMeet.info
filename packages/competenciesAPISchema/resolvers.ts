@@ -17,6 +17,12 @@ const resolvers = {
       const competency = await prisma.competencies.findFirst({
         where,
       });
+      if (!competency)
+        return await prisma.competencies.findFirst({
+          where: {
+            title: { mode: "insensitive", contains: args.data.title as string },
+          },
+        });
       return competency;
     },
     competencies: async (_: unknown, args: QueryCompetenciesArgs) => {

@@ -9,7 +9,6 @@ export const getWhereTitle = (
     OR.push({ title: { mode: "insensitive", equals: title } });
     OR.push({ appelations: { has: title } });
     OR.push({ appelations: { has: lower } });
-    OR.push({ title: { mode: "insensitive", contains: title } });
   }
   return OR;
 };
