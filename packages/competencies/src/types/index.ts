@@ -1,7 +1,7 @@
+export { getOne, getMany } from "./methods.js";
+
 export type {
-  getOne,
-  getMany,
   Competency,
   GetManyCompetenciesQueryVariables,
   GetOneCompetencyQueryVariables,
-} from "./methods";
+} from "./generated.js";

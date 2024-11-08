@@ -17,8 +17,7 @@
     "noImplicitOverride": true,
 
     /* If transpiling with TypeScript: */
-    "module": "ES2020",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
     "outDir": "dist",
     "rootDir": "src",
     "sourceMap": true,
@@ -43,10 +42,9 @@
     "src/esm/imports.js",
     "src/cjs/index.js",
     "src/esm/index.js",
-    "src/types/getMany.ts",
-    "src/types/getOne.ts",
+    "src/types/generated.ts",
     "src/types/index.ts",
-    "src/types/methods.d.ts"
+    "src/types/methods.ts"
   ],
   "exclude": ["node_modules"]
 }
