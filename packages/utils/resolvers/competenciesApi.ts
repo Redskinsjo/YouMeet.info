@@ -6,9 +6,10 @@ export const getWhereTitle = (
   const OR: Prisma.competenciesWhereInput[] = [];
   if (title) {
     const lower = title.toLowerCase();
-    OR.push({ title: { mode: "insensitive", contains: title } });
+    OR.push({ title: { mode: "insensitive", equals: title } });
     OR.push({ appelations: { has: title } });
     OR.push({ appelations: { has: lower } });
+    OR.push({ title: { mode: "insensitive", contains: title } });
   }
   return OR;
 };
