@@ -1,6 +1,6 @@
 {
   "name": "@youmeet/competencies",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Centralize competencies titles. Fastly get unique competencies from all sectors (mainly, for recruitment enterprises). Helps finding competency that was derived. For example, request for whether react, ReactJS, or react.js, always get the unique React.js. Can be used in the frontend or the backend. This package is part of the YouMeet.info project.",
   "keywords": [
     "competencies",

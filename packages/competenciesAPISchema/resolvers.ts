@@ -17,6 +17,12 @@ const resolvers = {
       const competency = await prisma.competencies.findFirst({
         where,
       });
+      if (!competency)
+        return await prisma.competencies.findFirst({
+          where: {
+            title: { mode: "insensitive", contains: args.data.title as string },
+          },
+        });
       return competency;
     },
     competencies: async (_: unknown, args: QueryCompetenciesArgs) => {
@@ -31,7 +37,17 @@ const resolvers = {
       if (args.params?.take !== undefined)
         params.take = args.params.take as number;
 
-      return await prisma.competencies.findMany({ where, ...params });
+      const competencies = await prisma.competencies.findMany({
+        where,
+        ...params,
+      });
+      if (!competencies)
+        return await prisma.competencies.findFirst({
+          where: {
+            title: { mode: "insensitive", contains: args.data.title as string },
+          },
+        });
+      return competencies;
     },
   },
 };
