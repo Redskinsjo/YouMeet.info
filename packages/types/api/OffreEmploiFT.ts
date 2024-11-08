@@ -322,8 +322,8 @@ export type OffreEmploiFT = {
 
 export type JobsManyFTParams = {
   /** Sélecteur de champs : il est possible de paramétrer le retour de la requête en définissant les champs souhaités (liste exhaustive des champs possibles : Allowed values).
-  Vous pouvez vous aider des exemples de réponse pour identifier les champs que vous voulez récupérer.
-  
+  * Vous pouvez vous aider des exemples de réponse pour identifier les champs que vous voulez récupérer.
+  *
   Allowed values:
   accesemploi
   appellations(emploireglemente,transitionecologiquedetaillee,libelle,code,emploicadre,transitionecologique,transitionnumerique,transitiondemographique,classification,libellecourt)
@@ -346,7 +346,7 @@ export type JobsManyFTParams = {
   formacodes(libelle,code),libelle,code */
   champs: string;
 
-  /** Code compétence. */
+  /* Code compétence. */
   "code-competence": string;
 
   /** Code de la division NAF. */
@@ -384,6 +384,7 @@ riasecmineur,riasecmajeur,libelle,code */
   /** Le(s) mot(s) et/ou début de mot(s) recherché(s). required*/
   q: string;
 };
+
 export type JobFT = {
   /** Liste des secteurs d'activites liés. */
   secteursActivites: {}[];
@@ -414,7 +415,7 @@ export type JobFT = {
   transitionNumerique: boolean;
 };
 
-type CompetenceDetaillee = {
+export type CompetenceDetaillee = {
   /** Code unique de la compétence.
 
 Example:
@@ -462,7 +463,7 @@ C
   riasecMineur: string;
 };
 
-type Theme = {
+export type Theme = {
   /** Code unique du thème.
 
 Example:
@@ -492,7 +493,7 @@ Métiers auprès des enfants */
   obsolete: boolean;
 };
 
-type Metier = {
+export type Metier = {
   /** Acces emploi.
 
 Example:

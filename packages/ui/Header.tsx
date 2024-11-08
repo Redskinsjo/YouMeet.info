@@ -17,6 +17,7 @@ import MenuHeaderForMobile from "./MenuHeaderForMobile";
 import { Article, Translated } from "@youmeet/gql/generated";
 import { getArticlesParams } from "@youmeet/functions/request";
 import BlogMenuNav from "./BlogMenuNav";
+import { outfit } from "@youmeet/functions/fonts";
 
 export default function Header({ classes, newStyles }: HeaderComponentProps) {
   const user = useSelector((state: RootState) => state.user as UserState);
@@ -39,6 +40,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   router.prefetch("/le-produit/mise-en-relation");
   router.prefetch("/");
   router.prefetch("/blog");
+  router.prefetch("/offres");
 
   const scrollTo = (window: Window, type: "solutions" | "prices") => {
     window.scrollTo({
@@ -111,6 +113,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
             pathname.includes("blog") ||
+            pathname.includes("offres") ||
             pathname.includes("medias") ? (
               <Link
                 title="Naviguer vers la page d'accueil de YouMeet.info"
@@ -137,6 +140,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             pathname.includes("competences") ||
             pathname.includes("blog") ||
             pathname.includes("medias") ||
+            pathname.includes("offres") ||
             pathname === "/blog" ? (
               <Link
                 title="Naviguer vers le produit de mise en relation de YouMeet.info"
@@ -164,6 +168,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             pathname.includes("competences") ||
             pathname.includes("blog") ||
             pathname.includes("medias") ||
+            pathname.includes("offres") ||
             pathname === "/blog" ? (
               <Link
                 title="Naviguer vers le blog de YouMeet.info"
@@ -197,7 +202,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
               : "flex flex-1 items-center justify-end xs:gap-[12px] sm:gap-[12px] gap-[24px]"
           }
         >
-          {/* {pathname !== "/offres" && (
+          {pathname !== "/offres" && (
             <Link
               title="Naviguer vers la page des offres d'emploi et de stage sur YouMeet.info"
               href={`/offres`}
@@ -209,7 +214,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 {t("company-offers")}
               </div>
             </Link>
-          )} */}
+          )}
           {pathname === "/" && <RecruiterSpace />}
           <Locale />
 

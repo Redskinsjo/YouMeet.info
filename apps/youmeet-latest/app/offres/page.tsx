@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import OffresChild from "./offresChild";
-import { getOffers } from "@youmeet/functions/request";
+import { getOffers, getOffersFT } from "@youmeet/functions/request";
 import { Offer } from "@youmeet/gql/generated";
 import { logoUrl } from "@youmeet/functions/imports";
 import { getOffresEmploiFT } from "@youmeet/functions/browserRequests";
@@ -42,36 +42,13 @@ export default async function Offres(request: {
   //   params: { take: 50 },
   // })) as Offer[];
 
-  const reqSearch = request.searchParams;
-
-  const body = {
-    type: reqSearch.type ?? "search",
-    id: reqSearch.id,
-  };
-  delete reqSearch.type;
-  delete reqSearch.id;
-  const searchParams: OffreEmploiFTParams = {
-    ...reqSearch,
-    range: reqSearch.range ?? "0-10",
-  };
-
   try {
-    if ((body.type === "id" && body.id) || Object.keys(reqSearch).length > 0) {
-      const result = (await getOffresEmploiFT<{ resultats: OffreEmploiFT[] }>(
-        body,
-        searchParams
-      )) as withData<{ resultats: OffreEmploiFT[] }> | PayloadBackendError;
+    type ResultOffresFT = { resultats: OffreEmploiFT[] };
+    const result = (await getOffersFT<ResultOffresFT>({})) as ResultOffresFT;
 
-      if (result && isPayloadError(result)) {
-        throw new BackendError(result.type, result.message);
-      } else {
-        const data = result.data.resultats;
-        const offres = data.length > 0 ? data : [];
-        return <OffresChild offres={offres} />;
-      }
-    } else {
-      return <OffresChild offres={[]} />;
-    }
+    const data = result?.resultats;
+    const offres = data?.length > 0 ? data : [];
+    return <OffresChild offres={offres.slice(0, 3)} />;
   } catch (error) {
     notFound();
   }

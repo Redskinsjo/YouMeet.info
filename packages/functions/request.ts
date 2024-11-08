@@ -191,6 +191,11 @@ import {
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { isNotHandledReq, isPayloadError } from "@youmeet/types/TypeGuards";
 import { AES } from "crypto-js";
+import {
+  OffreEmploiFT,
+  OffreEmploiFTParams,
+} from "@youmeet/types/api/OffreEmploiFT";
+import { getAccessTokenFT } from "./browserRequests";
 
 export const createError = async <T>(
   variables?: MutationCreateErrorArgs,
@@ -286,6 +291,89 @@ const req = async <T>(
   }
 };
 
+const reqFT = async <T>(
+  uri: string,
+  scope: string,
+  params: string = "",
+  revalidate: number = 30
+): Promise<withData<T> | PayloadBackendError> => {
+  try {
+    const credentials = (await getAccessTokenFT(scope)) as
+      | withData<{ access_token: string }>
+      | PayloadBackendError;
+
+    console.log(credentials, "credentials");
+
+    if (credentials && isPayloadError(credentials)) {
+      throw new BackendError(credentials.type, credentials.message);
+    } else {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller?.abort(), 10000);
+      const nextParams = {} as { next?: { revalidate: number } };
+      if (process.env.SCRIPT === undefined) nextParams.next = { revalidate };
+
+      const urlParams = new URLSearchParams(params);
+      const response = await fetch(`${uri}?${urlParams}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${credentials.data.access_token}`,
+          Accept: "application/json",
+          origin: "https://www.youmeet.info",
+        },
+        mode: "same-origin",
+        credentials: "same-origin",
+        ...nextParams,
+        signal: controller?.signal,
+      });
+      const json = await response.json();
+      if (response.ok) {
+        clearTimeout(timeoutId);
+        if (json) {
+          if (!json.errors) {
+            return { data: json as T };
+          }
+          console.log(json.errors, "errors");
+          console.log(json.errors[0].extensions, "extensions");
+          throw new BackendError(
+            BACKEND_ERRORS.REQUEST_FEEDBACK,
+            BACKEND_MESSAGES.REQUEST_FEEDBACK,
+            response.status
+          );
+        }
+        throw new BackendError(
+          BACKEND_ERRORS.JSON_NOT_VALID,
+          BACKEND_MESSAGES.JSON_NOT_VALID,
+          response.status
+        );
+      }
+      throw new BackendError(
+        BACKEND_ERRORS.PROCESSING,
+        json.errors ? json.errors[0].message : response.statusText,
+        response.status
+      );
+    }
+  } catch (err: any) {
+    await createError({
+      data: {
+        environment: dev ? "development" : "production",
+        message: err.message,
+        pro: false,
+        query: "FT request",
+        status: err.status,
+        statusText: err.statusText ?? "",
+        type: err.type,
+      },
+    });
+    return {
+      type: err.type ?? BACKEND_ERRORS.UNKNOWN,
+      message: err.message,
+      status: err.status,
+      error: true,
+    };
+  }
+};
+
 async function reqFnc<T>(
   path: string,
   multiple: boolean = false,
@@ -307,6 +395,31 @@ async function reqFnc<T>(
     const data = (res.data as withData<{ [path in string]: T }>).data;
     const result = data[path];
     return { data: result } as withData<T>;
+  }
+}
+
+async function reqFTFnc<T, S>(
+  uri: string,
+  multiple: boolean = false,
+  search: S,
+  scope: string,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<PayloadBackendError | PayloadBackendSuccess<T>> {
+  const params = new URLSearchParams(
+    search as { [key: string]: string }
+  ).toString();
+
+  const res = await reqFT<T>(uri, scope, params, revalidate);
+  if (res && isPayloadError(res)) {
+    if (isNotHandledReq<T>(handling, res))
+      return { data: multiple ? [] : undefined } as withData<
+        never[] | undefined
+      >;
+    else return res;
+  } else {
+    const data = res.data as withData<{ [path in string]: T }>;
+    return { data } as withData<T>;
   }
 }
 
@@ -2158,6 +2271,29 @@ export const getCompetenciesTitle = async <T>(
     multiple,
     getCompetenciesTitleQuery,
     variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getOffersFT = async <T>(
+  search: OffreEmploiFTParams,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = true;
+  const endpoint =
+    "https://api.francetravail.io/partenaire/offresdemploi/v2/offres/search";
+  const uri = endpoint;
+  const scope = "o2dsoffre api_offresdemploiv2";
+  const result = await reqFTFnc<T, OffreEmploiFTParams>(
+    uri,
+    multiple,
+    search,
+    scope,
     revalidate,
     handling
   );
