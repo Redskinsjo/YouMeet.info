@@ -1,53 +1,45 @@
 "use client";
-import { deepPurple } from "@mui/material/colors";
-import { Skeleton, useMediaQuery } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import BoldText from "../../../BoldText";
-import DetailComponent from "../../../DetailComponent";
 import CompetencyLink from "../../../CompetencyLink";
 import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
 import { OfferContentValues } from "@youmeet/types/OfferContentValues";
 import Link from "next/link";
 import { CiLink } from "react-icons/ci";
-import { createElement, useEffect, useState } from "react";
-import setFileUrl from "@youmeet/utils/basics/setFileUrl";
+import { createElement, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Offer } from "@youmeet/gql/generated";
 import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
-import React from "react";
+import dynamic from "next/dynamic";
+
+const DoubleDetails = dynamic(() => import("./DoubleDetails"));
+const BoldText = dynamic(() => import("../../../TextChild"));
+const DetailComponent = dynamic(() => import("../../../DetailComponent"));
 
 export default function OfferContent({ offre }: { offre: Offer }) {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const xs = useMediaQuery("(max-width:600px)");
-  const sm = useMediaQuery("(max-width:720px)");
-  const md = useMediaQuery("(max-width:900px)");
   const [values, setValues] = useState<OfferContentValues | undefined>();
-  const [loading, setLoading] = useState(true);
 
-  const getValues = async () => {
-    if (offre.company?.id) {
-      const values = await getOfferOrPreviewValues(
-        offre,
-        language as "fr" | "en",
-        offre.company?.id
-      );
-      setValues(values);
-    }
-  };
+  const getValues = useCallback(async () => {
+    console.log(offre, "offre");
+    const values = await getOfferOrPreviewValues(
+      offre,
+      language as "fr" | "en",
+      offre?.company?.id || undefined
+    );
+
+    setValues(values);
+  }, [offre, language]);
 
   useEffect(() => {
     getValues();
-    setLoading(false);
-  }, []);
-
-  if (loading) return undefined;
+  }, [getValues]);
 
   return (
     !!values && (
-      <div className="dark:mediumDarkBg bg-white flex w-full flex-col items-center py-[12px] px-[24px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] rounded-[16px] shadow-custom h-full">
+      <div className="dark:mediumDarkBg bg-white flex w-full flex-col items-center p-[12px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] xs:gap-[12px] sm:gap-[12px] rounded-[16px] shadow-custom h-full overflow-hidden overflow-y-scroll">
         <div>
           {values.rebroadcast && (
             <div className="flex-1 text-[16px] flex-center flex-col gap-[6px] p-[6px] bg-grey50 dark:lightDarkBg text-deepPurple500 dark:text-deepPurple200 text-center">
@@ -59,63 +51,39 @@ export default function OfferContent({ offre }: { offre: Offer }) {
               </span>
               <BoldText
                 text={t("youmeet-not-recruiting")}
-                fontSizeClass="text-[13px] text-grey600 dark:text-grey200"
+                fontSizeClass="text-[13px]"
               />
             </div>
           )}
 
-          {values.companyLogo &&
-            setFileUrl(values.companyLogo) &&
-            values.companyName !== "YouMeet" && (
-              <Image
-                src={setFileUrl(values.companyLogo) as string}
-                width={60}
-                height={60}
-                alt="logo de l'entreprise qui recrute et qui diffuse cette opportunité de travail"
-                style={{ objectFit: "contain" }}
-              />
-            )}
+          {values.logo && values.companyName !== "YouMeet" && (
+            <Image
+              src={values.logo}
+              width={60}
+              height={60}
+              alt="logo de l'entreprise qui recrute et qui diffuse cette opportunité de travail"
+              style={{ objectFit: "contain" }}
+            />
+          )}
           <div className="flex-center w-full">
-            {values.jobTitle ? (
-              <div className="m-[6px] flex w-full">
-                <div className="flex-1" />
+            {values.jobTitle && (
+              <div className="flex-center w-full">
                 <h1 className="flex-[2] text-[24px] dark:text-white text-black font-bold text-center">
                   {values.jobTitle}
                 </h1>
-                <div className="flex-1" />
-              </div>
-            ) : (
-              <div className="m-[24px] w-[15%] flex-center flex-col italic">
-                {t("jobTitle")}
-                {[0].map((line) => (
-                  <Skeleton
-                    key={line}
-                    className="fadeIn"
-                    animation="wave"
-                    variant="rounded"
-                    width="100%"
-                    height="10px"
-                    style={{
-                      margin: "4px",
-                      gap: "4px",
-                      backgroundColor: deepPurple[50],
-                    }}
-                  />
-                ))}
               </div>
             )}
           </div>
         </div>
 
         {values.content && (
-          <div className="flex-center flex-col w-full box-border px-[6px]">
+          <div className="flex-center flex-col w-full box-border h-fit">
             <DetailComponent
               labelInBold
               labelUnderline
-              fontSize={"16px"}
               valueInBold
               labelComponent="h2"
-              label={t("me-profile-infos-label-description")}
+              label={"me-profile-infos-label-description"}
               noLabelColon
               conversation
               newStyles={{ display: "flex", alignItems: "center" }}
@@ -124,14 +92,13 @@ export default function OfferContent({ offre }: { offre: Offer }) {
                 <div className="w-full">
                   <BoldText
                     formatDisplay
-                    fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg"
+                    fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg text-[16px] xs:text-[13px] sm:text-[14px] md:text-[14px]"
                     skeleton={{ count: 3 }}
                     links
                     align="justify"
                     text={values.content || ""}
                     containerStyle={{
                       lineHeight: 1.5,
-                      fontSize: "16px",
                       margin: "0px",
                     }}
                   />
@@ -143,14 +110,13 @@ export default function OfferContent({ offre }: { offre: Offer }) {
           </div>
         )}
         {values.profileSearched && (
-          <div className="flex-center flex-col w-full box-border px-[6px]">
+          <div className="flex-center flex-col w-full box-border h-fit">
             <DetailComponent
               labelInBold
               labelUnderline
-              fontSize={"16px"}
               valueInBold
               labelComponent="h2"
-              label={t("profileSearched")}
+              label={"profileSearched"}
               noLabelColon
               conversation
               newStyles={{ display: "flex", alignItems: "center" }}
@@ -159,14 +125,13 @@ export default function OfferContent({ offre }: { offre: Offer }) {
                 <div className="w-full">
                   <BoldText
                     formatDisplay
-                    fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg"
+                    fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg text-[16px] xs:text-[13px] sm:text-[13px] md:text-[13px]"
                     links
                     skeleton={{ count: 3 }}
                     align="justify"
                     text={values.profileSearched || ""}
                     containerStyle={{
                       lineHeight: 1.5,
-                      fontSize: "16px",
                       margin: "0px",
                     }}
                   />
@@ -181,11 +146,10 @@ export default function OfferContent({ offre }: { offre: Offer }) {
           {values.requirements && values.requirements?.length > 0 ? (
             <div className="flex-center w-full px-[6px] box-border">
               <DetailComponent
-                fontSize={"16px"}
                 valueInBold
                 labelComponent="h2"
                 labelUnderline
-                label={t("offerRequirements")}
+                label={"offerRequirements"}
                 noPadding
                 type="modal2"
                 fullWidth
@@ -197,9 +161,9 @@ export default function OfferContent({ offre }: { offre: Offer }) {
                 }}
                 value={
                   <div className="w-full flex gap-[6px] flex-wrap p-[2px] dark:lightDarkBg">
-                    {values.requirements.map((req) =>
+                    {values.requirements.map((req, i) =>
                       req ? (
-                        <CompetencyLink key={req?.id} requirement={req} />
+                        <CompetencyLink key={req + i} str={req} />
                       ) : undefined
                     )}
                   </div>
@@ -210,156 +174,79 @@ export default function OfferContent({ offre }: { offre: Offer }) {
         </div>
 
         <div className="w-full">
-          <h2 className="font-bold dark:text-white text-center">
+          <h2 className="font-bold dark:text-white text-center text-[18px] underline underline-offset-4">
             {t("more-details")}
           </h2>
           <div className="w-full flex flex-wrap xs:flex-col sm:flex-col md:flex-col xs:items-start sm:items-start md:items-start items-center justify-between px-[6px] box-border">
-            <div className="flex gap-[12px] w-full flex-wrap">
-              {values.revenue && Number(values.revenue) > 0 && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  label={t("offerRevenue")}
-                  value={String(
-                    Math.round(Number(Number(values.revenue).toFixed(0)))
-                  )}
-                  type="modal"
-                />
+            <DoubleDetails
+              value1={String(
+                Math.round(Number(Number(values.revenue).toFixed(0)))
               )}
-              {values.contractType && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  type="modal"
-                  label={t("contractType")}
-                  value={t(values.contractType)}
-                />
+              label1="offerRevenue"
+              value2={values.secteurActivite}
+              label2="Secteur d'activité"
+            />
+            <DoubleDetails
+              label1="contractType"
+              value1={values.contractType}
+              label2="remote"
+              value2={values.remote}
+            />
+            <DoubleDetails
+              value1={formatToDatetime(
+                values.limitDate,
+                true,
+                true,
+                true,
+                language
               )}
-              {values.remote && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  type="modal"
-                  label={t("remote")}
-                  value={t(values.remote)}
-                />
-              )}
-            </div>
-            <div className="flex gap-[12px] w-full flex-wrap">
-              {values.limitDate && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  type="modal"
-                  label={t("limitDate")}
-                  value={formatToDatetime(
-                    values.limitDate,
-                    true,
-                    true,
-                    true,
-                    language
-                  )}
-                />
-              )}
-              {values.jobDescriptionLink && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  type="modal"
-                  label={t("jobDescriptionLink")}
-                  value={
-                    !!values?.jobDescriptionLink ? (
-                      <Link
-                        href={values?.jobDescriptionLink}
-                        target="_blank"
-                        className="flex-center text-blue700 dark:text-blue100 text-[18px]"
-                      >
-                        {createElement(CiLink)}
-                      </Link>
-                    ) : (
-                      ""
-                    )
-                  }
-                />
-              )}
-            </div>
-            <div className="flex gap-[12px] w-full flex-wrap">
-              {values.companyName && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  type="modal"
-                  label={"Nom de l'entreprise"}
-                  value={values.companyName}
-                />
-              )}
-              {values.location && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  type="modal"
-                  label={"Localisation"}
-                  value={values.location}
-                />
-              )}
-              {values.createdAt && (
-                <DetailComponent
-                  conversation={xs || sm || md}
-                  labelComponent="h3"
-                  newStyles={{ minWidth: "unset", maxWidth: "400px" }}
-                  fontSize={"16px"}
-                  valueInBold
-                  noLabelColon
-                  type="modal"
-                  label={t("createdAt")}
-                  value={
-                    values.createdAt
-                      ? formatToDatetime(
-                          values.createdAt,
-                          true,
-                          false,
-                          false,
-                          language
-                        )
-                      : formatToDatetime(
-                          new Date().toString(),
-                          true,
-                          false,
-                          false,
-                          language
-                        )
-                  }
-                />
-              )}
-            </div>
+              label1="limitDate"
+              value2={
+                !!values?.jobDescriptionLink ? (
+                  <Link
+                    href={values?.jobDescriptionLink}
+                    target="_blank"
+                    className="flex-center text-blue700 dark:text-blue100 text-[18px]"
+                  >
+                    {createElement(CiLink)}
+                  </Link>
+                ) : (
+                  ""
+                )
+              }
+              label2="jobDescriptionLink"
+            />
+            <DoubleDetails
+              value1={values.companyName}
+              value2={values.location}
+              label1="Nom de l'entreprise"
+              label2="Localisation"
+            />
+            <DoubleDetails
+              label1="Accessible Travailleur handicapé"
+              value1={values.accessibleTH}
+              value2={values.alternance}
+              label2="Alternance"
+            />
+            <DoubleDetails
+              label1="Appellation"
+              value1={values.appellationlibelle}
+              value2={values.dureeTravail}
+              label2="Durée de travail"
+            />
+            <DoubleDetails
+              label1="Format de travail"
+              value1={values.dureeTravailConverti}
+              label2="Nombre de postes"
+              value2={values.nombrePostes}
+            />
+            <DoubleDetails
+              label1="Qualification"
+              value1={values.qualification}
+              label2="Outils informatiques"
+              value2={values.tools.length > 1 ? values.tools : undefined}
+            />
+            <DoubleDetails label1="Contact" value1={values.contact} />
           </div>
         </div>
       </div>

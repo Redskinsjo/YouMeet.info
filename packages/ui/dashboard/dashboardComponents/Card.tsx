@@ -56,8 +56,6 @@ export default function Card({
             <FrontCard
               user={d as BetaUser}
               type={type}
-              setFrontShouldTurnUp={setFrontShouldTurnUp}
-              frontShouldTurnUp={frontShouldTurnUp}
               isSubscribed={isSubscribedPro}
               refetch={refetch}
               unlocked={unlocked}

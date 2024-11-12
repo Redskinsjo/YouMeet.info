@@ -9,6 +9,7 @@ import { JobSchema } from "./jobs";
 import mongoose from "mongoose";
 import { IndexList } from "@youmeet/types/IndexList";
 import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
+import * as OffreEmploiFT from "@youmeet/types/api/OffreEmploiFT";
 mongoose.connect(`${process.env.MONGODB_URI}`);
 mongoose.Promise = global.Promise;
 
@@ -80,6 +81,87 @@ export class OfferSchema {
   public createdAt: Date;
   @typegoose.prop()
   public updatedAt: Date;
+
+  @typegoose.prop()
+  public intitule: string;
+  @typegoose.prop()
+  public description: string;
+  @typegoose.prop()
+  public dateCreation: string;
+  @typegoose.prop()
+  public dateActualisation: string;
+  @typegoose.prop()
+  public lieuTravail: OffreEmploiFT.WorkLocationFT;
+  @typegoose.prop()
+  public romeCode: string;
+  @typegoose.prop()
+  public romeLibelle: string;
+  @typegoose.prop()
+  public appellationlibelle: string;
+  @typegoose.prop()
+  public entreprise: OffreEmploiFT.EnterpriseFT;
+  @typegoose.prop()
+  public typeContrat: string;
+  @typegoose.prop()
+  public typeContratLibelle: string;
+  @typegoose.prop()
+  public natureContrat: string;
+  @typegoose.prop()
+  public experienceExige: string;
+  @typegoose.prop()
+  public experienceLibelle: string;
+  @typegoose.prop()
+  public experienceCommentaire: string;
+  @typegoose.prop()
+  public formations: OffreEmploiFT.FormationFT[];
+  @typegoose.prop()
+  public langues: OffreEmploiFT.Required[];
+  @typegoose.prop()
+  public permis: OffreEmploiFT.Required[];
+  @typegoose.prop()
+  public competences: OffreEmploiFT.Entity[];
+  @typegoose.prop()
+  public salaire: OffreEmploiFT.SalaryFT[];
+  @typegoose.prop()
+  public dureeTravailLibelle: string;
+  @typegoose.prop()
+  public dureeTravailLibelleConverti: string;
+  @typegoose.prop()
+  public complementExercice: string;
+  @typegoose.prop()
+  public conditionExercice: string;
+  @typegoose.prop()
+  public alternance: boolean;
+  @typegoose.prop()
+  public contact: OffreEmploiFT.ContactFT;
+  @typegoose.prop()
+  public agence: OffreEmploiFT.AgencyFT;
+  @typegoose.prop()
+  public nombrePostes: number;
+  @typegoose.prop()
+  public accessibleTH: boolean;
+  @typegoose.prop()
+  public deplacementCode: string;
+  @typegoose.prop()
+  public deplacementLibelle: string;
+  @typegoose.prop()
+  public qualificationCode: string;
+  @typegoose.prop()
+  public qualificationLibelle: string;
+  @typegoose.prop()
+  public codeNAF: string;
+  @typegoose.prop()
+  public secteurActivite: string;
+  @typegoose.prop()
+  public secteurActiviteLibelle: string;
+  @typegoose.prop()
+  public qualitesProfessionnelles: OffreEmploiFT.ProfessionalQualityFT[];
+  @typegoose.prop()
+  public trancheEffectifEtab: string;
+  @typegoose.prop()
+  public origineOffre: OffreEmploiFT.OriginOfferFT;
+  @typegoose.prop()
+  public offresManqueCandidats: boolean;
 }
 
 const model = mongoose.models.Offer || typegoose.getModelForClass(OfferSchema);

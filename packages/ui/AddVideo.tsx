@@ -26,15 +26,13 @@ export default function AddVideo({
   offerJobId?: string | undefined;
 }) {
   const [displayAdvices, setDisplayAdvices] = useState(false);
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const videos = profil.videos?.filter((v) => v) || [];
+  console.log(chosenVideo, "chosenVideo");
   return (
-    <div className="flex flex-col gap-[6px]">
+    <div className="flex flex-col gap-[6px] w-full">
       {videos.length === 0 ? (
-        <div className="w-full flex-bet">
+        <div className="w-full flex-bet xs:flex-col sm:flex-col">
           <span className="font-bold text-black dark:text-grey300">
             {t("video")}
           </span>
@@ -54,8 +52,8 @@ export default function AddVideo({
                     profil={profil}
                     key={video.id}
                     video={video}
-                    videoWidth="190px"
-                    videoHeight="220px"
+                    videoWidth="100%"
+                    videoHeight="100%"
                     modal
                     setChosenVideo={setChosenVideo}
                     chosenVideo={chosenVideo}
@@ -71,64 +69,72 @@ export default function AddVideo({
           />
         </div>
       ) : (
-        <div className="w-full flex-bet gap-[12px] xs:gap-[6px] sm:gap-[6px] md:gap-[6px]">
-          {!!setCheckAvailableVideos && (
-            <div
-              className="flex items-center gap-[24px] text-green700 dark:text-green200 cursor-pointer hover:text-deepPurple900"
-              onClick={() => setCheckAvailableVideos(true)}
+        <div className="w-full flex-bet flex-col gap-[12px] xs:gap-[12px] sm:gap-[12px] md:gap-[12px]">
+          <div className="flex-bet w-full xs:flex-col-reverse sm:flex-col-reverse">
+            {!!chosenVideo && (
+              <span className="whitespace-nowrap text-blueGrey700 dark:text-blueGrey200 italic underline">
+                {chosenVideo.principal
+                  ? "Principal"
+                  : !chosenVideo.principal &&
+                    chosenVideo.file?.original_filename
+                  ? chosenVideo.file?.original_filename
+                  : undefined}
+              </span>
+            )}
+
+            <DetailComponent
+              type="modal2"
+              noLabelColon
+              noPadding
+              label={<></>}
+              value={
+                <FormControlLabel
+                  className="dark:text-white text-black font-bold"
+                  control={
+                    <Switch
+                      value={videos.length > 0 ? true : false}
+                      checked={videos.length > 0 ? true : false}
+                      sx={{
+                        "& .MuiSwitch-track": {
+                          backgroundColor: `${
+                            videos.length > 0 ? deepPurple[300] : grey[500]
+                          } !important`,
+                        },
+                        "& span .MuiSwitch-thumb": {
+                          color:
+                            videos.length > 0 ? deepPurple[300] : grey[300],
+                        },
+                      }}
+                    />
+                  }
+                  label={t("video")}
+                  labelPlacement="start"
+                />
+              }
+            />
+          </div>
+          <div className="flex w-full xs:flex-col sm:flex-col gap-[6px]">
+            {!!setCheckAvailableVideos && (
+              <div
+                className="flex items-center gap-[24px] text-green700 dark:text-green200 cursor-pointer hover:text-deepPurple900"
+                onClick={() => setCheckAvailableVideos(true)}
+              >
+                <div className="whitespace-nowrap">
+                  {t("choose-another-video")}
+                </div>
+                <AiOutlineEye style={{ fontSize: "18px" }} />
+              </div>
+            )}
+            <span
+              className="text-blue700 dark:text-blue100 text-[14px] underline cursor-pointer"
+              onClick={() => setDisplayAdvices(true)}
             >
-              <div className="whitespace-nowrap">{t("choose-video")}</div>
-              <AiOutlineEye style={{ fontSize: "18px" }} />
-            </div>
-          )}
-          {!!chosenVideo && (
-            <span className="whitespace-nowrap text-blueGrey700 dark:text-blueGrey200 italic underline">
-              {chosenVideo.principal
-                ? "Principal"
-                : !chosenVideo.principal && chosenVideo.job
-                ? (chosenVideo.job?.title as Translated)[
-                    language as "fr" | "en"
-                  ]
-                : undefined}
+              {t("some-advices-for-video")}
             </span>
-          )}
-          <DetailComponent
-            type="modal2"
-            noLabelColon
-            noPadding
-            label={<></>}
-            value={
-              <FormControlLabel
-                className="dark:text-white text-black font-bold"
-                control={
-                  <Switch
-                    value={videos.length > 0 ? true : false}
-                    checked={videos.length > 0 ? true : false}
-                    sx={{
-                      "& .MuiSwitch-track": {
-                        backgroundColor: `${
-                          videos.length > 0 ? deepPurple[300] : grey[500]
-                        } !important`,
-                      },
-                      "& span .MuiSwitch-thumb": {
-                        color: videos.length > 0 ? deepPurple[300] : grey[300],
-                      },
-                    }}
-                  />
-                }
-                label={t("video")}
-                labelPlacement="start"
-              />
-            }
-          />
+          </div>
         </div>
       )}
-      <span
-        className="text-blue700 dark:text-blue100 text-[14px] underline cursor-pointer"
-        onClick={() => setDisplayAdvices(true)}
-      >
-        {t("some-advices-for-video")}
-      </span>
+
       {!!displayAdvices && (
         <div className="flex flex-col gap-[12px] bg-grey50 dark:extraLightDarkBg">
           <ul className="flex flex-col gap-[6px]">

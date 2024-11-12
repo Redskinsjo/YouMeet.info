@@ -11,7 +11,6 @@ import { UserState, removeUser } from "@youmeet/global-config/features/user";
 import { outfit } from "@youmeet/functions/fonts";
 import { setName } from "@youmeet/utils/basics/setName";
 import { onLogout } from "@youmeet/functions/actions";
-import { useRouter } from "next/navigation";
 import LogoutBtn from "./LogoutBtn";
 
 export default function MenuAuthenticatedUser() {
@@ -29,7 +28,6 @@ export default function MenuAuthenticatedUser() {
   const sm = useMediaQuery("(max-width:720px)");
   const xs = useMediaQuery("(max-width:600px)");
   const { t } = useTranslation();
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleClick = useCallback(
@@ -45,10 +43,6 @@ export default function MenuAuthenticatedUser() {
   const customOnLogout = useCallback(async () => {
     await onLogout();
     dispatch(removeUser("ok"));
-  }, []);
-
-  useEffect(() => {
-    router.prefetch("/");
   }, []);
 
   return (

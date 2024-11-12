@@ -64,7 +64,6 @@ export default function VideoComponent({
             maxWidth: "100vw",
             width: "100%",
             height: "100%",
-            minWidth: "300px",
           }}
           containerNewStyles={{
             maxWidth: videoWidth,
@@ -139,13 +138,10 @@ export default function VideoComponent({
               {t("chosen")}
             </div>
           )}
-          <div
-            className={
-              video
-                ? "flex xs:flex-col sm:flex-col md:flex-col md2:flex-col lg:flex-col lg2:flex-col relative gap-[12px] w-full"
-                : "flex xs:flex-col sm:flex-col md:flex-col md2:flex-col lg:flex-col lg2:flex-col flex-col gap-[12px] w-full"
-            }
-          >
+          <div className="flex-col gap-[12px] w-full">
+            {video?.file?.url && video.file.secure_url && !xs && !sm && !md
+              ? videoComponent
+              : undefined}
             <div
               className={
                 videos && videos.length === 0
@@ -183,21 +179,6 @@ export default function VideoComponent({
                         align="left"
                       />
                     )}
-
-                    <DetailComponent
-                      type="modal"
-                      noPadding
-                      label={t("createdAt")}
-                      conversation={modal}
-                      value={formatToDatetime(
-                        video?.createdAt,
-                        false,
-                        false,
-                        false,
-                        language
-                      )}
-                      name="createAt"
-                    />
                   </div>
                 )}
                 {video?.file?.url && video.file.secure_url && (
@@ -220,7 +201,7 @@ export default function VideoComponent({
                         </div>
                       </form>
                     ) : (
-                      <div className="h-full cursor-pointer dark:text-green200 text-green600 font-bold">
+                      <div className="h-full dark:text-green200 text-green600 font-bold">
                         {t("principalVideo")}
                       </div>
                     )}
@@ -255,7 +236,7 @@ export default function VideoComponent({
                             setCheckAvailableVideos(false);
                         }}
                       >
-                        {t("choose-video")}
+                        {t("take-this-video")}
                       </Button>
                     )}
                   </div>
@@ -284,9 +265,6 @@ export default function VideoComponent({
                 </span>
               </div>
             ) : undefined}
-            {video?.file?.url && video.file.secure_url && !xs && !sm && !md
-              ? videoComponent
-              : undefined}
           </div>
         </div>
       </SubPartContainer>

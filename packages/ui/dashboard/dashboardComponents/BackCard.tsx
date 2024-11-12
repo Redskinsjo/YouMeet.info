@@ -167,7 +167,6 @@ export default function BackCard({
           <DetailComponent
             noPadding
             type="modal2"
-            fontSize="14px"
             label={t("me-profile-infos-label-phone")}
             value={
               shouldSee
@@ -184,7 +183,6 @@ export default function BackCard({
         <DetailComponent
           noPadding
           type="modal2"
-          fontSize="14px"
           label={t("me-profile-infos-label-email")}
           value={shouldSee ? user.email : t("unavailable")}
           newStyles={{ boxSizing: "border-box" }}
@@ -194,7 +192,6 @@ export default function BackCard({
         <DetailComponent
           noPadding
           type="modal2"
-          fontSize="14px"
           label={t("linkedin")}
           value={
             shouldSee ? (

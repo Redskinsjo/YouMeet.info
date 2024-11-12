@@ -1,8 +1,9 @@
-import React from "react";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
-import Meets from "./Meets";
-import { useTranslation } from "react-i18next";
-import BoldText from "./BoldText";
+import BoldText from "./TextChild";
+import dynamic from "next/dynamic";
+
+const SectionTitle = dynamic(() => import("./_components/SectionTitleChild"));
+const Card = dynamic(() => import("./Card"));
 
 export default function SuggestedMeets({
   data,
@@ -13,26 +14,32 @@ export default function SuggestedMeets({
   type?: "suggested" | "favorite";
   dataType: "candidates" | "recruiters" | "offers";
 }) {
-  const { t } = useTranslation();
   return data ? (
     <div className="flex flex-col items-center pb-8 box-border w-full">
       <div className="flex justify-start items-center w-full">
         <div className="flex ml-[38px] items-center">
-          <h2 className="text-deepPurple900 dark:text-white">
-            {type === "suggested"
-              ? t("suggested-" + dataType)
-              : type === "favorite"
-              ? t("all-favorites")
-              : t("all-" + dataType)}
-          </h2>
+          <SectionTitle
+            component="h2"
+            translation={
+              type === "suggested"
+                ? "suggested-" + dataType
+                : type === "favorite"
+                ? "all-favorites"
+                : "all-" + dataType
+            }
+          />
         </div>
       </div>
 
       {data.length > 0 ? (
-        <Meets data={data} type={dataType} />
+        <div className="flex-center xs:flex-bet sm:flex-bet flex-wrap gap-[12px] xs:gap-[6px] sm:gap-[6px]">
+          {data?.map((d: BetaUser | BetaCompany | Offer) => (
+            <Card key={d.id} d={d} type={dataType} length={data.length} />
+          ))}
+        </div>
       ) : (
         <div className="dark:text-white text-[14px] italic px-[12px] h-full">
-          <BoldText text={t("no-offer-for-the-moment")} align="center" />
+          <BoldText text={"no-offer-for-the-moment"} align="center" />
         </div>
       )}
     </div>

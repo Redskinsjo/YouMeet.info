@@ -4,9 +4,11 @@ import { isAvatar } from "@youmeet/types/TypeGuards";
 
 export default (
   file: Avatar | undefined | null,
-  video?: true
+  video?: true | undefined,
+  str?: string
 ): string | undefined => {
   let url;
+  if (str) return str;
   if (file && isAvatar(file)) {
     // if (file.subtitledUrl) return file.subtitledUrl;
     // else if (dev) url = file.url as string;

@@ -1,72 +1,31 @@
-import React, { useState } from "react";
-import { Box } from "@mui/material";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
-import FrontCardRecruiter from "./FrontCardRecruiter";
-import BackCardRecruiter from "./BackCardRecruiter";
-import FrontCardOffer from "./offres/offresComponent/FrontCardOffer";
-import BackCardOffer from "./offres/offresComponent/BackCardOffer";
-import { CardTurnUp } from "@youmeet/types/Header";
+import dynamic from "next/dynamic";
 
-const Card = ({
+const FrontCardOffer = dynamic(
+  () => import("./offres/offresComponent/FrontCardOfferChild")
+);
+const FTCardOffer = dynamic(
+  () => import("./offres/offresComponent/FTCardOfferChild")
+);
+const FrontCardRecruiter = dynamic(() => import("./FrontCardRecruiterChild"));
+
+export default function Card({
   d,
   type,
-  styles,
+  length,
 }: {
   d: BetaUser | BetaCompany | Offer;
   type?: string;
-  styles?: { [key: string]: number | string | undefined };
-}) => {
-  const [frontShouldTurnUp, setFrontShouldTurnUp] = useState<
-    false | CardTurnUp
-  >(false);
-
+  length?: number;
+}) {
   return (
-    <Box
-      key={d.id}
-      className={
-        (frontShouldTurnUp as { id: string })?.id === d.id
-          ? "lockedCard w-full max-w-[390px] group appear-fastly relative rounded-[14px] box-border shadow-custom dark:shadow-black"
-          : "lockedCard w-full max-w-[390px] appear-fastly relative rounded-[14px] box-border shadow-custom dark:shadow-black"
-      }
-      sx={{
-        ...styles,
-      }}
-      onMouseLeave={() => setFrontShouldTurnUp(false)}
-      data-test="card"
-    >
-      <div
-        className="h-[480px] shadow-lg text-center bg-transparent transition-transform duration-300 perspective-1000"
-        onMouseEnter={() => setFrontShouldTurnUp(false)}
-      >
-        {type === "recruiters" && d && (
-          <div className="relative w-full h-full text-center tranform-style-preserve3d backface-hidden">
-            <FrontCardRecruiter
-              company={d as BetaCompany}
-              setFrontShouldTurnUp={setFrontShouldTurnUp}
-              frontShouldTurnUp={frontShouldTurnUp}
-            />
-            <BackCardRecruiter
-              company={d as BetaCompany}
-              setFrontShouldTurnUp={setFrontShouldTurnUp}
-            />
-          </div>
-        )}
-        {type === "offers" && d && (
-          <div className="relative w-full h-full text-center tranform-style-preserve3d backface-hidden">
-            <FrontCardOffer
-              offer={d as Offer}
-              setFrontShouldTurnUp={setFrontShouldTurnUp}
-              frontShouldTurnUp={frontShouldTurnUp}
-            />
-            <BackCardOffer
-              offer={d as Offer}
-              setFrontShouldTurnUp={setFrontShouldTurnUp}
-            />
-          </div>
-        )}
-      </div>
-    </Box>
+    <>
+      {type === "recruiters" && d && (
+        <FrontCardRecruiter company={d as BetaCompany} />
+      )}
+      {type === "offers" && d && (
+        <FTCardOffer el={d as Offer} length={length} />
+      )}
+    </>
   );
-};
-
-export default Card;
+}

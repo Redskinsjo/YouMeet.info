@@ -2,9 +2,7 @@
 import Footer from "@youmeet/ui/Footer";
 import dynamic from "next/dynamic";
 
-const ErrorChild = dynamic(() => import("@youmeet/ui/ErrorChild"), {
-  ssr: false,
-});
+const ErrorChild = dynamic(() => import("@youmeet/ui/ErrorChild"));
 
 export default function ServerError500({
   error,

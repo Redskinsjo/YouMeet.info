@@ -39,7 +39,7 @@ export default function SectionTitle({
     t(
       lang
         ? `${(translation as Translated)[language as "fr" | "en"]}`
-        : (translation as string)
+        : t(translation as string)
     )
   );
 

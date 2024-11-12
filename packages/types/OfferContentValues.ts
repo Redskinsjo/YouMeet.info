@@ -1,10 +1,8 @@
-import { Avatar, Competency } from "@youmeet/gql/generated";
-
 export type OfferContentValues = {
   jobTitle: string;
   content: string;
   profileSearched: string;
-  requirements: Competency[];
+  requirements: string[];
   revenue: string;
   remote: string;
   contractType: string;
@@ -13,6 +11,19 @@ export type OfferContentValues = {
   jobDescriptionLink?: string;
   companyName: string;
   createdAt?: Date;
-  companyLogo?: Avatar;
   rebroadcast: boolean;
+  logo: string;
+  qualification: string;
+  slug: string;
+  tools: string[];
+  nombrePostes: number;
+  permis: string[];
+  accessibleTH: boolean;
+  appellationlibelle: string;
+  alternance: boolean;
+  contact: string;
+  dureeTravail: string;
+  dureeTravailConverti: string;
+  experience: string;
+  secteurActivite: string;
 };

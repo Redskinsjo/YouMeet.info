@@ -57,8 +57,6 @@ const emailsList = [
 
 export default function FrontCard({
   user,
-  setFrontShouldTurnUp,
-  frontShouldTurnUp,
   isSubscribed,
   type,
   refetch,
@@ -70,7 +68,6 @@ export default function FrontCard({
   const [shouldChangeImageAppear, setShouldChangeImageAppear] =
     useState<boolean>(false);
   const [currentAvatarIndex, setCurrentAvatarIndex] = useState<number>(0);
-  const [timerId, setTimerId] = useState<NodeJS.Timeout | undefined>(undefined);
   const {
     t,
     i18n: { language },
@@ -135,13 +132,6 @@ export default function FrontCard({
     setLoading(false);
   }, [appUser]);
 
-  useEffect(() => {
-    if ((frontShouldTurnUp as CardTurnUp).waiting) {
-      clearTimeout(timerId);
-      setTimerId(undefined);
-    }
-  }, [frontShouldTurnUp, timerId]);
-
   const video = getPrincipalVideo(
     (user?.videos?.filter((v) => v) as Video[]) || undefined
   );
@@ -172,13 +162,7 @@ export default function FrontCard({
     .join(", ");
 
   return !loading && user ? (
-    <div
-      className={
-        (frontShouldTurnUp as CardTurnUp).waiting
-          ? "absolute h-full w-full backface-hidden group invisible flex flex-col justify-between px-[12px] pt-[16px] box-border dark:darkBg"
-          : "absolute h-full w-full backface-hidden group group-hover:invisible flex flex-col justify-between px-[12px] pt-[16px] box-border dark:darkBg"
-      }
-    >
+    <div className="absolute h-full w-full backface-hidden group group-hover:invisible flex flex-col justify-between px-[12px] pt-[16px] box-border dark:darkBg">
       {!shouldSee && (
         <div className="absolute w-fit h-fit box-border z-30 flex flex-col gap-[3px]">
           <TooltipedAsset asset={t("pay-this-to-see")}>
@@ -212,12 +196,7 @@ export default function FrontCard({
           </TooltipedAsset>
         )}
 
-        <div
-          className="pt-[8px] hover:animate-pulse"
-          onClick={() => {
-            setFrontShouldTurnUp({ id: user?.id as string, waiting: true });
-          }}
-        >
+        <div className="pt-[8px] hover:animate-pulse">
           <HiArrowUturnRight className="item dark:text-white hover:text-purple700 dark:hover:text-purple100" />
         </div>
       </Box>
@@ -319,14 +298,6 @@ export default function FrontCard({
         <h3 className="my-0 dark:text-white">{getName(user, shouldSee)}</h3>
       )}
       <div
-        onMouseEnter={() => {
-          const timerId = setTimeout(() => {
-            if (!xs && !sm) {
-              setFrontShouldTurnUp({ id: user?.id as string });
-            }
-          }, 300);
-          setTimerId(timerId);
-        }}
         className="px-[16px] mt-[6px] mb-[16px] mx-[16px] flex flex-col gap-[12px] items-center relative box-border bg-grey100 hover:bg-grey200 dark:extraLightDarkBg dark:hover:lightDarkBg border-[1px] border-solid border-blueGrey50"
         style={{ height: "40%" }}
       >

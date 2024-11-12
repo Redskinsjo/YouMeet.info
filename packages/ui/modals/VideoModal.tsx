@@ -1,6 +1,5 @@
 import AddVideo from "../AddVideo";
 import BoldText from "../BoldText";
-import { ModalWrapper } from "../CustomModal";
 import DetailComponent from "../DetailComponentContent";
 import LoginModalClose from "../LoginModalClose";
 import NewAddCVComponent from "../NewAddCVComponent";
@@ -22,6 +21,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCheckCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import ModalWrapper from "./ModalWrapper";
 
 export default function VideoAddingModal({
   type,

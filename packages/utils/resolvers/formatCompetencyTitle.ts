@@ -1,6 +1,14 @@
-export const formatForDb = (title: string) => title?.split("-").join(" ");
+const removeBars = (title: string) =>
+  title
+    ?.split("/")
+    .map((l) => l.trim())
+    .join(" ");
 
-export const formatForUrl = (title: string) => title?.split(" ").join("+");
+export const formatForDb = (title: string) =>
+  removeBars(title)?.split("-").join(" ");
+
+export const formatForUrl = (title: string) =>
+  removeBars(title)?.split(" ").join("+");
 
 export const inFormatForUrl = (str: string) => str.replaceAll(" ", "-");
 

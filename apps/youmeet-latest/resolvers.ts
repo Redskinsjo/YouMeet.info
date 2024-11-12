@@ -863,62 +863,55 @@ const resolvers: Resolvers = {
       if (!noCors) return [];
       const where = {} as Prisma.offersWhereInput;
 
-      if (args.data?.jobs && args.data.jobs.length > 0)
-        where.jobId = { in: args.data.jobs as string[] };
-      if (args.data?.sectors && args.data.sectors.length > 0)
-        where.sectorId = { in: args.data.sectors as string[] };
+      const data = args.data;
+      const prms = args.params;
 
-      if (args.params?.search || (args.data?.language && args.data.title)) {
+      if (data?.jobs && data.jobs.length > 0)
+        where.jobId = { in: data.jobs as string[] };
+      if (data?.sectors && data.sectors.length > 0)
+        where.sectorId = { in: data.sectors as string[] };
+
+      if (prms?.search || (data?.language && data.title)) {
         where.OR = [];
       }
 
-      if (args.params?.search && where.OR) {
-        where.OR.push({
-          company: {
-            name: { mode: "insensitive", startsWith: args.params.search },
-          },
-        });
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                fr: { mode: "insensitive", startsWith: args.params.search },
-              },
-            },
-          },
-        });
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                en: { mode: "insensitive", startsWith: args.params.search },
-              },
-            },
-          },
-        });
-      }
-      if (args.data?.language && args.data.title && where.OR) {
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                [args.data.language]: {
-                  mode: "insensitive",
-                  equals: args.data.title,
+      const search = prms?.search;
+      if (search && where.OR) {
+        const s = search.split(" ");
+
+        for (let i = 0; i < s.length; i++) {
+          where.OR.push({
+            job: {
+              title: {
+                is: {
+                  fr: { mode: "insensitive", contains: s[i] },
                 },
               },
             },
-          },
-        });
+          });
+          where.OR.push({
+            job: {
+              title: {
+                is: {
+                  en: { mode: "insensitive", contains: s[i] },
+                },
+              },
+            },
+          });
+
+          where.OR.push({
+            intitule: { contains: s[i], mode: "insensitive" },
+          });
+        }
       }
 
-      if (args.data?.targetSectorId) {
-        where.sectorId = { in: [args.data.targetSectorId] };
+      if (data?.targetSectorId) {
+        where.sectorId = { in: [data.targetSectorId] };
       }
       let take = {} as { take?: number };
-      if (args.params?.take) take = { take: args.params.take };
+      if (prms?.take) take = { take: prms.take };
       let skip = {} as { skip?: number };
-      if (args.params?.skip) skip = { skip: args.params.skip };
+      if (prms?.skip) skip = { skip: prms.skip };
 
       const finalWhere = {} as Prisma.offersFindManyArgs;
       if (Object.keys(where).length > 0) finalWhere.where = where;

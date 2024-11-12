@@ -3,7 +3,13 @@ import { outfit } from "@youmeet/functions/fonts";
 import Link from "next/link";
 import React from "react";
 
-const CompetencyLink = ({ requirement }: { requirement: Competency }) => {
+export default function CompetencyLink({
+  requirement,
+  str,
+}: {
+  requirement?: Competency;
+  str: string;
+}) {
   return requirement?.title ? (
     <Link
       href={`/competences/${requirement.slug}`}
@@ -14,7 +20,7 @@ const CompetencyLink = ({ requirement }: { requirement: Competency }) => {
     >
       {requirement?.title[0].toUpperCase() + requirement?.title.slice(1)}
     </Link>
-  ) : undefined;
-};
-
-export default CompetencyLink;
+  ) : (
+    str
+  );
+}

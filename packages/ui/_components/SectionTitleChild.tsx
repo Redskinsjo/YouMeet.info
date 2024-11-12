@@ -4,7 +4,11 @@ import { Translated } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 const SectionTitle = dynamic(() => import("./SectionTitle"), {
   ssr: false,
-  loading: () => <OneLineSkeleton height="20px" width="200px" />,
+  loading: () => (
+    <div className="py-[12px]">
+      <OneLineSkeleton height="20px" width="200px" />
+    </div>
+  ),
 });
 
 export default function fnc({

@@ -1107,6 +1107,8 @@ const misc = {
   "apply-now": "Postuler maintenant",
   "already-applied": "Déjà postulé",
   "choose-video": "Choisir vidéo",
+  "choose-another-video": "Choisir une autre vidéo",
+  "take-this-video": "Prendre cette vidéo",
   "start-with-video-cv": "Commencer avec un CV vidéo",
   "new-article": "Récent",
   "some-articles-could-interest":

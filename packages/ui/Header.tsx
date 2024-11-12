@@ -75,10 +75,6 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         }`}
         style={newStyles}
         data-test="header"
-        onMouseEnter={() => {
-          if (!xs && !sm && !md) setMegaMenu(true);
-        }}
-        onMouseLeave={() => setMegaMenu(false)}
       >
         <div className="flex items-center justify-start flex-1 gap-[24px] xs:hidden sm:hidden md:hidden">
           {pathname.includes("/competencies") && (
@@ -108,7 +104,13 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
         <MenuHeaderForMobile />
         {!xs && !sm && !md && (
-          <div className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full">
+          <div
+            className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full"
+            onMouseEnter={() => {
+              if (!xs && !sm && !md) setMegaMenu(true);
+            }}
+            onMouseLeave={() => setMegaMenu(false)}
+          >
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
@@ -227,7 +229,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
       {!!megaMenu && !megaMenuLoading && (
         <div
           onClick={() => setMegaMenu(false)}
-          className="absolute h-screen top-[75px] z-[11001] shadow-inner"
+          className="absolute h-screen top-[75px] z-[11001] shadow-inner lightBg"
         >
           <div
             onMouseEnter={() => setMegaMenu(true)}

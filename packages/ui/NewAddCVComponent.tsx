@@ -48,20 +48,20 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   };
 
   return profil?.cvFile ? undefined : (
-    <div className="w-full flex-bet p-[6px] h-[39px]">
+    <div className="w-full flex justify-end p-[6px] h-[39px]">
       <form
         ref={cvRef}
         action={customOnAddCV.bind(null, profil?.id as string)}
-        className="w-full min-w-[245px] flex-center rounded-xl cursor-pointer relative"
+        className="rounded-xl flex justify-end min-w-[80px] cursor-pointer relative"
       >
         <label
           htmlFor="cv"
-          className="w-full h-full cursor-pointer absolute flex justify-end items-center dark:text-deepPurple200 text-deepPurple700 font-bold"
+          className="h-full cursor-pointer absolute left-0 dark:text-deepPurple200 text-deepPurple700 font-bold"
         >
           {t("add-cv")}
         </label>
         <input
-          className="invisible w-full h-full absolute"
+          className="invisible left-0 absolute"
           id="cv"
           name="cvFile"
           type="file"

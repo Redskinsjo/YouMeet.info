@@ -7,7 +7,7 @@ import {
 import { Metadata, ResolvingMetadata } from "next";
 import { Offer } from "@youmeet/gql/generated";
 import { logoUrl, uri } from "@youmeet/functions/imports";
-import OfferChild from "./offerChild";
+import OfferChild from "@youmeet/ui/offres/offerChild";
 import {
   formatForDb,
   inFormatForDb,
@@ -120,6 +120,6 @@ export default async function OfferComponent({
     })) as Offer[];
   }
 
-  if (offer) return <OfferChild offre={offer} offers={offers} />;
+  if (offer) return <OfferChild offre={offer} />;
   return notFound();
 }

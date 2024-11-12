@@ -30,6 +30,12 @@ export type Affiliation = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
+export type AgencyFt = {
+  __typename?: 'AgencyFT';
+  courriel?: Maybe<Scalars['String']['output']>;
+  telephone?: Maybe<Scalars['String']['output']>;
+};
+
 export type Article = {
   __typename?: 'Article';
   alt?: Maybe<Scalars['String']['output']>;
@@ -496,6 +502,13 @@ export type CompanyInput = {
   userEmail?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type CompetenceFt = {
+  __typename?: 'CompetenceFT';
+  code?: Maybe<Scalars['String']['output']>;
+  exigence?: Maybe<Scalars['String']['output']>;
+  libelle?: Maybe<Scalars['String']['output']>;
+};
+
 export type Competency = {
   __typename?: 'Competency';
   advantages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -517,6 +530,19 @@ export type CompetencyInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactFt = {
+  __typename?: 'ContactFT';
+  commentaire?: Maybe<Scalars['String']['output']>;
+  coordonnees1?: Maybe<Scalars['String']['output']>;
+  coordonnees2?: Maybe<Scalars['String']['output']>;
+  coordonnees3?: Maybe<Scalars['String']['output']>;
+  courriel?: Maybe<Scalars['String']['output']>;
+  nom?: Maybe<Scalars['String']['output']>;
+  telephone?: Maybe<Scalars['String']['output']>;
+  urlPostulation?: Maybe<Scalars['String']['output']>;
+  urlRecruteur?: Maybe<Scalars['String']['output']>;
 };
 
 export type ConversationInput = {
@@ -594,6 +620,15 @@ export type EmailInput = {
   recruiterName?: InputMaybe<Scalars['String']['input']>;
   templateId?: InputMaybe<Scalars['Int']['input']>;
   token?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type EnterpriseFt = {
+  __typename?: 'EnterpriseFT';
+  description?: Maybe<Scalars['String']['output']>;
+  entrepriseAdaptee?: Maybe<Scalars['Boolean']['output']>;
+  logo?: Maybe<Scalars['String']['output']>;
+  nom?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type Error = {
@@ -722,6 +757,15 @@ export type FormResponseInput = {
   type?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type FormationFt = {
+  __typename?: 'FormationFT';
+  codeFormation?: Maybe<Scalars['String']['output']>;
+  commentaire?: Maybe<Scalars['String']['output']>;
+  domaineLibelle?: Maybe<Scalars['String']['output']>;
+  exigence?: Maybe<Scalars['String']['output']>;
+  niveauLibelle?: Maybe<Scalars['String']['output']>;
+};
+
 export type GoogleAuthentication = {
   __typename?: 'GoogleAuthentication';
   email?: Maybe<Scalars['String']['output']>;
@@ -814,6 +858,12 @@ export type JobInput = {
   language?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   topSectorIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type LanguageFt = {
+  __typename?: 'LanguageFT';
+  exigence?: Maybe<Scalars['String']['output']>;
+  libelle?: Maybe<Scalars['String']['output']>;
 };
 
 export type Lead = {
@@ -1342,6 +1392,10 @@ export type NotificationInput = {
 
 export type Offer = {
   __typename?: 'Offer';
+  accessibleTH?: Maybe<Scalars['Boolean']['output']>;
+  agence?: Maybe<AgencyFt>;
+  alternance?: Maybe<Scalars['Boolean']['output']>;
+  appellationlibelle?: Maybe<Scalars['String']['output']>;
   author?: Maybe<BetaUser>;
   authorEmail?: Maybe<Scalars['String']['output']>;
   authorId?: Maybe<Scalars['String']['output']>;
@@ -1349,31 +1403,68 @@ export type Offer = {
   authorName?: Maybe<Scalars['String']['output']>;
   candidates?: Maybe<Array<Maybe<BetaUser>>>;
   candidatesIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  codeNAF?: Maybe<Scalars['String']['output']>;
   company?: Maybe<BetaCompany>;
   companyId?: Maybe<Scalars['String']['output']>;
   companyLogo?: Maybe<Scalars['String']['output']>;
   companyName?: Maybe<Scalars['String']['output']>;
+  competences?: Maybe<Array<Maybe<CompetenceFt>>>;
+  complementExercice?: Maybe<Scalars['String']['output']>;
+  conditionExercice?: Maybe<Scalars['String']['output']>;
+  contact?: Maybe<ContactFt>;
   content?: Maybe<Scalars['String']['output']>;
   contractType?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dateActualisation?: Maybe<Scalars['String']['output']>;
+  dateCreation?: Maybe<Scalars['String']['output']>;
+  deplacementCode?: Maybe<Scalars['String']['output']>;
+  deplacementLibelle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  dureeTravailLibelle?: Maybe<Scalars['String']['output']>;
+  dureeTravailLibelleConverti?: Maybe<Scalars['String']['output']>;
+  entreprise?: Maybe<EnterpriseFt>;
+  experienceCommentaire?: Maybe<Scalars['String']['output']>;
+  experienceExige?: Maybe<Scalars['String']['output']>;
+  experienceLibelle?: Maybe<Scalars['String']['output']>;
   extension?: Maybe<Scalars['String']['output']>;
+  formations?: Maybe<Array<Maybe<FormationFt>>>;
   generated?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  intitule?: Maybe<Scalars['String']['output']>;
   job?: Maybe<Job>;
   jobDescriptionLink?: Maybe<Scalars['String']['output']>;
   jobId?: Maybe<Scalars['String']['output']>;
+  langues?: Maybe<Array<Maybe<LanguageFt>>>;
+  lieuTravail?: Maybe<WorkLocationFt>;
   limitDate?: Maybe<Scalars['DateTime']['output']>;
   location?: Maybe<Scalars['String']['output']>;
+  natureContrat?: Maybe<Scalars['String']['output']>;
+  nombrePostes?: Maybe<Scalars['Int']['output']>;
+  offresManqueCandidats?: Maybe<Scalars['Boolean']['output']>;
+  origineOffre?: Maybe<OriginOfferFt>;
+  outilsBureautiques?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  permis?: Maybe<Array<Maybe<PermisFt>>>;
   profileSearched?: Maybe<Scalars['String']['output']>;
+  qualificationCode?: Maybe<Scalars['String']['output']>;
+  qualificationLibelle?: Maybe<Scalars['String']['output']>;
+  qualitesProfessionnelles?: Maybe<Array<Maybe<ProfessionalQualityFt>>>;
   rebroadcast?: Maybe<Scalars['Boolean']['output']>;
   remote?: Maybe<Scalars['String']['output']>;
   requirements?: Maybe<Array<Maybe<Competency>>>;
   requirementsIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   revenue?: Maybe<Scalars['Int']['output']>;
+  romeCode?: Maybe<Scalars['String']['output']>;
+  romeLibelle?: Maybe<Scalars['String']['output']>;
+  salaire?: Maybe<SalaryFt>;
+  secteurActivite?: Maybe<Scalars['String']['output']>;
+  secteurActiviteLibelle?: Maybe<Scalars['String']['output']>;
   sector?: Maybe<TopSector>;
   sectorId?: Maybe<Scalars['String']['output']>;
   sharings?: Maybe<Array<Maybe<ProfileSharing>>>;
   slug?: Maybe<Scalars['String']['output']>;
+  trancheEffectifEtab?: Maybe<Scalars['String']['output']>;
+  typeContrat?: Maybe<Scalars['String']['output']>;
+  typeContratLibelle?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -1403,10 +1494,30 @@ export type OfferInput = {
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type OriginOfferFt = {
+  __typename?: 'OriginOfferFT';
+  origine?: Maybe<Scalars['String']['output']>;
+  partenaires?: Maybe<Array<Maybe<PartenairFt>>>;
+  urlOrigine?: Maybe<Scalars['String']['output']>;
+};
+
 export type PageParamsInput = {
   search?: InputMaybe<Scalars['String']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PartenairFt = {
+  __typename?: 'PartenairFT';
+  logo?: Maybe<Scalars['String']['output']>;
+  nom?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type PermisFt = {
+  __typename?: 'PermisFT';
+  exigence?: Maybe<Scalars['String']['output']>;
+  libelle?: Maybe<Scalars['String']['output']>;
 };
 
 export type PersonalDetailsInput = {
@@ -1444,6 +1555,12 @@ export type ProFormInput = {
   resume?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['String']['input']>;
   video?: InputMaybe<AvatarInput>;
+};
+
+export type ProfessionalQualityFt = {
+  __typename?: 'ProfessionalQualityFT';
+  description?: Maybe<Scalars['String']['output']>;
+  libelle?: Maybe<Scalars['String']['output']>;
 };
 
 export type ProfileExperienceGivenInfos = {
@@ -2012,6 +2129,14 @@ export type ResponseInput = {
   type?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SalaryFt = {
+  __typename?: 'SalaryFT';
+  commentaire?: Maybe<Scalars['String']['output']>;
+  complement1?: Maybe<Scalars['String']['output']>;
+  complement2?: Maybe<Scalars['String']['output']>;
+  libelle?: Maybe<Scalars['String']['output']>;
+};
+
 export type ScrappedInfos = {
   __typename?: 'ScrappedInfos';
   fullname?: Maybe<Scalars['String']['output']>;
@@ -2181,6 +2306,15 @@ export type VideoInput = {
   targetId?: InputMaybe<Scalars['String']['input']>;
   transcript?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type WorkLocationFt = {
+  __typename?: 'WorkLocationFT';
+  codePostal?: Maybe<Scalars['String']['output']>;
+  commune?: Maybe<Scalars['String']['output']>;
+  latitude?: Maybe<Scalars['PositiveFloat']['output']>;
+  libelle?: Maybe<Scalars['String']['output']>;
+  longitude?: Maybe<Scalars['PositiveFloat']['output']>;
 };
 
 export type CreateAccountMutationVariables = Exact<{
@@ -3000,6 +3134,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Affiliation: ResolverTypeWrapper<Affiliation>;
+  AgencyFT: ResolverTypeWrapper<AgencyFt>;
   Article: ResolverTypeWrapper<Article>;
   ArticleParagraph: ResolverTypeWrapper<ArticleParagraph>;
   ArticlesLink: ResolverTypeWrapper<ArticlesLink>;
@@ -3031,8 +3166,10 @@ export type ResolversTypes = {
   CandidatesNotes: ResolverTypeWrapper<CandidatesNotes>;
   CandidatesNotesInput: CandidatesNotesInput;
   CompanyInput: CompanyInput;
+  CompetenceFT: ResolverTypeWrapper<CompetenceFt>;
   Competency: ResolverTypeWrapper<Competency>;
   CompetencyInput: CompetencyInput;
+  ContactFT: ResolverTypeWrapper<ContactFt>;
   ConversationInput: ConversationInput;
   CreateProAccountInput: CreateProAccountInput;
   Customisation: ResolverTypeWrapper<Customisation>;
@@ -3042,6 +3179,7 @@ export type ResolversTypes = {
   EagerInput: EagerInput;
   Email: ResolverTypeWrapper<Email>;
   EmailInput: EmailInput;
+  EnterpriseFT: ResolverTypeWrapper<EnterpriseFt>;
   Error: ResolverTypeWrapper<Error>;
   ErrorInput: ErrorInput;
   ErrorOnValidation: ResolverTypeWrapper<ErrorOnValidation>;
@@ -3054,6 +3192,7 @@ export type ResolversTypes = {
   FormQuestion: ResolverTypeWrapper<FormQuestion>;
   FormResponse: ResolverTypeWrapper<FormResponse>;
   FormResponseInput: FormResponseInput;
+  FormationFT: ResolverTypeWrapper<FormationFt>;
   GoogleAuthentication: ResolverTypeWrapper<GoogleAuthentication>;
   GoogleAuthenticationInput: GoogleAuthenticationInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
@@ -3064,6 +3203,7 @@ export type ResolversTypes = {
   InterviewOfferInput: InterviewOfferInput;
   Job: ResolverTypeWrapper<Job>;
   JobInput: JobInput;
+  LanguageFT: ResolverTypeWrapper<LanguageFt>;
   Lead: ResolverTypeWrapper<Lead>;
   LeadInput: LeadInput;
   Meet: ResolverTypeWrapper<Meet>;
@@ -3077,12 +3217,16 @@ export type ResolversTypes = {
   NotificationInput: NotificationInput;
   Offer: ResolverTypeWrapper<Offer>;
   OfferInput: OfferInput;
+  OriginOfferFT: ResolverTypeWrapper<OriginOfferFt>;
   PageParamsInput: PageParamsInput;
+  PartenairFT: ResolverTypeWrapper<PartenairFt>;
+  PermisFT: ResolverTypeWrapper<PermisFt>;
   PersonalDetailsInput: PersonalDetailsInput;
   Phone: ResolverTypeWrapper<Phone>;
   PhoneInput: PhoneInput;
   PositiveFloat: ResolverTypeWrapper<Scalars['PositiveFloat']['output']>;
   ProFormInput: ProFormInput;
+  ProfessionalQualityFT: ResolverTypeWrapper<ProfessionalQualityFt>;
   ProfileExperienceGivenInfos: ResolverTypeWrapper<ProfileExperienceGivenInfos>;
   ProfileSharing: ResolverTypeWrapper<ProfileSharing>;
   ProfileSharingInput: ProfileSharingInput;
@@ -3098,6 +3242,7 @@ export type ResolversTypes = {
   ReferenceInput: ReferenceInput;
   RemarkInput: RemarkInput;
   ResponseInput: ResponseInput;
+  SalaryFT: ResolverTypeWrapper<SalaryFt>;
   ScrappedInfos: ResolverTypeWrapper<ScrappedInfos>;
   SharingRefusal: ResolverTypeWrapper<SharingRefusal>;
   SharingRefusalInput: SharingRefusalInput;
@@ -3115,11 +3260,13 @@ export type ResolversTypes = {
   VerificationRequestInput: VerificationRequestInput;
   Video: ResolverTypeWrapper<Video>;
   VideoInput: VideoInput;
+  WorkLocationFT: ResolverTypeWrapper<WorkLocationFt>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Affiliation: Affiliation;
+  AgencyFT: AgencyFt;
   Article: Article;
   ArticleParagraph: ArticleParagraph;
   ArticlesLink: ArticlesLink;
@@ -3151,8 +3298,10 @@ export type ResolversParentTypes = {
   CandidatesNotes: CandidatesNotes;
   CandidatesNotesInput: CandidatesNotesInput;
   CompanyInput: CompanyInput;
+  CompetenceFT: CompetenceFt;
   Competency: Competency;
   CompetencyInput: CompetencyInput;
+  ContactFT: ContactFt;
   ConversationInput: ConversationInput;
   CreateProAccountInput: CreateProAccountInput;
   Customisation: Customisation;
@@ -3162,6 +3311,7 @@ export type ResolversParentTypes = {
   EagerInput: EagerInput;
   Email: Email;
   EmailInput: EmailInput;
+  EnterpriseFT: EnterpriseFt;
   Error: Error;
   ErrorInput: ErrorInput;
   ErrorOnValidation: ErrorOnValidation;
@@ -3174,6 +3324,7 @@ export type ResolversParentTypes = {
   FormQuestion: FormQuestion;
   FormResponse: FormResponse;
   FormResponseInput: FormResponseInput;
+  FormationFT: FormationFt;
   GoogleAuthentication: GoogleAuthentication;
   GoogleAuthenticationInput: GoogleAuthenticationInput;
   ID: Scalars['ID']['output'];
@@ -3184,6 +3335,7 @@ export type ResolversParentTypes = {
   InterviewOfferInput: InterviewOfferInput;
   Job: Job;
   JobInput: JobInput;
+  LanguageFT: LanguageFt;
   Lead: Lead;
   LeadInput: LeadInput;
   Meet: Meet;
@@ -3197,12 +3349,16 @@ export type ResolversParentTypes = {
   NotificationInput: NotificationInput;
   Offer: Offer;
   OfferInput: OfferInput;
+  OriginOfferFT: OriginOfferFt;
   PageParamsInput: PageParamsInput;
+  PartenairFT: PartenairFt;
+  PermisFT: PermisFt;
   PersonalDetailsInput: PersonalDetailsInput;
   Phone: Phone;
   PhoneInput: PhoneInput;
   PositiveFloat: Scalars['PositiveFloat']['output'];
   ProFormInput: ProFormInput;
+  ProfessionalQualityFT: ProfessionalQualityFt;
   ProfileExperienceGivenInfos: ProfileExperienceGivenInfos;
   ProfileSharing: ProfileSharing;
   ProfileSharingInput: ProfileSharingInput;
@@ -3218,6 +3374,7 @@ export type ResolversParentTypes = {
   ReferenceInput: ReferenceInput;
   RemarkInput: RemarkInput;
   ResponseInput: ResponseInput;
+  SalaryFT: SalaryFt;
   ScrappedInfos: ScrappedInfos;
   SharingRefusal: SharingRefusal;
   SharingRefusalInput: SharingRefusalInput;
@@ -3235,6 +3392,7 @@ export type ResolversParentTypes = {
   VerificationRequestInput: VerificationRequestInput;
   Video: Video;
   VideoInput: VideoInput;
+  WorkLocationFT: WorkLocationFt;
 };
 
 export type AffiliationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Affiliation'] = ResolversParentTypes['Affiliation']> = {
@@ -3244,6 +3402,12 @@ export type AffiliationResolvers<ContextType = any, ParentType extends Resolvers
   parent?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType>;
   parentId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AgencyFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['AgencyFT'] = ResolversParentTypes['AgencyFT']> = {
+  courriel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  telephone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3538,6 +3702,13 @@ export type CandidatesNotesResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CompetenceFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['CompetenceFT'] = ResolversParentTypes['CompetenceFT']> = {
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  exigence?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  libelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CompetencyResolvers<ContextType = any, ParentType extends ResolversParentTypes['Competency'] = ResolversParentTypes['Competency']> = {
   advantages?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   appelations?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
@@ -3552,6 +3723,19 @@ export type CompetencyResolvers<ContextType = any, ParentType extends ResolversP
   relatedSkills?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ContactFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContactFT'] = ResolversParentTypes['ContactFT']> = {
+  commentaire?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  coordonnees1?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  coordonnees2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  coordonnees3?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  courriel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  nom?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  telephone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  urlPostulation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  urlRecruteur?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3584,6 +3768,15 @@ export type EagerResolvers<ContextType = any, ParentType extends ResolversParent
 export type EmailResolvers<ContextType = any, ParentType extends ResolversParentTypes['Email'] = ResolversParentTypes['Email']> = {
   error?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type EnterpriseFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['EnterpriseFT'] = ResolversParentTypes['EnterpriseFT']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  entrepriseAdaptee?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  nom?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3664,6 +3857,15 @@ export type FormResponseResolvers<ContextType = any, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FormationFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['FormationFT'] = ResolversParentTypes['FormationFT']> = {
+  codeFormation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  commentaire?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  domaineLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  exigence?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  niveauLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type GoogleAuthenticationResolvers<ContextType = any, ParentType extends ResolversParentTypes['GoogleAuthentication'] = ResolversParentTypes['GoogleAuthentication']> = {
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email_verified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -3716,6 +3918,12 @@ export type JobResolvers<ContextType = any, ParentType extends ResolversParentTy
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaUser']>>>, ParentType, ContextType>;
   usersIds?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type LanguageFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['LanguageFT'] = ResolversParentTypes['LanguageFT']> = {
+  exigence?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  libelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3872,6 +4080,10 @@ export type NotificationResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type OfferResolvers<ContextType = any, ParentType extends ResolversParentTypes['Offer'] = ResolversParentTypes['Offer']> = {
+  accessibleTH?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  agence?: Resolver<Maybe<ResolversTypes['AgencyFT']>, ParentType, ContextType>;
+  alternance?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  appellationlibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   author?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType>;
   authorEmail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   authorId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3879,32 +4091,89 @@ export type OfferResolvers<ContextType = any, ParentType extends ResolversParent
   authorName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   candidates?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaUser']>>>, ParentType, ContextType>;
   candidatesIds?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  codeNAF?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['BetaCompany']>, ParentType, ContextType>;
   companyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   companyLogo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   companyName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  competences?: Resolver<Maybe<Array<Maybe<ResolversTypes['CompetenceFT']>>>, ParentType, ContextType>;
+  complementExercice?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  conditionExercice?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  contact?: Resolver<Maybe<ResolversTypes['ContactFT']>, ParentType, ContextType>;
   content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   contractType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  dateActualisation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  dateCreation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  deplacementCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  deplacementLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  dureeTravailLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  dureeTravailLibelleConverti?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  entreprise?: Resolver<Maybe<ResolversTypes['EnterpriseFT']>, ParentType, ContextType>;
+  experienceCommentaire?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  experienceExige?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  experienceLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   extension?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  formations?: Resolver<Maybe<Array<Maybe<ResolversTypes['FormationFT']>>>, ParentType, ContextType>;
   generated?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  intitule?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   job?: Resolver<Maybe<ResolversTypes['Job']>, ParentType, ContextType>;
   jobDescriptionLink?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   jobId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  langues?: Resolver<Maybe<Array<Maybe<ResolversTypes['LanguageFT']>>>, ParentType, ContextType>;
+  lieuTravail?: Resolver<Maybe<ResolversTypes['WorkLocationFT']>, ParentType, ContextType>;
   limitDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   location?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  natureContrat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  nombrePostes?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  offresManqueCandidats?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  origineOffre?: Resolver<Maybe<ResolversTypes['OriginOfferFT']>, ParentType, ContextType>;
+  outilsBureautiques?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  permis?: Resolver<Maybe<Array<Maybe<ResolversTypes['PermisFT']>>>, ParentType, ContextType>;
   profileSearched?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  qualificationCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  qualificationLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  qualitesProfessionnelles?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfessionalQualityFT']>>>, ParentType, ContextType>;
   rebroadcast?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   remote?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   requirements?: Resolver<Maybe<Array<Maybe<ResolversTypes['Competency']>>>, ParentType, ContextType>;
   requirementsIds?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   revenue?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  romeCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  romeLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  salaire?: Resolver<Maybe<ResolversTypes['SalaryFT']>, ParentType, ContextType>;
+  secteurActivite?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  secteurActiviteLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sector?: Resolver<Maybe<ResolversTypes['TopSector']>, ParentType, ContextType>;
   sectorId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sharings?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfileSharing']>>>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  trancheEffectifEtab?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  typeContrat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  typeContratLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OriginOfferFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['OriginOfferFT'] = ResolversParentTypes['OriginOfferFT']> = {
+  origine?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  partenaires?: Resolver<Maybe<Array<Maybe<ResolversTypes['PartenairFT']>>>, ParentType, ContextType>;
+  urlOrigine?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PartenairFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartenairFT'] = ResolversParentTypes['PartenairFT']> = {
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  nom?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PermisFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['PermisFT'] = ResolversParentTypes['PermisFT']> = {
+  exigence?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  libelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3917,6 +4186,12 @@ export type PhoneResolvers<ContextType = any, ParentType extends ResolversParent
 export interface PositiveFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['PositiveFloat'], any> {
   name: 'PositiveFloat';
 }
+
+export type ProfessionalQualityFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfessionalQualityFT'] = ResolversParentTypes['ProfessionalQualityFT']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  libelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type ProfileExperienceGivenInfosResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfileExperienceGivenInfos'] = ResolversParentTypes['ProfileExperienceGivenInfos']> = {
   company?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -4076,6 +4351,14 @@ export type ReferenceContactResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type SalaryFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['SalaryFT'] = ResolversParentTypes['SalaryFT']> = {
+  commentaire?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  complement1?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  complement2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  libelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ScrappedInfosResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScrappedInfos'] = ResolversParentTypes['ScrappedInfos']> = {
   fullname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -4182,8 +4465,18 @@ export type VideoResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type WorkLocationFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['WorkLocationFT'] = ResolversParentTypes['WorkLocationFT']> = {
+  codePostal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  commune?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<Maybe<ResolversTypes['PositiveFloat']>, ParentType, ContextType>;
+  libelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  longitude?: Resolver<Maybe<ResolversTypes['PositiveFloat']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   Affiliation?: AffiliationResolvers<ContextType>;
+  AgencyFT?: AgencyFtResolvers<ContextType>;
   Article?: ArticleResolvers<ContextType>;
   ArticleParagraph?: ArticleParagraphResolvers<ContextType>;
   ArticlesLink?: ArticlesLinkResolvers<ContextType>;
@@ -4200,11 +4493,14 @@ export type Resolvers<ContextType = any> = {
   BetaWhatsappResponse?: BetaWhatsappResponseResolvers<ContextType>;
   BetaWhatsappThread?: BetaWhatsappThreadResolvers<ContextType>;
   CandidatesNotes?: CandidatesNotesResolvers<ContextType>;
+  CompetenceFT?: CompetenceFtResolvers<ContextType>;
   Competency?: CompetencyResolvers<ContextType>;
+  ContactFT?: ContactFtResolvers<ContextType>;
   Customisation?: CustomisationResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Eager?: EagerResolvers<ContextType>;
   Email?: EmailResolvers<ContextType>;
+  EnterpriseFT?: EnterpriseFtResolvers<ContextType>;
   Error?: ErrorResolvers<ContextType>;
   ErrorOnValidation?: ErrorOnValidationResolvers<ContextType>;
   Favorite?: FavoriteResolvers<ContextType>;
@@ -4212,10 +4508,12 @@ export type Resolvers<ContextType = any> = {
   File?: GraphQLScalarType;
   FormQuestion?: FormQuestionResolvers<ContextType>;
   FormResponse?: FormResponseResolvers<ContextType>;
+  FormationFT?: FormationFtResolvers<ContextType>;
   GoogleAuthentication?: GoogleAuthenticationResolvers<ContextType>;
   InternalAuthentication?: InternalAuthenticationResolvers<ContextType>;
   InterviewOffer?: InterviewOfferResolvers<ContextType>;
   Job?: JobResolvers<ContextType>;
+  LanguageFT?: LanguageFtResolvers<ContextType>;
   Lead?: LeadResolvers<ContextType>;
   Meet?: MeetResolvers<ContextType>;
   MeetCandidate?: MeetCandidateResolvers<ContextType>;
@@ -4224,8 +4522,12 @@ export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Notification?: NotificationResolvers<ContextType>;
   Offer?: OfferResolvers<ContextType>;
+  OriginOfferFT?: OriginOfferFtResolvers<ContextType>;
+  PartenairFT?: PartenairFtResolvers<ContextType>;
+  PermisFT?: PermisFtResolvers<ContextType>;
   Phone?: PhoneResolvers<ContextType>;
   PositiveFloat?: GraphQLScalarType;
+  ProfessionalQualityFT?: ProfessionalQualityFtResolvers<ContextType>;
   ProfileExperienceGivenInfos?: ProfileExperienceGivenInfosResolvers<ContextType>;
   ProfileSharing?: ProfileSharingResolvers<ContextType>;
   ProfileView?: ProfileViewResolvers<ContextType>;
@@ -4233,6 +4535,7 @@ export type Resolvers<ContextType = any> = {
   Question?: QuestionResolvers<ContextType>;
   Reference?: ReferenceResolvers<ContextType>;
   ReferenceContact?: ReferenceContactResolvers<ContextType>;
+  SalaryFT?: SalaryFtResolvers<ContextType>;
   ScrappedInfos?: ScrappedInfosResolvers<ContextType>;
   SharingRefusal?: SharingRefusalResolvers<ContextType>;
   SocialAuthentication?: SocialAuthenticationResolvers<ContextType>;
@@ -4242,6 +4545,7 @@ export type Resolvers<ContextType = any> = {
   UserRemark?: UserRemarkResolvers<ContextType>;
   VerificationRequest?: VerificationRequestResolvers<ContextType>;
   Video?: VideoResolvers<ContextType>;
+  WorkLocationFT?: WorkLocationFtResolvers<ContextType>;
 };
 
 

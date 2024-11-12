@@ -1071,6 +1071,8 @@ const misc = {
   "apply-now": "Apply now",
   "already-applied": "Already applied",
   "choose-video": "Choose video",
+  "choose-another-video": "Choose another video",
+  "take-this-video": "Take this video",
   "start-with-video-cv": "Start with a video CV",
   "new-article": "New",
   "some-articles-could-interest": "Some articles that could interest you",

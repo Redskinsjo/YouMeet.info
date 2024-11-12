@@ -10,7 +10,7 @@ const DetailComponent = dynamic(() => import("./DetailComponentContent"), {
   loading: () => <OneLineSkeleton />,
 });
 
-export default function DetailComponentWrapper(params: {
+export default function fnc(params: {
   label: string | (string | React.JSX.Element)[] | React.JSX.Element;
   value: string | (string | React.JSX.Element)[] | React.JSX.Element;
   type?: "modal" | "modal2";

@@ -17,23 +17,20 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
   const { t } = useTranslation();
   const user = useSelector((state: RootState) => state.user as UserState);
   const router = useRouter();
+  router.prefetch("/se-connecter");
 
   const alreadyApplied = !!offre?.sharings?.find(
     (sharing) => sharing?.origin?.id === user.id
   );
 
-  useEffect(() => {
-    router.prefetch("/se-connecter");
-  }, []);
-
   return (
     <Button
       className={
         alreadyApplied
-          ? "h-fit min-h-[49px] xs:min-h-[33px] sm:min-h-[33px] w-full bg-grey500 text-grey700 dark:darkBg dark:text-white"
+          ? "h-fit min-h-[49px] xs:min-h-[33px] sm:min-h-[33px] w-fit bg-grey500 text-grey700 dark:darkBg dark:text-white"
           : user.videos.length > 0 && user.cvFile
-          ? "h-fit min-h-[49px] xs:min-h-[33px] sm:min-h-[33px] w-full dark:darkBg dark:text-white lightBg text-black"
-          : "h-fit min-h-[49px] xs:min-h-[33px] sm:min-h-[33px] w-full dark:darkBg dark:text-white"
+          ? "h-fit min-h-[49px] xs:min-h-[33px] sm:min-h-[33px] w-fit dark:darkBg dark:text-white lightBg text-black"
+          : "h-fit min-h-[49px] xs:min-h-[33px] sm:min-h-[33px] w-fit dark:darkBg dark:text-white"
       }
       disabled={alreadyApplied}
       onClick={async () => {

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { FrontCardProps } from "@youmeet/types/FrontCardProps";
@@ -8,25 +9,12 @@ import { blueGrey, grey, purple } from "@mui/material/colors";
 import { HiVideoCamera } from "react-icons/hi";
 import { HiArrowUturnRight } from "react-icons/hi2";
 import { setName } from "@youmeet/utils/basics/setName";
-import { CardTurnUp } from "@youmeet/types/Header";
 
-const FrontCardRecruiter = ({
-  company,
-  setFrontShouldTurnUp,
-  frontShouldTurnUp,
-}: FrontCardProps) => {
+export default function FrontCardRecruiter({ company }: FrontCardProps) {
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const [shouldChangeImageAppear, setShouldChangeImageAppear] =
     useState<boolean>(false);
-  const [timerId, setTimerId] = useState<NodeJS.Timeout | undefined>(undefined);
-
-  useEffect(() => {
-    if ((frontShouldTurnUp as CardTurnUp).waiting) {
-      clearTimeout(timerId);
-      setTimerId(undefined);
-    }
-  }, [frontShouldTurnUp, timerId]);
 
   return company ? (
     <div className="absolute h-full w-full backface-hidden group-hover:invisible flex flex-col px-[16px] pt-[16px] box-border">
@@ -51,9 +39,6 @@ const FrontCardRecruiter = ({
               "&:hover svg": {
                 color: purple[700],
               },
-            }}
-            onClick={() => {
-              setFrontShouldTurnUp({ id: company?.id as string });
             }}
           >
             <HiArrowUturnRight className="item" />
@@ -95,14 +80,6 @@ const FrontCardRecruiter = ({
       </div>
       {company.logo && <h3 className="my-0">{setName(company)}</h3>}
       <Box
-        onMouseEnter={() => {
-          const timerId = setTimeout(() => {
-            if (!xs && !sm) {
-              setFrontShouldTurnUp({ id: company?.id as string });
-            }
-          }, 300);
-          setTimerId(timerId);
-        }}
         sx={{
           backgroundColor: "#fcfff7",
           border: `1px solid ${blueGrey[50]}`,
@@ -120,6 +97,4 @@ const FrontCardRecruiter = ({
       </Box>
     </div>
   ) : undefined;
-};
-
-export default FrontCardRecruiter;
+}

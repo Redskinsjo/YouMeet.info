@@ -15,28 +15,31 @@ export default function PublicPageContainer({
   apply,
   offre,
   newStyles,
+  view,
 }: {
   children: React.ReactElement;
   noReturnHeader?: boolean;
   apply?: boolean;
   offre?: Offer;
   newStyles?: Attr;
+  view?: boolean;
 }) {
   return (
-    <div className="flex-center w-full">
+    <div
+      className="flex-center w-full box-border h-full"
+      style={{ ...newStyles }}
+    >
       <Layout
-        newClasses="xs:my-0 sm:my-0 md:my-0 mx-auto mt-0 mb-[24px] w-screen"
+        newClasses="xs:my-0 sm:my-0 md:my-0 mx-auto mt-0 mb-[24px] w-screen h-full"
         newStyles={{
-          maxWidth: "900px",
           height: "100%",
-          flex: 1,
           boxSizing: "border-box",
           borderRadius: "14px",
-          padding: "6px",
+          padding: "3px",
           ...newStyles,
         }}
       >
-        <div className="flex flex-col w-full gap-[6px]">
+        <div className="flex flex-col w-full gap-[6px] box-border h-full">
           {!noReturnHeader && (
             <div className="mediumBg dark:mediumDarkBg flex-bet w-full p-[3px] rounded-[14px] box-border">
               <Suspense>
@@ -51,7 +54,14 @@ export default function PublicPageContainer({
               )}
             </div>
           )}
-          <div className="flex flex-col gap-[48px]">{children}</div>
+          <div
+            className="flex flex-col gap-[48px] box-border h-full"
+            style={{
+              overflow: view ? "hidden" : "initial",
+            }}
+          >
+            {children}
+          </div>
         </div>
       </Layout>
     </div>

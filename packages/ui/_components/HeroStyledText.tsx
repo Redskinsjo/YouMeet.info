@@ -1,5 +1,5 @@
 "use client";
-import BoldText from "@youmeet/ui/BoldText";
+import BoldText from "@youmeet/ui/TextChild";
 import { grey } from "@mui/material/colors";
 import { ReactElement, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

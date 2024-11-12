@@ -9,12 +9,13 @@ import { UserState, storeUser } from "@youmeet/global-config/features/user";
 import MenuAuthenticatedUser from "./MenuAuthenticatedUser";
 import verifyTokenBrowser from "@youmeet/utils/basics/verifyTokenBrowser";
 import { getUser } from "@youmeet/functions/request";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import NotificationsIconComponent from "./NotificationsIconComponent";
 import { BetaUser } from "@youmeet/gql/generated";
 import Link from "next/link";
 import { setLogin } from "@youmeet/global-config/features/global";
 import { UnknownAction } from "@reduxjs/toolkit";
+import { useTranslation } from "react-i18next";
 
 export default function ThinHeader({
   setDark,
@@ -24,6 +25,10 @@ export default function ThinHeader({
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
   const pathname = usePathname();
+  const { t } = useTranslation();
+  const router = useRouter();
+  router.prefetch("/offers");
+  router.prefetch("/se-connecter");
 
   const fetchAndStoreUser = useCallback(async () => {
     const verified = await verifyTokenBrowser(pathname);
@@ -45,21 +50,22 @@ export default function ThinHeader({
         <Logo />
       </div>
       <div className="cursor-pointer p-[1px] box-border flex-center gap-[12px]">
-        {/* {!pathname.includes("/offres") &&
-            pathname !== "/" &&
-            pathname !== "/blog" &&
-            !pathname.includes("/medias") && (
-              <Link
-                role="link"
-                title="Voir les offres d'emplois proposées par les entreprises."
-                href={`/offres`}
-                className="text-black dark:text-deepPurple900 no-underline"
-              >
-                <div className="flex-center h-[25px] w-fit">
-                  {t("company-offers")}
-                </div>
-              </Link>
-            )} */}
+        {!pathname.includes("/offres") &&
+          pathname !== "/" &&
+          pathname !== "/blog" &&
+          !pathname.includes("le-produit") &&
+          !pathname.includes("/medias") && (
+            <Link
+              role="link"
+              title="Voir les offres d'emplois proposées par les entreprises."
+              href={`/offres`}
+              className="text-black dark:text-deepPurple900 no-underline"
+            >
+              <div className="flex-center h-[25px] w-fit">
+                {t("company-offers")}
+              </div>
+            </Link>
+          )}
         {/* <div className="flex-center h-[25px] w-[25px]">
             <CgDarkMode
               className="w-full h-full"

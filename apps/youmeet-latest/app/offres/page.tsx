@@ -1,18 +1,10 @@
-import { Metadata } from "next";
 import OffresChild from "./offresChild";
-import { getOffers, getOffersFT } from "@youmeet/functions/request";
+import { getOffers } from "@youmeet/functions/request";
 import { Offer } from "@youmeet/gql/generated";
-import { logoUrl } from "@youmeet/functions/imports";
-import { getOffresEmploiFT } from "@youmeet/functions/browserRequests";
-import {
-  OffreEmploiFT,
-  OffreEmploiFTParams,
-} from "@youmeet/types/api/OffreEmploiFT";
-import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
-import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { notFound } from "next/navigation";
-import { NextRequest } from "next/server";
+import PageFilters from "@youmeet/ui/PageFilters";
+import { Metadata } from "next";
+import { logoUrl } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: "YouMeet - Offres",
@@ -34,21 +26,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Offres(request: {
-  params: any;
-  searchParams: any;
+export default async function Offres({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
 }) {
-  // const offers = (await getOffers<Offer[]>({
-  //   params: { take: 50 },
-  // })) as Offer[];
-
+  const prms = await searchParams;
+  let search = "";
+  if (prms?.s) {
+    search = prms.s;
+  }
   try {
-    type ResultOffresFT = { resultats: OffreEmploiFT[] };
-    const result = (await getOffersFT<ResultOffresFT>({})) as ResultOffresFT;
+    const offers = (await getOffers({
+      params: { take: 30, search },
+    })) as Offer[];
 
-    const data = result?.resultats;
-    const offres = data?.length > 0 ? data : [];
-    return <OffresChild offres={offres.slice(0, 3)} />;
+    return (
+      <div className="w-full">
+        <PageFilters />
+        <OffresChild offres={offers} />
+      </div>
+    );
   } catch (error) {
     notFound();
   }
