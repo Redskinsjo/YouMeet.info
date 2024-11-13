@@ -581,6 +581,7 @@ const candidates = {
     "+Impossible= de démarrer une conversation si une est +déjà en cours=.+",
   "conversations-inprogress": "Conversations en cours",
   for: "pour",
+  "reset-navigation": "Réinitialiser la navigation",
   "validation-activate-conversation":
     "+Valider= les thèmes +va activer la conversation= avec le candidat.+",
   "cancel-theme": "Annuler le thème",
@@ -965,6 +966,7 @@ const prisesDeRef = {
   rapid: "Rapide",
   classic: "Classique",
   launch: "Lancer",
+  or: "ou",
   "write-or-choose": "Écrivez ou choisissez dans la liste",
   sector: "Secteur",
   "Hôtellerie Restauration": "Hôtellerie Restauration",
@@ -1135,6 +1137,10 @@ const offres = {
     "Nous n'avons pas d'offres pour le moment. Revenez plus tard.",
   "offers-announcement": "Retrouvez ici toutes les opportunités disponibles.",
   "requirements-skills": "Compétences requises",
+  "all-in-paris": "Toutes les offres à Paris",
+  "all-in-marseille": "Toutes les offres à Marseille",
+  "all-in-bordeaux": "Toutes les offres à Bordeaux",
+  "all-in-lyon": "Toutes les offres à Lyon",
   "some-more-offers": "Voici d'autres offres similaires",
   "take-opportunity-to-apply":
     "Si vous prenez +l'opportunité de postuler= à d'autres offres, vous aurez plus de chances de trouver un travail.+",

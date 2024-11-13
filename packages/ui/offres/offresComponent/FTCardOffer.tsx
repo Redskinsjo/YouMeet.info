@@ -74,7 +74,7 @@ export default function FTCardOffer({
       ? "w-[300px] xs:w-[49%] sm:w-[49%]"
       : "w-[300px] xs:w-full sm:w-full";
 
-  const elClassName = `p-[12px] box-border flex-bet flex-col gap-[24px] xs:gap-[12px] sm:gap-[12px] h-[300px] shadow-xl border-[0.5px] border-grey300 border-solid rounded-xl xs:overflow-hidden xs:overflow-y-scroll sm:overflow-hidden sm:overflow-y-scroll ${width}`;
+  const elClassName = `fadeIn bg-white p-[12px] box-border flex-bet flex-col gap-[24px] xs:gap-[12px] sm:gap-[12px] h-[300px] shadow-xl border-[0.5px] border-grey300 border-solid rounded-xl xs:overflow-hidden xs:overflow-y-scroll sm:overflow-hidden sm:overflow-y-scroll ${width}`;
 
   return (
     <div className={elClassName}>
@@ -97,7 +97,9 @@ export default function FTCardOffer({
           <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
             Type:
           </span>
-          <span className="px-[6px]">{contractType}</span>
+          <span className="px-[6px] text-[14px] xs:text-[12px] sm:text-[12px]">
+            {contractType}
+          </span>
         </div>
       </div>
 
@@ -107,19 +109,25 @@ export default function FTCardOffer({
             <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
               Exp:
             </span>
-            <span className="px-[6px]">{exp}</span>
+            <span className="px-[6px] text-[14px] xs:text-[12px] sm:text-[12px]">
+              {exp}
+            </span>
           </div>
-          <div>{workPeriod}</div>
+          <div className="text-[14px] xs:text-[12px] sm:text-[12px]">
+            {workPeriod}
+          </div>
         </div>
         <div>
           <div>
             <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
               Nmb postes:
             </span>
-            <span className="px-[6px]">{postsCount}</span>
+            <span className="px-[6px] text-[14px] xs:text-[12px] sm:text-[12px]">
+              {postsCount}
+            </span>
           </div>
           <div>{tools?.map((t, i) => t && <span key={t + i}>{t}</span>)}</div>
-          <div>
+          <div className="text-[14px] xs:text-[12px] sm:text-[12px]">
             {permis?.map(
               (p, i) =>
                 p?.libelle && <span key={p.libelle + i}>{p.libelle}</span>
@@ -129,8 +137,8 @@ export default function FTCardOffer({
       </div>
       <div className="flex-bet w-full">
         <SeeMore el={el} />
-        <div className="flex-center flex-col">
-          {logo && <Image src={logo} alt="logo" width={55} height={55} />}
+        <div className="flex-center">
+          {logo && <Image src={logo} alt="logo" width={40} height={40} />}
           <span className="text-[12px] xs:text-[13px] sm:text-[13px] text-center lightBg p-[1px]">
             {companyName}
           </span>

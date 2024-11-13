@@ -1480,6 +1480,7 @@ export type OfferInput = {
   jobDescriptionLink?: InputMaybe<Scalars['String']['input']>;
   jobs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   language?: InputMaybe<Scalars['String']['input']>;
+  lieuTravail?: InputMaybe<WorkLocationFtInput>;
   limitDate?: InputMaybe<Scalars['String']['input']>;
   location?: InputMaybe<Scalars['String']['input']>;
   profileSearched?: InputMaybe<Scalars['String']['input']>;
@@ -2315,6 +2316,14 @@ export type WorkLocationFt = {
   latitude?: Maybe<Scalars['PositiveFloat']['output']>;
   libelle?: Maybe<Scalars['String']['output']>;
   longitude?: Maybe<Scalars['PositiveFloat']['output']>;
+};
+
+export type WorkLocationFtInput = {
+  codePostal?: InputMaybe<Scalars['String']['input']>;
+  commune?: InputMaybe<Scalars['String']['input']>;
+  latitude?: InputMaybe<Scalars['PositiveFloat']['input']>;
+  libelle?: InputMaybe<Scalars['String']['input']>;
+  longitude?: InputMaybe<Scalars['PositiveFloat']['input']>;
 };
 
 export type CreateAccountMutationVariables = Exact<{
@@ -3261,6 +3270,7 @@ export type ResolversTypes = {
   Video: ResolverTypeWrapper<Video>;
   VideoInput: VideoInput;
   WorkLocationFT: ResolverTypeWrapper<WorkLocationFt>;
+  WorkLocationFTInput: WorkLocationFtInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -3393,6 +3403,7 @@ export type ResolversParentTypes = {
   Video: Video;
   VideoInput: VideoInput;
   WorkLocationFT: WorkLocationFt;
+  WorkLocationFTInput: WorkLocationFtInput;
 };
 
 export type AffiliationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Affiliation'] = ResolversParentTypes['Affiliation']> = {

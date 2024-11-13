@@ -165,6 +165,7 @@ import {
   setDetailPayload,
   setUserPayload,
 } from "@youmeet/utils/basics/setPayload";
+import { get } from "http";
 
 export const apiInstance = new SendinBlue.TransactionalEmailsApi();
 
@@ -861,10 +862,26 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      const where = {} as Prisma.offersWhereInput;
+      let where = {} as Prisma.offersWhereInput;
 
       const data = args.data;
       const prms = args.params;
+
+      if (data?.lieuTravail) {
+        const l = data.lieuTravail;
+        const f = (value: any) =>
+          ({
+            contains: value,
+            mode: "insensitive",
+          } as any);
+        where.lieuTravail = {
+          is: {
+            codePostal: f(l.codePostal),
+            commune: f(l.commune),
+            libelle: f(l.libelle),
+          },
+        };
+      }
 
       if (data?.jobs && data.jobs.length > 0)
         where.jobId = { in: data.jobs as string[] };

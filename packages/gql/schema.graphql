@@ -519,6 +519,14 @@ type WorkLocationFT {
   commune: String
 }
 
+input WorkLocationFTInput {
+  libelle: String
+  latitude: PositiveFloat
+  longitude: PositiveFloat
+  codePostal: String
+  commune: String
+}
+
 type EnterpriseFT {
   nom: String
   description: String
@@ -833,6 +841,7 @@ input OfferInput {
   remote: String
   title: String
   language: String
+  lieuTravail: WorkLocationFTInput
 }
 
 type Favorite {

@@ -1,6 +1,5 @@
 "use client";
 import { purple } from "@mui/material/colors";
-import { IoIosSearch } from "react-icons/io";
 import dynamic from "next/dynamic";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -22,7 +21,6 @@ export default function PageFilters() {
             params.set("s", value);
             const query = params.toString();
             router.push(pathname + "?" + query);
-            console.log(value, "value");
           }}
           className="flex items-start justify-center gap-[12px] relative"
         >

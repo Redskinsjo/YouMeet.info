@@ -40,3 +40,12 @@ export const trialSettings = {
     end_behavior: { missing_payment_method: "cancel" },
   },
 } as SubscriptionData;
+
+export const bgImageParis =
+  "https://res.cloudinary.com/de822mdsy/image/upload/v1731497551/xdjofq1e1fphpi0n4l41.jpg";
+export const bgImageMarseille =
+  "https://res.cloudinary.com/de822mdsy/image/upload/v1731497551/paqxejbv7gvuptgarupw.jpg";
+export const bgImageLyon =
+  "https://res.cloudinary.com/de822mdsy/image/upload/v1731497551/tbqfwtxzh6l0lqbhemmo.jpg";
+export const bgImageBordeaux =
+  "https://res.cloudinary.com/de822mdsy/image/upload/v1731497551/ojno0deubhpdrdguzamy.jpg";

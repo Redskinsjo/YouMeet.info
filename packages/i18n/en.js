@@ -1094,9 +1094,15 @@ const competencies = {
 };
 
 const offres = {
+  "reset-navigation": "Reset navigation",
+  or: "or",
   "no-offer-for-the-moment":
     "We don't have any offers at the moment. Come back later.",
   "offers-announcement": "Find here all the opportunities available.",
+  "all-in-paris": "All offers in Paris",
+  "all-in-marseille": "All offers in Marseille",
+  "all-in-bordeaux": "All offers in Bordeaux",
+  "all-in-lyon": "All offers in Lyon",
   "requirements-skills": "Required skills",
   "some-more-offers": "Here are some more offers",
   "take-opportunity-to-apply":

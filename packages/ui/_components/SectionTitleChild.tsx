@@ -16,11 +16,13 @@ export default function fnc({
   component,
   className = "",
   lang = false,
+  searching = "",
 }: {
   translation: string | Translated;
   component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   className?: string;
   lang?: boolean;
+  searching?: string;
 }) {
   return (
     <SectionTitle
@@ -28,6 +30,7 @@ export default function fnc({
       component={component}
       className={className}
       lang={lang}
+      searching={searching}
     />
   );
 }

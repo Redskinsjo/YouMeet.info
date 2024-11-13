@@ -1,5 +1,5 @@
 import BoldText from "./TextChild";
-import Layout from "./Layout";
+import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
@@ -12,7 +12,7 @@ export default function PageListContainer({
 }: {
   data: BetaUser[] | BetaCompany[] | Offer[] | undefined | any[];
   dataType: "candidates" | "recruiters" | "offers";
-  type?: "suggested" | "favorite";
+  type?: SuggestedMeetsType;
 }) {
   return (
     <div className="w-full p-[6px] box-border flex flex-col gap-[12px] box-border">
