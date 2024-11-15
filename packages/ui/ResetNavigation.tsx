@@ -5,7 +5,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const BoldText = dynamic(() => import("./TextChild"));
 
-export default function CardNavigation({ type }: { type: SuggestedMeetsType }) {
+export default function CardNavigation({
+  type,
+}: {
+  type?: SuggestedMeetsType;
+}) {
   const search = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();

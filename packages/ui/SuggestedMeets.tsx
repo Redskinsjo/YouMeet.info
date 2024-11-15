@@ -2,7 +2,6 @@ import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
-import OneLineSkeleton from "./OneLineSkeleton";
 
 const Card = dynamic(() => import("./Card"));
 const SuggestedMeetsTitle = dynamic(() => import("./SuggestedMeetsTitle"));
@@ -17,7 +16,7 @@ export default function SuggestedMeets({
   bgImage,
 }: {
   data: (BetaUser | BetaCompany | Offer)[];
-  type: SuggestedMeetsType;
+  type?: SuggestedMeetsType;
   dataType: "candidates" | "recruiters" | "offers";
   bgImage?: string;
 }) {
