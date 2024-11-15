@@ -2319,7 +2319,7 @@ export type WorkLocationFt = {
 };
 
 export type WorkLocationFtInput = {
-  codePostal?: InputMaybe<Scalars['String']['input']>;
+  codePostal?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   commune?: InputMaybe<Scalars['String']['input']>;
   latitude?: InputMaybe<Scalars['PositiveFloat']['input']>;
   libelle?: InputMaybe<Scalars['String']['input']>;

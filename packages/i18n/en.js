@@ -105,6 +105,7 @@ const me = {
   "linkedinProfileId-field-placeholder":
     "What is the Linkedin profile of the company?",
   "location-field-placeholder": "What is the location of the company?",
+  "department-field-placeholder": "In which department ?",
   "resume-field-placeholder": "What is the description of the company?",
   "form-come-back": "Go back",
   "your-experiences": "Your experiences",
@@ -1103,6 +1104,7 @@ const offres = {
   "all-in-marseille": "All offers in Marseille",
   "all-in-bordeaux": "All offers in Bordeaux",
   "all-in-lyon": "All offers in Lyon",
+  department: "Department",
   "requirements-skills": "Required skills",
   "some-more-offers": "Here are some more offers",
   "take-opportunity-to-apply":

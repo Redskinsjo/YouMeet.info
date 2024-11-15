@@ -123,6 +123,7 @@ const form = {
   "linkedinProfileId-field-placeholder":
     "Quel est le profil Linkedin de l'entreprise?",
   "location-field-placeholder": "Quelle est la localisation de l'entreprise?",
+  "department-field-placeholder": "Dans quel département ?",
   "resume-field-placeholder": "Quelle est la description de l'entreprise?",
   "form-come-back": "Revenir en arrière",
   "your-experiences": "Vos expériences",
@@ -717,6 +718,7 @@ const compte = {
   "would-like-your-remarks":
     "Nous aimerions récupérer votre opinion sur l'application.",
   "what-remarks": "Quelles sont vos remarques ?",
+  department: "Département",
   remarks: "Remarques",
   "leave-us-your-remarks": "Laissez-nous une remarque",
   "presentation-video": "Vidéo de présentation",

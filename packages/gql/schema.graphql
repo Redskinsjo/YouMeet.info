@@ -523,7 +523,7 @@ input WorkLocationFTInput {
   libelle: String
   latitude: PositiveFloat
   longitude: PositiveFloat
-  codePostal: String
+  codePostal: [String]
   commune: String
 }
 

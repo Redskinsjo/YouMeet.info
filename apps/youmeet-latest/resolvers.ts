@@ -140,6 +140,8 @@ import {
   QueryAffiliationArgs,
   QueryVideoByPublicIdArgs,
   FormResponse,
+  OfferInput,
+  WorkLocationFtInput,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
@@ -869,18 +871,28 @@ const resolvers: Resolvers = {
 
       if (data?.lieuTravail) {
         const l = data.lieuTravail;
-        const f = (value: any) =>
+        const f = (value: any, type: "contains" | "startsWith" = "contains") =>
           ({
-            contains: value,
+            [type]: value,
             mode: "insensitive",
           } as any);
-        where.lieuTravail = {
-          is: {
-            codePostal: f(l.codePostal),
-            commune: f(l.commune),
-            libelle: f(l.libelle),
-          },
+        let is = {} as Prisma.WorkLocationFTWhereInput;
+
+        const getOr = (l: WorkLocationFtInput, codePostal: string) => {
+          let is = {} as Prisma.WorkLocationFTWhereInput;
+          if (l.codePostal) is.codePostal = f(codePostal, "startsWith");
+          if (l.commune) is.commune = f(l.commune);
+          if (l.libelle) is.libelle = f(l.libelle);
+          return is;
         };
+        if (l.codePostal) {
+          const ors = [] as Prisma.WorkLocationFTWhereInput[];
+          for (let i = 0; i < l.codePostal.length; i++) {
+            const codePostal = l.codePostal[i];
+            ors.push(getOr(l, codePostal || ""));
+          }
+          where.lieuTravail = { is: { OR: ors } };
+        }
       }
 
       if (data?.jobs && data.jobs.length > 0)
@@ -930,7 +942,7 @@ const resolvers: Resolvers = {
       let skip = {} as { skip?: number };
       if (prms?.skip) skip = { skip: prms.skip };
 
-      const finalWhere = {} as Prisma.offersFindManyArgs;
+      const finalWhere = { where: {} };
       if (Object.keys(where).length > 0) finalWhere.where = where;
 
       return await prisma.offers.findMany({

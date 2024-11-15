@@ -6,8 +6,8 @@ import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import dynamic from "next/dynamic";
 
 const GenericField = dynamic(() => import("./GenericField"), {
-  ssr: false,
-  loading: () => <OneLineSkeleton height="45px" />,
+  // ssr: false,
+  // loading: () => <OneLineSkeleton height="45px" />,
 });
 
 export default function fnc({
@@ -18,7 +18,7 @@ export default function fnc({
   label,
   errors,
   multiline = 0,
-  params = {},
+  params,
   value,
   basic,
   onChange,

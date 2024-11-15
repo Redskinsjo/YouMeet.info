@@ -1,13 +1,14 @@
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
-import BoldText from "./TextChild";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
+import OneLineSkeleton from "./OneLineSkeleton";
 
 const Card = dynamic(() => import("./Card"));
 const SuggestedMeetsTitle = dynamic(() => import("./SuggestedMeetsTitle"));
 const CardNavigation = dynamic(() => import("./CardNavigation"));
 const ResetNavigation = dynamic(() => import("./ResetNavigation"));
+const BoldText = dynamic(() => import("./TextChild"));
 
 export default function SuggestedMeets({
   data,
@@ -53,7 +54,7 @@ export default function SuggestedMeets({
           </div>
         </div>
       ) : (
-        <div className="dark:text-white text-[14px] italic px-[12px] h-full">
+        <div className="dark:text-white text-[14px] italic px-[12px] h-full flex flex-col gap-[12px]">
           <BoldText text={"no-offer-for-the-moment"} align="center" />
 
           <ResetNavigation type={type} />

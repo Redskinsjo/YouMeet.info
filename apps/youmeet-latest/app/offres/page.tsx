@@ -1,6 +1,6 @@
 import OffresChild from "./offresChild";
 import { getOffers } from "@youmeet/functions/request";
-import { Offer } from "@youmeet/gql/generated";
+import { Offer, OfferInput, PageParamsInput } from "@youmeet/gql/generated";
 import { notFound } from "next/navigation";
 import PageFilters from "@youmeet/ui/PageFilters";
 import { Metadata } from "next";
@@ -13,6 +13,7 @@ import {
 } from "@youmeet/functions/imports";
 import dynamic from "next/dynamic";
 import DividerSection from "@youmeet/ui/_components/DividerSection";
+import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
 
 const SuggestedMeets = dynamic(() => import("@youmeet/ui/SuggestedMeets"));
 
@@ -47,32 +48,60 @@ export default async function Offres({
     if (!skip || Number.isNaN(skip)) return 0;
     else return parseInt(skip) * 5;
   };
+  const getDepartments = (l: string) => {
+    if (l) {
+      return l.split(",");
+    } else return [];
+  };
   const search = getIfExist(prms.s);
   const skipAll = getSkip(prms["all-skip"]);
   const skipInParis = getSkip(prms["in-paris-skip"]);
   const skipInMarseille = getSkip(prms["in-marseille-skip"]);
   const skipInLyon = getSkip(prms["in-lyon-skip"]);
   const skipInBordeaux = getSkip(prms["in-bordeaux-skip"]);
+  const departments = getDepartments(prms.l);
+
+  type Filter = { data: OfferInput; params: PageParamsInput };
+
+  const get = async (params: Filter) => await getOffers(params);
+
+  const filter = async (type: SuggestedMeetsType) => {
+    let params = {} as Filter;
+
+    const buildPrms = (
+      codes: string[],
+      search: string | undefined,
+      skip: number
+    ) => {
+      const result = {
+        params: { take: 5, skip: skip },
+      } as Filter;
+      if (search) result.params = { ...result.params, search };
+      if (codes.length > 0)
+        result.data = { ...result.data, lieuTravail: { codePostal: codes } };
+
+      return result;
+    };
+
+    if (type === "all") {
+      let deps = [] as string[];
+      if (departments.length > 0) deps = departments;
+      params = buildPrms(deps, search, skipAll);
+    }
+    if (type === "in-paris") params = buildPrms(["75"], undefined, skipInParis);
+    if (type === "in-marseille")
+      params = buildPrms(["13"], undefined, skipInMarseille);
+    if (type === "in-lyon") params = buildPrms(["69"], undefined, skipInLyon);
+    if (type === "in-bordeaux")
+      params = buildPrms(["33"], undefined, skipInBordeaux);
+    return await get(params);
+  };
   try {
-    const offers = (await getOffers({
-      params: { take: 5, search, skip: skipAll },
-    })) as Offer[];
-    const offersInParis = (await getOffers({
-      data: { lieuTravail: { codePostal: "75" } },
-      params: { take: 5, skip: skipInParis },
-    })) as Offer[];
-    const offersInMarseille = (await getOffers({
-      data: { lieuTravail: { codePostal: "13" } },
-      params: { take: 5, skip: skipInMarseille },
-    })) as Offer[];
-    const offersInLyon = (await getOffers({
-      data: { lieuTravail: { codePostal: "69" } },
-      params: { take: 5, skip: skipInLyon },
-    })) as Offer[];
-    const offersInBordeaux = (await getOffers({
-      data: { lieuTravail: { codePostal: "33" } },
-      params: { take: 5, skip: skipInBordeaux },
-    })) as Offer[];
+    const offers = (await filter("all")) as Offer[];
+    const offersInParis = (await filter("in-paris")) as Offer[];
+    const offersInMarseille = (await filter("in-marseille")) as Offer[];
+    const offersInLyon = (await filter("in-lyon")) as Offer[];
+    const offersInBordeaux = (await filter("in-bordeaux")) as Offer[];
 
     return (
       <div className="w-full">
