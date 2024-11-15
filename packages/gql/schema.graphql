@@ -1451,6 +1451,7 @@ type Query {
   myPublishedOffers(data: OfferInput): [Offer]
   oneProfileSharing(data: ProfileSharingInput): ProfileSharing
   myCompanyProfileSharings(targetId: String): [ProfileSharing]
+  sharings: [ProfileSharing]
   companyOffers(companyId: ID): [Offer]
   myReferenceContacts(userId: ID, experienceId: ID): [ReferenceContact]
   myNotifications(

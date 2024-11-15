@@ -1683,6 +1683,7 @@ export type Query = {
   sendEmailOfferOpportunities?: Maybe<Array<Maybe<BetaUser>>>;
   sendEmailProspectionLinkedin?: Maybe<Array<Maybe<Lead>>>;
   sendEmailToLead?: Maybe<Array<Maybe<Lead>>>;
+  sharings?: Maybe<Array<Maybe<ProfileSharing>>>;
   topSectors?: Maybe<Array<Maybe<TopSector>>>;
   uniqueCompetency?: Maybe<Competency>;
   user?: Maybe<BetaUser>;
@@ -4311,6 +4312,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   sendEmailOfferOpportunities?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaUser']>>>, ParentType, ContextType, Partial<QuerySendEmailOfferOpportunitiesArgs>>;
   sendEmailProspectionLinkedin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Lead']>>>, ParentType, ContextType, Partial<QuerySendEmailProspectionLinkedinArgs>>;
   sendEmailToLead?: Resolver<Maybe<Array<Maybe<ResolversTypes['Lead']>>>, ParentType, ContextType, Partial<QuerySendEmailToLeadArgs>>;
+  sharings?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfileSharing']>>>, ParentType, ContextType>;
   topSectors?: Resolver<Maybe<Array<Maybe<ResolversTypes['TopSector']>>>, ParentType, ContextType, Partial<QueryTopSectorsArgs>>;
   uniqueCompetency?: Resolver<Maybe<ResolversTypes['Competency']>, ParentType, ContextType, Partial<QueryUniqueCompetencyArgs>>;
   user?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType, Partial<QueryUserArgs>>;

@@ -21,6 +21,9 @@ export default function BackofficeUsersPage({ users }: { users: BetaUser[] }) {
         <Link href={`/backoffice`} className="no-underline">
           <Button>Retour vers Backoffice</Button>
         </Link>
+        <Link href={`/backoffice/applications`} className="no-underline">
+          <Button>Voir candidatures</Button>
+        </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>
         </Link>

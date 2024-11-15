@@ -1,21 +1,25 @@
-import BackofficeMeetsComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficeMeetsComponent";
-import { Meet } from "@youmeet/gql/generated";
+import { ProfileSharing } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import CreateMeet from "@youmeet/ui/backoffice/backofficeComponents/CreateMeet";
+import dynamic from "next/dynamic";
 
-export default function BackofficeMeetsPage({ meets }: { meets: Meet[] }) {
+const BackofficeApplicationsComponent = dynamic(
+  () =>
+    import(
+      "@youmeet/ui/backoffice/backofficeComponents/BackofficeApplicationsComponent"
+    )
+);
+
+export default function BackofficeApplicationsPage({
+  applications,
+}: {
+  applications: ProfileSharing[];
+}) {
   return (
-    <div className="relative flex-1 flex flex-col h-full lightBg dark:darkBg">
+    <div className="relative flex-1 flex-center flex-col h-full lightBg dark:darkBg">
       <div className="flex-center">
         <Link href={`/backoffice`} className="no-underline">
           <Button>Retour vers Backoffice</Button>
-        </Link>
-        <Link href={`/backoffice/users`} className="no-underline">
-          <Button>Voir utilisateurs</Button>
-        </Link>
-        <Link href={`/backoffice/applications`} className="no-underline">
-          <Button>Voir candidatures</Button>
         </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>
@@ -29,6 +33,9 @@ export default function BackofficeMeetsPage({ meets }: { meets: Meet[] }) {
         <Link href={`/backoffice/errors`} className="no-underline">
           <Button>Voir erreurs</Button>
         </Link>
+        <Link href={`/backoffice/meets`} className="no-underline">
+          <Button>Voir Rencontres</Button>
+        </Link>
         <Link href={`/backoffice/affiliations`} className="no-underline">
           <Button>Voir Affiliations</Button>
         </Link>
@@ -37,9 +44,7 @@ export default function BackofficeMeetsPage({ meets }: { meets: Meet[] }) {
         </Link>
       </div>
 
-      <BackofficeMeetsComponent data={meets} />
-
-      <CreateMeet />
+      <BackofficeApplicationsComponent data={applications} />
     </div>
   );
 }

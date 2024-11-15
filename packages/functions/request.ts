@@ -151,6 +151,7 @@ import {
   getProfileViewsQuery,
   getRawUserQuery,
   getSharingQuery,
+  getSharingsQuery,
   getSimpleCompanyQuery,
   getSimpleUserQuery,
   getUserCandidateQuery,
@@ -1977,6 +1978,25 @@ export const getSharing = async <T>(
     "oneProfileSharing",
     multiple,
     getSharingQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getSharings = async <T>(
+  variables: any = undefined,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = true;
+  const result = await reqFnc(
+    "getSharingsQuery",
+    multiple,
+    getSharingsQuery,
     variables,
     revalidate,
     handling

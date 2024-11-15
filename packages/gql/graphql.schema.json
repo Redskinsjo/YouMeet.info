@@ -15954,6 +15954,22 @@
             "deprecationReason": null
           },
           {
+            "name": "sharings",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ProfileSharing",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "topSectors",
             "description": null,
             "args": [
