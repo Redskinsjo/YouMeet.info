@@ -1555,7 +1555,8 @@ const resolvers: Resolvers = {
     sharings: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      return await prisma.profileSharings.findMany();
+      const sharings = await prisma.profileSharings.findMany();
+      return sharings;
     },
     experiences: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);

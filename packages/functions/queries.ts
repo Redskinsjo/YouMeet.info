@@ -2578,8 +2578,9 @@ export const searchSomeoneQuery = `query SearchSomeone($uniqueName: String, $use
   }
 }`;
 
-export const getSharingsQuery = `query GetSharings($first: PageParamsInput, $data: ProfileSharingInput) {
-  sharings(first: $first, data: $data) {
+export const getSharingsQuery = `query GetSharings {
+  sharings {
+    id
     origin {
       id
       fullname
@@ -2594,7 +2595,14 @@ export const getSharingsQuery = `query GetSharings($first: PageParamsInput, $dat
         secure_url
       }
     }
-    
+    offerTarget {
+      intitule
+      job {
+      title 
+        fr
+        en
+      }
+    }
     video {
       file {
         secure_url
@@ -2604,11 +2612,3 @@ export const getSharingsQuery = `query GetSharings($first: PageParamsInput, $dat
     report
   }
 }`;
-
-/* 
-offerTarget {
-      intitule
-    }
-
-
-*/

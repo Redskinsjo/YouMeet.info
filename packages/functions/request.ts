@@ -75,6 +75,7 @@ import {
   QueryUsersArgs,
   QueryVideoByPublicIdArgs,
   QueryCompetenciesArgs,
+  DeleteOneProfileSharingMutation,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -1994,9 +1995,28 @@ export const getSharings = async <T>(
 ): Promise<Result<T>> => {
   const multiple = true;
   const result = await reqFnc(
-    "getSharingsQuery",
+    "sharings",
     multiple,
     getSharingsQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const deleteSharing = async <T>(
+  variables?: MutationDeleteProfileSharingArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "deleteProfileSharing",
+    multiple,
+    deleteProfileSharingMutation,
     variables,
     revalidate,
     handling
@@ -2205,24 +2225,6 @@ export const deleteInterviewOffer = async <T>(
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
 
-export const deleteProfileSharing = async <T>(
-  variables: MutationDeleteProfileSharingArgs,
-  revalidate: number = 0,
-  handling: true | undefined = undefined
-): Promise<Result<T>> => {
-  const multiple = false;
-  const result = await reqFnc(
-    "deleteProfileSharing",
-    multiple,
-    deleteProfileSharingMutation,
-    variables,
-    revalidate,
-    handling
-  );
-  if (isNotHandledReq<T>(handling, result)) {
-    return result.data as ResultNotHandled<T>;
-  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
-};
 export const videoByPublicId = async <T>(
   variables: QueryVideoByPublicIdArgs,
   revalidate: number = 0,

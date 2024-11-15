@@ -4,10 +4,11 @@ import { ProfileSharing } from "@youmeet/gql/generated";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { DataGrid } from "@mui/x-data-grid";
-import { useDispatch } from "react-redux";
 import Layout from "../../Layout";
 import Image from "next/image";
 import setFileUrl from "@youmeet/utils/basics/setFileUrl";
+import { Button } from "@mui/material";
+import { deleteSharing, getSharings } from "@youmeet/functions/request";
 
 export default function BackofficeUsersComponent({
   data,
@@ -15,8 +16,6 @@ export default function BackofficeUsersComponent({
   data: ProfileSharing[];
 }) {
   const [rows, setRows] = useState<any[]>([]);
-  const dispatch = useDispatch();
-  const [rowsIdsSelected, setRowsIdsSelected] = useState<string[]>([]);
 
   const fetchRows = useCallback(
     async (sharings: ProfileSharing[]) => {
@@ -24,12 +23,13 @@ export default function BackofficeUsersComponent({
         sharings?.map(async (sharing: ProfileSharing | undefined | null) => {
           const origin = sharing?.origin;
           const company = sharing?.target;
-
+          const offer = sharing?.offerTarget;
+          const intitule = offer?.intitule || offer?.job?.title?.fr;
           return {
             id: sharing?.id,
             fullname: origin?.fullname,
             email: origin?.email,
-            intitule: sharing?.offerTarget?.intitule,
+            intitule,
             url: company?.url,
             logo: company?.logo,
             companyName: company?.name,
@@ -62,9 +62,6 @@ export default function BackofficeUsersComponent({
             checkboxSelection
             className="flex-1 max-h-[700px]"
             rows={rows}
-            onRowSelectionModelChange={(rows) => {
-              setRowsIdsSelected(rows as string[]);
-            }}
             columns={[
               {
                 type: "string",
@@ -90,10 +87,12 @@ export default function BackofficeUsersComponent({
                 headerName: "Lien origine",
                 width: 60,
                 renderCell: (row: any) => {
-                  return (
+                  return row.row.url ? (
                     <Link href={row.row.url} target="_blank">
                       <>Lien</>
                     </Link>
+                  ) : (
+                    <></>
                   );
                 },
               },
@@ -112,7 +111,7 @@ export default function BackofficeUsersComponent({
                       alt="logo de l'entreprise"
                     />
                   ) : (
-                    <>Pas de logo</>
+                    <></>
                   );
                 },
               },
@@ -121,6 +120,34 @@ export default function BackofficeUsersComponent({
                 field: "companyName",
                 headerName: "Nom entreprise",
                 minWidth: 100,
+              },
+              {
+                field: "actions",
+                headerName: "Actions",
+                minWidth: 100,
+                renderCell: (row: any) => {
+                  return (
+                    <div className="flex-center">
+                      <Button
+                        onClick={async (e) => {
+                          e.stopPropagation();
+
+                          const deleted = (await deleteSharing<ProfileSharing>({
+                            id: row.row.id as string,
+                          })) as ProfileSharing;
+                          if (deleted) {
+                            const sharings = (await getSharings<
+                              ProfileSharing[]
+                            >()) as ProfileSharing[];
+                            fetchRows(sharings);
+                          }
+                        }}
+                      >
+                        Supprimer
+                      </Button>
+                    </div>
+                  );
+                },
               },
             ]}
             rowHeight={70}
@@ -131,14 +158,6 @@ export default function BackofficeUsersComponent({
                   1000 * 3600 * 24 * 5
                 ? "bg-deepPurple100 animate-pulse"
                 : "";
-            }}
-            onRowClick={async (row) => {
-              //   const user = await getUser({
-              //     userId: row.id as string,
-              //   });
-              //   dispatch(
-              //     setModal({ display: "backoffice", user }) as UnknownAction
-              //   );
             }}
           />
         </div>
