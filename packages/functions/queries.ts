@@ -1045,13 +1045,7 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
       email
       linkedinProfileId
     }
-   
-  }
-}`;
-
-/*
-
- intitule
+    intitule
     description
     dateCreation
     dateActualisation
@@ -1149,7 +1143,8 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
       }
     }
     offresManqueCandidats
-*/
+  }
+}`;
 
 export const GetOfferQuery = `query GetOneOffer($id: ID, $slug: String) {
   oneOffer(id: $id, slug: $slug) {
@@ -1213,12 +1208,7 @@ export const GetOfferQuery = `query GetOneOffer($id: ID, $slug: String) {
         id
       }
     }
-   
-  }
-}`;
-
-/*
- intitule
+    intitule
     description
     dateCreation
     dateActualisation
@@ -1316,8 +1306,8 @@ export const GetOfferQuery = `query GetOneOffer($id: ID, $slug: String) {
       }
     }
     offresManqueCandidats
-
-*/
+  }
+}`;
 
 export const getNotificationQuery = `query GetNotification ($data: NotificationInput) {
   oneNotification(data:$data) {
