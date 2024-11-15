@@ -68,6 +68,8 @@ export default async function Offres({
   const filter = async (type: SuggestedMeetsType) => {
     let params = {} as Filter;
 
+    const t = type;
+
     const buildPrms = (
       codes: string[],
       search: string | undefined,
@@ -83,16 +85,16 @@ export default async function Offres({
       return result;
     };
 
-    if (type === "all") {
+    if (t === "all") {
       let deps = [] as string[];
       if (departments.length > 0) deps = departments;
       params = buildPrms(deps, search, skipAll);
     }
-    if (type === "in-paris") params = buildPrms(["75"], undefined, skipInParis);
-    if (type === "in-marseille")
+    if (t === "in-paris") params = buildPrms(["75"], undefined, skipInParis);
+    if (t === "in-marseille")
       params = buildPrms(["13"], undefined, skipInMarseille);
-    if (type === "in-lyon") params = buildPrms(["69"], undefined, skipInLyon);
-    if (type === "in-bordeaux")
+    if (t === "in-lyon") params = buildPrms(["69"], undefined, skipInLyon);
+    if (t === "in-bordeaux")
       params = buildPrms(["33"], undefined, skipInBordeaux);
     return await get(params);
   };
@@ -102,6 +104,8 @@ export default async function Offres({
     const offersInMarseille = (await filter("in-marseille")) as Offer[];
     const offersInLyon = (await filter("in-lyon")) as Offer[];
     const offersInBordeaux = (await filter("in-bordeaux")) as Offer[];
+
+    console.log(offers[0]);
 
     return (
       <div className="w-full">

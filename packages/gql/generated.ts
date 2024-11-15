@@ -142,6 +142,7 @@ export type BetaCompany = {
   __typename?: 'BetaCompany';
   autocompletions?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  entrepriseAdaptee?: Maybe<Scalars['Boolean']['output']>;
   experiences?: Maybe<Array<Maybe<BetaExperience>>>;
   id?: Maybe<Scalars['ID']['output']>;
   isPublic?: Maybe<Scalars['Boolean']['output']>;
@@ -154,6 +155,7 @@ export type BetaCompany = {
   scrapped?: Maybe<Scalars['Boolean']['output']>;
   sharings?: Maybe<Array<Maybe<ProfileSharing>>>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
   video?: Maybe<Avatar>;
   videos?: Maybe<Array<Maybe<Video>>>;
 };
@@ -3499,6 +3501,7 @@ export type BetaCandidateResolvers<ContextType = any, ParentType extends Resolve
 export type BetaCompanyResolvers<ContextType = any, ParentType extends ResolversParentTypes['BetaCompany'] = ResolversParentTypes['BetaCompany']> = {
   autocompletions?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  entrepriseAdaptee?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   experiences?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaExperience']>>>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   isPublic?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -3511,6 +3514,7 @@ export type BetaCompanyResolvers<ContextType = any, ParentType extends Resolvers
   scrapped?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   sharings?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfileSharing']>>>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   video?: Resolver<Maybe<ResolversTypes['Avatar']>, ParentType, ContextType>;
   videos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Video']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

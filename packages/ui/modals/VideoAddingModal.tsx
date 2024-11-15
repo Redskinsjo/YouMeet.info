@@ -222,6 +222,7 @@ export default function VideoAddingModal({
                       text={`${t(
                         (cta as string) ?? (modals[type].cta as trads)[language]
                       )}`}
+                      align="center"
                       containerStyle={{ margin: 0 }}
                     />
                   )}

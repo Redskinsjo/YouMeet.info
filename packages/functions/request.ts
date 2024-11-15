@@ -297,7 +297,6 @@ const reqFT = async <T>(
   params: string = "",
   revalidate: number = 30
 ): Promise<withData<T> | PayloadBackendError> => {
-  console.log("reqFT");
   try {
     const credentials = (await getAccessTokenFT(scope)) as
       | withData<{ access_token: string }>
@@ -407,7 +406,6 @@ async function reqFTFnc<T, S>(
   revalidate: number = 0,
   handling: true | undefined = undefined
 ): Promise<PayloadBackendError | PayloadBackendSuccess<T>> {
-  console.log("reqFTFnc");
   const params = new URLSearchParams(
     search as { [key: string]: string }
   ).toString();
@@ -2286,7 +2284,6 @@ export const getOffersFT = async <T>(
   revalidate: number = 0,
   handling: true | undefined = undefined
 ): Promise<Result<T>> => {
-  console.log("getOffersFT");
   const multiple = true;
   const endpoint =
     "https://api.francetravail.io/partenaire/offresdemploi/v2/offres/search";

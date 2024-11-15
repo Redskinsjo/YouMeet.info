@@ -29,32 +29,34 @@ export default function CardNavigation({
     if (length < 5) return;
   }
   return (
-    <form
-      action={() => {
-        const params = new URLSearchParams(search.toString());
-        if (Number.isNaN(value)) return;
-        if (value) {
-          const toSet = `${
-            sort === "asc" ? parseInt(value) + 1 : parseInt(value) - 1
-          }`;
-          params.set(`${type}-skip`, toSet);
-          setValue(toSet);
-        } else {
-          params.set(`${type}-skip`, "1");
-          setValue("1");
-        }
-        const query = params.toString();
-        router.push(pathname + "?" + query, { scroll: false });
-      }}
-      className="h-full flex-center w-[40px]"
-    >
-      <button type="submit" className="outline-0 bg-transparent border-0">
-        {sort === "asc" ? (
-          <IoChevronForwardSharp className="cursor-pointer p-[6px] text-[30px]" />
-        ) : (
-          <IoChevronBackSharp className="cursor-pointer p-[6px] text-[30px]" />
-        )}
-      </button>
-    </form>
+    <div className="w-[40px] xs:w-[49%] sm:w-[49%] h-[300px] flex justify-start">
+      <form
+        action={() => {
+          const params = new URLSearchParams(search.toString());
+          if (Number.isNaN(value)) return;
+          if (value) {
+            const toSet = `${
+              sort === "asc" ? parseInt(value) + 1 : parseInt(value) - 1
+            }`;
+            params.set(`${type}-skip`, toSet);
+            setValue(toSet);
+          } else {
+            params.set(`${type}-skip`, "1");
+            setValue("1");
+          }
+          const query = params.toString();
+          router.push(pathname + "?" + query, { scroll: false });
+        }}
+        className=" flex-center"
+      >
+        <button type="submit" className="outline-0 bg-transparent border-0">
+          {sort === "asc" ? (
+            <IoChevronForwardSharp className="cursor-pointer p-[6px] text-[30px]" />
+          ) : (
+            <IoChevronBackSharp className="cursor-pointer p-[6px] text-[30px]" />
+          )}
+        </button>
+      </form>
+    </div>
   );
 }

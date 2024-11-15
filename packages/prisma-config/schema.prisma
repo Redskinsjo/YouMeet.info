@@ -468,6 +468,8 @@ model betacompanies {
   videos              videos[]
   isPublic            Boolean?          @default(false)
   sharingRefusals     sharingRefusals[]
+  url                 String?
+  entrepriseAdaptee   Boolean?
   createdAt           DateTime?
   updatedAt           DateTime?
 }

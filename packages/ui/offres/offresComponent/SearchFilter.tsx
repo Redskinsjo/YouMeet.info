@@ -18,7 +18,11 @@ export default function SearchFilter() {
       action={(formData: FormData) => {
         const value = formData.get("search") as string;
         const params = new URLSearchParams(search.toString());
-        params.set("s", value);
+        if (!value) {
+          params.delete("s");
+        } else {
+          params.set("s", value);
+        }
         const otherPrm = "all-skip";
         params.delete(otherPrm);
         const query = params.toString();

@@ -33,14 +33,8 @@ export const setUniqueNameAndExtension = async (
 
 export const setUniqueSlugAndExtension = async (
   title: string,
-  forCount: number,
   type: "offers" | "articles" | "competencies"
 ) => {
-  let extension = "";
-
-  // si le prénom ou le nom est manquant
-  if (!title.trim()) extension = uid2(6);
-
   let found = [];
   if (type === "offers") {
     const offers = await prisma.offers.findMany({
@@ -61,11 +55,10 @@ export const setUniqueSlugAndExtension = async (
     );
   }
   title = formatForUrl(title);
-  if (found.length > forCount) {
-    // is not unique
-    extension = uid2(6);
-    title = `${title} ${extension}`;
-  }
+
+  // is not unique
+  const extension = uid2(7);
+  title = `${title} ${extension}`;
 
   return { slug: inFormatForUrl(title), extension };
 };

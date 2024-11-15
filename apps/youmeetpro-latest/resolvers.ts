@@ -2820,7 +2820,6 @@ const resolvers: Resolvers = {
         if (resultingJob) {
           const res = await setUniqueSlugAndExtension(
             resultingJob?.title?.fr as string,
-            0,
             "offers"
           );
 

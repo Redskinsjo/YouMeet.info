@@ -22,7 +22,7 @@ export default function SuggestedMeets({
   bgImage?: string;
 }) {
   return data ? (
-    <section className="flex flex-col items-center pb-8 box-border w-full relative h-[409px] xs:h-full sm:h-full">
+    <section className="flex flex-col items-center pb-8 box-border w-full relative xs:h-full sm:h-full">
       {!!bgImage && (
         <div className="absolute flex justify-end w-full h-full top-0 left-0 z-[-1] offerBg">
           <Image
@@ -46,7 +46,7 @@ export default function SuggestedMeets({
 
       {data.length > 0 ? (
         <div className="flex w-full justify-start">
-          <div className="flex xs:flex-bet sm:flex-bet flex-wrap gap-[12px] xs:gap-[6px] sm:gap-[6px] px-[12px]">
+          <div className="flex flex-wrap gap-[12px] xs:gap-[6px] sm:gap-[6px] px-[12px]">
             {data?.map((d: BetaUser | BetaCompany | Offer) => (
               <Card key={d.id} d={d} type={dataType} length={data.length} />
             ))}

@@ -666,6 +666,8 @@ type BetaCompany {
   sharings: [ProfileSharing]
   offers: [Offer]
   isPublic: Boolean
+  url: String
+  entrepriseAdaptee: Boolean
   createdAt: DateTime
   updatedAt: DateTime
 }

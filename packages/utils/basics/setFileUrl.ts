@@ -2,11 +2,11 @@ import { Avatar } from "@youmeet/gql/generated";
 import { dev } from "@youmeet/functions/imports";
 import { isAvatar } from "@youmeet/types/TypeGuards";
 
-export default (
+function setFileUrl(
   file: Avatar | undefined | null,
   video?: true | undefined,
   str?: string
-): string | undefined => {
+): string | undefined {
   let url;
   if (str) return str;
   if (file && isAvatar(file)) {
@@ -27,4 +27,6 @@ export default (
     return url;
   }
   return undefined;
-};
+}
+
+export default setFileUrl;
