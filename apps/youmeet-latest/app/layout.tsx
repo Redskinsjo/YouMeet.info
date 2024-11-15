@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-// import Providers from "./providers";
-// import Template from "./template";
+import Providers from "./providers";
+import Template from "./template";
 
 const fnc = function RootLayout({
   children,
@@ -15,10 +15,9 @@ const fnc = function RootLayout({
     <html lang="fr">
       <body>
         <script src="https://cdn.francetravail.fr/webco/v1/ft-connect.js"></script>
-        {children}
-        {/* <Providers modals={{ loginModal, recordModal }}>
+        <Providers modals={{ loginModal, recordModal }}>
           <Template key={"1"}>{children}</Template>
-        </Providers> */}
+        </Providers>
       </body>
     </html>
   );
