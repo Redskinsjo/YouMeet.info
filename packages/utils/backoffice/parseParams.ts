@@ -6,6 +6,6 @@ export const parsePrms = (params: string | undefined): StripeParams =>
         params
           .split("&")
           .map((param) => param.split("="))
-          .filter((entry) => entry[0]),
+          .filter((entry) => entry[0])
       )
     : {};

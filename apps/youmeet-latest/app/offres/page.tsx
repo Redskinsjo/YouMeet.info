@@ -105,8 +105,6 @@ export default async function Offres({
     const offersInLyon = (await filter("in-lyon")) as Offer[];
     const offersInBordeaux = (await filter("in-bordeaux")) as Offer[];
 
-    console.log(offers[0]);
-
     return (
       <div className="w-full">
         <PageFilters />

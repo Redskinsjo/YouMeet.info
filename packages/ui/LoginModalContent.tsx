@@ -25,20 +25,16 @@ import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
 import SubmitBtn from "./SubmitBtn";
 import ReadCGU from "./ReadCGU";
+import { GlobalState } from "@youmeet/global-config/features/global";
 
 const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [state, handle] = useActionState(onSigninUp, { data: "" });
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const searchRedirect = encodeURIComponent(searchParams.get("redirect") || "");
-  const redirect = searchRedirect
-    ? searchRedirect
-    : pathname === "/" || pathname === "/se-connecter"
-    ? "dashboard"
-    : pathname;
+  const redirect = useSelector(
+    (state: RootState) => (state.global as GlobalState).redirect
+  );
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const { t } = useTranslation();
@@ -183,14 +179,9 @@ const WhenLogin = ({
     withData<string | null> | PayloadBackendError,
     FormData
   >(onLogin, { data: null });
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const searchRedirect = encodeURIComponent(searchParams.get("redirect") || "");
-  const redirect = searchRedirect
-    ? searchRedirect
-    : pathname === "/" || pathname === "/se-connecter"
-    ? "dashboard"
-    : pathname;
+  const redirect = useSelector(
+    (state: RootState) => (state.global as GlobalState).redirect
+  );
   const { t } = useTranslation();
   const [status, setStatus] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -385,19 +376,13 @@ export default function LoginModalContent({ type }: CustomModalProps) {
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [isForgotten, setIsForgotten] = useState(false);
   const md = useMediaQuery("(max-width:900px)");
-  const [loading, setLoading] = useState(true);
-  const user = useSelector((state: RootState) => state.user as UserState);
 
   useEffect(() => {
     if (isForgotten) setIsSubscribing(false);
     if (isSubscribing) setIsForgotten(false);
   }, [isSubscribing, isForgotten]);
 
-  useEffect(() => {
-    setLoading(false);
-  }, [user]);
-
-  return !loading ? (
+  return (
     <div role="login-modal-content" className="w-full flex-center">
       {isSubscribing || subscribingData ? (
         <div className={md ? "sm-auth-container" : "lg-auth-container"}>
@@ -417,5 +402,5 @@ export default function LoginModalContent({ type }: CustomModalProps) {
         </div>
       )}
     </div>
-  ) : undefined;
+  );
 }

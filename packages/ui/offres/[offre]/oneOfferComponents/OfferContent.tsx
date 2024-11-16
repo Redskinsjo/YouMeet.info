@@ -24,7 +24,6 @@ export default function OfferContent({ offre }: { offre: Offer }) {
   const [values, setValues] = useState<OfferContentValues | undefined>();
 
   const getValues = useCallback(async () => {
-    console.log(offre, "offre");
     const values = await getOfferOrPreviewValues(
       offre,
       language as "fr" | "en",

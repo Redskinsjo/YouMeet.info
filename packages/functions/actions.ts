@@ -876,7 +876,6 @@ export const onLogout = async () => {
     path: "/",
     domain: `${process.env.API_DOMAIN}`,
   });
-  revalidatePath("/");
   redirect("/");
 };
 
