@@ -9,6 +9,7 @@
     "./store": "./store.ts",
     "./useRedirect": "./useRedirect.ts",
     "./useFormDefaultValues": "./useFormDefaultValues.ts",
+    "./useSubscriptionStatus": "./useSubscriptionStatus.ts",
     "./features/form": "./features/form.ts",
     "./features/global": "./features/global.ts",
     "./features/modal": "./features/modal.ts",
