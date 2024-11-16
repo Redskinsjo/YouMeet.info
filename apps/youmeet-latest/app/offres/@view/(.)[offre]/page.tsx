@@ -10,7 +10,7 @@ export default async function OfferComponent({
   params: Promise<{ offre: string }>;
 }) {
   const prms = await params;
-  console.log(decodeURIComponent(prms.offre), "decodeURIComponent(prms.offre)");
+
   const offer = (await getOffer({
     slug: decodeURIComponent(prms.offre),
   })) as Offer;

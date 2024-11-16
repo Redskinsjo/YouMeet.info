@@ -1,4 +1,3 @@
-import React from "react";
 import { Offer } from "@youmeet/gql/generated";
 import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
 import dynamic from "next/dynamic";
@@ -18,9 +17,7 @@ export default function OfferChild({
   offre: Offer;
   view?: true;
 }) {
-  const viewClassName = view
-    ? "offerView sticky top-[24px] border-[0.5px] border-solid border-grey300"
-    : "sticky top-[24px] border-[0.5px] border-solid border-grey300";
+  const viewClassName = view ? "offerView sticky top-[24px]" : "top-[24px]";
   return (
     <div
       className="flex justify-center"
@@ -36,6 +33,7 @@ export default function OfferChild({
           backgroundAttachment: "fixed",
           backgroundBlendMode: "hue",
           maxWidth: view ? "600px" : "900px",
+          width: view ? "600px" : "initial",
         }}
       >
         <div

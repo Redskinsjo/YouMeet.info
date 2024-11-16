@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Offer } from "@youmeet/gql/generated";
 import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import dynamic from "next/dynamic";
+import TooltipedAsset from "../../../TooltipedAsset";
 
 const DoubleDetails = dynamic(() => import("./DoubleDetails"));
 const BoldText = dynamic(() => import("../../../TextChild"));
@@ -39,20 +40,24 @@ export default function OfferContent({ offre }: { offre: Offer }) {
 
   return (
     !!values && (
-      <div className="dark:mediumDarkBg bg-white flex w-full flex-col items-center p-[12px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] xs:gap-[12px] sm:gap-[12px] rounded-[16px] shadow-custom h-full overflow-hidden overflow-y-scroll">
+      <div className="dark:mediumDarkBg bg-grey50 flex w-full flex-col items-center p-[12px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] xs:gap-[12px] sm:gap-[12px] rounded-[16px] shadow-custom h-full overflow-hidden overflow-y-scroll">
         <div>
           {values.rebroadcast && (
             <div className="flex-1 text-[16px] flex-center flex-col gap-[6px] p-[6px] bg-grey50 dark:lightDarkBg text-deepPurple500 dark:text-deepPurple200 text-center">
-              <span className="mt-[12px] bg-deepPurple50 text-deepPurple900 rounded-[14px] p-[12px] xs:p-[8px] sm:p-[8px] md:p-[8px] text-[16px] flex flex-col">
-                <span className="mx-[3px] font-bold whitespace-nowrap">
-                  Offre rediffusée
+              <TooltipedAsset
+                asset={
+                  <BoldText
+                    text={"youmeet-not-recruiting"}
+                    fontSizeClass="text-[13px]"
+                  />
+                }
+              >
+                <span className="mt-[12px] bg-deepPurple50 text-deepPurple900 rounded-[14px] p-[12px] xs:p-[8px] sm:p-[8px] md:p-[8px] text-[16px] flex flex-col">
+                  <span className="mx-[3px] font-bold whitespace-nowrap">
+                    Offre rediffusée
+                  </span>
                 </span>
-                <span>par YouMeet</span>
-              </span>
-              <BoldText
-                text={t("youmeet-not-recruiting")}
-                fontSizeClass="text-[13px]"
-              />
+              </TooltipedAsset>
             </div>
           )}
 
@@ -69,7 +74,9 @@ export default function OfferContent({ offre }: { offre: Offer }) {
             {values.jobTitle && (
               <div className="flex-center w-full">
                 <h1 className="flex-[2] text-[24px] dark:text-white text-black font-bold text-center">
-                  {values.jobTitle}
+                  <div className="bg-white p-[12px] border-[0.5px] border-solid border-grey300 rounded-xl">
+                    {values.jobTitle}
+                  </div>
                 </h1>
               </div>
             )}
@@ -92,7 +99,7 @@ export default function OfferContent({ offre }: { offre: Offer }) {
                 <div className="w-full">
                   <BoldText
                     formatDisplay
-                    fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg text-[16px] xs:text-[13px] sm:text-[14px] md:text-[14px]"
+                    fontSizeClass="bg-white p-[12px] border-[0.5px] border-solid border-grey300 rounded-xl dark:lightDarkBg text-[16px] xs:text-[13px] sm:text-[14px] md:text-[14px]"
                     skeleton={{ count: 3 }}
                     links
                     align="justify"
@@ -125,7 +132,7 @@ export default function OfferContent({ offre }: { offre: Offer }) {
                 <div className="w-full">
                   <BoldText
                     formatDisplay
-                    fontSizeClass="bg-grey50 rounded-xl py-[6px] px-[2px] dark:lightDarkBg text-[16px] xs:text-[13px] sm:text-[13px] md:text-[13px]"
+                    fontSizeClass="bg-white p-[12px] border-[0.5px] border-solid border-grey300 rounded-xl dark:lightDarkBg text-[16px] xs:text-[13px] sm:text-[13px] md:text-[13px]"
                     links
                     skeleton={{ count: 3 }}
                     align="justify"
@@ -177,14 +184,18 @@ export default function OfferContent({ offre }: { offre: Offer }) {
           <h2 className="font-bold dark:text-white text-center text-[18px] underline underline-offset-4">
             {t("more-details")}
           </h2>
-          <div className="w-full flex flex-wrap xs:flex-col sm:flex-col md:flex-col xs:items-start sm:items-start md:items-start items-center justify-between px-[6px] box-border">
+          <div className="w-full flex flex-wrap xs:flex-col sm:flex-col md:flex-col xs:items-start sm:items-start md:items-start items-center justify-between box-border bg-white p-[12px] border-[0.5px] border-solid border-grey300 rounded-xl">
+            {!!Number(Number(values.revenue).toFixed(0)) && (
+              <DoubleDetails
+                value1={String(
+                  Math.round(Number(Number(values.revenue).toFixed(0)))
+                )}
+                label1="offerRevenue"
+              />
+            )}
             <DoubleDetails
-              value1={String(
-                Math.round(Number(Number(values.revenue).toFixed(0)))
-              )}
-              label1="offerRevenue"
-              value2={values.secteurActivite}
-              label2="Secteur d'activité"
+              value1={values.secteurActivite}
+              label1="Secteur d'activité"
             />
             <DoubleDetails
               label1="contractType"

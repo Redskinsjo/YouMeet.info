@@ -19,7 +19,7 @@ export default function DoubleDetails({
         <DetailComponent
           noPadding
           labelComponent="h3"
-          newStyles={{ minWidth: "unset", maxWidth: "400px" }}
+          newStyles={{ minWidth: "unset" }}
           newClasses="text-[16px] xs:text-[13px] sm:text-[13px]"
           valueInBold
           noLabelColon
@@ -32,7 +32,7 @@ export default function DoubleDetails({
         <DetailComponent
           noPadding
           labelComponent="h3"
-          newStyles={{ minWidth: "unset", maxWidth: "400px" }}
+          newStyles={{ minWidth: "unset" }}
           newClasses="text-[16px] xs:text-[13px] sm:text-[13px]"
           valueInBold
           noLabelColon

@@ -1,37 +1,17 @@
 "use client";
 
-import { Skeleton } from "@mui/material";
+import OneLineSkeleton from "../../../OneLineSkeleton";
 import { Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
 const OfferContent = dynamic(() => import("./OfferContent"), {
   ssr: false,
   loading: () => (
-    <div className="h-[140px] p-[6px] shadow-custom">
-      <div className="flex-bet">
-        <Skeleton width={60} height={18} />
-        <Skeleton width={48} height={18} />
+    <div className="h-full p-[6px] shadow-custom flex flex-col gap-[24px] w-full box-border">
+      <div className="flex-center">
+        <OneLineSkeleton width="110px" height="22px" />
       </div>
-      <div className="flex-bet">
-        <Skeleton width={48} height={18} />
-        <Skeleton width={60} height={18} />
-      </div>
-      <div className="flex-bet">
-        <Skeleton width={60} height={18} />
-        <Skeleton width={120} height={18} />
-      </div>
-      <div className="flex-bet">
-        <Skeleton width={48} height={18} />
-        <Skeleton width={48} height={18} />
-      </div>
-      <div className="flex-bet">
-        <Skeleton width={48} height={18} />
-        <Skeleton width={48} height={18} />
-      </div>
-      <div className="flex-bet">
-        <Skeleton width={48} height={18} />
-        <Skeleton width={96} height={18} />
-      </div>
+      <OneLineSkeleton count={7} height="18px" />
     </div>
   ),
 });

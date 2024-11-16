@@ -142,11 +142,7 @@ export default function DetailComponent({
           className="text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            width: fullWidth
-              ? "100%"
-              : conversation
-              ? "fit-content"
-              : "max-content",
+            width: fullWidth ? "100%" : conversation ? "fit-content" : "auto",
 
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
@@ -285,11 +281,7 @@ export default function DetailComponent({
           className="text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            width: fullWidth
-              ? "100%"
-              : conversation
-              ? "fit-content"
-              : "max-content",
+            width: fullWidth ? "100%" : conversation ? "fit-content" : "auto",
             justifyContent: conversation ? "center" : "end",
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
