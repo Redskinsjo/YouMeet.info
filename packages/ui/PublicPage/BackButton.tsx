@@ -9,7 +9,7 @@ export default function BackButton() {
       <div
         className="bg-grey50 text-deepPurple900 rounded-full border-[1px] border-solid border-grey300 h-[27px] w-auto cursor-pointer hover:bg-deepPurple900 hover:text-white"
         onClick={() => {
-          router.back();
+          router.push("/offres");
         }}
       >
         <IoCaretBackOutline style={{ fontSize: "28px" }} />
