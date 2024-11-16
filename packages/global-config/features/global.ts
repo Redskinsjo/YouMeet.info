@@ -18,6 +18,7 @@ export interface GlobalState {
   error: GlobalError | null;
   login: boolean;
   subscription: AppSubscription | undefined | false;
+  redirect: string;
 }
 
 const initialState: GlobalState = {
@@ -28,6 +29,7 @@ const initialState: GlobalState = {
   error: null,
   login: false,
   subscription: undefined,
+  redirect: "dashboard",
 };
 
 export const globalSlice = createSlice({
@@ -62,6 +64,9 @@ export const globalSlice = createSlice({
     ) => {
       state.subscription = action.payload;
     },
+    setRedirect: (state, action: PayloadAction<string>) => {
+      state.redirect = action.payload;
+    },
   },
 });
 
@@ -73,6 +78,7 @@ export const {
   setError,
   setLogin,
   setSubscription,
+  setRedirect,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;
