@@ -17,7 +17,7 @@ export default function SuggestedMeetsTitle({
   return (
     <SectionTitle
       component="h2"
-      searching={searching}
+      searching={type === "all" ? searching : undefined}
       translation={
         type === "suggested"
           ? "suggested-" + dataType

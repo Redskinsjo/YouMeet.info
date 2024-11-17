@@ -55,6 +55,7 @@ export default function OfferChild({
             <OfferContent offre={offre} />
           </PublicPageContainer>
           <PublicPageContainer
+            view={view}
             noReturnHeader
             newStyles={{ margin: "0px", height: "fit-content" }}
           >

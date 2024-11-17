@@ -1,6 +1,5 @@
 "use client";
 
-import { Skeleton } from "@mui/material";
 import { Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import OneLineSkeleton from "../../../OneLineSkeleton";

@@ -21,7 +21,10 @@ export default function CardNavigation({
 
         const params = new URLSearchParams(search.toString());
         if (skip) params.delete(`${type}-skip`);
-        if (type === "all") params.delete("l");
+        if (type === "all") {
+          params.delete("s");
+          params.delete("l");
+        }
         const query = params.toString();
         router.push(pathname + "?" + query, { scroll: false });
       }}

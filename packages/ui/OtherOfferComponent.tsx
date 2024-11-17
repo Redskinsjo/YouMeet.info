@@ -2,7 +2,7 @@ import { Offer } from "@youmeet/gql/generated";
 import { OfferContentValues } from "@youmeet/types/OfferContentValues";
 import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SeeMore from "./_components/SeeMore";
 import Image from "next/image";

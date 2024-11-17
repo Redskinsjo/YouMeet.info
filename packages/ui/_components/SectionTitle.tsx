@@ -41,10 +41,10 @@ export default function SectionTitle({
     t(
       lang
         ? `${(translation as Translated)[language as "fr" | "en"]} ${
-            searching ? `${t("for")} ${searching}` : ""
+            searching ? `${t("for")} "${searching}"` : ""
           }`
         : `${t(translation as string)} ${
-            searching ? `${t("for")} ${searching}` : ""
+            searching ? `${t("for")} "${searching}"` : ""
           }`
     )
   );

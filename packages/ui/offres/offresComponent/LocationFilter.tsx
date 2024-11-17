@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import regions_departements from "@youmeet/raw-data/regions_departements.json";
-import { ReactElement, useState } from "react";
+import { ReactElement, useCallback } from "react";
 
 const GenericField = dynamic(
   () =>
@@ -31,15 +31,30 @@ export default function LocationFilter() {
   const pathname = usePathname();
   const multiple = true;
   const location = search.get("l")?.split(",") || [];
-  const [value, setValue] = useState(
-    location.map((l) => list.find((d) => d.code === l)) as Department[]
-  );
+  const searchLocation = location.map((l) =>
+    list.find((d) => d.code === l)
+  ) as Department[];
 
-  const onClick = (option: Department) => {
-    const found = value.find((v) => v.code === option.code);
-    if (found) setValue(value.filter((o) => o.code !== found.code));
-    else setValue([...value, option]);
-  };
+  const onClick = useCallback(
+    (option: Department) => {
+      const value = searchLocation;
+      const found = value.find((v) => v.code === option.code);
+      let codes = value.map((v) => v.code);
+      if (found) codes = codes.filter((o) => o !== found.code);
+      else codes = [...codes, option.code];
+
+      const codeStr = codes.join(",");
+
+      const prm = "l";
+      const params = new URLSearchParams(search.toString());
+      params.set(prm, codeStr);
+      const otherPrm = "all-skip";
+      params.delete(otherPrm);
+      const query = params.toString();
+      router.push(pathname + "?" + query);
+    },
+    [searchLocation]
+  );
 
   const groupParams = {} as {
     groupBy?: (option: any) => string;
@@ -61,7 +76,7 @@ export default function LocationFilter() {
   return (
     <form
       action={() => {
-        const codes = value.map((v) => v.code).join(",");
+        const codes = searchLocation.map((v) => v.code).join(",");
         const prm = "l";
         const params = new URLSearchParams(search.toString());
         params.set(prm, codes);
@@ -77,7 +92,7 @@ export default function LocationFilter() {
           return option.code === value.code;
         }}
         multiple={multiple}
-        value={value}
+        value={searchLocation}
         sx={{
           width: "100%",
           height: "100%",
@@ -93,14 +108,16 @@ export default function LocationFilter() {
                 label={option.name}
                 key={key}
                 onDelete={() => {
-                  const prm = "l";
+                  const code = option.code;
                   const params = new URLSearchParams(search.toString());
-                  params.delete(prm);
+                  const locations = params.get("l")?.split(",") || [];
+                  const newLocations = locations.filter((l) => l !== code);
+                  if (newLocations.length === 0) params.delete("l");
+                  else params.set("l", newLocations.join(","));
                   const otherPrm = "all-skip";
                   params.delete(otherPrm);
                   const query = params.toString();
                   router.push(pathname + "?" + query);
-                  setValue(value.filter((v) => v.code !== option.code));
                 }}
                 className={tagProps.className}
                 data-tag-index={tagProps["data-tag-index"]}
@@ -122,7 +139,7 @@ export default function LocationFilter() {
               style={{
                 fontSize: 16,
                 minHeight: 44,
-                background: value.find((v) => v.code === option.code)
+                background: searchLocation.find((v) => v.code === option.code)
                   ? grey[100]
                   : "white",
               }}
