@@ -9,6 +9,7 @@ dotenv.config();
 const hosts = [
   "www.youmeet.info",
   "youmeet-git-testing-youmeet.vercel.app",
+  "youmeet-git-ft-offres-youmeet.vercel.app",
   "youmeetpro-git-testing-youmeet.vercel.app",
   "app",
 ];

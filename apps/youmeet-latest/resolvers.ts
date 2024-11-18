@@ -140,7 +140,6 @@ import {
   QueryAffiliationArgs,
   QueryVideoByPublicIdArgs,
   FormResponse,
-  OfferInput,
   WorkLocationFtInput,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
@@ -167,7 +166,6 @@ import {
   setDetailPayload,
   setUserPayload,
 } from "@youmeet/utils/basics/setPayload";
-import { get } from "http";
 
 export const apiInstance = new SendinBlue.TransactionalEmailsApi();
 
