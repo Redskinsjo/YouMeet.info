@@ -7,7 +7,6 @@ import { Metadata, ResolvingMetadata } from "next";
 import { Offer } from "@youmeet/gql/generated";
 import { logoUrl, uri } from "@youmeet/functions/imports";
 import OfferChild from "@youmeet/ui/offres/offerChild";
-import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -25,31 +24,37 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const prms = await params;
+  const decoded = decodeURIComponent(prms.offre);
   const offre = (await getOfferMetadata({
-    slug: decodeURIComponent(prms.offre),
+    slug: decoded,
   })) as Offer;
+
+  const title =
+    offre.job?.title?.fr ||
+    offre.job?.title?.en ||
+    offre.intitule ||
+    "Nouvelle offre";
 
   if (offre) {
     // optionally access and extend (rather than replace) parent metadata
     const previousImages = (await parent).openGraph?.images || [];
 
-    const jobTitle = offre?.job?.title?.fr || "Nouvelle offre";
     const companyName = offre?.company?.name || "";
 
     return {
-      title: `YouMeet - ${jobTitle} - ${companyName}`,
+      title: `YouMeet - ${title} - ${companyName}`,
       description:
         "Découvrez les détails de cette offre d'emploi, y compris les qualifications requises, les responsabilités, et les informations sur l'entreprise. Candidatez dès maintenant sur notre plateforme de recrutement.",
       openGraph: {
         url: `${uri}/offres/${offre?.slug}`,
-        title: `YouMeet - ${jobTitle} - ${companyName}`,
+        title: `YouMeet - ${title} - ${companyName}`,
         images: [...previousImages, logoUrl],
         type: "video.other",
         description:
           "Découvrez les détails de cette offre d'emploi, y compris les qualifications requises, les responsabilités, et les informations sur l'entreprise. Candidatez dès maintenant sur notre plateforme de recrutement.",
       },
       keywords: [
-        jobTitle,
+        title,
         "offre d'emploi",
         "candidate CV vidéo",
         offre?.contractType as string,
@@ -68,14 +73,13 @@ export async function generateMetadata(
       creator: "Jonathan Carnos",
     };
   }
-  let title = decodeURIComponent(prms.offre).split(" ")[0];
-  title = formatForDb(title);
+
   return {
     title: `YouMeet - ${title}`,
     description:
       "Découvrez les détails de cette offre d'emploi, y compris les qualifications requises, les responsabilités, et les informations sur l'entreprise. Candidatez dès maintenant sur notre plateforme de recrutement.",
     openGraph: {
-      url: `${uri}/offres/${decodeURIComponent(prms.offre)}`,
+      url: `${uri}/offres/${decoded}`,
       title: `YouMeet - ${title}`,
       images: [logoUrl],
       type: "video.other",
@@ -101,8 +105,9 @@ export default async function OfferComponent({
   params: Promise<{ offre: string }>;
 }) {
   const prms = await params;
+  const decoded = decodeURIComponent(prms.offre);
   const offer = (await getOffer({
-    slug: decodeURIComponent(prms.offre),
+    slug: decoded,
   })) as Offer;
 
   if (offer) return <OfferChild offre={offer} />;

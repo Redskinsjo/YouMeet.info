@@ -103,6 +103,7 @@ export const getOfferMetadataQuery = `query GetOffer($id: ID, $slug: String) {
             en
           }
         }
+        intitule
         company {
           id
           name
