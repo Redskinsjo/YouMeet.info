@@ -61,6 +61,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  //
   const offers = (await getHomeOffers<Offer>({
     params: { take: 3 },
   })) as Offer[];
