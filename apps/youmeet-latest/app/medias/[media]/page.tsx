@@ -7,10 +7,7 @@ import {
   getArticlesParams,
 } from "@youmeet/functions/request";
 import MediaChild from "./mediaChild";
-import {
-  formatForDb,
-  inFormatForDb,
-} from "@youmeet/utils/resolvers/formatCompetencyTitle";
+import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { Article } from "@youmeet/gql/generated";
 import { notFound } from "next/navigation";
 
@@ -33,8 +30,10 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const prms = await params;
+  const decoded = decodeURIComponent(prms.media);
+  const media = formatForDb(decoded);
   const article = (await getArticleMetadata({
-    slug: decodeURIComponent(prms.media),
+    slug: decoded,
   })) as Article;
 
   if (article?.title?.fr) {
@@ -49,7 +48,7 @@ export async function generateMetadata(
       description:
         "Découvrez ce nouvel article, informez-vous des dernières actualités dans le recrutement pour être toujours le premier sur les nouvelles tendances.",
       openGraph: {
-        url: `${uri}/medias/${decodeURIComponent(prms.media)}`,
+        url: `${uri}/medias/${decoded}`,
         title: `YouMeet - ${title}`,
         images: ogImages,
         type: "article",
@@ -74,8 +73,7 @@ export async function generateMetadata(
       creator: "Jonathan Carnos",
     };
   }
-  let media = decodeURIComponent(inFormatForDb(prms.media).split(" ")[0]);
-  media = formatForDb(media);
+
   return {
     title: `YouMeet - ${media}`,
     description: `Découvrez ce nouvel article sr ${media}, informez-vous des dernières actualités dans le recrutement pour être toujours le premier sur les nouvelles tendances.`,

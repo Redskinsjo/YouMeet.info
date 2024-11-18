@@ -1,17 +1,13 @@
 import {
   getOffer,
   getOfferMetadata,
-  getOffers,
   getOffersParams,
 } from "@youmeet/functions/request";
 import { Metadata, ResolvingMetadata } from "next";
 import { Offer } from "@youmeet/gql/generated";
 import { logoUrl, uri } from "@youmeet/functions/imports";
 import OfferChild from "@youmeet/ui/offres/offerChild";
-import {
-  formatForDb,
-  inFormatForDb,
-} from "@youmeet/utils/resolvers/formatCompetencyTitle";
+import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -72,7 +68,7 @@ export async function generateMetadata(
       creator: "Jonathan Carnos",
     };
   }
-  let title = decodeURIComponent(inFormatForDb(prms.offre).split(" ")[0]);
+  let title = decodeURIComponent(prms.offre).split(" ")[0];
   title = formatForDb(title);
   return {
     title: `YouMeet - ${title}`,
@@ -108,17 +104,6 @@ export default async function OfferComponent({
   const offer = (await getOffer({
     slug: decodeURIComponent(prms.offre),
   })) as Offer;
-
-  let offers = [] as Offer[];
-  if (offer) {
-    offers = (await getOffers<Offer[]>({
-      data: {
-        title:
-          offer.job?.title && offer.job?.title.fr ? offer.job?.title.fr : "",
-        language: "fr",
-      },
-    })) as Offer[];
-  }
 
   if (offer) return <OfferChild offre={offer} />;
   return notFound();

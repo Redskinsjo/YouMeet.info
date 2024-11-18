@@ -1,7 +1,7 @@
 import { setName } from "../basics/setName";
 import {
   formatForUrl,
-  inFormatForUrl,
+  separateFromExtension,
 } from "../resolvers/formatCompetencyTitle";
 import uid2 from "uid2";
 import prisma from "@youmeet/prisma-config/prisma";
@@ -28,7 +28,7 @@ export const setUniqueNameAndExtension = async (
     uniqueName = `${uniqueName} ${extension}`;
   }
 
-  return { uniqueName: inFormatForUrl(uniqueName), extension };
+  return { uniqueName: separateFromExtension(uniqueName), extension };
 };
 
 export const setUniqueSlugAndExtension = async (title: string) => {
@@ -37,7 +37,7 @@ export const setUniqueSlugAndExtension = async (title: string) => {
   const extension = uid2(7);
   title = `${title} ${extension}`;
 
-  return { slug: inFormatForUrl(title), extension };
+  return { slug: separateFromExtension(title), extension };
 };
 
 export default { setUniqueNameAndExtension, setUniqueSlugAndExtension };
