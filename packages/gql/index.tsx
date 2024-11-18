@@ -24,7 +24,6 @@ const authLink = setContext((_, { headers }) => {
     `${process.env.JWT_SECRET}`
   ).toString();
 
-  console.log("Encrypted", encrypt);
   return {
     headers: {
       ...headers,
