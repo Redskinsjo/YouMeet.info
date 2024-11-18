@@ -15,10 +15,8 @@ import { TopSectorSchema } from "./topSectors";
 import { JobSchema } from "./jobs";
 import mongoose from "mongoose";
 import * as OffreEmploiFT from "@youmeet/types/api/OffreEmploiFT";
-import { uri } from "../functions/imports";
-mongoose.connect(`${process.env.MONGODB_URI}`);
 
-console.log(uri);
+mongoose.connect(`${process.env.MONGODB_URI}`);
 
 @modelOptions({
   schemaOptions: {
@@ -180,7 +178,7 @@ export class OfferSchema {
 
 const model = getModelForClass(OfferSchema);
 
-model.ensureIndexes();
 model.syncIndexes();
+model.ensureIndexes();
 
 export default model;
