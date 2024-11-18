@@ -420,8 +420,7 @@ const appelationCorrespondsCompetency = async (appelation: Appelation) => {
 
 const createNewCompetency = async (appelation: Appelation) => {
   const { extension, slug } = await setUniqueSlugAndExtension(
-    appelation.title.toLowerCase(),
-    "competencies"
+    appelation.title.toLowerCase()
   );
   const created = await prisma.competencies.create({
     data: {
@@ -452,10 +451,7 @@ const mergeAppelation = async (
   const actualTitle = competency.title;
   const futureTitle = appelation.title;
 
-  const { slug, extension } = await setUniqueSlugAndExtension(
-    futureTitle,
-    "competencies"
-  );
+  const { slug, extension } = await setUniqueSlugAndExtension(futureTitle);
 
   const dbAppelations = [...new Set(competency.appelations)];
   const newAppelations = [...new Set(appelation.appelations)];

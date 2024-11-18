@@ -9,8 +9,9 @@ export const checkingIndexes = <T>(myIndexes: IndexList, model: Model<T>) => {
 
       try {
         for (let j = 0; j < scheduledIndexes.length; j++) {
-          const scheduledIndexKey = scheduledIndexes[j][0];
-          const scheduledIndexOptions = scheduledIndexes[j][1];
+          const scheduledIndex = scheduledIndexes[j];
+          const scheduledIndexKey = scheduledIndex[0];
+          const scheduledIndexOptions = scheduledIndex[1];
 
           let isAlreadyCreated = false;
 

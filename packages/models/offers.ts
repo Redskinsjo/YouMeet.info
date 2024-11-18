@@ -1,19 +1,26 @@
 export {};
 
-import * as typegoose from "@typegoose/typegoose";
+import {
+  getModelForClass,
+  index,
+  modelOptions,
+  prop,
+  Severity,
+} from "@typegoose/typegoose";
+import type { Ref } from "@typegoose/typegoose";
 import { BetaUserSchema } from "./betaUsers";
 import { BetaCompanySchema } from "./betaCompanies";
 import { CompetencySchema } from "./competencies";
 import { TopSectorSchema } from "./topSectors";
 import { JobSchema } from "./jobs";
 import mongoose from "mongoose";
-import { IndexList } from "@youmeet/types/IndexList";
-import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 import * as OffreEmploiFT from "@youmeet/types/api/OffreEmploiFT";
+import { uri } from "../functions/imports";
 mongoose.connect(`${process.env.MONGODB_URI}`);
-mongoose.Promise = global.Promise;
 
-@typegoose.modelOptions({
+console.log(uri);
+
+@modelOptions({
   schemaOptions: {
     timestamps: true,
     id: true,
@@ -21,160 +28,159 @@ mongoose.Promise = global.Promise;
   options: {
     automaticName: false,
     customName: "Offer",
-    allowMixed: typegoose.Severity.ALLOW,
+    allowMixed: Severity.ALLOW,
   },
 })
+@index({ slug: 1 }, { unique: true })
+@index({ location: 1 })
+@index({ sectorId: 1 })
+@index({ jobId: 1 })
+@index({ companyId: 1 })
+@index({ intitule: 1 })
+@index({ "lieuTravail.codePostal": 1 })
 export class OfferSchema {
-  @typegoose.prop({ index: { name: "offers_slug", unique: true } })
+  @prop({ index: true })
   public slug: string;
-  @typegoose.prop()
+  @prop()
   public extension: string;
-  @typegoose.prop()
+  @prop()
   public content: string;
-  @typegoose.prop()
+  @prop()
   public profileSearched: string;
-  @typegoose.prop()
+  @prop()
   public contractType: string;
-  @typegoose.prop()
+  @prop()
   public remote: string;
-  @typegoose.prop({ index: { name: "offers_location" } })
+  @prop({ index: true })
   public location: string;
-  @typegoose.prop({ default: [], ref: () => "Competency" })
-  public requirementsIds: typegoose.Ref<CompetencySchema>[];
-  @typegoose.prop()
+  @prop({ default: [], ref: () => "Competency" })
+  public requirementsIds: Ref<CompetencySchema>[];
+  @prop()
   public revenue: number;
-  @typegoose.prop()
+  @prop()
   public limitDate: Date;
-  @typegoose.prop()
+  @prop()
   public authorName: string;
-  @typegoose.prop({ default: false })
+  @prop({ default: false })
   public rebroadcast: boolean;
-  @typegoose.prop()
+  @prop()
   public companyName: string;
-  @typegoose.prop()
+  @prop()
   public companyLogo: string;
-  @typegoose.prop()
+  @prop()
   public authorEmail: string;
-  @typegoose.prop({
+  @prop({
+    index: true,
     ref: () => "TopSector",
-    index: { name: "offers_sectorId" },
   })
-  public sectorId: typegoose.Ref<TopSectorSchema>;
-  @typegoose.prop({ ref: () => "Job", index: { name: "offers_jobId" } })
-  public jobId: typegoose.Ref<JobSchema>;
-  @typegoose.prop()
+  public sectorId: Ref<TopSectorSchema>;
+  @prop({ index: true, ref: () => "Job" })
+  public jobId: Ref<JobSchema>;
+  @prop()
   public jobDescriptionLink: string;
-  @typegoose.prop()
+  @prop()
   public authorInterviewLink: string;
-  @typegoose.prop({ ref: () => "BetaUser" })
-  public authorId: typegoose.Ref<BetaUserSchema>;
-  @typegoose.prop({ default: [], ref: () => "BetaUser" })
-  public candidatesIds: typegoose.Ref<BetaUserSchema>[];
-  @typegoose.prop({
+  @prop({ ref: () => "BetaUser" })
+  public authorId: Ref<BetaUserSchema>;
+  @prop({ default: [], ref: () => "BetaUser" })
+  public candidatesIds: Ref<BetaUserSchema>[];
+  @prop({
+    index: true,
     ref: () => "BetaCompany",
-    index: { name: "offers_companyId" },
   })
-  public companyId: typegoose.Ref<BetaCompanySchema>;
-  @typegoose.prop()
+  public companyId: Ref<BetaCompanySchema>;
+  @prop()
   public generated: string;
-  @typegoose.prop()
+  @prop()
   public createdAt: Date;
-  @typegoose.prop()
+  @prop()
   public updatedAt: Date;
 
-  @typegoose.prop()
+  @prop({ index: true })
   public intitule: string;
-  @typegoose.prop()
+  @prop()
   public description: string;
-  @typegoose.prop()
+  @prop()
   public dateCreation: string;
-  @typegoose.prop()
+  @prop()
   public dateActualisation: string;
-  @typegoose.prop()
+  @prop({ index: true })
   public lieuTravail: OffreEmploiFT.WorkLocationFT;
-  @typegoose.prop()
+  @prop()
   public romeCode: string;
-  @typegoose.prop()
+  @prop()
   public romeLibelle: string;
-  @typegoose.prop()
+  @prop()
   public appellationlibelle: string;
-  @typegoose.prop()
+  @prop()
   public entreprise: OffreEmploiFT.EnterpriseFT;
-  @typegoose.prop()
+  @prop()
   public typeContrat: string;
-  @typegoose.prop()
+  @prop()
   public typeContratLibelle: string;
-  @typegoose.prop()
+  @prop()
   public natureContrat: string;
-  @typegoose.prop()
+  @prop()
   public experienceExige: string;
-  @typegoose.prop()
+  @prop()
   public experienceLibelle: string;
-  @typegoose.prop()
+  @prop()
   public experienceCommentaire: string;
-  @typegoose.prop()
+  @prop()
   public formations: OffreEmploiFT.FormationFT[];
-  @typegoose.prop()
+  @prop()
   public langues: OffreEmploiFT.Required[];
-  @typegoose.prop()
+  @prop()
   public permis: OffreEmploiFT.Required[];
-  @typegoose.prop()
+  @prop()
   public competences: OffreEmploiFT.Entity[];
-  @typegoose.prop()
+  @prop()
   public salaire: OffreEmploiFT.SalaryFT[];
-  @typegoose.prop()
+  @prop()
   public dureeTravailLibelle: string;
-  @typegoose.prop()
+  @prop()
   public dureeTravailLibelleConverti: string;
-  @typegoose.prop()
+  @prop()
   public complementExercice: string;
-  @typegoose.prop()
+  @prop()
   public conditionExercice: string;
-  @typegoose.prop()
+  @prop()
   public alternance: boolean;
-  @typegoose.prop()
+  @prop()
   public contact: OffreEmploiFT.ContactFT;
-  @typegoose.prop()
+  @prop()
   public agence: OffreEmploiFT.AgencyFT;
-  @typegoose.prop()
+  @prop()
   public nombrePostes: number;
-  @typegoose.prop()
+  @prop()
   public accessibleTH: boolean;
-  @typegoose.prop()
+  @prop()
   public deplacementCode: string;
-  @typegoose.prop()
+  @prop()
   public deplacementLibelle: string;
-  @typegoose.prop()
+  @prop()
   public qualificationCode: string;
-  @typegoose.prop()
+  @prop()
   public qualificationLibelle: string;
-  @typegoose.prop()
+  @prop()
   public codeNAF: string;
-  @typegoose.prop()
+  @prop()
   public secteurActivite: string;
-  @typegoose.prop()
+  @prop()
   public secteurActiviteLibelle: string;
-  @typegoose.prop()
+  @prop()
   public qualitesProfessionnelles: OffreEmploiFT.ProfessionalQualityFT[];
-  @typegoose.prop()
+  @prop()
   public trancheEffectifEtab: string;
-  @typegoose.prop()
+  @prop()
   public origineOffre: OffreEmploiFT.OriginOfferFT;
-  @typegoose.prop()
+  @prop()
   public offresManqueCandidats: boolean;
 }
 
-const model = mongoose.models.Offer || typegoose.getModelForClass(OfferSchema);
+const model = getModelForClass(OfferSchema);
 
-const myIndexes = {
-  _id: { name: "_id_" },
-  companyId: { name: "offers_companyId" },
-  jobId: { name: "offers_jobId" },
-  sectorId: { name: "offers_sectorId" },
-  location: { name: "offers_location" },
-  slug: { name: "offers_slug", unique: true },
-} as IndexList;
-
-checkingIndexes<OfferSchema>(myIndexes, model);
+model.ensureIndexes();
+model.syncIndexes();
 
 export default model;

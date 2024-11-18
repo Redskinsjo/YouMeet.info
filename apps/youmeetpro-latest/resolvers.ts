@@ -2819,8 +2819,7 @@ const resolvers: Resolvers = {
         });
         if (resultingJob) {
           const res = await setUniqueSlugAndExtension(
-            resultingJob?.title?.fr as string,
-            "offers"
+            resultingJob?.title?.fr as string
           );
 
           if (res.extension) creates.extension = res.extension;

@@ -300,6 +300,7 @@ const reqFT = async <T>(
   revalidate: number = 30
 ): Promise<withData<T> | PayloadBackendError> => {
   try {
+    console.log("getting access...");
     const credentials = (await getAccessTokenFT(scope)) as
       | withData<{ access_token: string }>
       | PayloadBackendError;

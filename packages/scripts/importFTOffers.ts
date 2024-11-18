@@ -6,7 +6,7 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
 (async () => {
   let start = 0;
   let end = 0;
-  let over = start > 149 || end >= 149;
+  let over = start > 3149 || end >= 3149;
   type ResultOffresFT = { resultats: OffreEmploiFT[] };
 
   const waitFor = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -58,28 +58,24 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
       }
 
       const { extension, slug } = await setUniqueSlugAndExtension(
-        offer.romeLibelle,
-        "offers"
+        offer.romeLibelle
       );
 
-      const offerExist = await prisma.offers.findFirst({ where: { slug } });
-
-      if (!offerExist)
-        await prisma.offers.create({
-          data: {
-            extension,
-            slug,
-            ...offer,
-            company: { connect: { id: company.id } },
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          },
-        });
+      await prisma.offers.create({
+        data: {
+          extension,
+          slug,
+          ...offer,
+          company: { connect: { id: company.id } },
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      });
     }
 
     start = end + 1;
     await waitFor(5000);
-    await fnc(start, end, start > 149 || end >= 149);
+    await fnc(start, end, start > 3149 || end >= 3149);
   };
 
   await fnc(start, end, over);

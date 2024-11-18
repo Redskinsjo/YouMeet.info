@@ -14,7 +14,8 @@
     "transferCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./transferCompetencies.ts",
     "deleteCompetencies": "SCRIPT=true dotenv -e .env.development -- ts-node ./deleteCompetencies.ts",
     "testingAPIPackage": "SCRIPT=true dotenv -e .env.development -- npx tsx ./testingAPIPackage.ts",
-    "importFTOffers": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts"
+    "importFTOffers": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts",
+    "checkDbIndexes": "SCRIPT=true dotenv -e .env.development -- ts-node ./checkDbIndexes.ts"
   },
   "dependencies": {
     "@youmeet/competencies": "*",
@@ -27,6 +28,7 @@
     "dotenv": "^16.4.5",
     "mongoose": "^8.8.0",
     "openai": "^4.70.3",
+    "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {}

@@ -31,32 +31,9 @@ export const setUniqueNameAndExtension = async (
   return { uniqueName: inFormatForUrl(uniqueName), extension };
 };
 
-export const setUniqueSlugAndExtension = async (
-  title: string,
-  type: "offers" | "articles" | "competencies"
-) => {
-  let found = [];
-  if (type === "offers") {
-    const offers = await prisma.offers.findMany({
-      include: { job: true },
-    });
-    found = offers.filter(
-      (offer) => offer?.job?.title?.fr?.toLowerCase() === title.toLowerCase()
-    );
-  } else if (type === "articles") {
-    const articles = await prisma.articles.findMany();
-    found = articles.filter(
-      (article) => article.title.fr?.toLowerCase() === title.toLowerCase()
-    );
-  } else if (type === "competencies") {
-    const competencies = await prisma.competencies.findMany();
-    found = competencies.filter(
-      (competency) => competency.title.toLowerCase() === title.toLowerCase()
-    );
-  }
+export const setUniqueSlugAndExtension = async (title: string) => {
   title = formatForUrl(title);
 
-  // is not unique
   const extension = uid2(7);
   title = `${title} ${extension}`;
 
