@@ -1,4 +1,3 @@
-import { uri } from "@youmeet/functions/imports";
 import BackofficeAffiliationsChild from "./backofficeAffiliationsChild";
 import { getAffiliations } from "@youmeet/functions/request";
 import { Affiliation } from "@youmeet/gql/generated";
