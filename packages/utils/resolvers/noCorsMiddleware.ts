@@ -25,15 +25,12 @@ export const noCorsMiddleware = async (context: ContextRequest, err?: true) => {
   const match = origin.match(regex);
   const originHost = match ? match[0] : "";
 
-  console.log("Host was", host, "and origin was", origin);
   if (err || dev || hosts.includes(host) || hosts.includes(originHost)) {
-    console.log("Allowed");
     const decrypt = AES.decrypt(
       uniqueHeader,
       `${process.env.JWT_SECRET}`
     ).toString(enc.Utf8);
 
-    console.log("Decrypted", decrypt);
     if (hosts.includes(decrypt)) {
       return true;
     }
