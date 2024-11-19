@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     "informations",
   ],
 };
+//
 
 export default function Home() {
   return (

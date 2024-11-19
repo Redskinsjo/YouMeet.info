@@ -15,6 +15,8 @@ import { TopSectorSchema } from "./topSectors";
 import { JobSchema } from "./jobs";
 import mongoose from "mongoose";
 import * as OffreEmploiFT from "@youmeet/types/api/OffreEmploiFT";
+import { IndexList } from "@youmeet/types/IndexList";
+import { checkingIndexes } from "@youmeet/utils/basics/checkingIndexes";
 
 mongoose.connect(`${process.env.MONGODB_URI}`);
 
@@ -37,7 +39,7 @@ mongoose.connect(`${process.env.MONGODB_URI}`);
 @index({ intitule: 1 })
 @index({ "lieuTravail.codePostal": 1 })
 export class OfferSchema {
-  @prop({ index: true })
+  @prop({ unique: true, index: true })
   public slug: string;
   @prop()
   public extension: string;
@@ -178,7 +180,19 @@ export class OfferSchema {
 
 const model = getModelForClass(OfferSchema);
 
+const myIndexes = {
+  _id: { name: "_id_" },
+  type: { name: "offers_location" },
+  sectorId: { name: "offers_sectorId" },
+  jobId: { name: "offers_jobId" },
+  slug: { name: "offers_slug", unique: true },
+  intitule: { name: "offers_intitule" },
+  "lieuTravail.codePostal": { name: "offers_lieuTravail_codePostal" },
+} as IndexList;
+
+checkingIndexes<OfferSchema>(myIndexes, model);
+
+model.createIndexes();
 model.syncIndexes();
-model.ensureIndexes();
 
 export default model;
