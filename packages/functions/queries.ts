@@ -999,7 +999,8 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
     __typename
     id
     slug
-    jobDescriptionLink
+    contractType
+    intitule
     job {
       id
       title {
@@ -1007,29 +1008,20 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
         en
       }
     }
-    limitDate
-    location
-    requirements {
-      title
-      id
-    }
-    content
-    revenue
-    remote
-    contractType
-    authorName
-    authorInterviewLink
-    authorEmail
-    rebroadcast
+    typeContratLibelle
+    qualificationLibelle
     companyName
-    sector {
-      id
-      bgImage
+    entreprise {
+      nom
+      logo
+    }
+    location 
+    lieuTravail {
+      libelle
     }
     company {
       id
       name
-      location
       logo {
         secure_url
         url
@@ -1038,112 +1030,14 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
         }
       }
     }
-    author {
-      id
-      firstname
-      lastname
-      fullname
-      email
-      linkedinProfileId
-    }
-    intitule
-    description
-    dateCreation
-    dateActualisation
-    lieuTravail {
-      libelle
-      latitude
-      longitude
-      codePostal
-      commune
-    }
-    romeCode
-    romeLibelle
-    appellationlibelle
-    entreprise {
-      nom
-      description
-      logo
-      url
-      entrepriseAdaptee
-    }
-    typeContrat
-    typeContratLibelle
-    natureContrat
-    experienceExige
+    outilsBureautiques
+    dureeTravailLibelleConverti
+    nombrePostes
     experienceLibelle
-    experienceCommentaire
-    formations {
-      codeFormation
-      domaineLibelle
-      niveauLibelle
-      commentaire
-      exigence
-    }
-    langues {
-      libelle
-      exigence
-    }
     permis {
       libelle
       exigence
     }
-    outilsBureautiques
-    competences {
-      code
-      libelle
-      exigence
-    }
-    salaire {
-      libelle
-      commentaire
-      complement1
-      complement2
-    }
-    dureeTravailLibelle
-    dureeTravailLibelleConverti
-    complementExercice
-    conditionExercice
-    alternance
-    contact {
-      nom
-      coordonnees1
-      coordonnees2
-      coordonnees3
-      telephone
-      courriel
-      commentaire
-      urlRecruteur
-      urlPostulation
-    }
-    agence {
-      telephone
-      courriel
-    }
-    nombrePostes
-    accessibleTH
-    deplacementCode
-    deplacementLibelle
-    qualificationCode
-    qualificationLibelle
-    codeNAF
-    secteurActivite
-    secteurActiviteLibelle
-    qualitesProfessionnelles {
-      libelle
-      description
-    }
-    trancheEffectifEtab
-    origineOffre {
-      origine
-      urlOrigine
-      partenaires {
-          nom
-          url
-          logo
-      }
-    }
-    offresManqueCandidats
   }
 }`;
 

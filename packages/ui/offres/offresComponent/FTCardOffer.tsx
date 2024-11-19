@@ -1,15 +1,10 @@
 "use client";
 import SeeMore from "../../_components/SeeMore";
-import {
-  CompetenceFt,
-  Competency,
-  Offer,
-  Translated,
-} from "@youmeet/gql/generated";
+import { Offer, Translated } from "@youmeet/gql/generated";
 import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 export default function FTCardOffer({
@@ -30,10 +25,10 @@ export default function FTCardOffer({
   const required = (title: string | null | undefined) =>
     title ? title[0].toUpperCase() + title?.slice(1) : undefined;
 
-  const listReqs = (
-    list: (Competency | null)[] | (CompetenceFt | null)[] | undefined | null
-  ) => (list ? list.map((c: any) => required(c?.title || c?.libelle)) : []);
-  const requirements = listReqs(el?.requirements) || listReqs(el?.competences);
+  // const listReqs = (
+  //   list: (Competency | null)[] | (CompetenceFt | null)[] | undefined | null
+  // ) => (list ? list.map((c: any) => required(c?.title || c?.libelle)) : []);
+  // const requirements = listReqs(el?.requirements) || listReqs(el?.competences);
 
   const jobTitle =
     (job?.title && (job?.title as Translated)[language as "fr" | "en"]) ||
@@ -50,10 +45,6 @@ export default function FTCardOffer({
   const contractType = el?.contractType || el?.typeContratLibelle;
   const slug = `/offres/${el?.slug}`;
   if (slug) router.prefetch(slug);
-  const limitDate = el?.limitDate;
-  const revenue = el?.revenue || el?.salaire?.libelle;
-  const remote = el?.remote;
-  const rebroadcast = el?.rebroadcast || !el?.entreprise?.logo;
   const logo = setFileUrl(company?.logo) || el?.entreprise?.logo;
   const companyName = company?.name || el?.entreprise?.nom || el.companyName;
 
