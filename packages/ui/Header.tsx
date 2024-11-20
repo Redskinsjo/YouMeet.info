@@ -104,13 +104,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
         <MenuHeaderForMobile />
         {!xs && !sm && !md && (
-          <div
-            className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full"
-            onMouseEnter={() => {
-              if (!xs && !sm && !md) setMegaMenu(true);
-            }}
-            onMouseLeave={() => setMegaMenu(false)}
-          >
+          <div className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full">
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
@@ -123,7 +117,12 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 className="text-black flex-center h-full group relative cursor-pointer hover:rounded-t-xl focus-visible:outline-0"
                 style={{ textDecoration: "none", height: "100%" }}
               >
-                <div className="flex-center h-full">
+                <div
+                  className="flex-center h-full"
+                  onMouseEnter={() => {
+                    setMegaMenu(true);
+                  }}
+                >
                   <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
                     {t("home")}
                   </span>
@@ -150,7 +149,12 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 className="text-black flex-center h-full group relative cursor-pointer hover:rounded-t-xl focus-visible:outline-0"
                 style={{ textDecoration: "none", height: "100%" }}
               >
-                <div className="flex-center h-full">
+                <div
+                  className="flex-center h-full"
+                  onMouseEnter={() => {
+                    setMegaMenu(true);
+                  }}
+                >
                   <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
                     {t("product")}
                   </span>
@@ -178,7 +182,12 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 className="text-black flex-center h-full group relative cursor-pointer hover:rounded-t-xl focus-visible:outline-0"
                 style={{ textDecoration: "none", height: "100%" }}
               >
-                <div className="flex-center h-full">
+                <div
+                  className="flex-center h-full"
+                  onMouseEnter={() => {
+                    setMegaMenu(true);
+                  }}
+                >
                   <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
                     {t("blog")}
                   </span>

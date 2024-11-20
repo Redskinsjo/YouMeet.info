@@ -903,33 +903,39 @@ const resolvers: Resolvers = {
       }
 
       const search = prms?.search;
-      if (search && where.OR) {
-        const s = search.split(" ");
+      // if (search && where.OR) {
+      //   const s = search.split(" ");
 
-        for (let i = 0; i < s.length; i++) {
-          where.OR.push({
-            job: {
-              title: {
-                is: {
-                  fr: { mode: "insensitive", contains: s[i] },
-                },
-              },
-            },
-          });
-          where.OR.push({
-            job: {
-              title: {
-                is: {
-                  en: { mode: "insensitive", contains: s[i] },
-                },
-              },
-            },
-          });
+      //   for (let i = 0; i < s.length; i++) {
+      //     where.OR.push({
+      //       job: {
+      //         title: {
+      //           is: {
+      //             fr: { mode: "insensitive", contains: s[i] },
+      //           },
+      //         },
+      //       },
+      //     });
+      //     where.OR.push({
+      //       job: {
+      //         title: {
+      //           is: {
+      //             en: { mode: "insensitive", contains: s[i] },
+      //           },
+      //         },
+      //       },
+      //     });
 
-          where.OR.push({
-            intitule: { contains: s[i], mode: "insensitive" },
-          });
-        }
+      //     where.OR.push({
+      //       intitule: { contains: s[i], mode: "insensitive" },
+      //     });
+      //   }
+      // }
+      if (search) {
+        where.OR?.push({ intitule: { contains: search, mode: "insensitive" } });
+        where.OR?.push({
+          romeLibelle: { contains: search, mode: "insensitive" },
+        });
       }
 
       if (data?.targetSectorId) {

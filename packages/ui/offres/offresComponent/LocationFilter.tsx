@@ -47,7 +47,8 @@ export default function LocationFilter() {
 
       const prm = "l";
       const params = new URLSearchParams(search.toString());
-      params.set(prm, codeStr);
+      if (codes.length > 0) params.set(prm, codeStr);
+      else params.delete(prm);
       const otherPrm = "all-skip";
       params.delete(otherPrm);
       const query = params.toString();

@@ -35,9 +35,12 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
       );
       delete offer.id;
 
-      let company = await prisma.betacompanies.findFirst({
-        where: { name: entreprise.nom },
-      });
+      let company;
+      try {
+        company = await prisma.betacompanies.findUniqueOrThrow({
+          where: { name: entreprise.nom },
+        });
+      } catch (error) {}
       if (!company) {
         const logo = {} as { secure_url: string; url: string };
         if (entreprise.logo) {

@@ -1,4 +1,3 @@
-import Layout from "../Layout";
 import { Offer } from "@youmeet/gql/generated";
 import type { Attr } from "@youmeet/types/attributes";
 import BackButton from "./BackButton";
@@ -33,7 +32,7 @@ export default function PublicPageContainer({
         {!noReturnHeader && (
           <div className="mediumBg dark:mediumDarkBg flex-bet w-full p-[3px] rounded-[14px] box-border">
             <Suspense>
-              <BackButton />
+              <BackButton view={view} />
             </Suspense>
             {apply && (
               <div className="flex items-center xs:items-end sm:items-end md:items-end xs:flex-col sm:flex-col md:flex-col gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px]">
