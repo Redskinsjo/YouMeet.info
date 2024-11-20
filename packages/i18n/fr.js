@@ -982,7 +982,7 @@ const favorites = {
 };
 
 const login = {
-  signin: "S'inscrire",
+  signup: "S'inscrire",
   "google-signin": "Connexion Google",
   "already-signed": "Déjà inscrit?",
   "forgotten-password": "Mot de passe oublié?",

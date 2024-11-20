@@ -89,7 +89,7 @@ const WhenSubscribin = ({ type, setIsSubscribing }: CustomModalProps) => {
       <Logo png />
 
       <h1 className="m-0 p-0 titles text-center dark:text-white">
-        {t("signin")}
+        {t("signup")}
       </h1>
 
       <div className="gap-[12px] xs:gap-[6px] sm:gap-[6px] md:gap-[6px] grid grid-cols-2 w-full">
@@ -275,7 +275,7 @@ const WhenLogin = ({
                 }}
               >
                 <Button className="group-hover:underline legend dark:darkBg dark:text-white bg-white text-black">
-                  {t("signin")}
+                  {t("signup")}
                 </Button>
               </div>
             )}

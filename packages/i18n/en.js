@@ -945,7 +945,7 @@ const favorites = {
 };
 
 const login = {
-  signin: "Signin",
+  signup: "Sign up",
   "google-signin": "Connect Google",
   "already-signed": "Already signed in?",
   "forgotten-password": "Forgotten password?",
