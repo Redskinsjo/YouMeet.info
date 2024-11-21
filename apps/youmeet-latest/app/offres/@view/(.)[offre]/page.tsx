@@ -20,9 +20,9 @@ export default async function OfferComponent({
     offers = (await getOffers<Offer[]>({
       params: {
         search:
-          offer.job?.title && offer.job?.title.fr
-            ? offer.job?.title.fr
-            : offer.intitule,
+          offer?.job?.title && offer?.job?.title.fr
+            ? offer?.job?.title.fr
+            : offer?.intitule,
       },
     })) as Offer[];
   }

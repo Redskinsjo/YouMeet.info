@@ -58,6 +58,12 @@ export default function BackofficeModalComponent(props: CustomModalProps) {
           data: modal.user as Partial<BackofficeModalData>,
         };
       }
+      if (modal.sharing) {
+        data = {
+          type: "sharing",
+          data: modal.sharing as Partial<BackofficeModalData>,
+        };
+      }
       if (data) {
         return <BackofficeModalContent data={data} />;
       }

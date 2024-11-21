@@ -38,15 +38,14 @@ export default function SectionTitle({
       }${className}`,
       role: "heading",
     },
-    t(
-      lang
-        ? `${(translation as Translated)[language as "fr" | "en"]} ${
-            searching ? `${t("for")} "${searching}"` : ""
-          }`
-        : `${t(translation as string)} ${
-            searching ? `${t("for")} "${searching}"` : ""
-          }`
-    )
+
+    lang
+      ? `${(translation as Translated)[language as "fr" | "en"]} ${
+          searching ? `${t("for")} "${searching}"` : ""
+        }`
+      : `${t(translation as string)} ${
+          searching ? `${t("for")} "${searching}"` : ""
+        }`
   );
 
   return Component;

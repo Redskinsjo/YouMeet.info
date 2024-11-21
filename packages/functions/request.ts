@@ -146,6 +146,7 @@ import {
   getOfferMetadataQuery,
   getOffersParamsQuery,
   getOffersQuery,
+  getOneCompleteSharingQuery,
   getOneDetailsQuery,
   getOneMeetQuery,
   getOneQueueQuery,
@@ -2293,6 +2294,25 @@ export const getCompetenciesTitle = async <T>(
     "competencies",
     multiple,
     getCompetenciesTitleQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getOneCompleteSharing = async <T>(
+  variables: QueryOneProfileSharingArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "oneProfileSharing",
+    multiple,
+    getOneCompleteSharingQuery,
     variables,
     revalidate,
     handling

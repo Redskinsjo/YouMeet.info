@@ -1,10 +1,18 @@
+import { Attr } from "@youmeet/types/attributes";
 import { ReactElement } from "react";
 
-export default function ModalWrapper({ children }: { children: ReactElement }) {
+export default function ModalWrapper({
+  children,
+  newStyles,
+}: {
+  children: ReactElement;
+  newStyles?: Attr;
+}) {
   return (
     <div
       className="modal-content"
       onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+      style={{ ...newStyles }}
     >
       {children}
     </div>

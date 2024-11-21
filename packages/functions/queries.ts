@@ -2122,6 +2122,270 @@ export const getSharingQuery = `query GetOneProfileSharing($data: ProfileSharing
   }
 }`;
 
+export const getOneCompleteSharingQuery = `query getOneCompleteSharingQuery($data: ProfileSharingInput) {
+  oneProfileSharing(data: $data) {
+    origin {
+      __typename
+      id
+      firstname
+      lastname
+      fullname
+      email
+      description
+      picture
+      isPublic
+      uniqueName
+      age
+      user
+      pro
+      consent
+      languages
+      scrapped
+      linkedinProfileId
+      cvFile {
+        url
+        secure_url
+      }
+      hiddenFields
+      role
+      roles {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      candidate {
+        id
+        targetContractType
+        avatars {
+          secure_url
+          url
+          eager {
+            transformation
+          }
+        }
+        targetJob {
+          id
+          title {
+            fr
+            en
+          }
+          topSector {
+            id
+            bgImage
+          }
+        }
+      }
+      details {
+        id
+        phone {
+          number
+          code
+        }
+      }
+    }
+    target {
+      __typename
+      id
+      location
+      name
+      resume
+    }
+    video {
+      id
+      likes
+      principal
+      report
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      transcript
+      confidence
+      audio {
+        url
+        secure_url
+      }
+      file {
+        url
+        secure_url
+        subtitledUrl
+        width
+        height
+        original_filename
+        public_id
+        eager {
+          transformation
+        }
+      }
+    }
+    offerTarget {
+      id
+      content
+      profileSearched
+      slug
+      company {
+        id
+        name
+        location
+      }
+      author {
+        id
+        email
+        firstname
+        fullname
+        lastname
+      }
+      remote
+      requirements {
+        id
+        title
+      }
+      rebroadcast
+      companyName
+      companyLogo
+      contractType
+      limitDate
+      authorInterviewLink
+      authorName
+      createdAt
+      updatedAt
+      job {
+        id
+        title {
+          fr
+          en
+        }
+        topSector {
+          id
+          bgImage
+        }
+      }
+      sector {
+        id
+      }
+      jobDescriptionLink
+      authorEmail
+      location
+      revenue
+      sharings {
+        id
+        origin {
+          id
+        }
+        target {
+          id
+        }
+        offerTarget {
+          id
+        }
+      }
+      intitule
+      description
+      dateCreation
+      dateActualisation
+      lieuTravail {
+        libelle
+        latitude
+        longitude
+        codePostal
+        commune
+      }
+      romeCode
+      romeLibelle
+      appellationlibelle
+      entreprise {
+        nom
+        description
+        logo
+        url
+        entrepriseAdaptee
+      }
+      typeContrat
+      typeContratLibelle
+      natureContrat
+      experienceExige
+      experienceLibelle
+      experienceCommentaire
+      formations {
+        codeFormation
+        domaineLibelle
+        niveauLibelle
+        commentaire
+        exigence
+      }
+      langues {
+        libelle
+        exigence
+      }
+      permis {
+        libelle
+        exigence
+      }
+      outilsBureautiques
+      competences {
+        code
+        libelle
+        exigence
+      }
+      salaire {
+        libelle
+        commentaire
+        complement1
+        complement2
+      }
+      dureeTravailLibelle
+      dureeTravailLibelleConverti
+      complementExercice
+      conditionExercice
+      alternance
+      contact {
+        nom
+        coordonnees1
+        coordonnees2
+        coordonnees3
+        telephone
+        courriel
+        commentaire
+        urlRecruteur
+        urlPostulation
+      }
+      agence {
+        telephone
+        courriel
+      }
+      nombrePostes
+      accessibleTH
+      deplacementCode
+      deplacementLibelle
+      qualificationCode
+      qualificationLibelle
+      codeNAF
+      secteurActivite
+      secteurActiviteLibelle
+      qualitesProfessionnelles {
+        libelle
+        description
+      }
+      trancheEffectifEtab
+      origineOffre {
+        origine
+        urlOrigine
+        partenaires {
+            nom
+            url
+            logo
+        }
+      }
+      offresManqueCandidats
+    }
+  }
+}`;
+
 export const getAffiliationsQuery = `query GetAffiliations {
   affiliations {
     id
@@ -2483,17 +2747,14 @@ export const getSharingsQuery = `query GetSharings {
     offerTarget {
       intitule
       job {
-      title 
-        fr
-        en
+        title {
+          fr
+          en
+        }
+      }
+      entreprise {
+        logo
       }
     }
-    video {
-      file {
-        secure_url
-        url
-      }
-    }
-    report
   }
 }`;

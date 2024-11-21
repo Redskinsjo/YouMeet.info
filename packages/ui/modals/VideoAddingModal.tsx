@@ -90,7 +90,12 @@ export default function VideoAddingModal({
     chosenVideo?.id;
 
   return !loading ? (
-    <ModalWrapper>
+    <ModalWrapper
+      newStyles={{
+        maxHeight: "92vh",
+        height: "unset",
+      }}
+    >
       <div
         style={{
           overflowY: "scroll",

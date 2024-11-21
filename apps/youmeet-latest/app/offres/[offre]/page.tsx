@@ -16,7 +16,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const offers = (await getOffersParams<Offer[]>()) as Offer[];
-  return offers?.map((offer: Offer) => ({ offre: offer.slug }));
+  return offers?.map((offer: Offer) => ({ offre: offer?.slug }));
 }
 
 export async function generateMetadata(

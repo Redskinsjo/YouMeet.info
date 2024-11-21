@@ -11,6 +11,7 @@ export default async function BackofficeUsers() {
     verified.email.toLowerCase() === "jonathan.carnos@gmail.com"
   ) {
     const applications = (await getSharings(undefined, 0)) as ProfileSharing[];
+
     if (applications)
       return <BackofficeApplicationsChild applications={applications} />;
   }

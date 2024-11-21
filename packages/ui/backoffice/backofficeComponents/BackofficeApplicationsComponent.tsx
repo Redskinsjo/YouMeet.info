@@ -8,7 +8,15 @@ import Layout from "../../Layout";
 import Image from "next/image";
 import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import { Button } from "@mui/material";
-import { deleteSharing, getSharings } from "@youmeet/functions/request";
+import {
+  deleteSharing,
+  getOneCompleteSharing,
+  getSharings,
+} from "@youmeet/functions/request";
+import { setModal } from "@youmeet/global-config/features/modal";
+import { UnknownAction } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import prisma from "@youmeet/prisma-config/prisma";
 
 export default function BackofficeUsersComponent({
   data,
@@ -16,6 +24,7 @@ export default function BackofficeUsersComponent({
   data: ProfileSharing[];
 }) {
   const [rows, setRows] = useState<any[]>([]);
+  const dispatch = useDispatch();
 
   const fetchRows = useCallback(
     async (sharings: ProfileSharing[]) => {
@@ -31,7 +40,7 @@ export default function BackofficeUsersComponent({
             email: origin?.email,
             intitule,
             url: company?.url,
-            logo: company?.logo,
+            logo: company?.logo?.secure_url || offer?.entreprise?.logo,
             companyName: company?.name,
             createdAt: sharing?.createdAt,
             updatedAt: sharing?.updatedAt,
@@ -67,19 +76,19 @@ export default function BackofficeUsersComponent({
                 type: "string",
                 field: "fullname",
                 headerName: "Nom complet",
-                flex: 1,
+                width: 140,
               },
               {
                 type: "string",
                 field: "email",
                 headerName: "Email",
-                flex: 1,
+                width: 200,
               },
               {
                 type: "string",
                 field: "intitule",
                 headerName: "intitule offre",
-                width: 140,
+                flex: 1,
               },
               {
                 type: "actions",
@@ -102,13 +111,15 @@ export default function BackofficeUsersComponent({
                 headerName: "logo",
                 width: 60,
                 renderCell: (row: any) => {
-                  const fileUrl = setFileUrl(row.row.logo) || "";
+                  const file = { url: row.row.logo, securel_url: row.row.logo };
+                  const fileUrl = setFileUrl(file) || "";
                   return fileUrl ? (
                     <Image
                       src={fileUrl}
                       width={40}
                       height={40}
                       alt="logo de l'entreprise"
+                      style={{ objectFit: "cover" }}
                     />
                   ) : (
                     <></>
@@ -150,6 +161,18 @@ export default function BackofficeUsersComponent({
                 },
               },
             ]}
+            onRowClick={async (row) => {
+              console.log(row, "row");
+              const sharing = (await getOneCompleteSharing({
+                data: { id: row.id as string },
+              })) as ProfileSharing;
+              dispatch(
+                setModal({
+                  display: "backoffice",
+                  sharing,
+                }) as UnknownAction
+              );
+            }}
             rowHeight={70}
             getRowClassName={(params) => {
               return params.row.consent ||

@@ -587,29 +587,18 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-      if (
-        args.data?.offerTargetId &&
-        args.data.originId &&
-        args.data.targetId
-      ) {
-        const where = {} as {
-          id?: string;
-          originId?: string;
-          targetId?: string;
-          offerTargetId?: string;
-        };
-        if (args.data?.id) where.id = args.data?.id;
-        if (args.data?.originId) where.originId = args.data?.originId;
-        if (args.data?.targetId) where.targetId = args.data?.targetId;
-        if (args.data?.offerTargetId)
-          where.offerTargetId = args.data?.offerTargetId;
-        const sharing = await prisma.profileSharings.findFirst({
-          where,
-          include: { target: true, origin: true, offerTarget: true },
-        });
-        return sharing;
-      }
-      return null;
+
+      const where = {} as Prisma.profileSharingsWhereInput;
+      const d = args.data;
+      if (d?.id) where.id = d?.id;
+      if (d?.originId) where.originId = d?.originId;
+      if (d?.targetId) where.targetId = d?.targetId;
+      if (d?.offerTargetId) where.offerTargetId = d?.offerTargetId;
+      const sharing = await prisma.profileSharings.findFirst({
+        where,
+        include: { target: true, origin: true, offerTarget: true, video: true },
+      });
+      return sharing;
     },
     myCompanyProfileSharings: async (
       _: unknown,
@@ -4076,6 +4065,14 @@ const resolvers: Resolvers = {
         : sharing.offerTargetId
         ? await prisma.offers.findUnique({
             where: { id: sharing.offerTargetId as string },
+          })
+        : null,
+    video: async (sharing: ProfileSharing) =>
+      sharing.video
+        ? sharing.video
+        : sharing.videoId
+        ? await prisma.videos.findUnique({
+            where: { id: sharing.videoId as string },
           })
         : null,
   },
