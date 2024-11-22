@@ -304,8 +304,6 @@ const reqFT = async <T>(
       | withData<{ access_token: string }>
       | PayloadBackendError;
 
-    console.log(credentials, "credentials");
-
     if (credentials && isPayloadError(credentials)) {
       throw new BackendError(credentials.type, credentials.message);
     } else {

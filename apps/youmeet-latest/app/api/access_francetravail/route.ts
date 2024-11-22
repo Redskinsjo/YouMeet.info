@@ -11,12 +11,10 @@ export async function GET(req: NextRequest): Promise<Response> {
   try {
     const uniqueHeader = req.headers.get("x-domain-youmeet") || "";
 
-    console.log(uniqueHeader, "uniqueHeader");
     if (uniqueHeader) {
       const noCors = await noCorsMiddleware({
         request: req,
       } as unknown as ContextRequest);
-      console.log(noCors, "noCors");
       if (noCors) {
         const uri =
           "https://entreprise.francetravail.fr/connexion/oauth2/access_token";
@@ -26,11 +24,6 @@ export async function GET(req: NextRequest): Promise<Response> {
         const grant_type = "client_credentials";
         const scope = decodeURIComponent(searchParams.get("scope") ?? "");
 
-        console.log(
-          client_id.slice(20, client_id.length + 1),
-          client_secret.slice(20, client_secret.length + 1),
-          scope
-        );
         const body = `grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&scope=${scope}`;
 
         const endpoint = uri + "?" + params.toString();

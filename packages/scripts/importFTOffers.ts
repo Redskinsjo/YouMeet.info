@@ -19,20 +19,12 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
   const a = (await getSharings<ProfileSharing[]>()) as ProfileSharing[];
   const applications = a;
   console.log("applications: ", applications.length);
-  console.log(
-    "applications ids: ",
-    applications.map((a) => a.id)
-  );
   // offres qui sont liées à une candidature
 
   const offersToKeep = applications
     .filter((sharing) => sharing.offerTarget.id)
     .map((sharing) => sharing.offerTarget);
   console.log("offersToKeep: ", offersToKeep.length);
-  console.log(
-    "offersToKeep ids: ",
-    offersToKeep.map((o) => o.id)
-  );
 
   const offers = (await getOffers<Offer[]>()) as Offer[];
   // offres qui ne sont pas liées à une candidature
@@ -72,7 +64,6 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
     const result = (await getOffersFT<ResultOffresFT>({
       range: `${start}-${end}`,
     })) as ResultOffresFT;
-    console.log("Result is:", result);
     console.log(`Fetched: ${result.resultats.length} offers`);
     const data = result?.resultats;
     const offres = data?.length > 0 ? data : [];
