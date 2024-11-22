@@ -52,7 +52,7 @@ export default function LocationFilter() {
       const otherPrm = "all-skip";
       params.delete(otherPrm);
       const query = params.toString();
-      router.push(pathname + "?" + query);
+      router.push("/offres" + "?" + query);
     },
     [searchLocation]
   );

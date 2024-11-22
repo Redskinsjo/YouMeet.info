@@ -26,7 +26,7 @@ export default function SearchFilter() {
         const otherPrm = "all-skip";
         params.delete(otherPrm);
         const query = params.toString();
-        router.push(pathname + "?" + query);
+        router.push("/offres" + "?" + query);
       }}
       className="flex flex-1 items-start justify-center gap-[12px] relative"
     >
