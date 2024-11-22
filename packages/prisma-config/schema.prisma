@@ -722,6 +722,7 @@ model offers {
   queues                      betaqueues[]
   createdAt                   DateTime?
   updatedAt                   DateTime?
+  idFT                        String?                 @unique
   intitule                    String?
   description                 String?
   dateCreation                String?
@@ -763,6 +764,7 @@ model offers {
   trancheEffectifEtab         String?
   origineOffre                OriginOfferFT?
   offresManqueCandidats       Boolean?
+  live                        Boolean?
 }
 
 model favorites {

@@ -2745,6 +2745,7 @@ export const getSharingsQuery = `query GetSharings {
       }
     }
     offerTarget {
+      id
       intitule
       job {
         title {

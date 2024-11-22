@@ -1432,6 +1432,7 @@ export type Offer = {
   formations?: Maybe<Array<Maybe<FormationFt>>>;
   generated?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  idFT?: Maybe<Scalars['String']['output']>;
   intitule?: Maybe<Scalars['String']['output']>;
   job?: Maybe<Job>;
   jobDescriptionLink?: Maybe<Scalars['String']['output']>;
@@ -1439,6 +1440,7 @@ export type Offer = {
   langues?: Maybe<Array<Maybe<LanguageFt>>>;
   lieuTravail?: Maybe<WorkLocationFt>;
   limitDate?: Maybe<Scalars['DateTime']['output']>;
+  live?: Maybe<Scalars['Boolean']['output']>;
   location?: Maybe<Scalars['String']['output']>;
   natureContrat?: Maybe<Scalars['String']['output']>;
   nombrePostes?: Maybe<Scalars['Int']['output']>;
@@ -1484,6 +1486,7 @@ export type OfferInput = {
   language?: InputMaybe<Scalars['String']['input']>;
   lieuTravail?: InputMaybe<WorkLocationFtInput>;
   limitDate?: InputMaybe<Scalars['String']['input']>;
+  live?: InputMaybe<Scalars['Boolean']['input']>;
   location?: InputMaybe<Scalars['String']['input']>;
   profileSearched?: InputMaybe<Scalars['String']['input']>;
   remote?: InputMaybe<Scalars['String']['input']>;
@@ -2015,6 +2018,11 @@ export type QuerySendEmailToLeadArgs = {
 };
 
 
+export type QuerySharingsArgs = {
+  data?: InputMaybe<SharingInput>;
+};
+
+
 export type QueryTopSectorsArgs = {
   data?: InputMaybe<TopSectorInput>;
 };
@@ -2144,6 +2152,13 @@ export type SalaryFt = {
 export type ScrappedInfos = {
   __typename?: 'ScrappedInfos';
   fullname?: Maybe<Scalars['String']['output']>;
+};
+
+export type SharingInput = {
+  offerId?: InputMaybe<Scalars['ID']['input']>;
+  originId?: InputMaybe<Scalars['ID']['input']>;
+  targetId?: InputMaybe<Scalars['ID']['input']>;
+  videoId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type SharingRefusal = {
@@ -3256,6 +3271,7 @@ export type ResolversTypes = {
   ResponseInput: ResponseInput;
   SalaryFT: ResolverTypeWrapper<SalaryFt>;
   ScrappedInfos: ResolverTypeWrapper<ScrappedInfos>;
+  SharingInput: SharingInput;
   SharingRefusal: ResolverTypeWrapper<SharingRefusal>;
   SharingRefusalInput: SharingRefusalInput;
   SocialAuthentication: ResolverTypeWrapper<SocialAuthentication>;
@@ -3389,6 +3405,7 @@ export type ResolversParentTypes = {
   ResponseInput: ResponseInput;
   SalaryFT: SalaryFt;
   ScrappedInfos: ScrappedInfos;
+  SharingInput: SharingInput;
   SharingRefusal: SharingRefusal;
   SharingRefusalInput: SharingRefusalInput;
   SocialAuthentication: SocialAuthentication;
@@ -4134,6 +4151,7 @@ export type OfferResolvers<ContextType = any, ParentType extends ResolversParent
   formations?: Resolver<Maybe<Array<Maybe<ResolversTypes['FormationFT']>>>, ParentType, ContextType>;
   generated?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  idFT?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   intitule?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   job?: Resolver<Maybe<ResolversTypes['Job']>, ParentType, ContextType>;
   jobDescriptionLink?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -4141,6 +4159,7 @@ export type OfferResolvers<ContextType = any, ParentType extends ResolversParent
   langues?: Resolver<Maybe<Array<Maybe<ResolversTypes['LanguageFT']>>>, ParentType, ContextType>;
   lieuTravail?: Resolver<Maybe<ResolversTypes['WorkLocationFT']>, ParentType, ContextType>;
   limitDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  live?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   location?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   natureContrat?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   nombrePostes?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -4312,7 +4331,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   sendEmailOfferOpportunities?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaUser']>>>, ParentType, ContextType, Partial<QuerySendEmailOfferOpportunitiesArgs>>;
   sendEmailProspectionLinkedin?: Resolver<Maybe<Array<Maybe<ResolversTypes['Lead']>>>, ParentType, ContextType, Partial<QuerySendEmailProspectionLinkedinArgs>>;
   sendEmailToLead?: Resolver<Maybe<Array<Maybe<ResolversTypes['Lead']>>>, ParentType, ContextType, Partial<QuerySendEmailToLeadArgs>>;
-  sharings?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfileSharing']>>>, ParentType, ContextType>;
+  sharings?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfileSharing']>>>, ParentType, ContextType, Partial<QuerySharingsArgs>>;
   topSectors?: Resolver<Maybe<Array<Maybe<ResolversTypes['TopSector']>>>, ParentType, ContextType, Partial<QueryTopSectorsArgs>>;
   uniqueCompetency?: Resolver<Maybe<ResolversTypes['Competency']>, ParentType, ContextType, Partial<QueryUniqueCompetencyArgs>>;
   user?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType, Partial<QueryUserArgs>>;

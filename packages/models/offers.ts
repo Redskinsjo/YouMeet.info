@@ -95,7 +95,8 @@ export class OfferSchema {
   public createdAt: Date;
   @prop()
   public updatedAt: Date;
-
+  @prop({ unique: true })
+  public idFT: string;
   @prop({ index: true })
   public intitule: string;
   @prop()
@@ -176,6 +177,8 @@ export class OfferSchema {
   public origineOffre: OffreEmploiFT.OriginOfferFT;
   @prop()
   public offresManqueCandidats: boolean;
+  @prop()
+  public live: boolean;
 }
 
 const model = getModelForClass(OfferSchema);

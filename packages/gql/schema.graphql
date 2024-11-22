@@ -468,6 +468,7 @@ type Offer {
   sharings: [ProfileSharing]
   createdAt: DateTime
   updatedAt: DateTime
+  idFT: String
   intitule: String
   description: String
   dateCreation: String
@@ -509,6 +510,7 @@ type Offer {
   trancheEffectifEtab: String
   origineOffre: OriginOfferFT
   offresManqueCandidats: Boolean
+  live: Boolean
 }
 
 type WorkLocationFT {
@@ -844,6 +846,7 @@ input OfferInput {
   title: String
   language: String
   lieuTravail: WorkLocationFTInput
+  live: Boolean
 }
 
 type Favorite {
@@ -1417,6 +1420,13 @@ input EmailInput {
   recruiterName: String
 }
 
+input SharingInput {
+  offerId: ID
+  originId: ID
+  targetId: ID
+  videoId: ID
+}
+
 type Query {
   oneMeet(id: ID): Meet
   meets(data: MeetInput): [Meet]
@@ -1451,7 +1461,7 @@ type Query {
   myPublishedOffers(data: OfferInput): [Offer]
   oneProfileSharing(data: ProfileSharingInput): ProfileSharing
   myCompanyProfileSharings(targetId: String): [ProfileSharing]
-  sharings: [ProfileSharing]
+  sharings(data: SharingInput): [ProfileSharing]
   companyOffers(companyId: ID): [Offer]
   myReferenceContacts(userId: ID, experienceId: ID): [ReferenceContact]
   myNotifications(

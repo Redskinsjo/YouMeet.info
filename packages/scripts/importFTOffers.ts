@@ -1,4 +1,9 @@
-import { getOffersFT } from "@youmeet/functions/request";
+import {
+  getOffers,
+  getOffersFT,
+  getSharings,
+} from "@youmeet/functions/request";
+import { Offer, ProfileSharing } from "@youmeet/gql/generated";
 import prisma from "@youmeet/prisma-config/prisma";
 import { OffreEmploiFT } from "@youmeet/types/api/OffreEmploiFT";
 import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
@@ -11,8 +16,57 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
 
   const waitFor = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+  const a = (await getSharings<ProfileSharing[]>()) as ProfileSharing[];
+  const applications = a;
+  console.log("applications: ", applications.length);
+  console.log(
+    "applications ids: ",
+    applications.map((a) => a.id)
+  );
+  // offres qui sont liées à une candidature
+
+  const offersToKeep = applications
+    .filter((sharing) => sharing.offerTarget.id)
+    .map((sharing) => sharing.offerTarget);
+  console.log("offersToKeep: ", offersToKeep.length);
+  console.log(
+    "offersToKeep ids: ",
+    offersToKeep.map((o) => o.id)
+  );
+
+  const offers = (await getOffers<Offer[]>()) as Offer[];
+  // offres qui ne sont pas liées à une candidature
+  const offersToRemove = offers.filter(
+    (offer) => !offersToKeep.find((o) => o.id === offer.id)
+  );
+  console.log(offersToRemove.length, "offersToRemove: ", offersToRemove.length);
+
+  // annoter les offres liées à une candidature, comme étant live
+  for (let k = 0; k < offersToKeep.length; k++) {
+    const offer = offersToKeep[k];
+    const exist = await prisma.offers.findUnique({ where: { id: offer.id } });
+    if (exist) {
+      try {
+        await prisma.offers.update({
+          where: { id: exist.id },
+          data: { live: true },
+        });
+        console.log("updated offer to: live");
+      } catch (e) {
+        console.log("error updating offer");
+      }
+    }
+  }
+
+  // enlever les offres qui ne sont pas liées à une candidature
+  const deleted = await prisma.offers.deleteMany({
+    where: { live: { isSet: false } },
+  });
+  console.log("deleted: ", deleted.count.toString());
+
   const fnc = async (start: number, end: number, over: boolean) => {
     if (over) return;
+
     end = start + 149;
     console.log(`Fetching offers from ${start} to ${end}`);
     const result = (await getOffersFT<ResultOffresFT>({
@@ -33,7 +87,19 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
           return [key, val];
         })
       );
+      const idFT = offer.id;
       delete offer.id;
+
+      const isStillLive = await prisma.offers.findUnique({
+        where: { idFT },
+      });
+      if (isStillLive) {
+        await prisma.offers.update({
+          where: { idFT },
+          data: { ...offer, updatedAt: new Date() },
+        });
+        continue;
+      }
 
       let company;
       if (entreprise.nom) {
@@ -73,6 +139,7 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
           extension,
           slug,
           ...offer,
+          idFT,
           ...companyData,
           createdAt: new Date(),
           updatedAt: new Date(),

@@ -76,6 +76,7 @@ import {
   QueryVideoByPublicIdArgs,
   QueryCompetenciesArgs,
   DeleteOneProfileSharingMutation,
+  QuerySharingsArgs,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -305,8 +306,6 @@ const reqFT = async <T>(
     const credentials = (await getAccessTokenFT(scope)) as
       | withData<{ access_token: string }>
       | PayloadBackendError;
-
-    console.log(credentials, "credentials");
 
     if (credentials && isPayloadError(credentials)) {
       throw new BackendError(credentials.type, credentials.message);
@@ -1991,7 +1990,7 @@ export const getSharing = async <T>(
 };
 
 export const getSharings = async <T>(
-  variables: any = undefined,
+  variables?: QuerySharingsArgs | undefined,
   revalidate: number = 0,
   handling: true | undefined = undefined
 ): Promise<Result<T>> => {

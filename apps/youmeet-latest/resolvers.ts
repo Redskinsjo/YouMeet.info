@@ -141,6 +141,7 @@ import {
   QueryVideoByPublicIdArgs,
   FormResponse,
   WorkLocationFtInput,
+  QuerySharingsArgs,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
@@ -1555,10 +1556,26 @@ const resolvers: Resolvers = {
       if (!noCors) return [];
       return await prisma.affiliations.findMany({ include: { parent: true } });
     },
-    sharings: async (_: unknown, args: any, context: ContextRequest) => {
+    sharings: async (
+      _: unknown,
+      args: QuerySharingsArgs,
+      context: ContextRequest
+    ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      const sharings = await prisma.profileSharings.findMany();
+      const data = args.data;
+      const where = {} as Prisma.profileSharingsWhereInput;
+      if (data?.offerId) where.offerTarget = { id: data.offerId };
+      if (data?.originId) where.origin = { id: data.originId };
+      if (data?.targetId) where.target = { id: data.targetId };
+      if (data?.videoId) where.video = { id: data.videoId };
+
+      let finalWhere = {} as Prisma.profileSharingsWhereInput;
+      if (Object.keys(where).length > 0) finalWhere = where;
+      const sharings = await prisma.profileSharings.findMany({
+        where: { ...finalWhere },
+        include: { video: true, offerTarget: true, origin: true, target: true },
+      });
       return sharings;
     },
     experiences: async (_: unknown, args: any, context: ContextRequest) => {
