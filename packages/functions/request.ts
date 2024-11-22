@@ -195,10 +195,7 @@ import {
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { isNotHandledReq, isPayloadError } from "@youmeet/types/TypeGuards";
 import { AES } from "crypto-js";
-import {
-  OffreEmploiFT,
-  OffreEmploiFTParams,
-} from "@youmeet/types/api/OffreEmploiFT";
+import { OffreEmploiFTParams } from "@youmeet/types/api/OffreEmploiFT";
 import { getAccessTokenFT } from "./browserRequests";
 
 export const createError = async <T>(
@@ -307,6 +304,8 @@ const reqFT = async <T>(
       | withData<{ access_token: string }>
       | PayloadBackendError;
 
+    console.log(credentials, "credentials");
+
     if (credentials && isPayloadError(credentials)) {
       throw new BackendError(credentials.type, credentials.message);
     } else {
@@ -388,6 +387,7 @@ async function reqFnc<T>(
   const params = { query } as { query: string; variables?: any };
   if (variables) params.variables = variables;
   const res = await req<T>(params, revalidate);
+
   if (res && isPayloadError(res)) {
     if (isNotHandledReq<T>(handling, res))
       return { data: multiple ? [] : undefined } as withData<

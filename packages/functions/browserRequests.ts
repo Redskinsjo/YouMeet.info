@@ -7,10 +7,7 @@ import {
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { handleActionError } from "@youmeet/utils/basics/handleActionError";
 import { uri } from "./imports";
-import {
-  OffreEmploiFT,
-  OffreEmploiFTParams,
-} from "@youmeet/types/api/OffreEmploiFT";
+import { OffreEmploiFTParams } from "@youmeet/types/api/OffreEmploiFT";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 
 type OffreEmploiFTBody = { type: "search" | "id"; id?: string; token?: string };

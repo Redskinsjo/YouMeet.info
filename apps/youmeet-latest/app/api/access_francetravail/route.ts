@@ -21,6 +21,11 @@ export async function GET(req: NextRequest): Promise<Response> {
       const grant_type = "client_credentials";
       const scope = decodeURIComponent(searchParams.get("scope") ?? "");
 
+      console.log(
+        client_id.slice(20, client_id.length + 1),
+        client_secret.slice(20, client_secret.length + 1),
+        scope
+      );
       const body = `grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&scope=${scope}`;
 
       const endpoint = uri + "?" + params.toString();
