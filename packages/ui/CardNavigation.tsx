@@ -45,7 +45,7 @@ export default function CardNavigation({
             setValue("1");
           }
           const query = params.toString();
-          router.push(pathname + "?" + query, { scroll: false });
+          router.push("/offres" + "?" + query, { scroll: false });
         }}
         className=" flex-center"
       >
