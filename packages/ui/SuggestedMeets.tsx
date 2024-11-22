@@ -53,10 +53,13 @@ export default function SuggestedMeets({
           </div>
         </div>
       ) : (
-        <div className="dark:text-white text-[14px] italic px-[12px] h-full flex flex-col gap-[12px]">
-          <BoldText text={"no-offer-for-the-moment"} align="center" />
+        <div className="flex-center">
+          {type && <CardNavigation type={type} length={data.length} />}
+          <div className="dark:text-white text-[14px] italic px-[12px] h-full flex flex-col gap-[12px]">
+            <BoldText text={"no-offer-for-the-moment"} align="center" />
 
-          <ResetNavigation type={type} />
+            <ResetNavigation type={type} />
+          </div>
         </div>
       )}
     </section>

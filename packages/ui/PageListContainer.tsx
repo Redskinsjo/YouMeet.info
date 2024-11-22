@@ -15,10 +15,10 @@ export default function PageListContainer({
   type?: SuggestedMeetsType;
 }) {
   return (
-    <div className="w-full p-[6px] box-border flex flex-col gap-[12px] box-border">
+    <div className="w-full flex flex-col gap-[12px] box-border">
       <div className="w-full">
         {data && data.length > 0 ? (
-          <div className="px-[12px]">
+          <div className="p-[12px]">
             <BoldText
               text={`${dataType}-announcement`}
               fontSizeClass="text-black"
