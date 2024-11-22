@@ -315,12 +315,17 @@ const reqFT = async <T>(
       if (process.env.SCRIPT === undefined) nextParams.next = { revalidate };
 
       const urlParams = `${params ? `?${params}` : ""}`;
+      const encrypt = AES.encrypt(
+        "app",
+        `${process.env.JWT_SECRET}`
+      ).toString();
       const response = await fetch(`${uri}${urlParams}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${credentials.data.access_token}`,
           Accept: "application/json",
+          "x-domain-youmeet": encrypt,
           origin: "https://www.youmeet.info",
         },
         mode: "same-origin",
