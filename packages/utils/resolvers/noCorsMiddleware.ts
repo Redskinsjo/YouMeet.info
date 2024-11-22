@@ -25,6 +25,9 @@ export const noCorsMiddleware = async (context: ContextRequest) => {
     uniqueHeader,
     `${process.env.JWT_SECRET}`
   ).toString(enc.Utf8);
+  console.log(decrypt, "decrypt");
+  console.log(process.env.JWT_SECRET, "process.env.JWT_SECRET");
+  console.log(hosts, "hosts");
 
   if (hosts.includes(decrypt)) {
     return true;
