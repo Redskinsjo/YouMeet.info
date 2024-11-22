@@ -9,6 +9,7 @@ import { handleActionError } from "@youmeet/utils/basics/handleActionError";
 import { uri } from "./imports";
 import { OffreEmploiFTParams } from "@youmeet/types/api/OffreEmploiFT";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
+import { AES } from "crypto-js";
 
 type OffreEmploiFTBody = { type: "search" | "id"; id?: string; token?: string };
 type JobsFTBody = { token: string };
@@ -23,9 +24,13 @@ export const getAccessTokenFT = async (
   const tokenEndpoint = `${uri}/api/access_francetravail?${tokenSearchParams.toString()}`;
 
   try {
+    const encrypt = AES.encrypt("app", `${process.env.JWT_SECRET}`).toString();
     const tokenResponse = await fetch(tokenEndpoint, {
       method: "GET",
       cache: "no-store",
+      headers: {
+        "x-domain-youmeet": encrypt,
+      },
     });
     const tokenData = await tokenResponse.json();
 
