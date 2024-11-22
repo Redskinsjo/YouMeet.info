@@ -10,13 +10,12 @@ export async function GET(req: NextRequest): Promise<Response> {
   const searchParams = req.nextUrl.searchParams;
 
   try {
-    console.log(req.cookies.getAll());
-
     const noCors = await noCorsMiddleware(
       { request: req } as unknown as ContextRequest,
       true
     );
-    if (req.cookies.get("login")?.value && noCors) {
+    console.log(noCors, "noCors");
+    if (noCors) {
       const uri =
         "https://entreprise.francetravail.fr/connexion/oauth2/access_token";
       const client_id = `${process.env.FRANCE_TRAVAIL_CLIENT_ID}`;
