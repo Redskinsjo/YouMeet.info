@@ -12,7 +12,7 @@ export async function GET(req: NextRequest): Promise<Response> {
     const uniqueHeader = req.headers.get("x-domain-youmeet") || "";
 
     console.log(uniqueHeader, "uniqueHeader");
-    if (!uniqueHeader) {
+    if (uniqueHeader) {
       const noCors = await noCorsMiddleware({
         request: req,
       } as unknown as ContextRequest);
