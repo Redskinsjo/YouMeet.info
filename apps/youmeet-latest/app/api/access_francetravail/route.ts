@@ -10,10 +10,9 @@ export async function GET(req: NextRequest): Promise<Response> {
   const searchParams = req.nextUrl.searchParams;
 
   try {
-    const noCors = await noCorsMiddleware(
-      { request: req } as unknown as ContextRequest,
-      true
-    );
+    const noCors = await noCorsMiddleware({
+      request: req,
+    } as unknown as ContextRequest);
     console.log(noCors, "noCors");
     if (noCors) {
       const uri =
