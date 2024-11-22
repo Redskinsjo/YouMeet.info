@@ -1,46 +1,20 @@
 import { Offer } from "@youmeet/gql/generated";
 import React from "react";
-import Footer from "@youmeet/ui/Footer";
-import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
-import OffresComponent from "@youmeet/ui/offres/offresComponent/OffresComponent";
-import OffresEmploiFT from "@youmeet/ui/offres/offresComponent/OffresEmploiFT";
-import { OffreEmploiFT } from "@youmeet/types/api/OffreEmploiFT";
+import PageListContainer from "@youmeet/ui/PageListContainer";
+import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
 
-export default function OffresChild({ offres }: { offres: OffreEmploiFT[] }) {
-  // export default function OffresChild({ offres }: { offres: Offer[] }) {
-  // const { data: suggestedData, loading: suggestedLoading } = useQuery(
-  //   GetOffersDocument,
-  //   {
-  //     variables: {
-  //       params: { take: 3 },
-  //       data: {
-  //         sectors,
-  //         jobs,
-  //         targetSectorId: user.candidate?.targetJob?.topSector?.id || undefined,
-  //       },
-  //     },
-  //   }
-  // );
-
-  // useEffect(() => {
-  //   const hasAvatars = (curr: Offer) => {};
-
-  //   const filtered = (suggestedData?.offers as Offer[])?.reduce((acc, curr) => {
-  //     acc.push(curr);
-  //     return acc;
-  //   }, [] as Offer[]);
-
-  //   setSuggested(filtered);
-  // }, [suggestedLoading]);
-
+export default function OffresChild({
+  offres,
+  type,
+}: {
+  offres: Offer[];
+  type: SuggestedMeetsType;
+}) {
   return (
-    <div className="min-h-screen">
-      <div className="relative flex-1 flex flex-col h-full min-h-screen dark:darkBg mediumBg">
-        <BigHeaderSection />
-        {/* <OffresComponent offres={offres} /> */}
-        <OffresEmploiFT offres={offres} />
+    <div className="w-full min-w-2/3 xs:max-w-screen sm:max-w-screen md:max-w-screen xs:min-w-fit sm:min-w-fit md:min-w-fit">
+      <div className="relative flex-1 flex flex-col h-full dark:darkBg">
+        <PageListContainer data={offres} dataType="offers" type={type} />
       </div>
-      <Footer />
     </div>
   );
 }

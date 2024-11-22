@@ -1,8 +1,17 @@
+"use client";
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactNode } from "react";
+import BigHeaderSection from "@youmeet/ui/_sections/BigHeaderSection";
+import Footer from "@youmeet/ui/Footer";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({
+  children,
+  view,
+}: {
+  children: ReactNode;
+  view: ReactNode;
+}) {
   return (
     <div>
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
@@ -52,7 +61,12 @@ export default function Layout({ children }: { children: ReactNode }) {
         }}
         key="product-jsonld"
       />
-      {children}
+      <BigHeaderSection />
+      <div className="flex xs:flex-col-reverse sm:flex-col-reverse md:flex-col-reverse">
+        {children}
+        {view}
+      </div>
+      <Footer />
     </div>
   );
 }

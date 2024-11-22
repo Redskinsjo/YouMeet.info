@@ -1,10 +1,12 @@
 {
   "extends": "@youmeet/typescript-config/base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "outDir": "dist",
+    "rootDir": ".",
+    "noEmit": false
   },
-  "exclude": ["node_modules", "next.config.js"]
+  "exclude": ["node_modules", "next.config.js", ".turbo"]
 }

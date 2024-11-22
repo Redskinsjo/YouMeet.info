@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import {
   ApolloClient,
-  ApolloLink,
   ApolloProvider,
   InMemoryCache,
   createHttpLink,
@@ -24,6 +23,7 @@ const authLink = setContext((_, { headers }) => {
     originHost,
     `${process.env.JWT_SECRET}`
   ).toString();
+
   return {
     headers: {
       ...headers,

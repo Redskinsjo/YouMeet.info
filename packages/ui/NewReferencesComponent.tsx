@@ -41,7 +41,6 @@ export default function NewReferencesComponent({
                       label={<ReferenceLabel title={title} list={list} />}
                       value={<ReferenceValue list={list} />}
                       type="modal"
-                      fontSize="16px"
                       conversation={list.length === 0 ? false : true}
                     />
                   </SubPartContainer>

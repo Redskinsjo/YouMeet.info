@@ -12,18 +12,21 @@ export default function OneLineSkeleton({
 }) {
   const array = Array.from(new Array(count));
 
-  return array.map((line, i, arr) => (
-    <Skeleton
-      key={i}
-      className="fadeIn"
-      animation="wave"
-      variant="rounded"
-      width={arr.length > 1 && i === arr.length - 1 ? "45%" : width}
-      height={height}
-      style={{
-        margin: "0px 8px",
-        backgroundColor: blueGrey[50],
-      }}
-    />
-  ));
+  return (
+    <div className="flex flex-col gap-[6px] box-border">
+      {array.map((line, i, arr) => (
+        <Skeleton
+          key={i}
+          className="fadeIn"
+          animation="wave"
+          variant="rounded"
+          width={arr.length > 1 && i === arr.length - 1 ? "45%" : width}
+          height={height}
+          style={{
+            backgroundColor: blueGrey[50],
+          }}
+        />
+      ))}
+    </div>
+  );
 }

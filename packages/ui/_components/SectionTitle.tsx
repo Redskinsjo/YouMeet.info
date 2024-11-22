@@ -17,11 +17,13 @@ export default function SectionTitle({
   component,
   className = "",
   lang = false,
+  searching = "",
 }: {
   translation: string | Translated;
   component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   className?: string;
   lang?: boolean;
+  searching?: string;
 }) {
   const {
     t,
@@ -36,11 +38,14 @@ export default function SectionTitle({
       }${className}`,
       role: "heading",
     },
-    t(
-      lang
-        ? `${(translation as Translated)[language as "fr" | "en"]}`
-        : (translation as string)
-    )
+
+    lang
+      ? `${(translation as Translated)[language as "fr" | "en"]} ${
+          searching ? `${t("for")} "${searching}"` : ""
+        }`
+      : `${t(translation as string)} ${
+          searching ? `${t("for")} "${searching}"` : ""
+        }`
   );
 
   return Component;

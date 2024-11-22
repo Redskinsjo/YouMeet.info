@@ -1,10 +1,13 @@
-import { TextField } from "@mui/material";
+"use client";
+import { Button, TextField, TextFieldProps } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import { useId } from "react";
 import { IoIosSearch } from "react-icons/io";
+import { useTranslation } from "react-i18next";
+import { VscFilterFilled } from "react-icons/vsc";
 
-const GenericField = ({
+export default function GenericField({
   register,
   required,
   name,
@@ -12,8 +15,8 @@ const GenericField = ({
   label,
   errors,
   multiline = 0,
-  params = {},
-  value,
+  params,
+  value = "",
   basic,
   onChange,
   sx,
@@ -21,12 +24,13 @@ const GenericField = ({
   fetchData,
   border = `1px solid ${grey[500]}`,
   type,
-}: GenericFieldProps) => {
+}: GenericFieldProps) {
   const id = useId();
   let registerParams = {};
   let specificNameParams = {};
   let autoCompleteParams = {};
   let basicParams = {};
+  const { t } = useTranslation();
 
   if (basic) {
     basicParams = {
@@ -37,14 +41,23 @@ const GenericField = ({
           }
         : () => {},
     };
-  } else if (fetchData) {
-    delete params.key;
+  } else if (fetchData && params) {
     autoCompleteParams = {
-      ...params,
+      size: params.size,
+      id: params.id,
+      disabled: params.disabled,
+      fullWidth: params.fullWidth,
+      slotProps: {
+        input: { ...params.InputProps },
+        htmlInput: { ...params.inputProps },
+        inputLabel: { ...params.InputLabelProps },
+      },
+
       onChange: async (e: any) => {
+        console.log(e.target.value, "value");
         await fetchData(e.target.value);
       },
-    };
+    } as TextFieldProps;
   }
   if (register) {
     registerParams = { ...register(name) };
@@ -74,15 +87,23 @@ const GenericField = ({
         multiline={multiline && multiline !== 0 ? true : false}
         rows={multiline ? multiline : undefined}
         required={required}
-        label={label}
+        label={t(`${label || ""}`)}
         className="xs:fadeIn sm:fadeIn sm:col-span-2 subItem w-full dark:genericFieldDark dark:darkFieldset dark:darkInput dark:darkLabel"
-        autoComplete={"off"}
-        placeholder={placeholder}
+        placeholder={t(`${placeholder || ""}`)}
         type={type}
       />
-      {name === "search" && (
-        <div className="absolute h-full flex-center right-[12px] dark:text-white">
-          <IoIosSearch className="item" />
+      {(name === "search" || name === "location") && (
+        <div className="absolute flex-center right-[8px] h-full">
+          <Button
+            type="submit"
+            className="h-auto flex-center bg-deepPurple50 box-border"
+          >
+            {name === "search" ? (
+              <IoIosSearch className="sentences text-deepPurple900" />
+            ) : (
+              <VscFilterFilled className="sentences text-deepPurple900" />
+            )}
+          </Button>
         </div>
       )}
       {errors && errors[location] ? (
@@ -92,6 +113,4 @@ const GenericField = ({
       ) : undefined}
     </div>
   );
-};
-
-export default GenericField;
+}

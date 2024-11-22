@@ -105,6 +105,7 @@ const me = {
   "linkedinProfileId-field-placeholder":
     "What is the Linkedin profile of the company?",
   "location-field-placeholder": "What is the location of the company?",
+  "department-field-placeholder": "In which department ?",
   "resume-field-placeholder": "What is the description of the company?",
   "form-come-back": "Go back",
   "your-experiences": "Your experiences",
@@ -944,7 +945,7 @@ const favorites = {
 };
 
 const login = {
-  signin: "Signin",
+  signup: "Sign up",
   "google-signin": "Connect Google",
   "already-signed": "Already signed in?",
   "forgotten-password": "Forgotten password?",
@@ -1071,6 +1072,8 @@ const misc = {
   "apply-now": "Apply now",
   "already-applied": "Already applied",
   "choose-video": "Choose video",
+  "choose-another-video": "Choose another video",
+  "take-this-video": "Take this video",
   "start-with-video-cv": "Start with a video CV",
   "new-article": "New",
   "some-articles-could-interest": "Some articles that could interest you",
@@ -1092,9 +1095,16 @@ const competencies = {
 };
 
 const offres = {
+  "reset-navigation": "Reset navigation",
+  or: "or",
   "no-offer-for-the-moment":
     "We don't have any offers at the moment. Come back later.",
   "offers-announcement": "Find here all the opportunities available.",
+  "all-in-paris": "All offers in Paris",
+  "all-in-marseille": "All offers in Marseille",
+  "all-in-bordeaux": "All offers in Bordeaux",
+  "all-in-lyon": "All offers in Lyon",
+  department: "Department",
   "requirements-skills": "Required skills",
   "some-more-offers": "Here are some more offers",
   "take-opportunity-to-apply":

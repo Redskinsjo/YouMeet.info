@@ -25,7 +25,6 @@ export default function DetailComponent({
   newClasses,
   onClick,
   newStyles,
-  fontSize,
   noLabelColon,
   noPadding,
   name,
@@ -51,7 +50,6 @@ export default function DetailComponent({
   newClasses?: string;
   onClick?: () => void;
   newStyles?: Attr;
-  fontSize?: string;
   noLabelColon?: boolean;
   noPadding?: boolean;
   fullWidth?: boolean;
@@ -75,7 +73,11 @@ export default function DetailComponent({
   const md = useMediaQuery("(max-width:900px)");
   const searchParams = useSearchParams();
 
-  const LabelComponent = createElement(labelComponent, {}, label);
+  const LabelComponent = createElement(
+    labelComponent,
+    {},
+    typeof label === "string" ? t(label as string) : label
+  );
 
   return type === "modal" &&
     ((profil && name && !profil?.hiddenFields?.includes(name) && !account) ||
@@ -94,10 +96,9 @@ export default function DetailComponent({
       onClick={onClick}
     >
       <div
-        className="flex font-bold w-fit dark:text-white text-black"
+        className="text-[14px] xs:text-[12px] sm:text-[12px] flex font-bold w-fit dark:text-white text-black"
         style={{
           textAlign: "start",
-          fontSize: fontSize || "14px",
           whiteSpace:
             labelNoWrap || (!xs && !sm && !md) || !searchParams.get("new")
               ? "nowrap"
@@ -138,15 +139,10 @@ export default function DetailComponent({
         }}
       >
         <div
-          className="rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
+          className="text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            fontSize: fontSize || "15px",
-            width: fullWidth
-              ? "100%"
-              : conversation
-              ? "fit-content"
-              : "max-content",
+            width: fullWidth ? "100%" : conversation ? "fit-content" : "auto",
 
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
@@ -160,7 +156,7 @@ export default function DetailComponent({
               color: valueColor ?? "inherit",
             }}
           >
-            {value}
+            {typeof value === "string" ? t(value) : value}
           </div>
         </div>
         {account &&
@@ -247,10 +243,9 @@ export default function DetailComponent({
       onClick={onClick}
     >
       <div
-        className="flex font-bold w-fit dark:text-white text-black"
+        className="text-[14px] xs:text-[12px] sm:text-[12px] flex font-bold w-fit dark:text-white text-black"
         style={{
           textAlign: "start",
-          fontSize: fontSize || "14px",
           whiteSpace:
             labelNoWrap || (!xs && !sm && !md) || !searchParams.get("new")
               ? "nowrap"
@@ -283,15 +278,10 @@ export default function DetailComponent({
         }}
       >
         <div
-          className="rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
+          className="text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            fontSize: fontSize || "15px",
-            width: fullWidth
-              ? "100%"
-              : conversation
-              ? "fit-content"
-              : "max-content",
+            width: fullWidth ? "100%" : conversation ? "fit-content" : "auto",
             justifyContent: conversation ? "center" : "end",
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
@@ -305,7 +295,7 @@ export default function DetailComponent({
               color: valueColor ?? "inherit",
             }}
           >
-            {value}
+            {typeof value === "string" ? t(value) : value}
           </div>
         </div>
         {account &&
@@ -420,8 +410,10 @@ export default function DetailComponent({
                 color: valueColor ?? "inherit",
               }}
             >
-              {value}
+              {typeof value === "string" ? t(value) : value}
             </div>
+          ) : typeof value === "string" ? (
+            t(value)
           ) : (
             value
           )}

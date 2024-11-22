@@ -17,7 +17,7 @@ import {
 import { onDeleteVideo, onSetVideoAsDefault } from "@youmeet/functions/actions";
 import { RootState } from "@youmeet/global-config/store";
 import { IoIosCamera } from "react-icons/io";
-import { removeVideo } from "@youmeet/global-config/features/user";
+import { removeVideo, UserState } from "@youmeet/global-config/features/user";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import CandidateVideo from "../../CandidateVideo";
@@ -53,6 +53,7 @@ export default function VideoComponent({
   const dispatch = useDispatch();
   const deleteVideoFormRef = useRef<HTMLFormElement>(null);
   const setVideoAsDefaultFormRef = useRef<HTMLFormElement>(null);
+  const user = useSelector((state: RootState) => state.user as UserState);
 
   const videoComponent = useMemo(() => {
     return (
@@ -64,7 +65,6 @@ export default function VideoComponent({
             maxWidth: "100vw",
             width: "100%",
             height: "100%",
-            minWidth: "300px",
           }}
           containerNewStyles={{
             maxWidth: videoWidth,
@@ -139,13 +139,10 @@ export default function VideoComponent({
               {t("chosen")}
             </div>
           )}
-          <div
-            className={
-              video
-                ? "flex xs:flex-col sm:flex-col md:flex-col md2:flex-col lg:flex-col lg2:flex-col relative gap-[12px] w-full"
-                : "flex xs:flex-col sm:flex-col md:flex-col md2:flex-col lg:flex-col lg2:flex-col flex-col gap-[12px] w-full"
-            }
-          >
+          <div className="flex-col gap-[12px] w-full">
+            {video?.file?.url && video.file.secure_url && !xs && !sm && !md
+              ? videoComponent
+              : undefined}
             <div
               className={
                 videos && videos.length === 0
@@ -183,83 +180,70 @@ export default function VideoComponent({
                         align="left"
                       />
                     )}
-
-                    <DetailComponent
-                      type="modal"
-                      noPadding
-                      label={t("createdAt")}
-                      conversation={modal}
-                      value={formatToDatetime(
-                        video?.createdAt,
-                        false,
-                        false,
-                        false,
-                        language
-                      )}
-                      name="createAt"
-                    />
                   </div>
                 )}
-                {video?.file?.url && video.file.secure_url && (
-                  <div className="flex flex-col gap-[12px] w-full py-[6px]">
-                    {!video.principal && !affiliated ? (
-                      <form
-                        ref={setVideoAsDefaultFormRef}
-                        action={customOnSetVideoAsDefault.bind(null, {
-                          videoId: video?.id as string,
-                          userId: profil.id as string,
-                        })}
-                      >
-                        <div
-                          onClick={(e) =>
-                            setVideoAsDefaultFormRef.current?.requestSubmit()
-                          }
-                          className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold"
-                        >
-                          {t("set-as-principal")}
-                        </div>
-                      </form>
-                    ) : (
-                      <div className="h-full cursor-pointer dark:text-green200 text-green600 font-bold">
-                        {t("principalVideo")}
-                      </div>
-                    )}
-                    {!affiliated && (
-                      <div className="flex-bet gap-[12px]">
+                {video?.file?.url &&
+                  video.file.secure_url &&
+                  user.id === profil.id && (
+                    <div className="flex flex-col gap-[12px] w-full py-[6px]">
+                      {!video.principal && !affiliated ? (
                         <form
-                          ref={deleteVideoFormRef}
-                          action={customOnDeleteVideo.bind(
-                            null,
-                            video?.id as string
-                          )}
+                          ref={setVideoAsDefaultFormRef}
+                          action={customOnSetVideoAsDefault.bind(null, {
+                            videoId: video?.id as string,
+                            userId: profil.id as string,
+                          })}
                         >
                           <div
                             onClick={(e) =>
-                              deleteVideoFormRef.current?.requestSubmit()
+                              setVideoAsDefaultFormRef.current?.requestSubmit()
                             }
                             className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold"
                           >
-                            {t("delete")}
+                            {t("set-as-principal")}
                           </div>
                         </form>
-                      </div>
-                    )}
+                      ) : (
+                        <div className="h-full dark:text-green200 text-green600 font-bold">
+                          {t("principalVideo")}
+                        </div>
+                      )}
+                      {!affiliated && (
+                        <div className="flex-bet gap-[12px]">
+                          <form
+                            ref={deleteVideoFormRef}
+                            action={customOnDeleteVideo.bind(
+                              null,
+                              video?.id as string
+                            )}
+                          >
+                            <div
+                              onClick={(e) =>
+                                deleteVideoFormRef.current?.requestSubmit()
+                              }
+                              className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold"
+                            >
+                              {t("delete")}
+                            </div>
+                          </form>
+                        </div>
+                      )}
 
-                    {!!modal && (
-                      <Button
-                        className="whitespace-nowrap"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (setChosenVideo) setChosenVideo(video);
-                          if (setCheckAvailableVideos)
-                            setCheckAvailableVideos(false);
-                        }}
-                      >
-                        {t("choose-video")}
-                      </Button>
-                    )}
-                  </div>
-                )}
+                      {!!modal && (
+                        <Button
+                          className="whitespace-nowrap"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (setChosenVideo) setChosenVideo(video);
+                            if (setCheckAvailableVideos)
+                              setCheckAvailableVideos(false);
+                          }}
+                        >
+                          {t("take-this-video")}
+                        </Button>
+                      )}
+                    </div>
+                  )}
               </div>
             </div>
 
@@ -284,9 +268,6 @@ export default function VideoComponent({
                 </span>
               </div>
             ) : undefined}
-            {video?.file?.url && video.file.secure_url && !xs && !sm && !md
-              ? videoComponent
-              : undefined}
           </div>
         </div>
       </SubPartContainer>

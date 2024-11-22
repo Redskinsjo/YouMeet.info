@@ -743,7 +743,6 @@ export default function CandidateVideo({
 
                       {usersWithVideos[currentPosition].fullname ? (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
                           type="modal2"
@@ -758,7 +757,6 @@ export default function CandidateVideo({
                         usersWithVideos[currentPosition].lastname ? (
                         <div className="flex flex-col gap-[12px]">
                           <DetailComponent
-                            fontSize={xs || sm || md ? "14px" : "inherit"}
                             conversation={xs || sm || md ? false : true}
                             newStyles={{ color: "white" }}
                             noPadding={!xs && !sm && !md}
@@ -772,7 +770,6 @@ export default function CandidateVideo({
                           />
 
                           <DetailComponent
-                            fontSize={xs || sm || md ? "14px" : "inherit"}
                             conversation={xs || sm || md ? false : true}
                             newStyles={{ color: "white" }}
                             noPadding={!xs && !sm && !md}
@@ -788,7 +785,6 @@ export default function CandidateVideo({
                       ) : undefined}
                       {usersWithVideos[currentPosition].linkedinProfileId && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
@@ -812,7 +808,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition]?.languages as string[])
                         ?.length > 0 && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
@@ -829,7 +824,6 @@ export default function CandidateVideo({
                         usersWithVideos[currentPosition].details?.phone
                           ?.number && (
                           <DetailComponent
-                            fontSize={xs || sm || md ? "14px" : "inherit"}
                             conversation={xs || sm || md ? false : true}
                             newStyles={{ color: "white" }}
                             noPadding={!xs && !sm && !md}
@@ -847,7 +841,6 @@ export default function CandidateVideo({
                         )}
                       {usersWithVideos[currentPosition]?.age && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
@@ -895,7 +888,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition] as BetaCompany)
                         .name && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding
@@ -911,7 +903,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition] as BetaCompany)
                         .location && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding
@@ -928,7 +919,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition] as BetaCompany)
                         .linkedinProfilePage && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding

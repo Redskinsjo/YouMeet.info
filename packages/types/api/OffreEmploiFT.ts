@@ -79,22 +79,7 @@ export type OffreEmploiFT = {
   dateActualisation: string;
 
   /** Lieu de travail*/
-  lieuTravail: any;
-
-  /** Libellé du lieu de travail */
-  libelle: string;
-
-  /** Latitude du lieu de travail */
-  latitude: number;
-
-  /** Longitude de lieu de travail */
-  longitude: number;
-
-  /** Code postal du lieu de travail */
-  codePostal: string;
-
-  /** Code Insee du lieu de travail */
-  commune: string;
+  lieuTravail: WorkLocationFT;
 
   /** Code ROME de l’offre */
   romeCode: string;
@@ -106,22 +91,7 @@ export type OffreEmploiFT = {
   appellationlibelle: string;
 
   /** Entreprise */
-  entreprise: {
-    /** Nom de l’entreprise */
-    nom: string;
-
-    /** Description de l’entreprise */
-    description: string;
-
-    /** URL du logo de l’entreprise */
-    logo: string;
-
-    /** URL du site de l’entreprise */
-    url: string;
-
-    /** Flag entreprise adaptee */
-    entrepriseAdaptee: boolean;
-  };
+  entreprise: EnterpriseFT;
 
   /** Code du type de contrat proposé (CDD, CDI, etc.) */
   typeContrat: string;
@@ -142,69 +112,21 @@ export type OffreEmploiFT = {
   experienceCommentaire: string;
 
   /** Formations */
-  formations: {
-    /** Code du domaine de formation souhaité */
-    codeFormation: string;
-
-    /** Domaine de formation souhaité */
-    domaineLibelle: string;
-
-    /** Niveau de formation souhaité */
-    niveauLibelle: string;
-
-    /** Commentaire sur la formation */
-    commentaire: string;
-
-    /** E : la formation est exigée, S : la formation est souhaitée */
-    exigence: string;
-  }[];
+  formations: FormationFT[];
 
   /** Langues */
-  langues: {
-    /** Langue souhaitée */
-    libelle: string;
-
-    /** E : la langue est exigée, S : la langue est souhaitée */
-    exigence: string;
-  }[];
+  langues: Required[];
 
   /** Permis */
-  permis: {
-    /** Permis demandé */
-    libelle: string;
-
-    /** E : le permis est exigée, S : la permis est souhaitée */
-    exigence: string;
-  }[];
+  permis: Required[];
 
   /** Liste des outils bureautiques utilisés */
   outilsBureautiques: string[];
 
   /** Compétences */
-  competences: {
-    /** Code de la compétence */
-    code: string;
-
-    /** Libellé de la compétence */
-    libelle: string;
-
-    /** E : la compétence est exigée, S : la compétence est souhaitée */
-    exigence: string;
-  }[];
+  competences: Entity[];
   /** Salaire */
-  salaire: {
-    /** Libellé du salaire (ex : 31k€ annuel sur 12 mois) */
-    libelle: string;
-
-    /** Commentaire sur le salaire */
-    commentaire: string;
-
-    /** Complément 1 de rémunération (prime, véhicule…) */
-    complement1: string;
-
-    /** Complément 2 de rémunération (prime, véhicule…) */
-    complement2: string;
-  };
+  salaire: SalaryFT;
 
   /**Libellé de la durée de travail*/
   dureeTravailLibelle: string;
@@ -222,43 +144,11 @@ export type OffreEmploiFT = {
   alternance: boolean;
 
   /** Contact */
-  contact: {
-    /** Nom du recruteur */
-    nom: string;
-
-    /** Adresse du recruteur */
-    coordonnees1: string;
-
-    /** Adresse du recruteur */
-    coordonnees2: string;
-
-    /** Adresse du recruteur */
-    coordonnees3: string;
-
-    /** N° de téléphone du recruteur */
-    telephone: string;
-
-    /** Courriel du recruteur */
-    courriel: string;
-
-    /** Précision sur le contact de l’offre */
-    commentaire: string;
-
-    /** URL du recruteur */
-    urlRecruteur: string;
-
-    /** URL du formulaire de postulation */
-    urlPostulation: string;
-  };
+  contact: ContactFT;
 
   /** Agence Pôle Emploi */
-  agence: {
-    /** N° de téléphone de l’agence Pôle Emploi*/
-    telephone: string;
+  agence: AgencyFT;
 
-    /** Courriel de l’agence de Pôle Emploi */
-    courriel: string;
-  };
   /** Nombre de postes disponibles pour cette offre */
   nombrePostes: number;
 
@@ -286,44 +176,22 @@ export type OffreEmploiFT = {
   secteurActiviteLibelle: string;
 
   /** Qualités professionnelles */
-  qualitesProfessionnelles: {
-    /** Libellé de la qualité professionnelle demandée */
-    libelle: string;
-
-    /** Description de la qualité professionnelle demandée */
-    description: string;
-  }[];
+  qualitesProfessionnelles: ProfessionalQualityFT[];
 
   /** Libellé de la tranche d'effectif de l'etablissement */
   trancheEffectifEtab: string;
 
   /** Origine de l'offre */
-  origineOffre: {
-    /** Origine de l’offre */
-    origine: string;
+  origineOffre: OriginOfferFT;
 
-    /** URL de l’offre sur les sites des partenaires */
-    urlOrigine: string;
-
-    partenaires: {
-      /** Nom du partenaire */
-      nom: string;
-
-      /** URL de l’offre sur les sites des partenaires */
-      url: string;
-
-      /** URL du logo sur les sites des partenaires */
-      logo: string;
-    }[];
-  };
   /** Flag des offres difficiles à pourvoir */
   offresManqueCandidats: boolean;
 };
 
 export type JobsManyFTParams = {
   /** Sélecteur de champs : il est possible de paramétrer le retour de la requête en définissant les champs souhaités (liste exhaustive des champs possibles : Allowed values).
-  Vous pouvez vous aider des exemples de réponse pour identifier les champs que vous voulez récupérer.
-  
+  * Vous pouvez vous aider des exemples de réponse pour identifier les champs que vous voulez récupérer.
+  *
   Allowed values:
   accesemploi
   appellations(emploireglemente,transitionecologiquedetaillee,libelle,code,emploicadre,transitionecologique,transitionnumerique,transitiondemographique,classification,libellecourt)
@@ -346,7 +214,7 @@ export type JobsManyFTParams = {
   formacodes(libelle,code),libelle,code */
   champs: string;
 
-  /** Code compétence. */
+  /* Code compétence. */
   "code-competence": string;
 
   /** Code de la division NAF. */
@@ -384,6 +252,7 @@ riasecmineur,riasecmajeur,libelle,code */
   /** Le(s) mot(s) et/ou début de mot(s) recherché(s). required*/
   q: string;
 };
+
 export type JobFT = {
   /** Liste des secteurs d'activites liés. */
   secteursActivites: {}[];
@@ -414,7 +283,7 @@ export type JobFT = {
   transitionNumerique: boolean;
 };
 
-type CompetenceDetaillee = {
+export type CompetenceDetaillee = {
   /** Code unique de la compétence.
 
 Example:
@@ -462,7 +331,7 @@ C
   riasecMineur: string;
 };
 
-type Theme = {
+export type Theme = {
   /** Code unique du thème.
 
 Example:
@@ -492,7 +361,7 @@ Métiers auprès des enfants */
   obsolete: boolean;
 };
 
-type Metier = {
+export type Metier = {
   /** Acces emploi.
 
 Example:
@@ -630,4 +499,150 @@ EMPLOI_BRUN */
 
   /** Transition numérique: oui/non. Ce champ est optionnel. */
   transitionNumerique: boolean;
+};
+
+export type WorkLocationFT = {
+  /** Libellé du lieu de travail */
+  libelle: string;
+
+  /** Latitude du lieu de travail */
+  latitude: number;
+
+  /** Longitude de lieu de travail */
+  longitude: number;
+
+  /** Code postal du lieu de travail */
+  codePostal: string;
+
+  /** Code Insee du lieu de travail */
+  commune: string;
+};
+
+export type EnterpriseFT = {
+  /** Nom de l’entreprise */
+  nom: string;
+
+  /** Description de l’entreprise */
+  description: string;
+
+  /** URL du logo de l’entreprise */
+  logo: string;
+
+  /** URL du site de l’entreprise */
+  url: string;
+
+  /** Flag entreprise adaptee */
+  entrepriseAdaptee: boolean;
+};
+
+export type FormationFT = {
+  /** Code du domaine de formation souhaité */
+  codeFormation: string;
+
+  /** Domaine de formation souhaité */
+  domaineLibelle: string;
+
+  /** Niveau de formation souhaité */
+  niveauLibelle: string;
+
+  /** Commentaire sur la formation */
+  commentaire: string;
+
+  /** E : la formation est exigée, S : la formation est souhaitée */
+  exigence: string;
+};
+
+export type Required = {
+  /** Ce qui est requis(e) */
+  libelle: string;
+
+  /** E : est exigé(e), S : est souhaité(e) */
+  exigence: string;
+};
+
+export type Codified = {
+  /** Code */
+  code: string;
+};
+
+export type Entity = Required & Codified;
+
+export type SalaryFT = {
+  /** Libellé du salaire (ex : 31k€ annuel sur 12 mois) */
+  libelle: string;
+
+  /** Commentaire sur le salaire */
+  commentaire: string;
+
+  /** Complément 1 de rémunération (prime, véhicule…) */
+  complement1: string;
+
+  /** Complément 2 de rémunération (prime, véhicule…) */
+  complement2: string;
+};
+
+export type ContactFT = {
+  /** Nom du recruteur */
+  nom: string;
+
+  /** Adresse du recruteur */
+  coordonnees1: string;
+
+  /** Adresse du recruteur */
+  coordonnees2: string;
+
+  /** Adresse du recruteur */
+  coordonnees3: string;
+
+  /** N° de téléphone du recruteur */
+  telephone: string;
+
+  /** Courriel du recruteur */
+  courriel: string;
+
+  /** Précision sur le contact de l’offre */
+  commentaire: string;
+
+  /** URL du recruteur */
+  urlRecruteur: string;
+
+  /** URL du formulaire de postulation */
+  urlPostulation: string;
+};
+
+export type AgencyFT = {
+  /** N° de téléphone de l’agence Pôle Emploi*/
+  telephone: string;
+
+  /** Courriel de l’agence de Pôle Emploi */
+  courriel: string;
+};
+
+export type ProfessionalQualityFT = {
+  /** Libellé de la qualité professionnelle demandée */
+  libelle: string;
+
+  /** Description de la qualité professionnelle demandée */
+  description: string;
+};
+
+export type OriginOfferFT = {
+  /** Origine de l’offre */
+  origine: string;
+
+  /** URL de l’offre sur les sites des partenaires */
+  urlOrigine: string;
+
+  partenaires: PartenairFT[];
+};
+
+export type PartenairFT = {
+  /** Nom du partenaire */
+  nom: string;
+
+  /** URL de l’offre sur les sites des partenaires */
+  url: string;
+
+  /** URL du logo sur les sites des partenaires */
+  logo: string;
 };

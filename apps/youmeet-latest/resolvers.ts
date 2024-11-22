@@ -140,6 +140,8 @@ import {
   QueryAffiliationArgs,
   QueryVideoByPublicIdArgs,
   FormResponse,
+  WorkLocationFtInput,
+  QuerySharingsArgs,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
@@ -586,29 +588,18 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-      if (
-        args.data?.offerTargetId &&
-        args.data.originId &&
-        args.data.targetId
-      ) {
-        const where = {} as {
-          id?: string;
-          originId?: string;
-          targetId?: string;
-          offerTargetId?: string;
-        };
-        if (args.data?.id) where.id = args.data?.id;
-        if (args.data?.originId) where.originId = args.data?.originId;
-        if (args.data?.targetId) where.targetId = args.data?.targetId;
-        if (args.data?.offerTargetId)
-          where.offerTargetId = args.data?.offerTargetId;
-        const sharing = await prisma.profileSharings.findFirst({
-          where,
-          include: { target: true, origin: true, offerTarget: true },
-        });
-        return sharing;
-      }
-      return null;
+
+      const where = {} as Prisma.profileSharingsWhereInput;
+      const d = args.data;
+      if (d?.id) where.id = d?.id;
+      if (d?.originId) where.originId = d?.originId;
+      if (d?.targetId) where.targetId = d?.targetId;
+      if (d?.offerTargetId) where.offerTargetId = d?.offerTargetId;
+      const sharing = await prisma.profileSharings.findFirst({
+        where,
+        include: { target: true, origin: true, offerTarget: true, video: true },
+      });
+      return sharing;
     },
     myCompanyProfileSharings: async (
       _: unknown,
@@ -861,78 +852,113 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      const where = {} as Prisma.offersWhereInput;
+      let where = {} as Prisma.offersWhereInput;
 
-      if (args.data?.jobs && args.data.jobs.length > 0)
-        where.jobId = { in: args.data.jobs as string[] };
-      if (args.data?.sectors && args.data.sectors.length > 0)
-        where.sectorId = { in: args.data.sectors as string[] };
+      const data = args.data;
+      const prms = args.params;
 
-      if (args.params?.search || (args.data?.language && args.data.title)) {
+      if (data?.lieuTravail) {
+        const l = data.lieuTravail;
+        const f = (value: any, type: "contains" | "startsWith" = "contains") =>
+          ({
+            [type]: value,
+            mode: "insensitive",
+          } as any);
+        let is = {} as Prisma.WorkLocationFTWhereInput;
+
+        const getOr = (l: WorkLocationFtInput, codePostal: string) => {
+          let is = {} as Prisma.WorkLocationFTWhereInput;
+          if (l.codePostal) is.codePostal = f(codePostal, "startsWith");
+          if (l.commune) is.commune = f(l.commune);
+          if (l.libelle) is.libelle = f(l.libelle);
+          return is;
+        };
+        if (l.codePostal) {
+          const ors = [] as Prisma.WorkLocationFTWhereInput[];
+          for (let i = 0; i < l.codePostal.length; i++) {
+            const codePostal = l.codePostal[i];
+            ors.push(getOr(l, codePostal || ""));
+          }
+          where.lieuTravail = { is: { OR: ors } };
+        }
+      }
+
+      if (data?.jobs && data.jobs.length > 0)
+        where.jobId = { in: data.jobs as string[] };
+      if (data?.sectors && data.sectors.length > 0)
+        where.sectorId = { in: data.sectors as string[] };
+
+      if (prms?.search || (data?.language && data.title)) {
         where.OR = [];
       }
 
-      if (args.params?.search && where.OR) {
-        where.OR.push({
-          company: {
-            name: { mode: "insensitive", startsWith: args.params.search },
-          },
-        });
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                fr: { mode: "insensitive", startsWith: args.params.search },
-              },
-            },
-          },
-        });
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                en: { mode: "insensitive", startsWith: args.params.search },
-              },
-            },
-          },
-        });
-      }
-      if (args.data?.language && args.data.title && where.OR) {
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                [args.data.language]: {
-                  mode: "insensitive",
-                  equals: args.data.title,
-                },
-              },
-            },
-          },
+      const search = prms?.search;
+      // if (search && where.OR) {
+      //   const s = search.split(" ");
+
+      //   for (let i = 0; i < s.length; i++) {
+      //     where.OR.push({
+      //       job: {
+      //         title: {
+      //           is: {
+      //             fr: { mode: "insensitive", contains: s[i] },
+      //           },
+      //         },
+      //       },
+      //     });
+      //     where.OR.push({
+      //       job: {
+      //         title: {
+      //           is: {
+      //             en: { mode: "insensitive", contains: s[i] },
+      //           },
+      //         },
+      //       },
+      //     });
+
+      //     where.OR.push({
+      //       intitule: { contains: s[i], mode: "insensitive" },
+      //     });
+      //   }
+      // }
+      if (search) {
+        where.OR?.push({ intitule: { contains: search, mode: "insensitive" } });
+        where.OR?.push({
+          romeLibelle: { contains: search, mode: "insensitive" },
         });
       }
 
-      if (args.data?.targetSectorId) {
-        where.sectorId = { in: [args.data.targetSectorId] };
+      if (data?.targetSectorId) {
+        where.sectorId = { in: [data.targetSectorId] };
       }
       let take = {} as { take?: number };
-      if (args.params?.take) take = { take: args.params.take };
+      if (prms?.take) take = { take: prms.take };
       let skip = {} as { skip?: number };
-      if (args.params?.skip) skip = { skip: args.params.skip };
+      if (prms?.skip) skip = { skip: prms.skip };
 
-      const finalWhere = {} as Prisma.offersFindManyArgs;
+      const finalWhere = { where: {} };
       if (Object.keys(where).length > 0) finalWhere.where = where;
 
       return await prisma.offers.findMany({
         ...finalWhere,
         ...skip,
         ...take,
-        include: {
-          requirements: true,
+        select: {
           job: true,
-          sector: true,
-          author: true,
           company: true,
+          permis: true,
+          experienceLibelle: true,
+          nombrePostes: true,
+          dureeTravailLibelleConverti: true,
+          outilsBureautiques: true,
+          location: true,
+          entreprise: true,
+          typeContratLibelle: true,
+          qualificationLibelle: true,
+          contractType: true,
+          intitule: true,
+          id: true,
+          slug: true,
         },
       });
     },
@@ -1529,6 +1555,28 @@ const resolvers: Resolvers = {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
       return await prisma.affiliations.findMany({ include: { parent: true } });
+    },
+    sharings: async (
+      _: unknown,
+      args: QuerySharingsArgs,
+      context: ContextRequest
+    ) => {
+      const noCors = await noCorsMiddleware(context);
+      if (!noCors) return [];
+      const data = args.data;
+      const where = {} as Prisma.profileSharingsWhereInput;
+      if (data?.offerId) where.offerTarget = { id: data.offerId };
+      if (data?.originId) where.origin = { id: data.originId };
+      if (data?.targetId) where.target = { id: data.targetId };
+      if (data?.videoId) where.video = { id: data.videoId };
+
+      let finalWhere = {} as Prisma.profileSharingsWhereInput;
+      if (Object.keys(where).length > 0) finalWhere = where;
+      const sharings = await prisma.profileSharings.findMany({
+        where: { ...finalWhere },
+        include: { video: true, offerTarget: true, origin: true, target: true },
+      });
+      return sharings;
     },
     experiences: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);
@@ -4034,6 +4082,14 @@ const resolvers: Resolvers = {
         : sharing.offerTargetId
         ? await prisma.offers.findUnique({
             where: { id: sharing.offerTargetId as string },
+          })
+        : null,
+    video: async (sharing: ProfileSharing) =>
+      sharing.video
+        ? sharing.video
+        : sharing.videoId
+        ? await prisma.videos.findUnique({
+            where: { id: sharing.videoId as string },
           })
         : null,
   },

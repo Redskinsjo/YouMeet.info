@@ -123,6 +123,7 @@ const form = {
   "linkedinProfileId-field-placeholder":
     "Quel est le profil Linkedin de l'entreprise?",
   "location-field-placeholder": "Quelle est la localisation de l'entreprise?",
+  "department-field-placeholder": "Dans quel département ?",
   "resume-field-placeholder": "Quelle est la description de l'entreprise?",
   "form-come-back": "Revenir en arrière",
   "your-experiences": "Vos expériences",
@@ -581,6 +582,7 @@ const candidates = {
     "+Impossible= de démarrer une conversation si une est +déjà en cours=.+",
   "conversations-inprogress": "Conversations en cours",
   for: "pour",
+  "reset-navigation": "Réinitialiser la navigation",
   "validation-activate-conversation":
     "+Valider= les thèmes +va activer la conversation= avec le candidat.+",
   "cancel-theme": "Annuler le thème",
@@ -716,6 +718,7 @@ const compte = {
   "would-like-your-remarks":
     "Nous aimerions récupérer votre opinion sur l'application.",
   "what-remarks": "Quelles sont vos remarques ?",
+  department: "Département",
   remarks: "Remarques",
   "leave-us-your-remarks": "Laissez-nous une remarque",
   "presentation-video": "Vidéo de présentation",
@@ -965,6 +968,7 @@ const prisesDeRef = {
   rapid: "Rapide",
   classic: "Classique",
   launch: "Lancer",
+  or: "ou",
   "write-or-choose": "Écrivez ou choisissez dans la liste",
   sector: "Secteur",
   "Hôtellerie Restauration": "Hôtellerie Restauration",
@@ -978,7 +982,7 @@ const favorites = {
 };
 
 const login = {
-  signin: "S'inscrire",
+  signup: "S'inscrire",
   "google-signin": "Connexion Google",
   "already-signed": "Déjà inscrit?",
   "forgotten-password": "Mot de passe oublié?",
@@ -1107,6 +1111,8 @@ const misc = {
   "apply-now": "Postuler maintenant",
   "already-applied": "Déjà postulé",
   "choose-video": "Choisir vidéo",
+  "choose-another-video": "Choisir une autre vidéo",
+  "take-this-video": "Prendre cette vidéo",
   "start-with-video-cv": "Commencer avec un CV vidéo",
   "new-article": "Récent",
   "some-articles-could-interest":
@@ -1133,6 +1139,10 @@ const offres = {
     "Nous n'avons pas d'offres pour le moment. Revenez plus tard.",
   "offers-announcement": "Retrouvez ici toutes les opportunités disponibles.",
   "requirements-skills": "Compétences requises",
+  "all-in-paris": "Toutes les offres à Paris",
+  "all-in-marseille": "Toutes les offres à Marseille",
+  "all-in-bordeaux": "Toutes les offres à Bordeaux",
+  "all-in-lyon": "Toutes les offres à Lyon",
   "some-more-offers": "Voici d'autres offres similaires",
   "take-opportunity-to-apply":
     "Si vous prenez +l'opportunité de postuler= à d'autres offres, vous aurez plus de chances de trouver un travail.+",

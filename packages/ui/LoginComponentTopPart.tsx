@@ -1,24 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Button, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { usePathname, useSearchParams } from "next/navigation";
-import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 import AdmitCGU from "./AdmitCGU";
-import FranceTravailConnect from "./backoffice/backofficeComponents/FranceTravailConnect";
 import dynamic from "next/dynamic";
+import { GlobalState } from "@youmeet/global-config/features/global";
+import { RootState } from "@youmeet/global-config/store";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "next/navigation";
 const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 export default function LoginComponentTopPart() {
   const ftConnectRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
+  const redirect = useSelector(
+    (state: RootState) => (state.global as GlobalState).redirect
+  );
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const searchRedirect = encodeURIComponent(searchParams.get("redirect") || "");
-  const redirect = searchRedirect
-    ? searchRedirect
-    : pathname === "/" || pathname === "/se-connecter"
-    ? "dashboard"
-    : pathname;
 
   useEffect(() => {
     if (ftConnectRef) {
@@ -40,7 +37,7 @@ export default function LoginComponentTopPart() {
           <form
             name="google-signin"
             method="POST"
-            action={`/api/auth/google/oauth?${renderUrlQuery({
+            action={`/api/auth/google/oauth?${new URLSearchParams({
               redirect,
               choice: searchParams.get("choice") as string,
               email: searchParams.get("email") as string,

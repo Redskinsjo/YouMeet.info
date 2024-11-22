@@ -12,8 +12,9 @@ export default async function Layout({
   params: Promise<{ offre: string }>;
 }) {
   const prms = await params;
+  const decoded = decodeURIComponent(prms.offre);
   const offre = (await getOffer<Offer>({
-    slug: decodeURIComponent(prms.offre),
+    slug: decoded,
   })) as Offer;
   return (
     <div>

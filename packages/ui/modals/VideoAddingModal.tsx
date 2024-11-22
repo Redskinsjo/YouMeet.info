@@ -90,15 +90,26 @@ export default function VideoAddingModal({
     chosenVideo?.id;
 
   return !loading ? (
-    <ModalWrapper>
-      <>
-        <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px]">
+    <ModalWrapper
+      newStyles={{
+        maxHeight: "92vh",
+        height: "unset",
+      }}
+    >
+      <div
+        style={{
+          overflowY: "scroll",
+          height: checkAvailableVideos ? "88vh" : "inherit",
+        }}
+      >
+        <div className="w-full h-full flex flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] py-[24px]">
           <h3 className="text-purple900 sentences xs:my-0 sm:my-0 md:my-0">
             {modals && modals[type] && modals[type].title && (
               <BoldText
                 text={`${t(
                   (title as string) ?? (modals[type].title as trads)[language]
                 )}`}
+                align="center"
               />
             )}
           </h3>
@@ -112,6 +123,7 @@ export default function VideoAddingModal({
                       (content as string) ??
                         (modals[type].content as trads)[language]
                     )}`}
+                    align="center"
                   />
                 )}
               </>
@@ -120,23 +132,28 @@ export default function VideoAddingModal({
                 <BoldText
                   text={`${t("profile-seems-ready")}`}
                   containerStyle={{ margin: "0px" }}
+                  align="center"
                 />
                 <FaCheckCircle style={{ color: green[600] }} />
               </div>
             )}
           </div>
-          <div className="w-full flex flex-col gap-[24px]">
-            <AddVideo
-              profil={user}
-              setCheckAvailableVideos={setCheckAvailableVideos}
-              checkAvailableVideos={checkAvailableVideos}
-              chosenVideo={chosenVideo}
-              offerJobId={offerJobId}
-              setChosenVideo={setChosenVideo}
-            />
-
+          <div className="w-full flex flex-col gap-[24px] h-full">
+            <div className="w-full flex flex-col justify-between items-start gap-[12px] xs:gap-0 sm:gap-0">
+              <span className="text-black dark:text-white font-bold">
+                {t("video")}
+              </span>
+              <AddVideo
+                profil={user}
+                setCheckAvailableVideos={setCheckAvailableVideos}
+                checkAvailableVideos={checkAvailableVideos}
+                chosenVideo={chosenVideo}
+                offerJobId={offerJobId}
+                setChosenVideo={setChosenVideo}
+              />
+            </div>
             {!checkAvailableVideos && !user.cvFile ? (
-              <div className="w-full flex-center">
+              <div className="w-full flex flex-col justify-between items-start gap-[12px] xs:gap-0 sm:gap-0">
                 <span className="text-black dark:text-white font-bold">
                   {t("cv")}
                 </span>
@@ -175,60 +192,61 @@ export default function VideoAddingModal({
                 />
               </div>
             ) : undefined}
-          </div>
-          {!checkAvailableVideos ? (
-            <form
-              className="w-full flex flex-col gap-[24px]"
-              action={customOnApplying.bind(null, {
-                originId: user.id,
-                targetId: offer?.company?.id ?? "",
-                videoId:
-                  (chosenVideo?.id as string) ||
-                  (getPrincipalVideo(user.videos)?.id as string),
-                offerTargetId: offer?.id as string,
-              })}
-            >
-              <div>
-                <BoldText
-                  text={`${t("video-mandatory-from-cgu")}`}
-                  containerStyle={{ margin: 0 }}
-                  fontSizeClass="leading-[1.5]"
-                />
-                <Link
-                  href={`/conditions-generales-utilisation`}
-                  className="text-deepPurple900 dark:text-deepPurple200"
-                >
-                  <span>{t("cgu-initials")}</span>
-                </Link>
-              </div>
-              <Button
-                disabled={!readyToApply}
-                className="subItem fadeIn"
-                type="submit"
+            {!checkAvailableVideos ? (
+              <form
+                className="w-full flex flex-col gap-[24px] pb-[36px]"
+                action={customOnApplying.bind(null, {
+                  originId: user.id,
+                  targetId: offer?.company?.id ?? "",
+                  videoId:
+                    (chosenVideo?.id as string) ||
+                    (getPrincipalVideo(user.videos)?.id as string),
+                  offerTargetId: offer?.id as string,
+                })}
               >
-                {modals && modals[type] && modals[type].cta && (
+                <div>
                   <BoldText
-                    text={`${t(
-                      (cta as string) ?? (modals[type].cta as trads)[language]
-                    )}`}
+                    text={`${t("video-mandatory-from-cgu")}`}
                     containerStyle={{ margin: 0 }}
+                    fontSizeClass="leading-[1.5]"
                   />
-                )}
+                  <Link
+                    href={`/conditions-generales-utilisation`}
+                    className="text-deepPurple900 dark:text-deepPurple200"
+                  >
+                    <span>{t("cgu-initials")}</span>
+                  </Link>
+                </div>
+                <Button
+                  disabled={!readyToApply}
+                  className="subItem fadeIn"
+                  type="submit"
+                >
+                  {modals && modals[type] && modals[type].cta && (
+                    <BoldText
+                      text={`${t(
+                        (cta as string) ?? (modals[type].cta as trads)[language]
+                      )}`}
+                      align="center"
+                      containerStyle={{ margin: 0 }}
+                    />
+                  )}
+                </Button>
+              </form>
+            ) : (
+              <Button
+                onClick={() => {
+                  setCheckAvailableVideos(false);
+                }}
+                className="subItem fadeIn"
+              >
+                {t("back")}
               </Button>
-            </form>
-          ) : (
-            <Button
-              onClick={() => {
-                setCheckAvailableVideos(false);
-              }}
-              className="subItem fadeIn"
-            >
-              {t("back")}
-            </Button>
-          )}
+            )}
+          </div>
         </div>
         <LoginModalClose />
-      </>
+      </div>
     </ModalWrapper>
   ) : undefined;
 }

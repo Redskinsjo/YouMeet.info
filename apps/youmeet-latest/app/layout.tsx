@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import Providers from "./providers";
 import Template from "./template";
 
-export default function RootLayout({
+const fnc = function RootLayout({
   children,
   loginModal,
   recordModal,
@@ -21,4 +21,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} as any;
+
+export default fnc;

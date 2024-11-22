@@ -1,8 +1,5 @@
 import { logoUrl, uri } from "@youmeet/functions/imports";
-import {
-  formatForDb,
-  inFormatForDb,
-} from "@youmeet/utils/resolvers/formatCompetencyTitle";
+import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { Metadata, ResolvingMetadata } from "next";
 import CompetencyChild from "./competencyChild";
 import {
@@ -34,10 +31,11 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const prms = await params;
+  const decoded = decodeURIComponent(prms.competence);
+  const competence = formatForDb(decoded);
   const competency = (await getCompetencyMetadata({
-    slug: decodeURIComponent(prms.competence),
+    slug: decoded,
   })) as Competency;
-
   const title = competency?.title;
 
   if (title) {
@@ -50,7 +48,7 @@ export async function generateMetadata(
       title: `YouMeet - ${title}`,
       description: `Découvrez notre expertise en ${title}. Obtenez des informations détaillées, des exemples concrets et des ressources pour approfondir vos connaissances dans le domaine de ${title}.`,
       openGraph: {
-        url: `${uri}/competences/${prms.competence}`,
+        url: `${uri}/competences/${decoded}`,
         title: `YouMeet - ${title}`,
         images: ogImages,
         type: "article",
@@ -75,15 +73,12 @@ export async function generateMetadata(
       creator: "Jonathan Carnos",
     };
   }
-  let competence = decodeURIComponent(
-    inFormatForDb(prms.competence).split(" ")[0]
-  );
-  competence = formatForDb(competence);
+
   return {
     title: `YouMeet - Voici une compétence que vous allez maitriser`,
     description: `Découvrez la définition de ${competence} Obtenez des informations détaillées, des exemples concrets et des ressources pour approfondir vos connaissances dans le domaine de ${competence}.`,
     openGraph: {
-      url: `${uri}/competences/${decodeURIComponent(prms.competence)}`,
+      url: `${uri}/competences/${decoded}`,
       title: `YouMeet - Voici une compétence que vous allez maitriser`,
       type: "article",
       description: `Découvrez la définition de ${competence} Obtenez des informations détaillées, des exemples concrets et des ressources pour approfondir vos connaissances dans le domaine de ${competence}.`,
@@ -112,8 +107,10 @@ export default async function Page({
 }: {
   params: Promise<{ competence: string }>;
 }) {
+  const prms = await params;
+  const decoded = decodeURIComponent(prms.competence);
   const competency = (await getCompetency({
-    slug: decodeURIComponent((await params).competence),
+    slug: decoded,
   })) as Competency;
 
   if (competency) return <CompetencyChild competency={competency} />;

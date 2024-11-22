@@ -2,6 +2,7 @@ import { dev } from "@youmeet/functions/imports";
 import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { handleActionError } from "@youmeet/utils/basics/handleActionError";
+import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest): Promise<Response> {
@@ -12,11 +13,8 @@ export async function POST(req: NextRequest): Promise<Response> {
   const id = body?.id;
 
   try {
-    if (
-      req.cookies.get("login")?.value ||
-      (req.nextUrl.origin !== "https://www.youmeet.info" && !dev) ||
-      dev
-    ) {
+    const verified = await verifyTokenServer();
+    if (verified) {
       if (!body?.token)
         throw new BackendError(
           BACKEND_ERRORS.MISSING_ARGUMENT,

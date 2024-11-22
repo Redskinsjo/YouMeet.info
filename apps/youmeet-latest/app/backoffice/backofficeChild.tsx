@@ -17,6 +17,9 @@ export default async function BackofficeChild({
         <Link href={`/backoffice/users`} className="no-underline">
           <Button>Voir utilisateurs</Button>
         </Link>
+        <Link href={`/backoffice/applications`} className="no-underline">
+          <Button>Voir candidatures</Button>
+        </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>
         </Link>

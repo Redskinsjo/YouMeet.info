@@ -38,7 +38,12 @@ export default function CustomModalContent({
   const pathname = usePathname();
 
   return (
-    <ModalWrapper>
+    <ModalWrapper
+      newStyles={{
+        maxHeight: "92vh",
+        height: "unset",
+      }}
+    >
       <>
         <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px]">
           <h3 className="text-purple900 sentences">

@@ -56,8 +56,8 @@ export default function DataSection({
       {!!data.length && (
         <div className="flex-center xs:flex-col sm:flex-col md:flex-col flex-wrap gap-[12px] w-fit p-[12px] xs:p-0 w-full">
           {data.map((el) => (
-            <Suspense>
-              <Card key={el?.id} el={el} />
+            <Suspense key={el?.id}>
+              <Card el={el} />
             </Suspense>
           ))}
         </div>

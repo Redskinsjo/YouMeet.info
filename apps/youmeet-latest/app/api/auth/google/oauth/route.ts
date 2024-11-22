@@ -21,15 +21,14 @@ export async function POST(req: NextRequest) {
   const scopes = ["openid", "email", "profile"];
   // "https://www.googleapis.com/auth/contacts.readonly",
 
-  const state = `queryParams=${encodeURIComponent(
-    renderUrlQuery({
-      id,
-      email,
-      customer,
-      redirect,
-      choice,
-    })
-  )}`;
+  const search = new URLSearchParams({
+    id,
+    email,
+    customer,
+    redirect,
+    choice,
+  });
+  const state = search.toString();
 
   const url = oauth2Client.generateAuthUrl({
     // 'online' (default) or 'offline' (gets refresh_token)

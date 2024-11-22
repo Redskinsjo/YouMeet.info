@@ -22,6 +22,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { SimpleSelectNames } from "./SimpleSelectNames";
+import { AutocompleteRenderInputParams } from "@mui/material";
 
 export type Queries = GetCompetenciesQuery &
   GetTopSectorsQuery &
@@ -72,7 +73,7 @@ export type GenericFieldProps = SelectFieldProps & {
   topSectorIds?: string[];
   border?: string;
   multiline?: number;
-  params?: any;
+  params?: AutocompleteRenderInputParams;
   onChange?: (e: any) => void;
   basic?: boolean;
   multiple?: boolean;

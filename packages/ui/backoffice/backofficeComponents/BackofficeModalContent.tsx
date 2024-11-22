@@ -22,8 +22,9 @@ import {
   Video,
 } from "@youmeet/gql/generated";
 import { client } from "@youmeet/gql/index";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  ModalState,
   resetModal,
   setModalUserExperiences,
 } from "@youmeet/global-config/features/modal";
@@ -55,9 +56,13 @@ import { removeVideo } from "@youmeet/global-config/features/user";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { onDeleteVideo } from "@youmeet/functions/actions";
+import ModalWrapper from "../../modals/ModalWrapper";
+import SectionTitle from "../../_components/SectionTitle";
+import VideoComponent from "../../dashboard/dashboardComponents/VideoComponent";
+import { RootState } from "@youmeet/global-config/store";
 
 export default function BackofficeModalContent({
-  data,
+  data: data1,
 }: {
   data:
     | {
@@ -96,11 +101,13 @@ export default function BackofficeModalContent({
   const [video, setVideo] = useState<Video | undefined>(undefined);
   const [shouldAddExperience, setShouldAddExperience] = useState(false);
   const [specialErr, setSpecialErr] = useState<any>(undefined);
+  const [data, setData] = useState(data1?.data);
+  const modal = useSelector((state: RootState) => state.modal as ModalState);
 
   const getQuestions = useCallback(async () => {
     const response = await client.query({
       query: GetQuestionsDocument,
-      variables: { jobId: (data?.data as Job).id as string },
+      variables: { jobId: (data as Job).id as string },
       // fetchPolicy: "no-cache",
     });
     const questions = response?.data?.questions;
@@ -110,7 +117,7 @@ export default function BackofficeModalContent({
           questions.filter((q) => q).map((question) => question?.text as string)
         ),
       ]);
-  }, [(data?.data as Job).id]);
+  }, [(data as Job).id]);
 
   const customOnDeleteVideo = async (videoId: string) => {
     dispatch(setUpload(`upload`));
@@ -137,16 +144,16 @@ export default function BackofficeModalContent({
   }, []);
 
   useEffect(() => {
-    const videos = data?.data?.videos as Video[];
+    const videos = data?.videos as Video[];
     if (videos && videos.length > 0) {
       const video = videos
         ? getPrincipalVideo(videos.filter((d) => d) as Video[])
         : undefined;
       setVideo(video);
     }
-  }, [data?.data]);
+  }, [data]);
 
-  return data?.type === "queue" ? (
+  return modal.queue ? (
     <div
       onClick={(e) => {
         e.stopPropagation();
@@ -155,8 +162,8 @@ export default function BackofficeModalContent({
       <div className="p-[24px] max-w-[720px] max-h-[92vh] overflow-hidden overflow-y-scroll flex flex-col items-center border-solid border-blueGrey500 border-[2px] lightBg gap-[24px] outline-0">
         <div>
           {fromNames(
-            (data?.data as Partial<BetaQueue>)?.target?.firstname as string,
-            data?.data?.target?.lastname as string
+            (data as Partial<BetaQueue>)?.target?.firstname as string,
+            data?.target?.lastname as string
           )}
         </div>
         <Box
@@ -170,11 +177,11 @@ export default function BackofficeModalContent({
             width: "100%",
           }}
         >
-          {data?.data?.id && (
+          {data?.id && (
             <DetailComponent
               noPadding
               label="Queue id"
-              value={data?.data?.id as string}
+              value={data?.id as string}
               type="modal2"
             />
           )}
@@ -193,7 +200,7 @@ export default function BackofficeModalContent({
           <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
             Profil du candidat
           </Typography>
-          <UserInfos user={data.data?.target} />
+          <UserInfos user={data?.target} />
         </Box>
         <Box
           sx={{
@@ -209,7 +216,7 @@ export default function BackofficeModalContent({
           <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
             Informations sur le requêteur
           </Typography>
-          {data?.data?.origin?.picture && (
+          {data?.origin?.picture && (
             <Box
               sx={{
                 display: "flex",
@@ -218,7 +225,7 @@ export default function BackofficeModalContent({
               }}
             >
               <Image
-                src={data?.data?.origin?.picture}
+                src={data?.origin?.picture}
                 alt="user-picture"
                 width={48}
                 height={48}
@@ -229,7 +236,7 @@ export default function BackofficeModalContent({
               />
             </Box>
           )}
-          <UserInfos user={data.data?.origin} />
+          <UserInfos user={data?.origin} />
         </Box>
         <Box
           sx={{
@@ -254,7 +261,7 @@ export default function BackofficeModalContent({
         )}
       </div>
     </div>
-  ) : data?.type === "lead" ? (
+  ) : modal.lead ? (
     <div
       onClick={(e) => {
         e.stopPropagation();
@@ -273,11 +280,11 @@ export default function BackofficeModalContent({
             width: "100%",
           }}
         >
-          {data?.data?.id && (
+          {data?.id && (
             <DetailComponent
               noPadding
               label="lead id"
-              value={data?.data?.id as string}
+              value={data?.id as string}
               type="modal2"
             />
           )}
@@ -296,40 +303,40 @@ export default function BackofficeModalContent({
           <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
             Profil
           </Typography>
-          {(data?.data as Lead).email && (
+          {(data as Lead).email && (
             <DetailComponent
               noPadding
               label="Email"
-              value={(data?.data as Lead).email as string}
+              value={(data as Lead).email as string}
               type="modal2"
             />
           )}
-          {(data?.data as Lead).type && (
+          {(data as Lead).type && (
             <DetailComponent
               noPadding
               label="Type"
-              value={(data?.data as Lead).type as string}
+              value={(data as Lead).type as string}
               type="modal2"
             />
           )}
-          {(data?.data as Lead).updatedAt && (
+          {(data as Lead).updatedAt && (
             <DetailComponent
               noPadding
               label="Modifié"
-              value={giveTimeAgo((data?.data as Lead).updatedAt)}
+              value={giveTimeAgo((data as Lead).updatedAt)}
               type="modal2"
             />
           )}
-          {(data?.data as Lead).createdAt && (
+          {(data as Lead).createdAt && (
             <DetailComponent
               noPadding
               label="Créé"
-              value={giveTimeAgo((data?.data as Lead).createdAt)}
+              value={giveTimeAgo((data as Lead).createdAt)}
               type="modal2"
             />
           )}
         </Box>
-        <LeadForm lead={data?.data as Lead} />
+        <LeadForm lead={data as Lead} />
         <Box
           sx={{
             gap: "48px",
@@ -346,11 +353,11 @@ export default function BackofficeModalContent({
                 query: SendEmailToLeadDocument,
                 variables: {
                   data: {
-                    leadId: (data.data as Lead).id,
+                    leadId: (data as Lead).id,
                   },
                 },
               });
-              if (response.data.sendEmailToLead)
+              if (response.data?.sendEmailToLead)
                 dispatch(resetModal("ok") as UnknownAction);
               else
                 setSpecialErr({
@@ -358,11 +365,11 @@ export default function BackofficeModalContent({
                 });
             }}
           >
-            {(data.data as Lead).type === "recruiter"
+            {(data as Lead).type === "recruiter"
               ? "Offrir Essai Illimité 2 Semaines"
               : "Proposer Connexion Automatiqe"}
           </Button>
-          {(data.data as Lead).type === "candidate" ? (
+          {(data as Lead).type === "candidate" ? (
             <Button
               sx={{ backgroundColor: green[500], color: "white" }}
               type="submit"
@@ -372,12 +379,12 @@ export default function BackofficeModalContent({
                   query: SendEmailToLeadDocument,
                   variables: {
                     data: {
-                      leadId: (data.data as Lead).id,
+                      leadId: (data as Lead).id,
                     },
                     negativeAnswerForDev: true,
                   },
                 });
-                if (response.data.sendEmailToLead)
+                if (response.data?.sendEmailToLead)
                   dispatch(resetModal("ok") as UnknownAction);
                 else
                   setSpecialErr({
@@ -388,7 +395,7 @@ export default function BackofficeModalContent({
               Donner réponse négative entretien Développeur
             </Button>
           ) : undefined}
-          {(data.data as Lead).type === "candidate" ? (
+          {(data as Lead).type === "candidate" ? (
             <Button
               sx={{ backgroundColor: green[500], color: "white" }}
               type="submit"
@@ -398,12 +405,12 @@ export default function BackofficeModalContent({
                   query: SendEmailToLeadDocument,
                   variables: {
                     data: {
-                      leadId: (data.data as Lead).id,
+                      leadId: (data as Lead).id,
                     },
                     negativeAnswerForDesign: true,
                   },
                 });
-                if (response.data.sendEmailToLead)
+                if (response.data?.sendEmailToLead)
                   dispatch(resetModal("ok") as UnknownAction);
                 else
                   setSpecialErr({
@@ -422,7 +429,7 @@ export default function BackofficeModalContent({
         )}
       </div>
     </div>
-  ) : data?.type === "thread" ? (
+  ) : modal.thread ? (
     <div
       onClick={(e) => {
         e.stopPropagation();
@@ -431,7 +438,7 @@ export default function BackofficeModalContent({
       <div className="p-[24px] max-w-[720px] max-h-[92vh] overflow-hidden overflow-y-scroll flex flex-col items-center border-solid border-blueGrey500 border-[2px] lightBg gap-[24px] outline-0">
         <div>
           {
-            (data?.data as Partial<BetaWhatsappThread>).queue?.origin
+            (data as Partial<BetaWhatsappThread>).queue?.origin
               ?.fullname as string
           }
         </div>
@@ -446,11 +453,11 @@ export default function BackofficeModalContent({
             width: "100%",
           }}
         >
-          {data?.data?.id && (
+          {data?.id && (
             <DetailComponent
               noPadding
               label="thread id"
-              value={data?.data?.id as string}
+              value={data?.id as string}
               type="modal2"
             />
           )}
@@ -470,35 +477,35 @@ export default function BackofficeModalContent({
             Profil du fil de discussion (BetaWhatsappThread)
           </Typography>
 
-          {data?.data?.terminated && (
+          {data?.terminated && (
             <DetailComponent
               noPadding
               label="Terminé"
-              value={data?.data?.terminated ? "Oui" : "Non"}
+              value={data?.terminated ? "Oui" : "Non"}
               type="modal2"
             />
           )}
-          {data?.data?.chatId && (
+          {data?.chatId && (
             <DetailComponent
               noPadding
               label="ChatId"
-              value={data?.data?.chatId as string}
+              value={data?.chatId as string}
               type="modal2"
             />
           )}
-          {data?.data?.updatedAt && (
+          {data?.updatedAt && (
             <DetailComponent
               noPadding
               label="Modifié"
-              value={giveTimeAgo(data?.data?.updatedAt)}
+              value={giveTimeAgo(data?.updatedAt)}
               type="modal2"
             />
           )}
-          {data?.data?.createdAt && (
+          {data?.createdAt && (
             <DetailComponent
               noPadding
               label="Créé"
-              value={giveTimeAgo(data?.data?.createdAt)}
+              value={giveTimeAgo(data?.createdAt)}
               type="modal2"
             />
           )}
@@ -553,24 +560,24 @@ export default function BackofficeModalContent({
           <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
             Informations sur la queue (BetaQueue)
           </Typography>
-          {data?.data?.queue?.id && (
+          {data?.queue?.id && (
             <DetailComponent
               noPadding
               label="Id"
-              value={data?.data?.queue?.id as string}
+              value={data?.queue?.id as string}
               type="modal2"
             />
           )}
-          {data?.data?.queue?.status && (
+          {data?.queue?.status && (
             <DetailComponent
               noPadding
               label="Statut"
-              value={data?.data?.queue?.status as string}
+              value={data?.queue?.status as string}
               type="modal2"
             />
           )}
 
-          {data?.data?.queue?.origin?.picture && (
+          {data?.queue?.origin?.picture && (
             <Box
               sx={{
                 display: "flex",
@@ -579,7 +586,7 @@ export default function BackofficeModalContent({
               }}
             >
               <Image
-                src={data?.data?.queue?.origin?.picture}
+                src={data?.queue?.origin?.picture}
                 alt="user-picture"
                 width={48}
                 height={48}
@@ -593,9 +600,9 @@ export default function BackofficeModalContent({
           <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
             Recruteur
           </Typography>
-          <UserInfos user={data.data?.queue?.origin} />
+          <UserInfos user={data?.queue?.origin} />
 
-          {data?.data?.queue?.target?.picture && (
+          {data?.queue?.target?.picture && (
             <Box
               sx={{
                 display: "flex",
@@ -604,7 +611,7 @@ export default function BackofficeModalContent({
               }}
             >
               <Image
-                src={data?.data?.queue?.target?.picture}
+                src={data?.queue?.target?.picture}
                 alt="user-picture"
                 width={48}
                 height={48}
@@ -618,11 +625,11 @@ export default function BackofficeModalContent({
           <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
             Candidat
           </Typography>
-          <UserInfos user={data.data?.queue?.target} />
+          <UserInfos user={data?.queue?.target} />
         </Box>
       </div>
     </div>
-  ) : data?.type === "job" ? (
+  ) : modal.job ? (
     <div
       onClick={(e) => {
         e.stopPropagation();
@@ -632,19 +639,19 @@ export default function BackofficeModalContent({
         <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
           Rôle
         </Typography>
-        {data?.data?.id && (
+        {data?.id && (
           <DetailComponent
             noPadding
             label="Id"
-            value={data?.data?.id as string}
+            value={data?.id as string}
             type="modal2"
           />
         )}
-        {data?.data?.title && (
+        {data?.title && (
           <DetailComponent
             noPadding
             label="Titre du rôle"
-            value={data?.data?.title as string}
+            value={data?.title as string}
             type="modal2"
           />
         )}
@@ -664,47 +671,46 @@ export default function BackofficeModalContent({
         </Box>
       </div>
     </div>
-  ) : data?.type === "company" ? (
+  ) : modal?.company ? (
     <div className="p-[24px] max-w-[720px] max-h-[92vh] overflow-hidden overflow-y-scroll min-w-[600px] h-auto flex flex-col items-center border-[2px] border-solid border-blueGrey500 lightBg outline-0 gap-[24px]">
       <div className="font-bold text-[14px]">Entreprise</div>
-      {data?.data?.id && (
+      {data?.id && (
         <DetailComponent
           noPadding
           label="Id"
-          value={data?.data?.id as string}
+          value={data?.id as string}
           type="modal2"
         />
       )}
-      {data?.data?.name && (
+      {data?.name && (
         <DetailComponent
           noPadding
           label="Nom"
-          value={data?.data?.name as string}
+          value={data?.name as string}
           type="modal2"
         />
       )}
-      {data?.data?.location && (
+      {data?.location && (
         <DetailComponent
           noPadding
           label="Localité"
-          value={data?.data?.location as string}
+          value={data?.location as string}
           type="modal2"
         />
       )}
-      {(data?.data as BetaCompany)?.resume && (
+      {(data as BetaCompany)?.resume && (
         <DetailComponent
           noPadding
           label="Résumé"
-          value={data?.data?.resume as string}
+          value={data?.resume as string}
           type="modal2"
         />
       )}
       <div className="font-bold text-[14px]">
-        Potentielles références (
-        {(data?.data as BetaCompany)?.experiences?.length})
+        Potentielles références ({(data as BetaCompany)?.experiences?.length})
       </div>
       <div className="flex flex-col gap-[12px] w-full border-[0.5px] border-solid border-grey300">
-        {(data?.data as BetaCompany)?.experiences?.map((experience, index) => {
+        {(data as BetaCompany)?.experiences?.map((experience, index) => {
           return (
             <div
               className="bg-white p-[24px] flex flex-col"
@@ -817,10 +823,10 @@ export default function BackofficeModalContent({
         })}
       </div>
       <div className="font-bold text-[14px]">
-        Offres ({(data?.data as BetaCompany)?.offers?.length})
+        Offres ({(data as BetaCompany)?.offers?.length})
       </div>
       <div className="flex flex-col gap-[12px] w-full border-[0.5px] border-solid border-grey300">
-        {(data?.data as BetaCompany)?.offers?.map((offer, index) => {
+        {(data as BetaCompany)?.offers?.map((offer, index) => {
           return (
             <div className="bg-white p-[24px] flex flex-col" key={offer?.id}>
               <div>
@@ -844,20 +850,103 @@ export default function BackofficeModalContent({
         })}
       </div>
     </div>
+  ) : modal.sharing ? (
+    <ModalWrapper>
+      <>
+        <div className="flex flex-col gap-[24px] h-full">
+          <div className="flex flex-col gap-[12px]">
+            <div className="underline">Utilisateur</div>
+            <SectionTitle component="h2" translation={setName(data?.origin)} />
+            <DetailComponent
+              noPadding
+              label="Email"
+              value={data?.origin?.email as string}
+              type="modal2"
+            />
+            {data?.origin?.details?.phone?.code &&
+              data?.origin?.details?.phone.number && (
+                <DetailComponent
+                  noPadding
+                  label="Telephone"
+                  value={
+                    getUniversalFromCodeAndNumber(
+                      data?.origin?.details?.phone?.code,
+                      data?.origin?.details?.phone?.number
+                    ) as string
+                  }
+                />
+              )}
+          </div>
+          <div className="flex flex-col gap-[12px]">
+            <div className="underline">Offre</div>
+            <DetailComponent
+              noPadding
+              label="Intitulé de l'offre"
+              value={data?.offerTarget?.intitule as string}
+            />
+            <DetailComponent
+              noPadding
+              label="Lien vers l'offre"
+              value={
+                <Link
+                  href={`/${data?.offerTarget?.slug as string}`}
+                  target="_blank"
+                >
+                  Lien
+                </Link>
+              }
+            />
+          </div>
+          <div className="flex flex-col gap-[12px]">
+            <div className="flex gap-[12px]">
+              <div className="underline">Entreprise</div>
+              {(setFileUrl(data?.target?.company?.logo) ||
+                (data?.offerTarget?.entreprise?.logo as string)) && (
+                <Image
+                  src={
+                    setFileUrl(data?.target?.company?.logo) ||
+                    (data?.offerTarget?.entreprise?.logo as string)
+                  }
+                  alt="logo de l'entreprise"
+                  width={40}
+                  height={40}
+                />
+              )}
+            </div>
+
+            <DetailComponent
+              noPadding
+              label="Nom"
+              value={
+                data?.target?.name ||
+                (data?.offerTarget?.entreprise?.nom as string)
+              }
+            />
+          </div>
+          <div className="flex flex-col gap-[12px]">
+            <div className="underline">Video</div>
+            <VideoComponent
+              video={data?.video as Video}
+              profil={data?.origin as BetaUser}
+            />
+          </div>
+        </div>
+      </>
+    </ModalWrapper>
   ) : (
     <div
       className="p-[24px] max-w-[720px] max-h-[92vh] overflow-hidden overflow-y-scroll min-w-[600px] h-auto flex flex-col items-center border-[2px] border-solid border-blueGrey500 lightBg gap-[24px] outline-none"
       onClick={(e) => e.stopPropagation()}
     >
       <div className="font-bold text-[14px]">Utilisateur</div>
-      {data?.data.candidate?.avatars &&
-        data?.data.candidate?.avatars.length > 0 &&
-        setFileUrl(data?.data.candidate?.avatars[0]) && (
+      {data?.candidate?.avatars &&
+        data?.candidate?.avatars.length > 0 &&
+        setFileUrl(data?.candidate?.avatars[0]) && (
           <Image
             width={0}
             height={0}
-            src={setFileUrl(data?.data.candidate?.avatars[0]) as string}
-            alt={`ìmage de profil de ${setName(data.data)}`}
+            src={setFileUrl(data?.candidate?.avatars[0]) as string}
+            alt={`ìmage de profil de ${setName(data)}`}
             style={{
               width: "110px",
               height: "auto",
@@ -867,7 +956,7 @@ export default function BackofficeModalContent({
       <DetailComponent
         noPadding
         label="Id"
-        value={(data?.data?.id as string) || "-"}
+        value={(data?.id as string) || "-"}
         type="modal2"
       />
 
@@ -889,15 +978,15 @@ export default function BackofficeModalContent({
       <DetailComponent
         noPadding
         label="Public"
-        value={data?.data.isPublic ? "Oui" : "Non"}
+        value={data?.isPublic ? "Oui" : "Non"}
         type="modal2"
       />
       <DetailComponent
         noPadding
         label="Target job"
         value={
-          (data?.data?.candidate?.targetJob?.title as Translated)
-            ? ((data?.data?.candidate?.targetJob?.title as Translated)[
+          (data?.candidate?.targetJob?.title as Translated)
+            ? ((data?.candidate?.targetJob?.title as Translated)[
                 language as "fr" | "en"
               ] as string)
             : "-"
@@ -908,37 +997,37 @@ export default function BackofficeModalContent({
         noPadding
         label="Type de contrat"
         value={
-          data?.data?.candidate?.targetContractType
-            ? data?.data?.candidate?.targetContractType
+          data?.candidate?.targetContractType
+            ? data?.candidate?.targetContractType
             : "-"
         }
         type="modal2"
       />
-      {!(data?.data?.candidate?.targetJob?.title as Translated) ? (
-        <AddTargetJobComponent profil={data?.data as BetaUser} />
+      {!(data?.candidate?.targetJob?.title as Translated) ? (
+        <AddTargetJobComponent profil={data as BetaUser} />
       ) : undefined}
       <DetailComponent
         noPadding
         label="Nom unique"
-        value={data?.data?.uniqueName || "-"}
+        value={data?.uniqueName || "-"}
         type="modal2"
       />
       <DetailComponent
         noPadding
         label="Nom complet"
-        value={(data?.data?.fullname as string) || "-"}
+        value={(data?.fullname as string) || "-"}
         type="modal2"
       />
       <DetailComponent
         noPadding
         label="Linkedin"
-        value={(data?.data?.linkedinProfileId as string) || "-"}
+        value={(data?.linkedinProfileId as string) || "-"}
         type="modal2"
       />
       <DetailComponent
         noPadding
         label="Email"
-        value={(data?.data?.email as string) || "-"}
+        value={(data?.email as string) || "-"}
         type="modal2"
       />
 
@@ -946,10 +1035,10 @@ export default function BackofficeModalContent({
         noPadding
         label="Téléphone"
         value={
-          data?.data?.details?.phone?.code && data?.data?.details?.phone?.number
+          data?.details?.phone?.code && data?.details?.phone?.number
             ? getUniversalFromCodeAndNumber(
-                data?.data?.details.phone.code,
-                data?.data?.details.phone.number
+                data?.details.phone.code,
+                data?.details.phone.number
               )
             : "-"
         }
@@ -959,15 +1048,15 @@ export default function BackofficeModalContent({
       <DetailComponent
         noPadding
         label="Consenti"
-        value={data?.data?.consent ? "oui" : "non"}
+        value={data?.consent ? "oui" : "non"}
         type="modal2"
       />
       <DetailComponent
         noPadding
         label="CV"
         value={
-          data?.data?.cvFile && setFileUrl(data.data.cvFile) ? (
-            <Link href={setFileUrl(data.data.cvFile) as string} target="_blank">
+          data?.cvFile && setFileUrl(data?.cvFile) ? (
+            <Link href={setFileUrl(data?.cvFile) as string} target="_blank">
               Voir
             </Link>
           ) : (
@@ -979,26 +1068,26 @@ export default function BackofficeModalContent({
       <DetailComponent
         noPadding
         label="Age"
-        value={data?.data?.age ? String(data.data.age) : "-"}
+        value={data?.age ? String(data?.age) : "-"}
         type="modal2"
       />
       <DetailComponent
         noPadding
         label="Description"
-        value={data?.data?.description ? data.data.description : "-"}
+        value={data?.description ? data?.description : "-"}
         type="modal2"
       />
       <DetailComponent
         noPadding
         label="Langues"
         value={
-          data?.data?.languages && data.data.languages.length > 0
-            ? data.data.languages.join(", ")
+          data?.languages && data?.languages.length > 0
+            ? data?.languages.join(", ")
             : "-"
         }
         type="modal2"
       />
-      <AddReferenceComponent data={data?.data as BetaUser} />
+      <AddReferenceComponent data={data as BetaUser} />
 
       {loading && (
         <ImSpinner2 className="hover:text-purple700 cursor-pointer animate-spin subItem" />
@@ -1052,10 +1141,10 @@ export default function BackofficeModalContent({
           onClick={async () => {
             const response = await client.query({
               query: GetOneUserExperiencesDocument,
-              variables: { userId: data?.data.id as string },
+              variables: { userId: data?.id as string },
               fetchPolicy: "no-cache",
             });
-            const exps = response.data.oneUserExperiences;
+            const exps = response.data?.oneUserExperiences;
             if (exps) dispatch(setModalUserExperiences(exps) as UnknownAction);
           }}
         >
@@ -1064,7 +1153,7 @@ export default function BackofficeModalContent({
       </div>
       {shouldAddExperience ? (
         <div className="flex items-center gap-[12px]">
-          <BackofficeUserModalAddExperience data={data?.data as BetaUser} />
+          <BackofficeUserModalAddExperience data={data as BetaUser} />
           <div
             className="p-[8px] bg-white dark:extraLightDarkBg dark:text-white flex-center"
             onClick={() => setShouldAddExperience(false)}
@@ -1077,7 +1166,7 @@ export default function BackofficeModalContent({
           Ajouter Expérience
         </Button>
       )}
-      <Link href={`${uri}/on/${data?.data.uniqueName}`} target="_blank">
+      <Link href={`${uri}/on/${data?.uniqueName}`} target="_blank">
         <Button>Voir profil</Button>
       </Link>
     </div>

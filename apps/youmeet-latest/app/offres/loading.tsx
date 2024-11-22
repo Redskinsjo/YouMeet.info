@@ -6,7 +6,7 @@ const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 
 export default function Loading() {
   return (
-    <div className="h-screen flex-center">
+    <div className="flex-center w-full offerView">
       <Logo gif png />
     </div>
   );

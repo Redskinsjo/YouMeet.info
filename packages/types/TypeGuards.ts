@@ -30,8 +30,7 @@ export const isCompetency = (
 ): job is Competency => (job as Competency).__typename === "Competency";
 
 export const isAvatar = (file: Avatar | undefined | null): file is Avatar =>
-  (file as Avatar).url !== undefined &&
-  (file as Avatar).secure_url !== undefined;
+  !!(file as Avatar).url && !!(file as Avatar).secure_url;
 
 export const isProfileSharing = (
   obj: ProfileSharing | InterviewOffer | Offer

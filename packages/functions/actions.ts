@@ -53,7 +53,7 @@ import {
   deleteInterviewOffer,
   deleteLead,
   deleteOffer,
-  deleteProfileSharing,
+  deleteSharing,
   deleteVideo,
   getAffiliation,
   getRawUser,
@@ -876,7 +876,6 @@ export const onLogout = async () => {
     path: "/",
     domain: `${process.env.API_DOMAIN}`,
   });
-  revalidatePath("/");
   redirect("/");
 };
 
@@ -1532,11 +1531,9 @@ export const onDeleteNotification = async (
 ): Promise<withData<boolean> | PayloadBackendError> => {
   try {
     if (type === "s") {
-      const result = (await deleteProfileSharing<ProfileSharing>(
-        { id },
-        0,
-        true
-      )) as PayloadBackendError | withData<ProfileSharing>;
+      const result = (await deleteSharing<ProfileSharing>({ id }, 0, true)) as
+        | PayloadBackendError
+        | withData<ProfileSharing>;
       if (result && isPayloadError(result)) {
         throw new BackendError(result.type, result.message);
       } else {

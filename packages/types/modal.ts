@@ -5,6 +5,7 @@ import {
   BetaWhatsappThread,
   Job,
   Lead,
+  ProfileSharing,
 } from "@youmeet/gql/generated";
 
 export type BackofficeModalData = Partial<BetaQueue> &
@@ -12,7 +13,8 @@ export type BackofficeModalData = Partial<BetaQueue> &
   Partial<BetaWhatsappThread> &
   Partial<Job> &
   Partial<BetaCompany> &
-  Partial<BetaUser>;
+  Partial<BetaUser> &
+  Partial<ProfileSharing>;
 
 export type BackofficeModalDataType =
   | "queue"
@@ -22,4 +24,5 @@ export type BackofficeModalDataType =
   | "thread"
   | "job"
   | "company"
-  | "user";
+  | "user"
+  | "sharing";

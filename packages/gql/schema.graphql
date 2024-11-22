@@ -468,6 +468,138 @@ type Offer {
   sharings: [ProfileSharing]
   createdAt: DateTime
   updatedAt: DateTime
+  idFT: String
+  intitule: String
+  description: String
+  dateCreation: String
+  dateActualisation: String
+  lieuTravail: WorkLocationFT
+  romeCode: String
+  romeLibelle: String
+  appellationlibelle: String
+  entreprise: EnterpriseFT
+  typeContrat: String
+  typeContratLibelle: String
+  natureContrat: String
+  experienceExige: String
+  experienceLibelle: String
+  experienceCommentaire: String
+  formations: [FormationFT]
+  langues: [LanguageFT]
+  permis: [PermisFT]
+  outilsBureautiques: [String]
+  competences: [CompetenceFT]
+  salaire: SalaryFT
+  dureeTravailLibelle: String
+  dureeTravailLibelleConverti: String
+  complementExercice: String
+  conditionExercice: String
+  alternance: Boolean
+  contact: ContactFT
+  agence: AgencyFT
+  nombrePostes: Int
+  accessibleTH: Boolean
+  deplacementCode: String
+  deplacementLibelle: String
+  qualificationCode: String
+  qualificationLibelle: String
+  codeNAF: String
+  secteurActivite: String
+  secteurActiviteLibelle: String
+  qualitesProfessionnelles: [ProfessionalQualityFT]
+  trancheEffectifEtab: String
+  origineOffre: OriginOfferFT
+  offresManqueCandidats: Boolean
+  live: Boolean
+}
+
+type WorkLocationFT {
+  libelle: String
+  latitude: PositiveFloat
+  longitude: PositiveFloat
+  codePostal: String
+  commune: String
+}
+
+input WorkLocationFTInput {
+  libelle: String
+  latitude: PositiveFloat
+  longitude: PositiveFloat
+  codePostal: [String]
+  commune: String
+}
+
+type EnterpriseFT {
+  nom: String
+  description: String
+  logo: String
+  url: String
+  entrepriseAdaptee: Boolean
+}
+
+type FormationFT {
+  codeFormation: String
+  domaineLibelle: String
+  niveauLibelle: String
+  commentaire: String
+  exigence: String
+}
+
+type LanguageFT {
+  libelle: String
+  exigence: String
+}
+
+type PermisFT {
+  libelle: String
+  exigence: String
+}
+
+type CompetenceFT {
+  code: String
+  libelle: String
+  exigence: String
+}
+
+type SalaryFT {
+  libelle: String
+  commentaire: String
+  complement1: String
+  complement2: String
+}
+
+type ContactFT {
+  nom: String
+  coordonnees1: String
+  coordonnees2: String
+  coordonnees3: String
+  telephone: String
+  courriel: String
+  commentaire: String
+  urlRecruteur: String
+  urlPostulation: String
+}
+
+type AgencyFT {
+  telephone: String
+  courriel: String
+}
+
+type ProfessionalQualityFT {
+  libelle: String
+  description: String
+}
+
+type OriginOfferFT {
+  origine: String
+  urlOrigine: String
+  partenaires: [PartenairFT]
+}
+
+type PartenairFT {
+  nom: String
+  url: String
+  logo: String
 }
 
 input BetaUserInput {
@@ -536,6 +668,8 @@ type BetaCompany {
   sharings: [ProfileSharing]
   offers: [Offer]
   isPublic: Boolean
+  url: String
+  entrepriseAdaptee: Boolean
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -711,6 +845,8 @@ input OfferInput {
   remote: String
   title: String
   language: String
+  lieuTravail: WorkLocationFTInput
+  live: Boolean
 }
 
 type Favorite {
@@ -1284,6 +1420,13 @@ input EmailInput {
   recruiterName: String
 }
 
+input SharingInput {
+  offerId: ID
+  originId: ID
+  targetId: ID
+  videoId: ID
+}
+
 type Query {
   oneMeet(id: ID): Meet
   meets(data: MeetInput): [Meet]
@@ -1318,6 +1461,7 @@ type Query {
   myPublishedOffers(data: OfferInput): [Offer]
   oneProfileSharing(data: ProfileSharingInput): ProfileSharing
   myCompanyProfileSharings(targetId: String): [ProfileSharing]
+  sharings(data: SharingInput): [ProfileSharing]
   companyOffers(companyId: ID): [Offer]
   myReferenceContacts(userId: ID, experienceId: ID): [ReferenceContact]
   myNotifications(

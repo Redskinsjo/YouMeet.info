@@ -24,7 +24,7 @@ export default function Switches() {
         value={
           <FormControlLabel
             sx={{ margin: xs || sm || md ? "0px" : "inherit" }}
-            className="m-0"
+            className="m-0 w-max"
             control={
               <Switch
                 value={user.videos.length > 0 ? true : false}
@@ -54,7 +54,7 @@ export default function Switches() {
         value={
           <FormControlLabel
             sx={{ margin: xs || sm || md ? "0px" : "inherit" }}
-            className="m-0"
+            className="m-0 w-max"
             control={
               <Switch
                 value={user.cvFile ? true : false}

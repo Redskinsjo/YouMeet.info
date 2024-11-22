@@ -9,6 +9,7 @@ dotenv.config();
 const hosts = [
   "www.youmeet.info",
   "youmeet-git-testing-youmeet.vercel.app",
+  "youmeet-git-ft-offres-youmeet.vercel.app",
   "youmeetpro-git-testing-youmeet.vercel.app",
   "app",
 ];
@@ -29,6 +30,7 @@ export const noCorsMiddleware = async (context: ContextRequest, err?: true) => {
       uniqueHeader,
       `${process.env.JWT_SECRET}`
     ).toString(enc.Utf8);
+
     if (hosts.includes(decrypt)) {
       return true;
     }
