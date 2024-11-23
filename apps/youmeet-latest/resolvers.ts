@@ -167,6 +167,7 @@ import {
   setDetailPayload,
   setUserPayload,
 } from "@youmeet/utils/basics/setPayload";
+import { replaceLetters } from "@youmeet/utils/resolvers/reduceAppelations";
 
 export const apiInstance = new SendinBlue.TransactionalEmailsApi();
 
@@ -893,38 +894,19 @@ const resolvers: Resolvers = {
       }
 
       const search = prms?.search;
-      // if (search && where.OR) {
-      //   const s = search.split(" ");
 
-      //   for (let i = 0; i < s.length; i++) {
-      //     where.OR.push({
-      //       job: {
-      //         title: {
-      //           is: {
-      //             fr: { mode: "insensitive", contains: s[i] },
-      //           },
-      //         },
-      //       },
-      //     });
-      //     where.OR.push({
-      //       job: {
-      //         title: {
-      //           is: {
-      //             en: { mode: "insensitive", contains: s[i] },
-      //           },
-      //         },
-      //       },
-      //     });
-
-      //     where.OR.push({
-      //       intitule: { contains: s[i], mode: "insensitive" },
-      //     });
-      //   }
-      // }
       if (search) {
-        where.OR?.push({ intitule: { contains: search, mode: "insensitive" } });
+        const s = replaceLetters(search);
+        const mode = "insensitive";
+        where.OR?.push({ intitule: { contains: search, mode } });
         where.OR?.push({
-          romeLibelle: { contains: search, mode: "insensitive" },
+          intituleReduced: { contains: s, mode },
+        });
+        where.OR?.push({
+          romeLibelle: { contains: search, mode },
+        });
+        where.OR?.push({
+          romeLibelleReduced: { contains: s, mode },
         });
       }
 

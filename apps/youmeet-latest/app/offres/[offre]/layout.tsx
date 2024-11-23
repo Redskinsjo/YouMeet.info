@@ -13,6 +13,7 @@ export default async function Layout({
 }) {
   const prms = await params;
   const decoded = decodeURIComponent(prms.offre);
+  if (!decoded) return {};
   const offre = (await getOffer<Offer>({
     slug: decoded,
   })) as Offer;

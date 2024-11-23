@@ -32,6 +32,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const prms = await params;
   const decoded = decodeURIComponent(prms.competence);
+  if (!decoded) return {};
   const competence = formatForDb(decoded);
   const competency = (await getCompetencyMetadata({
     slug: decoded,
@@ -109,6 +110,7 @@ export default async function Page({
 }) {
   const prms = await params;
   const decoded = decodeURIComponent(prms.competence);
+  if (!decoded) return notFound();
   const competency = (await getCompetency({
     slug: decoded,
   })) as Competency;

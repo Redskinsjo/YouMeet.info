@@ -12042,6 +12042,18 @@
             "deprecationReason": null
           },
           {
+            "name": "intituleReduced",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "job",
             "description": null,
             "args": [],
@@ -12355,6 +12367,18 @@
           },
           {
             "name": "romeLibelle",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "romeLibelleReduced",
             "description": null,
             "args": [],
             "type": {

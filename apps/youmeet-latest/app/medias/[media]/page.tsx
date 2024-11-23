@@ -31,6 +31,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const prms = await params;
   const decoded = decodeURIComponent(prms.media);
+  if (!decoded) return {};
   const media = formatForDb(decoded);
   const article = (await getArticleMetadata({
     slug: decoded,

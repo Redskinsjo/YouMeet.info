@@ -1,7 +1,9 @@
 "use client";
 import { purple } from "@mui/material/colors";
+import { setOffresSearch } from "@youmeet/global-config/features/search";
 import dynamic from "next/dynamic";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 const GenericField = dynamic(
   () =>
@@ -11,7 +13,7 @@ const GenericField = dynamic(
 export default function SearchFilter() {
   const search = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
+  const dispatch = useDispatch();
 
   return (
     <form
@@ -20,8 +22,10 @@ export default function SearchFilter() {
         const params = new URLSearchParams(search.toString());
         if (!value) {
           params.delete("s");
+          dispatch(setOffresSearch({ search: "" }));
         } else {
           params.set("s", value);
+          dispatch(setOffresSearch({ search: value }));
         }
         const otherPrm = "all-skip";
         params.delete(otherPrm);

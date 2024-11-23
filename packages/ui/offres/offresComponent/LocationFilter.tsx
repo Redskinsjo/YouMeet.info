@@ -6,6 +6,12 @@ import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import regions_departements from "@youmeet/raw-data/regions_departements.json";
 import { ReactElement, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  resetOffresSearch,
+  setOffresSearch,
+} from "@youmeet/global-config/features/search";
+import { RootState } from "@youmeet/global-config/store";
 
 const GenericField = dynamic(
   () =>
@@ -29,9 +35,13 @@ export default function LocationFilter() {
   const search = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
   const multiple = true;
   const location = search.get("l")?.split(",") || [];
-  const searchLocation = location.map((l) =>
+  const locations = useSelector(
+    (state: RootState) => state.search.offres.departments
+  );
+  const searchLocation = (locations || location).map((l) =>
     list.find((d) => d.code === l)
   ) as Department[];
 
@@ -47,8 +57,13 @@ export default function LocationFilter() {
 
       const prm = "l";
       const params = new URLSearchParams(search.toString());
-      if (codes.length > 0) params.set(prm, codeStr);
-      else params.delete(prm);
+      if (codes.length > 0) {
+        params.set(prm, codeStr);
+        dispatch(setOffresSearch({ departments: codes }));
+      } else {
+        params.delete(prm);
+        dispatch(setOffresSearch({ departments: [] }));
+      }
       const otherPrm = "all-skip";
       params.delete(otherPrm);
       const query = params.toString();
@@ -80,9 +95,15 @@ export default function LocationFilter() {
         const codes = searchLocation.map((v) => v.code).join(",");
         const prm = "l";
         const params = new URLSearchParams(search.toString());
+
+        // update the locations
         params.set(prm, codes);
+        dispatch(setOffresSearch({ departments: codes.split(",") }));
+        // update the skip
         const otherPrm = "all-skip";
         params.delete(otherPrm);
+        dispatch(setOffresSearch({ [otherPrm]: 0 }));
+
         const query = params.toString();
         router.push(pathname + "?" + query);
       }}
@@ -111,14 +132,26 @@ export default function LocationFilter() {
                 onDelete={() => {
                   const code = option.code;
                   const params = new URLSearchParams(search.toString());
-                  const locations = params.get("l")?.split(",") || [];
-                  const newLocations = locations.filter((l) => l !== code);
-                  if (newLocations.length === 0) params.delete("l");
-                  else params.set("l", newLocations.join(","));
+                  const newLocations = (locations || location).filter(
+                    (l) => l !== code
+                  );
+
+                  // update the locations
+                  console.log("newLocations", newLocations);
+                  if (newLocations.length === 0) {
+                    params.delete("l");
+                    dispatch(setOffresSearch({ departments: [] }));
+                  } else {
+                    params.set("l", newLocations.join(","));
+                    dispatch(setOffresSearch({ departments: newLocations }));
+                  }
+
+                  // update the skip
                   const otherPrm = "all-skip";
                   params.delete(otherPrm);
+                  dispatch(setOffresSearch({ [otherPrm]: 0 }));
                   const query = params.toString();
-                  router.push(pathname + "?" + query);
+                  router.push("/offres" + "?" + query);
                 }}
                 className={tagProps.className}
                 data-tag-index={tagProps["data-tag-index"]}

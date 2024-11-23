@@ -724,12 +724,14 @@ model offers {
   updatedAt                   DateTime?
   idFT                        String?                 @unique
   intitule                    String?
+  intituleReduced             String?
   description                 String?
   dateCreation                String?
   dateActualisation           String?
   lieuTravail                 WorkLocationFT?
   romeCode                    String?
   romeLibelle                 String?
+  romeLibelleReduced          String?
   appellationlibelle          String?
   entreprise                  EnterpriseFT?
   typeContrat                 String?

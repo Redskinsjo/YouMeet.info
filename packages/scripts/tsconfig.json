@@ -4,7 +4,8 @@
     "allowJs": true,
     "downlevelIteration": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "lib": ["esnext"]
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }

@@ -10,9 +10,11 @@ export default async function OfferComponent({
   params: Promise<{ offre: string }>;
 }) {
   const prms = await params;
+  const decoded = decodeURIComponent(prms.offre);
+  if (!decoded) return notFound();
 
   const offer = (await getOffer({
-    slug: decodeURIComponent(prms.offre),
+    slug: decoded,
   })) as Offer;
 
   let offers = [] as Offer[];

@@ -99,6 +99,8 @@ export class OfferSchema {
   public idFT: string;
   @prop({ index: true })
   public intitule: string;
+  @prop({ index: true })
+  public intituleReduced: string;
   @prop()
   public description: string;
   @prop()
@@ -111,6 +113,8 @@ export class OfferSchema {
   public romeCode: string;
   @prop()
   public romeLibelle: string;
+  @prop({ index: true })
+  public romeLibelleReduced: string;
   @prop()
   public appellationlibelle: string;
   @prop()

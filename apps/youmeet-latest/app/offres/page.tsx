@@ -40,9 +40,10 @@ export const metadata: Metadata = {
 export default async function Offres({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string }>;
+  searchParams?: Promise<{ [key: string]: string }>;
 }) {
   const prms = await searchParams;
+  if (!prms) return notFound();
   const getIfExist = (oneParam: string) => (oneParam ? oneParam : "");
   const getSkip = (skip: string) => {
     if (!skip || Number.isNaN(skip)) return 0;

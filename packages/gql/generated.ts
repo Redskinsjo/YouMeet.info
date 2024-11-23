@@ -1434,6 +1434,7 @@ export type Offer = {
   id?: Maybe<Scalars['ID']['output']>;
   idFT?: Maybe<Scalars['String']['output']>;
   intitule?: Maybe<Scalars['String']['output']>;
+  intituleReduced?: Maybe<Scalars['String']['output']>;
   job?: Maybe<Job>;
   jobDescriptionLink?: Maybe<Scalars['String']['output']>;
   jobId?: Maybe<Scalars['String']['output']>;
@@ -1459,6 +1460,7 @@ export type Offer = {
   revenue?: Maybe<Scalars['Int']['output']>;
   romeCode?: Maybe<Scalars['String']['output']>;
   romeLibelle?: Maybe<Scalars['String']['output']>;
+  romeLibelleReduced?: Maybe<Scalars['String']['output']>;
   salaire?: Maybe<SalaryFt>;
   secteurActivite?: Maybe<Scalars['String']['output']>;
   secteurActiviteLibelle?: Maybe<Scalars['String']['output']>;
@@ -4153,6 +4155,7 @@ export type OfferResolvers<ContextType = any, ParentType extends ResolversParent
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   idFT?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   intitule?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  intituleReduced?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   job?: Resolver<Maybe<ResolversTypes['Job']>, ParentType, ContextType>;
   jobDescriptionLink?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   jobId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -4178,6 +4181,7 @@ export type OfferResolvers<ContextType = any, ParentType extends ResolversParent
   revenue?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   romeCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   romeLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  romeLibelleReduced?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   salaire?: Resolver<Maybe<ResolversTypes['SalaryFT']>, ParentType, ContextType>;
   secteurActivite?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   secteurActiviteLibelle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

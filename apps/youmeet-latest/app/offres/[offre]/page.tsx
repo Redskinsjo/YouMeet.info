@@ -25,14 +25,15 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const prms = await params;
   const decoded = decodeURIComponent(prms.offre);
+  if (!decoded) return {};
   const offre = (await getOfferMetadata({
     slug: decoded,
   })) as Offer;
 
   const title =
-    offre.job?.title?.fr ||
-    offre.job?.title?.en ||
-    offre.intitule ||
+    offre?.job?.title?.fr ||
+    offre?.job?.title?.en ||
+    offre?.intitule ||
     "Nouvelle offre";
 
   if (offre) {
@@ -106,6 +107,7 @@ export default async function OfferComponent({
 }) {
   const prms = await params;
   const decoded = decodeURIComponent(prms.offre);
+  if (!decoded) return notFound();
   const offer = (await getOffer({
     slug: decoded,
   })) as Offer;

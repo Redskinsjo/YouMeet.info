@@ -10,6 +10,7 @@
     "./useRedirect": "./useRedirect.ts",
     "./useFormDefaultValues": "./useFormDefaultValues.ts",
     "./useSubscriptionStatus": "./useSubscriptionStatus.ts",
+    "./useSelectedLayoutClient": "./useSelectedLayoutClient.ts",
     "./features/form": "./features/form.ts",
     "./features/global": "./features/global.ts",
     "./features/modal": "./features/modal.ts",

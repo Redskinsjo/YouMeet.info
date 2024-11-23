@@ -1,6 +1,5 @@
 import { dev } from "@youmeet/functions/imports";
 import Script from "next/script";
-import React from "react";
 
 export default function GoogleTagAndHotjarComponent() {
   return !dev ? (

@@ -1,8 +1,10 @@
 "use client";
+import { setOffresSearch } from "@youmeet/global-config/features/search";
 import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { IoChevronForwardSharp, IoChevronBackSharp } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 
 export default function CardNavigation({
   type,
@@ -13,7 +15,7 @@ export default function CardNavigation({
 }) {
   const search = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
+  const dispatch = useDispatch();
   const [value, setValue] = useState(search.get(`${type}-skip`));
 
   let sort = "asc";
@@ -39,9 +41,11 @@ export default function CardNavigation({
               sort === "asc" ? parseInt(value) + 1 : parseInt(value) - 1
             }`;
             params.set(`${type}-skip`, toSet);
+            dispatch(setOffresSearch({ [`${type}-skip`]: toSet }));
             setValue(toSet);
           } else {
             params.set(`${type}-skip`, "1");
+            dispatch(setOffresSearch({ [`${type}-skip`]: 1 }));
             setValue("1");
           }
           const query = params.toString();

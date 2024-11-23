@@ -14,8 +14,9 @@
     "transferCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./transferCompetencies.ts",
     "deleteCompetencies": "SCRIPT=true dotenv -e .env.development -- ts-node ./deleteCompetencies.ts",
     "testingAPIPackage": "SCRIPT=true dotenv -e .env.development -- npx tsx ./testingAPIPackage.ts",
-    "importFTOffers": "SCRIPT=true dotenv -e .env -- npx tsx ./importFTOffers.ts",
-    "checkDbIndexes": "SCRIPT=true dotenv -e .env.development -- ts-node ./checkDbIndexes.ts"
+    "importFTOffers": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts",
+    "checkDbIndexes": "SCRIPT=true dotenv -e .env.development -- ts-node ./checkDbIndexes.ts",
+    "updateReducedOffers": "SCRIPT=true dotenv -e .env -- ts-node ./updateReducedOffers.ts"
   },
   "dependencies": {
     "@youmeet/competencies": "*",
