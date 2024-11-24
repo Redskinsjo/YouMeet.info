@@ -3,10 +3,10 @@ import { Button, useMediaQuery } from "@mui/material";
 import {
   createElement,
   useState,
-  useEffect,
   ReactElement,
   Dispatch,
   SetStateAction,
+  useMemo,
 } from "react";
 import TooltipedAsset from "@youmeet/ui/TooltipedAsset";
 import { useTranslation } from "react-i18next";
@@ -40,6 +40,7 @@ export default function PageContent({
   const [pageIndex, setPageIndex] = useState(0);
   const dispatch = useDispatch();
   const router = useRouter();
+  router.prefetch("/dashboard");
 
   const step = useSelector(
     (state: RootState) => (state.form as FormState).profileStep
@@ -70,6 +71,29 @@ export default function PageContent({
     setPageIndex(pageIndex - 1 >= 0 ? pageIndex - 1 : 0);
     setTransitioned(false);
   };
+
+  const fields = useMemo(() => {
+    return firstPartPages.map((field) => {
+      const currentField = firstPartPages[field.props.id ?? 0];
+      const currentValue = watch(currentField.props.name);
+
+      return createElement(
+        field.field as unknown as (props: any) => ReactElement,
+        {
+          key: field.props.id,
+          ...field.props,
+          type: pageIndex === field.props.id ? "text" : "hidden",
+          value: currentValue,
+          step: step,
+          errors,
+          clearErrors,
+          setError,
+          setValue,
+          phonecode: watch("phonecode"),
+        }
+      );
+    });
+  }, [errors, pageIndex, step, watch(), clearErrors, setError, setValue]);
 
   const customOnFormData = async (
     extras: { userId: string },
@@ -124,15 +148,11 @@ export default function PageContent({
     }
   };
 
-  useEffect(() => {
-    router.prefetch("/dashboard");
-  }, []);
-
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex-center">
         {currentFieldName === "linkedinProfileId" ? (
-          <>
+          <div className="p-[6px]">
             <BoldText
               text={
                 md
@@ -141,7 +161,7 @@ export default function PageContent({
               }
               align="left"
             />
-          </>
+          </div>
         ) : undefined}
       </div>
       <div className="h-full flex-center flex-col w-full my-[24px]">
@@ -155,26 +175,7 @@ export default function PageContent({
         >
           <div className="rounded-[30px] w-full">
             <div className="w-full flex-center flex-col bg-grey100 border-[0.5px] border-solid border-grey300 dark:extraLightDarkBg rounded-xl p-[8px] box-border">
-              {firstPartPages.map((field) => {
-                const currentField = firstPartPages[field.props.id ?? 0];
-                const currentValue = watch(currentField.props.name);
-
-                return createElement(
-                  field.field as unknown as (props: any) => ReactElement,
-                  {
-                    key: field.props.id,
-                    ...field.props,
-                    type: pageIndex === field.props.id ? "text" : "hidden",
-                    value: currentValue,
-                    step: step,
-                    errors,
-                    clearErrors,
-                    setError,
-                    setValue,
-                    phonecode: watch("phonecode"),
-                  }
-                );
-              })}
+              {fields}
             </div>
           </div>
           <div className="flex gap-[12px] items-center justify-end h-[40px] xs:right-0 right-[48px]">

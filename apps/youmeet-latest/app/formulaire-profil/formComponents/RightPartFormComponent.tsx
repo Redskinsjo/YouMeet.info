@@ -12,25 +12,14 @@ export default function RightPartFormComponent({
   defaultValues: Partial<ProfileFormDefaultValues> | undefined;
 }) {
   return (
-    <Layout
-      newClasses="dark:darkBg lightBg flex-1"
-      newStyles={{
-        maxWidth: "unset",
-        padding: "0px 40px",
-        justifyContent: "center",
-        height: "unset",
-        boxSizing: "border-box",
-      }}
-    >
-      <div className="xs:w-screen sm:w-screen md:w-screen w-[50vw] box-border flex flex-1 justify-center">
-        <div className="flex w-full flex-col">
-          <PageContentTitle />
+    <div className="xs:w-screen sm:w-screen md:w-screen w-[50vw] box-border flex flex-1 justify-center box-border p-[48px] xs:p-[12px] sm:p-[12px]">
+      <div className="flex w-full flex-col">
+        <PageContentTitle />
 
-          <Suspense>
-            <PageContent defaultValues={defaultValues} />
-          </Suspense>
-        </div>
+        <Suspense>
+          <PageContent defaultValues={defaultValues} />
+        </Suspense>
       </div>
-    </Layout>
+    </div>
   );
 }

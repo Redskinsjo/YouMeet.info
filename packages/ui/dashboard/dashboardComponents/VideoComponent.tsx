@@ -65,6 +65,7 @@ export default function VideoComponent({
             maxWidth: "100vw",
             width: "100%",
             height: "100%",
+            mobileWidth: "100%",
           }}
           containerNewStyles={{
             maxWidth: videoWidth,

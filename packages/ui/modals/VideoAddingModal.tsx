@@ -23,7 +23,7 @@ import { deepPurple, green, grey } from "@mui/material/colors";
 import NewAddCVComponent from "../NewAddCVComponent";
 import { Button, FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
-import LoginModalClose from "../LoginModalClose";
+import LoginModalClose from "../login/LoginModalClose";
 import { modals } from "./modals";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });

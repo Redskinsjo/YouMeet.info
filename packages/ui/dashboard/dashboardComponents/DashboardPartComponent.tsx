@@ -76,8 +76,12 @@ export default function DashboardPartComponent({
         <Tabs
           value={value}
           onChange={handleChange}
-          className="px-[24px] dark:extraLightDarkBg"
-          aria-label="basic tabs example"
+          className="px-[24px] dark:extraLightDarkBg overflow-x-scroll"
+          sx={{
+            "& .MuiTabs-flexContainer": {
+              overflowX: "scroll",
+            },
+          }}
         >
           <Tab
             className="dark:text-white"

@@ -16,7 +16,7 @@ import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import DetailComponent from "../../DetailComponent";
 import BoldText from "../../BoldText";
 import isProfileEmpty from "@youmeet/utils/basics/isProfileEmpty";
-import NewProfileComponent from "../../profils/[candidateName]/candidateProfileComponents/NewProfileComponent";
+import NewProfileComponent from "@youmeet/ui/NewProfileComponent";
 import Link from "next/link";
 import { uri } from "@youmeet/functions/imports";
 import CustomIcon from "../../CustomIcon";

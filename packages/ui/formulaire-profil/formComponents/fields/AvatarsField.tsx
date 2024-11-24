@@ -10,6 +10,7 @@ import { dev } from "@youmeet/functions/imports";
 import { Avatar } from "@youmeet/gql/generated";
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 
 export default function AvatarsField({
   name,
@@ -27,20 +28,16 @@ export default function AvatarsField({
   const [fieldVal, setFieldVal] = useState<
     File | Partial<Avatar> | undefined
   >();
-  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const xs = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
-    if (value) {
-      const file = value as any;
-      if (file) {
-        setFieldVal(file);
-        if (dev) setSrc(file.url);
-        else setSrc(file.secure_url);
-      }
+    if (value && value[0]) {
+      const file = setFileUrl(value[0]) || "";
+      setFieldVal(value);
+      if (file) setSrc(file);
     }
-  }, []);
+  }, [value]);
 
   return (
     <div
@@ -100,11 +97,10 @@ export default function AvatarsField({
                 }
                 onClick={() => {
                   if (clearErrors) clearErrors();
-                  setLoading(true);
+
                   setSrc("");
                   if (setValue) setValue(name, undefined);
                   setFieldVal(undefined);
-                  setLoading(false);
                 }}
               />
             )}
@@ -131,7 +127,7 @@ export default function AvatarsField({
             )}
             {!!src && name === "video" && (
               <div className="italic text-[12px] font-bold text-center w-full box-border overflow-hidden dark:text-white">
-                {(fieldVal as Partial<Avatar>).original_filename ??
+                {(fieldVal as Partial<Avatar>)?.original_filename ??
                   (fieldVal as File)?.name}
               </div>
             )}
@@ -149,7 +145,6 @@ export default function AvatarsField({
               className="hidden"
               type={"file"}
               onChange={(e) => {
-                setLoading(true);
                 const files = (e.target as HTMLInputElement).files as FileList;
                 if (typeof files[0] === "object") {
                   setSrc(URL.createObjectURL(files[0]));
@@ -163,7 +158,6 @@ export default function AvatarsField({
                   }
                   if (setValue) setValue(name, files[0]);
                 }
-                setLoading(false);
               }}
               accept={
                 name === "logo" || name === "avatars"

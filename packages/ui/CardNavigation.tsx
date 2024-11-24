@@ -2,23 +2,28 @@
 import { setOffresSearch } from "@youmeet/global-config/features/search";
 import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoChevronForwardSharp, IoChevronBackSharp } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 
 export default function CardNavigation({
   type,
   length,
+  sort = "asc",
 }: {
   type: SuggestedMeetsType;
   length: number;
+  sort?: string;
 }) {
   const search = useSearchParams();
   const router = useRouter();
   const dispatch = useDispatch();
   const [value, setValue] = useState(search.get(`${type}-skip`));
 
-  let sort = "asc";
+  useEffect(() => {
+    setValue(search.get(`${type}-skip`));
+  }, [search.get(`${type}-skip`)]);
+
   if (search.has(`${type}-skip`) && value) {
     const isNotNum = Number.isNaN(parseInt(value));
     if (isNotNum) return;
@@ -30,8 +35,11 @@ export default function CardNavigation({
   } else {
     if (length < 5) return;
   }
+
+  if (sort === "desc" && (value === "0" || !value)) return;
+
   return (
-    <div className="w-[40px] xs:w-[49%] sm:w-[49%] h-[300px] flex justify-start">
+    <div className="w-[40px] xs:w-[49%] sm:w-[49%] flex-1 flex justify-start">
       <form
         action={() => {
           const params = new URLSearchParams(search.toString());

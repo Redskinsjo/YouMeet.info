@@ -15,6 +15,7 @@ import TooltipedAsset from "./TooltipedAsset";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
 import { Attr } from "@youmeet/types/attributes";
+import { updateUser } from "@youmeet/functions/request";
 
 export default function DetailComponent({
   label,
@@ -171,18 +172,12 @@ export default function DetailComponent({
                 className="item cursor-pointer dark:text-white"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: appUser.hiddenFields.filter(
-                            (f) => !name
-                          ),
-                        },
-                        userId: appUser.id,
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: {
+                        hiddenFields: appUser.hiddenFields.filter((f) => !name),
                       },
-                    });
-                    const updated = response.data?.updateUser;
+                    })) as BetaUser;
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])
@@ -204,16 +199,10 @@ export default function DetailComponent({
                 className="item cursor-pointer dark:text-grey300 text-grey700"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: [...appUser.hiddenFields, name],
-                        },
-                        userId: appUser.id,
-                      },
-                    });
-                    const updated = response.data?.updateUser;
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: { hiddenFields: [...appUser.hiddenFields, name] },
+                    })) as BetaUser;
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])
@@ -308,18 +297,12 @@ export default function DetailComponent({
                 className="item text-black cursor-pointer"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: appUser.hiddenFields.filter(
-                            (f) => !name
-                          ),
-                        },
-                        userId: appUser.id,
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: {
+                        hiddenFields: appUser.hiddenFields.filter((f) => !name),
                       },
-                    });
-                    const updated = response.data?.updateUser;
+                    })) as BetaUser;
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])
@@ -339,16 +322,11 @@ export default function DetailComponent({
                 className="item text-black cursor-pointer"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: [...appUser.hiddenFields, name],
-                        },
-                        userId: appUser.id,
-                      },
-                    });
-                    const updated = response.data?.updateUser;
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: { hiddenFields: [...appUser.hiddenFields, name] },
+                    })) as BetaUser;
+
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])

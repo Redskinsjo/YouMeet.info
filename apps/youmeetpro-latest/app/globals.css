@@ -443,7 +443,7 @@ p {
     @apply flex flex-col hover:cursor-pointer w-[144px];
   }
   .auth-form-content {
-    @apply flex-center flex-col w-full p-[48px] flex-1 h-full xs:p-[12px] sm:p-[12px] gap-[36px] relative bg-white appear_slowly box-border bg-white md:border-[2px] md:border-solid md:border-grey300;
+    @apply flex-center flex-col w-full p-[48px] flex-1 h-full xs:px-[18px] xs:py-[24px] sm:px-[18px] sm:py-[24px] gap-[36px] relative bg-white appear_slowly box-border bg-white md:border-[2px] md:border-solid md:border-grey300;
   }
   .sm-auth-container {
     @apply h-full flex flex-col items-center w-full box-border p-[4px] rounded-lg shadow-2xl;

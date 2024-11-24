@@ -39,7 +39,7 @@ export default function NewPublicVideoComponent({
           profil={profil}
           video={principalVideo?.file}
           name={principalVideo?.file?.original_filename as string}
-          newStyles={{ width: "100%", maxHeight: "400px" }}
+          newStyles={{ width: "100%", maxHeight: "400px", mobileWidth: "100%" }}
           containerNewStyles={{
             maxHeight: "400px",
             width: "100%",

@@ -14,7 +14,7 @@ import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 import { Button, InputLabel, MenuItem, Select } from "@mui/material";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi2";
 import Link from "next/link";
-import LoginModalClose from "../LoginModalClose";
+import LoginModalClose from "../login/LoginModalClose";
 import { modals } from "./modals";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
@@ -62,6 +62,7 @@ export default function CustomModalContent({
                   (content as string) ??
                     (modals[type].content as trads)[language]
                 )}`}
+                align="center"
               />
             )}
           </div>

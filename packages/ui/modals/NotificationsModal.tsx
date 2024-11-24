@@ -22,7 +22,7 @@ import { resetModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { client } from "@youmeet/gql/index";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
-import LoginModalClose from "../LoginModalClose";
+import LoginModalClose from "../login/LoginModalClose";
 
 export default function NotificationsModalComponent(props: CustomModalProps) {
   const user = useSelector((state: RootState) => state.user as UserState);

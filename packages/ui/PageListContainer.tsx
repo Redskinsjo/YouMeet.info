@@ -1,9 +1,7 @@
 import BoldText from "./TextChild";
 import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
 import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
-import dynamic from "next/dynamic";
-
-const SuggestedMeets = dynamic(() => import("./SuggestedMeets"));
+import SuggestedMeets from "./SuggestedMeets";
 
 export default function PageListContainer({
   data,

@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Button, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import AdmitCGU from "./AdmitCGU";
+import AdmitCGU from "../AdmitCGU";
 import dynamic from "next/dynamic";
 import { GlobalState } from "@youmeet/global-config/features/global";
 import { RootState } from "@youmeet/global-config/store";
