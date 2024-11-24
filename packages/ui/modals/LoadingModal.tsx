@@ -1,5 +1,5 @@
-import LoginModalClose from "../LoginModalClose";
-import { ModalWrapper } from "../CustomModal";
+import LoginModalClose from "../login/LoginModalClose";
+import ModalWrapper from "../modals/ModalWrapper";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import Logo from "../Logo";
 import LoadingText from "../LoadingText";

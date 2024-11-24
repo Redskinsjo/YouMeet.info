@@ -1,7 +1,7 @@
 "use client";
 
 import ModalWrapper from "./ModalWrapper";
-import LoginModalClose from "../LoginModalClose";
+import LoginModalClose from "../login/LoginModalClose";
 import dynamic from "next/dynamic";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 

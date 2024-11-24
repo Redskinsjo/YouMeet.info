@@ -34,7 +34,7 @@ export default function OtherOffersComponent({ offre }: { offre: Offer }) {
   }, [getValues]);
 
   return (
-    <div className="flex w-full flex-col items-center p-[24px] xs:p-[12px] sm:p-[12px] md:p-[12px] box-border gap-[24px] bg-white dark:mediumDarkBg h-full rounded-[14px] shadow-custom">
+    <div className="flex w-full flex-col items-center p-[24px] xs:p-[12px] sm:p-[12px] md:p-[12px] box-border gap-[24px] bg-white dark:mediumDarkBg h-full border-[0.5px] border-solid border-grey300 shadow-custom">
       <h3 className="dark:text-white">{t("some-more-offers")}</h3>
       <BoldText
         text={t("take-opportunity-to-apply")}

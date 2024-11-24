@@ -7,7 +7,9 @@ export default function PageContentTitle() {
   return (
     <div className="w-full flex-center flex-col gap-[24px]">
       <h1 className="text-center my-[36px] dark:text-white">{t("the-form")}</h1>
-      <BoldText text={t("fulfill-perso-form")} fontSizeClass="text-[16px]" />
+      <div className="p-[6px]">
+        <BoldText text={t("fulfill-perso-form")} />
+      </div>
     </div>
   );
 }

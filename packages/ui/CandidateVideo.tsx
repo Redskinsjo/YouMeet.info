@@ -376,10 +376,31 @@ export default function CandidateVideo({
         className="relative h-full flex w-full xs:flex-col-reverse sm:flex-col-reverse md:flex-col-reverse justify-between"
         style={{
           ...containerNewStyles,
-          minHeight: inFullScreen ? "100%" : containerNewStyles?.minHeight,
-          minWidth: inFullScreen ? "100%" : containerNewStyles?.minWidth,
-          height: inFullScreen ? "100%" : containerNewStyles?.height,
-          width: inFullScreen ? "100%" : containerNewStyles?.width,
+          minHeight: inFullScreen
+            ? "100%"
+            : xs || sm || md
+            ? containerNewStyles?.mobileMinHeight
+            : containerNewStyles?.minHeight,
+          minWidth: inFullScreen
+            ? "100%"
+            : xs || sm || md
+            ? containerNewStyles?.mobileMinWidth
+            : containerNewStyles?.minWidth,
+          height: inFullScreen
+            ? "100%"
+            : xs || sm || md
+            ? containerNewStyles?.mobileHeight
+            : containerNewStyles?.height,
+          width: inFullScreen
+            ? "100%"
+            : xs || sm || md
+            ? containerNewStyles?.mobileWidth
+            : containerNewStyles?.width,
+          maxWidth: inFullScreen
+            ? "100%"
+            : xs || sm || md
+            ? containerNewStyles?.mobileMaxWidth
+            : containerNewStyles?.maxWidth,
         }}
       >
         {!loading && (
@@ -410,12 +431,32 @@ export default function CandidateVideo({
               autoPlay={notAutoPlay ? false : true}
               id="video"
               style={{
-                maxWidth: "100%",
                 ...newStyles,
-                minHeight: inFullScreen ? "100%" : newStyles?.minHeight,
-                minWidth: inFullScreen ? "100%" : newStyles?.minWidth,
-                height: inFullScreen ? "100%" : newStyles?.height,
-                width: inFullScreen ? "100%" : newStyles?.height,
+                minHeight: inFullScreen
+                  ? "100%"
+                  : xs || sm || md
+                  ? newStyles?.mobileMinHeight
+                  : newStyles?.minHeight,
+                minWidth: inFullScreen
+                  ? "100%"
+                  : xs || sm || md
+                  ? newStyles?.mobileMinWidth
+                  : newStyles?.minWidth,
+                height: inFullScreen
+                  ? "100%"
+                  : xs || sm || md
+                  ? newStyles?.mobileHeight
+                  : newStyles?.height,
+                width: inFullScreen
+                  ? "100%"
+                  : xs || sm || md
+                  ? newStyles?.mobileWidth
+                  : newStyles?.width,
+                maxWidth: inFullScreen
+                  ? "100%"
+                  : xs || sm || md
+                  ? newStyles?.mobileMaxWidth
+                  : newStyles?.maxWidth,
               }}
               src={setFileUrl(video, onTheFly) as string}
               onClick={(e) => togglePlay(e)}

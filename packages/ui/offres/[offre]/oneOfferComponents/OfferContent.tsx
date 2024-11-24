@@ -39,7 +39,7 @@ export default function OfferContent({ offre }: { offre: Offer }) {
 
   return (
     !!values && (
-      <div className="dark:mediumDarkBg bg-grey50 flex w-full flex-col items-center p-[12px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] xs:gap-[12px] sm:gap-[12px] rounded-[16px] shadow-custom h-full overflow-hidden overflow-y-scroll">
+      <div className="dark:mediumDarkBg bg-grey50 flex w-full flex-col items-center p-[12px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] xs:gap-[12px] sm:gap-[12px] border-[0.5px] border-solid border-grey300 shadow-custom h-full overflow-hidden overflow-y-scroll">
         <div className="flex-center flex-col">
           {values.rebroadcast && (
             <div className="flex-1 text-[16px] flex-center flex-col gap-[6px] p-[6px] bg-grey50 dark:lightDarkBg text-deepPurple500 dark:text-deepPurple200 text-center">

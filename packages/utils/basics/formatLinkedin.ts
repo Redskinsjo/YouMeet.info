@@ -1,11 +1,11 @@
 export const linkedinIdRegex = new RegExp(
-  /(?<=linkedin\.com\/in\/)[^\/]{1,}/,
-  "gm",
+  /(?<=linkedin\.com\/in\/)[^\/]+/,
+  "gm"
 );
 
 export const linkedinPageRegex = new RegExp(
-  /(?<=linkedin\.com\/company\/)[^\/]{1,}/,
-  "gm",
+  /(?<=linkedin\.com\/company\/)[^\/]+/,
+  "gm"
 );
 
 export const getLinkedinUrlFromId = (id: string) => {

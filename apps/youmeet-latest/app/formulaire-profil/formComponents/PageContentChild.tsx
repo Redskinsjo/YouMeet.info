@@ -14,7 +14,7 @@ export default function fnc({
 }) {
   return (
     <Suspense>
-      <PageContent defaultValues={defaultValues} />;
+      <PageContent defaultValues={defaultValues} />
     </Suspense>
   );
 }

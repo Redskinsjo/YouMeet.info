@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { useRouter } from "next/navigation";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
-import LoginModalContent from "./LoginModalContent";
+import LoginModalContent from "./login/LoginModalContent";
 import { ModalState } from "@youmeet/global-config/features/modal";
 import dynamic from "next/dynamic";
 

@@ -1,6 +1,6 @@
 "use client";
 import { TextField, useMediaQuery } from "@mui/material";
-import React, { useEffect, useId, useState } from "react";
+import React, { useCallback, useEffect, useId, useState } from "react";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
 import {
   linkedinIdRegex,
@@ -80,7 +80,7 @@ export default function SimpleField({
     };
   }
 
-  const getOnChange = () => {
+  const getOnChange = useCallback(() => {
     return {
       phonecode: (e: any) => {
         if (clearErrors) clearErrors();
@@ -119,17 +119,24 @@ export default function SimpleField({
       },
       linkedinProfileId: (e: any) => {
         if (clearErrors) clearErrors();
-        if (!linkedinIdRegex.test(e.target.value))
-          if (setError)
+        const match = e.target.value.match(linkedinIdRegex);
+        if (!match) {
+          if (setError) {
             setError(name, { message: "Le lien n'est pas correcte." });
+          }
+        }
+
         if (setValue) setValue(name, e.target.value);
         setFieldVal(e.target.value);
       },
       linkedinProfilePage: (e: any) => {
         if (clearErrors) clearErrors();
-        if (!linkedinPageRegex.test(e.target.value))
+        const match = e.target.value.match(linkedinPageRegex);
+        if (!match) {
           if (setError)
             setError(name, { message: "Le lien n'est pas correcte." });
+        }
+
         if (setValue) setValue(name, e.target.value);
         setFieldVal(e.target.value);
       },
@@ -142,7 +149,7 @@ export default function SimpleField({
         setFieldVal(e.target.value);
       },
     };
-  };
+  }, [name, setValue, setError, clearErrors, onChange, user.company?.id]);
 
   useEffect(() => {
     setFieldVal(value);

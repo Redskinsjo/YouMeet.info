@@ -26,10 +26,7 @@ export default function NewProfileComponent({
 }) {
   const router = useRouter();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    router.prefetch("/formulaire-profil?step=1");
-  }, []);
+  router.prefetch("/formulaire-profil?step=1");
 
   const linkedin = useMemo(() => {
     if (profil.linkedinProfileId) {
@@ -224,7 +221,7 @@ export default function NewProfileComponent({
             name="salaryExpected"
             account={account}
             type="modal"
-            label={t("me-profile-infos-label-age")}
+            label={t("me-profile-infos-label-salary")}
             value={
               profil?.candidate?.salaryExpected ? (
                 profil?.candidate?.salaryExpected

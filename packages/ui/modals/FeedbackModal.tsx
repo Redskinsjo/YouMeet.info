@@ -19,7 +19,7 @@ import { useActionState, useRef } from "react";
 import dynamic from "next/dynamic";
 import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
 import { modals } from "./modals";
-import LoginModalClose from "../LoginModalClose";
+import LoginModalClose from "../login/LoginModalClose";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 

@@ -5,7 +5,8 @@ import { Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
 const width = "w-[300px] xs:w-[49%] sm:w-[49%]";
-const elClassName = `${width} bg-white p-[12px] box-border flex-bet flex-col gap-[24px] xs:gap-[12px] sm:gap-[12px] h-[300px] shadow-xl border-[0.5px] border-grey300 border-solid rounded-xl xs:overflow-hidden xs:overflow-y-scroll sm:overflow-hidden sm:overflow-y-scroll`;
+
+const elClassName = `fadeIn bg-white p-[12px] box-border flex-bet flex-col gap-[24px] xs:gap-[12px] sm:gap-[12px] h-[300px] shadow-xl border-[0.5px] border-grey300 border-solid rounded-xl xs:overflow-hidden xs:overflow-y-scroll sm:overflow-hidden sm:overflow-y-scroll ${width}`;
 
 const FTCardOffer = dynamic(() => import("./FTCardOffer"), {
   ssr: false,
@@ -32,7 +33,7 @@ const FTCardOffer = dynamic(() => import("./FTCardOffer"), {
           <OneLineSkeleton width="50px" />
         </div>
       </div>
-      <div className="flex-bet w-full">
+      <div className="flex-bet w-full xs:flex-col-reverse sm:flex-col-reverse">
         <OneLineSkeleton width="35px" />
         <OneLineSkeleton width="35px" />
       </div>

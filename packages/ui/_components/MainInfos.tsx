@@ -121,6 +121,7 @@ export default function MainInfos({ el }: { el: Offer | Competency | Video }) {
             maxWidth: "100vw",
             minWidth: "300px",
             height: "280px",
+            mobileWidth: "100%",
           }}
           containerNewStyles={{
             minWidth: "300px",

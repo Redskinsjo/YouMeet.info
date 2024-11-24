@@ -52,11 +52,11 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
       <form
         ref={cvRef}
         action={customOnAddCV.bind(null, profil?.id as string)}
-        className="rounded-xl flex justify-end min-w-[80px] cursor-pointer relative"
+        className="rounded-xl flex items-center justify-end min-w-[80px] cursor-pointer relative"
       >
         <label
           htmlFor="cv"
-          className="h-full cursor-pointer absolute left-0 dark:text-deepPurple200 text-deepPurple700 font-bold"
+          className="h-full cursor-pointer absolute left-0 dark:text-deepPurple200 text-deepPurple700 font-bold flex-center"
         >
           {t("add-cv")}
         </label>

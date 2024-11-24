@@ -13,8 +13,8 @@ export default function Page({
   defaultValues: Partial<ProfileFormDefaultValues> | undefined;
 }) {
   return (
-    <div className="min-h-screen relative flex flex-col flex-1">
-      <div className="flex-1 flex relative sm:flex-col">
+    <div className="offerView relative flex flex-col">
+      <div className="flex relative xs:flex-col sm:flex-col h-full">
         <div
           className="bg-grey100 dark:extraLightDarkBg flex-center relative z-50 xs:hidden sm:hidden"
           style={{

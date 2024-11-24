@@ -126,7 +126,7 @@ export default function FTCardOffer({
           </div>
         </div>
       </div>
-      <div className="flex-bet w-full">
+      <div className="flex-bet w-full xs:flex-col-reverse sm:flex-col-reverse">
         <SeeMore el={el} />
         <div className="flex-center">
           {logo && <Image src={logo} alt="logo" width={40} height={40} />}

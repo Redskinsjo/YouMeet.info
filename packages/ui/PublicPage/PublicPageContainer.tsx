@@ -24,8 +24,8 @@ export default function PublicPageContainer({
   view?: boolean;
 }) {
   const className = view
-    ? "flex-center box-border h-full w-[600px] xs:0 sm:0"
-    : "flex-center box-border h-full w-[900px] xs:0 sm:0";
+    ? "flex-center box-border h-full w-[600px] xs:w-screen sm:w-screen"
+    : "flex-center box-border h-full w-[900px] xs:w-screen sm:w-screen";
   return (
     <div className={className} style={{ ...newStyles }}>
       <div className="flex flex-col w-full gap-[6px] box-border h-full">

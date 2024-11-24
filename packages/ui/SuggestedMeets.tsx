@@ -2,8 +2,8 @@ import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
+import Card from "./Card";
 
-const Card = dynamic(() => import("./Card"));
 const SuggestedMeetsTitle = dynamic(() => import("./SuggestedMeetsTitle"));
 const CardNavigation = dynamic(() => import("./CardNavigation"));
 const ResetNavigation = dynamic(() => import("./ResetNavigation"));
@@ -45,11 +45,16 @@ export default function SuggestedMeets({
 
       {data.length > 0 ? (
         <div className="flex w-full justify-start">
-          <div className="flex flex-wrap gap-[12px] xs:gap-[6px] sm:gap-[6px] px-[12px]">
+          <div className="flex flex-wrap gap-[12px] xs:gap-[6px] sm:gap-[6px] px-[12px] max-w-screen">
             {data?.map((d: BetaUser | BetaCompany | Offer) => (
               <Card key={d.id} d={d} type={dataType} length={data.length} />
             ))}
-            {type && <CardNavigation type={type} length={data.length} />}
+            <div className="flex-center flex-col">
+              {type && (
+                <CardNavigation type={type} length={data.length} sort="desc" />
+              )}
+              {type && <CardNavigation type={type} length={data.length} />}
+            </div>
           </div>
         </div>
       ) : (
