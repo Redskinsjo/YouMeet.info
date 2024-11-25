@@ -1,3 +1,4 @@
+"use server";
 import { cookies } from "next/headers";
 import { verif } from "../basics/jwt";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";

@@ -4,7 +4,6 @@ import { ModalState } from "@youmeet/global-config/features/modal";
 import { RootState } from "@youmeet/global-config/store";
 import CustomModal from "@youmeet/ui/CustomModal";
 import verifyTokenBrowser from "@youmeet/utils/basics/verifyTokenBrowser";
-import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
 import { useSelector } from "react-redux";
 
 export default async function VideoAddingModal() {
