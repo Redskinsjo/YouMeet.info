@@ -13,11 +13,13 @@ import { UnknownAction } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export default function CreateAffiliation() {
   const [chosen, setChosen] = useState<BetaUser | null>(null);
   const [users, setUsers] = useState<BetaUser[]>([]);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const getParents = async () => {
     const users = (await getUsers<BetaUser[]>({
@@ -41,10 +43,12 @@ export default function CreateAffiliation() {
     } catch (err: any) {
       dispatch(setModal({ display: "not-completed" }) as UnknownAction);
     }
+    router.push("/message");
   };
 
   useEffect(() => {
     getParents();
+    router.prefetch("/message");
   }, []);
 
   return (

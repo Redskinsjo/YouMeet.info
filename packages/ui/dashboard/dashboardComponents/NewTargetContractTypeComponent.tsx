@@ -16,6 +16,7 @@ import { Button, useMediaQuery } from "@mui/material";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { renderContractType } from "@youmeet/utils/basics/renderContractType";
+import { useRouter } from "next/navigation";
 
 const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
   const [isValidated, setIsValidated] = useState(true);
@@ -38,6 +39,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
   const sm = useMediaQuery("(max-width:720px)");
   const md = useMediaQuery("(max-width:900px)");
   const lg = useMediaQuery("(max-width:1050px)");
+  const router = useRouter();
 
   const customOnTargetContractTypeUpdate = useCallback(
     async (extras: { userId: string; contractType: string }) => {
@@ -45,9 +47,13 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
         | PayloadBackendError
         | withData<BetaCandidate>;
 
-      if (result && isPayloadError(result)) dispatch(setError("not-completed"));
-      else if (!result?.data) dispatch(setError("not-completed"));
-      else {
+      if (result && isPayloadError(result)) {
+        dispatch(setError("not-completed"));
+        router.push("/message");
+      } else if (!result?.data) {
+        dispatch(setError("not-completed"));
+        router.push("/message");
+      } else {
         setCandidateValidated((result as withData<BetaCandidate>).data);
         setIsValidated(true);
       }
@@ -60,6 +66,10 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
       setCandidateValidated(profil?.candidate);
     }
   }, [profil?.candidate]);
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <form

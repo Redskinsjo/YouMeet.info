@@ -28,7 +28,7 @@ export default function AddVideo({
   const [displayAdvices, setDisplayAdvices] = useState(false);
   const { t } = useTranslation();
   const videos = profil.videos?.filter((v) => v) || [];
-  console.log(chosenVideo, "chosenVideo");
+
   return (
     <div className="flex flex-col gap-[6px] w-full">
       {videos.length === 0 ? (

@@ -5,8 +5,8 @@ import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import { UnknownAction } from "@reduxjs/toolkit";
-import { usePathname } from "next/navigation";
-import React from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AiOutlineEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +20,11 @@ const Validation = ({ type, watch }: NewFieldProps & GenericFieldProps) => {
     (state: RootState) => (state.user as UserState).company?.id
   );
   const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return type !== "hidden" ? (
     <div className="text-purple900 xs:sentences sm:sentences md:titles lg:titles xl:titles titles p-[8px] flex-center flex-col gap-[12px] dark:text-deepPurple200">
@@ -41,6 +46,7 @@ const Validation = ({ type, watch }: NewFieldProps & GenericFieldProps) => {
                   offerPreview: values,
                 }) as UnknownAction
               );
+              router.push("/message");
             }
           }}
         >

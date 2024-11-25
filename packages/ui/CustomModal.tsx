@@ -26,6 +26,7 @@ const NotificationsModal = dynamic(
 const FeedBackModal = dynamic(() => import("./modals/FeedbackModal"), {
   ssr: false,
 });
+//
 const VideoAddingModal = dynamic(() => import("./modals/VideoAddingModal"), {
   ssr: false,
 });
@@ -102,6 +103,8 @@ export default function CustomModal({
         if (type === "login" || type === "record") router.back();
         if (setDisplayModal) {
           setDisplayModal(null);
+        } else {
+          router.back();
         }
       }}
     >

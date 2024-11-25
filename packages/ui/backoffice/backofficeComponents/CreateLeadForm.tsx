@@ -9,12 +9,14 @@ import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { setName } from "@youmeet/utils/basics/setName";
 import { Button, Checkbox, MenuItem } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function CreateLeadForm({ users }: { users: BetaUser[] }) {
   const dispatch = useDispatch();
   const formRef = useRef<HTMLFormElement | null>(null);
+  const router = useRouter();
 
   const customOnCreateLead = async (formData: FormData) => {
     const result = await onCreateLead(formData);
@@ -27,7 +29,12 @@ export default function CreateLeadForm({ users }: { users: BetaUser[] }) {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
       formRef.current?.reset();
     }
+    router.push("/message");
   };
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <form

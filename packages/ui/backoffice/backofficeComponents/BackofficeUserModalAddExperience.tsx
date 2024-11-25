@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import ExperienceField from "../../formulaire-profil/formComponents/fields/ExperienceField";
 import { FieldValues, useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { BetaUser, CreateExperienceDocument } from "@youmeet/gql/generated";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { setModal, resetModal } from "@youmeet/global-config/features/modal";
+import { useRouter } from "next/navigation";
 
 const BackofficeUserModalAddExperience = ({ data }: { data: BetaUser }) => {
   const {
@@ -31,6 +32,7 @@ const BackofficeUserModalAddExperience = ({ data }: { data: BetaUser }) => {
     },
   });
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const onSubmit = async (formData: FieldValues) => {
     const companyInput = {} as { company?: string; companyName?: string };
@@ -50,8 +52,13 @@ const BackofficeUserModalAddExperience = ({ data }: { data: BetaUser }) => {
       reset();
       dispatch(resetModal("ok") as UnknownAction);
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+      router.push("/message");
     }
   };
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <form

@@ -1,6 +1,6 @@
 "use client";
 import { useMediaQuery } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Flower from "@/public/flower.webp";
 import { useRouter } from "next/navigation";
@@ -34,14 +34,20 @@ export default function ResetPasswordContent({ userId }: { userId: string }) {
           }) as UnknownAction
         );
       } else dispatch(setError("requestNotCompleted") as UnknownAction);
+      router.push("/message");
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+      router.push("/message");
       setTimeout(() => {
         router.push(`/${result.data}`);
         dispatch(resetModal("ok") as UnknownAction);
       }, 2500);
     }
   };
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <form

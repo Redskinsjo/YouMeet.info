@@ -7,6 +7,7 @@ import { UnknownAction } from "@reduxjs/toolkit";
 import { useEffect, useRef, useState } from "react";
 import { MdNotifications } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function NotificationsIconComponent() {
   const notificationsContainerRef = useRef(null);
@@ -15,6 +16,7 @@ export default function NotificationsIconComponent() {
   const modalDisplay = useSelector(
     (state: RootState) => (state.modal as ModalState).display
   );
+  const router = useRouter();
   const [displayNotifications, setDisplayNotifications] = useState(false);
   const { data, refetch } = useQuery(GetMyNotificationsDocument, {
     variables: {

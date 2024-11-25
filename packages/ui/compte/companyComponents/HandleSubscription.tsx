@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import TooltipedAsset from "../../TooltipedAsset";
 import { useTranslation } from "react-i18next";
 import SubPartContainer from "../../SubPartContainer";
@@ -12,6 +12,7 @@ import { UnknownAction } from "@reduxjs/toolkit";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { UserState } from "@youmeet/global-config/features/user";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 export default function HandleSubscription() {
   const dispatch = useDispatch();
@@ -21,6 +22,12 @@ export default function HandleSubscription() {
   const { t } = useTranslation();
   const currentSubscription = isSubscribedPro(subscription);
   const user = useSelector((state: RootState) => state.user as UserState);
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
+
   return (
     !!subscription &&
     !!currentSubscription && (
@@ -47,10 +54,12 @@ export default function HandleSubscription() {
                 });
                 if (response.status === 200) {
                   const subscription = await response.json();
-                  if (subscription)
+                  if (subscription) {
                     dispatch(
                       setModal({ display: "consent2" }) as UnknownAction
                     );
+                    router.push("/message");
+                  }
                 }
               }
             }}

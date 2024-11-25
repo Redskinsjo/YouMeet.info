@@ -42,6 +42,7 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
   const [transitioned, setTransitioned] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+
   const { watch, setValue, reset } = useForm<FieldValues>({
     values: {
       "exchange-0": "",
@@ -66,6 +67,7 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
     exchanges: BetaWhatsappExchange[];
   }) => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
+    router.push("/message");
     const result = (await onAnswerConversation(
       watch(),
       extras.exchanges,
@@ -83,6 +85,7 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
     } else {
       reset();
       dispatch(resetModal("ok") as UnknownAction);
+      router.back();
 
       router.push("/dashboard");
     }
@@ -114,6 +117,7 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
   useEffect(() => {
     customOnConversationEngagement();
     router.prefetch("/dashboard");
+    router.prefetch("/message");
   }, []);
 
   useEffect(() => {

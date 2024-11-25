@@ -32,8 +32,6 @@ export default function OfferChild({
           backgroundRepeat: "repeat",
           backgroundAttachment: "fixed",
           backgroundBlendMode: "hue",
-          // maxWidth: view ? "600px" : "900px",
-          // width: view ? "600px" : "initial",
         }}
       >
         <div

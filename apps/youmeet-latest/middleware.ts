@@ -40,6 +40,7 @@ export async function middleware(request: NextRequest) {
       "offres",
       "regles-de-confidentialite",
       "se-connecter",
+      "ajouter-video",
       "robots.txt",
       ...privatePages,
     ];

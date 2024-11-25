@@ -32,6 +32,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useRouter } from "next/navigation";
 
 const AvatarsField = dynamic(
   () => import("../../formulaire-profil/formComponents/fields/AvatarsField"),
@@ -78,11 +79,12 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
       job: "",
     },
   });
+  const router = useRouter();
 
   const customOnCreateMeet = useCallback(
     async (formData: FormData) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
-
+      router.push("/message");
       const main = formData.get("videoMain") as File;
 
       try {
@@ -93,8 +95,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
           child?.id as string,
           watch("job")
         )) as withData<BetaUser> | PayloadBackendError;
-
-        console.log(result, "result");
 
         if (result && isPayloadError(result)) {
           throw new BackendError(
@@ -149,6 +149,7 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
                   dispatch(
                     setModal({ display: "backofficeConfirm" }) as UnknownAction
                   );
+                  router.push("/message");
                 }
               } else {
                 throw new BackendError(
@@ -183,6 +184,7 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
         });
         dispatch(resetModal("ok") as UnknownAction);
         dispatch(setModal({ display: "not-completed" }) as UnknownAction);
+        router.push("/message");
       }
     },
     [parent, child]
@@ -216,6 +218,7 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
 
   useEffect(() => {
     getParentAffiliation();
+    router.prefetch("/message");
   }, []);
 
   useEffect(() => {

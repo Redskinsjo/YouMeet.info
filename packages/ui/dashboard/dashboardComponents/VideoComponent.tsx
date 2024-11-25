@@ -1,5 +1,12 @@
 "use client";
-import { Dispatch, SetStateAction, useCallback, useMemo, useRef } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import BoldText from "../../BoldText";
 import { useTranslation } from "react-i18next";
 import { Avatar, BetaUser, MeetCandidate, Video } from "@youmeet/gql/generated";
@@ -21,6 +28,7 @@ import { removeVideo, UserState } from "@youmeet/global-config/features/user";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import CandidateVideo from "../../CandidateVideo";
+import { useRouter } from "next/navigation";
 
 export default function VideoComponent({
   profil,
@@ -54,6 +62,11 @@ export default function VideoComponent({
   const deleteVideoFormRef = useRef<HTMLFormElement>(null);
   const setVideoAsDefaultFormRef = useRef<HTMLFormElement>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   const videoComponent = useMemo(() => {
     return (
@@ -78,6 +91,7 @@ export default function VideoComponent({
 
   const customOnDeleteVideo = useCallback(async (videoId: string) => {
     dispatch(setUpload(`delete`));
+    router.push("/message");
     const result = (await onDeleteVideo(videoId)) as
       | PayloadBackendError
       | withData<Video>;

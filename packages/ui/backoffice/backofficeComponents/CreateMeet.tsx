@@ -33,6 +33,7 @@ import VideoComponent from "../../dashboard/dashboardComponents/VideoComponent";
 import SelectField from "../../formulaire-profil/formComponents/fields/SelectField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 const AvatarsField = dynamic(
   () => import("../../formulaire-profil/formComponents/fields/AvatarsField"),
@@ -57,7 +58,7 @@ const AvatarsField = dynamic(
 export default function CreateProUser() {
   const dispatch = useDispatch();
   const [chosen, setChosen] = useState<MeetCandidate | null>(null);
-
+  const router = useRouter();
   const mainVideo = chosen?.videos?.find((video) => !video?.preview);
   const previewsVideos = chosen?.videos?.filter((video) => video?.preview);
   const [candidates, setCandidates] = useState<MeetCandidate[]>([]);
@@ -90,6 +91,7 @@ export default function CreateProUser() {
 
   const customeOnCreateMeet = async (formData: FormData) => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
+    router.push("/message");
 
     const emailCandidate = formData.get("emailCandidate") as string;
     const main = formData.get("videoMain") as File;
@@ -236,6 +238,7 @@ export default function CreateProUser() {
               dispatch(
                 setModal({ display: "backofficeConfirm" }) as UnknownAction
               );
+              router.push("/message");
             }
           }
         } else {
@@ -259,6 +262,7 @@ export default function CreateProUser() {
       });
       dispatch(resetModal("ok") as UnknownAction);
       dispatch(setModal({ display: "not-completed" }) as UnknownAction);
+      router.push("/message");
     }
   };
 
@@ -274,6 +278,7 @@ export default function CreateProUser() {
 
   useEffect(() => {
     getCandidates();
+    router.prefetch("/message");
   }, []);
 
   return (

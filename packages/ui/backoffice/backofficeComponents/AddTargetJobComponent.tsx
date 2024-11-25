@@ -8,7 +8,8 @@ import { setError } from "@youmeet/global-config/features/global";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AddTargetJobComponent({
   profil,
@@ -21,13 +22,20 @@ export default function AddTargetJobComponent({
     });
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const router = useRouter();
 
   const customOnUpdateTargetJob = async (formData: FieldValues) => {
     const userId = profil.id as string;
     const result = await onUpdateTargetJob(userId, formData);
-    if (result && isPayloadError(result))
+    if (result && isPayloadError(result)) {
       dispatch(setError("not-completed") as UnknownAction);
+      router.push("/message");
+    }
   };
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return !profil.candidate?.targetJob ? (
     <form

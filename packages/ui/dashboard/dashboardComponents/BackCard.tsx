@@ -28,6 +28,7 @@ import { CardTurnUp } from "@youmeet/types/Header";
 import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import NoData from "../../NoData";
 import { setModal } from "@youmeet/global-config/features/modal";
+import { useRouter } from "next/navigation";
 
 export default function BackCard({
   user,
@@ -42,6 +43,7 @@ export default function BackCard({
   const [justFavorited, setJustFavorited] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const fetchFavorite = useCallback(async () => {
     if (appUser?.id && user?.id) {
@@ -66,6 +68,10 @@ export default function BackCard({
         setJustFavorited(false);
       }, 2500);
   }, [justFavorited]);
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return justFavorited ? (
     <Box
@@ -220,6 +226,7 @@ export default function BackCard({
                     `${uriCandidates}/on/${user?.uniqueName}`
                   );
                   dispatch(setModal({ display: "shareProfile" }));
+                  router.push("/message");
                 }}
                 name={CustomIconName.share}
               />

@@ -14,7 +14,7 @@ import { UserState } from "@youmeet/global-config/features/user";
 import { FieldValues, useForm } from "react-hook-form";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   onAddCustomisation,
   onAddQuestion,
@@ -35,7 +35,7 @@ export default function ConversationComponent({
   const search = useSearchParams();
   const jobId = search.get("jobId") || profil.candidate?.targetJob?.id || "";
   const offerId = search.get("offerId");
-
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.user as UserState);
@@ -56,7 +56,7 @@ export default function ConversationComponent({
   const customOnAddConversationTheme = useCallback(
     async (fieldValues: FieldValues) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
-
+      router.push("/message");
       try {
         const themes = fieldValues.themes;
         // const result = await onAddConversationTheme(themes, {
@@ -130,6 +130,7 @@ export default function ConversationComponent({
             dispatch(
               setModal({ display: "backofficeConfirm" }) as UnknownAction
             );
+            router.push("/message");
           }
         }
 
@@ -149,6 +150,7 @@ export default function ConversationComponent({
       } catch (err: any) {
         resetModal("ok");
         dispatch(setError("requestNotCompleted"));
+        router.push("/message");
       }
     },
     [watch("themes"), user.id, user.company?.name]
@@ -160,6 +162,7 @@ export default function ConversationComponent({
       const parsedThemes = JSON.parse(localThemes);
       if (parsedThemes) setValue("themes", parsedThemes);
     }
+    router.prefetch("/message");
   }, []);
 
   return (

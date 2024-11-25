@@ -11,7 +11,7 @@ import {
   giveTimeAgo,
 } from "@youmeet/utils/basics/formatToDatetime";
 import { Button } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { getLead } from "@youmeet/functions/request";
 import { getUniversalFromCodeAndNumber } from "@youmeet/utils/basics/formatPhone";
@@ -26,6 +26,7 @@ import { useDispatch } from "react-redux";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { setError } from "@youmeet/global-config/features/global";
+import { useRouter } from "next/navigation";
 
 export default function LeadsGrid({ data }: { data: Lead[] }) {
   const {
@@ -33,6 +34,7 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
   } = useTranslation();
   const [rowsIdsSelected, setRowsIdsSelected] = useState<string[]>([]);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const customOnDeleteLead = useCallback(async (id: string) => {
     await onDeleteLead(id);
@@ -54,6 +56,11 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
+    router.push("/message");
+  }, []);
+
+  useEffect(() => {
+    router.prefetch("/message");
   }, []);
 
   return (
@@ -68,10 +75,12 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
                 variables: { leadsIds: rowsIdsSelected },
               });
               const leads = response.data.sendEmailProspectionLinkedin;
-              if (leads)
+              if (leads) {
                 dispatch(
                   setModal({ display: "backofficeConfirm" }) as UnknownAction
                 );
+                router.push("/message");
+              }
             }
           }}
         >

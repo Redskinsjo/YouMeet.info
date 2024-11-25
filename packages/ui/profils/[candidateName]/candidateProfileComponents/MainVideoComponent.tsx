@@ -7,7 +7,7 @@ import {
   Video,
 } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { BiSolidLike } from "react-icons/bi";
 import { TbMessageDots } from "react-icons/tb";
@@ -29,6 +29,7 @@ import DetailComponent from "../../../DetailComponent";
 import BoldText from "../../../BoldText";
 import { getSimpleUser } from "@youmeet/functions/request";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const NewVideoComponent = dynamic(() => import("../../../NewVideoComponent"));
 
@@ -49,6 +50,7 @@ export default function MainVideoComponent({
   const user = useSelector((state: RootState) => state.user as UserState);
   const likeRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation();
+  const router = useRouter();
 
   const principalVideo = useMemo(() => {
     if (video) return video;
@@ -63,6 +65,7 @@ export default function MainVideoComponent({
   const customOnTranscriptVideo = useCallback(
     async (extras: { videoId: string }) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
+      router.push("/message");
       if (!extras.videoId) dispatch(setError("requestNotCompleted"));
       else {
         const result = await onTranscriptVideo(extras.videoId);
@@ -77,6 +80,7 @@ export default function MainVideoComponent({
           dispatch(resetModal("ok") as UnknownAction);
           dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
         }
+        router.push("/message");
       }
     },
     []
@@ -85,6 +89,7 @@ export default function MainVideoComponent({
   const customOnAnalyzeVideo = useCallback(
     async (extras: { videoId: string }) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
+      router.push("/message");
       if (!extras.videoId) dispatch(setError("requestNotCompleted"));
       else {
         const result = await onAnalyzeVideo(extras.videoId);
@@ -99,10 +104,15 @@ export default function MainVideoComponent({
           dispatch(resetModal("ok") as UnknownAction);
           dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
         }
+        router.push("/message");
       }
     },
     []
   );
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <main

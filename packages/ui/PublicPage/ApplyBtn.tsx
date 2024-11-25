@@ -10,7 +10,6 @@ import { RootState } from "@youmeet/global-config/store";
 import { UserState } from "@youmeet/global-config/features/user";
 import BoldText from "../BoldText";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function ApplyBtn({ offre }: { offre?: Offer }) {
   const dispatch = useDispatch();
@@ -18,6 +17,7 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
   const user = useSelector((state: RootState) => state.user as UserState);
   const router = useRouter();
   router.prefetch("/se-connecter");
+  router.prefetch("/ajouter-video");
 
   const alreadyApplied = !!offre?.sharings?.find(
     (sharing) => sharing?.origin?.id === user.id
@@ -45,7 +45,7 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
             publicOffer: offre,
           }) as UnknownAction
         );
-        // }
+        router.push(`/ajouter-video`);
       }}
     >
       <BoldText

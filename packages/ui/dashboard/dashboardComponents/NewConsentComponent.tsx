@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormControlLabel, Switch } from "@mui/material";
 import { BetaUser } from "@youmeet/gql/generated";
 import DetailComponent from "../../DetailComponent";
@@ -9,11 +9,13 @@ import { updateUser } from "@youmeet/functions/request";
 import { useDispatch } from "react-redux";
 import { setError } from "@youmeet/global-config/features/global";
 import { UnknownAction } from "@reduxjs/toolkit";
+import { useRouter } from "next/navigation";
 
 const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
   const [consent, setConsent] = useState(profil.consent ?? false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const customUpdateConsent = useCallback(async () => {
     const result = await updateUser({
@@ -21,8 +23,15 @@ const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
       data: { consent: !consent },
     });
     if (result) setConsent(!consent);
-    else dispatch(setError("not-completed") as UnknownAction);
+    else {
+      dispatch(setError("not-completed") as UnknownAction);
+      router.push("/message");
+    }
   }, [consent]);
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <DetailComponent

@@ -1,7 +1,7 @@
 import { UserState, addVideo } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { BetaUser, Video } from "@youmeet/gql/generated";
-import { Dispatch, SetStateAction, useMemo, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,6 +16,7 @@ import { submitFile } from "@youmeet/utils/basics/submitFile";
 import Link from "next/link";
 import { getPublicIdFirstPart } from "@youmeet/utils/basics/getPublicId";
 import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function NewAddVideoComponent({
   profil,
@@ -38,6 +39,7 @@ export default function NewAddVideoComponent({
   const upload = useSelector(
     (state: RootState) => (state.global as GlobalState).upload
   );
+  const router = useRouter();
 
   const customOnAddVideo = async (
     extras: {
@@ -47,6 +49,7 @@ export default function NewAddVideoComponent({
     formData: FormData
   ) => {
     dispatch(setUpload("upload"));
+    router.push("/message");
     let count = 0;
     const intervalId = setInterval(() => {
       count++;
@@ -107,6 +110,10 @@ export default function NewAddVideoComponent({
     profil?.id as string,
     user.videos.length
   );
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <div className="w-full p-[6px] box-border flex-bet h-[39px]">

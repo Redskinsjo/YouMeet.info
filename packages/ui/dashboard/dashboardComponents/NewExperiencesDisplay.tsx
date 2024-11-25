@@ -24,12 +24,12 @@ const NewExperiencesDisplay = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
-
   const user = useSelector((state: RootState) => state.user as UserState);
   const [experiences, setExperiences] = useState(profil?.experiences);
 
   useEffect(() => {
     router.prefetch("/formulaire-profil?step=2");
+    router.prefetch("/message");
   }, []);
 
   return (
@@ -102,6 +102,7 @@ const NewExperiencesDisplay = ({
                               experience: exp,
                             }) as UnknownAction
                           );
+                          router.push("/message");
                         }}
                       >
                         <div

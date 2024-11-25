@@ -1,5 +1,5 @@
 import GenericField from "../../formulaire-profil/formComponents/fields/GenericField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { client } from "@youmeet/gql/index";
 import { CreateUserRemarkDocument } from "@youmeet/gql/generated";
@@ -12,7 +12,7 @@ import { HiPencil } from "react-icons/hi";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import TooltipedAsset from "../../TooltipedAsset";
-import React from "react";
+import { useRouter } from "next/navigation";
 
 export default function UserRemarkComponent() {
   const [content, setContent] = useState("");
@@ -20,6 +20,11 @@ export default function UserRemarkComponent() {
   const { t } = useTranslation();
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <div className="w-full">
@@ -77,6 +82,7 @@ export default function UserRemarkComponent() {
                             display: "backofficeConfirm",
                           }) as UnknownAction
                         );
+                        router.push("/message");
                         setContent("");
                       }
                     }

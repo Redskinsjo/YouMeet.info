@@ -26,6 +26,7 @@ import { RiInformationFill } from "react-icons/ri";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const renderTooltipContent = (
   veryHigh: boolean,
@@ -76,6 +77,7 @@ export default function FrontCard({
   const [cardPrice, setCardPrice] = useState<number | undefined>(undefined);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const calculatePrice = useCallback(() => {
     if (isSubscribed) {
@@ -122,6 +124,7 @@ export default function FrontCard({
       } else if (cardPrice === undefined) {
         dispatch(setError("creditTooLow"));
       }
+      router.push("/message");
     },
     [appUser]
   );
@@ -131,6 +134,10 @@ export default function FrontCard({
     calculatePrice();
     setLoading(false);
   }, [appUser]);
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   const video = getPrincipalVideo(
     (user?.videos?.filter((v) => v) as Video[]) || undefined

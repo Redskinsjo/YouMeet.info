@@ -8,6 +8,8 @@ import { RootState } from "@youmeet/global-config/store";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const CustomModal = dynamic(() => import("../CustomModal"), { ssr: false });
 
@@ -16,8 +18,13 @@ export default function Modals() {
   const error = global.error;
   const upload = global.upload;
   const modal = useSelector((state: RootState) => state.modal as ModalState);
-
+  const router = useRouter();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
+
   return (
     <>
       {(error || upload) && (
@@ -26,6 +33,7 @@ export default function Modals() {
           setDisplayModal={(payload) => {
             dispatch(setError(payload));
             dispatch(setUpload(payload));
+            router.push("/message");
           }}
         />
       )}

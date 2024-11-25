@@ -60,6 +60,7 @@ import ModalWrapper from "../../modals/ModalWrapper";
 import SectionTitle from "../../_components/SectionTitle";
 import VideoComponent from "../../dashboard/dashboardComponents/VideoComponent";
 import { RootState } from "@youmeet/global-config/store";
+import { useRouter } from "next/navigation";
 
 export default function BackofficeModalContent({
   data: data1,
@@ -103,6 +104,7 @@ export default function BackofficeModalContent({
   const [specialErr, setSpecialErr] = useState<any>(undefined);
   const [data, setData] = useState(data1?.data);
   const modal = useSelector((state: RootState) => state.modal as ModalState);
+  const router = useRouter();
 
   const getQuestions = useCallback(async () => {
     const response = await client.query({
@@ -121,6 +123,7 @@ export default function BackofficeModalContent({
 
   const customOnDeleteVideo = async (videoId: string) => {
     dispatch(setUpload(`upload`));
+    router.push("/message");
     const result = (await onDeleteVideo(videoId)) as
       | PayloadBackendError
       | withData<Video>;
@@ -141,6 +144,7 @@ export default function BackofficeModalContent({
     if (data?.type === "job") {
       getQuestions();
     }
+    router.prefetch("/message");
   }, []);
 
   useEffect(() => {

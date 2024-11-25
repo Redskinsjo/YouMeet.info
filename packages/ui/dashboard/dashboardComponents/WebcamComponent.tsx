@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { IoMdPlay } from "react-icons/io";
 import { IoStop } from "react-icons/io5";
@@ -83,6 +83,7 @@ export default function WebcamComponent({
 
   const handleAddVideo = useCallback(async () => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
+    router.push("/message");
     if (recordedChunks.length) {
       const file = new File(recordedChunks, "video-capture-youmeet", {
         type: "video-webm",
@@ -123,6 +124,10 @@ export default function WebcamComponent({
     }
     dispatch(resetModal("ok") as UnknownAction);
   }, [recordedChunks]);
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <div className="flex-center flex-col gap-[24px] xs:gap-[12px] sm:gap-[12px] md:gap-[12px]">

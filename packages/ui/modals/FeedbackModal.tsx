@@ -20,6 +20,7 @@ import dynamic from "next/dynamic";
 import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
 import { modals } from "./modals";
 import LoginModalClose from "../login/LoginModalClose";
+import { useRouter } from "next/navigation";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 
@@ -36,15 +37,20 @@ export default function FeedBackModal({ type }: CustomModalProps) {
   const formRef = useRef<HTMLFormElement | null>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
+  const router = useRouter();
+  router?.prefetch("/message");
 
   useEffect(() => {
-    if (state && isPayloadError(state)) dispatch(setError("not-completed"));
-    else if ((state as withData<boolean>).data) {
+    if (state && isPayloadError(state)) {
+      dispatch(setError("not-completed"));
+      router.push("/message");
+    } else if ((state as withData<boolean>).data) {
       setStatus((state as withData<boolean>).data);
       (formRef.current as HTMLFormElement)?.reset();
       setTimeout(() => {
         setStatus(false);
         dispatch(resetModal("ok") as UnknownAction);
+        router.back();
       }, 5000);
     }
   }, [state]);

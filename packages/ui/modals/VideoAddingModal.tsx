@@ -25,6 +25,7 @@ import { Button, FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
 import LoginModalClose from "../login/LoginModalClose";
 import { modals } from "./modals";
+import { useRouter } from "next/navigation";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 
@@ -47,6 +48,7 @@ export default function VideoAddingModal({
   const [checkAvailableVideos, setCheckAvailableVideos] = useState(false);
   const [loading, setLoading] = useState(true);
   const [chosenVideo, setChosenVideo] = useState<Video | undefined>();
+  const router = useRouter();
 
   const fetchOffer = useCallback(async () => {
     if (modal.publicOffer?.id) {
@@ -70,6 +72,7 @@ export default function VideoAddingModal({
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
+    router.push("/message");
   };
 
   useEffect(() => {
@@ -79,6 +82,7 @@ export default function VideoAddingModal({
       const principalVideo = getPrincipalVideo(user.videos);
       setChosenVideo(principalVideo);
     }
+    router.prefetch("/message");
   }, []);
 
   const offerJobId = modal.publicOffer?.job?.id as string | undefined;

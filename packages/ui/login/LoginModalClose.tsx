@@ -28,10 +28,7 @@ export default function LoginModalClose({ type }: { type?: CustomModalType }) {
           height: "24px",
         }}
         onClick={() => {
-          if (type === "login" || type === "record") router.back();
-          if (login) return router.back();
-          else if (error) dispatch(setError(null));
-          else dispatch(setModal("ok") as UnknownAction);
+          router.back();
         }}
         onFocus={(e) => {
           e.target.style.backgroundColor = blueGrey[200];

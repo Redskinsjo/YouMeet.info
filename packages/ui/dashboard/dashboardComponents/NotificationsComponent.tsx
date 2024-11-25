@@ -72,6 +72,7 @@ import {
 import { GlobalState, setError } from "@youmeet/global-config/features/global";
 import { FaLockOpen } from "react-icons/fa";
 import { GetMyUnlockedUsers } from "@youmeet/functions/request";
+import { useRouter } from "next/navigation";
 
 type RowNotification = {
   id: string;
@@ -121,6 +122,7 @@ export default function NotificationsComponent({
     "children" | "severity"
   > | null>(null);
   const [rows, setRows] = useState<RowNotification[]>([]);
+  const router = useRouter();
 
   const isSubscribedPro = useMemo(
     () =>
@@ -250,6 +252,7 @@ export default function NotificationsComponent({
       } else {
         dispatch(setError("creditTooLow"));
       }
+      router.push("/message");
     },
     [user]
   );
@@ -361,6 +364,10 @@ export default function NotificationsComponent({
     getRows();
   }, [user, language]);
 
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
+
   return (
     <SubPartContainer
       radius="14px"
@@ -456,6 +463,7 @@ export default function NotificationsComponent({
                       display: "account",
                     }) as UnknownAction
                   );
+                  router.push("/message");
                   return;
                 }
               }
@@ -504,6 +512,7 @@ export default function NotificationsComponent({
                       ...value,
                     }) as UnknownAction
                   );
+                  router.push("/message");
                 }
               }
             }}

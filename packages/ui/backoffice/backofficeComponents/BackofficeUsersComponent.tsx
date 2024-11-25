@@ -22,6 +22,7 @@ import Layout from "../../Layout";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { setError } from "@youmeet/global-config/features/global";
+import { useRouter } from "next/navigation";
 
 export default function BackofficeUsersComponent({
   data,
@@ -31,6 +32,7 @@ export default function BackofficeUsersComponent({
   const [rows, setRows] = useState<any[]>([]);
   const dispatch = useDispatch();
   const [rowsIdsSelected, setRowsIdsSelected] = useState<string[]>([]);
+  const router = useRouter();
 
   const fetchRows = useCallback(
     async (users: BetaUser[]) => {
@@ -76,6 +78,9 @@ export default function BackofficeUsersComponent({
     if (data) fetchRows(data);
   }, [data]);
 
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
   return (
     <Layout newStyles={{ maxWidth: "1200px", padding: "0px", width: "100%" }}>
       <div className="flex flex-col gap-[24px] w-full border-[0.5px] border-solid border-grey500">
@@ -108,6 +113,7 @@ export default function BackofficeUsersComponent({
                     setModal({ display: "backofficeConfirm" }) as UnknownAction
                   );
                 }
+                router.push("/message");
               }
             }}
           >
@@ -216,6 +222,7 @@ export default function BackofficeUsersComponent({
                                 display: "backofficeConfirm",
                               }) as UnknownAction
                             );
+                            router.push("/message");
                           }
                         }}
                       >

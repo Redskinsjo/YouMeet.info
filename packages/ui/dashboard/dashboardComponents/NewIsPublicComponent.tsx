@@ -12,11 +12,13 @@ import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { onUpdateisPublic } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
+import { useRouter } from "next/navigation";
 
 const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
   const [isPublic, setIsPublic] = useState(profil.isPublic ?? false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const cantEnable =
     !isPublic &&
@@ -41,12 +43,17 @@ const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
     const result = await onUpdateisPublic(profil.id as string, !isPublic);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed") as UnknownAction);
+      router.push("/message");
     } else setIsPublic(!isPublic);
   }, [isPublic]);
 
   useEffect(() => {
     if (profil?.id) automaticUpdateIsPublic();
   }, [profil.videos]);
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return cantEnable ? (
     <TooltipedAsset asset={t("should-fulfill-profile")}>

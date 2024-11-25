@@ -8,7 +8,7 @@ import { storeUser } from "@youmeet/global-config/features/user";
 import { setSubscription } from "@youmeet/global-config/features/global";
 import { useCallback, useEffect } from "react";
 import { isUser } from "@youmeet/types/TypeGuards";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { setModal } from "@youmeet/global-config/features/modal";
 
@@ -38,6 +38,8 @@ export const useFetchedUser = () => {
   const dispatch = useDispatch();
   const pathname = usePathname();
   const params = useSearchParams();
+  const router = useRouter();
+
   const newParams = !!params.get("new") || false;
 
   const fetchAndStoreUser = useCallback(async () => {
@@ -48,11 +50,13 @@ export const useFetchedUser = () => {
       dispatch(
         setModal({ display: "fulfill", user: appData.user }) as UnknownAction
       );
+      router.push("/message");
     }
     dispatch(setSubscription(appData.data));
   }, [pathname]);
 
   useEffect(() => {
     fetchAndStoreUser();
+    if (router) router.prefetch("/message");
   }, []);
 };

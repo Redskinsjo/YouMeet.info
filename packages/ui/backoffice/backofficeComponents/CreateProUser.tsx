@@ -10,10 +10,12 @@ import { Button } from "@mui/material";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import PhoneField from "../../formulaire-profil/formComponents/fields/PhoneField";
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CreateProUser() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const customeOnCreateProAccount = async (formData: FormData) => {
     const result = (await onCreateProAccount(formData)) as {
@@ -23,7 +25,12 @@ export default function CreateProUser() {
     if (result && isPayloadError(result))
       dispatch(setModal({ display: "not-completed" }) as UnknownAction);
     else dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+    router.push("/message");
   };
+
+  useEffect(() => {
+    router.prefetch("/message");
+  }, []);
 
   return (
     <Layout newStyles={{ maxWidth: "1200px", padding: "0px", width: "100%" }}>
