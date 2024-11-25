@@ -22,7 +22,7 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const customOnAddCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("upload"));
     router.push("/message");
-    console.log("routing to message");
+    console.log("routing to message ");
     const cvFile = formData.get("cvFile") as File;
     const fileFormData = new FormData();
     fileFormData.append("file", cvFile);
