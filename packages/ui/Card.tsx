@@ -2,11 +2,9 @@ import { BetaCompany, BetaUser, Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
 const FrontCardOffer = dynamic(
-  () => import("./offres/offresComponent/FrontCardOfferChild")
+  () => import("./offresComponent/FrontCardOfferChild")
 );
-const FTCardOffer = dynamic(
-  () => import("./offres/offresComponent/FTCardOfferChild")
-);
+const FTCardOffer = dynamic(() => import("./offresComponent/FTCardOfferChild"));
 const FrontCardRecruiter = dynamic(() => import("./FrontCardRecruiterChild"));
 
 export default function Card({

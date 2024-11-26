@@ -27,7 +27,7 @@ import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 import { dev } from "@youmeet/functions/imports";
 import { createError } from "@youmeet/functions/request";
-import { firstPartPages } from "@youmeet/ui/formulaire-profil/formComponents/steps/FirstStep";
+import { firstPartPages } from "@youmeet/ui/formComponents/steps/FirstStep";
 
 export default function PageContent({
   defaultValues,

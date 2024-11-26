@@ -8,7 +8,7 @@ import { Skeleton } from "@mui/material";
 const TogglePersonalInfo = dynamic(() => import("./TogglePersonalInfo"), {
   ssr: false,
   loading: () => (
-    <div className="flex-center w-full">
+    <div className="flex-center w-full border-[0.5px] border-solid border-grey300 h-[55px]">
       <Skeleton width={"50%"} height={18} />
     </div>
   ),
@@ -17,7 +17,7 @@ const TogglePersonalInfo = dynamic(() => import("./TogglePersonalInfo"), {
 const NewProfileComponent = dynamic(() => import("./NewProfileComponent"), {
   ssr: false,
   loading: () => (
-    <div className="h-[140px] p-[6px] shadow-custom">
+    <div className="h-[140px] p-[6px] border-[0.5px] border-solid border-grey300">
       <div className="flex-bet">
         <Skeleton width={60} height={18} />
         <Skeleton width={48} height={18} />
@@ -48,7 +48,7 @@ const NewProfileComponent = dynamic(() => import("./NewProfileComponent"), {
 const ProfileDescription = dynamic(() => import("./ProfileDescription"), {
   ssr: false,
   loading: () => (
-    <div className="h-max p-[24px] shadow-custom flex-center flex-col">
+    <div className="h-max p-[24px] border-[0.5px] border-solid border-grey300 flex-center flex-col">
       <div className="flex-center justify-end w-full mb-[24px]">
         <Skeleton width={"60%"} height={24} />
       </div>

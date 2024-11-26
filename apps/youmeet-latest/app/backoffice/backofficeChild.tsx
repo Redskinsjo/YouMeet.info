@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
-import BackofficeComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficePageComponent";
-import FranceTravailConnect from "@youmeet/ui/backoffice/backofficeComponents/FranceTravailConnect";
+import BackofficeComponent from "@youmeet/ui/backofficeComponents/BackofficePageComponent";
+import FranceTravailConnect from "@youmeet/ui/backofficeComponents/FranceTravailConnect";
 
 export default async function BackofficeChild({
   leads,

@@ -85,11 +85,15 @@ export default function CustomModal({
   );
 
   const aboveError =
-    type === "fileTooLarge" ||
-    type === "not-completed" ||
-    type === "request-feedback" ||
     type === "upload" ||
-    type === "backofficeConfirm";
+    type === "upload-50" ||
+    type === "delete" ||
+    type === "backofficeConfirm" ||
+    type === "fileTooLarge" ||
+    type === "creditTooLow" ||
+    type === "requestNotCompleted" ||
+    type === "not-completed" ||
+    type === "request-feedback";
 
   return (
     <div

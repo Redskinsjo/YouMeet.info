@@ -17,7 +17,7 @@ import { Button } from "@mui/material";
 import { withData } from "@youmeet/types/api/backend";
 import { useActionState, useRef } from "react";
 import dynamic from "next/dynamic";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "../formComponents/fields/SimpleField";
 import { modals } from "./modals";
 import LoginModalClose from "../login/LoginModalClose";
 import { useRouter } from "next/navigation";

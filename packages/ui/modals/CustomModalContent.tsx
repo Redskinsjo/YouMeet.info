@@ -9,7 +9,7 @@ import { CustomModalProps, trads } from "@youmeet/types/CustomModal";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
-import UserRemarkComponent from "../dashboard/dashboardComponents/UserRemarkComponent";
+import UserRemarkComponent from "../dashboardComponents/UserRemarkComponent";
 import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 import { Button, InputLabel, MenuItem, Select } from "@mui/material";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi2";

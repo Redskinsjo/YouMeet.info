@@ -1,10 +1,8 @@
-import { GlobalState, setError } from "@youmeet/global-config/features/global";
-import { setModal } from "@youmeet/global-config/features/modal";
+import { GlobalState } from "@youmeet/global-config/features/global";
 import { RootState } from "@youmeet/global-config/store";
 import { CustomModalType } from "@youmeet/types/CustomModal";
 import { Button } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
-import { UnknownAction } from "@reduxjs/toolkit";
 import { useRouter } from "next/navigation";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";

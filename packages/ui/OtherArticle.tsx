@@ -4,10 +4,10 @@ import dynamic from "next/dynamic";
 import OneLineSkeleton from "./OneLineSkeleton";
 
 const OtherArticleLink = dynamic(
-  () => import("./medias/[media]/mediaComponents/OtherArticleLinkChild")
+  () => import("./mediaComponents/OtherArticleLinkChild")
 );
 const OtherArticleImg = dynamic(
-  () => import("./medias/[media]/mediaComponents/OtherArticleImgChild")
+  () => import("./mediaComponents/OtherArticleImgChild")
 );
 
 const BoldText = dynamic(() => import("./TextChild"), {

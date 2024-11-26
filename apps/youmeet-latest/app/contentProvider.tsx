@@ -57,6 +57,7 @@ export default function ContentProvider({
         {modals.recordModal}
         {modals.loginModal}
         {modals.videoAddingModal}
+        {modals.messageModal}
 
         <div
           className={

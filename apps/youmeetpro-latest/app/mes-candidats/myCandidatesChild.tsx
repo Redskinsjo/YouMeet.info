@@ -1,4 +1,4 @@
-import NotificationsComponent from "@youmeet/ui/dashboard/dashboardComponents/NotificationsComponent";
+import NotificationsComponent from "@youmeet/ui/dashboardComponents/NotificationsComponent";
 import { BetaUser, UnlockedUser } from "@youmeet/gql/generated";
 
 export default function MyCandidatesChild({

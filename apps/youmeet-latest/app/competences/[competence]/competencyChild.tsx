@@ -2,7 +2,7 @@ import React from "react";
 import { Competency } from "@youmeet/gql/generated";
 import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
 import Footer from "@youmeet/ui/Footer";
-import CompetencyComponent from "@youmeet/ui/competences/[competence]/competencyComponents/CompetencyComponent";
+import CompetencyComponent from "@youmeet/ui/competencyComponents/CompetencyComponent";
 import DividerSection from "@youmeet/ui/_components/DividerSection";
 import dynamic from "next/dynamic";
 

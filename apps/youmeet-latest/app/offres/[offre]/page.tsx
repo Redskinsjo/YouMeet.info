@@ -6,7 +6,7 @@ import {
 import { Metadata, ResolvingMetadata } from "next";
 import { Offer } from "@youmeet/gql/generated";
 import { logoUrl, uri } from "@youmeet/functions/imports";
-import OfferChild from "@youmeet/ui/offres/offerChild";
+import OfferChild from "./offerChild";
 import { notFound } from "next/navigation";
 
 type Props = {

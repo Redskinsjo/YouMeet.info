@@ -10,6 +10,8 @@ import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/basics/submitFile";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { revalidate } from "@youmeet/functions/request";
 
 const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 
@@ -22,7 +24,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const customOnAddCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("upload"));
     router.push("/message");
-    console.log("routing to message ");
     const cvFile = formData.get("cvFile") as File;
     const fileFormData = new FormData();
     fileFormData.append("file", cvFile);
@@ -40,7 +41,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
         dispatch(setCvFile((result2 as withData<Avatar>).data));
       }
     }
-    dispatch(setUpload(null));
   };
 
   useEffect(() => {

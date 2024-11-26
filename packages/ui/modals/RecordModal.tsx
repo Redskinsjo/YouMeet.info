@@ -1,6 +1,6 @@
 "use client";
 import ModalWrapper from "./ModalWrapper";
-import WebcamComponent from "../dashboard/dashboardComponents/WebcamComponent";
+import WebcamComponent from "../dashboardComponents/WebcamComponent";
 import LoginModalClose from "../login/LoginModalClose";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 

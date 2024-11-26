@@ -3,10 +3,10 @@ import dynamic from "next/dynamic";
 import DividerSection from "./_components/DividerSection";
 
 const SearchFilter = dynamic(
-  () => import("./offres/offresComponent/SearchFilterChild")
+  () => import("./offresComponent/SearchFilterChild")
 );
 const LocationFilter = dynamic(
-  () => import("./offres/offresComponent/LocationFilterChild")
+  () => import("./offresComponent/LocationFilterChild")
 );
 
 export default function PageFilters() {

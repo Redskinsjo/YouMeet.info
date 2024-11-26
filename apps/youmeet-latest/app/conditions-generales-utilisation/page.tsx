@@ -4,17 +4,11 @@ import dynamic from "next/dynamic";
 
 const Footer = dynamic(() => import("@youmeet/ui/Footer"));
 const CGUTitle = dynamic(
-  () =>
-    import(
-      "@youmeet/ui/conditions-generales-utilisation/cguComponents/CGUTitleChild"
-    )
+  () => import("@youmeet/ui/cguComponents/CGUTitleChild")
 );
 
 const ParagraphWithTitle = dynamic(
-  () =>
-    import(
-      "@youmeet/ui/conditions-generales-utilisation/cguComponents/ParagraphWithTitle"
-    )
+  () => import("@youmeet/ui/cguComponents/ParagraphWithTitle")
 );
 
 const paragraphs: ParagraphWithTitleTypes[] = [

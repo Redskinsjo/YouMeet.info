@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useActionState } from "react";
 import { onEmailForgotten } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "../formComponents/fields/SimpleField";
 import LoginModalClose from "./LoginModalClose";
 import Logo from "../Logo";
 import { isPayloadError } from "@youmeet/types/TypeGuards";

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Flower from "@/public/flower.webp";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import SimpleField from "@youmeet/ui/formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "@youmeet/ui/formComponents/fields/SimpleField";
 import SubmitBtn from "@youmeet/ui/SubmitBtn";
 import { onResetPassword } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";

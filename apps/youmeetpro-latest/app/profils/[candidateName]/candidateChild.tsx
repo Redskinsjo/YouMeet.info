@@ -7,7 +7,7 @@ const ProfilePartComponent = dynamic(
   () => import("@youmeet/ui/ProfilePartChild")
 );
 const VideoPartComponent = dynamic(
-  () => import("@youmeet/ui/[candidateName]/candidateComponents/VideoPartChild")
+  () => import("@youmeet/ui/candidateComponents/VideoPartChild")
 );
 
 export default function Profil({

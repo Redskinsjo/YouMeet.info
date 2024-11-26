@@ -1,8 +1,8 @@
 import { Affiliation } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import BackofficeAffiliationsComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficeAffiliationsComponent";
-import CreateAffiliation from "@youmeet/ui/backoffice/backofficeComponents/CreateAffiliation";
+import BackofficeAffiliationsComponent from "@youmeet/ui/backofficeComponents/BackofficeAffiliationsComponent";
+import CreateAffiliation from "@youmeet/ui/backofficeComponents/CreateAffiliation";
 
 export default function BackofficeAffiliationsChild({
   affiliations,

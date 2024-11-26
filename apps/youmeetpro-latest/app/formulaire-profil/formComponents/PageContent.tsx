@@ -12,7 +12,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import {
   companyFirstPartPages,
   offerFirstPartPages,
-} from "@youmeet/ui/formulaire-profil/formComponents/steps/FirstStep";
+} from "@youmeet/ui/formComponents/steps/FirstStep";
 import { onCompanyForm, onOfferForm } from "@youmeet/functions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { UnknownAction } from "@reduxjs/toolkit";

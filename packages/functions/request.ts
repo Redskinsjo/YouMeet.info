@@ -197,6 +197,7 @@ import { isNotHandledReq, isPayloadError } from "@youmeet/types/TypeGuards";
 import { AES } from "crypto-js";
 import { OffreEmploiFTParams } from "@youmeet/types/api/OffreEmploiFT";
 import { getAccessTokenFT } from "./browserRequests";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const createError = async <T>(
   variables?: MutationCreateErrorArgs,
@@ -2345,4 +2346,15 @@ export const getOffersFT = async <T>(
   if (isNotHandledReq<T>(handling, result)) {
     return result.data as ResultNotHandled<T>;
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const revalidate = async (
+  path: string | undefined,
+  tag: string = ""
+) => {
+  const promise = new Promise((resolve) => {
+    if (!!path) resolve(revalidatePath(`/${path}`));
+    if (!!tag) resolve(revalidateTag(`${tag}`));
+  });
+  return await promise;
 };

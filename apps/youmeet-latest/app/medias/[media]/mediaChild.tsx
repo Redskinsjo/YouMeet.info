@@ -2,9 +2,9 @@ import { Article } from "@youmeet/gql/generated";
 import React from "react";
 import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
 import Footer from "@youmeet/ui/Footer";
-import OtherArticles from "@youmeet/ui/medias/[media]/mediaComponents/OtherArticles";
+import OtherArticles from "@youmeet/ui/mediaComponents/OtherArticles";
 import dynamic from "next/dynamic";
-import MediaContent from "@youmeet/ui/medias/[media]/mediaComponents/MediaContent";
+import MediaContent from "@youmeet/ui/mediaComponents/MediaContent";
 
 const BigHeaderSection = dynamic(
   () => import("@youmeet/ui/_sections/BigHeaderSectionChild")

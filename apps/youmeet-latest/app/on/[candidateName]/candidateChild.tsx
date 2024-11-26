@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Footer from "@youmeet/ui/Footer";
 
 const VideoPartComponent = dynamic(
-  () => import("@youmeet/ui/[candidateName]/candidateComponents/VideoPartChild")
+  () => import("@youmeet/ui/candidateComponents/VideoPartChild")
 );
 const ProfilePartComponent = dynamic(
   () => import("@youmeet/ui/ProfilePartChild")

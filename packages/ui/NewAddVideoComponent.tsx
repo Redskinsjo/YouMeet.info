@@ -1,3 +1,4 @@
+"use client";
 import { UserState, addVideo } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { BetaUser, Video } from "@youmeet/gql/generated";
@@ -86,7 +87,6 @@ export default function NewAddVideoComponent({
         if (setVideoId) setVideoId(result.data.id as string);
       }
     }
-    dispatch(setUpload(null));
     clearInterval(intervalId);
   };
 

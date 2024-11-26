@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useActionState } from "react";
 import { onLogin } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "../formComponents/fields/SimpleField";
 import LoginModalClose from "./LoginModalClose";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { RootState } from "@youmeet/global-config/store";

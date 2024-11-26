@@ -23,7 +23,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Button, useMediaQuery } from "@mui/material";
-import DisplayedExchange from "@youmeet/ui/dashboard/conversations/conversationComponents/DisplayedExchange";
+import DisplayedExchange from "@youmeet/ui/conversationComponents/DisplayedExchange";
 import TooltipedAsset from "@youmeet/ui/TooltipedAsset";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { resetModal, setModal } from "@youmeet/global-config/features/modal";

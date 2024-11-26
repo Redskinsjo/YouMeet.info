@@ -1,6 +1,6 @@
 import { BetaUser, Translated, Video } from "@youmeet/gql/generated";
 import NewAddVideoComponent from "./NewAddVideoComponent";
-import VideoComponent from "./dashboard/dashboardComponents/VideoComponent";
+import VideoComponent from "./dashboardComponents/VideoComponent";
 import { Button, FormControlLabel, Switch } from "@mui/material";
 import DetailComponent from "./DetailComponent";
 import { deepPurple, grey } from "@mui/material/colors";

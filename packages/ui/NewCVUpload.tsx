@@ -31,7 +31,6 @@ export default function NewCVUpload({
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed"));
     }
-    dispatch(setUpload(null));
   };
 
   const cvComponent = useMemo(() => {
