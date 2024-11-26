@@ -42,6 +42,7 @@ export async function middleware(request: NextRequest) {
       "se-connecter",
       "ajouter-video",
       "robots.txt",
+      "message",
       ...privatePages,
     ];
     const match = pathname.match(regex);
