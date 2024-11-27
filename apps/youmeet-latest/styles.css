@@ -23,23 +23,6 @@ p {
   margin: 0px;
 }
 
-@keyframes quickHighlight {
-  0% {
-    background: #fafafa;
-    color: #006064;
-    font-weight: 500;
-  }
-  100% {
-    color: white;
-    background: #006064;
-    font-weight: 700;
-  }
-}
-
-.quickHighlight {
-  animation: quickHighlight 1s 1 forwards ease-out;
-}
-
 @keyframes fadeIn {
   0% {
     opacity: 0.4;
@@ -51,59 +34,6 @@ p {
 
 .fadeIn {
   animation: fadeIn 0.5s 1 forwards ease-out;
-}
-
-@keyframes slipIn {
-  0% {
-    height: 0px;
-    width: 0px;
-  }
-  100% {
-    height: 100%;
-    width: 100%;
-    border: 1px solid #e0e0e0;
-    background-color: #fafafa;
-  }
-}
-
-.slipIn {
-  animation: slipIn 0.9s 1 forwards ease-out;
-}
-
-@keyframes slipIn2 {
-  0% {
-    height: 0px;
-    width: 0px;
-  }
-  100% {
-    height: 100%;
-    width: 100%;
-    border: 0.5px solid #e0e0e0;
-    background-color: #e0e0e0;
-  }
-}
-
-.slipIn2 {
-  animation: slipIn2 0.9s 1 forwards ease-out;
-}
-
-@keyframes brighting {
-  0% {
-    color: white;
-  }
-  10% {
-    color: #011552;
-  }
-  20% {
-    color: white;
-  }
-  30% {
-    color: #011552;
-  }
-}
-
-.brighting {
-  animation: brighting 1.2s ease-in;
 }
 
 @keyframes appear_fastly {
@@ -131,9 +61,6 @@ p {
 .appear_slowly {
   animation: appear_slowly 1.3s ease-in;
 }
-.appear_slowly-product {
-  animation: appear_slowly 0.3s ease-in;
-}
 
 @keyframes slide_out {
   0% {
@@ -152,7 +79,7 @@ p {
 
 @keyframes slide_in {
   0% {
-    translate: 60px;
+    translate: 1500px;
     opacity: 0;
   }
   100% {
@@ -191,60 +118,6 @@ p {
   animation: darkIn 1.6s ease-out;
 }
 
-@keyframes gapIn {
-  0% {
-    gap: 0px;
-    padding: 0px;
-  }
-  100% {
-    gap: 48px;
-    padding: 48px;
-  }
-}
-@keyframes gapInMobile {
-  0% {
-    gap: 0px;
-    padding: 0px;
-  }
-  100% {
-    gap: 12px;
-    padding: 12px;
-  }
-}
-.gapIn {
-  animation: gapIn 0.8s 1 forwards ease-in-out;
-}
-.gapInMobile {
-  animation: gapInMobile 0.8s 1 forwards ease-in-out;
-}
-
-@keyframes gapOut {
-  0% {
-    gap: 48px;
-    padding: 48px;
-  }
-  100% {
-    gap: 0px;
-    padding: 0px;
-  }
-}
-@keyframes gapOutMobile {
-  0% {
-    gap: 12px;
-    padding: 12px;
-  }
-  100% {
-    gap: 0px;
-    padding: 0px;
-  }
-}
-.gapOut {
-  animation: gapOut 0.8s 1 forwards ease-in-out;
-}
-.gapOutMobile {
-  animation: gapOutMobile 0.8s 1 forwards ease-in-out;
-}
-
 @keyframes slideUp {
   0% {
     transform: translateY(700px);
@@ -256,59 +129,6 @@ p {
 
 .slideUp {
   animation: slideUp 1.2s 1 forwards ease-out;
-}
-
-@keyframes disappearVisualLeft {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-}
-.disappearVisualLeft {
-  animation: disappearVisualLeft 1.9s forwards ease-in-out;
-}
-@keyframes disappearVisualRight {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
-}
-.disappearVisualRight {
-  animation: disappearVisualRight 1.9s forwards ease-in-out;
-}
-
-@keyframes fadeSlideLeft {
-  0% {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0px);
-    opacity: 1;
-  }
-}
-.fadeSlideLeft {
-  animation: fadeSlideLeft 1.9s 1 forwards ease-in-out;
-}
-
-@keyframes fadeToRight {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(300px);
-    opacity: 0;
-  }
-}
-.fadeToRight {
-  animation: fadeToRight 0.1s 1 forwards ease-in-out;
 }
 
 @keyframes emphasizeVisualLeft {
@@ -337,44 +157,6 @@ p {
   animation: emphasizeVisualRight 1.9s infinite ease-in-out;
 }
 
-@keyframes emphasizeVisualBottom {
-  0% {
-    transform: translateY(15px);
-  }
-  100% {
-    transform: translateY(-15px);
-    opacity: 0;
-  }
-}
-.emphasizeVisualBottom {
-  animation: emphasizeVisualBottom 1.9s infinite ease-in-out;
-}
-@keyframes wording {
-  0% {
-    display: inline-flex;
-    transform: translateY(-15px);
-    opacity: 0.5;
-  }
-  30% {
-    display: inline-flex;
-    transform: translateY(0px);
-    opacity: 1;
-  }
-  70% {
-    display: inline-flex;
-    transform: translateY(0px);
-    opacity: 0.5;
-  }
-  100% {
-    display: inline-flex;
-    transform: translateY(15px);
-    opacity: 0;
-  }
-}
-.wording {
-  animation: wording 3s infinite ease-in-out;
-}
-
 @keyframes blinkSide {
   0% {
     transform: scaleX(1);
@@ -388,124 +170,9 @@ p {
   animation: blinkSide infinite linear alternate 1s;
 }
 
-@keyframes blinking {
-  0% {
-    background: #9575cd;
-    color: white;
-  }
-  100% {
-    background: white;
-    color: #311b92;
-  }
-}
-
-.blinking {
-  animation: blinking infinite linear alternate 2s;
-}
-
-@keyframes infinite-slide {
-  0% {
-    transform: translateX(300px);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.infinite-slide {
-  animation: infinite-slide 10s infinite linear;
-}
-
-.infinite-slide {
-  animation: infinite-slide 10s infinite linear;
-}
-
 @layer utilities {
-  .darkLi::marker {
-    color: white;
-  }
-  .low-opacity {
-    opacity: 0.5;
-  }
-  .infinite-slide-container {
-    width: calc(200px * 3 + 72px * 2);
-  }
-  .homeImgBg {
-    background: radial-gradient(rgb(240, 240, 240), white);
-  }
-  .homeSectionBg {
-    background: radial-gradient(rgb(234, 234, 244), white);
-  }
-  .darkHomeSectionBg {
-    background: radial-gradient(rgb(56, 56, 188), rgb(1, 6, 101));
-  }
-  .home-squares-bg {
-    background: radial-gradient(ellipse at left, rgb(40, 45, 110), transparent),
-      radial-gradient(ellipse at right, white, transparent);
-  }
-  .home-squares-bg-reverse {
-    background: radial-gradient(ellipse at right, rgb(40, 45, 110)),
-      radial-gradient(ellipse at left, white, transparent);
-  }
-  .homeLightning {
-    background: linear-gradient(
-      to bottom,
-      rgb(148, 153, 217),
-      rgb(78, 85, 181),
-      rgb(91, 96, 162)
-    );
-  }
-  .linkingProductBg {
-    background: linear-gradient(90deg, #95592d, #36392a, #495345, #3c544c);
-  }
-  .homeGradient {
-    background: radial-gradient(
-        ellipse at right,
-        #ede7f6,
-        #311b92,
-        white,
-        #006064,
-        #00bcd4,
-        #00bcd4,
-        transparent
-      ),
-      radial-gradient(
-        ellipse at left,
-        #ede7f6,
-        #311b92,
-        white,
-        #006064,
-        #00bcd4,
-        #00bcd4,
-        transparent
-      );
-  }
-  .darkHomeGradient {
-    background: radial-gradient(
-        ellipse at right,
-        #5c09d7,
-        #261865,
-        black,
-        black,
-        #003c3e,
-        #007685,
-        #07abc1,
-        transparent
-      ),
-      radial-gradient(
-        ellipse at left,
-        #5c09d7,
-        #261865,
-        black,
-        black,
-        #003c3e,
-        #007685,
-        #07abc1,
-        transparent
-      );
-  }
-  .darkDisabled .Mui-disabled {
-    color: white !important;
+  .darkLine .MuiDataGrid-virtualScrollerContent {
+    background: rgb(30, 35, 90);
   }
   .darkOverlay .MuiDataGrid-overlay {
     background: linear-gradient(150deg, rgb(0, 0, 40), rgb(0, 0, 0));
@@ -532,14 +199,20 @@ p {
     opacity: unset !important;
   }
   .darkDatagridHeader .MuiDataGrid-columnHeaders > div {
-    background: rgb(20, 25, 60) !important;
+    background: rgb(30, 35, 90) !important;
   }
   .darkErrorFieldset fieldset {
     border-color: red !important;
-    background: rgb(40, 45, 110) !important;
+    background: rgb(30, 35, 90) !important;
   }
   .errorFieldset fieldset {
     border-color: red !important;
+  }
+  .checkedCheckbox.Mui-checked {
+    color: #9c27b0 !important;
+  }
+  .darkCheckedCheckbox.Mui-checked {
+    color: white !important;
   }
   .darkInput input {
     caret-color: white !important;
@@ -553,21 +226,22 @@ p {
   }
   .darkDiv div {
     color: white !important;
-    background: rgb(40, 45, 110) !important;
+    background: rgb(30, 35, 90) !important;
   }
   .darkInput textarea {
     caret-color: white !important;
     color: white !important;
     z-index: 100;
-    background: rgb(40, 45, 110);
-    border-color: black !important;
+    background: rgb(30, 35, 90);
+    border-color: #e0e0e0 !important;
   }
   .darkLabel .MuiFormLabel-root {
     color: white !important;
+    z-index: 200;
   }
   .darkFieldset fieldset {
-    background: rgb(40, 45, 110) !important;
-    border-color: black !important;
+    background: rgb(30, 35, 90) !important;
+    border-color: #e0e0e0 !important;
   }
   .specialBg {
     background: linear-gradient(#e1bee7, white);
@@ -577,9 +251,7 @@ p {
   }
   .genericFieldDark fieldset {
     border: 0.5px solid #fafafa;
-    caret-color: white;
     background: rgb(30, 35, 90);
-    color: white;
   }
   .darkBg {
     background: linear-gradient(150deg, rgb(0, 0, 40), rgb(0, 0, 0));
@@ -597,9 +269,8 @@ p {
     background: linear-gradient(90deg, white, #eceff1, white);
   }
   .mediumBg {
-    background: linear-gradient(270deg, #e0e0e0, #e0e0e0, #9e9e9e);
+    background: linear-gradient(270deg, #9e9e9e, #e0e0e0, #e0e0e0);
   }
-
   .break-any {
     overflow-wrap: anywhere;
   }
@@ -639,7 +310,7 @@ p {
   }
   .home-highlights-text {
     color: rgba(0, 0, 0, 0);
-    background: linear-gradient(180deg, #8c6fc3, #673ab7, #311b92, #2e206e);
+    background: linear-gradient(180deg, #d1c4e9, #673ab7, #311b92, black);
     background-clip: text;
   }
   .marketing-card-text {
@@ -726,13 +397,6 @@ p {
   .description-not-subscribed {
     display: inline-block;
     max-width: 550px;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      white 0%,
-      white 60%,
-      transparent 100%
-    );
     padding: 10px;
     text-overflow: ellipsis;
     text-align: justify;
@@ -760,29 +424,26 @@ p {
 }
 
 @layer components {
+  .afterHeaderAndMenu {
+    @apply min-h-[calc(100vh-41px-62px)];
+  }
   .afterHeader {
     @apply min-h-[calc(100vh-41px)];
   }
-  .seeMoreJob {
-    @apply bg-grey100 text-blueGrey700 text-[12px] hover:bg-black active:bg-green500 hover:text-white cursor-pointer p-[2px] px-[12px] m-[2px] rounded-[14px] no-underline;
-  }
-  .homeSectionBorder {
-    @apply border-[0.5px] border-solid border-grey900 shadow-lg shadow-[white] rounded-2xl;
-  }
-  .infos-component {
-    @apply p-[16px] gap-[6px] w-full flex flex-col items-center relative box-border dark:extraLightDarkBg border-[0.5px] border-solid border-grey300 dark:border-grey900 fadeIn;
-  }
   .modal-container {
-    @apply flex-col w-[600px] xs:w-screen sm:w-screen overflow-hidden overflow-y-scroll p-[24px] bg-white flex-1 xs:p-[12px] sm:p-[12px] xs:gap-[12px] sm:gap-[12px] gap-[24px] h-full relative box-border appear_slowly flex-center dark:mediumDarkBg;
+    @apply flex-col overflow-hidden overflow-y-scroll p-[24px] bg-white flex-1 xs:p-[12px] sm:p-[12px] xs:gap-[12px] sm:gap-[12px] gap-[24px] h-full relative box-border appear_slowly flex-center dark:mediumDarkBg;
   }
   .modal-content {
     @apply bg-white flex flex-col gap-[24px] p-[24px] rounded-xl shadow-custom xs:shadow-none sm:shadow-none;
+  }
+  .infos-component {
+    @apply p-[16px] gap-[6px] w-full flex flex-col items-center relative box-border dark:extraLightDarkBg border-[0.5px] border-solid border-grey300 dark:border-grey900;
   }
   .auth-to-signin {
     @apply flex flex-col hover:cursor-pointer w-[144px];
   }
   .product-grid {
-    @apply grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-1 xs:grid-rows-[repeat(8,_372px)] sm:grid-rows-[repeat(8,_372px)] bg-transparent relative z-10 w-full;
+    @apply grid grid-cols-2 gap-[24px] xs:gap-0 sm:gap-0 md:gap-0 xs:grid-cols-1 sm:grid-cols-1 xs:grid-rows-[repeat(8,_372px)] sm:grid-rows-[repeat(8,_372px)] bg-transparent relative z-10 w-full mb-[48px];
   }
   .marketing-card-container {
     @apply relative border-[0.5px] border-solid rounded-xl bg-white z-20 transition m-[24px] xs:mx-0 xs:mb-0 sm:mx-0 sm:mb-0 md:mx-0 md:mb-0 px-[36px] flex-col flex-center flex-1 shadow-inner hover:shadow-none hover:py-[0.5px] hover:px-[36.5px];
@@ -815,7 +476,10 @@ p {
     @apply grid grid-cols-2 my-[12px] w-full max-w-[720px] justify-items-center;
   }
   .header-item {
-    @apply group-hover:bg-black group-hover:text-white group-focus-visible:bg-black group-focus-visible:text-white item h-[34px] box-border flex-center rounded-xl;
+    @apply group-hover:bg-black group-hover:text-white group-focus-visible:bg-black group-focus-visible:text-white h-[34px] box-border flex-center rounded-xl;
+  }
+  .header-item-active {
+    @apply group-focus-visible:bg-black group-focus-visible:text-white h-[34px] box-border flex-center rounded-xl;
   }
   .container-principal-darker {
     @apply flex flex-col gap-[12px] bg-grey50 p-[24px] xs:p-[12px] sm:p-[12px] w-full box-border rounded-2xl;
@@ -1033,14 +697,8 @@ input:-webkit-autofill {
   width: 50px;
 } */
 
-.timeline-container {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.timeline-container:hover .timeline {
-  height: 100%;
+/* .timeline-container:hover .timeline {
+  height: 12px;
 }
 
 .timeline {
@@ -1069,16 +727,23 @@ input:-webkit-autofill {
   bottom: 0;
   right: calc(100% - var(--progress-position) * 100%);
   background-color: #ba68c8;
+} */
+
+.timeline-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .timeline .thumb-indicator {
   --scale: 0;
   position: absolute;
-  height: 200%;
-  top: -50%;
+  z-index: 100;
+  height: 100%;
   transform: translateX(-50%) scale(var(--scale));
   left: calc(var(--progress-position) * 100%);
-  background-color: #ba68c8;
+  background-color: white;
+  opacity: 1;
   border-radius: 50%;
   transition: transform 150ms ease-in-out;
   aspect-ratio: 1 / 1;
