@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function LoginModalClose({ type }: { type?: CustomModalType }) {
+export default function ModalClose({ type }: { type?: CustomModalType }) {
   const dispatch = useDispatch();
   const login = useSelector(
     (state: RootState) => (state.global as GlobalState).login

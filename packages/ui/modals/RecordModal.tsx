@@ -1,7 +1,7 @@
 "use client";
 import ModalWrapper from "./ModalWrapper";
 import WebcamComponent from "../dashboardComponents/WebcamComponent";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 
 export default function RecordModal({ type }: CustomModalProps) {
@@ -11,7 +11,7 @@ export default function RecordModal({ type }: CustomModalProps) {
         <div className="flex-center flex-col gap-[24px] relative">
           <WebcamComponent />
         </div>
-        <LoginModalClose type={type} />
+        <ModalClose type={type} />
       </>
     </ModalWrapper>
   );

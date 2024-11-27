@@ -10,7 +10,7 @@ import { useActionState } from "react";
 import { onLogin } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import SimpleField from "../formComponents/fields/SimpleField";
-import LoginModalClose from "./LoginModalClose";
+import ModalClose from "../modals/ModalClose";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { RootState } from "@youmeet/global-config/store";
 import SubmitBtn from "../SubmitBtn";
@@ -63,10 +63,7 @@ export default function WhenLogin({
   }, [(state as PayloadBackendError).error, (state as withData<string>).data]);
 
   return (
-    <div
-      className="auth-form-content dark:mediumDarkBg gap-0"
-      onClick={(e) => e.stopPropagation()}
-    >
+    <div onClick={(e) => e.stopPropagation()}>
       <Suspense>
         <LoginComponentTopPart />
       </Suspense>
@@ -126,7 +123,7 @@ export default function WhenLogin({
           </div>
         </div>
       </form>
-      {type !== "loginPage" && <LoginModalClose type={type} />}
+      {type !== "loginPage" && <ModalClose type={type} />}
     </div>
   );
 }

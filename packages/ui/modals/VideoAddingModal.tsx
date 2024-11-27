@@ -23,7 +23,7 @@ import { deepPurple, green, grey } from "@mui/material/colors";
 import NewAddCVComponent from "../NewAddCVComponent";
 import { Button, FormControlLabel, Switch } from "@mui/material";
 import Link from "next/link";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import { modals } from "./modals";
 import { useRouter } from "next/navigation";
 
@@ -94,19 +94,14 @@ export default function VideoAddingModal({
     chosenVideo?.id;
 
   return !loading ? (
-    <ModalWrapper
-      newStyles={{
-        maxHeight: "92vh",
-        height: "unset",
-      }}
-    >
+    <ModalWrapper>
       <div
         style={{
           overflowY: "scroll",
           height: checkAvailableVideos ? "88vh" : "inherit",
         }}
       >
-        <div className="w-full h-full flex flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] py-[24px]">
+        <div className="w-[600px] xs:w-screen sm:w-screen h-full flex flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] py-[24px]">
           <h3 className="text-purple900 sentences xs:my-0 sm:my-0 md:my-0">
             {modals && modals[type] && modals[type].title && (
               <BoldText
@@ -249,7 +244,7 @@ export default function VideoAddingModal({
             )}
           </div>
         </div>
-        <LoginModalClose />
+        <ModalClose />
       </div>
     </ModalWrapper>
   ) : undefined;

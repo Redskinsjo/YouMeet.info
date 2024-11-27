@@ -16,7 +16,7 @@ export default function OfferChild({
   offre: Offer;
   view?: true;
 }) {
-  const viewClassName = view ? "offerView sticky top-[24px]" : "top-[24px]";
+  const viewClassName = view ? "afterHeader sticky top-[24px]" : "top-[24px]";
   return (
     <div
       className="flex justify-center"

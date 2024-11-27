@@ -760,9 +760,6 @@ p {
 }
 
 @layer components {
-  .offerView {
-    @apply h-[calc(100vh-48px)];
-  }
   .afterHeader {
     @apply min-h-[calc(100vh-41px)];
   }
@@ -775,20 +772,14 @@ p {
   .infos-component {
     @apply p-[16px] gap-[6px] w-full flex flex-col items-center relative box-border dark:extraLightDarkBg border-[0.5px] border-solid border-grey300 dark:border-grey900;
   }
+  .modal-container {
+    @apply flex-col overflow-hidden overflow-y-scroll p-[24px] bg-white flex-1 xs:p-[12px] sm:p-[12px] xs:gap-[12px] sm:gap-[12px] gap-[24px] h-full relative box-border appear_slowly flex-center dark:mediumDarkBg;
+  }
   .modal-content {
-    @apply flex-col overflow-hidden overflow-y-scroll p-[24px] bg-white flex-1 xs:p-[12px] sm:p-[12px] xs:gap-[12px] sm:gap-[12px] gap-[24px] xs:max-h-full sm:max-h-full md:max-h-full h-[92vh] xs:h-full sm:h-full md:h-full relative box-border appear_slowly flex-center dark:mediumDarkBg rounded-[14px];
+    @apply bg-white flex flex-col gap-[24px] p-[24px] rounded-xl shadow-custom xs:shadow-none sm:shadow-none;
   }
   .auth-to-signin {
     @apply flex flex-col hover:cursor-pointer w-[144px];
-  }
-  .auth-form-content {
-    @apply flex-center flex-col w-full p-[36px] flex-1 h-full xs:px-[18px] xs:py-[24px] sm:px-[18px] sm:py-[24px] gap-[36px] relative bg-white appear_slowly box-border md:border-[2px] md:border-solid md:border-grey300;
-  }
-  .sm-auth-container {
-    @apply h-full flex flex-col items-center w-full box-border p-[4px] rounded-lg shadow-2xl xs:shadow-none sm:shadow-none md:shadow-none;
-  }
-  .lg-auth-container {
-    @apply h-full flex-col max-w-[600px] w-full box-border flex-center bg-white p-[4px] rounded-lg shadow-2xl xs:shadow-none sm:shadow-none md:shadow-none;
   }
   .product-grid {
     @apply grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-1 xs:grid-rows-[repeat(8,_372px)] sm:grid-rows-[repeat(8,_372px)] bg-transparent relative z-10 w-full;

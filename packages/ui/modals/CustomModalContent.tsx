@@ -14,7 +14,7 @@ import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 import { Button, InputLabel, MenuItem, Select } from "@mui/material";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi2";
 import Link from "next/link";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import { modals } from "./modals";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
@@ -38,12 +38,7 @@ export default function CustomModalContent({
   const pathname = usePathname();
 
   return (
-    <ModalWrapper
-      newStyles={{
-        maxHeight: "92vh",
-        height: "unset",
-      }}
-    >
+    <ModalWrapper>
       <>
         <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px]">
           <h3 className="text-purple900 sentences">
@@ -130,7 +125,7 @@ export default function CustomModalContent({
             </Link>
           )}
         </div>
-        <LoginModalClose />
+        <ModalClose />
       </>
     </ModalWrapper>
   );

@@ -19,7 +19,7 @@ import { useActionState, useRef } from "react";
 import dynamic from "next/dynamic";
 import SimpleField from "../formComponents/fields/SimpleField";
 import { modals } from "./modals";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import { useRouter } from "next/navigation";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
@@ -105,7 +105,7 @@ export default function FeedBackModal({ type }: CustomModalProps) {
               </div>
             )}
           </div>
-          <LoginModalClose />
+          <ModalClose />
         </>
       </ModalWrapper>
     )

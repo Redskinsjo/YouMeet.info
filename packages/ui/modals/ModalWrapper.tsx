@@ -10,7 +10,7 @@ export default function ModalWrapper({
 }) {
   return (
     <div
-      className="modal-content"
+      className="modal-container"
       onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
       style={{ ...newStyles }}
     >

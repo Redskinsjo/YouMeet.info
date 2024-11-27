@@ -1,7 +1,7 @@
 import AddVideo from "../AddVideo";
 import BoldText from "../BoldText";
 import DetailComponent from "../DetailComponentContent";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import NewAddCVComponent from "../NewAddCVComponent";
 import { Button, FormControlLabel, Switch } from "@mui/material";
 import { deepPurple, green, grey } from "@mui/material/colors";
@@ -228,7 +228,7 @@ export default function VideoAddingModal({
             </Button>
           )}
         </div>
-        <LoginModalClose />
+        <ModalClose />
       </>
     </ModalWrapper>
   ) : undefined;

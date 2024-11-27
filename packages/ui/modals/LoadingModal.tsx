@@ -1,4 +1,4 @@
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import ModalWrapper from "../modals/ModalWrapper";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import Logo from "../Logo";
@@ -24,7 +24,7 @@ export default function LoadingModal({ type }: CustomModalProps) {
           />
           <LoadingText />
         </div>
-        <LoginModalClose type={type} />
+        <ModalClose type={type} />
       </>
     </ModalWrapper>
   );

@@ -97,7 +97,7 @@ export default function CustomModal({
 
   return (
     <div
-      className="absolute h-full w-full fadeIn"
+      className="absolute afterHeader w-full fadeIn"
       style={{
         zIndex: aboveError ? 1101 : 1100,
         background: "rgba(0,0,0,0.5)",
@@ -112,23 +112,9 @@ export default function CustomModal({
         }
       }}
     >
-      {type === "video" ? (
-        <div className="w-full h-screen">{modalContent}</div>
-      ) : (
-        <div className="h-screen flex fixed w-full">
-          <div className="relative m-auto box-border xs:w-screen sm:w-screen md:w-screen w-[600px] xs:h-screen sm:h-screen md:h-screen max-h-screen flex-center">
-            <div
-              className={
-                type === "login"
-                  ? "box-border h-full xs:w-screen sm:w-screen xs:h-screen sm:h-screen md:h-screen rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 flex-center w-full"
-                  : "box-border rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 bg-white xs:h-full sm:h-full md:h-full dark:darkBg flex-center w-full"
-              }
-            >
-              <Suspense>{children ?? modalContent}</Suspense>
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="h-full flex-center fixed w-full">
+        <Suspense>{children ?? modalContent}</Suspense>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import Locale from "./Locale";
 import { GoTriangleLeft } from "react-icons/go";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
@@ -34,7 +34,6 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   const [articles, setArticles] = useState<
     { id?: string; title: Translated; slug?: string }[]
   >([]);
-  const [megaMenuLoading, setMegaMenuLoading] = useState(true);
   const router = useRouter();
   router.prefetch(`/${searchParams.get("candidate")}`);
   router.prefetch("/le-produit/mise-en-relation");
@@ -49,7 +48,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     });
   };
 
-  const getArticles = async () => {
+  const getArticles = useCallback(async () => {
     const articles = (await getArticlesParams<Article[]>()) as Article[];
     setArticles(
       articles.map((article) => ({
@@ -58,14 +57,11 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         slug: article.slug,
       }))
     );
-  };
+  }, []);
 
   useEffect(() => {
-    if (megaMenu) {
-      getArticles();
-      setMegaMenuLoading(false);
-    }
-  }, [megaMenu]);
+    getArticles();
+  }, []);
 
   return (
     <div className="relative">
@@ -235,7 +231,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
       </div>
 
-      {!!megaMenu && !megaMenuLoading && (
+      {!!megaMenu && !!articles && (
         <div
           onClick={() => setMegaMenu(false)}
           className="absolute h-screen top-[75px] z-[11001] shadow-inner lightBg"
