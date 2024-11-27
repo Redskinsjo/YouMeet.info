@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    ".": "./tailwind.config.ts"
+    ".": "./tailwind.config.ts",
+    "./styles.css": "./styles"
   },
   "devDependencies": {
     "@youmeet/typescript-config": "*",
