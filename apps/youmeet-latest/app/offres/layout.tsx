@@ -65,7 +65,7 @@ export default function Layout({
         key="product-jsonld"
       />
       <BigHeaderSection />
-      <div className="flex xs:flex-col-reverse sm:flex-col-reverse md:flex-col-reverse">
+      <div className="flex xs:flex-col-reverse sm:flex-col-reverse md:flex-col-reverse afterHeader">
         {children}
         {pathname !== "/offres" && view}
       </div>

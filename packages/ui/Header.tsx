@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Locale from "./Locale";
 import { GoTriangleLeft } from "react-icons/go";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
@@ -16,8 +16,9 @@ import NotificationsComponent from "./NotificationsIconComponent";
 import MenuHeaderForMobile from "./MenuHeaderForMobile";
 import { Article, Translated } from "@youmeet/gql/generated";
 import { getArticlesParams } from "@youmeet/functions/request";
-import BlogMenuNav from "./BlogMenuNav";
+import BlogMenuNav from "./blog/BlogMenuNav";
 import { outfit } from "@youmeet/functions/fonts";
+import { ReducedArticle } from "@youmeet/types/ReducedArticle";
 
 export default function Header({ classes, newStyles }: HeaderComponentProps) {
   const user = useSelector((state: RootState) => state.user as UserState);
@@ -31,9 +32,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     i18n: { language },
   } = useTranslation();
   const [megaMenu, setMegaMenu] = useState(false);
-  const [articles, setArticles] = useState<
-    { id?: string; title: Translated; slug?: string }[]
-  >([]);
+  const [articles, setArticles] = useState<ReducedArticle[]>([]);
   const router = useRouter();
   router.prefetch(`/${searchParams.get("candidate")}`);
   router.prefetch("/le-produit/mise-en-relation");
@@ -60,8 +59,8 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   }, []);
 
   useEffect(() => {
-    getArticles();
-  }, []);
+    if (articles.length === 0) getArticles();
+  }, [megaMenu]);
 
   return (
     <div className="relative">
@@ -279,9 +278,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
               <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
                 {t("blog")}
               </h3>
-              <Suspense>
-                <BlogMenuNav articles={articles} />
-              </Suspense>
+              <BlogMenuNav articles={articles} />
             </div>
           </div>
         </div>

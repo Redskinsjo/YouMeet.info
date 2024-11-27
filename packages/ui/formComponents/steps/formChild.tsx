@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 const RightPartFormComponent = dynamic(
-  () => import("./formComponents/RightPartChild")
+  () => import("@youmeet/ui/formComponents/steps/RightPartChild")
 );
 
 export default function Page({

@@ -67,7 +67,6 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
     exchanges: BetaWhatsappExchange[];
   }) => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
-    router.push("/message");
     const result = (await onAnswerConversation(
       watch(),
       extras.exchanges,
@@ -117,7 +116,6 @@ export default function ConversationChild({ queue }: { queue: BetaQueue }) {
   useEffect(() => {
     customOnConversationEngagement();
     router.prefetch("/dashboard");
-    router.prefetch("/message");
   }, []);
 
   useEffect(() => {

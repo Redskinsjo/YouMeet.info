@@ -43,17 +43,12 @@ const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
     const result = await onUpdateisPublic(profil.id as string, !isPublic);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed") as UnknownAction);
-      router.push("/message");
     } else setIsPublic(!isPublic);
   }, [isPublic]);
 
   useEffect(() => {
     if (profil?.id) automaticUpdateIsPublic();
   }, [profil.videos]);
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return cantEnable ? (
     <TooltipedAsset asset={t("should-fulfill-profile")}>

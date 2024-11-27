@@ -11,15 +11,11 @@ export default function UserNotices() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
   return (
     <div
       className="h-[220px] flex-center flex-col dark:extraLightDarkBg hover:bg-grey100 dark:hover:mediumDarkBg cursor-pointer"
       onClick={() => {
         dispatch(setModal({ display: "remark" }) as UnknownAction);
-        router.push("/message");
       }}
     >
       <div className="text-[14px] dark:text-grey200">

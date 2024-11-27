@@ -22,10 +22,6 @@ const Validation = ({ type, watch }: NewFieldProps & GenericFieldProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
-
   return type !== "hidden" ? (
     <div className="text-purple900 xs:sentences sm:sentences md:titles lg:titles xl:titles titles p-[8px] flex-center flex-col gap-[12px] dark:text-deepPurple200">
       Fin du formulaire
@@ -46,7 +42,6 @@ const Validation = ({ type, watch }: NewFieldProps & GenericFieldProps) => {
                   offerPreview: values,
                 }) as UnknownAction
               );
-              router.push("/message");
             }
           }}
         >

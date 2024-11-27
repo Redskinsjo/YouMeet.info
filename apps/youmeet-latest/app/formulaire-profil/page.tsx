@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 import dynamic from "next/dynamic";
 
-const FormChild = dynamic(() => import("./formChild"));
+const FormChild = dynamic(
+  () => import("@youmeet/ui/formComponents/steps/formChild")
+);
 
 export default async function Form() {
   const verified = await verifyTokenServer();

@@ -1,5 +1,5 @@
 import { Offer } from "@youmeet/gql/generated";
-import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
+import PublicPageContainer from "../publicPagesComponents/PublicPageContainer";
 import dynamic from "next/dynamic";
 
 const OfferContent = dynamic(

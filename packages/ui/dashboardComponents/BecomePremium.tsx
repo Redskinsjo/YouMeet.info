@@ -24,7 +24,6 @@ export default function BecomePremium() {
 
   useEffect(() => {
     setLoading(false);
-    router.prefetch("/message");
   }, []);
 
   if (loading) {
@@ -45,7 +44,6 @@ export default function BecomePremium() {
           className="max-h-[40px] box-border animate-pulse bg-deepPurple50 dark:extraLightDarkBg dark:text-white border-[1px] border-solid border-yellow700"
           onClick={() => {
             dispatch(setModal({ display: "account" }) as UnknownAction);
-            router.push("/message");
           }}
         >
           {t("become-premium")}

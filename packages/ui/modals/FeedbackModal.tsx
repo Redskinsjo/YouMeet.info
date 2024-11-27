@@ -38,12 +38,10 @@ export default function FeedBackModal({ type }: CustomModalProps) {
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
   const router = useRouter();
-  router?.prefetch("/message");
 
   useEffect(() => {
     if (state && isPayloadError(state)) {
       dispatch(setError("not-completed"));
-      router.push("/message");
     } else if ((state as withData<boolean>).data) {
       setStatus((state as withData<boolean>).data);
       (formRef.current as HTMLFormElement)?.reset();

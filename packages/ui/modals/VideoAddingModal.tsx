@@ -72,7 +72,6 @@ export default function VideoAddingModal({
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
-    router.push("/message");
   };
 
   useEffect(() => {
@@ -82,7 +81,6 @@ export default function VideoAddingModal({
       const principalVideo = getPrincipalVideo(user.videos);
       setChosenVideo(principalVideo);
     }
-    router.prefetch("/message");
   }, []);
 
   const offerJobId = modal.publicOffer?.job?.id as string | undefined;
@@ -95,12 +93,7 @@ export default function VideoAddingModal({
 
   return !loading ? (
     <ModalWrapper>
-      <div
-        style={{
-          overflowY: "scroll",
-          height: checkAvailableVideos ? "88vh" : "inherit",
-        }}
-      >
+      <div>
         <div className="w-[600px] xs:w-screen sm:w-screen h-full flex flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] py-[24px]">
           <h3 className="text-purple900 sentences xs:my-0 sm:my-0 md:my-0">
             {modals && modals[type] && modals[type].title && (
@@ -139,24 +132,33 @@ export default function VideoAddingModal({
           </div>
           <div className="w-full flex flex-col gap-[24px] h-full">
             <div className="w-full flex flex-col justify-between items-start gap-[12px] xs:gap-0 sm:gap-0">
-              <span className="text-black dark:text-white font-bold">
-                {t("video")}
-              </span>
-              <AddVideo
-                profil={user}
-                setCheckAvailableVideos={setCheckAvailableVideos}
-                checkAvailableVideos={checkAvailableVideos}
-                chosenVideo={chosenVideo}
-                offerJobId={offerJobId}
-                setChosenVideo={setChosenVideo}
+              <DetailComponent
+                label="video"
+                conversation={!!checkAvailableVideos}
+                labelInBold
+                noPadding
+                type="modal"
+                value={
+                  <AddVideo
+                    profil={user}
+                    setCheckAvailableVideos={setCheckAvailableVideos}
+                    checkAvailableVideos={checkAvailableVideos}
+                    chosenVideo={chosenVideo}
+                    offerJobId={offerJobId}
+                    setChosenVideo={setChosenVideo}
+                  />
+                }
               />
             </div>
             {!checkAvailableVideos && !user.cvFile ? (
               <div className="w-full flex flex-col justify-between items-start gap-[12px] xs:gap-0 sm:gap-0">
-                <span className="text-black dark:text-white font-bold">
-                  {t("cv")}
-                </span>
-                <NewAddCVComponent profil={user} />
+                <DetailComponent
+                  labelInBold
+                  noPadding
+                  type="modal"
+                  label="cv"
+                  value={<NewAddCVComponent profil={user} />}
+                />
               </div>
             ) : !checkAvailableVideos ? (
               <div className="w-full">

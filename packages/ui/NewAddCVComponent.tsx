@@ -23,7 +23,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
 
   const customOnAddCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("upload"));
-    router.push("/message");
     const cvFile = formData.get("cvFile") as File;
     const fileFormData = new FormData();
     fileFormData.append("file", cvFile);
@@ -42,10 +41,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
       }
     }
   };
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return profil?.cvFile ? undefined : (
     <div className="w-full flex justify-end p-[6px] h-[39px]">

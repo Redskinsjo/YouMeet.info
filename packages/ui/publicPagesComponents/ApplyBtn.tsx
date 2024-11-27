@@ -45,6 +45,7 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
             publicOffer: offre,
           }) as UnknownAction
         );
+        router.refresh();
         router.push(`/ajouter-video`);
       }}
     >

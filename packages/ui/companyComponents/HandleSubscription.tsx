@@ -24,10 +24,6 @@ export default function HandleSubscription() {
   const user = useSelector((state: RootState) => state.user as UserState);
   const router = useRouter();
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
-
   return (
     !!subscription &&
     !!currentSubscription && (
@@ -58,7 +54,6 @@ export default function HandleSubscription() {
                     dispatch(
                       setModal({ display: "consent2" }) as UnknownAction
                     );
-                    router.push("/message");
                   }
                 }
               }

@@ -1,10 +1,9 @@
-"use client";
 import Footer from "@youmeet/ui/Footer";
 import dynamic from "next/dynamic";
 
 const ErrorChild = dynamic(() => import("@youmeet/ui/ErrorChild"));
 
-export default function ServerError500({
+export default function ErrorComponent({
   error,
   reset,
 }: {

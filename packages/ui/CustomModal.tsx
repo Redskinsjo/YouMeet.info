@@ -112,7 +112,7 @@ export default function CustomModal({
         }
       }}
     >
-      <div className="h-full flex-center fixed w-full">
+      <div className="h-full flex-center absolute w-full">
         <Suspense>{children ?? modalContent}</Suspense>
       </div>
     </div>

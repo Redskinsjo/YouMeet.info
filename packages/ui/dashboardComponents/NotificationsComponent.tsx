@@ -252,7 +252,6 @@ export default function NotificationsComponent({
       } else {
         dispatch(setError("creditTooLow"));
       }
-      router.push("/message");
     },
     [user]
   );
@@ -364,10 +363,6 @@ export default function NotificationsComponent({
     getRows();
   }, [user, language]);
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
-
   return (
     <SubPartContainer
       radius="14px"
@@ -463,7 +458,6 @@ export default function NotificationsComponent({
                       display: "account",
                     }) as UnknownAction
                   );
-                  router.push("/message");
                   return;
                 }
               }
@@ -512,7 +506,6 @@ export default function NotificationsComponent({
                       ...value,
                     }) as UnknownAction
                   );
-                  router.push("/message");
                 }
               }
             }}

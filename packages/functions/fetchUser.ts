@@ -50,13 +50,11 @@ export const useFetchedUser = () => {
       dispatch(
         setModal({ display: "fulfill", user: appData.user }) as UnknownAction
       );
-      router.push("/message");
     }
     dispatch(setSubscription(appData.data));
   }, [pathname]);
 
   useEffect(() => {
     fetchAndStoreUser();
-    if (router) router.prefetch("/message");
   }, []);
 };

@@ -1,6 +1,5 @@
 import { Article } from "@youmeet/gql/generated";
-import React from "react";
-import PublicPageContainer from "@youmeet/ui/PublicPage/PublicPageContainer";
+import PublicPageContainer from "../publicPagesComponents/PublicPageContainer";
 import Footer from "@youmeet/ui/Footer";
 import OtherArticles from "@youmeet/ui/mediaComponents/OtherArticles";
 import dynamic from "next/dynamic";

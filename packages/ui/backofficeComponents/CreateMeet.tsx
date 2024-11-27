@@ -91,7 +91,6 @@ export default function CreateProUser() {
 
   const customeOnCreateMeet = async (formData: FormData) => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
-    router.push("/message");
 
     const emailCandidate = formData.get("emailCandidate") as string;
     const main = formData.get("videoMain") as File;
@@ -238,7 +237,6 @@ export default function CreateProUser() {
               dispatch(
                 setModal({ display: "backofficeConfirm" }) as UnknownAction
               );
-              router.push("/message");
             }
           }
         } else {
@@ -262,7 +260,6 @@ export default function CreateProUser() {
       });
       dispatch(resetModal("ok") as UnknownAction);
       dispatch(setModal({ display: "not-completed" }) as UnknownAction);
-      router.push("/message");
     }
   };
 
@@ -278,7 +275,6 @@ export default function CreateProUser() {
 
   useEffect(() => {
     getCandidates();
-    router.prefetch("/message");
   }, []);
 
   return (

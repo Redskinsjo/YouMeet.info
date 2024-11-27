@@ -67,7 +67,6 @@ export default function VideoAddingModal({
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
-    router.push("/message");
   };
 
   useEffect(() => {
@@ -77,7 +76,6 @@ export default function VideoAddingModal({
       const principalVideo = getPrincipalVideo(user.videos);
       setChosenVideo(principalVideo);
     }
-    router.prefetch("/message");
   }, []);
 
   const offerJobId = modal.publicOffer?.job?.id as string | undefined;

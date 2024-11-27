@@ -25,12 +25,7 @@ export default function CreateProUser() {
     if (result && isPayloadError(result))
       dispatch(setModal({ display: "not-completed" }) as UnknownAction);
     else dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
-    router.push("/message");
   };
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return (
     <Layout newStyles={{ maxWidth: "1200px", padding: "0px", width: "100%" }}>

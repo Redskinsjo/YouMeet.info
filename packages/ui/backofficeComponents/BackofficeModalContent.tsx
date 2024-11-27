@@ -123,7 +123,7 @@ export default function BackofficeModalContent({
 
   const customOnDeleteVideo = async (videoId: string) => {
     dispatch(setUpload(`upload`));
-    router.push("/message");
+
     const result = (await onDeleteVideo(videoId)) as
       | PayloadBackendError
       | withData<Video>;
@@ -142,7 +142,6 @@ export default function BackofficeModalContent({
     if (data?.type === "job") {
       getQuestions();
     }
-    router.prefetch("/message");
   }, []);
 
   useEffect(() => {

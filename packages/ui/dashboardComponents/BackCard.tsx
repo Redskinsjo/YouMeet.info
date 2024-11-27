@@ -69,10 +69,6 @@ export default function BackCard({
       }, 2500);
   }, [justFavorited]);
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
-
   return justFavorited ? (
     <Box
       className={
@@ -226,7 +222,6 @@ export default function BackCard({
                     `${uriCandidates}/on/${user?.uniqueName}`
                   );
                   dispatch(setModal({ display: "shareProfile" }));
-                  router.push("/message");
                 }}
                 name={CustomIconName.share}
               />

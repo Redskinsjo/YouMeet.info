@@ -78,9 +78,6 @@ export default function BackofficeUsersComponent({
     if (data) fetchRows(data);
   }, [data]);
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
   return (
     <Layout newStyles={{ maxWidth: "1200px", padding: "0px", width: "100%" }}>
       <div className="flex flex-col gap-[24px] w-full border-[0.5px] border-solid border-grey500">
@@ -113,7 +110,6 @@ export default function BackofficeUsersComponent({
                     setModal({ display: "backofficeConfirm" }) as UnknownAction
                   );
                 }
-                router.push("/message");
               }
             }}
           >
@@ -222,7 +218,6 @@ export default function BackofficeUsersComponent({
                                 display: "backofficeConfirm",
                               }) as UnknownAction
                             );
-                            router.push("/message");
                           }
                         }}
                       >

@@ -26,7 +26,6 @@ export default function NewCVUpload({
 
   const customeOnDeleteCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("delete"));
-    router.push("/message");
     const result = await onDeleteCV(userId);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed"));
@@ -65,10 +64,6 @@ export default function NewCVUpload({
       </div>
     );
   }, [cvFile?.url, account]);
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return cvComponent;
 }

@@ -43,12 +43,10 @@ export default function CreateAffiliation() {
     } catch (err: any) {
       dispatch(setModal({ display: "not-completed" }) as UnknownAction);
     }
-    router.push("/message");
   };
 
   useEffect(() => {
     getParents();
-    router.prefetch("/message");
   }, []);
 
   return (

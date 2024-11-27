@@ -1,4 +1,4 @@
-import OffresChild from "./offresChild";
+import OffresChild from "@youmeet/ui/offresComponent/offresChild";
 import { getOffers } from "@youmeet/functions/request";
 import { Offer, OfferInput, PageParamsInput } from "@youmeet/gql/generated";
 import { notFound } from "next/navigation";

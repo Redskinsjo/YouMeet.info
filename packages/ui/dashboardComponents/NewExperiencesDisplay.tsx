@@ -29,7 +29,6 @@ const NewExperiencesDisplay = ({
 
   useEffect(() => {
     router.prefetch("/formulaire-profil?step=2");
-    router.prefetch("/message");
   }, []);
 
   return (
@@ -102,7 +101,6 @@ const NewExperiencesDisplay = ({
                               experience: exp,
                             }) as UnknownAction
                           );
-                          router.push("/message");
                         }}
                       >
                         <div

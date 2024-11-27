@@ -2,7 +2,7 @@
 import { UserState, addVideo } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { BetaUser, Video } from "@youmeet/gql/generated";
-import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react";
+import { Dispatch, SetStateAction, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,7 +17,11 @@ import { submitFile } from "@youmeet/utils/basics/submitFile";
 import Link from "next/link";
 import { getPublicIdFirstPart } from "@youmeet/utils/basics/getPublicId";
 import { Button } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { modals } from "./modals/modals";
+import dynamic from "next/dynamic";
+import { trads } from "@youmeet/types/CustomModal";
+
+const BoldText = dynamic(() => import("./TextChild"));
 
 export default function NewAddVideoComponent({
   profil,
@@ -36,11 +40,15 @@ export default function NewAddVideoComponent({
   const submitVideoRef = useRef<HTMLButtonElement | null>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const upload = useSelector(
-    (state: RootState) => (state.global as GlobalState).upload
-  );
-  const router = useRouter();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const global = useSelector((state: RootState) => state.global as GlobalState);
+  const error = global.error;
+  const upload = global.upload;
+
+  const type = error || (upload as "upload");
 
   const customOnAddVideo = async (
     extras: {
@@ -50,7 +58,7 @@ export default function NewAddVideoComponent({
     formData: FormData
   ) => {
     dispatch(setUpload("upload"));
-    router.push("/message");
+
     let count = 0;
     const intervalId = setInterval(() => {
       count++;
@@ -88,6 +96,7 @@ export default function NewAddVideoComponent({
       }
     }
     clearInterval(intervalId);
+    dispatch(setUpload(null));
   };
 
   const inputElement = useMemo(
@@ -111,12 +120,8 @@ export default function NewAddVideoComponent({
     user.videos.length
   );
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
-
   return (
-    <div className="w-full p-[6px] box-border flex-bet h-[39px]">
+    <div className="w-full p-[6px] box-border flex-bet flex-col">
       <div className="w-full flex justify-end items-center gap-[24px] xs:gap-[12px] sm:gap-[6px] md:gap-[6px]">
         <Link href={"/enregistrer"} className="no-underline">
           <div className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold">
@@ -147,6 +152,12 @@ export default function NewAddVideoComponent({
           />
         </form>
       </div>
+      {!!type && modals && modals[type] && modals[type].content && (
+        <BoldText
+          text={`${t((modals[type].content as trads)[language])}`}
+          align="center"
+        />
+      )}
     </div>
   );
 }

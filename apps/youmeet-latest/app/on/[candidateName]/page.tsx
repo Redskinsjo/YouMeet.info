@@ -1,6 +1,6 @@
 import { BetaUser, Reference, Video } from "@youmeet/gql/generated";
 import { uri } from "@youmeet/functions/imports";
-import CandidateChild from "./candidateChild";
+import CandidateChild from "@youmeet/ui/candidateProfileComponents/candidateChild";
 import { setName } from "@youmeet/utils/basics/setName";
 import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { Metadata, ResolvingMetadata } from "next";

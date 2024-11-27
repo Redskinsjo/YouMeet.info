@@ -6,7 +6,7 @@ import {
   getArticles,
   getArticlesParams,
 } from "@youmeet/functions/request";
-import MediaChild from "./mediaChild";
+import MediaChild from "@youmeet/ui/mediaComponents/mediaChild";
 import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { Article } from "@youmeet/gql/generated";
 import { notFound } from "next/navigation";

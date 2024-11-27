@@ -56,7 +56,6 @@ export default function ConversationComponent({
   const customOnAddConversationTheme = useCallback(
     async (fieldValues: FieldValues) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
-      router.push("/message");
       try {
         const themes = fieldValues.themes;
         // const result = await onAddConversationTheme(themes, {
@@ -130,7 +129,6 @@ export default function ConversationComponent({
             dispatch(
               setModal({ display: "backofficeConfirm" }) as UnknownAction
             );
-            router.push("/message");
           }
         }
 
@@ -150,7 +148,6 @@ export default function ConversationComponent({
       } catch (err: any) {
         resetModal("ok");
         dispatch(setError("requestNotCompleted"));
-        router.push("/message");
       }
     },
     [watch("themes"), user.id, user.company?.name]
@@ -162,7 +159,6 @@ export default function ConversationComponent({
       const parsedThemes = JSON.parse(localThemes);
       if (parsedThemes) setValue("themes", parsedThemes);
     }
-    router.prefetch("/message");
   }, []);
 
   return (

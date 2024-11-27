@@ -25,13 +25,8 @@ const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
     if (result) setConsent(!consent);
     else {
       dispatch(setError("not-completed") as UnknownAction);
-      router.push("/message");
     }
   }, [consent]);
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return (
     <DetailComponent

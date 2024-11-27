@@ -22,7 +22,9 @@ import { removeVideo, UserState } from "@youmeet/global-config/features/user";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import CandidateVideo from "../CandidateVideo";
-import { useRouter } from "next/navigation";
+import { GlobalState } from "@youmeet/global-config/features/global";
+import { modals } from "../modals/modals";
+import { trads } from "@youmeet/types/CustomModal";
 
 export default function VideoComponent({
   profil,
@@ -56,11 +58,12 @@ export default function VideoComponent({
   const deleteVideoFormRef = useRef<HTMLFormElement>(null);
   const setVideoAsDefaultFormRef = useRef<HTMLFormElement>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
-  const router = useRouter();
+  const global = useSelector((state: RootState) => state.global as GlobalState);
+  const error = global.error;
+  const del = "delete";
+  const deleting = global.upload === del ? del : null;
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
+  const type = error || deleting;
 
   const videoComponent = useMemo(() => {
     return (
@@ -85,7 +88,6 @@ export default function VideoComponent({
 
   const customOnDeleteVideo = useCallback(async (videoId: string) => {
     dispatch(setUpload(`delete`));
-    router.push("/message");
     const result = (await onDeleteVideo(videoId)) as
       | PayloadBackendError
       | withData<Video>;
@@ -98,6 +100,7 @@ export default function VideoComponent({
     } else {
       dispatch(removeVideo((result as withData<Video>).data));
     }
+    dispatch(setUpload(null));
   }, []);
 
   const customOnSetVideoAsDefault = useCallback(
@@ -131,13 +134,11 @@ export default function VideoComponent({
         <div
           className={
             modal && chosenVideo?.id === video?.id
-              ? "relative flex flex-1 p-[18px] cursor-pointer rounded-[14px] dark:extraLightDarkBg border-[1px] border-green700 border-solid"
+              ? "relative flex flex-1 p-[18px] rounded-[14px] dark:extraLightDarkBg border-[1px] border-green700 border-solid"
               : "relative flex flex-1 p-[12px] rounded-[14px] dark:extraLightDarkBg"
           }
           onClick={(e) => {
             e.stopPropagation();
-            if (setChosenVideo) setChosenVideo(video);
-            if (setCheckAvailableVideos) setCheckAvailableVideos(false);
           }}
         >
           {modal && chosenVideo?.id === video?.id && (
@@ -202,9 +203,10 @@ export default function VideoComponent({
                           })}
                         >
                           <div
-                            onClick={(e) =>
-                              setVideoAsDefaultFormRef.current?.requestSubmit()
-                            }
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setVideoAsDefaultFormRef.current?.requestSubmit();
+                            }}
                             className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold"
                           >
                             {t("set-as-principal")}
@@ -216,7 +218,7 @@ export default function VideoComponent({
                         </div>
                       )}
                       {!affiliated && (
-                        <div className="flex-bet gap-[12px]">
+                        <div className="flex flex-col gap-[12px]">
                           <form
                             ref={deleteVideoFormRef}
                             action={customOnDeleteVideo.bind(
@@ -225,14 +227,26 @@ export default function VideoComponent({
                             )}
                           >
                             <div
-                              onClick={(e) =>
-                                deleteVideoFormRef.current?.requestSubmit()
-                              }
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteVideoFormRef.current?.requestSubmit();
+                              }}
                               className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold"
                             >
                               {t("delete")}
                             </div>
                           </form>
+                          {!!type &&
+                            modals &&
+                            modals[type] &&
+                            modals[type].content && (
+                              <BoldText
+                                text={`${t(
+                                  (modals[type].content as trads)[language]
+                                )}`}
+                                align="left"
+                              />
+                            )}
                         </div>
                       )}
 
@@ -240,7 +254,6 @@ export default function VideoComponent({
                         <Button
                           className="whitespace-nowrap"
                           onClick={(e) => {
-                            e.stopPropagation();
                             if (setChosenVideo) setChosenVideo(video);
                             if (setCheckAvailableVideos)
                               setCheckAvailableVideos(false);

@@ -22,10 +22,6 @@ export default function UserRemarkComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
-
   return (
     <div className="w-full">
       {!isValidated ? (
@@ -82,7 +78,6 @@ export default function UserRemarkComponent() {
                             display: "backofficeConfirm",
                           }) as UnknownAction
                         );
-                        router.push("/message");
                         setContent("");
                       }
                     }

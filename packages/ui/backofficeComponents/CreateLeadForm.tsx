@@ -29,12 +29,7 @@ export default function CreateLeadForm({ users }: { users: BetaUser[] }) {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
       formRef.current?.reset();
     }
-    router.push("/message");
   };
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return (
     <form

@@ -1,5 +1,4 @@
 "use client";
-import "./globals.css";
 import "@youmeet/ui/dist/index.css";
 import "@youmeet/i18n/index";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -8,7 +7,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import GraphQLProvider from "@youmeet/gql/index";
 import { ReactElement } from "react";
 import { store } from "@youmeet/global-config/store";
-import ContentProvider from "./contentProvider";
+import ContentProvider from "@youmeet/ui/rootComponents/contentProvider";
 import { outfit } from "@youmeet/functions/fonts";
 import { deepPurple, grey, purple } from "@mui/material/colors";
 

@@ -64,7 +64,6 @@ export default function MainVideoComponent({
   const customOnTranscriptVideo = useCallback(
     async (extras: { videoId: string }) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
-      router.push("/message");
       if (!extras.videoId) dispatch(setError("requestNotCompleted"));
       else {
         const result = await onTranscriptVideo(extras.videoId);
@@ -79,7 +78,6 @@ export default function MainVideoComponent({
           dispatch(resetModal("ok") as UnknownAction);
           dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
         }
-        router.push("/message");
       }
     },
     []
@@ -88,7 +86,6 @@ export default function MainVideoComponent({
   const customOnAnalyzeVideo = useCallback(
     async (extras: { videoId: string }) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
-      router.push("/message");
       if (!extras.videoId) dispatch(setError("requestNotCompleted"));
       else {
         const result = await onAnalyzeVideo(extras.videoId);
@@ -103,15 +100,10 @@ export default function MainVideoComponent({
           dispatch(resetModal("ok") as UnknownAction);
           dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
         }
-        router.push("/message");
       }
     },
     []
   );
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return (
     <main

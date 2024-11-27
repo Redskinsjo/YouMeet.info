@@ -124,7 +124,6 @@ export default function FrontCard({
       } else if (cardPrice === undefined) {
         dispatch(setError("creditTooLow"));
       }
-      router.push("/message");
     },
     [appUser]
   );
@@ -134,10 +133,6 @@ export default function FrontCard({
     calculatePrice();
     setLoading(false);
   }, [appUser]);
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   const video = getPrincipalVideo(
     (user?.videos?.filter((v) => v) as Video[]) || undefined

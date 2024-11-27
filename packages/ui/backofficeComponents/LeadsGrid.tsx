@@ -56,11 +56,6 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
-    router.push("/message");
-  }, []);
-
-  useEffect(() => {
-    router.prefetch("/message");
   }, []);
 
   return (
@@ -79,7 +74,6 @@ export default function LeadsGrid({ data }: { data: Lead[] }) {
                 dispatch(
                   setModal({ display: "backofficeConfirm" }) as UnknownAction
                 );
-                router.push("/message");
               }
             }
           }}

@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import Providers from "./providers";
+import Providers from "@youmeet/ui/rootComponents/providers";
 import Template from "./template";
 
 const fnc = function RootLayout({

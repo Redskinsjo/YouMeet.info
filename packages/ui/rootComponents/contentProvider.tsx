@@ -43,6 +43,7 @@ export default function ContentProvider({
     error ||
     pathname === "/se-connecter" ||
     pathname === "/enregistrer";
+
   return (
     <div className={dark ? `dark ${outfit.className}` : `${outfit.className}`}>
       <div
@@ -57,7 +58,6 @@ export default function ContentProvider({
         {modals.recordModal}
         {modals.loginModal}
         {modals.videoAddingModal}
-        {modals.messageModal}
 
         <div
           className={

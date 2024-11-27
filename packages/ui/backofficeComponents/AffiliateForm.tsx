@@ -84,7 +84,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
   const customOnCreateMeet = useCallback(
     async (formData: FormData) => {
       dispatch(setModal({ display: "upload" }) as UnknownAction);
-      router.push("/message");
       const main = formData.get("videoMain") as File;
 
       try {
@@ -149,7 +148,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
                   dispatch(
                     setModal({ display: "backofficeConfirm" }) as UnknownAction
                   );
-                  router.push("/message");
                 }
               } else {
                 throw new BackendError(
@@ -184,7 +182,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
         });
         dispatch(resetModal("ok") as UnknownAction);
         dispatch(setModal({ display: "not-completed" }) as UnknownAction);
-        router.push("/message");
       }
     },
     [parent, child]
@@ -218,7 +215,6 @@ export default function AffiliateForm({ users }: { users: BetaUser[] }) {
 
   useEffect(() => {
     getParentAffiliation();
-    router.prefetch("/message");
   }, []);
 
   useEffect(() => {

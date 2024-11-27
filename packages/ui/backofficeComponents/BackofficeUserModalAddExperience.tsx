@@ -52,13 +52,8 @@ const BackofficeUserModalAddExperience = ({ data }: { data: BetaUser }) => {
       reset();
       dispatch(resetModal("ok") as UnknownAction);
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
-      router.push("/message");
     }
   };
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return (
     <form

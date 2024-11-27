@@ -1,8 +1,10 @@
 import { Translated } from "@youmeet/gql/generated";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import dynamic from "next/dynamic";
+
+const BlogMenuLi = dynamic(() => import("./BlogMenuLiChild"));
 
 export default function BlogMenuNav({
   articles,
@@ -16,21 +18,7 @@ export default function BlogMenuNav({
 
   const articleEls = articles.map((article) => {
     router.prefetch(`/medias/${article.slug}`);
-    return (
-      <li
-        key={article.id}
-        className="darkLi article list-none cursor-pointer text-[16px] font-light hover:font-semibold hover:opacity-100"
-      >
-        <Link
-          href={`/medias/${article.slug}`}
-          className="no-underline text-black"
-        >
-          <span className="dark:text-white">
-            {article.title[language as "fr" | "en"]}
-          </span>
-        </Link>
-      </li>
-    );
+    return <BlogMenuLi article={article} key={article.id} />;
   });
 
   const updateBlur = (scrollContainer: any, listItems: HTMLLIElement[]) => {

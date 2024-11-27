@@ -49,10 +49,8 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
 
       if (result && isPayloadError(result)) {
         dispatch(setError("not-completed"));
-        router.push("/message");
       } else if (!result?.data) {
         dispatch(setError("not-completed"));
-        router.push("/message");
       } else {
         setCandidateValidated((result as withData<BetaCandidate>).data);
         setIsValidated(true);
@@ -66,10 +64,6 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
       setCandidateValidated(profil?.candidate);
     }
   }, [profil?.candidate]);
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return (
     <form

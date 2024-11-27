@@ -29,13 +29,8 @@ export default function AddTargetJobComponent({
     const result = await onUpdateTargetJob(userId, formData);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed") as UnknownAction);
-      router.push("/message");
     }
   };
-
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
 
   return !profil.candidate?.targetJob ? (
     <form

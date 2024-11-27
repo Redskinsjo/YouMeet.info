@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import { getMyReferences, getUser } from "@youmeet/functions/request";
 import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
-import DashboardChild from "./dashboardChild";
+import DashboardChild from "@youmeet/ui/dashboardComponents/dashboardChild";
 import { redirect } from "next/navigation";
 import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser, Reference } from "@youmeet/gql/generated";

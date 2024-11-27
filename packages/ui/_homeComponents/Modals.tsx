@@ -21,10 +21,6 @@ export default function Modals() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    router.prefetch("/message");
-  }, []);
-
   return (
     <>
       {(error || upload) && (
@@ -33,7 +29,6 @@ export default function Modals() {
           setDisplayModal={(payload) => {
             dispatch(setError(payload));
             dispatch(setUpload(payload));
-            router.push("/message");
           }}
         />
       )}
