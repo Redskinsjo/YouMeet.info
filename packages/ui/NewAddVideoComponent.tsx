@@ -47,8 +47,9 @@ export default function NewAddVideoComponent({
   const global = useSelector((state: RootState) => state.global as GlobalState);
   const error = global.error;
   const upload = global.upload;
-
-  const type = error || (upload as "upload");
+  const uploading =
+    upload === "upload" || upload === "upload-50" ? upload : null;
+  const type = error || uploading;
 
   const customOnAddVideo = async (
     extras: {

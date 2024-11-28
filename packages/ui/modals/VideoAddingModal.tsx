@@ -46,9 +46,7 @@ export default function VideoAddingModal({
   } = useTranslation();
   const [offer, setOffer] = useState<Offer | undefined>();
   const [checkAvailableVideos, setCheckAvailableVideos] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [chosenVideo, setChosenVideo] = useState<Video | undefined>();
-  const router = useRouter();
 
   const fetchOffer = useCallback(async () => {
     if (modal.publicOffer?.id) {
@@ -76,7 +74,6 @@ export default function VideoAddingModal({
 
   useEffect(() => {
     fetchOffer();
-    setLoading(false);
     if (user.videos) {
       const principalVideo = getPrincipalVideo(user.videos);
       setChosenVideo(principalVideo);
@@ -84,6 +81,11 @@ export default function VideoAddingModal({
   }, []);
 
   const offerJobId = modal.publicOffer?.job?.id as string | undefined;
+  console.log(user.videos.length > 0);
+  console.log(user.cvFile);
+  console.log(offer?.company);
+  console.log(offer?.company?.id);
+  console.log(chosenVideo?.id);
   const readyToApply =
     user.videos.length > 0 &&
     user.cvFile &&
@@ -91,7 +93,7 @@ export default function VideoAddingModal({
     offer?.company.id &&
     chosenVideo?.id;
 
-  return !loading ? (
+  return (
     <ModalWrapper>
       <div>
         <div className="w-[600px] xs:w-screen sm:w-screen h-full flex flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] py-[24px]">
@@ -150,7 +152,7 @@ export default function VideoAddingModal({
                 }
               />
             </div>
-            {!checkAvailableVideos && !user.cvFile ? (
+            {!user.cvFile ? (
               <div className="w-full flex flex-col justify-between items-start gap-[12px] xs:gap-0 sm:gap-0">
                 <DetailComponent
                   labelInBold
@@ -160,7 +162,7 @@ export default function VideoAddingModal({
                   value={<NewAddCVComponent profil={user} />}
                 />
               </div>
-            ) : !checkAvailableVideos ? (
+            ) : (
               <div className="w-full">
                 <DetailComponent
                   type="modal2"
@@ -192,62 +194,51 @@ export default function VideoAddingModal({
                   }
                 />
               </div>
-            ) : undefined}
-            {!checkAvailableVideos ? (
-              <form
-                className="w-full flex flex-col gap-[24px] pb-[36px]"
-                action={customOnApplying.bind(null, {
-                  originId: user.id,
-                  targetId: offer?.company?.id ?? "",
-                  videoId:
-                    (chosenVideo?.id as string) ||
-                    (getPrincipalVideo(user.videos)?.id as string),
-                  offerTargetId: offer?.id as string,
-                })}
-              >
-                <div>
-                  <BoldText
-                    text={`${t("video-mandatory-from-cgu")}`}
-                    containerStyle={{ margin: 0 }}
-                    fontSizeClass="leading-[1.5]"
-                  />
-                  <Link
-                    href={`/conditions-generales-utilisation`}
-                    className="text-deepPurple900 dark:text-deepPurple200"
-                  >
-                    <span>{t("cgu-initials")}</span>
-                  </Link>
-                </div>
-                <Button
-                  disabled={!readyToApply}
-                  className="subItem fadeIn"
-                  type="submit"
-                >
-                  {modals && modals[type] && modals[type].cta && (
-                    <BoldText
-                      text={`${t(
-                        (cta as string) ?? (modals[type].cta as trads)[language]
-                      )}`}
-                      align="center"
-                      containerStyle={{ margin: 0 }}
-                    />
-                  )}
-                </Button>
-              </form>
-            ) : (
-              <Button
-                onClick={() => {
-                  setCheckAvailableVideos(false);
-                }}
-                className="subItem fadeIn"
-              >
-                {t("back")}
-              </Button>
             )}
+            <form
+              className="w-full flex flex-col gap-[24px] pb-[36px]"
+              action={customOnApplying.bind(null, {
+                originId: user.id,
+                targetId: offer?.company?.id ?? "",
+                videoId:
+                  (chosenVideo?.id as string) ||
+                  (getPrincipalVideo(user.videos)?.id as string),
+                offerTargetId: offer?.id as string,
+              })}
+            >
+              <div>
+                <BoldText
+                  text={`${t("video-mandatory-from-cgu")}`}
+                  containerStyle={{ margin: 0 }}
+                  fontSizeClass="leading-[1.5]"
+                />
+                <Link
+                  href={`/conditions-generales-utilisation`}
+                  className="text-deepPurple900 dark:text-deepPurple200"
+                >
+                  <span>{t("cgu-initials")}</span>
+                </Link>
+              </div>
+              <Button
+                disabled={!readyToApply}
+                className="subItem fadeIn"
+                type="submit"
+              >
+                {modals && modals[type] && modals[type].cta && (
+                  <BoldText
+                    text={`${t(
+                      (cta as string) ?? (modals[type].cta as trads)[language]
+                    )}`}
+                    align="center"
+                    containerStyle={{ margin: 0 }}
+                  />
+                )}
+              </Button>
+            </form>
           </div>
         </div>
         <ModalClose />
       </div>
     </ModalWrapper>
-  ) : undefined;
+  );
 }

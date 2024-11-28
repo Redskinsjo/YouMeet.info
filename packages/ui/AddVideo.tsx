@@ -4,7 +4,7 @@ import VideoComponent from "./dashboardComponents/VideoComponent";
 import { Button, FormControlLabel, Switch } from "@mui/material";
 import DetailComponent from "./DetailComponent";
 import { deepPurple, grey } from "@mui/material/colors";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BoldText from "./BoldText";
 import { AiOutlineEye } from "react-icons/ai";
@@ -28,15 +28,16 @@ export default function AddVideo({
   const { t } = useTranslation();
   const videos = profil.videos?.filter((v) => v) || [];
 
+  useEffect(() => {
+    if (videos.length === 0) {
+      if (setCheckAvailableVideos) setCheckAvailableVideos(false);
+    }
+  }, [videos]);
+
   return (
     <div className="flex flex-col gap-[6px] w-full">
       {videos.length === 0 ? (
         <div className="w-full flex-bet xs:flex-col sm:flex-col">
-          {videos.length > 0 && (
-            <span className="font-bold text-black dark:text-grey300">
-              {t("video")}
-            </span>
-          )}
           <NewAddVideoComponent
             jobId={offerJobId}
             profil={profil}
@@ -137,7 +138,7 @@ export default function AddVideo({
       )}
 
       {!!displayAdvices && (
-        <div className="flex flex-col gap-[12px] bg-grey50 dark:extraLightDarkBg">
+        <div className="flex flex-col gap-[6px] rounded-xl bg-grey50 dark:extraLightDarkBg">
           <ul className="flex flex-col gap-[6px]">
             <li className="darkLi text-[14px]">
               <BoldText

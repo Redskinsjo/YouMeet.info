@@ -47,16 +47,15 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     });
   };
 
-  const getArticles = useCallback(async () => {
-    const articles = (await getArticlesParams<Article[]>()) as Article[];
-    setArticles(
-      articles.map((article) => ({
-        id: article.id,
-        title: article.title,
-        slug: article.slug,
-      }))
-    );
-  }, []);
+  const getArticles = async () => {
+    const result = (await getArticlesParams<Article[]>()) as Article[];
+    const articles = result.map((a) => ({
+      id: a.id,
+      title: a.title,
+      slug: a.slug,
+    }));
+    setArticles(articles);
+  };
 
   useEffect(() => {
     if (articles.length === 0) getArticles();
