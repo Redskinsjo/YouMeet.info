@@ -3,11 +3,11 @@ import { CustomModalProps } from "@youmeet/types/CustomModal";
 import dynamic from "next/dynamic";
 import ModalClose from "./ModalClose";
 
-const VideoAddingContent = dynamic(
-  () => import("./modalContents/VideoAddingContent")
+const CustomModalContent = dynamic(
+  () => import("./modalContents/CustomModalContent")
 );
 
-export default function VideoAddingModal({
+export default function CustomModalComponent({
   type,
   cta,
   title,
@@ -16,18 +16,13 @@ export default function VideoAddingModal({
   return (
     <ModalWrapper>
       <div>
-        <VideoAddingContent
+        <CustomModalContent
           type={type}
           cta={cta}
           title={title}
           content={content}
         />
-        <ModalClose
-          onClick={() => {
-            // active
-            // dispatch(setApplying(false))
-          }}
-        />
+        <ModalClose />
       </div>
     </ModalWrapper>
   );

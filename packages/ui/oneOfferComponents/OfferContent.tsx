@@ -11,6 +11,10 @@ import { Offer } from "@youmeet/gql/generated";
 import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import dynamic from "next/dynamic";
 import TooltipedAsset from "../TooltipedAsset";
+import { useSelector } from "react-redux";
+import { GlobalState } from "@youmeet/global-config/features/global";
+import { RootState } from "@youmeet/global-config/store";
+import VideoAddingContent from "../modals/modalContents/VideoAddingContent";
 
 const DoubleDetails = dynamic(() => import("./DoubleDetails"));
 const BoldText = dynamic(() => import("../TextChild"));
@@ -39,7 +43,7 @@ export default function OfferContent({ offre }: { offre: Offer }) {
 
   return (
     !!values && (
-      <div className="dark:mediumDarkBg bg-grey50 flex w-full flex-col items-center p-[12px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] xs:gap-[12px] sm:gap-[12px] border-[0.5px] border-solid border-grey300 shadow-custom h-full overflow-hidden overflow-y-scroll">
+      <div className="dark:mediumDarkBg bg-grey50 flex w-full flex-col items-center p-[12px] xs:p-[6px] sm:p-[6px] md:p-[6px] box-border gap-[24px] xs:gap-[12px] sm:gap-[12px] border-[0.5px] border-solid border-grey300 ovverflow-y-scroll h-full">
         <div className="flex-center flex-col">
           {values.rebroadcast && (
             <div className="flex-1 text-[16px] flex-center flex-col gap-[6px] p-[6px] bg-grey50 dark:lightDarkBg text-deepPurple500 dark:text-deepPurple200 text-center">

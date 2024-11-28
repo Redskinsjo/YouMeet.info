@@ -53,16 +53,16 @@ export default function FeedBackModal({ type }: CustomModalProps) {
     }
   }, [state]);
 
+  const data = modals && type && modals[type] ? modals[type] : undefined;
+
   return (
     !!modal.user && (
       <ModalWrapper>
         <>
           <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] p-[12px]">
             <h3 className="text-purple900 sentences">
-              {modals && modals[type] && modals[type].title && (
-                <BoldText
-                  text={`${t((modals[type].title as trads)[language])}`}
-                />
+              {data?.title && (
+                <BoldText text={`${t((data?.title as trads)[language])}`} />
               )}
             </h3>
             <form
@@ -70,10 +70,8 @@ export default function FeedBackModal({ type }: CustomModalProps) {
               action={formHandler}
               className="xs:text-[22px] sm:text-[22px] md:text-[22px] text-blueGrey700 text-[19px] text-center flex-center flex-col gap-[12px]"
             >
-              {modals && modals[type] && modals[type].content && (
-                <BoldText
-                  text={`${t((modals[type].content as trads)[language])}`}
-                />
+              {data?.content && (
+                <BoldText text={`${t((data?.content as trads)[language])}`} />
               )}
               <SimpleField
                 name="feedback"

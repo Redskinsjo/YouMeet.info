@@ -11,7 +11,6 @@ const UploadText = dynamic(() => import("./UploadModal/UploadText"), {
 const Logo = dynamic(() => import("@youmeet/ui/LogoChild"), { ssr: false });
 
 export default function UploadModalContent(props: CustomModalProps) {
-  console.log("UploadModalContent");
   return (
     <ModalWrapper>
       <>

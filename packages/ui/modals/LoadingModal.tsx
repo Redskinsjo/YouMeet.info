@@ -24,7 +24,7 @@ export default function LoadingModal({ type }: CustomModalProps) {
           />
           <LoadingText />
         </div>
-        <ModalClose type={type} />
+        <ModalClose />
       </>
     </ModalWrapper>
   );

@@ -2291,18 +2291,15 @@ const resolvers: Resolvers = {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
       const data = args.data;
-      if (
-        data?.targetId &&
-        data.originId &&
-        data.offerTargetId &&
-        data.videoId
-      ) {
+      if (data?.originId && data?.offerTargetId && data?.videoId) {
+        const target = {} as { target: { connect: { id: string } } };
+        if (data?.targetId) target.target = { connect: { id: data.targetId } };
         const sharing = await prisma.$transaction(
           async (prisma) => {
             const sharing = await prisma.profileSharings.create({
               data: {
                 origin: { connect: { id: data?.originId as string } },
-                target: { connect: { id: data.targetId as string } },
+                ...target,
                 offerTarget: {
                   connect: { id: data?.offerTargetId as string },
                 },
@@ -2311,26 +2308,28 @@ const resolvers: Resolvers = {
                 updatedAt: new Date(),
               },
             });
-            const targetUsers = await prisma.betausers.findMany({
-              where: { companyId: data?.targetId as string },
-            });
-            if (targetUsers) {
-              for (let i = 0; i < targetUsers.length; i++) {
-                const user = targetUsers[i];
+            if (data?.targetId) {
+              const targetUsers = await prisma.betausers.findMany({
+                where: { companyId: data?.targetId as string },
+              });
+              if (targetUsers) {
+                for (let i = 0; i < targetUsers.length; i++) {
+                  const user = targetUsers[i];
 
-                await prisma.notifications.create({
-                  data: {
-                    type: "sharing",
-                    sharing: { connect: { id: sharing.id as string } },
-                    content:
-                      "Quelqu'un vient de partager son profil avec vous.",
-                    createdAt: new Date(),
-                    origin: { connect: { id: data?.originId as string } },
-                    target: { connect: { id: user.id as string } },
-                    status: "pending",
-                    updatedAt: new Date(),
-                  },
-                });
+                  await prisma.notifications.create({
+                    data: {
+                      type: "sharing",
+                      sharing: { connect: { id: sharing.id as string } },
+                      content:
+                        "Quelqu'un vient de partager son profil avec vous.",
+                      createdAt: new Date(),
+                      origin: { connect: { id: data?.originId as string } },
+                      target: { connect: { id: user.id as string } },
+                      status: "pending",
+                      updatedAt: new Date(),
+                    },
+                  });
+                }
               }
             }
             return sharing;

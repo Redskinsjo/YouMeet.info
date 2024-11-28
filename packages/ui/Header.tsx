@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import RecruiterSpace from "./RecruiterSpace";
 import NotificationsComponent from "./NotificationsIconComponent";
 import MenuHeaderForMobile from "./MenuHeaderForMobile";
-import { Article, Translated } from "@youmeet/gql/generated";
+import { Article } from "@youmeet/gql/generated";
 import { getArticlesParams } from "@youmeet/functions/request";
 import BlogMenuNav from "./blog/BlogMenuNav";
 import { outfit } from "@youmeet/functions/fonts";
@@ -64,13 +64,13 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   return (
     <div className="relative">
       <div
-        className={`header-classes h-[75px] px-[12px] dark:lightDarkBg dark:border-transparent ${
+        className={`header-classes h-[75px] dark:lightDarkBg dark:border-transparent ${
           classes || ""
         }`}
         style={newStyles}
         data-test="header"
       >
-        <div className="flex items-center justify-start flex-1 gap-[24px] xs:hidden sm:hidden md:hidden">
+        <div className="flex items-center justify-start flex-1 p-[12px] box-border gap-[24px] xs:hidden sm:hidden md:hidden">
           {pathname.includes("/competencies") && (
             <TooltipedAsset
               asset={`Profil de ${
@@ -98,7 +98,12 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
         <MenuHeaderForMobile />
         {!xs && !sm && !md && (
-          <div className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full">
+          <div
+            className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full p-[12px] box-border"
+            onMouseLeave={() => {
+              setMegaMenu(false);
+            }}
+          >
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
@@ -203,8 +208,8 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             pathname !== "/les-prix" &&
             pathname !== "/le-produit/mise-en-relation" &&
             pathname !== "/le-produit/ats"
-              ? "flex flex-1 items-center justify-end gap-[12px]"
-              : "flex flex-1 items-center justify-end xs:gap-[12px] sm:gap-[12px] gap-[24px]"
+              ? "flex flex-1 items-center justify-end gap-[12px] p-[12px] box-border"
+              : "flex flex-1 items-center justify-end xs:gap-[12px] sm:gap-[12px] gap-[24px] p-[12px] box-border"
           }
         >
           {pathname !== "/offres" && (

@@ -2,7 +2,7 @@
 import { Button } from "@mui/material";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
-import { setLogin } from "@youmeet/global-config/features/global";
+import { setApplying, setLogin } from "@youmeet/global-config/features/global";
 import { useDispatch, useSelector } from "react-redux";
 import { Offer } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,6 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
   const user = useSelector((state: RootState) => state.user as UserState);
   const router = useRouter();
   router.prefetch("/se-connecter");
-  router.prefetch("/ajouter-video");
 
   const alreadyApplied = !!offre?.sharings?.find(
     (sharing) => sharing?.origin?.id === user.id
@@ -45,7 +44,7 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
             publicOffer: offre,
           }) as UnknownAction
         );
-        window.location.href = "/ajouter-video";
+        dispatch(setApplying(true));
       }}
     >
       <BoldText

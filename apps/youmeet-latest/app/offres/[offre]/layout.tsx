@@ -17,8 +17,9 @@ export default async function Layout({
   const offre = (await getOffer<Offer>({
     slug: decoded,
   })) as Offer;
+
   return (
-    <div>
+    <div className="relative top-0">
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
@@ -43,8 +44,8 @@ export default async function Layout({
             title:
               offre?.job &&
               offre?.job.title &&
-              offre.company?.name &&
-              offre.location
+              offre?.company?.name &&
+              offre?.location
                 ? `${(offre?.job?.title as Translated)["fr"]} chez ${
                     offre?.company?.name
                   } à ${offre?.location}`
@@ -63,10 +64,10 @@ export default async function Layout({
               "@type": "Place",
               address: {
                 "@type": "PostalAddress",
-                // streetAddress: "Adresse de l'Entreprise",
-                addressLocality: offre?.location,
-                // postalCode: "Code Postal",
-                // addressCountry: "Pays",
+                // streetAddress: ,
+                addressLocality: offre?.location || offre?.lieuTravail?.libelle,
+                postalCode: offre?.lieuTravail?.codePostal,
+                // addressCountry: ,
               },
             },
             qualifications: offre?.requirements?.map((req) => req?.title),
@@ -75,7 +76,7 @@ export default async function Layout({
               currency: "EUR",
               value: {
                 "@type": "QuantitativeValue",
-                minValue: offre?.revenue,
+                minValue: offre?.revenue || offre?.salaire?.libelle,
               },
             },
             identifier: offre?.id,

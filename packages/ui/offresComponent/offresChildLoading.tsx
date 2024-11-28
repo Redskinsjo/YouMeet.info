@@ -49,7 +49,7 @@ export default function CardLoading() {
           </div>
         </div>
         <div className="w-full h-[0.5px] bg-grey300" />
-        <div className="flex-bet w-full">
+        <div className="flex-bet w-full flex-col">
           <Skeleton
             className="fadeIn"
             animation="wave"

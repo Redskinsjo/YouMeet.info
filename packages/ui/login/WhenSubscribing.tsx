@@ -154,7 +154,7 @@ export default function WhenSubscribing({
 
         <div className={xs || sm ? "flex-[2]" : "flex-1"}></div>
       </div>
-      {type !== "loginPage" && <ModalClose type={type} />}
+      {type !== "loginPage" && <ModalClose />}
     </form>
   );
 }

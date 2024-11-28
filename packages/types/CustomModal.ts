@@ -58,7 +58,7 @@ export type GlobalError =
 export type CustomModalProps = {
   video?: Video;
   children?: ReactElement;
-  type: CustomModalType | GlobalError;
+  type?: CustomModalType | GlobalError;
   setDisplayModal?: Dispatch<SetStateAction<any>>;
   setIsSubscribing?: Dispatch<SetStateAction<boolean>>;
   setIsForgotten?: Dispatch<SetStateAction<boolean>>;

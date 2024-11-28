@@ -123,7 +123,7 @@ export default function WhenLogin({
           </div>
         </div>
       </form>
-      {type !== "loginPage" && <ModalClose type={type} />}
+      {type !== "loginPage" && <ModalClose />}
     </div>
   );
 }

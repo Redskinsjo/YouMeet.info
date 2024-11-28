@@ -767,8 +767,11 @@ p {
 }
 
 @layer components {
+  .offerView {
+    @apply h-[calc(100vh-39px)];
+  }
   .afterHeaderAndMenu {
-    @apply min-h-[calc(100vh-41px-62px)];
+    @apply min-h-[calc(100vh-39px-72px)];
   }
   .afterHeader {
     @apply min-h-[calc(100vh-39px)];
@@ -786,7 +789,7 @@ p {
     @apply flex-col w-[600px] xs:w-screen sm:w-screen overflow-hidden overflow-y-scroll p-[24px] bg-white flex-1 xs:p-[12px] sm:p-[12px] xs:gap-[12px] sm:gap-[12px] gap-[24px] h-full relative box-border appear_slowly flex-center dark:mediumDarkBg;
   }
   .modal-content {
-    @apply bg-white flex flex-col gap-[24px] p-[24px] rounded-xl shadow-custom xs:shadow-none sm:shadow-none max-h-[88vh] overflow-hidden overflow-y-scroll;
+    @apply relative bg-white flex flex-col gap-[24px] p-[24px] rounded-xl shadow-custom xs:shadow-none sm:shadow-none max-h-[88vh] overflow-hidden overflow-y-scroll;
   }
   .infos-component {
     @apply p-[16px] gap-[6px] w-full flex flex-col items-center relative box-border dark:extraLightDarkBg border-[0.5px] border-solid border-grey300 dark:border-grey900;
@@ -837,10 +840,7 @@ p {
     @apply flex flex-col gap-[12px] bg-grey50 p-[24px] xs:p-[12px] sm:p-[12px] w-full box-border rounded-2xl;
   }
   .header-classes {
-    @apply flex-bet py-[12px] border-[0.5px] border-solid border-grey300 xs:px-[12px] sm:px-[12px] shadow-lg w-full box-border relative z-50 bg-white;
-  }
-  .mobile-header-classes {
-    @apply py-[12px] xs:px-[12px] sm:px-[12px] px-[36px] shadow-lg w-full box-border h-[85px] relative z-50 hidden xs:flex-bet sm:flex-bet md:flex-bet bg-white;
+    @apply flex-bet border-[0.5px] border-solid border-grey300 shadow-lg w-full box-border bg-white;
   }
   .public-profile-icon {
     @apply hover:text-deepPurple500 cursor-pointer text-[28px] rounded-[14px];

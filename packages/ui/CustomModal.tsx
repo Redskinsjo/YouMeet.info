@@ -33,8 +33,8 @@ const VideoAddingModal = dynamic(() => import("./modals/VideoAddingModal"), {
 const UploadModal = dynamic(() => import("./modals/UploadModal"), {
   ssr: false,
 });
-const CustomModalContent = dynamic(
-  () => import("./modals/CustomModalContent"),
+const CustomModalComponent = dynamic(
+  () => import("./modals/CustomModalComponent"),
   {
     ssr: false,
   }
@@ -71,7 +71,7 @@ export default function CustomModal({
             ? UploadModal
             : type === "login"
             ? LoginModalContent
-            : CustomModalContent,
+            : CustomModalComponent,
           {
             setDisplayModal,
             type,
@@ -97,7 +97,7 @@ export default function CustomModal({
 
   return (
     <div
-      className="absolute afterHeader w-full fadeIn"
+      className="absolute h-screen w-full fadeIn"
       style={{
         zIndex: aboveError ? 1101 : 1100,
         background: "rgba(0,0,0,0.5)",

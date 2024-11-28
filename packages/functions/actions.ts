@@ -887,7 +887,7 @@ export const onApplying = async (extras: {
 }): Promise<withData<ProfileSharing> | PayloadBackendError> => {
   const schema = z.object({
     originId: z.string().min(1),
-    targetId: z.string().min(1),
+    targetId: z.string().optional(),
     videoId: z.string().min(1),
     offerTargetId: z.string().min(1),
   });

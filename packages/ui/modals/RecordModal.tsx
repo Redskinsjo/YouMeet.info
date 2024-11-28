@@ -11,7 +11,7 @@ export default function RecordModal({ type }: CustomModalProps) {
         <div className="flex-center flex-col gap-[24px] relative">
           <WebcamComponent />
         </div>
-        <ModalClose type={type} />
+        <ModalClose />
       </>
     </ModalWrapper>
   );

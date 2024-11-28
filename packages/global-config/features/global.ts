@@ -13,6 +13,7 @@ export interface GlobalState {
   subscription: AppSubscription | undefined | false;
   redirect: string;
   tab: number;
+  applying: boolean;
 }
 
 const initialState: GlobalState = {
@@ -25,6 +26,7 @@ const initialState: GlobalState = {
   subscription: undefined,
   redirect: "dashboard",
   tab: 0,
+  applying: false,
 };
 
 export const globalSlice = createSlice({
@@ -65,6 +67,9 @@ export const globalSlice = createSlice({
     setTab: (state, action: PayloadAction<number>) => {
       state.tab = action.payload;
     },
+    setApplying: (state, action: PayloadAction<boolean>) => {
+      state.applying = action.payload;
+    },
   },
 });
 
@@ -78,6 +83,7 @@ export const {
   setSubscription,
   setRedirect,
   setTab,
+  setApplying,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

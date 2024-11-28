@@ -28,7 +28,7 @@ export default function PublicPageContainer({
     : "flex-center box-border h-full w-[900px] xs:w-screen sm:w-screen";
   return (
     <div className={className} style={{ ...newStyles }}>
-      <div className="flex flex-col w-full gap-[6px] box-border h-full">
+      <div className="flex flex-col w-full gap-[6px] box-border h-full overflow-hidden overflow-y-scroll">
         {!noReturnHeader && (
           <div className="mediumBg dark:mediumDarkBg flex-bet w-full p-[3px] rounded-[14px] box-border">
             <Suspense>
@@ -43,12 +43,7 @@ export default function PublicPageContainer({
             )}
           </div>
         )}
-        <div
-          className="flex flex-col gap-[48px] box-border h-full"
-          style={{
-            overflow: view ? "hidden" : "initial",
-          }}
-        >
+        <div className="flex flex-col gap-[48px] box-border h-full">
           {children}
         </div>
       </div>

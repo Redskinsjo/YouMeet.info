@@ -16,7 +16,7 @@ export default function OfferChild({
   offre: Offer;
   view?: true;
 }) {
-  const viewClassName = view ? "afterHeader sticky top-[24px]" : "top-[24px]";
+  const viewClassName = view ? "offerView sticky top-[24px]" : "top-[24px]";
   return (
     <div
       className="flex justify-center"
@@ -34,9 +34,8 @@ export default function OfferChild({
         }}
       >
         <div
-          className="flex flex-col pb-[48px] gap-[6px] h-full box-border"
+          className="flex flex-col pb-[48px] gap-[6px] box-border h-full"
           style={{
-            overflow: view ? "hidden" : "initial",
             overflowY: view ? "scroll" : "initial",
           }}
         >

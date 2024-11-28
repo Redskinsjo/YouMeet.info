@@ -23,7 +23,7 @@ const FTCardOffer = dynamic(() => import("./FTCardOffer"), {
       </div>
 
       <div className="w-full flex-bet text-grey900 font-semilight text-[16px] xs:text-[13px] sm:text-[13px] gap-[6px]">
-        <div className="flex">
+        <div className="flex flex-col gap-[6px]">
           <OneLineSkeleton width="30px" />
           <OneLineSkeleton width="50px" />
         </div>

@@ -91,7 +91,7 @@ export default function WhenForgotten({
 
         <div className="flex-1"></div>
       </div>
-      {type !== "loginPage" && <ModalClose type={type} />}
+      {type !== "loginPage" && <ModalClose />}
     </form>
   );
 }
