@@ -67,9 +67,6 @@ export const globalSlice = createSlice({
     setTab: (state, action: PayloadAction<number>) => {
       state.tab = action.payload;
     },
-    setApplying: (state, action: PayloadAction<boolean>) => {
-      state.applying = action.payload;
-    },
   },
 });
 
@@ -83,7 +80,6 @@ export const {
   setSubscription,
   setRedirect,
   setTab,
-  setApplying,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

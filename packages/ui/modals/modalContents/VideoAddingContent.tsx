@@ -12,7 +12,7 @@ import { getOffer } from "@youmeet/functions/request";
 import { Offer, Video } from "@youmeet/gql/generated";
 import { ModalState, setModal } from "@youmeet/global-config/features/modal";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { setApplying, setError } from "@youmeet/global-config/features/global";
+import { setError } from "@youmeet/global-config/features/global";
 import { onApplying } from "@youmeet/functions/actions";
 import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import dynamic from "next/dynamic";
@@ -67,7 +67,6 @@ export default function VideoAddingContent({
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
     }
-    dispatch(setApplying(false));
   };
 
   useEffect(() => {

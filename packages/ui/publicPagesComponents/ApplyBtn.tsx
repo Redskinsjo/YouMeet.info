@@ -2,7 +2,7 @@
 import { Button } from "@mui/material";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
-import { setApplying, setLogin } from "@youmeet/global-config/features/global";
+import { setLogin } from "@youmeet/global-config/features/global";
 import { useDispatch, useSelector } from "react-redux";
 import { Offer } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
@@ -44,7 +44,6 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
             publicOffer: offre,
           }) as UnknownAction
         );
-        dispatch(setApplying(true));
       }}
     >
       <BoldText

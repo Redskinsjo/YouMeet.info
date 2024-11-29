@@ -22,12 +22,7 @@ export default function VideoAddingModal({
           title={title}
           content={content}
         />
-        <ModalClose
-          onClick={() => {
-            // active
-            // dispatch(setApplying(false))
-          }}
-        />
+        <ModalClose />
       </div>
     </ModalWrapper>
   );

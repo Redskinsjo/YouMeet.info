@@ -1,11 +1,11 @@
 "use client";
 import { createElement, useMemo, Suspense } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { useRouter } from "next/navigation";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import LoginModalContent from "./login/LoginModalContent";
-import { ModalState } from "@youmeet/global-config/features/modal";
+import { ModalState, resetModal } from "@youmeet/global-config/features/modal";
 import dynamic from "next/dynamic";
 
 const RecordModal = dynamic(() => import("./modals/RecordModal"), {
@@ -47,6 +47,7 @@ export default function CustomModal({
 }: CustomModalProps) {
   const modal = useSelector((state: RootState) => state.modal as ModalState);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const uploadDelete =
     type === "upload" || type === "upload-50" || type === "delete";
@@ -109,6 +110,7 @@ export default function CustomModal({
           setDisplayModal(null);
         } else {
           router.back();
+          dispatch(resetModal(null));
         }
       }}
     >

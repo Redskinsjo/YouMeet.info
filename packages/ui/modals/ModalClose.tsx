@@ -1,12 +1,10 @@
 import { Button } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
-import { setApplying } from "@youmeet/global-config/features/global";
-import { useRouter } from "next/navigation";
+import { resetModal } from "@youmeet/global-config/features/modal";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 
-export default function ModalClose({ onClick }: { onClick?: () => void }) {
-  const router = useRouter();
+export default function ModalClose() {
   const dispatch = useDispatch();
   return (
     <div className="absolute top-[12px] left-[12px] flex-center">
@@ -18,8 +16,7 @@ export default function ModalClose({ onClick }: { onClick?: () => void }) {
           height: "24px",
         }}
         onClick={() => {
-          if (onClick) dispatch(setApplying(false));
-          else router.back();
+          dispatch(resetModal(null));
         }}
         onFocus={(e) => {
           e.target.style.backgroundColor = blueGrey[200];
