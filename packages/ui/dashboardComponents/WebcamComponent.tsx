@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@mui/material";
 import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";

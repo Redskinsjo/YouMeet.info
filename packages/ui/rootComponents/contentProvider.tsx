@@ -55,9 +55,7 @@ export default function ContentProvider({
       >
         <ThinHeader setDark={setDark} />
         <Modals />
-        {modals.recordModal}
         {modals.loginModal}
-        {modals.videoAddingModal}
 
         <div
           className={
