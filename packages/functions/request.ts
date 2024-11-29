@@ -77,6 +77,7 @@ import {
   QueryCompetenciesArgs,
   DeleteOneProfileSharingMutation,
   QuerySharingsArgs,
+  MutationCreateRemarkArgs,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -99,6 +100,7 @@ import {
   createProfileViewMutation,
   createQuestionMutation,
   createQueueMutation,
+  createRemarkMutation,
   createResponsesMutation,
   createSharingRefusalMutation,
   createThreadMutation,
@@ -1324,6 +1326,24 @@ export const getJob = async <T>(
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
 
+export const createRemark = async <T>(
+  variables?: MutationCreateRemarkArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "createRemark",
+    multiple,
+    createRemarkMutation,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
 export const createProfileSharing = async <T>(
   variables?: MutationCreateProfileSharingArgs,
   revalidate: number = 0,

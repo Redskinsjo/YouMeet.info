@@ -1,6 +1,6 @@
 "use client";
 import { ReactElement, useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import GenericField from "./GenericField";
@@ -30,6 +30,8 @@ import { IoClose } from "react-icons/io5";
 import { FormState } from "@youmeet/global-config/features/form";
 import phoneCodes from "@youmeet/raw-data/phoneCodes.json";
 import { PhoneCodes } from "@youmeet/types/form/fields/PhoneCodes";
+import { UnknownAction } from "@reduxjs/toolkit";
+import { setError } from "@youmeet/global-config/features/global";
 
 const filter = createFilterOptions<string>();
 
@@ -119,6 +121,7 @@ const SelectField = ({
     (state: RootState) => (state.form as FormState).profileStep
   );
   const [data, setData] = useState<QueriesDocuments | PhoneCodes[]>([]);
+  const dispatch = useDispatch();
   const [added, setAdded] = useState<string[] | undefined>([]);
   const {
     i18n: { language },
@@ -159,13 +162,16 @@ const SelectField = ({
         variables.first = { take: 50 };
         variables.filters = { name: value };
       }
-
-      const response = await client.query({
-        query: names[name].multiple.request,
-        variables,
-      });
-      const resData = response.data[names[name].multiple.response];
-      if (resData) setData(resData as QueriesDocuments);
+      try {
+        const response = await client.query({
+          query: names[name].multiple.request,
+          variables,
+        });
+        const resData = response.data[names[name].multiple.response];
+        if (resData) setData(resData as QueriesDocuments);
+      } catch (e) {
+        dispatch(setError("not-completed") as UnknownAction);
+      }
     },
     [name]
   );

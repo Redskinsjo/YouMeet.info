@@ -15,8 +15,6 @@ import { setError } from "@youmeet/global-config/features/global";
 import { Button, useMediaQuery } from "@mui/material";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { renderContractType } from "@youmeet/utils/basics/renderContractType";
-import { useRouter } from "next/navigation";
 
 const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
   const [isValidated, setIsValidated] = useState(true);
@@ -32,14 +30,15 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
     watch,
     formState: { errors },
   } = useForm<FieldValues>({
-    values: { targetContractType: profil?.candidate?.targetContractType ?? "" },
+    defaultValues: {
+      contractType: profil?.candidate?.targetContractType ?? "",
+    },
   });
   const dispatch = useDispatch();
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const md = useMediaQuery("(max-width:900px)");
   const lg = useMediaQuery("(max-width:1050px)");
-  const router = useRouter();
 
   const customOnTargetContractTypeUpdate = useCallback(
     async (extras: { userId: string; contractType: string }) => {
@@ -56,7 +55,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
         setIsValidated(true);
       }
     },
-    []
+    [watch("contractType")]
   );
 
   useEffect(() => {
@@ -69,7 +68,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
     <form
       action={customOnTargetContractTypeUpdate.bind(null, {
         userId: profil.id as string,
-        contractType: watch("targetContractType"),
+        contractType: watch("contractType"),
       })}
     >
       {!isValidated ? (
@@ -83,7 +82,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
               noPadding
               account
               labelNoWrap
-              name="targetContractType"
+              name="contractType"
               reversePlacement
               label={
                 <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
@@ -93,7 +92,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
               value={
                 <ContractTypeField
                   errors={errors}
-                  value={watch("targetContractType")}
+                  value={watch("contractType")}
                   setValue={setValue}
                   required
                   name="contractType"
@@ -136,7 +135,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
             type="modal"
             noPadding
             account
-            name="targetContractType"
+            name="contractType"
             reversePlacement
             noLabelColon
             labelNoWrap
@@ -149,10 +148,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
               <div className="flex-center gap-[12px]">
                 {candidateValidated?.targetContractType ? (
                   <span className="dark:text-white">
-                    {renderContractType(
-                      candidateValidated.targetContractType,
-                      language as "fr" | "en"
-                    )}
+                    {t(candidateValidated.targetContractType)}
                   </span>
                 ) : (
                   <span className="dark:text-white">-</span>

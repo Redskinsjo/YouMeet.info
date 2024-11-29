@@ -81,7 +81,7 @@ export default function AvatarsField({
           >
             {!!src && (
               <TiDelete
-                className="absolute top-[-14px] right-[-14px] text-[28px] cursor-pointer text-deepPurple900 dark:text-grey300"
+                className="absolute top-[-14px] right-[-14px] text-[28px] cursor-pointer text-deepPurple900 dark:text-grey300 z-30"
                 onMouseOver={(e) =>
                   (e.target as HTMLElement).setAttribute(
                     "style",

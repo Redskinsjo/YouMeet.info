@@ -16,6 +16,7 @@ import {
 import { onCompanyForm, onOfferForm } from "@youmeet/functions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { UnknownAction } from "@reduxjs/toolkit";
+import { trads } from "@youmeet/types/CustomModal";
 import {
   FormState,
   setLoading,
@@ -28,6 +29,7 @@ import { UserState } from "@youmeet/global-config/features/user";
 import { StepContentProps } from "@youmeet/types/form/StepContent";
 import { proExternallyHandleData } from "@youmeet/utils/basics/handleProfileSubmit";
 import { setError as setGlobalError } from "@youmeet/global-config/features/global";
+import { modals } from "@youmeet/ui/modals/modals";
 import {
   OfferHandledData,
   ProFormHandledData,
@@ -44,6 +46,8 @@ import {
   withData,
 } from "@youmeet/types/api/backend";
 import setFileUrl from "@youmeet/utils/basics/setFileUrl";
+import { resetModal } from "@youmeet/global-config/features/modal";
+import BoldText from "@youmeet/ui/BoldText";
 
 export default function PageContent({
   defaultValues,
@@ -53,14 +57,17 @@ export default function PageContent({
   const [transitioned, setTransitioned] = useState(false);
   const [last, setLast] = useState(false);
   const xs = useMediaQuery("(max-width:600px)");
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const [pageIndex, setPageIndex] = useState(1);
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const step = useSelector(
-    (state: RootState) => (state.form as FormState).profileStep
-  );
+  const form = useSelector((state: RootState) => state.form as FormState);
+  const step = form.profileStep;
+  const loading = form.loading;
   const {
     watch,
     formState: { errors },
@@ -181,6 +188,7 @@ export default function PageContent({
           } else {
             router.push(`/${result3.data}`);
           }
+          dispatch(resetModal(null));
         }
       } catch (err: any) {
         setPageIndex(1);
@@ -226,7 +234,6 @@ export default function PageContent({
     if (pages) {
       setLast(pages.count === pages.index);
     }
-    setLoading(false);
   }, [pages]);
 
   useEffect(() => {
@@ -334,6 +341,14 @@ export default function PageContent({
                 </Button>
               </div>
             </TooltipedAsset>
+          </div>
+          <div className="flex items-center justify-end">
+            {loading && modals && modals.upload && modals.upload.content && (
+              <BoldText
+                text={`${t((modals.upload.content as trads)[language])}`}
+                align="center"
+              />
+            )}
           </div>
         </form>
       </div>

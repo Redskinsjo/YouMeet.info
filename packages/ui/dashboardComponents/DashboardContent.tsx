@@ -1,5 +1,5 @@
 import { BetaUser } from "@youmeet/gql/generated";
-import AffiliatesComponent from "./AffiliatesComponent";
+// import AffiliatesComponent from "./AffiliatesComponent";
 import dynamic from "next/dynamic";
 // import NewConsentComponent from "./NewConsentComponent";
 
@@ -11,7 +11,7 @@ const NewTargetContractTypeComponent = dynamic(
   () => import("./NewTargetContractTypeChild")
 );
 const NewVideoComponent = dynamic(() => import("./NewVideoChild"));
-const UserNotices = dynamic(() => import("./UserNoticesChild"));
+// const UserNotices = dynamic(() => import("./UserNoticesChild"));
 
 export default function DashboardContent({ profil }: { profil: BetaUser }) {
   return (
@@ -40,7 +40,7 @@ export default function DashboardContent({ profil }: { profil: BetaUser }) {
           <NewVideoComponent profil={profil} />
         </div>
       </CustomTabPanel>
-      <CustomTabPanel index={3}>
+      {/* <CustomTabPanel index={3}>
         <div className="indent-4 xs:indent-0 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify">
           <UserNotices />
         </div>
@@ -49,7 +49,7 @@ export default function DashboardContent({ profil }: { profil: BetaUser }) {
         <div className="indent-4 xs:indent-0 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify">
           <AffiliatesComponent profil={profil} />
         </div>
-      </CustomTabPanel>
+      </CustomTabPanel> */}
 
       {/* <div className="indent-4 xs:indent-0 sm:indent-0 md:indent-0 text-justify border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg">
   <NewExperiencesDisplay profil={profil} />

@@ -28,6 +28,9 @@ import { ProfileFormDefaultValues } from "@youmeet/types/form/useFormDefaultValu
 import { dev } from "@youmeet/functions/imports";
 import { createError } from "@youmeet/functions/request";
 import { firstPartPages } from "@youmeet/ui/formComponents/steps/FirstStep";
+import { modals } from "@youmeet/ui/modals/modals";
+import { trads } from "@youmeet/types/CustomModal";
+import { UnknownAction } from "@reduxjs/toolkit";
 
 export default function PageContent({
   defaultValues,
@@ -36,15 +39,17 @@ export default function PageContent({
 }) {
   const [transitioned, setTransitioned] = useState(false);
   const md = useMediaQuery("(max-width:900px)");
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const [pageIndex, setPageIndex] = useState(0);
   const dispatch = useDispatch();
   const router = useRouter();
   router.prefetch("/dashboard");
-
-  const step = useSelector(
-    (state: RootState) => (state.form as FormState).profileStep
-  );
+  const form = useSelector((state: RootState) => state.form as FormState);
+  const step = form.profileStep;
+  const loading = form.loading;
   const user = useSelector((state: RootState) => state.user as UserState);
   const {
     watch,
@@ -99,6 +104,7 @@ export default function PageContent({
     extras: { userId: string },
     formData: FormData
   ) => {
+    dispatch(setLoading(true) as UnknownAction);
     const uploadedList = [] as AvatarInput[];
     const files: File[] = [];
 
@@ -134,6 +140,7 @@ export default function PageContent({
       } else {
         dispatch(setAppError("not-completed"));
       }
+      dispatch(setLoading(false) as UnknownAction);
       return;
     }
 
@@ -146,6 +153,7 @@ export default function PageContent({
     } else {
       router.push("/dashboard");
     }
+    dispatch(setLoading(false) as UnknownAction);
   };
 
   return (
@@ -224,6 +232,14 @@ export default function PageContent({
                 {!last && t("next")}
               </Button>
             </TooltipedAsset>
+          </div>
+          <div className="flex items-center justify-end">
+            {loading && modals && modals.upload && modals.upload.content && (
+              <BoldText
+                text={`${t((modals.upload.content as trads)[language])}`}
+                align="right"
+              />
+            )}
           </div>
         </form>
       </div>

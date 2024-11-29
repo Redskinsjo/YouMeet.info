@@ -3,13 +3,11 @@ import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function UserNotices() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const router = useRouter();
 
   return (
     <div

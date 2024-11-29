@@ -54,7 +54,6 @@ export default function GenericField({
       },
 
       onChange: async (e: any) => {
-        console.log(e.target.value, "value");
         await fetchData(e.target.value);
       },
     } as TextFieldProps;

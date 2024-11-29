@@ -10,6 +10,7 @@ import { setError, setUpload } from "@youmeet/global-config/features/global";
 import { onDeleteCV } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { useRouter } from "next/navigation";
+import { resetModal } from "@youmeet/global-config/features/modal";
 
 export default function NewCVUpload({
   account,
@@ -29,6 +30,8 @@ export default function NewCVUpload({
     const result = await onDeleteCV(userId);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed"));
+    } else {
+      dispatch(resetModal(null));
     }
   };
 

@@ -1,7 +1,7 @@
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import { MenuItem, TextField } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import React from "react";
 
@@ -17,8 +17,9 @@ const ContractTypeField = ({
   border = `1px solid ${grey[500]}`,
 }: GenericFieldProps) => {
   const id = useId();
-  const [fieldVal, setFieldVal] = useState(value);
   const { t } = useTranslation();
+  const [fieldVal, setFieldVal] = useState(value);
+
   return (
     <div className="xs:fadeIn sm:fadeIn flex flex-col col-span-2 sm:col-span-2 w-full min-w-[195px]">
       <TextField
@@ -36,22 +37,22 @@ const ContractTypeField = ({
           setFieldVal(e.target.value);
         }}
         required={required ?? false}
+        slotProps={{
+          input: { className: `subItem min-h-[60px] flex flex-wrap` },
+        }}
         label={label ?? t("contractType")}
         className="xs:fadeIn sm:fadeIn sm:col-span-2 subItem w-full dark:genericFieldDark dark:darkFieldset dark:darkInput dark:darkLabel"
         autoComplete={"off"}
-        InputProps={{
-          className: `subItem min-h-[60px] flex flex-wrap`,
-        }}
         id={String(id)}
         placeholder={placeholder ?? t("what-contractType")}
       >
-        <MenuItem value={"CDI"}>CDI</MenuItem>
-        <MenuItem value={"Interim"}>Interim</MenuItem>
-        <MenuItem value={"Stage"}>Stage</MenuItem>
-        <MenuItem value={"CDD"}>CDD</MenuItem>
-        <MenuItem value={"Alternance"}>Alternance</MenuItem>
-        <MenuItem value={"Freelance"}>Freelance</MenuItem>
-        <MenuItem value={"Autre"}>Autre</MenuItem>
+        <MenuItem value={"cdi"}>{t("cdi")}</MenuItem>
+        <MenuItem value={"interim"}>{t("interim")}</MenuItem>
+        <MenuItem value={"stage"}>{t("stage")}</MenuItem>
+        <MenuItem value={"cdd"}>{t("cdd")}</MenuItem>
+        <MenuItem value={"alternance"}>{t("alternance")}</MenuItem>
+        <MenuItem value={"freelance"}>{t("freelance")}</MenuItem>
+        <MenuItem value={"other"}>{t("other")}</MenuItem>
       </TextField>
       {errors && errors["contractType"] ? (
         <span style={{ color: "#f96666" }}>

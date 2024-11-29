@@ -6,7 +6,6 @@ import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AiOutlineEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";

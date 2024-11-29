@@ -2759,3 +2759,11 @@ export const getSharingsQuery = `query GetSharings {
     }
   }
 }`;
+
+export const createRemarkMutation = `mutation CreateUserRemark($data: RemarkInput) {
+  createRemark(data: $data) {
+    id
+    content
+  }
+}
+`;

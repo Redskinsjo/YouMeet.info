@@ -14,7 +14,7 @@ export default function Page({
 }) {
   return (
     <div className="afterHeader relative flex flex-col">
-      <div className="flex relative xs:flex-col sm:flex-col h-full">
+      <div className="flex relative xs:flex-col sm:flex-col h-full flex-1">
         <div
           className="bg-grey100 dark:extraLightDarkBg flex-center relative z-50 xs:hidden sm:hidden"
           style={{
