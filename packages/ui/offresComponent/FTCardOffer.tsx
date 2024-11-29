@@ -5,6 +5,7 @@ import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function FTCardOffer({
@@ -45,7 +46,19 @@ export default function FTCardOffer({
   const contractType = el?.contractType || el?.typeContratLibelle;
   const slug = `/offres/${el?.slug}`;
   if (slug) router.prefetch(slug);
-  const logo = setFileUrl(company?.logo) || el?.entreprise?.logo;
+  const logo = useMemo(() => {
+    let result;
+    const str = setFileUrl(company?.logo) || el?.entreprise?.logo;
+    let res;
+    if (str) {
+      res = fetch(str)
+        .then((res) => {
+          if (res && res.ok) result = str;
+        })
+        .catch((e) => e);
+    }
+    return result;
+  }, []);
   const companyName = company?.name || el?.entreprise?.nom || el.companyName;
 
   const tools = el.outilsBureautiques;
