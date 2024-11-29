@@ -20,6 +20,8 @@ import { Button } from "@mui/material";
 import { modals } from "./modals/modals";
 import dynamic from "next/dynamic";
 import { trads } from "@youmeet/types/CustomModal";
+import { setModal } from "@youmeet/global-config/features/modal";
+import { UnknownAction } from "@reduxjs/toolkit";
 
 const BoldText = dynamic(() => import("./TextChild"));
 
@@ -124,11 +126,16 @@ export default function NewAddVideoComponent({
   return (
     <div className="w-full p-[6px] box-border flex-bet flex-col">
       <div className="w-full flex justify-end items-center gap-[24px] xs:gap-[12px] sm:gap-[6px] md:gap-[6px]">
-        <Link href={"/enregistrer"} className="no-underline">
+        <div
+          onClick={() => {
+            dispatch(setModal({ display: "record" }) as UnknownAction);
+          }}
+          className="no-underline"
+        >
           <div className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold">
             {t("record-video")}
           </div>
-        </Link>
+        </div>
         <div className="w-[1px] bg-grey300" style={{ height: "18px" }} />
         <form
           ref={addVideoRef}

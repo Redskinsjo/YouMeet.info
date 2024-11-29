@@ -1,4 +1,3 @@
-"use client";
 import ModalWrapper from "./ModalWrapper";
 import WebcamComponent from "../dashboardComponents/WebcamComponent";
 import ModalClose from "./ModalClose";

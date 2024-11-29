@@ -51,7 +51,7 @@ export default function FTCardOffer({
     const str = setFileUrl(company?.logo) || el?.entreprise?.logo;
     let res;
     if (str) {
-      res = fetch(str)
+      res = fetch(str, { mode: "no-cors" })
         .then((res) => {
           if (res && res.ok) result = str;
         })

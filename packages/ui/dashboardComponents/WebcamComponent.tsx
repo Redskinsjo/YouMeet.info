@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { IoMdPlay } from "react-icons/io";
 import { IoStop } from "react-icons/io5";
@@ -14,11 +14,11 @@ import { setError } from "@youmeet/global-config/features/global";
 import { onAddVideo } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { Video } from "@youmeet/gql/generated";
-import { resetModal, setModal } from "@youmeet/global-config/features/modal";
+import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import { FaCheck } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { getPublicIdFirstPart } from "@youmeet/utils/basics/getPublicId";
 
 export default function WebcamComponent({
   jobId,
@@ -83,28 +83,26 @@ export default function WebcamComponent({
 
   const handleAddVideo = useCallback(async () => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
-
     if (recordedChunks.length) {
       const file = new File(recordedChunks, "video-capture-youmeet", {
         type: "video-webm",
       });
 
-      const userIdFollowingVideosCount = `${user.id}_${user.videos.length + 1}`;
+      const publicId = getPublicIdFirstPart(
+        user?.id as string,
+        user.videos.length
+      );
 
       const fileFormData = new FormData();
       fileFormData.append("file", file);
-      const result1 = await submitFile(
-        fileFormData,
-        userIdFollowingVideosCount,
-        "video"
-      );
+      const result1 = await submitFile(fileFormData, publicId, "video");
 
       if (result1 && isPayloadError(result1)) {
         if (result1.type === 15) dispatch(setError("request-feedback"));
         else if (result1.type === 8) dispatch(setError("fileTooLarge"));
       } else {
         const result = (await onAddVideo(
-          userIdFollowingVideosCount,
+          publicId,
           jobId,
           result1,
           exchangeId
@@ -116,13 +114,12 @@ export default function WebcamComponent({
           dispatch(setError("not-completed"));
         } else {
           dispatch(addVideo((result as withData<Video>).data));
-          router.back();
+          dispatch(setModal({ display: "videoAdding" }));
         }
       }
 
       setRecordedChunks([]);
     }
-    dispatch(resetModal("ok") as UnknownAction);
   }, [recordedChunks]);
 
   return (
@@ -130,6 +127,7 @@ export default function WebcamComponent({
       <Webcam
         className="mt-[24px] xs:w-[92vw] sm:w-[92vw] md:w-[92vw] w-[533px] xs:h-[69vw] sm:h-[69vw] md:h-[69vw] h-[400px]"
         audio={true}
+        muted={true}
         ref={webcamRef}
         mirrored={true}
       />
