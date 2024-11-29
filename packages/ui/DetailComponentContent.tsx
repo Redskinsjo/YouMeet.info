@@ -89,7 +89,7 @@ export default function DetailComponent({
         newClasses || ""
       }`}
       style={{
-        alignItems: conversation ? "flex-start" : "center",
+        alignItems: "flex-start",
         flexDirection: conversation ? "column" : "row",
         padding: noGap ? "0px" : noPadding ? "0px" : "12px",
         ...newStyles,
@@ -97,7 +97,7 @@ export default function DetailComponent({
       onClick={onClick}
     >
       <div
-        className="text-[14px] xs:text-[12px] sm:text-[12px] flex font-bold w-fit dark:text-white text-black"
+        className="text-[14px] xs:text-[12px] sm:text-[12px] flex w-fit dark:text-white text-black"
         style={{
           textAlign: "start",
           whiteSpace:
@@ -140,10 +140,9 @@ export default function DetailComponent({
         }}
       >
         <div
-          className="text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
+          className="w-full text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            width: fullWidth ? "100%" : conversation ? "fit-content" : "auto",
 
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
@@ -224,7 +223,7 @@ export default function DetailComponent({
         newClasses || ""
       }`}
       style={{
-        alignItems: conversation ? "flex-start" : "center",
+        alignItems: "flex-start",
         flexDirection: conversation ? "column" : "row",
         padding: noGap ? "0px" : noPadding ? "0px" : "12px",
         ...newStyles,
@@ -232,7 +231,7 @@ export default function DetailComponent({
       onClick={onClick}
     >
       <div
-        className="text-[14px] xs:text-[12px] sm:text-[12px] flex font-bold w-fit dark:text-white text-black"
+        className="text-[14px] xs:text-[12px] sm:text-[12px] flex w-fit dark:text-white text-black"
         style={{
           textAlign: "start",
           whiteSpace:
@@ -267,10 +266,9 @@ export default function DetailComponent({
         }}
       >
         <div
-          className="text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
+          className="w-full text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            width: fullWidth ? "100%" : conversation ? "fit-content" : "auto",
             justifyContent: conversation ? "center" : "end",
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
@@ -351,11 +349,16 @@ export default function DetailComponent({
               newClasses || ""
             }`
       }
-      style={{ ...newStyles }}
+      style={{
+        alignItems: "flex-start",
+        flexDirection: conversation ? "column" : "row",
+        padding: noGap ? "0px" : noPadding ? "0px" : "12px",
+        ...newStyles,
+      }}
       onClick={onClick}
     >
       <div
-        className="mr-[12px] text-[14px] font-bold text-grey500 dark:text-white text-black flex-center"
+        className="mr-[12px] text-[14px] dark:text-white text-black flex-center"
         style={{
           fontWeight: labelInBold ? 700 : 300,
           whiteSpace:

@@ -1,7 +1,6 @@
-import LoginModalContent from "@youmeet/ui/login/LoginModalContent";
 import { Metadata } from "next";
 import { logoUrl } from "@youmeet/functions/imports";
-import { Suspense } from "react";
+import LoginPageComponent from "@youmeet/ui/loginPageComponents/LoginPage";
 
 export const metadata: Metadata = {
   title: "YouMeet - Se Connecter",
@@ -26,13 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Login() {
-  return (
-    <div className="afterHeader h-full w-full flex-center dark:darkBg">
-      <div className="flex-center w-full h-full">
-        <Suspense>
-          <LoginModalContent type="loginPage" />
-        </Suspense>
-      </div>
-    </div>
-  );
+  return <LoginPageComponent />;
 }

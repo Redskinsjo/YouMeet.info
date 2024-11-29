@@ -1,11 +1,11 @@
 "use client";
 import { useMediaQuery } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Flower from "@/public/flower.webp";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import SimpleField from "@youmeet/ui/formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "@youmeet/ui/formComponents/fields/SimpleField";
 import SubmitBtn from "@youmeet/ui/SubmitBtn";
 import { onResetPassword } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
@@ -36,6 +36,7 @@ export default function ResetPasswordContent({ userId }: { userId: string }) {
       } else dispatch(setError("requestNotCompleted") as UnknownAction);
     } else {
       dispatch(setModal({ display: "backofficeConfirm" }) as UnknownAction);
+
       setTimeout(() => {
         router.push(`/${result.data}`);
         dispatch(resetModal("ok") as UnknownAction);

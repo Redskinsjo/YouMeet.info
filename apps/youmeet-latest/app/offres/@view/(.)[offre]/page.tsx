@@ -1,6 +1,6 @@
 import { getOffer, getOffers } from "@youmeet/functions/request";
 import { Offer } from "@youmeet/gql/generated";
-import OfferChild from "@youmeet/ui/offres/offerChild";
+import OfferChild from "@youmeet/ui/oneOfferComponents/offerChild";
 import { notFound } from "next/navigation";
 import React from "react";
 

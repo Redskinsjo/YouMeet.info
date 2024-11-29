@@ -8,13 +8,13 @@ import { ModalState } from "@youmeet/global-config/features/modal";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import NewTargetContractTypeComponent from "../dashboard/dashboardComponents/NewTargetContractTypeComponent";
+import NewTargetContractTypeComponent from "../dashboardComponents/NewTargetContractTypeComponent";
 import AddVideo from "../AddVideo";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 const NewTargetJobComponent = dynamic(
-  () => import("../dashboard/dashboardComponents/NewTargetJobComponent"),
+  () => import("../dashboardComponents/NewTargetJobComponent"),
   { ssr: false }
 );
 export default function FulfillModal({ type }: CustomModalProps) {
@@ -47,7 +47,7 @@ export default function FulfillModal({ type }: CustomModalProps) {
               <AddVideo profil={modal.user} />
             </div>
           </div>
-          <LoginModalClose />
+          <ModalClose />
         </>
       </ModalWrapper>
     )

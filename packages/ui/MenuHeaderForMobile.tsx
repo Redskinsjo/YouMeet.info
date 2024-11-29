@@ -23,7 +23,7 @@ export default function MenuHeaderForMobile() {
   };
 
   return (
-    <div className="hidden xs:block sm:block md:block flex-1">
+    <div className="hidden xs:block sm:block md:block flex-1 p-[12px]">
       <div
         className={
           open

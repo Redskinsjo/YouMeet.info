@@ -1,11 +1,11 @@
 "use client";
 import { createElement, useMemo, Suspense } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import { useRouter } from "next/navigation";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import LoginModalContent from "./login/LoginModalContent";
-import { ModalState } from "@youmeet/global-config/features/modal";
+import { ModalState, resetModal } from "@youmeet/global-config/features/modal";
 import dynamic from "next/dynamic";
 
 const RecordModal = dynamic(() => import("./modals/RecordModal"), {
@@ -26,14 +26,15 @@ const NotificationsModal = dynamic(
 const FeedBackModal = dynamic(() => import("./modals/FeedbackModal"), {
   ssr: false,
 });
+//
 const VideoAddingModal = dynamic(() => import("./modals/VideoAddingModal"), {
   ssr: false,
 });
 const UploadModal = dynamic(() => import("./modals/UploadModal"), {
   ssr: false,
 });
-const CustomModalContent = dynamic(
-  () => import("./modals/CustomModalContent"),
+const CustomModalComponent = dynamic(
+  () => import("./modals/CustomModalComponent"),
   {
     ssr: false,
   }
@@ -46,6 +47,7 @@ export default function CustomModal({
 }: CustomModalProps) {
   const modal = useSelector((state: RootState) => state.modal as ModalState);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const uploadDelete =
     type === "upload" || type === "upload-50" || type === "delete";
@@ -70,7 +72,7 @@ export default function CustomModal({
             ? UploadModal
             : type === "login"
             ? LoginModalContent
-            : CustomModalContent,
+            : CustomModalComponent,
           {
             setDisplayModal,
             type,
@@ -84,15 +86,19 @@ export default function CustomModal({
   );
 
   const aboveError =
-    type === "fileTooLarge" ||
-    type === "not-completed" ||
-    type === "request-feedback" ||
     type === "upload" ||
-    type === "backofficeConfirm";
+    type === "upload-50" ||
+    type === "delete" ||
+    type === "backofficeConfirm" ||
+    type === "fileTooLarge" ||
+    type === "creditTooLow" ||
+    type === "requestNotCompleted" ||
+    type === "not-completed" ||
+    type === "request-feedback";
 
   return (
     <div
-      className="absolute h-full w-full fadeIn"
+      className="absolute h-screen w-full fadeIn"
       style={{
         zIndex: aboveError ? 1101 : 1100,
         background: "rgba(0,0,0,0.5)",
@@ -102,26 +108,15 @@ export default function CustomModal({
         if (type === "login" || type === "record") router.back();
         if (setDisplayModal) {
           setDisplayModal(null);
+        } else {
+          router.back();
+          dispatch(resetModal(null));
         }
       }}
     >
-      {type === "video" ? (
-        <div className="w-full h-screen">{modalContent}</div>
-      ) : (
-        <div className="h-screen flex fixed w-full">
-          <div className="relative m-auto box-border xs:w-screen sm:w-screen md:w-screen w-[600px] xs:h-screen sm:h-screen md:h-screen max-h-screen flex-center">
-            <div
-              className={
-                type === "login"
-                  ? "box-border h-full xs:w-screen sm:w-screen xs:h-screen sm:h-screen md:h-screen rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 flex-center w-full"
-                  : "box-border rounded-[14px] xs:rounded-0 sm:rounded-0 md:rounded-0 bg-white xs:h-full sm:h-full md:h-full dark:darkBg flex-center w-full"
-              }
-            >
-              <Suspense>{children ?? modalContent}</Suspense>
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="h-full flex-center absolute w-full">
+        <Suspense>{children ?? modalContent}</Suspense>
+      </div>
     </div>
   );
 }

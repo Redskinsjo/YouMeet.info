@@ -1099,7 +1099,7 @@ const resolvers: Resolvers = {
         const filter = { mode: "insensitive" } as FilterText;
         if (d.contains) filter.contains = d.title;
         else filter.startsWith = d.title;
-        where.title = { is: { fr: filter } };
+        where.title = { is: { OR: [{ fr: filter }, { en: filter }] } };
       }
       if (d?.topSectorIds && d.topSectorIds.length > 0)
         whereOr.push({
@@ -1108,6 +1108,8 @@ const resolvers: Resolvers = {
       if (d?.in) whereOr.push({ id: { in: d.in as string[] } });
 
       if (whereOr && whereOr.length > 0) where.OR = whereOr;
+
+      console.log(where, "where");
       return await prisma.jobs.findMany({
         where,
       });

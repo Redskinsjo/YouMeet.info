@@ -5,9 +5,7 @@ import dynamic from "next/dynamic";
 
 const BackofficeApplicationsComponent = dynamic(
   () =>
-    import(
-      "@youmeet/ui/backoffice/backofficeComponents/BackofficeApplicationsComponent"
-    )
+    import("@youmeet/ui/backofficeComponents/BackofficeApplicationsComponent")
 );
 
 export default function BackofficeApplicationsPage({

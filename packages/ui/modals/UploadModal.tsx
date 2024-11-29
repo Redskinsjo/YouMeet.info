@@ -1,7 +1,7 @@
 "use client";
 
 import ModalWrapper from "./ModalWrapper";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import dynamic from "next/dynamic";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 
@@ -11,7 +11,6 @@ const UploadText = dynamic(() => import("./UploadModal/UploadText"), {
 const Logo = dynamic(() => import("@youmeet/ui/LogoChild"), { ssr: false });
 
 export default function UploadModalContent(props: CustomModalProps) {
-  console.log("UploadModalContent");
   return (
     <ModalWrapper>
       <>
@@ -20,7 +19,7 @@ export default function UploadModalContent(props: CustomModalProps) {
 
           <UploadText />
         </div>
-        <LoginModalClose />
+        <ModalClose />
       </>
     </ModalWrapper>
   );

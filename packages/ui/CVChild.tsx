@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const NewCVUpload = dynamic(() => import("@youmeet/ui/NewCVUpload"), {
   ssr: false,
   loading: () => (
-    <div className="flex-bet w-full px-[12px] box-border">
+    <div className="flex-bet w-full px-[12px] box-border border-[0.5px] border-solid border-grey300 h-[36px]">
       <div />
       <Skeleton width={65} height={18} />
     </div>

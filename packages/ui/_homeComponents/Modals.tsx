@@ -16,8 +16,8 @@ export default function Modals() {
   const error = global.error;
   const upload = global.upload;
   const modal = useSelector((state: RootState) => state.modal as ModalState);
-
   const dispatch = useDispatch();
+
   return (
     <>
       {(error || upload) && (

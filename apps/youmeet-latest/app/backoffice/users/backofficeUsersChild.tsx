@@ -1,17 +1,14 @@
 import { BetaUser } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import CreateAffiliateUser from "@youmeet/ui/backoffice/backofficeComponents/CreateAffiliateUser";
+import CreateAffiliateUser from "@youmeet/ui/backofficeComponents/CreateAffiliateUser";
 import dynamic from "next/dynamic";
 
 const BackofficeUsersComponent = dynamic(
-  () =>
-    import(
-      "@youmeet/ui/backoffice/backofficeComponents/BackofficeUsersComponent"
-    )
+  () => import("@youmeet/ui/backofficeComponents/BackofficeUsersComponent")
 );
 const CreateProUser = dynamic(
-  () => import("@youmeet/ui/backoffice/backofficeComponents/CreateProUser")
+  () => import("@youmeet/ui/backofficeComponents/CreateProUser")
 );
 
 export default function BackofficeUsersPage({ users }: { users: BetaUser[] }) {

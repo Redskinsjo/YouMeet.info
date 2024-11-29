@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Locale from "./Locale";
 import { GoTriangleLeft } from "react-icons/go";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
@@ -14,10 +14,11 @@ import { useTranslation } from "react-i18next";
 import RecruiterSpace from "./RecruiterSpace";
 import NotificationsComponent from "./NotificationsIconComponent";
 import MenuHeaderForMobile from "./MenuHeaderForMobile";
-import { Article, Translated } from "@youmeet/gql/generated";
+import { Article } from "@youmeet/gql/generated";
 import { getArticlesParams } from "@youmeet/functions/request";
-import BlogMenuNav from "./BlogMenuNav";
+import BlogMenuNav from "./blog/BlogMenuNav";
 import { outfit } from "@youmeet/functions/fonts";
+import { ReducedArticle } from "@youmeet/types/ReducedArticle";
 
 export default function Header({ classes, newStyles }: HeaderComponentProps) {
   const user = useSelector((state: RootState) => state.user as UserState);
@@ -31,10 +32,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     i18n: { language },
   } = useTranslation();
   const [megaMenu, setMegaMenu] = useState(false);
-  const [articles, setArticles] = useState<
-    { id?: string; title: Translated; slug?: string }[]
-  >([]);
-  const [megaMenuLoading, setMegaMenuLoading] = useState(true);
+  const [articles, setArticles] = useState<ReducedArticle[]>([]);
   const router = useRouter();
   router.prefetch(`/${searchParams.get("candidate")}`);
   router.prefetch("/le-produit/mise-en-relation");
@@ -50,33 +48,29 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   };
 
   const getArticles = async () => {
-    const articles = (await getArticlesParams<Article[]>()) as Article[];
-    setArticles(
-      articles.map((article) => ({
-        id: article.id,
-        title: article.title,
-        slug: article.slug,
-      }))
-    );
+    const result = (await getArticlesParams<Article[]>()) as Article[];
+    const articles = result.map((a) => ({
+      id: a.id,
+      title: a.title,
+      slug: a.slug,
+    }));
+    setArticles(articles);
   };
 
   useEffect(() => {
-    if (megaMenu) {
-      getArticles();
-      setMegaMenuLoading(false);
-    }
+    if (articles.length === 0) getArticles();
   }, [megaMenu]);
 
   return (
     <div className="relative">
       <div
-        className={`header-classes h-[75px] px-[12px] dark:lightDarkBg dark:border-transparent ${
+        className={`header-classes h-[75px] dark:lightDarkBg dark:border-transparent ${
           classes || ""
         }`}
         style={newStyles}
         data-test="header"
       >
-        <div className="flex items-center justify-start flex-1 gap-[24px] xs:hidden sm:hidden md:hidden">
+        <div className="flex items-center justify-start flex-1 p-[12px] box-border gap-[24px] xs:hidden sm:hidden md:hidden">
           {pathname.includes("/competencies") && (
             <TooltipedAsset
               asset={`Profil de ${
@@ -104,7 +98,12 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
         <MenuHeaderForMobile />
         {!xs && !sm && !md && (
-          <div className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full">
+          <div
+            className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full p-[12px] box-border"
+            onMouseLeave={() => {
+              setMegaMenu(false);
+            }}
+          >
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
@@ -209,8 +208,8 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             pathname !== "/les-prix" &&
             pathname !== "/le-produit/mise-en-relation" &&
             pathname !== "/le-produit/ats"
-              ? "flex flex-1 items-center justify-end gap-[12px]"
-              : "flex flex-1 items-center justify-end xs:gap-[12px] sm:gap-[12px] gap-[24px]"
+              ? "flex flex-1 items-center justify-end gap-[12px] p-[12px] box-border"
+              : "flex flex-1 items-center justify-end xs:gap-[12px] sm:gap-[12px] gap-[24px] p-[12px] box-border"
           }
         >
           {pathname !== "/offres" && (
@@ -235,7 +234,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
       </div>
 
-      {!!megaMenu && !megaMenuLoading && (
+      {!!megaMenu && !!articles && (
         <div
           onClick={() => setMegaMenu(false)}
           className="absolute h-screen top-[75px] z-[11001] shadow-inner lightBg"
@@ -283,9 +282,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
               <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
                 {t("blog")}
               </h3>
-              <Suspense>
-                <BlogMenuNav articles={articles} />
-              </Suspense>
+              <BlogMenuNav articles={articles} />
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+"use client";
 import { UserState, addVideo } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { BetaUser, Video } from "@youmeet/gql/generated";
@@ -16,6 +17,13 @@ import { submitFile } from "@youmeet/utils/basics/submitFile";
 import Link from "next/link";
 import { getPublicIdFirstPart } from "@youmeet/utils/basics/getPublicId";
 import { Button } from "@mui/material";
+import { modals } from "./modals/modals";
+import dynamic from "next/dynamic";
+import { trads } from "@youmeet/types/CustomModal";
+import { setModal } from "@youmeet/global-config/features/modal";
+import { UnknownAction } from "@reduxjs/toolkit";
+
+const BoldText = dynamic(() => import("./TextChild"));
 
 export default function NewAddVideoComponent({
   profil,
@@ -34,10 +42,16 @@ export default function NewAddVideoComponent({
   const submitVideoRef = useRef<HTMLButtonElement | null>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const upload = useSelector(
-    (state: RootState) => (state.global as GlobalState).upload
-  );
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const global = useSelector((state: RootState) => state.global as GlobalState);
+  const error = global.error;
+  const upload = global.upload;
+  const uploading =
+    upload === "upload" || upload === "upload-50" ? upload : null;
+  const type = error || uploading;
 
   const customOnAddVideo = async (
     extras: {
@@ -47,6 +61,7 @@ export default function NewAddVideoComponent({
     formData: FormData
   ) => {
     dispatch(setUpload("upload"));
+
     let count = 0;
     const intervalId = setInterval(() => {
       count++;
@@ -83,8 +98,8 @@ export default function NewAddVideoComponent({
         if (setVideoId) setVideoId(result.data.id as string);
       }
     }
-    dispatch(setUpload(null));
     clearInterval(intervalId);
+    dispatch(setUpload(null));
   };
 
   const inputElement = useMemo(
@@ -109,13 +124,18 @@ export default function NewAddVideoComponent({
   );
 
   return (
-    <div className="w-full p-[6px] box-border flex-bet h-[39px]">
+    <div className="w-full p-[6px] box-border flex-bet flex-col">
       <div className="w-full flex justify-end items-center gap-[24px] xs:gap-[12px] sm:gap-[6px] md:gap-[6px]">
-        <Link href={"/enregistrer"} className="no-underline">
+        <div
+          onClick={() => {
+            dispatch(setModal({ display: "record" }) as UnknownAction);
+          }}
+          className="no-underline"
+        >
           <div className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold">
             {t("record-video")}
           </div>
-        </Link>
+        </div>
         <div className="w-[1px] bg-grey300" style={{ height: "18px" }} />
         <form
           ref={addVideoRef}
@@ -140,6 +160,12 @@ export default function NewAddVideoComponent({
           />
         </form>
       </div>
+      {!!type && modals && modals[type] && modals[type].content && (
+        <BoldText
+          text={`${t((modals[type].content as trads)[language])}`}
+          align="center"
+        />
+      )}
     </div>
   );
 }

@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import { useActionState } from "react";
 import { onEmailForgotten } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
-import LoginModalClose from "./LoginModalClose";
+import SimpleField from "../formComponents/fields/SimpleField";
+import ModalClose from "../modals/ModalClose";
 import Logo from "../Logo";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import SubmitBtn from "../SubmitBtn";
@@ -48,7 +48,6 @@ export default function WhenForgotten({
     <form
       ref={formRef}
       name="forgotten"
-      className="auth-form-content dark:mediumDarkBg"
       action={handle}
       onClick={(e) => e.stopPropagation()}
     >
@@ -92,7 +91,7 @@ export default function WhenForgotten({
 
         <div className="flex-1"></div>
       </div>
-      {type !== "loginPage" && <LoginModalClose type={type} />}
+      {type !== "loginPage" && <ModalClose />}
     </form>
   );
 }

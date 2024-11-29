@@ -8,9 +8,9 @@ import { useSelector } from "react-redux";
 import { useActionState } from "react";
 import { onSigninUp } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
-import LoginModalClose from "./LoginModalClose";
-import PhoneField from "../formulaire-profil/formComponents/fields/PhoneField";
+import SimpleField from "../formComponents/fields/SimpleField";
+import ModalClose from "../modals/ModalClose";
+import PhoneField from "../formComponents/fields/PhoneField";
 import Logo from "../Logo";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { RootState } from "@youmeet/global-config/store";
@@ -74,7 +74,6 @@ export default function WhenSubscribing({
       ref={formRef}
       action={handle}
       name="subscribing"
-      className="auth-form-content dark:mediumDarkBg"
       onClick={(e) => e.stopPropagation()}
     >
       <Logo png />
@@ -155,7 +154,7 @@ export default function WhenSubscribing({
 
         <div className={xs || sm ? "flex-[2]" : "flex-1"}></div>
       </div>
-      {type !== "loginPage" && <LoginModalClose type={type} />}
+      {type !== "loginPage" && <ModalClose />}
     </form>
   );
 }

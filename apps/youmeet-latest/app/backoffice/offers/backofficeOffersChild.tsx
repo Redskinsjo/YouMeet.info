@@ -1,5 +1,5 @@
 import Layout from "@youmeet/ui/Layout";
-import AddOffer from "@youmeet/ui/backoffice/backofficeComponents/AddOffer";
+import AddOffer from "@youmeet/ui/backofficeComponents/AddOffer";
 import { Offer } from "@youmeet/gql/generated";
 import Link from "next/link";
 import { Button } from "@mui/material";

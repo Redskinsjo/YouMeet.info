@@ -25,23 +25,17 @@ export default function LoginModalContent({ type }: CustomModalProps) {
   }, [isSubscribing, isForgotten]);
 
   return (
-    <div role="login-modal-content" className="w-full flex-center">
+    <div className="modal-content">
       {isSubscribing || subscribingData ? (
-        <div className={md ? "sm-auth-container" : "lg-auth-container"}>
-          <WhenSubscribing type={type} setIsSubscribing={setIsSubscribing} />
-        </div>
+        <WhenSubscribing type={type} setIsSubscribing={setIsSubscribing} />
       ) : isForgotten ? (
-        <div className={md ? "sm-auth-container" : "lg-auth-container"}>
-          <WhenForgotten type={type} setIsForgotten={setIsForgotten} />
-        </div>
+        <WhenForgotten type={type} setIsForgotten={setIsForgotten} />
       ) : (
-        <div className={md ? "sm-auth-container" : "lg-auth-container"}>
-          <WhenLogin
-            type={type}
-            setIsSubscribing={setIsSubscribing}
-            setIsForgotten={setIsForgotten}
-          />
-        </div>
+        <WhenLogin
+          type={type}
+          setIsSubscribing={setIsSubscribing}
+          setIsForgotten={setIsForgotten}
+        />
       )}
     </div>
   );

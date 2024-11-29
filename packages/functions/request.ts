@@ -77,6 +77,7 @@ import {
   QueryCompetenciesArgs,
   DeleteOneProfileSharingMutation,
   QuerySharingsArgs,
+  MutationCreateRemarkArgs,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -99,6 +100,7 @@ import {
   createProfileViewMutation,
   createQuestionMutation,
   createQueueMutation,
+  createRemarkMutation,
   createResponsesMutation,
   createSharingRefusalMutation,
   createThreadMutation,
@@ -197,6 +199,7 @@ import { isNotHandledReq, isPayloadError } from "@youmeet/types/TypeGuards";
 import { AES } from "crypto-js";
 import { OffreEmploiFTParams } from "@youmeet/types/api/OffreEmploiFT";
 import { getAccessTokenFT } from "./browserRequests";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const createError = async <T>(
   variables?: MutationCreateErrorArgs,
@@ -1323,6 +1326,24 @@ export const getJob = async <T>(
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
 
+export const createRemark = async <T>(
+  variables?: MutationCreateRemarkArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "createRemark",
+    multiple,
+    createRemarkMutation,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
 export const createProfileSharing = async <T>(
   variables?: MutationCreateProfileSharingArgs,
   revalidate: number = 0,
@@ -2345,4 +2366,15 @@ export const getOffersFT = async <T>(
   if (isNotHandledReq<T>(handling, result)) {
     return result.data as ResultNotHandled<T>;
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const revalidate = async (
+  path: string | undefined,
+  tag: string = ""
+) => {
+  const promise = new Promise((resolve) => {
+    if (!!path) resolve(revalidatePath(`/${path}`));
+    if (!!tag) resolve(revalidateTag(`${tag}`));
+  });
+  return await promise;
 };

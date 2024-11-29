@@ -3,7 +3,7 @@ import { BetaQueue } from "@youmeet/gql/generated";
 import { setName } from "@youmeet/utils/basics/setName";
 import { Metadata, ResolvingMetadata } from "next";
 import { redirect } from "next/navigation";
-import ConversationChild from "./conversationChild";
+import ConversationChild from "@youmeet/ui/conversationComponents/conversationChild";
 
 type Props = {
   params: Promise<{ queueId: string }>;

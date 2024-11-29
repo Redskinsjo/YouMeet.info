@@ -1,21 +1,19 @@
 import { ReactElement } from "react";
-import Providers from "./providers";
+import Providers from "@youmeet/ui/rootComponents/providers";
 import Template from "./template";
 
 const fnc = function RootLayout({
   children,
   loginModal,
-  recordModal,
 }: {
   children: ReactElement;
   loginModal: ReactElement;
-  recordModal: ReactElement;
 }) {
   return (
     <html lang="fr">
       <body>
         <script src="https://cdn.francetravail.fr/webco/v1/ft-connect.js"></script>
-        <Providers modals={{ loginModal, recordModal }}>
+        <Providers modals={{ loginModal }}>
           <Template key={"1"}>{children}</Template>
         </Providers>
       </body>

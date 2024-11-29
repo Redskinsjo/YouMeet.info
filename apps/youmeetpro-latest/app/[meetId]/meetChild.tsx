@@ -9,7 +9,7 @@ import Link from "next/link";
 import { createElement, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { FaLinkedin } from "react-icons/fa";
-import MainVideoComponent from "@youmeet/ui/profils/[candidateName]/candidateProfileComponents/MainVideoComponent";
+import MainVideoComponent from "@youmeet/ui/candidateProfileComponents/MainVideoComponent";
 import NewVideoComponent from "@youmeet/ui/NewVideoComponent";
 import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { useMediaQuery } from "@mui/material";

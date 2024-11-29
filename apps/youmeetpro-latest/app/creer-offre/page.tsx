@@ -1,9 +1,9 @@
 import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
-import OfferChild from "./offerChild";
 import useFormDefaultValues from "@youmeet/global-config/useFormDefaultValues";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import { OfferDefaultValues } from "@youmeet/types/form/useFormDefaultValues";
 import { redirect } from "next/navigation";
+import FormChild from "./offerChild";
 
 export default async function Form() {
   const verified = await verifyTokenServer(undefined, "creer-offre");
@@ -13,7 +13,7 @@ export default async function Form() {
     (verified as LoginCookiePayload)?.userId
   )) as OfferDefaultValues;
   if (defaultValues)
-    return <OfferChild defaultValues={defaultValues} category="offer" />;
+    return <FormChild defaultValues={defaultValues} category="offer" />;
 
   redirect("/se-connecter?redirect=creer-offre");
 }

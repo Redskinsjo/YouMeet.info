@@ -22,6 +22,7 @@ import {
   QuerySendEmailArgs,
   Question,
   SharingRefusal,
+  UserRemark,
   Video,
 } from "@youmeet/gql/generated";
 import { ConversationTheme } from "@youmeet/types/ConversationTheme";
@@ -71,6 +72,7 @@ import {
   updateUser,
   updateVideo,
   searchSomeone,
+  createRemark,
 } from "./request";
 import {
   FormHandledData,
@@ -357,6 +359,55 @@ export const onAddVideo = async (
       }
     }
     throw new BackendError(BACKEND_ERRORS.NO_FILE, BACKEND_MESSAGES.NO_FILE);
+  } catch (err: any) {
+    return await handleActionError(err);
+  }
+};
+
+export const onRemark = async (
+  formData: FormData
+): Promise<withData<UserRemark> | PayloadBackendError> => {
+  const schema = z.object({
+    content: z.string().min(1),
+    userId: z.string().min(1),
+  });
+
+  const obj = Object.fromEntries(
+    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
+      entry[0],
+      entry[1].toString().trim(),
+    ])
+  );
+
+  const toBeParsed = obj;
+
+  try {
+    const valid = schema.parse(toBeParsed);
+
+    if (valid) {
+      const result = (await createRemark<UserRemark>(
+        { data: { content: valid.content, userId: valid.userId } },
+        0,
+        true
+      )) as PayloadBackendError | withData<UserRemark>;
+      if (result && isPayloadError(result)) {
+        throw new BackendError(result.type, result.message);
+      } else if (!result?.data) {
+        throw new BackendError(
+          BACKEND_ERRORS.PROCESSING,
+          BACKEND_MESSAGES.PROCESSING
+        );
+      } else {
+        if (!test) revalidatePath("/dashboard");
+        if (!test) revalidatePath("/backoffice/remarks");
+
+        return { data: result.data };
+      }
+    }
+    throw new BackendError(
+      BACKEND_ERRORS.NOT_VALID,
+      BACKEND_MESSAGES.NOT_VALID
+    );
   } catch (err: any) {
     return await handleActionError(err);
   }
@@ -887,7 +938,7 @@ export const onApplying = async (extras: {
 }): Promise<withData<ProfileSharing> | PayloadBackendError> => {
   const schema = z.object({
     originId: z.string().min(1),
-    targetId: z.string().min(1),
+    targetId: z.string().optional(),
     videoId: z.string().min(1),
     offerTargetId: z.string().min(1),
   });
@@ -1980,7 +2031,6 @@ export const generateCV = async (formData: FormData) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.ok ? "done" : response.ok);
       const result = await response.arrayBuffer();
       return result;
     }

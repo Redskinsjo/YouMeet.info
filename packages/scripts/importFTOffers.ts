@@ -22,7 +22,7 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
   // offres qui sont liées à une candidature
 
   const offersToKeep = applications
-    .filter((sharing) => sharing.offerTarget.id)
+    .filter((sharing) => sharing.offerTarget?.id)
     .map((sharing) => sharing.offerTarget);
   console.log("offersToKeep: ", offersToKeep.length);
 

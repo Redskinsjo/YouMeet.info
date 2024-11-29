@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "../formComponents/fields/SimpleField";
 import { useFormStatus } from "react-dom";
 import { NewFieldProps } from "@youmeet/types/form/fields/NewFieldProps";
 import { indie_flower } from "@youmeet/functions/fonts";

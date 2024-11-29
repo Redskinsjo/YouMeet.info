@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@mui/material";
 import { uri } from "@youmeet/functions/imports";
-import SelectField from "@youmeet/ui/formulaire-profil/formComponents/fields/SelectField";
+import SelectField from "@youmeet/ui/formComponents/fields/SelectField";
 import Link from "next/link";
 
 export default function BackofficeUsersPage() {

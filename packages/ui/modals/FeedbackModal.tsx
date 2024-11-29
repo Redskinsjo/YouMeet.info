@@ -17,9 +17,10 @@ import { Button } from "@mui/material";
 import { withData } from "@youmeet/types/api/backend";
 import { useActionState, useRef } from "react";
 import dynamic from "next/dynamic";
-import SimpleField from "../formulaire-profil/formComponents/fields/SimpleField";
+import SimpleField from "../formComponents/fields/SimpleField";
 import { modals } from "./modals";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
+import { useRouter } from "next/navigation";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 
@@ -36,18 +37,23 @@ export default function FeedBackModal({ type }: CustomModalProps) {
   const formRef = useRef<HTMLFormElement | null>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
-    if (state && isPayloadError(state)) dispatch(setError("not-completed"));
-    else if ((state as withData<boolean>).data) {
+    if (state && isPayloadError(state)) {
+      dispatch(setError("not-completed"));
+    } else if ((state as withData<boolean>).data) {
       setStatus((state as withData<boolean>).data);
       (formRef.current as HTMLFormElement)?.reset();
       setTimeout(() => {
         setStatus(false);
         dispatch(resetModal("ok") as UnknownAction);
+        router.back();
       }, 5000);
     }
   }, [state]);
+
+  const data = modals && type && modals[type] ? modals[type] : undefined;
 
   return (
     !!modal.user && (
@@ -55,10 +61,8 @@ export default function FeedBackModal({ type }: CustomModalProps) {
         <>
           <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] p-[12px]">
             <h3 className="text-purple900 sentences">
-              {modals && modals[type] && modals[type].title && (
-                <BoldText
-                  text={`${t((modals[type].title as trads)[language])}`}
-                />
+              {data?.title && (
+                <BoldText text={`${t((data?.title as trads)[language])}`} />
               )}
             </h3>
             <form
@@ -66,10 +70,8 @@ export default function FeedBackModal({ type }: CustomModalProps) {
               action={formHandler}
               className="xs:text-[22px] sm:text-[22px] md:text-[22px] text-blueGrey700 text-[19px] text-center flex-center flex-col gap-[12px]"
             >
-              {modals && modals[type] && modals[type].content && (
-                <BoldText
-                  text={`${t((modals[type].content as trads)[language])}`}
-                />
+              {data?.content && (
+                <BoldText text={`${t((data?.content as trads)[language])}`} />
               )}
               <SimpleField
                 name="feedback"
@@ -99,7 +101,7 @@ export default function FeedBackModal({ type }: CustomModalProps) {
               </div>
             )}
           </div>
-          <LoginModalClose />
+          <ModalClose />
         </>
       </ModalWrapper>
     )

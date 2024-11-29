@@ -1,19 +1,17 @@
 import { Avatar, BetaUser } from "@youmeet/gql/generated";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { onAddCV } from "@youmeet/functions/actions";
-import {
-  GlobalState,
-  setError,
-  setUpload,
-} from "@youmeet/global-config/features/global";
-import { RootState } from "@youmeet/global-config/store";
+import { setError, setUpload } from "@youmeet/global-config/features/global";
 import { setCvFile } from "@youmeet/global-config/features/user";
 import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/basics/submitFile";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { revalidate } from "@youmeet/functions/request";
 
 const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 
@@ -21,9 +19,7 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const cvRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const upload = useSelector(
-    (state: RootState) => (state.global as GlobalState).upload
-  );
+  const router = useRouter();
 
   const customOnAddCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("upload"));
@@ -44,7 +40,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
         dispatch(setCvFile((result2 as withData<Avatar>).data));
       }
     }
-    dispatch(setUpload(null));
   };
 
   return profil?.cvFile ? undefined : (

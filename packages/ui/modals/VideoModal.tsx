@@ -1,7 +1,7 @@
 import AddVideo from "../AddVideo";
 import BoldText from "../BoldText";
 import DetailComponent from "../DetailComponentContent";
-import LoginModalClose from "../login/LoginModalClose";
+import ModalClose from "./ModalClose";
 import NewAddCVComponent from "../NewAddCVComponent";
 import { Button, FormControlLabel, Switch } from "@mui/material";
 import { deepPurple, green, grey } from "@mui/material/colors";
@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import { FaCheckCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import ModalWrapper from "./ModalWrapper";
+import { useRouter } from "next/navigation";
 
 export default function VideoAddingModal({
   type,
@@ -42,6 +43,7 @@ export default function VideoAddingModal({
   const [checkAvailableVideos, setCheckAvailableVideos] = useState(false);
   const [loading, setLoading] = useState(true);
   const [chosenVideo, setChosenVideo] = useState<Video | undefined>();
+  const router = useRouter();
 
   const fetchOffer = useCallback(async () => {
     if (modal.publicOffer?.id) {
@@ -86,15 +88,17 @@ export default function VideoAddingModal({
 
   const modals: any = undefined;
 
+  const data = modals && type && modals[type] ? modals[type] : undefined;
+
   return !loading ? (
     <ModalWrapper>
       <>
         <div className="w-full flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px]">
           <h3 className="text-purple900 sentences xs:my-0 sm:my-0 md:my-0">
-            {modals && modals[type] && modals[type].title && (
+            {data?.title && (
               <BoldText
                 text={`${t(
-                  (title as string) ?? (modals[type].title as trads)[language]
+                  (title as string) ?? (data?.title as trads)[language]
                 )}`}
               />
             )}
@@ -103,11 +107,10 @@ export default function VideoAddingModal({
           <div className="text-blueGrey700 dark:text-blueGrey200 xs:text-[22px] sm:text-[22px] md:text-[22px] text-[19px] text-justify indent-[24px]">
             {!readyToApply ? (
               <>
-                {modals && modals[type] && modals[type].content && (
+                {data?.content && (
                   <BoldText
                     text={`${t(
-                      (content as string) ??
-                        (modals[type].content as trads)[language]
+                      (content as string) ?? (data?.content as trads)[language]
                     )}`}
                   />
                 )}
@@ -203,10 +206,10 @@ export default function VideoAddingModal({
                 className="subItem fadeIn"
                 type="submit"
               >
-                {modals && modals[type] && modals[type].cta && (
+                {data?.cta && (
                   <BoldText
                     text={`${t(
-                      (cta as string) ?? (modals[type].cta as trads)[language]
+                      (cta as string) ?? (data?.cta as trads)[language]
                     )}`}
                     containerStyle={{ margin: 0 }}
                   />
@@ -224,7 +227,7 @@ export default function VideoAddingModal({
             </Button>
           )}
         </div>
-        <LoginModalClose />
+        <ModalClose />
       </>
     </ModalWrapper>
   ) : undefined;
