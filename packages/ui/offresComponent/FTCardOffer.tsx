@@ -42,7 +42,11 @@ export default function FTCardOffer({
     })
     .join(" ");
   const qualification = el.qualificationLibelle;
-  const location = el?.location || el?.lieuTravail?.libelle;
+  const location =
+    el?.location ||
+    el?.lieuTravail?.libelle ||
+    el?.lieuTravail?.commune ||
+    el?.lieuTravail?.codePostal;
   const contractType = el?.contractType || el?.typeContratLibelle;
   const slug = `/offres/${el?.slug}`;
   if (slug) router.prefetch(slug);
