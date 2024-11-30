@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 type OffresSearch = {
-  search?: string;
-  departments?: string[];
+  search: string;
+  departments: string[];
   "all-skip"?: number;
   "paris-skip"?: number;
   "marseille-skip"?: number;

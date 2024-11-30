@@ -9,6 +9,7 @@ import { ReactElement, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetOffresSearch,
+  SearchState,
   setOffresSearch,
 } from "@youmeet/global-config/features/search";
 import { RootState } from "@youmeet/global-config/store";
@@ -38,9 +39,11 @@ export default function LocationFilter() {
   const multiple = true;
   const location = search.get("l")?.split(",") || [];
   const locations = useSelector(
-    (state: RootState) => state.search.offres.departments
+    (state: RootState) => state.search as SearchState
   );
-  const searchLocation = (locations || location).map((l) =>
+  const departments = locations.offres.departments;
+  const input = location?.length > 0 ? location : departments;
+  const searchLocation = input.map((l) =>
     list.find((d) => d.code === l)
   ) as Department[];
 
@@ -58,10 +61,10 @@ export default function LocationFilter() {
       const params = new URLSearchParams(search.toString());
       if (codes.length > 0) {
         params.set(prm, codeStr);
-        dispatch(setOffresSearch({ departments: codes }));
+        dispatch(setOffresSearch({ ...locations.offres, departments: codes }));
       } else {
         params.delete(prm);
-        dispatch(setOffresSearch({ departments: [] }));
+        dispatch(setOffresSearch({ ...locations.offres, departments: [] }));
       }
       const otherPrm = "all-skip";
       params.delete(otherPrm);
@@ -95,13 +98,18 @@ export default function LocationFilter() {
         const prm = "l";
         const params = new URLSearchParams(search.toString());
 
-        // update the locations
+        // update the departments
         params.set(prm, codes);
-        dispatch(setOffresSearch({ departments: codes.split(",") }));
+        dispatch(
+          setOffresSearch({
+            ...locations.offres,
+            departments: codes.split(","),
+          })
+        );
         // update the skip
         const otherPrm = "all-skip";
         params.delete(otherPrm);
-        dispatch(setOffresSearch({ [otherPrm]: 0 }));
+        dispatch(setOffresSearch({ ...locations.offres, [otherPrm]: 0 }));
 
         const query = params.toString();
         router.push(pathname + "?" + query);
@@ -131,24 +139,30 @@ export default function LocationFilter() {
                 onDelete={() => {
                   const code = option.code;
                   const params = new URLSearchParams(search.toString());
-                  const newLocations = (locations || location).filter(
-                    (l) => l !== code
-                  );
+                  const newLocations = input.filter((l) => l !== code);
 
-                  // update the locations
-                  console.log("newLocations", newLocations);
+                  // update the departments
                   if (newLocations.length === 0) {
                     params.delete("l");
-                    dispatch(setOffresSearch({ departments: [] }));
+                    dispatch(
+                      setOffresSearch({ ...locations.offres, departments: [] })
+                    );
                   } else {
                     params.set("l", newLocations.join(","));
-                    dispatch(setOffresSearch({ departments: newLocations }));
+                    dispatch(
+                      setOffresSearch({
+                        ...locations.offres,
+                        departments: newLocations,
+                      })
+                    );
                   }
 
                   // update the skip
                   const otherPrm = "all-skip";
                   params.delete(otherPrm);
-                  dispatch(setOffresSearch({ [otherPrm]: 0 }));
+                  dispatch(
+                    setOffresSearch({ ...locations.offres, [otherPrm]: 0 })
+                  );
                   const query = params.toString();
                   router.push("/offres" + "?" + query);
                 }}
