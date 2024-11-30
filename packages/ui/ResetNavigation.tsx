@@ -1,7 +1,9 @@
 "use client";
+import { resetOffresSearch } from "@youmeet/global-config/features/search";
 import { SuggestedMeetsType } from "@youmeet/types/SuggestedMeetsType";
 import dynamic from "next/dynamic";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 const BoldText = dynamic(() => import("./TextChild"));
 
@@ -13,6 +15,7 @@ export default function CardNavigation({
   const search = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
 
   return (
     <form
@@ -27,6 +30,7 @@ export default function CardNavigation({
         }
         const query = params.toString();
         router.push(pathname + "?" + query, { scroll: false });
+        dispatch(resetOffresSearch());
       }}
       className="h-fit w-full flex-col flex-center gap-[12px]"
     >
