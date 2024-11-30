@@ -1,9 +1,13 @@
 "use client";
 import { purple } from "@mui/material/colors";
-import { setOffresSearch } from "@youmeet/global-config/features/search";
+import {
+  SearchState,
+  setOffresSearch,
+} from "@youmeet/global-config/features/search";
+import { RootState } from "@youmeet/global-config/store";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 
 const GenericField = dynamic(
   () => import("../formComponents/fields/GenericFieldChild")
@@ -13,6 +17,9 @@ export default function SearchFilter() {
   const search = useSearchParams();
   const router = useRouter();
   const dispatch = useDispatch();
+  const location = useSelector(
+    (state: RootState) => state.search as SearchState
+  );
 
   return (
     <form
@@ -21,10 +28,10 @@ export default function SearchFilter() {
         const params = new URLSearchParams(search.toString());
         if (!value) {
           params.delete("s");
-          dispatch(setOffresSearch({ search: "" }));
+          dispatch(setOffresSearch({ ...location.offres, search: "" }));
         } else {
           params.set("s", value);
-          dispatch(setOffresSearch({ search: value }));
+          dispatch(setOffresSearch({ ...location.offres, search: value }));
         }
         const otherPrm = "all-skip";
         params.delete(otherPrm);
