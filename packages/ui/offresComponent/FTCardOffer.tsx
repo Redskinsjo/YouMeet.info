@@ -47,6 +47,7 @@ export default function FTCardOffer({
     el?.lieuTravail?.libelle ||
     el?.lieuTravail?.commune ||
     el?.lieuTravail?.codePostal;
+
   const contractType = el?.contractType || el?.typeContratLibelle;
   const slug = `/offres/${el?.slug}`;
   if (slug) router.prefetch(slug);

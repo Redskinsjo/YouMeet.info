@@ -1018,6 +1018,8 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
     location 
     lieuTravail {
       libelle
+      codePostal
+      commune
     }
     company {
       id
