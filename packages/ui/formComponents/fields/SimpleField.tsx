@@ -85,6 +85,7 @@ export default function SimpleField({
       phonecode: (e: any) => {
         if (clearErrors) clearErrors();
         if (setValue) setValue(name, e.target.value);
+        else setFieldVal(e.target.value);
       },
       name: async (e: any) => {
         if (clearErrors) clearErrors();

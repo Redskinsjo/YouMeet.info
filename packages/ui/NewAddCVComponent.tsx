@@ -51,7 +51,7 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
       >
         <label
           htmlFor="cv"
-          className="h-full cursor-pointer absolute left-0 dark:text-deepPurple200 text-deepPurple700 font-bold flex-center"
+          className="h-full cursor-pointer absolute left-0 dark:text-deepPurple200 text-deepPurple700 font-bold flex-center whitespace-nowrap"
         >
           {t("add-cv")}
         </label>

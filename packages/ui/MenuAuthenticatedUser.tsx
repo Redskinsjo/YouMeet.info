@@ -121,7 +121,6 @@ export default function MenuAuthenticatedUser() {
           <MenuItem
             component={LogoutBtn}
             sx={{
-              textTransform: "none",
               color: grey[700],
               "&:hover": {
                 backgroundColor: deepPurple[50],

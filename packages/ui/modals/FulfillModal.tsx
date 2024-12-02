@@ -24,7 +24,7 @@ export default function FulfillModal({ type }: CustomModalProps) {
     modal.user && (
       <ModalWrapper>
         <>
-          <div className="w-full h-full flex-col flex-center gap-[12px]">
+          <div className="w-full h-full flex-col flex-center gap-[12px] max-w-[600px]">
             <h3 className="dark:text-white font-semibold">{t("welcome")}</h3>
             <BoldText text={t("happy-to-see-you")} align="center" />
             <BoldText text={t("welcome-incentive")} />

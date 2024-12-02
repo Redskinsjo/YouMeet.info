@@ -116,7 +116,7 @@ type PartenairFT {
 
 model profileviews {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  user      betausers? @relation(references: [id], fields: [userId])
+  user      betausers? @relation(references: [id], fields: [userId], onDelete: Cascade)
   userId    String?    @db.ObjectId
   count     Int        @default(1)
   createdAt DateTime?
@@ -339,7 +339,7 @@ model meets {
 model customisations {
   id        String       @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
-  origin    betausers?   @relation(references: [id], fields: [originId])
+  origin    betausers?   @relation(references: [id], fields: [originId], onDelete: Cascade)
   originId  String?      @db.ObjectId
   queues    betaqueues[]
   questions questions[]
@@ -562,7 +562,7 @@ model unlockedUsers {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
   origin    betausers? @relation("origin", references: [id], fields: [originId])
   originId  String?    @db.ObjectId
-  target    betausers? @relation("target", references: [id], fields: [targetId])
+  target    betausers? @relation("target", references: [id], fields: [targetId], onDelete: Cascade)
   targetId  String?    @db.ObjectId
   createdAt DateTime?
   updatedAt DateTime?
@@ -773,7 +773,7 @@ model favorites {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
   origin        betausers? @relation("origin", fields: [originId], references: [id])
   originId      String?    @db.ObjectId
-  target        betausers? @relation("target", fields: [targetId], references: [id])
+  target        betausers? @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId      String?    @db.ObjectId
   offerTarget   offers?    @relation(fields: [offerTargetId], references: [id])
   offerTargetId String?    @db.ObjectId
@@ -789,7 +789,7 @@ model verificationRequest {
   judiciaryProofs    files[]
   origin             betausers? @relation("origin", fields: [originId], references: [id])
   originId           String?    @db.ObjectId
-  target             betausers? @relation("target", fields: [targetId], references: [id])
+  target             betausers? @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId           String?    @db.ObjectId
   createdAt          DateTime?
   updatedAt          DateTime?
@@ -802,7 +802,7 @@ model interviewOffer {
   comment   String?
   origin    betausers? @relation("origin", fields: [originId], references: [id])
   originId  String?    @db.ObjectId
-  target    betausers? @relation("target", fields: [targetId], references: [id])
+  target    betausers? @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId  String?    @db.ObjectId
   createdAt DateTime?
   updatedAt DateTime?
@@ -814,7 +814,7 @@ model references {
   content      String?
   concerned    String?
   valid        Boolean?
-  user         betausers?       @relation(fields: [userId], references: [id])
+  user         betausers?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?          @db.ObjectId
   experience   betaexperiences? @relation(fields: [experienceId], references: [id])
   experienceId String?          @db.ObjectId
@@ -830,7 +830,7 @@ model referenceContacts {
   position     String?
   experience   betaexperiences? @relation(fields: [experienceId], references: [id])
   experienceId String?          @db.ObjectId
-  user         betausers?       @relation(fields: [userId], references: [id])
+  user         betausers?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?          @db.ObjectId
   createdAt    DateTime?
   updatedAt    DateTime?
@@ -850,7 +850,7 @@ model notifications {
   status      String           @default("pending")
   origin      betausers?       @relation("origin", fields: [originId], references: [id])
   originId    String?          @db.ObjectId
-  target      betausers?       @relation("target", fields: [targetId], references: [id])
+  target      betausers?       @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId    String?          @db.ObjectId
   createdAt   DateTime?
   updatedAt   DateTime?

@@ -1,5 +1,4 @@
 "use client";
-import { useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   CustomModalProps,
@@ -17,7 +16,6 @@ export default function LoginModalContent({ type }: CustomModalProps) {
   >();
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [isForgotten, setIsForgotten] = useState(false);
-  const md = useMediaQuery("(max-width:900px)");
 
   useEffect(() => {
     if (isForgotten) setIsSubscribing(false);
@@ -25,7 +23,10 @@ export default function LoginModalContent({ type }: CustomModalProps) {
   }, [isSubscribing, isForgotten]);
 
   return (
-    <div className="modal-content">
+    <div
+      className="modal-content bg-grey200"
+      onClick={(e) => e.stopPropagation()}
+    >
       {isSubscribing || subscribingData ? (
         <WhenSubscribing type={type} setIsSubscribing={setIsSubscribing} />
       ) : isForgotten ? (

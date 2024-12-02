@@ -1,11 +1,16 @@
 import { Button } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
+import { setError } from "@youmeet/global-config/features/global";
 import { resetModal } from "@youmeet/global-config/features/modal";
+import { usePathname, useRouter } from "next/navigation";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 
 export default function ModalClose() {
   const dispatch = useDispatch();
+  const pathname = usePathname();
+  const router = useRouter();
+
   return (
     <div className="absolute top-[12px] left-[12px] flex-center">
       <Button
@@ -16,7 +21,12 @@ export default function ModalClose() {
           height: "24px",
         }}
         onClick={() => {
-          dispatch(resetModal(null));
+          if (pathname === "/se-connecter") {
+            router.back();
+          } else {
+            dispatch(resetModal(null));
+            dispatch(setError(null));
+          }
         }}
         onFocus={(e) => {
           e.target.style.backgroundColor = blueGrey[200];

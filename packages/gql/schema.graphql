@@ -1579,6 +1579,7 @@ type Mutation {
   submitVideo(data: VideoInput): Video
   deleteCompetency(id: ID): Competency
   deleteUser(userId: ID): BetaUser
+  deleteAccount(userId: ID): BetaUser
   deleteLead(leadId: ID): Lead
   createLead(data: LeadInput): Lead
   deleteQueue(queueId: ID): BetaQueue

@@ -50,13 +50,18 @@ export default function DashboardTabs({ profil }: { profil: BetaUser }) {
         {...a11yProps(0)}
       />
       <Tab className="dark:text-white" label={t("job")} {...a11yProps(1)} />
-      <Tab className="dark:text-white" label={t("video")} {...a11yProps(1)} />
-      {/* <Tab className="dark:text-white" label={t("notice")} {...a11yProps(2)} />
+      <Tab className="dark:text-white" label={t("video")} {...a11yProps(2)} />
+      <Tab
+        className="dark:text-white"
+        label={t("settings")}
+        {...a11yProps(3)}
+      />
+      {/* <Tab className="dark:text-white" label={t("notice")} {...a11yProps(4)} />
       {!!profil.affiliations && profil.affiliations.length > 0 && (
         <Tab
           className="dark:text-white"
           label={t("affiliates")}
-          {...a11yProps(3)}
+          {...a11yProps(5)}
         />
       )} */}
     </Tabs>

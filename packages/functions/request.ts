@@ -78,6 +78,7 @@ import {
   DeleteOneProfileSharingMutation,
   QuerySharingsArgs,
   MutationCreateRemarkArgs,
+  MutationDeleteUserArgs,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -105,6 +106,7 @@ import {
   createSharingRefusalMutation,
   createThreadMutation,
   createUserMutation,
+  deleteAccountMutation,
   deleteAffiliationMutation,
   deleteCompanyMutation,
   deleteInterviewOfferMutation,
@@ -245,6 +247,7 @@ const req = async <T>(
       body: JSON.stringify(params),
       signal: controller?.signal,
     });
+
     const json = await response.json();
     if (response.ok) {
       clearTimeout(timeoutId);
@@ -1819,6 +1822,24 @@ export const getSimpleUser = async <T>(
     "user",
     multiple,
     getSimpleUserQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+export const deleteAccount = async <T>(
+  variables: MutationDeleteUserArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "deleteAccount",
+    multiple,
+    deleteAccountMutation,
     variables,
     revalidate,
     handling

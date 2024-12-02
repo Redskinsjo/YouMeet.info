@@ -48,7 +48,7 @@ export default function LoginComponentTopPart() {
             tabIndex={-1}
           >
             <Button
-              className="subItem w-full flex-center gap-[12px] rounded-full text-black bg-white border-[1px] border-black"
+              className="subItem w-full flex-center gap-[12px] rounded-full text-black bg-white border-[1px] border-black normal-case border-[0.5px] border-solid border-grey300 hover:bg-grey100"
               style={{ height: 42.5, fontSize: "14px" }}
               tabIndex={-1}
               type="submit"

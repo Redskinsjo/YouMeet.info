@@ -3444,23 +3444,62 @@ const resolvers: Resolvers = {
       if (candidate) return candidate;
       return null;
     },
-
-    deleteUser: async (
+    deleteAccount: async (
       _: unknown,
       args: MutationDeleteUserArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-      const user = await prisma.betausers.findFirst({
+      const user = await prisma.betausers.findUnique({
         where: { id: args.userId as string },
       });
       if (user) {
-        await prisma.betausers.delete({
-          where: { id: args.userId as string },
+        const result = await prisma.$transaction(async (prisma) => {
+          const deleted = await prisma.betausers.delete({
+            where: { id: args.userId as string },
+          });
+          if (deleted) {
+            const data = deleted;
+            try {
+              // const res = await apiInstance.sendTransacEmail({
+              //   to: [
+              //     {
+              //       email: data?.email as string,
+              //       name: data?.fullname as string,
+              //     },
+              //   ],
+              //   params: {
+              //     name: data?.fullname,
+              //   },
+              //   templateId: 38 as number,
+              // });
+              // console.log(res, "res in resolver");
+              // if (res.response.statusCode === 201 || deleted) {
+              //   return deleted;
+              // } else {
+              //   throw new BackendError(
+              //     BACKEND_ERRORS.PROCESSING,
+              //     BACKEND_MESSAGES.PROCESSING
+              //   );
+              // }
+              if (deleted) {
+                return deleted;
+              } else {
+                throw new BackendError(
+                  BACKEND_ERRORS.PROCESSING,
+                  BACKEND_MESSAGES.PROCESSING
+                );
+              }
+            } catch (err: any) {
+              return null;
+            }
+          }
+          return null;
         });
+        if (result) return result;
       }
-      return user;
+      return null;
     },
   },
   BetaCompany: {

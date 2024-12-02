@@ -1013,6 +1013,7 @@ export type Mutation = {
   createThread?: Maybe<BetaWhatsappThread>;
   createUnlockedUser?: Maybe<UnlockedUser>;
   createUser?: Maybe<BetaUser>;
+  deleteAccount?: Maybe<BetaUser>;
   deleteAffiliation?: Maybe<Affiliation>;
   deleteCompany?: Maybe<BetaCompany>;
   deleteCompetency?: Maybe<Competency>;
@@ -1227,6 +1228,11 @@ export type MutationCreateUnlockedUserArgs = {
 
 export type MutationCreateUserArgs = {
   data?: InputMaybe<BetaUserInput>;
+};
+
+
+export type MutationDeleteAccountArgs = {
+  userId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -4067,6 +4073,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createThread?: Resolver<Maybe<ResolversTypes['BetaWhatsappThread']>, ParentType, ContextType, Partial<MutationCreateThreadArgs>>;
   createUnlockedUser?: Resolver<Maybe<ResolversTypes['UnlockedUser']>, ParentType, ContextType, Partial<MutationCreateUnlockedUserArgs>>;
   createUser?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType, Partial<MutationCreateUserArgs>>;
+  deleteAccount?: Resolver<Maybe<ResolversTypes['BetaUser']>, ParentType, ContextType, Partial<MutationDeleteAccountArgs>>;
   deleteAffiliation?: Resolver<Maybe<ResolversTypes['Affiliation']>, ParentType, ContextType, Partial<MutationDeleteAffiliationArgs>>;
   deleteCompany?: Resolver<Maybe<ResolversTypes['BetaCompany']>, ParentType, ContextType, Partial<MutationDeleteCompanyArgs>>;
   deleteCompetency?: Resolver<Maybe<ResolversTypes['Competency']>, ParentType, ContextType, Partial<MutationDeleteCompetencyArgs>>;

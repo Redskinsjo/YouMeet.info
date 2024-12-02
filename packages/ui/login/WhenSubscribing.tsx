@@ -1,5 +1,5 @@
 "use client";
-import { useMediaQuery } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import { useTranslation } from "react-i18next";
@@ -67,7 +67,11 @@ export default function WhenSubscribing({
       setStatus("La connexion a été établie");
       router.push(`/${(state as withData<string>).data}`);
     }
-  }, [(state as withData<string>).data, (state as PayloadBackendError).error]);
+  }, [
+    state,
+    (state as withData<string>).data,
+    (state as PayloadBackendError).error,
+  ]);
 
   return (
     <form
@@ -75,13 +79,15 @@ export default function WhenSubscribing({
       action={handle}
       name="subscribing"
       onClick={(e) => e.stopPropagation()}
+      className="flex flex-col gap-[12px] xs:gap-[6px] sm:gap-[6px] w-full"
     >
-      <Logo png />
+      <div className="flex-center flex-col gap-[12px]">
+        <Logo png />
 
-      <h1 className="m-0 p-0 titles text-center dark:text-white">
-        {t("signup")}
-      </h1>
-
+        <h1 className="m-0 p-0 titles text-center dark:text-white">
+          {t("signup")}
+        </h1>
+      </div>
       <div className="gap-[12px] xs:gap-[6px] sm:gap-[6px] md:gap-[6px] grid grid-cols-2 w-full">
         <SimpleField
           required
@@ -134,7 +140,9 @@ export default function WhenSubscribing({
 
       <ReadCGU />
       <div className="w-full flex-center gap-[12px] flex-col">
-        <SubmitBtn text={t("signin")} />
+        <div onClick={() => setStatus("")}>
+          <SubmitBtn text={t("signup")} />
+        </div>
         <div
           className={
             xs || sm
@@ -147,9 +155,7 @@ export default function WhenSubscribing({
           }}
         >
           <span className="legend text-center">{t("already-signed")}</span>
-          <span className="group-hover:underline legend text-center">
-            {t("login")}
-          </span>
+          <Button className="buttonMui">{t("login")}</Button>
         </div>
 
         <div className={xs || sm ? "flex-[2]" : "flex-1"}></div>

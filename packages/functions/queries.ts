@@ -166,7 +166,8 @@ export const getRawUserQuery = `query GetUser($uniqueName: String, $userId: ID, 
     company {
       id
     }
-  }`;
+  }
+}`;
 export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID, $fullname: String) {
     user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId, fullname: $fullname) {
         __typename
@@ -1566,6 +1567,14 @@ export const getSimpleUserQuery = `query GetUser($uniqueName: String, $userId: I
     company {
       id
     }
+  }
+}`;
+export const deleteAccountMutation = `mutation DeleteAccount($userId: ID) {
+  deleteAccount(userId: $userId) {
+    __typename
+    id
+    email
+    fullname
   }
 }`;
 

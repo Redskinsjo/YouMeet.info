@@ -60,7 +60,11 @@ export default function WhenLogin({
 
   useEffect(() => {
     if (state && isPayloadError(state)) setStatus(state.message);
-  }, [(state as PayloadBackendError).error, (state as withData<string>).data]);
+  }, [
+    state,
+    (state as PayloadBackendError).error,
+    (state as withData<string>).data,
+  ]);
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
@@ -115,9 +119,7 @@ export default function WhenLogin({
                   if (setIsSubscribing) setIsSubscribing(true);
                 }}
               >
-                <Button className="group-hover:underline legend dark:darkBg dark:text-white bg-white text-black">
-                  {t("signup")}
-                </Button>
+                <Button className="buttonMui">{t("signup")}</Button>
               </div>
             )}
           </div>

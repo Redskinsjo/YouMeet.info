@@ -42,7 +42,11 @@ export default function WhenForgotten({
       setStatus(state.message || "Une erreur est survenue");
     else if ((state as withData<boolean>).data)
       setStatus(t("forgotten-password-email-sent"));
-  }, [(state as PayloadBackendError).error, (state as withData<boolean>).data]);
+  }, [
+    state,
+    (state as PayloadBackendError).error,
+    (state as withData<boolean>).data,
+  ]);
 
   return (
     <form

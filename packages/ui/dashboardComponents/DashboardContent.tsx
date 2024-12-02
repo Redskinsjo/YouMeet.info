@@ -11,6 +11,7 @@ const NewTargetContractTypeComponent = dynamic(
   () => import("./NewTargetContractTypeChild")
 );
 const NewVideoComponent = dynamic(() => import("./NewVideoChild"));
+const SettingsComponent = dynamic(() => import("./SettingsChild"));
 // const UserNotices = dynamic(() => import("./UserNoticesChild"));
 
 export default function DashboardContent({ profil }: { profil: BetaUser }) {
@@ -38,6 +39,11 @@ export default function DashboardContent({ profil }: { profil: BetaUser }) {
       <CustomTabPanel index={2}>
         <div className="indent-4 xs:indent-0 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify">
           <NewVideoComponent profil={profil} />
+        </div>
+      </CustomTabPanel>
+      <CustomTabPanel index={3}>
+        <div className="indent-4 xs:indent-0 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify">
+          <SettingsComponent />
         </div>
       </CustomTabPanel>
       {/* <CustomTabPanel index={3}>

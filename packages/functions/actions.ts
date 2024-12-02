@@ -73,6 +73,7 @@ import {
   updateVideo,
   searchSomeone,
   createRemark,
+  deleteAccount as deleteAccountReq,
 } from "./request";
 import {
   FormHandledData,
@@ -96,6 +97,7 @@ import { setName } from "@youmeet/utils/basics/setName";
 import { handleActionError } from "@youmeet/utils/basics/handleActionError";
 import { redirect } from "next/navigation";
 import { getUserIdFromPublicId } from "@youmeet/utils/basics/getPublicId";
+import { redir } from "@youmeet/utils/checkout/functions";
 
 ///// backendisées avec gestion d'erreur
 
@@ -735,8 +737,8 @@ export const onLogin = async (
             }
           } else {
             throw new BackendError(
-              BACKEND_ERRORS.PROCESSING,
-              BACKEND_MESSAGES.PROCESSING
+              BACKEND_ERRORS.WRONG_CREDENTIALS,
+              BACKEND_MESSAGES.WRONG_CREDENTIALS
             );
           }
         } else {
@@ -2075,4 +2077,50 @@ export const searchSomeoneRequest = async (formData: FormData) => {
     return await handleActionError(err);
   }
   redirect(`/on/${result.uniqueName}`);
+};
+
+export const onDeleteAccount = async (
+  initial: withData<BetaUser | null> | PayloadBackendError,
+  formData: FormData
+): Promise<withData<BetaUser | null> | PayloadBackendError> => {
+  const schema = z.object({
+    userId: z.string().min(1),
+  });
+
+  const obj = Object.fromEntries(
+    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
+      entry[0],
+      entry[1].toString().trim(),
+    ])
+  );
+
+  const toBeParsed = obj;
+
+  let result: BetaUser = {};
+  try {
+    const valid = schema.parse(toBeParsed);
+    if (valid.userId) {
+      result = (await deleteAccountReq<BetaUser>({
+        userId: valid.userId,
+      })) as BetaUser;
+
+      if (result && isPayloadError(result)) {
+        throw new BackendError(result.type, result.message);
+      } else if (!result) {
+        throw new BackendError(
+          BACKEND_ERRORS.UNKNOWN,
+          BACKEND_MESSAGES.UNKNOWN
+        );
+      }
+    } else {
+      throw new BackendError(
+        BACKEND_ERRORS.MISSING_ARGUMENT,
+        BACKEND_MESSAGES.MISSING_ARGUMENT
+      );
+    }
+  } catch (err: any) {
+    return await handleActionError(err);
+  }
+
+  return { data: result };
 };
