@@ -83,7 +83,7 @@ export default function FTCardOffer({
       ? "w-[300px] xs:w-[49%] sm:w-[49%]"
       : "w-[300px] xs:w-full sm:w-full";
 
-  const elClassName = `fadeIn bg-white p-[12px] box-border flex-bet flex-col gap-[24px] xs:gap-[12px] sm:gap-[12px] h-[300px] shadow-xl border-[0.5px] border-grey300 border-solid rounded-xl xs:overflow-hidden xs:overflow-y-scroll sm:overflow-hidden sm:overflow-y-scroll ${width}`;
+  const elClassName = `fadeIn bg-white p-[12px] box-border flex-bet flex-col gap-[12px] xs:gap-[8px] sm:gap-[8px] h-[300px] shadow-xl border-[0.5px] border-grey300 border-solid rounded-xl xs:overflow-hidden xs:overflow-y-scroll sm:overflow-hidden sm:overflow-y-scroll ${width}`;
 
   return (
     <div className={elClassName}>
@@ -146,7 +146,7 @@ export default function FTCardOffer({
       </div>
       <div className="flex-bet w-full xs:flex-col-reverse sm:flex-col-reverse">
         <SeeMore el={el} />
-        <div className="flex-center">
+        <div className="flex items-center justify-end w-full">
           {logo && <Image src={logo} alt="logo" width={40} height={40} />}
           <span className="text-[12px] xs:text-[13px] sm:text-[13px] text-center lightBg p-[1px]">
             {companyName}

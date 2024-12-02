@@ -2,7 +2,7 @@
 import { UserState, addVideo } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
 import { BetaUser, Video } from "@youmeet/gql/generated";
-import { Dispatch, SetStateAction, useMemo, useRef } from "react";
+import { Dispatch, SetStateAction, useCallback, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -132,9 +132,11 @@ export default function NewAddVideoComponent({
           }}
           className="no-underline"
         >
-          <div className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold">
-            {t("record-video")}
-          </div>
+          <Button className="buttonMui">
+            <div className="h-full flex-center cursor-pointer font-bold">
+              {t("record-video")}
+            </div>
+          </Button>
         </div>
         <div className="w-[1px] bg-grey300" style={{ height: "18px" }} />
         <form
@@ -145,13 +147,15 @@ export default function NewAddVideoComponent({
           })}
           className="flex-center rounded-xl cursor-pointer relative"
         >
-          <label
-            htmlFor={`video_${user.videos.length + 1}`}
-            className="h-full cursor-pointer dark:text-deepPurple200 text-deepPurple700 font-bold"
-          >
-            {t("add-video")}
-          </label>
-          {inputElement}
+          <Button className="buttonMui">
+            <label
+              htmlFor={`video_${user.videos.length + 1}`}
+              className="h-full flex-center cursor-pointer font-bold"
+            >
+              {t("add-video")}
+            </label>
+            {inputElement}
+          </Button>
           <Button
             hidden
             type="submit"

@@ -606,7 +606,7 @@ p {
     background: linear-gradient(90deg, white, #eceff1, white);
   }
   .mediumBg {
-    background: linear-gradient(270deg, #e0e0e0, #e0e0e0, #9e9e9e);
+    background: linear-gradient(270deg, #ffffff, #e0e0e0, #9e9e9e);
   }
 
   .break-any {
@@ -767,6 +767,9 @@ p {
 }
 
 @layer components {
+  .buttonMui {
+    @apply rounded-[8px] text-deepPurple900 hover:text-white bg-deepPurple50 hover:bg-deepPurple300 h-[30px] flex-center text-[16px] normal-case;
+  }
   .offerView {
     @apply h-[calc(100vh-39px)];
   }

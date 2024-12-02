@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import CompetencyLink from "../CompetencyLink";
 import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
@@ -15,6 +16,7 @@ import { useSelector } from "react-redux";
 import { GlobalState } from "@youmeet/global-config/features/global";
 import { RootState } from "@youmeet/global-config/store";
 import VideoAddingContent from "../modals/modalContents/VideoAddingContent";
+import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 
 const DoubleDetails = dynamic(() => import("./DoubleDetails"));
 const BoldText = dynamic(() => import("../TextChild"));
@@ -36,6 +38,25 @@ export default function OfferContent({ offre }: { offre: Offer }) {
 
     setValues(values);
   }, [offre, language]);
+
+  const logo = useMemo(() => {
+    let result;
+    if (values?.logo) {
+      const str =
+        typeof values.logo === "string"
+          ? values.logo
+          : setFileUrl(values?.logo);
+      let res;
+      if (str) {
+        res = fetch(str, { mode: "no-cors" })
+          .then((res) => {
+            if (res && res.ok) result = str;
+          })
+          .catch((e) => e);
+      }
+    }
+    return result;
+  }, [values?.logo]);
 
   useEffect(() => {
     getValues();
@@ -64,9 +85,9 @@ export default function OfferContent({ offre }: { offre: Offer }) {
             </div>
           )}
 
-          {values.logo && values.companyName !== "YouMeet" && (
+          {logo && values.companyName !== "YouMeet" && (
             <Image
-              src={values.logo}
+              src={logo}
               width={60}
               height={60}
               alt="logo de l'entreprise qui recrute et qui diffuse cette opportunité de travail"

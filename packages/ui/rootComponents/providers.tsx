@@ -9,7 +9,7 @@ import { ReactElement } from "react";
 import { store } from "@youmeet/global-config/store";
 import ContentProvider from "@youmeet/ui/rootComponents/contentProvider";
 import { outfit } from "@youmeet/functions/fonts";
-import { deepPurple, grey, purple } from "@mui/material/colors";
+import { deepPurple, purple } from "@mui/material/colors";
 
 const theme = createTheme({
   typography: outfit.style,
@@ -19,12 +19,6 @@ const theme = createTheme({
         root: {
           zIndex: 11000,
         },
-      },
-    },
-
-    MuiButtonBase: {
-      defaultProps: {
-        className: "text-purple500",
       },
     },
     MuiFormLabel: {
@@ -63,22 +57,6 @@ const theme = createTheme({
           },
           ".Mui-focused input": {
             fontWeight: "bold !important",
-          },
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          fontWeight: 600,
-          textTransform: "capitalize",
-          borderRadius: "8px",
-          border: `0.5px solid ${grey[500]}`,
-          backgroundColor: grey[200],
-          ":hover": {
-            backgroundColor: "white",
-            color: "black",
-            animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
           },
         },
       },

@@ -105,11 +105,11 @@ export default function CustomModal({
       }}
       onClick={(e) => {
         e.stopPropagation();
-        if (type === "login" || type === "record") router.back();
+
+        if (type === "login") router.back();
         if (setDisplayModal) {
           setDisplayModal(null);
         } else {
-          router.back();
           dispatch(resetModal(null));
         }
       }}

@@ -5,7 +5,7 @@ import { logoUrl, uri } from "@youmeet/functions/imports";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="p-[6px]">
+    <div>
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />

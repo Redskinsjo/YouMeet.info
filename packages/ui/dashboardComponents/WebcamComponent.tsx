@@ -75,7 +75,7 @@ export default function WebcamComponent({
       document.body.appendChild(a);
       a.setAttribute("style", "display:none");
       a.setAttribute("href", url);
-      a.setAttribute("download", "video-capture-youmeet.webm");
+      a.setAttribute("download", "video-youmeet.webm");
       a.click();
       window.URL.revokeObjectURL(url);
       setRecordedChunks([]);
@@ -85,7 +85,7 @@ export default function WebcamComponent({
   const handleAddVideo = useCallback(async () => {
     dispatch(setModal({ display: "upload" }) as UnknownAction);
     if (recordedChunks.length) {
-      const file = new File(recordedChunks, "video-capture-youmeet", {
+      const file = new File(recordedChunks, "video-youmeet", {
         type: "video-webm",
       });
 
