@@ -949,7 +949,7 @@ input:-webkit-autofill {
 .video-controls-container .controls {
   display: flex;
   gap: 0.5rem;
-  padding: 0.25rem;
+  padding: 0.22rem;
   align-items: center;
 }
 
@@ -1142,7 +1142,7 @@ input:-webkit-autofill {
 
 .video-container.scrubbing .thumb-indicator,
 .timeline-container:hover .thumb-indicator {
-  --scale: 1;
+  --scale: 0.7;
 }
 
 .video-container.scrubbing .timeline,

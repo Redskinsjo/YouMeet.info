@@ -547,7 +547,7 @@ export default function CandidateVideo({
                     }
                   }}
                 >
-                  <div className="timeline opacity-[0.5] h-[3px] bg-purple500 group-hover:h-[12px] group-hover:opacity-[0.3] w-full relative">
+                  <div className="timeline opacity-[0.5] h-[3px] bg-purple500 group-hover:h-[6px] group-hover:opacity-[0.3] w-full relative">
                     {/* <Image
                   src={video.secure_url as string}
                   width={120}

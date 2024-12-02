@@ -171,7 +171,7 @@ export default function AddVideo({
           </div>
           <div className="w-full flex justify-end">
             <Button
-              className="p-[3px]"
+              className="p-[3px] buttonMui"
               onClick={() => setDisplayAdvices(false)}
             >
               {t("back")}

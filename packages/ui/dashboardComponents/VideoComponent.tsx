@@ -198,7 +198,7 @@ export default function VideoComponent({
                       : `CV`}
                   </h3>
                   {!!video.principal && (
-                    <div className="h-full dark:text-green200 text-green600 font-bold">
+                    <div className="h-full flex-center dark:text-green200 text-green600 font-bold">
                       {t("principalVideo")}
                     </div>
                   )}

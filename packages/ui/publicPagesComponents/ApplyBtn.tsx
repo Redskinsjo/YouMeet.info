@@ -27,8 +27,6 @@ export default function ApplyBtn({ offre }: { offre?: Offer }) {
       className={
         alreadyApplied
           ? "h-fit min-h-[49px] xs:min-h-[33px] sm:min-h-[33px] w-fit bg-grey500 text-grey700 dark:darkBg dark:text-white"
-          : user.videos.length > 0 && user.cvFile
-          ? "buttonMui lightBg text-black"
           : "buttonMui"
       }
       disabled={alreadyApplied}

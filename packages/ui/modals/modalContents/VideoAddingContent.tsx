@@ -187,6 +187,16 @@ export default function VideoAddingContent({
               />
             </div>
           )}
+          {!!checkAvailableVideos && (
+            <div className="w-full flex justify-end">
+              <Button
+                className="p-[3px] buttonMui"
+                onClick={() => setCheckAvailableVideos(false)}
+              >
+                {t("back")}
+              </Button>
+            </div>
+          )}
           <form
             className="w-full flex flex-col gap-[24px] pb-[36px]"
             action={customOnApplying.bind(null, {
