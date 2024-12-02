@@ -12,6 +12,7 @@ import { outfit } from "@youmeet/functions/fonts";
 import { setName } from "@youmeet/utils/basics/setName";
 import { onLogout } from "@youmeet/functions/actions";
 import LogoutBtn from "./LogoutBtn";
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 
 export default function MenuAuthenticatedUser() {
   const user = useSelector(
@@ -108,7 +109,7 @@ export default function MenuAuthenticatedUser() {
           />
         )}
         {process.env.APP === "candidate" &&
-          user.email.toLowerCase() === "jonathan.carnos@gmail.com" && (
+          user.email.toLowerCase() === EMAIL_PERSO && (
             <MenuItemRouter
               route="/backoffice"
               handleClose={handleClose}

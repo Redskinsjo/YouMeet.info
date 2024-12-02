@@ -1,3 +1,4 @@
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 import InterviewAnswersChild from "./interviewAnswersChild";
 import { getLeadFormResponses } from "@youmeet/functions/request";
 import { FormResponse } from "@youmeet/gql/generated";
@@ -6,10 +7,7 @@ import { notFound } from "next/navigation";
 
 export default async function BackofficeRemarks() {
   const verified = await verifyTokenServer();
-  if (
-    verified &&
-    verified.email.toLowerCase() === "jonathan.carnos@gmail.com"
-  ) {
+  if (verified && verified.email.toLowerCase() === EMAIL_PERSO) {
     const formResponses = (await getLeadFormResponses<
       FormResponse[]
     >()) as FormResponse[];

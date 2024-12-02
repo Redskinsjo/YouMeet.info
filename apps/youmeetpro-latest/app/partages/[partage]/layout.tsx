@@ -1,3 +1,4 @@
+import { uri } from "@youmeet/functions/imports";
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactElement } from "react";
@@ -14,10 +15,7 @@ export default async function Layout({
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link
-        rel="canonical"
-        href={`https://pro.youmeet.info/${params.meetId}`}
-      />
+      <link rel="canonical" href={`${uri}/${params.meetId}`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -35,21 +33,21 @@ export default async function Layout({
             name: "Espace Entreprise - Consulter un profil partagé",
             description:
               "Découvrez un nouveau profil partagé avec votre entreprise.",
-            url: `https://pro.youmeet.info/${params.meetId}`,
+            url: `${uri}/${params.meetId}`,
             potentialAction: [
               {
                 "@type": "ViewAction",
                 name: "Consulter un Profil Partagé avec votre Entreprise",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: `https://pro.youmeet.info/${params.meetId}`,
+                  urlTemplate: `${uri}/${params.meetId}`,
                 },
               },
             ],
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://pro.youmeet.info",
+              url: uri,
             },
           }),
         }}

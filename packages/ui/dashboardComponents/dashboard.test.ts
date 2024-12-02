@@ -8,6 +8,7 @@ import { BetaCandidate, BetaUser } from "@youmeet/gql/generated";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { DocumentType } from "@typegoose/typegoose";
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 
 let moi: BetaUser | undefined;
 let job: DocumentType<JobSchema> | undefined;
@@ -15,7 +16,7 @@ beforeAll(async () => {
   moi =
     ((await getUser<BetaUser>(
       {
-        email: "jonathan.carnos@gmail.com",
+        email: EMAIL_PERSO,
       },
       0
     )) as BetaUser) || undefined;

@@ -7,6 +7,7 @@ import { BetaUser } from "@youmeet/gql/generated";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import MyFavoritesChild from "./myFavoritesChild";
+import { NAME } from "@youmeet/functions/imports";
 
 export const maxDuration = 60;
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   description: "Consulter les profils que vous avez classés comme favoris.",
   keywords: ["mes favoris", "consultation"],
   category: "Page",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function page() {

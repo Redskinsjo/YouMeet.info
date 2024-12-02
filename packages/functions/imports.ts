@@ -49,3 +49,8 @@ export const bgImageLyon =
   "https://res.cloudinary.com/de822mdsy/image/upload/v1731497551/tbqfwtxzh6l0lqbhemmo.jpg";
 export const bgImageBordeaux =
   "https://res.cloudinary.com/de822mdsy/image/upload/v1731497551/ojno0deubhpdrdguzamy.jpg";
+
+export const linkedinUrl = "https://www.linkedin.com/in/yonatankarnos";
+export const githubUrl = "https://github.com/Redskinsjo";
+export const NAME = "Jonathan Carnos";
+export const EMAIL_PERSO = "jonathan.carnos@gmail.com";

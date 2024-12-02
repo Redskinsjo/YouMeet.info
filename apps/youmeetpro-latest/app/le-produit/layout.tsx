@@ -2,7 +2,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { ReactNode } from "react";
 import { Metadata } from "next";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - La Plateforme`,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "Découvrez les fonctionnalités de notre plateforme de recrutement, facilitant la mise en relation optimale entre candidats et recruteurs. Explorez comment nous innovons pour rendre le processus de recrutement plus efficace et transparent.",
   },
   category: "Abonnements",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://pro.youmeet.info/le-produit" />
+      <link rel="canonical" href={`${uri}/le-produit`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -52,9 +52,8 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Solution Complète de Prise de Références Automatisées",
             description:
               "Optimisez vos processus de recrutement avec notre application de prise de références automatisées. Découvrez ses fonctionnalités et avantages.",
-            url: "https://pro.youmeet.info/le-produit",
-            image:
-              "https://res.cloudinary.com/de822mdsy/image/upload/v1691348066/youmeet-official/webp/logo-favicon_yvmhxq.webp",
+            url: `${uri}/le-produit`,
+            image: logoUrl,
             brand: {
               "@type": "Brand",
               name: "YouMeet",

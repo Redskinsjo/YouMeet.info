@@ -5,7 +5,13 @@ import {
 } from "@youmeet/functions/request";
 import { Metadata, ResolvingMetadata } from "next";
 import { Offer } from "@youmeet/gql/generated";
-import { logoUrl, uri } from "@youmeet/functions/imports";
+import {
+  githubUrl,
+  linkedinUrl,
+  logoUrl,
+  NAME,
+  uri,
+} from "@youmeet/functions/imports";
 import OfferChild from "@youmeet/ui/oneOfferComponents/offerChild";
 import { notFound } from "next/navigation";
 
@@ -64,14 +70,14 @@ export async function generateMetadata(
         ...(offre?.requirements?.map((re) => re?.title) as string[]),
       ],
       authors: [
-        { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+        { name: NAME, url: githubUrl },
         {
-          name: "Jonathan Carnos",
-          url: "https://www.linkedin.com/in/jonathancarnos123/",
+          name: NAME,
+          url: linkedinUrl,
         },
       ],
       category: "Profil public",
-      creator: "Jonathan Carnos",
+      creator: NAME,
     };
   }
 
@@ -89,14 +95,14 @@ export async function generateMetadata(
     },
     keywords: [title, "offre d'emploi", "candidate CV vidéo"],
     authors: [
-      { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+      { name: NAME, url: githubUrl },
       {
-        name: "Jonathan Carnos",
-        url: "https://www.linkedin.com/in/jonathancarnos123/",
+        name: NAME,
+        url: linkedinUrl,
       },
     ],
     category: "Profil public",
-    creator: "Jonathan Carnos",
+    creator: NAME,
   };
 }
 

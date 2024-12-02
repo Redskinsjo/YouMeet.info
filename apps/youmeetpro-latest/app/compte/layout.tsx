@@ -2,6 +2,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { ReactNode } from "react";
 import { Metadata } from "next";
+import { NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - Gestion de votre Compte Recruteur`,
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   ],
 
   category: "Profil public",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -25,7 +26,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://pro.youmeet.info/compte" />
+      <link rel="canonical" href={`${uri}/compte`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -43,14 +44,14 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Espace Personnel Recruteur - Plateforme de Recrutement",
             description:
               "Gérez vos informations professionnelles, la vidéo de votre entreprise, souscrivez à un abonnement sur notre plateforme de recrutement pour recruteurs. Optimisez votre expérience sur la plateforme.",
-            url: "https://pro.youmeet.info/compte",
+            url: `${uri}/compte`,
             potentialAction: [
               {
                 "@type": "SubscribeAction",
                 name: "Souscrire à un Abonnement",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/compte",
+                  urlTemplate: `${uri}/compte`,
                 },
               },
               {
@@ -58,7 +59,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Voir les Informations Professionnelles",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/compte",
+                  urlTemplate: `${uri}/compte`,
                 },
               },
               {
@@ -66,14 +67,14 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Visionner la Vidéo de l'Entreprise",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/compte",
+                  urlTemplate: `${uri}/compte`,
                 },
               },
             ],
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://pro.youmeet.info",
+              url: uri,
             },
           }),
         }}

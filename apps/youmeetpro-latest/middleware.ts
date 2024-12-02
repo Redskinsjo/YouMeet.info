@@ -6,6 +6,7 @@ import { getOneMeet, sendEmail } from "@youmeet/functions/request";
 import { Email, Meet } from "@youmeet/gql/generated";
 import { choseCookie } from "@youmeet/utils/basics/choseCookie";
 import { setName } from "@youmeet/utils/basics/setName";
+import { EMAIL_PERSO, NAME, uri } from "@youmeet/functions/imports";
 
 export async function middleware(request: NextRequest) {
   const privatePages = [
@@ -56,7 +57,7 @@ export async function middleware(request: NextRequest) {
             const proCookieVerified = await verif(proCookie?.value);
             if (
               (proCookieVerified as LoginCookiePayload).email.toLowerCase() ===
-              "jonathan.carnos@gmail.com"
+              EMAIL_PERSO
             ) {
               specialAuthorized = true;
             }
@@ -74,14 +75,14 @@ export async function middleware(request: NextRequest) {
                   (verified as LoginCookiePayload).email ===
                     meet.meetRecruiter?.email ||
                   (verified as LoginCookiePayload).email.toLowerCase() ===
-                    "jonathan.carnos@gmail.com"
+                    EMAIL_PERSO
                 ) {
                   if (!specialAuthorized) {
                     (await sendEmail({
                       data: {
-                        email: "jonathan.carnos@gmail.com",
-                        name: "Jonathan Carnos",
-                        link: `https://pro.youmeet.info/api/meet?email=jonathan.carnos@gmail.com&token${meet.token}`,
+                        email: EMAIL_PERSO,
+                        name: NAME,
+                        link: `${uri}/api/meet?email=${EMAIL_PERSO}&token${meet.token}`,
                         templateId: 33,
                         recruiterName: setName(meet.meetRecruiter),
                       },

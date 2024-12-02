@@ -6,6 +6,7 @@ import DashboardChild from "@youmeet/ui/dashboardComponents/dashboardChild";
 import { redirect } from "next/navigation";
 import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser, Reference } from "@youmeet/gql/generated";
+import { NAME } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - Gestion de votre Compte Candidat`,
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   category: "Profil public",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function Dashboard() {

@@ -28,9 +28,7 @@ export default async function Layout({
         <link rel="preconnect" href="https://www.googletagmanager.com/" />
         <link
           rel="canonical"
-          href={`https://www.youmeet.info/competences/${formatForUrl(
-            title as string
-          )}`}
+          href={`${uri}/competences/${formatForUrl(title as string)}`}
         />
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -59,7 +57,7 @@ export default async function Layout({
               inLanguage: "fr-FR",
               keywords: competency?.keywords,
               description: `${competency?.definition}`,
-              url: `https://www.youmeet.info/competences/${competency?.slug}`,
+              url: `${uri}/competences/${competency?.slug}`,
               author: {
                 "@type": "Organization",
                 name: "YouMeet",
@@ -70,7 +68,7 @@ export default async function Layout({
                   name: `Voir les Détails et Explications concernant la compétence de ${competency?.title}`,
                   target: {
                     "@type": "EntryPoint",
-                    urlTemplate: `https://www.youmeet.info/competences/${competency?.slug}`,
+                    urlTemplate: `${uri}/competences/${competency?.slug}`,
                   },
                 },
                 {

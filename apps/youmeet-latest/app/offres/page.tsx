@@ -10,6 +10,7 @@ import {
   bgImageMarseille,
   bgImageParis,
   logoUrl,
+  uri,
 } from "@youmeet/functions/imports";
 import dynamic from "next/dynamic";
 import DividerSection from "@youmeet/ui/_components/DividerSection";
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "YouMeet - Offres",
     type: "website",
-    url: "https://www.youmeet.info/offres",
+    url: `${uri}/offres`,
     images: [logoUrl],
     description:
       "Explorez les offres d'emplois sur notre plateforme de recrutement. Trouvez l'emploi qui vous correspond parmis de nombreux choix.",

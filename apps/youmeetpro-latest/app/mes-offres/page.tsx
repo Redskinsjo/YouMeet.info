@@ -6,6 +6,7 @@ import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser } from "@youmeet/gql/generated";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { NAME } from "@youmeet/functions/imports";
 
 const MyOffersChild = dynamic(() => import("./myOffersComponentChild"));
 
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     "Gérer vos offres d'emplois diffusées sur la plateforme, consulter ou supprimer.",
   keywords: ["mes offres", "diffusion", "suppression", "consultation"],
   category: "Page",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function page() {

@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser } from "@youmeet/gql/generated";
 import { Metadata } from "next";
+import { NAME } from "@youmeet/functions/imports";
 
 export const maxDuration = 60;
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     "Consultez vos notifications et ajoutez des offres d'emploi sur notre plateforme de recrutement pour recruteurs.",
   keywords: ["dashboard", "utilisation", "paramétrage"],
   category: "Dashboard",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function Dashboard() {

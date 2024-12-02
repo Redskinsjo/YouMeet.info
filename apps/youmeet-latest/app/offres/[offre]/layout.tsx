@@ -3,6 +3,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { getOffer } from "@youmeet/functions/request";
 import { Offer, Translated } from "@youmeet/gql/generated";
+import { uri } from "@youmeet/functions/imports";
 
 export default async function Layout({
   children,
@@ -23,10 +24,7 @@ export default async function Layout({
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link
-        rel="canonical"
-        href={`https://www.youmeet.info/offres/${offre?.slug}`}
-      />
+      <link rel="canonical" href={`${uri}/offres/${offre?.slug}`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -51,14 +49,14 @@ export default async function Layout({
                   } à ${offre?.location}`
                 : "",
             description: offre?.content,
-            url: `https://www.youmeet.info/offres/${offre?.slug}`,
+            url: `${uri}/offres/${offre?.slug}`,
             datePosted: offre?.createdAt,
             validThrough: offre?.limitDate,
             employmentType: offre?.contractType,
             hiringOrganization: {
               "@type": "Organization",
               name: offre?.company?.name,
-              sameAs: "https://www.youmeet.info",
+              sameAs: uri,
             },
             jobLocation: {
               "@type": "Place",

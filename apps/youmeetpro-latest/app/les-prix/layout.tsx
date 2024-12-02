@@ -2,7 +2,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import { Metadata } from "next";
 import Script from "next/script";
 import { ReactNode } from "react";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - Les Tarifs`,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "Découvrez nos différentes offres, les fonctionnalités incluses, et les tarifs pour utiliser notre plateforme de recrutement. Choisissez l'abonnement qui correspond le mieux à vos besoins.",
   },
   category: "Abonnements",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://pro.youmeet.info/les-prix" />
+      <link rel="canonical" href={`${uri}/les-prix`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -51,7 +51,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Les Tarifs et Descriptions des Offres",
             description:
               "Découvrez nos différentes offres, les fonctionnalités incluses, et les tarifs pour utiliser notre plateforme de recrutement. Choisissez l'abonnement qui correspond le mieux à vos besoins.",
-            url: "https://pro.youmeet.info/les-prix",
+            url: `${uri}/les-prix`,
             offers: [
               {
                 "@type": "Offer",
@@ -63,7 +63,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 seller: {
                   "@type": "Organization",
                   name: "YouMeet",
-                  url: "https://pro.youmeet.info",
+                  url: uri,
                 },
               },
               {
@@ -76,7 +76,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 seller: {
                   "@type": "Organization",
                   name: "YouMeet",
-                  url: "https://pro.youmeet.info",
+                  url: uri,
                 },
               },
               {
@@ -89,7 +89,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 seller: {
                   "@type": "Organization",
                   name: "YouMeet",
-                  url: "https://pro.youmeet.info",
+                  url: uri,
                 },
               },
             ],

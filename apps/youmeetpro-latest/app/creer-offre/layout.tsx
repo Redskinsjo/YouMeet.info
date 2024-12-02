@@ -2,7 +2,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { ReactNode } from "react";
 import { Metadata } from "next";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: "YouMeet - Créer et diffuser une offre d'emploi",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       "Créez et diffusez une offre sur notre plateforme pour augmenter sa visibilité. Fournissez des informations sur l'opportunité et facilitez notre mise en relation avec les candidats qualifiés par vidéo de notre plateforme de recrutement.",
   },
-  creator: "Jonathan Carnos",
+  creator: NAME,
   keywords: [
     "création",
     "diffusion",
@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://pro.youmeet.info/creer-offre" />
+      <link rel="canonical" href={`${uri}/creer-offre`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -52,14 +52,14 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Formulaire de Création d'Offre d'Emploi",
             description:
               "Remplissez le formulaire pour créer une offre d'emploi et la diffuser sur notre plateforme. Fournissez des informations sur l'offre et obtenez une meilleure visibilité pour recruter.",
-            url: "https://pro.youmeet.info/creer-offre",
+            url: `${uri}/creer-offre`,
             potentialAction: [
               {
                 "@type": "Action",
                 name: "Remplir le Formulaire",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/creer-offre",
+                  urlTemplate: `${uri}/creer-offre`,
                 },
               },
               {
@@ -67,14 +67,14 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Soumettre le Formulaire",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/creer-offre",
+                  urlTemplate: `${uri}/creer-offre`,
                 },
               },
             ],
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://pro.youmeet.info",
+              url: uri,
             },
           }),
         }}

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 import LoginPageComponent from "@youmeet/ui/loginPageComponents/LoginPage";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "YouMeet - Se Connecter",
     type: "website",
-    url: "https://www.youmeet.info/se-connecter",
+    url: `${uri}/se-connecter`,
     images: [logoUrl],
     description:
       "Connectez-vous à notre plateforme de recrutement et explorez des opportunités passionnantes. Rencontrez des talents exceptionnels et trouvez le candidat idéal.",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "recrutement",
     "chercheur d'emploi",
   ],
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function Login() {

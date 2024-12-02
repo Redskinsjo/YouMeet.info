@@ -15,16 +15,14 @@ import {
 } from "@youmeet/types/api/backend";
 import { DocumentType } from "@typegoose/typegoose";
 import { readFileSync } from "fs";
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 
 let moi: BetaUser | undefined;
 let offer: DocumentType<OfferSchema> | undefined;
 let addedVideo: Video | undefined;
 
 beforeAll(async () => {
-  moi = (await getUser<BetaUser>(
-    { email: "jonathan.carnos@gmail.com" },
-    0
-  )) as BetaUser;
+  moi = (await getUser<BetaUser>({ email: EMAIL_PERSO }, 0)) as BetaUser;
   offer = (await Offer.findOne().populate([
     { path: "jobId" },
     { path: "companyId" },

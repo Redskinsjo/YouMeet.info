@@ -27,6 +27,7 @@ import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 
 const renderTooltipContent = (
   veryHigh: boolean,
@@ -50,7 +51,7 @@ const renderTooltipContent = (
 };
 
 const emailsList = [
-  "jonathan.carnos@gmail.com",
+  EMAIL_PERSO,
   "jonathan.carnos.serotel@gmail.com",
   "youmeet.test@gmail.com",
   "contact@youmeet.info",

@@ -2,7 +2,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { ReactNode } from "react";
 import { Metadata } from "next";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: "YouMeet - Complétez votre Profil Candidat",
@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "YouMeet - Complétez votre Profil Candidat",
     type: "website",
-    url: "formulaire-profil",
+    url: `${uri}/formulaire-profil`,
     images: [logoUrl],
     description:
       "Remplissez votre profil sur notre plateforme de recrutement en ajoutant vos informations personnelles et professionnelles. Optimisez votre visibilité auprès des recruteurs en présentant votre expérience et vos compétences.",
   },
-  creator: "Jonathan Carnos",
+  creator: NAME,
   keywords: ["remplir profil", "formulaire", "cv", "informations personnelles"],
 };
 
@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://pro.youmeet.info/formulaire-profil" />
+      <link rel="canonical" href={`${uri}/formulaire-profil`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -44,14 +44,14 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Formulaire de Profil Candidat - Plateforme de Recrutement",
             description:
               "Remplissez le formulaire pour créer votre profil professionnel en tant que recruteur. Fournissez des informations sur votre entreprise et facilitez la mise en relation avec des candidats qualifiés sur notre plateforme de recrutement.",
-            url: "https://pro.youmeet.info/formulaire-profil",
+            url: `${uri}/formulaire-profil`,
             potentialAction: [
               {
                 "@type": "Action",
                 name: "Remplir le Formulaire de Profil",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/formulaire-profil",
+                  urlTemplate: `${uri}/formulaire-profil`,
                 },
               },
               {
@@ -59,14 +59,14 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Soumettre le Formulaire",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/formulaire-profil",
+                  urlTemplate: `${uri}/formulaire-profil`,
                 },
               },
             ],
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://www.youmeet.info",
+              url: uri,
             },
           }),
         }}

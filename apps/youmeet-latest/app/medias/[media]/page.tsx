@@ -1,4 +1,10 @@
-import { logoUrl, uri } from "@youmeet/functions/imports";
+import {
+  githubUrl,
+  linkedinUrl,
+  logoUrl,
+  NAME,
+  uri,
+} from "@youmeet/functions/imports";
 import { Metadata, ResolvingMetadata } from "next";
 import {
   getArticle,
@@ -64,14 +70,14 @@ export async function generateMetadata(
         "connaissances",
       ],
       authors: [
-        { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+        { name: NAME, url: githubUrl },
         {
-          name: "Jonathan Carnos",
-          url: "https://www.linkedin.com/in/jonathancarnos123/",
+          name: NAME,
+          url: linkedinUrl,
         },
       ],
       category: "Article à caractère informatif",
-      creator: "Jonathan Carnos",
+      creator: NAME,
     };
   }
 
@@ -92,14 +98,14 @@ export async function generateMetadata(
       "connaissances",
     ],
     authors: [
-      { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+      { name: NAME, url: githubUrl },
       {
-        name: "Jonathan Carnos",
-        url: "https://www.linkedin.com/in/jonathancarnos123/",
+        name: NAME,
+        url: linkedinUrl,
       },
     ],
     category: "Article à caractère informatif",
-    creator: "Jonathan Carnos",
+    creator: NAME,
   };
 }
 

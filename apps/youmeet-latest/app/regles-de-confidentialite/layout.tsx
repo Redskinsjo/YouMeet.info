@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Script from "next/script";
 import { ReactNode } from "react";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - Règles de confidentialité`,
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `YouMeet - Règles de confidentialité`,
     images: [logoUrl],
-    url: "https://www.youmeet.info/regles-de-confidentialite",
+    url: `${uri}/regles-de-confidentialite`,
     description:
       "Consultez nos règles de confidentialité pour comprendre comment nous traitons vos informations personnelles et assurons la sécurité de vos données sur notre plateforme de recrutement.",
   },
@@ -19,10 +19,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <link
-        rel="canonical"
-        href="https://www.youmeet.info/regles-de-confidentialite"
-      />
+      <link rel="canonical" href={`${uri}/regles-de-confidentialite`} />
       <meta
         name="viewport"
         content="width=device-width,minimum-scale=1,initial-scale=1"
@@ -38,7 +35,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             headline: "Règles de Confidentialité",
             description:
               "Consultez nos règles de confidentialité pour comprendre comment nous traitons vos informations personnelles.",
-            url: "https://www.youmeet.info/regles-de-confidentialite",
+            url: `${uri}/regles-de-confidentialite`,
             datePublished: "2023-12-23",
             dateModified: "2023-12-23",
             author: {
@@ -48,7 +45,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://www.youmeet.info",
+              url: uri,
             },
           }),
         }}

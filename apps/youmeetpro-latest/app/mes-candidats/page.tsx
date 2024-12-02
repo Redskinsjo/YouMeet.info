@@ -6,6 +6,7 @@ import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser, UnlockedUser } from "@youmeet/gql/generated";
 import { Metadata } from "next";
 import MyCandidatesChild from "./myCandidatesChild";
+import { NAME } from "@youmeet/functions/imports";
 
 export const maxDuration = 60;
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description: "Consulter les profils qui ont postulés à une de vos offres.",
   keywords: ["mes candidats", "consultation", "supprimer", "gérer", "analyser"],
   category: "Page",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function page() {

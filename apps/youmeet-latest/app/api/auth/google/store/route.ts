@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { s } from "@youmeet/utils/basics/jwt";
+import { personalRegex } from "@youmeet/utils/basics/isProfessionalEmail";
 import { setName } from "@youmeet/utils/basics/setName";
 import { handleRedirect } from "@youmeet/utils/backoffice/classic-login";
 import { parsePrms } from "@youmeet/utils/backoffice/parseParams";
@@ -17,8 +18,6 @@ import { createError } from "@youmeet/functions/request";
 const regex = new RegExp(
   /[a-zA-Z0-9\._-]{3,}@gmail|aol|yahoo|outlook|hotmail|protonmail|mail|yandex|zoho|gmx\.[a-z]{2,}/gm
 );
-
-const personalRegex = new RegExp(/jonathan.carnos@gmail.com/gim);
 
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;

@@ -1,3 +1,4 @@
+import { uri } from "@youmeet/functions/imports";
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactNode } from "react";
@@ -17,7 +18,7 @@ export default async function Layout({
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
       <link
         rel="canonical"
-        href={`https://www.youmeet.info/dashboard/converations/${prms.queueId}`}
+        href={`${uri}/dashboard/converations/${prms.queueId}`}
       />
       <link rel="icon" href="/favicon.ico" />
       <meta
@@ -36,14 +37,14 @@ export default async function Layout({
             name: "Conversation Candidat-Recruteur - Plateforme de Recrutement",
             description:
               "Le recruteur a démarré une converation avec vous. Répondez aux questions pour faire suite à votre candidature.",
-            url: `https://www.youmeet.info/dashboard/converations/${prms.queueId}`,
+            url: `${uri}/dashboard/converations/${prms.queueId}`,
             potentialAction: [
               {
                 "@type": "ViewAction",
                 name: "Voir les Questions du Recruteur",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: `https://www.youmeet.info/dashboard/converations/${prms.queueId}`,
+                  urlTemplate: `${uri}/dashboard/converations/${prms.queueId}`,
                 },
               },
               {
@@ -51,14 +52,14 @@ export default async function Layout({
                 name: "Répondre aux Questions du Recruteur",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: `https://www.youmeet.info/dashboard/converations/${prms.queueId}`,
+                  urlTemplate: `${uri}/dashboard/converations/${prms.queueId}`,
                 },
               },
             ],
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://www.youmeet.info",
+              url: uri,
             },
           }),
         }}
