@@ -119,9 +119,9 @@ export default function MenuAuthenticatedUser() {
 
         <form action={"/api/auth/logout"} className="flex-center">
           <MenuItem
-            className="normal-case"
             component={LogoutBtn}
             sx={{
+              textTransform: "none",
               color: grey[700],
               "&:hover": {
                 backgroundColor: deepPurple[50],
