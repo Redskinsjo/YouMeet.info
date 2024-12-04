@@ -9,7 +9,6 @@ import NewAddCVComponent from "./NewAddCVComponent";
 import { setError, setUpload } from "@youmeet/global-config/features/global";
 import { onDeleteCV } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { useRouter } from "next/navigation";
 import { resetModal } from "@youmeet/global-config/features/modal";
 
 export default function NewCVUpload({
@@ -23,15 +22,16 @@ export default function NewCVUpload({
   const cvFile = profil?.cvFile;
   const formRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const customeOnDeleteCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("delete"));
     const result = await onDeleteCV(userId);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed"));
+    } else if (!result) {
+      dispatch(setError("not-completed"));
     } else {
-      dispatch(resetModal(null));
+      dispatch(setUpload(null));
     }
   };
 

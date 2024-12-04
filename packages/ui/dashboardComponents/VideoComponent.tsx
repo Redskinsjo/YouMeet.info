@@ -1,12 +1,5 @@
 "use client";
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import { Dispatch, SetStateAction, useCallback, useMemo, useRef } from "react";
 import BoldText from "../BoldText";
 import { useTranslation } from "react-i18next";
 import { Avatar, BetaUser, MeetCandidate, Video } from "@youmeet/gql/generated";
@@ -273,17 +266,6 @@ export default function VideoComponent({
                                 {t("delete")}
                               </Button>
                             </form>
-                            {!!type &&
-                              modals &&
-                              modals[type] &&
-                              modals[type].content && (
-                                <BoldText
-                                  text={`${t(
-                                    (modals[type].content as trads)[language]
-                                  )}`}
-                                  align="left"
-                                />
-                              )}
                           </div>
                         )}
                         {setFileUrl(video.file) && (

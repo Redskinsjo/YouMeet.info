@@ -7,7 +7,12 @@ import { deleteAccount } from "@youmeet/functions/request";
 import { BetaUser } from "@youmeet/gql/generated";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
-import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
+import {
+  BACKEND_ERRORS,
+  BACKEND_MESSAGES,
+  PayloadBackendError,
+} from "@youmeet/types/api/backend";
+import { handleRedirect } from "@youmeet/utils/backoffice/classic-login";
 
 export async function GET(req: NextRequest) {
   const verified = await verifyTokenServer();
@@ -39,8 +44,21 @@ export async function GET(req: NextRequest) {
         return res;
       }
     } catch (err: any) {
-      return Response.json({ data: "An error occured" }, { status: 400 });
+      const error = err as PayloadBackendError;
+      console.log(err, "err");
+      return handleRedirect(
+        { error: { message: error.message, type: error.type } },
+        "dashboard"
+      );
     }
   }
-  return Response.json({ data: "Not authenticated" }, { status: 400 });
+  return handleRedirect(
+    {
+      error: {
+        message: BACKEND_MESSAGES.NOT_AUTHENTICATED,
+        type: BACKEND_ERRORS.NOT_AUTHENTICATED,
+      },
+    },
+    "dashboard"
+  );
 }

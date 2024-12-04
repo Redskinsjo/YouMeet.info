@@ -164,12 +164,6 @@ export default function NewAddVideoComponent({
           />
         </form>
       </div>
-      {!!type && modals && modals[type] && modals[type].content && (
-        <BoldText
-          text={`${t((modals[type].content as trads)[language])}`}
-          align="center"
-        />
-      )}
     </div>
   );
 }

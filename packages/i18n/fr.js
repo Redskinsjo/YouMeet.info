@@ -709,9 +709,6 @@ const compte = {
   "welcome-incentive":
     "Vous +bénéficiez= d'avantages significatifs lors de votre +recherche d'emploi= grâce à YouMeet.info. Un profil +complet= vous permet d'accéder à plus d'opportunités, en le rendant public.+",
   "profile-views": "Vues de profil",
-  loading: "Un peu de patience... Le chargement est en cours.",
-  deleting: "Suppression en cours...",
-  "loading-50": "Ça y est, c'est presque fini... 50%.",
   "use-this-link":
     "Partagez ce lien avec les recruteurs, insérez le dans votre CV.+",
   welcome: "Bienvenue",

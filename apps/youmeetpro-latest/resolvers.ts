@@ -126,7 +126,7 @@ import {
 import { v2 as cloudinary } from "cloudinary";
 import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDuration";
 import { s } from "@youmeet/utils/basics/jwt";
-import * as SendinBlue from "@sendinblue/client";
+import * as SendinBlue from "@getbrevo/brevo";
 import CryptoJS from "crypto-js";
 import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { uri, uriCandidates } from "@youmeet/functions/imports";

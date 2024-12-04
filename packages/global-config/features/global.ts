@@ -1,13 +1,13 @@
 import { AppSubscription } from "@youmeet/types/app";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { GlobalError } from "@youmeet/types/CustomModal";
+import { GlobalError, UploadMessage } from "@youmeet/types/CustomModal";
 
 export interface GlobalState {
   locale: string;
   background: number;
   lastModification: number;
-  upload: "upload" | "upload-50" | "delete" | null;
+  upload: UploadMessage | null;
   error: GlobalError | null;
   login: boolean;
   subscription: AppSubscription | undefined | false;
@@ -41,10 +41,7 @@ export const globalSlice = createSlice({
       state.background = action.payload.background;
       state.lastModification = action.payload.lastModification;
     },
-    setUpload: (
-      state,
-      action: PayloadAction<"upload" | "upload-50" | "delete" | null>
-    ) => {
+    setUpload: (state, action: PayloadAction<UploadMessage | null>) => {
       state.upload = action.payload;
     },
     setError: (state, action: PayloadAction<GlobalError | null>) => {

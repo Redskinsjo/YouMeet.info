@@ -9,8 +9,8 @@ export type Result<T> =
 export type withData<T> = { data: T };
 
 export type PayloadBackendError = {
-  type: BACKEND_ERRORS;
-  message: string;
+  type: string | BACKEND_ERRORS;
+  message: string | BACKEND_MESSAGES;
   status?: number;
   error: true;
 };
@@ -22,8 +22,8 @@ export type PayloadBackend = {
 
 export type PayloadRedirections = {
   error?: {
-    type: BACKEND_ERRORS;
-    message: BACKEND_MESSAGES;
+    type: BACKEND_ERRORS | string | number;
+    message: BACKEND_MESSAGES | string | number;
   };
   success?: {
     uri?: string;

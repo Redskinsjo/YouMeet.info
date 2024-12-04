@@ -923,15 +923,6 @@ export const onSigninUp = async (
   }
 };
 
-export const onLogout = async () => {
-  (await cookies()).delete({
-    name: process.env.APP === "candidate" ? "login" : "loginPro",
-    path: "/",
-    domain: `${process.env.API_DOMAIN}`,
-  });
-  redirect("/");
-};
-
 export const onApplying = async (extras: {
   originId: string | undefined;
   targetId: string | undefined;
@@ -2077,50 +2068,4 @@ export const searchSomeoneRequest = async (formData: FormData) => {
     return await handleActionError(err);
   }
   redirect(`/on/${result.uniqueName}`);
-};
-
-export const onDeleteAccount = async (
-  initial: withData<BetaUser | null> | PayloadBackendError,
-  formData: FormData
-): Promise<withData<BetaUser | null> | PayloadBackendError> => {
-  const schema = z.object({
-    userId: z.string().min(1),
-  });
-
-  const obj = Object.fromEntries(
-    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
-      entry[0],
-      entry[1].toString().trim(),
-    ])
-  );
-
-  const toBeParsed = obj;
-
-  let result: BetaUser = {};
-  try {
-    const valid = schema.parse(toBeParsed);
-    if (valid.userId) {
-      result = (await deleteAccountReq<BetaUser>({
-        userId: valid.userId,
-      })) as BetaUser;
-
-      if (result && isPayloadError(result)) {
-        throw new BackendError(result.type, result.message);
-      } else if (!result) {
-        throw new BackendError(
-          BACKEND_ERRORS.UNKNOWN,
-          BACKEND_MESSAGES.UNKNOWN
-        );
-      }
-    } else {
-      throw new BackendError(
-        BACKEND_ERRORS.MISSING_ARGUMENT,
-        BACKEND_MESSAGES.MISSING_ARGUMENT
-      );
-    }
-  } catch (err: any) {
-    return await handleActionError(err);
-  }
-
-  return { data: result };
 };

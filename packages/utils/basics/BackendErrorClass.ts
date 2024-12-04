@@ -1,9 +1,16 @@
+import { BACKEND_ERRORS, BACKEND_MESSAGES } from "@youmeet/types/api/backend";
+
 export class BackendError extends Error {
-  type: number;
-  message: string;
+  type: BACKEND_ERRORS | string | number;
+  message: string | BACKEND_MESSAGES;
   status: number | undefined;
   uri: string | undefined;
-  constructor(type: number, message: string, status?: number, uri?: string) {
+  constructor(
+    type: BACKEND_ERRORS | string | number,
+    message: string | BACKEND_MESSAGES,
+    status?: number,
+    uri?: string
+  ) {
     super();
     this.type = type;
     this.message = message;

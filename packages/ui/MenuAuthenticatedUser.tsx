@@ -7,10 +7,9 @@ import { deepPurple, grey } from "@mui/material/colors";
 import MenuItemRouter from "./MenuItemRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
-import { UserState, removeUser } from "@youmeet/global-config/features/user";
+import { UserState } from "@youmeet/global-config/features/user";
 import { outfit } from "@youmeet/functions/fonts";
 import { setName } from "@youmeet/utils/basics/setName";
-import { onLogout } from "@youmeet/functions/actions";
 import LogoutBtn from "./LogoutBtn";
 import { EMAIL_PERSO } from "@youmeet/functions/imports";
 
@@ -39,11 +38,6 @@ export default function MenuAuthenticatedUser() {
   );
   const handleClose = useCallback(() => {
     setAnchorEl(undefined);
-  }, []);
-
-  const customOnLogout = useCallback(async () => {
-    await onLogout();
-    dispatch(removeUser("ok"));
   }, []);
 
   return (

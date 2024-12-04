@@ -1,6 +1,12 @@
 import { CustomModalType, ModalContentProps } from "@youmeet/types/CustomModal";
 
 export const modals: { [type in CustomModalType]: ModalContentProps } = {
+  upload: {
+    content: {
+      en: "Little patience... Loading is in progress.",
+      fr: "Un peu de patience... Le chargement est en cours.",
+    },
+  },
   "upload-50": {
     content: {
       fr: "Ça y est, c'est presque fini... 50%.",
@@ -137,12 +143,6 @@ export const modals: { [type in CustomModalType]: ModalContentProps } = {
     title: {
       fr: "Merci.+",
       en: "Thank you.+",
-    },
-  },
-  upload: {
-    content: {
-      en: "Little patience... Loading is in progress.",
-      fr: "Un peu de patience... Le chargement est en cours.",
     },
   },
   video: {},

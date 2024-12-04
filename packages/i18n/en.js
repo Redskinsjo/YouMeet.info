@@ -681,9 +681,6 @@ const recruiters = {
   "welcome-incentive":
     "You +benefit= from significant advantages during your +job search= thanks to YouMeet.info. A +complete= profile allows you to access more opportunities, by making it public.+",
   "profile-views": "Profile views",
-  loading: "Little patience... Loading is in progress.",
-  deleting: "Deleting...",
-  "loading-50": "That's it, almost there... Loading is at 50%.",
   "use-this-link":
     "Share this link with the recruiters, insert it in your CV.+",
   welcome: "Welcome",

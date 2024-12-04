@@ -1,5 +1,5 @@
 import { Avatar, BetaUser } from "@youmeet/gql/generated";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { onAddCV } from "@youmeet/functions/actions";
@@ -9,9 +9,6 @@ import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/basics/submitFile";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
-import { revalidate } from "@youmeet/functions/request";
 
 const Logo = dynamic(() => import("@youmeet/ui/LogoChild"));
 
@@ -19,7 +16,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const cvRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const router = useRouter();
 
   const customOnAddCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("upload"));
@@ -38,6 +34,7 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
         dispatch(setError("not-completed"));
       } else {
         dispatch(setCvFile((result2 as withData<Avatar>).data));
+        dispatch(setUpload(null));
       }
     }
   };

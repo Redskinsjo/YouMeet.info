@@ -12,8 +12,8 @@ import { renderUrlQuery } from "@youmeet/utils/basics/renderUrlQuery";
 import { Button, InputLabel, MenuItem, Select } from "@mui/material";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi2";
 import Link from "next/link";
-import ModalClose from "../ModalClose";
 import { modals } from "../modals";
+import Logo from "../../Logo";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 
@@ -37,15 +37,23 @@ export default function CustomModalContent({
 
   const data = modals && type && modals[type] ? modals[type] : undefined;
 
+  const uploading =
+    type === "upload" || type === "upload-50" || type === "delete";
   return (
     <div className="flex-center flex-col gap-[24px] box-border xs:px-[12px] sm:px-[12px] md:px-[12px] w-[600px]">
-      <h3 className="text-purple900 sentences">
-        {data?.title && (
-          <BoldText
-            text={`${t((title as string) ?? (data?.title as trads)[language])}`}
-          />
-        )}
-      </h3>
+      {uploading ? (
+        <Logo gif png />
+      ) : (
+        <h3 className="text-purple900 sentences">
+          {data?.title && (
+            <BoldText
+              text={`${t(
+                (title as string) ?? (data?.title as trads)[language]
+              )}`}
+            />
+          )}
+        </h3>
+      )}
       <div className="text-blueGrey700 text-[19px] xs:text-[22px] sm:text-[22px] md:text-[22px] text-justify">
         {data?.content && (
           <BoldText

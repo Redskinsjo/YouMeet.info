@@ -30,9 +30,7 @@ const FeedBackModal = dynamic(() => import("./modals/FeedbackModal"), {
 const VideoAddingModal = dynamic(() => import("./modals/VideoAddingModal"), {
   ssr: false,
 });
-const UploadModal = dynamic(() => import("./modals/UploadModal"), {
-  ssr: false,
-});
+
 const CustomModalComponent = dynamic(
   () => import("./modals/CustomModalComponent"),
   {
@@ -68,8 +66,6 @@ export default function CustomModal({
             ? FeedBackModal
             : type === "videoAdding"
             ? VideoAddingModal
-            : uploadDelete
-            ? UploadModal
             : type === "login"
             ? LoginModalContent
             : CustomModalComponent,
