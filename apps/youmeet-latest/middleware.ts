@@ -31,7 +31,8 @@ export async function middleware(request: NextRequest) {
     ];
     const pages = [
       "le-produit",
-      "with",
+      "on",
+      "sitemap",
       "blog",
       "competences",
       "favicon.ico",
