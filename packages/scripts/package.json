@@ -9,7 +9,7 @@
   "scripts": {
     "addSubtitledUrl": "SCRIPT=true dotenv -e .env.development -- ts-node ./addSubtitledUrl.ts",
     "createProfileViewsFor": "SCRIPT=true dotenv -e .env -- ts-node ./createProfileViewsFor.ts",
-    "test": "SCRIPT=true dotenv -e .env.development -- jest",
+    "test": "SCRIPT=true dotenv -e .env.development -- ts-node ./test.ts",
     "genCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./genCompetencies.ts",
     "transferCompetencies": "SCRIPT=true dotenv -e .env -- npx tsx ./transferCompetencies.ts",
     "deleteCompetencies": "SCRIPT=true dotenv -e .env.development -- ts-node ./deleteCompetencies.ts",

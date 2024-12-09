@@ -370,6 +370,8 @@ export default function CandidateVideo({
     fullScreenListener,
   ]);
 
+  const isAttr = (attr?: string | number) => (xs || sm || md) && !!attr;
+
   return (
     !loading && (
       <div
@@ -378,27 +380,27 @@ export default function CandidateVideo({
           ...containerNewStyles,
           minHeight: inFullScreen
             ? "100%"
-            : xs || sm || md
+            : isAttr(containerNewStyles?.mobileMinHeight)
             ? containerNewStyles?.mobileMinHeight
             : containerNewStyles?.minHeight,
           minWidth: inFullScreen
             ? "100%"
-            : xs || sm || md
+            : isAttr(containerNewStyles?.mobileMinWidth)
             ? containerNewStyles?.mobileMinWidth
             : containerNewStyles?.minWidth,
           height: inFullScreen
             ? "100%"
-            : xs || sm || md
+            : isAttr(containerNewStyles?.mobileHeight)
             ? containerNewStyles?.mobileHeight
             : containerNewStyles?.height,
           width: inFullScreen
             ? "100%"
-            : xs || sm || md
+            : isAttr(containerNewStyles?.mobileWidth)
             ? containerNewStyles?.mobileWidth
             : containerNewStyles?.width,
           maxWidth: inFullScreen
             ? "100%"
-            : xs || sm || md
+            : isAttr(containerNewStyles?.mobileMaxWidth)
             ? containerNewStyles?.mobileMaxWidth
             : containerNewStyles?.maxWidth,
         }}
@@ -434,27 +436,27 @@ export default function CandidateVideo({
                 ...newStyles,
                 minHeight: inFullScreen
                   ? "100%"
-                  : xs || sm || md
+                  : isAttr(newStyles?.mobileMinHeight)
                   ? newStyles?.mobileMinHeight
                   : newStyles?.minHeight,
                 minWidth: inFullScreen
                   ? "100%"
-                  : xs || sm || md
+                  : isAttr(newStyles?.mobileMinWidth)
                   ? newStyles?.mobileMinWidth
                   : newStyles?.minWidth,
                 height: inFullScreen
                   ? "100%"
-                  : xs || sm || md
+                  : isAttr(newStyles?.mobileHeight)
                   ? newStyles?.mobileHeight
                   : newStyles?.height,
                 width: inFullScreen
                   ? "100%"
-                  : xs || sm || md
+                  : isAttr(newStyles?.mobileWidth)
                   ? newStyles?.mobileWidth
                   : newStyles?.width,
                 maxWidth: inFullScreen
                   ? "100%"
-                  : xs || sm || md
+                  : isAttr(newStyles?.mobileMaxWidth)
                   ? newStyles?.mobileMaxWidth
                   : newStyles?.maxWidth,
               }}
