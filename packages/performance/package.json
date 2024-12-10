@@ -1,6 +1,6 @@
 {
   "name": "@youmeet/performance",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Methods and utils for high performance for Youmeet",
   "files": [
     "dist/cjs",
@@ -9,9 +9,7 @@
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "typescript": {
-    "definition": "dist/types/index.d.ts"
-  },
+  "types": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Redskinsjo/YouMeet.info.git#main"
@@ -22,18 +20,9 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "require": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/cjs/index.js"
-      },
-      "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "default": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.js"
-      }
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
     }
   },
   "author": {
