@@ -27,6 +27,7 @@
     "@youmeet/models": "*",
     "@youmeet/prisma-config": "*",
     "@youmeet/utils": "*",
+    "@youmeet/performance": "*",
     "cloudinary": "^2.5.1",
     "dotenv": "^16.4.5",
     "mongoose": "^8.8.0",
