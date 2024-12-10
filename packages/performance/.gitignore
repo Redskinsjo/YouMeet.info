@@ -1,5 +1,4 @@
 node_modules
 .turbo
-src
 codegen.ts
 tsconfig.json
