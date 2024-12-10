@@ -25,6 +25,7 @@
     "@youmeet/functions": "*",
     "@youmeet/gql": "*",
     "@youmeet/models": "*",
+    "@youmeet/performance": "*",
     "@youmeet/prisma-config": "*",
     "@youmeet/utils": "*",
     "cloudinary": "^2.5.1",
