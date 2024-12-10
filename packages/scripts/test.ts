@@ -503,4 +503,6 @@ const list = [
   console.log(1, evaluate1());
   const linkedList = new LinkedList(list);
   console.log(2, evaluate2(linkedList));
+
+  const array = new SortableArray(list);
 })();
