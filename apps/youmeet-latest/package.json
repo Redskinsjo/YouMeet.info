@@ -6,7 +6,7 @@
     "@/*": "./*"
   },
   "scripts": {
-    "dev": "PORT=3000 dotenv -e .env -- next dev",
+    "dev": "PORT=3000 dotenv -e .env.development -- next dev",
     "build": "next build",
     "preview": "dotenv -e .env.testing -- next build",
     "start": "PORT=3000 next start",
