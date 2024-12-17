@@ -1,15 +1,11 @@
-export class Node {
-  value;
-  next;
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
+import { Node } from "./Nodes.js";
 
 export class LinkedList {
   head;
+  pointer;
   constructor(array) {
+    this.head = null;
+    this.pointer = null;
     if (array) {
       this.fromArray(array);
     }
@@ -20,6 +16,37 @@ export class LinkedList {
       this.append(array[i]);
     }
     return this;
+  }
+  pointedValue(object) {
+    const keys = this.pointer ? this.pointer.split(".") : undefined;
+    if (!keys) return object;
+    const value = keys.reduce((acc, curr) => {
+      if (acc[curr]) return acc[curr];
+      return acc;
+    }, object);
+    return value;
+  }
+  areStrings(value1, value2) {
+    return typeof value1 === "string" && typeof value2 === "string";
+  }
+  areObjects(value1, value2) {
+    return typeof value1 === "object" && typeof value2 === "object";
+  }
+  isEqual(value1, value2) {
+    if (this.areStrings(value1, value2)) {
+      return value1.charCodeAt(0) === value2.charCodeAt(0);
+    } else if (this.areObjects(value1, value2)) {
+      const pointedValue1 = this.pointedValue(value1);
+      const pointedValue2 = this.pointedValue(value2);
+
+      if (this.areStrings(pointedValue1, pointedValue2)) {
+        return pointedValue1.charCodeAt(0) === pointedValue2.charCodeAt(0);
+      } else {
+        return this.pointedValue(value1) === this.pointedValue(value2);
+      }
+    } else {
+      return value1 === value2;
+    }
   }
   append(value) {
     const newNode = new Node(value);
@@ -69,13 +96,26 @@ export class LinkedList {
         index++;
       } else break;
     }
-    return current.value;
+    return current;
   }
-  search(value) {
-    let current = this.head;
+  search(value, pointer) {
+    this.pointer = pointer;
+    const keys = pointer ? pointer.split(".") : undefined;
+    let isObject = typeof this.head.value === "object";
+    let current = isObject ? { ...this.head } : this.head;
+
     while (current) {
-      if (current.value === value) {
-        return current.value;
+      let target = current.value;
+      if (isObject && keys) {
+        const reducedPointer = keys.reduce((acc, curr) => {
+          if (acc[curr]) return acc[curr];
+          return acc;
+        }, current.value);
+        target = keys ? reducedPointer : current.value;
+      }
+
+      if (this.isEqual(target, value)) {
+        return current;
       }
       if (current.next) current = current.next;
       else break;

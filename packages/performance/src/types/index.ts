@@ -1,2 +1,4 @@
-export { Node, LinkedList } from "./LinkedList";
+export { LinkedList } from "./LinkedList";
 export { SortableArray } from "./SortableArray";
+export { BinarySearchTree } from "./BinarySearchTree";
+export { Heap } from "./Heap";
