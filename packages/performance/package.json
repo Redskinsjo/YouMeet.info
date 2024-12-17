@@ -1,6 +1,6 @@
 {
   "name": "@youmeet/performance",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Methods and utils for high performance for Youmeet",
   "files": [
     "dist/cjs",
