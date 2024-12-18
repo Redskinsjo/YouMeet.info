@@ -15,10 +15,7 @@ export default function OtherArticleLink({ article }: { article: Article }) {
   } = useTranslation();
 
   return (
-    <div className="bg-cyan50 w-1/2 font-bold relative hover:bg-cyan300 rounded-xl group cursor-pointer">
-      <div className="group-hover:text-cyan50 absolute bottom-0 left-0 px-[12px]">
-        <FaLongArrowAltRight className="titles" />
-      </div>
+    <div className="bg-cyan50 font-bold hover:bg-cyan300 rounded-xl group cursor-pointer">
       <Link
         href={`/medias/${article.slug}`}
         className={
@@ -27,10 +24,15 @@ export default function OtherArticleLink({ article }: { article: Article }) {
             : "no-underline group-hover:text-white text-black w-full h-full flex-center justify-end"
         }
       >
-        {(xs || sm || md) && <PiBinocularsFill className="subItem" />}
-        <h3 className="item">
+        <PiBinocularsFill className="titles px-[12px] xs:px-[6px] sm:px-[6px] md:px-[6px]" />
+        <h3 className="item w-full px-[12px] xs:px-[6px] sm:px-[6px] md:px-[6px] text-center">
           {(article?.title as Translated)[language as "fr" | "en"]}
         </h3>
+        <div className="flex items-end h-full">
+          <div className="group-hover:text-cyan50 px-[12px]">
+            <FaLongArrowAltRight className="titles" />
+          </div>
+        </div>
       </Link>
     </div>
   );

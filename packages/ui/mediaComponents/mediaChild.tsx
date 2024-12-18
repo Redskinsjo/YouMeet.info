@@ -17,14 +17,16 @@ export default function MediaChild({
   articles: Article[];
 }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex-center flex-col">
       <BigHeaderSection />
-      <PublicPageContainer>
-        <MediaContent media={media} />
-      </PublicPageContainer>
-      <PublicPageContainer noReturnHeader>
-        <OtherArticles articles={articles} media={media} />
-      </PublicPageContainer>
+      <div className="flex flex-col gap-[24px] xs:gap-[12px] sm:gap-[12px] md:gap-[24px]">
+        <PublicPageContainer>
+          <MediaContent media={media} />
+        </PublicPageContainer>
+        <PublicPageContainer noReturnHeader>
+          <OtherArticles articles={articles} media={media} />
+        </PublicPageContainer>
+      </div>
       <Footer />
     </div>
   );
