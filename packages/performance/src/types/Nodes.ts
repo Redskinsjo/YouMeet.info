@@ -14,3 +14,7 @@ export declare class TreeNode<T> {
   left: TreeNode<T> | null;
   right: TreeNode<T> | null;
 }
+
+export declare class TrieNode<T> {
+  children: TrieNode<T>;
+}

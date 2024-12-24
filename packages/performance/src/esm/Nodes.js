@@ -28,3 +28,10 @@ export class TreeNode {
     this.right = null;
   }
 }
+
+export class TrieNode {
+  children;
+  constructor() {
+    this.children = {};
+  }
+}
