@@ -587,7 +587,6 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-
       const where = {} as Prisma.profileSharingsWhereInput;
       const d = args.data;
       if (d?.id) where.id = d?.id;
