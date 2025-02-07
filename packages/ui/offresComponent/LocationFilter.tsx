@@ -41,8 +41,8 @@ export default function LocationFilter() {
   const locations = useSelector(
     (state: RootState) => state.search as SearchState
   );
-  const departments = locations.offres.departments;
-  const input = location?.length > 0 ? location : departments;
+  const input = location;
+
   const searchLocation = input.map((l) =>
     list.find((d) => d.code === l)
   ) as Department[];

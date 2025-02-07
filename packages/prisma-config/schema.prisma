@@ -108,6 +108,11 @@ type OriginOfferFT {
   partenaires PartenairFT[]
 }
 
+type ContextTravailFT {
+  horaires           String[]
+  conditionsExercice String[]
+}
+
 type PartenairFT {
   nom  String?
   url  String?
@@ -766,6 +771,7 @@ model offers {
   trancheEffectifEtab         String?
   origineOffre                OriginOfferFT?
   offresManqueCandidats       Boolean?
+  contexteTravail             ContextTravailFT
   live                        Boolean?
 }
 

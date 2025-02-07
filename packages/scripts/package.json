@@ -18,18 +18,20 @@
     "checkDbIndexes": "SCRIPT=true dotenv -e .env.development -- ts-node ./checkDbIndexes.ts",
     "updateReducedOffers": "SCRIPT=true dotenv -e .env -- ts-node ./updateReducedOffers.ts",
     "renewDbProd": "SCRIPT=true dotenv -e .env -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts",
-    "renewDb": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts"
+    "renewDb": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts",
+    "removeBadIndexes": "SCRIPT=true dotenv -e .env -- npx tsx ./removeBadIndexes.ts"
   },
   "dependencies": {
     "@youmeet/competencies": "*",
     "@youmeet/functions": "*",
     "@youmeet/gql": "*",
     "@youmeet/models": "*",
+    "@youmeet/performance": "*",
     "@youmeet/prisma-config": "*",
     "@youmeet/utils": "*",
-    "@youmeet/performance": "*",
     "cloudinary": "^2.5.1",
     "dotenv": "^16.4.5",
+    "mongodb": "^6.13.0",
     "mongoose": "^8.8.0",
     "openai": "^4.70.3",
     "reflect-metadata": "^0.2.2",

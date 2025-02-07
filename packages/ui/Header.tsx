@@ -237,12 +237,12 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
       {!!megaMenu && !!articles && (
         <div
           onClick={() => setMegaMenu(false)}
-          className="absolute h-screen top-[75px] z-[11001] shadow-inner lightBg"
+          className="absolute h-screen top-[75px] z-[11001] shadow-inner"
         >
           <div
             onMouseEnter={() => setMegaMenu(true)}
             onMouseLeave={() => setMegaMenu(false)}
-            className="flex justify-center gap-[24px] w-screen bg-white h-[300px] m-[2px] dark:lightDarkBg"
+            className="flex justify-center gap-[24px] w-screen h-[300px] m-[2px] dark:lightDarkBg lightBg border-b-[2px] border-t-0 border-l-0 border-r-0 border-solid border-black"
           >
             <div className="w-[200px]">
               <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
