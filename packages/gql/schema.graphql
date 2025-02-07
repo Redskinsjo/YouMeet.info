@@ -513,6 +513,16 @@ type Offer {
   origineOffre: OriginOfferFT
   offresManqueCandidats: Boolean
   live: Boolean
+  contexteTravail: ContexteTravailFT
+}
+
+type ContexteTravailFT {
+  horaires: [String]
+  conditionsExercice: [String]
+}
+input ContexteTravailFTInput {
+  horaires: [String]
+  conditionsExercice: [String]
 }
 
 type WorkLocationFT {
@@ -849,6 +859,7 @@ input OfferInput {
   language: String
   lieuTravail: WorkLocationFTInput
   live: Boolean
+  contexteTravail: ContexteTravailFTInput
 }
 
 type Favorite {

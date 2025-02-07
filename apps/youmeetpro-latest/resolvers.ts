@@ -2805,6 +2805,7 @@ const resolvers: Resolvers = {
       if (data?.sector) creates.sector = { connect: { id: data.sector } };
       if (data?.companyId)
         creates.company = { connect: { id: data.companyId } };
+      if (data?.contexteTravail) creates.contexteTravail = data.contexteTravail as any
 
       const rebroadcasting = {} as { companyName: string; rebroadcast: true };
       if (data?.companyName) {

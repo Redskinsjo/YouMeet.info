@@ -2650,13 +2650,14 @@ const resolvers: Resolvers = {
       const sector = args.data?.sector as string;
       const userId = args.data?.userId;
       const companyId = args.data?.companyId;
+      const contexteTravail = args.data?.contexteTravail as any;
 
       const author = {} as { author?: { connect: { id: string } } };
       if (userId) author.author = { connect: { id: userId } };
 
       const offer = await prisma.offers.create({
         data: {
-          content,
+          contexteTravail,
           authorEmail,
           authorName,
           ...author,

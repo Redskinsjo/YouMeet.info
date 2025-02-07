@@ -547,6 +547,17 @@ export type ContactFt = {
   urlRecruteur?: Maybe<Scalars['String']['output']>;
 };
 
+export type ContexteTravailFt = {
+  __typename?: 'ContexteTravailFT';
+  conditionsExercice?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  horaires?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type ContexteTravailFtInput = {
+  conditionsExercice?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  horaires?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type ConversationInput = {
   candidateName?: InputMaybe<Scalars['String']['input']>;
   companyName?: InputMaybe<Scalars['String']['input']>;
@@ -1421,6 +1432,7 @@ export type Offer = {
   conditionExercice?: Maybe<Scalars['String']['output']>;
   contact?: Maybe<ContactFt>;
   content?: Maybe<Scalars['String']['output']>;
+  contexteTravail?: Maybe<ContexteTravailFt>;
   contractType?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   dateActualisation?: Maybe<Scalars['String']['output']>;
@@ -1487,6 +1499,7 @@ export type OfferInput = {
   companyId?: InputMaybe<Scalars['String']['input']>;
   companyName?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
+  contexteTravail?: InputMaybe<ContexteTravailFtInput>;
   contractType?: InputMaybe<Scalars['String']['input']>;
   job?: InputMaybe<Scalars['String']['input']>;
   jobDescriptionLink?: InputMaybe<Scalars['String']['input']>;
@@ -3205,6 +3218,8 @@ export type ResolversTypes = {
   Competency: ResolverTypeWrapper<Competency>;
   CompetencyInput: CompetencyInput;
   ContactFT: ResolverTypeWrapper<ContactFt>;
+  ContexteTravailFT: ResolverTypeWrapper<ContexteTravailFt>;
+  ContexteTravailFTInput: ContexteTravailFtInput;
   ConversationInput: ConversationInput;
   CreateProAccountInput: CreateProAccountInput;
   Customisation: ResolverTypeWrapper<Customisation>;
@@ -3339,6 +3354,8 @@ export type ResolversParentTypes = {
   Competency: Competency;
   CompetencyInput: CompetencyInput;
   ContactFT: ContactFt;
+  ContexteTravailFT: ContexteTravailFt;
+  ContexteTravailFTInput: ContexteTravailFtInput;
   ConversationInput: ConversationInput;
   CreateProAccountInput: CreateProAccountInput;
   Customisation: Customisation;
@@ -3780,6 +3797,12 @@ export type ContactFtResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ContexteTravailFtResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContexteTravailFT'] = ResolversParentTypes['ContexteTravailFT']> = {
+  conditionsExercice?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  horaires?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CustomisationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Customisation'] = ResolversParentTypes['Customisation']> = {
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
@@ -4143,6 +4166,7 @@ export type OfferResolvers<ContextType = any, ParentType extends ResolversParent
   conditionExercice?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   contact?: Resolver<Maybe<ResolversTypes['ContactFT']>, ParentType, ContextType>;
   content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  contexteTravail?: Resolver<Maybe<ResolversTypes['ContexteTravailFT']>, ParentType, ContextType>;
   contractType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   dateActualisation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -4543,6 +4567,7 @@ export type Resolvers<ContextType = any> = {
   CompetenceFT?: CompetenceFtResolvers<ContextType>;
   Competency?: CompetencyResolvers<ContextType>;
   ContactFT?: ContactFtResolvers<ContextType>;
+  ContexteTravailFT?: ContexteTravailFtResolvers<ContextType>;
   Customisation?: CustomisationResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Eager?: EagerResolvers<ContextType>;
