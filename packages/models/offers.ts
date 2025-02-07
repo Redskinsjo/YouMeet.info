@@ -183,6 +183,8 @@ export class OfferSchema {
   public offresManqueCandidats: boolean;
   @prop()
   public live: boolean;
+  @prop()
+  public contexteTravail: OffreEmploiFT.ContextTravailFT;
 }
 
 const model = getModelForClass(OfferSchema);

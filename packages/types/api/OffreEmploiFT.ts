@@ -62,6 +62,11 @@ export type OffreEmploiFTParams = {
   typeContrat?: "CDI" | "CDD" | "freelance";
 };
 
+export type ContextTravailFT = {
+  horaires: string[];
+  conditionsExercice: string[];
+};
+
 export type OffreEmploiFT = {
   /**   Identifiant de l’offre d’emploi */
   id: string;
@@ -186,6 +191,8 @@ export type OffreEmploiFT = {
 
   /** Flag des offres difficiles à pourvoir */
   offresManqueCandidats: boolean;
+
+  contexteTravail: ContextTravailFT;
 };
 
 export type JobsManyFTParams = {
