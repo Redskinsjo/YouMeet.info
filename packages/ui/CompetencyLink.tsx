@@ -11,16 +11,18 @@ export default function CompetencyLink({
   str: string;
 }) {
   return requirement?.title ? (
-    <Link
-      href={`/competences/${requirement.slug}`}
+    // <Link
+    <div
+      // href={`/competences/${requirement.slug}`}
       className="no-underline px-[12px] py-[6px] bg-deepPurple50 text-deepPurple900 rounded-[14px] w-auto"
       style={{
         ...outfit.style,
       }}
     >
       {requirement?.title[0].toUpperCase() + requirement?.title.slice(1)}
-    </Link>
+    </div>
   ) : (
+    // </Link>
     str
   );
 }
