@@ -264,11 +264,13 @@ const SelectField = ({
           height: "100%",
           maxWidth: "initial",
         }}
-        ChipProps={{
-          className: "dark:darkBg dark:text-white z-50",
-          deleteIcon: (
-            <IoClose className="dark:text-white dark:bg-grey200 rounded-full" />
-          ),
+        slotProps={{
+          chip: {
+            className: "dark:darkBg dark:text-white z-50",
+            deleteIcon: (
+              <IoClose className="dark:text-white dark:bg-grey200 rounded-full" />
+            ),
+          },
         }}
         limitTags={tags}
         disableCloseOnSelect={multiple}
@@ -317,7 +319,7 @@ const SelectField = ({
                       setValue(location, [...value, addedValues]);
                   } else {
                     if (setValue) {
-                      if (name === "job")
+                      if (name === "job" && option.topSector)
                         setValue("sector", option.topSector.id);
                       setValue(location, addedValues);
                     }
