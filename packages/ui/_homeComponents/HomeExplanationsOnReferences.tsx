@@ -5,10 +5,8 @@ import BoldText from "../BoldText";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
 import { GiSmartphone } from "react-icons/gi";
-import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { MdAlternateEmail } from "react-icons/md";
 import { BsFillHddNetworkFill } from "react-icons/bs";
-import { background } from "@/dashboardComponents/ProfileViewsComponent";
 
 export default function HomeExplanationsOnReferences() {
   const xs = useMediaQuery("(max-width:600px)");
