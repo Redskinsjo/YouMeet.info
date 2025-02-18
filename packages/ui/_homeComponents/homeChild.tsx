@@ -55,7 +55,7 @@ export default async function Home({
       <div className="homeLightning">
         <BrandsSection />
         <SquareSection />
-        <WhatsappSection />
+        {/* <WhatsappSection /> */}
       </div>
       <DividerSection />
       <Footer />

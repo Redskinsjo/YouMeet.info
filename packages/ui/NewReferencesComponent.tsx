@@ -15,8 +15,7 @@ export default function NewReferencesComponent({
   const refers = references;
   const pro = refers?.filter((ref) => ref?.type === "professional");
   const academic = refers?.filter((ref) => ref?.type === "academic");
-  const judiciary = refers?.filter((ref) => ref?.type === "judiciary");
-  const refs = { pro, academic, judiciary };
+  const refs = { pro, academic };
 
   return (
     <SubPartContainer
