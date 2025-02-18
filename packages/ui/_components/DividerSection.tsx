@@ -8,7 +8,7 @@ export default function DividerSection({
   width?: string;
 }) {
   const className = `border-[0.5px] border-dotted border-grey300 m-0 py-[${height}] px-[${width}] ${
-    bg === "homeImgBg" ? "homeImgBg" : `bg-${bg}`
+    bg === "homeImgBg" ? "bg-black" : `bg-${bg}`
   }`;
   return <hr className={className} />;
 }

@@ -34,31 +34,30 @@ export default async function Home({
   videos: Video[];
 }) {
   return (
-    <main>
+    <main className="homeLightning">
       <BigHeaderSection />
+      <DividerSection />
       <div className="flex-center flex-col">
         <div className="box-border w-3/4 xs:w-full sm:w-full md:w-full p-[72px] xs:p-[12px] sm:p-[12px] md:p-[12px]">
           <HeroSection />
-          <DividerSection />
           <MasterSearch />
         </div>
 
-        <DividerSection />
         {/* <PromotionSection /> */}
         <DataSection data={videos} />
       </div>
-      <DividerSection />
       {/* <OfferSection offers={offers} /> */}
-      <DividerSection />
       {/* <CompetencySection competences={competences} /> */}
       <DividerSection />
       <InsightSection />
       <BandSection />
-      <BrandsSection />
       <DividerSection />
-      <SquareSection />
+      <div className="homeLightning">
+        <BrandsSection />
+        <SquareSection />
+        <WhatsappSection />
+      </div>
       <DividerSection />
-      <WhatsappSection />
       <Footer />
     </main>
   );

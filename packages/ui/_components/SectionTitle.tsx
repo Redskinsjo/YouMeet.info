@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const classnames = {
   h1: "",
   h2: "",
-  h3: "dark:text-white sentences",
+  h3: "dark:text-white sentences text-white",
   h4: "",
   h5: "",
   h6: "",

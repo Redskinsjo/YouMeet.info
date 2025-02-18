@@ -32,4 +32,5 @@ export type NewFieldProps = {
   onChange?: (e: any) => void;
   fromYouMeet?: boolean;
   category?: "organisation" | "offer";
+  black?: true;
 };

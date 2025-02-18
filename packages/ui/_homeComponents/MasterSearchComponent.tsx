@@ -15,7 +15,7 @@ export default function MasterSearchComponent({
   return (
     <>
       <h2
-        className="underline font-light"
+        className="underline font-light text-specialDark"
         style={{
           ...indie_flower.style,
           textDecorationThickness: "1px",
@@ -32,6 +32,7 @@ export default function MasterSearchComponent({
         type="text"
         errors={errors}
         placeholder={t("search-by-fullname")}
+        black
       />
 
       {status.pending && (

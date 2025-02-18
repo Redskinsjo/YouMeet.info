@@ -26,15 +26,20 @@ export default function BrandsSection() {
 
   return (
     <section className="flex xs:flex-col sm:flex-col md:flex-col">
-      <div className="flex-1 flex-center flex-col gap-[24px] p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] homeLightning dark:darkHomeSectionBg text-white">
+      <div className="flex-1 flex-center flex-col gap-[24px] p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] dark:darkHomeSectionBg text-white">
         <h2 role="heading" className="text-center text-[18px]">
           {t("connecting-you-with-recruiters")}
         </h2>
-        <div className="w-[300px] overflow-hidden h-[200px] rounded-[14px]">
+        <div className="overflow-hidden h-[200px] rounded-[14px] mediumBg">
           <div className="flex w-full h-full gap-[72px] infinite-slide infinite-slide-container">
             {brands.map((brand) => {
               return (
-                <Link role="link" href={brand.url} key={brand.name}>
+                <Link
+                  role="link"
+                  href={brand.url}
+                  key={brand.name}
+                  className="flex-center"
+                >
                   <Image
                     role="img"
                     width={200}

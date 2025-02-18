@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Locale from "./Locale";
 import { GoTriangleLeft } from "react-icons/go";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
@@ -64,7 +64,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   return (
     <div className="relative">
       <div
-        className={`header-classes h-[75px] dark:lightDarkBg dark:border-transparent ${
+        className={`header-classes h-[75px] dark:border-transparent ${
           classes || ""
         }`}
         style={newStyles}
@@ -188,7 +188,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                   }}
                 >
                   <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
-                    {t("blog")}
+                    {t("biographies")}
                   </span>
                   <div
                     className={
@@ -212,7 +212,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
               : "flex flex-1 items-center justify-end xs:gap-[12px] sm:gap-[12px] gap-[24px] p-[12px] box-border"
           }
         >
-          {pathname !== "/offres" && (
+          {/* {pathname !== "/offres" && (
             <Link
               title="Naviguer vers la page des offres d'emploi et de stage sur YouMeet.info"
               href={`/offres`}
@@ -224,7 +224,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 {t("company-offers")}
               </div>
             </Link>
-          )}
+          )} */}
           {pathname === "/" && <RecruiterSpace />}
           <Locale />
 
@@ -280,7 +280,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             </div>
             <div className="w-[200px]">
               <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
-                {t("blog")}
+                {t("biographies")}
               </h3>
               <BlogMenuNav articles={articles} />
             </div>

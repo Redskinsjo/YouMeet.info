@@ -126,6 +126,8 @@ const config: Omit<Config, "content"> = {
       blue700: "#1976d2",
       blue900: "#0d47a1",
       thisBlue: "#011552",
+      specialDark: "#282d6e",
+      specialLighterDark: "#5d629e",
     },
     screens: {
       xss: { max: "540px" },

@@ -8,6 +8,7 @@ import { GiSmartphone } from "react-icons/gi";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { MdAlternateEmail } from "react-icons/md";
 import { BsFillHddNetworkFill } from "react-icons/bs";
+import { background } from "@/dashboardComponents/ProfileViewsComponent";
 
 export default function HomeExplanationsOnReferences() {
   const xs = useMediaQuery("(max-width:600px)");
@@ -27,8 +28,8 @@ export default function HomeExplanationsOnReferences() {
       }}
     >
       <div className="w-full flex flex-col">
-        <div className="h-full xs:h-full sm:h-full bg-white dark:mediumDarkBg z-20 w-full box-border slideIn flex-center xs:flex-col sm:flex-col md:flex-col box-border">
-          <div className="shadow-2xl w-full xs:py-[24px] xs:px-[6px] sm:py-[24px] sm:px-[6px] box-border h-full flex-center min-h-[80px] dark:mediumDarkBg lightBg xs:border-b-[0.5px] sm:border-b-[0.5px] md:border-b-[0.5px] border-0 border-solid border-blueGrey500 xs:mt-[0.5px] sm:mt-[0.5px] md:mt-[0.5px]">
+        <div className="h-full xs:h-full sm:h-full dark:mediumDarkBg z-20 w-full box-border slideIn flex-center xs:flex-col sm:flex-col md:flex-col box-border">
+          <div className="shadow-2xl w-full xs:py-[24px] xs:px-[6px] sm:py-[24px] sm:px-[6px] box-border h-full flex-center min-h-[80px] dark:mediumDarkBg bg-white xs:border-b-[0.5px] sm:border-b-[0.5px] md:border-b-[0.5px] border-0 border-solid border-blueGrey500 xs:mt-[0.5px] sm:mt-[0.5px] md:mt-[0.5px]">
             <BoldText
               text={t("home-explanation-question")}
               containerStyle={{
@@ -41,23 +42,18 @@ export default function HomeExplanationsOnReferences() {
               fontSizeClass="flex-center whitespace-break-spaces"
             />
           </div>
-
-          <div className="h-full w-full box-border flex-center min-h-[80px] lightBg dark:mediumDarkBg xs:border-t-[0.5px] sm:border-t-[0.5px] md:border-t-[0.5px] border-0 border-solid border-blueGrey500 xs:mb-[0.5px] sm:mb-[0.5px] md:mb-[0.5px]">
-            <ul
-              role="list"
-              className="flex m-0 h-full w-full box-border shadow-2xl gap-[24px] flex-col w-fit text-black font-bold p-0"
-            >
-              <li className="darkLi h-full flex-center box-border list-none">
-                <span
-                  className="sentences flex-center text-center xs:item sm:item font-[600] flex-bet text-black dark:text-white relative top-[4px] gap-[12px]"
-                  style={{ ...nunito.style }}
-                >
-                  <IoShieldCheckmarkSharp className="sentences xs:item sm:item min-w-[24px]" />
-                  {t("home-explanation3")}
-                  <div />
-                </span>
-              </li>
-            </ul>
+          <div className="shadow-2xl text-white w-full xs:py-[24px] xs:px-[6px] sm:py-[24px] sm:px-[6px] box-border h-full flex-center min-h-[80px] dark:mediumDarkBg bg-black xs:border-b-[0.5px] sm:border-b-[0.5px] md:border-b-[0.5px] border-0 border-solid border-blueGrey500 xs:mt-[0.5px] sm:mt-[0.5px] md:mt-[0.5px]">
+            <BoldText
+              text={t("home-explanation3")}
+              containerStyle={{
+                ...nunito.style,
+                textAlign: "center",
+                lineHeight: "1.3em",
+                margin: "0px",
+                fontSize: md2 ? "40px" : xs || sm || md || lg ? "44px" : "57px",
+              }}
+              fontSizeClass="flex-center whitespace-break-spaces"
+            />
           </div>
         </div>
         <div className="w-full flex-center dark:mediumDarkBg py-[24px] dark:text-white homeSectionBg">

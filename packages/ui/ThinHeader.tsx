@@ -45,7 +45,7 @@ export default function ThinHeader({
   }, []);
 
   return (
-    <div className="p-[6px] w-full flex-bet dark:darkBg lightBg box-border">
+    <div className="p-[6px] w-full flex-bet box-border">
       <div className="flex-center gap-[6px]">
         <Logo />
       </div>

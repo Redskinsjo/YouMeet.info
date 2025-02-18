@@ -46,6 +46,7 @@ export default function SimpleField({
   onChange,
   fromYouMeet,
   category,
+  black,
 }: NewFieldProps) {
   const id = useId();
   const xs = useMediaQuery("(max-width:600px)");
@@ -215,7 +216,11 @@ export default function SimpleField({
         }}
         label={label}
         className={
-          !!errors && errors[name]
+          black && !!errors && errors[name]
+            ? "sm:col-span-2 w-full subItem errorFieldset darkErrorFieldset darkLabel darkInput"
+            : black
+            ? "sm:col-span-2 w-full subItem darkFieldset darkLabel darkInput"
+            : !!errors && errors[name]
             ? "sm:col-span-2 w-full subItem errorFieldset dark:darkErrorFieldset dark:darkLabel dark:darkInput"
             : "sm:col-span-2 w-full subItem dark:darkFieldset dark:darkLabel dark:darkInput"
         }
