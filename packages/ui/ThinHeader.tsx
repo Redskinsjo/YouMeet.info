@@ -82,7 +82,10 @@ export default function ThinHeader({
             }}
             title="Se connecter à son compte utilisateur sur YouMeet.info"
           >
-            <div className="flex-center h-[25px] w-[25px]">
+            <div className="flex-center h-[25px]">
+              <span className="mx-[6px] w-max whitespace-nowrap">
+                {t("login")}
+              </span>
               <RiLoginCircleLine className="w-full h-full" />
             </div>
           </Link>

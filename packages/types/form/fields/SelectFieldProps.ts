@@ -66,6 +66,7 @@ export type SelectFieldProps = {
   onChange?: (payload: any) => void;
   multiple?: true;
   tags?: number;
+  fnc?: (...args: any) => void;
 };
 
 export type GenericFieldProps = SelectFieldProps & {
@@ -83,4 +84,5 @@ export type GenericFieldProps = SelectFieldProps & {
   sx?: { [key: string]: number | string };
   fetchData?: (value: string) => Promise<void>;
   type: string;
+  fnc?: (...args: any) => void;
 };

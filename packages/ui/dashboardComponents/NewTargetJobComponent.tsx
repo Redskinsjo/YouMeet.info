@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BetaCandidate, BetaUser } from "@youmeet/gql/generated";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -6,15 +6,11 @@ import SelectField from "../formComponents/fields/SelectField";
 import DetailComponent from "../DetailComponent";
 import { HiPencil } from "react-icons/hi";
 import { FieldValues, useForm } from "react-hook-form";
-import { IoIosCheckmarkCircle } from "react-icons/io";
-import { MdOutlineCancel } from "react-icons/md";
-import TooltipedAsset from "../TooltipedAsset";
-import { onTargetJobUpdate } from "@youmeet/functions/actions";
-import { Button, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { setError } from "@youmeet/global-config/features/global";
-import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
+import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { useRouter } from "next/navigation";
+import { uri } from "@youmeet/functions/imports";
 
 const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
   const [isValidated, setIsValidated] = useState(true);
@@ -33,24 +29,26 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
   const sm = useMediaQuery("(max-width:720px)");
   const md = useMediaQuery("(max-width:900px)");
   const lg = useMediaQuery("(max-width:1050px)");
-  const router = useRouter();
 
-  const customOnTargetJobUpdate = useCallback(
-    async (extras: { userId: string; jobId: string }) => {
-      const result = (await onTargetJobUpdate(extras)) as
-        | PayloadBackendError
-        | withData<BetaCandidate>;
-      if (result && isPayloadError(result)) {
-        dispatch(setError("not-completed"));
-      } else if (!result?.data) {
-        dispatch(setError("not-completed"));
-      } else {
-        setCandidateValidated((result as withData<BetaCandidate>).data);
-        setIsValidated(true);
-      }
-    },
-    []
-  );
+  const customOnTargetJobUpdate = async (extras: {
+    userId: string;
+    jobId: string;
+    dataType: "job" | "contractType";
+  }) => {
+    const response = await fetch(`${uri}/api/dashboard`, {
+      method: "POST",
+      body: JSON.stringify(extras),
+    });
+    const result = await response.json();
+    if (result && isPayloadError(result)) {
+      dispatch(setError("not-completed"));
+    } else if (!result?.data) {
+      dispatch(setError("not-completed"));
+    } else {
+      setCandidateValidated((result as withData<BetaCandidate>).data);
+      setIsValidated(true);
+    }
+  };
 
   useEffect(() => {
     if (profil?.candidate?.targetJob?.id) {
@@ -59,12 +57,7 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
   }, [profil?.candidate]);
 
   return (
-    <form
-      action={customOnTargetJobUpdate.bind(null, {
-        userId: profil.id as string,
-        jobId: watch("job"),
-      })}
-    >
+    <form>
       {!isValidated ? (
         <div className="flex-bet gap-[12px]">
           <div className="w-full">
@@ -93,34 +86,16 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
                   watch={watch}
                   label={t("me-profile-infos-label-job")}
                   value={watch("job")}
+                  fnc={() => {
+                    customOnTargetJobUpdate({
+                      userId: profil.id as string,
+                      jobId: watch("job"),
+                      dataType: "job",
+                    });
+                  }}
                 />
               }
             />
-          </div>
-
-          <div className="flex flex-col gap-[6px]">
-            <TooltipedAsset asset={`${t("cancel")}`} placement="right">
-              <div className="flex-center">
-                <MdOutlineCancel
-                  style={{ borderRadius: "100%" }}
-                  className="text-deepPurple900 hover:text-white bg-deepPurple50 hover:bg-deepPurple300 text-[25px] cursor-pointer"
-                  onClick={() => setIsValidated(true)}
-                />
-              </div>
-            </TooltipedAsset>
-            <TooltipedAsset asset={`${t("validate")}`} placement="right">
-              <div className="flex-center">
-                <Button
-                  className="bg-transparent border-0 w-fit min-w-0 p-0"
-                  type="submit"
-                >
-                  <IoIosCheckmarkCircle
-                    style={{ borderRadius: "100%" }}
-                    className="text-deepPurple900 hover:text-white bg-deepPurple50 hover:bg-deepPurple300 text-[25px] cursor-pointer"
-                  />
-                </Button>
-              </div>
-            </TooltipedAsset>
           </div>
         </div>
       ) : (

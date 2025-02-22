@@ -62,6 +62,7 @@ export const globalSlice = createSlice({
     setTab: (state, action: PayloadAction<number>) => {
       state.tab = action.payload;
     },
+    setMegaMenu: (state, action: PayloadAction<boolean>) => {},
   },
 });
 

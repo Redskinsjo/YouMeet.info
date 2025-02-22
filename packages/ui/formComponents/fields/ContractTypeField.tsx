@@ -1,9 +1,8 @@
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
 import { MenuItem, TextField } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
-import React from "react";
 
 const ContractTypeField = ({
   value,
@@ -15,6 +14,7 @@ const ContractTypeField = ({
   type,
   name,
   border = `1px solid ${grey[500]}`,
+  fnc,
 }: GenericFieldProps) => {
   const id = useId();
   const { t } = useTranslation();
@@ -35,6 +35,9 @@ const ContractTypeField = ({
         onChange={(e) => {
           if (setValue) setValue(name, e.target.value);
           setFieldVal(e.target.value);
+          if (fnc) {
+            fnc();
+          }
         }}
         required={required ?? false}
         slotProps={{

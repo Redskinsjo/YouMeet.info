@@ -116,6 +116,7 @@ const SelectField = ({
   watch,
   location,
   type,
+  fnc,
 }: SelectFieldProps) => {
   const step = useSelector(
     (state: RootState) => (state.form as FormState).profileStep
@@ -324,6 +325,9 @@ const SelectField = ({
                       setValue(location, addedValues);
                     }
                   }
+                  if (fnc) {
+                    fnc();
+                  }
                 }}
               >
                 {renderOption(name, option, language)}
@@ -368,6 +372,7 @@ const SelectField = ({
               setValue={setValue}
               onChange={onChange}
               fetchData={fetchData}
+              fnc={fnc}
             />
           );
         }}
