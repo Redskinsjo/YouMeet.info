@@ -405,7 +405,7 @@ p {
 
 @keyframes infinite-slide {
   0% {
-    transform: translateX(300px);
+    transform: translateX(700px);
   }
   100% {
     transform: translateX(-100%);

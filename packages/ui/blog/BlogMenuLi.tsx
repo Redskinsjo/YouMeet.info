@@ -11,7 +11,7 @@ export default function BlogMenuLi({ article }: { article: ReducedArticle }) {
   return (
     <li
       key={article.id}
-      className="darkLi article list-none cursor-pointer text-[16px] font-light hover:font-semibold hover:opacity-100"
+      className="darkLi article list-none cursor-pointer text-[16px] font-light hover:font-medium hover:opacity-100"
     >
       <Link
         href={`/medias/${article.slug}`}

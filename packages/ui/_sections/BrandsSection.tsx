@@ -12,12 +12,37 @@ const brands = [
   {
     name: "Société Générale",
     url: "https://www.societegenerale.com/fr",
-    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1718747476/jsri7niolhqa4f3tytpr.webp",
+    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740263690/youmeet-official/logo/zcpgrjupugbx7zpyciox.webp",
   },
   {
     name: "Serotel",
     url: "https://hotellutece.com/",
-    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1718747610/epaa9fzkdlyasm9sczkp.webp",
+    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740262690/youmeet-official/logo/ya4ggtnlp28cnbudyj7a.webp",
+  },
+  {
+    name: "Pelico",
+    url: "https://fr.pelico.ai/",
+    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740263541/youmeet-official/logo/stqql6a0sy2mmc5isizc.webp",
+  },
+  {
+    name: "Scalian",
+    url: "https://www.scalian.com/",
+    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740263325/youmeet-official/logo/zkmngds2p4srwzbw4wds.webp",
+  },
+  {
+    name: "Thalès",
+    url: "https://www.thalesgroup.com/fr",
+    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740264133/youmeet-official/logo/tbujcrszqzr4omtn8f8d.webp",
+  },
+  {
+    name: "Marriott Hotels",
+    url: "https://www.marriott.com/fr/",
+    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740264426/youmeet-official/logo/cyqyxstuwizi3y83im1r.webp",
+  },
+  {
+    name: "Accor Hotels",
+    url: "https://all.accor.com/",
+    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740264548/youmeet-official/logo/q3dx1hy3cfdy43gwbaxu.webp",
   },
 ];
 
@@ -26,29 +51,31 @@ export default function BrandsSection() {
 
   return (
     <section className="flex xs:flex-col sm:flex-col md:flex-col">
-      <div className="flex-1 flex-center flex-col gap-[24px] p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] dark:darkHomeSectionBg text-white">
+      <div className="flex-1 flex flex-col gap-[24px] p-[48px] max-w-screen xs:p-[12px] sm:p-[12px] md:p-[24px] dark:darkHomeSectionBg text-white">
         <h2 role="heading" className="text-center text-[18px]">
           {t("connecting-you-with-recruiters")}
         </h2>
-        <div className="overflow-hidden h-[200px] rounded-[14px] mediumBg">
-          <div className="flex w-full h-full gap-[72px] infinite-slide infinite-slide-container">
+        <div className="overflow-hidden w-full h-[400px] rounded-[14px] bg-specialDark">
+          <div className="flex h-full flex-center gap-[72px] flex-wrap">
             {brands.map((brand) => {
               return (
-                <Link
-                  role="link"
-                  href={brand.url}
-                  key={brand.name}
-                  className="flex-center"
-                >
-                  <Image
-                    role="img"
-                    width={200}
-                    height={150}
-                    style={{ objectFit: "contain" }}
-                    src={brand.logo}
-                    alt={`logo de l'entreprise ${brand.name} qui est un partenaire de mise en relation de candidats`}
-                  />
-                </Link>
+                <div className="w-[15%]">
+                  <Link
+                    role="link"
+                    href={brand.url}
+                    key={brand.name}
+                    className="flex-center"
+                  >
+                    <Image
+                      role="img"
+                      width={160}
+                      height={120}
+                      style={{ objectFit: "contain" }}
+                      src={brand.logo}
+                      alt={`logo de l'entreprise ${brand.name} qui est un partenaire de mise en relation de candidats`}
+                    />
+                  </Link>
+                </div>
               );
             })}
           </div>

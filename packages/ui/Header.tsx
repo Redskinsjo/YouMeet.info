@@ -21,7 +21,8 @@ import { ReducedArticle } from "@youmeet/types/ReducedArticle";
 
 export default function Header({ classes, newStyles }: HeaderComponentProps) {
   const user = useSelector((state: RootState) => state.user as UserState);
-  const [megaMenu, setMegaMenu] = useState(false);
+  const [megaMenu1, setMegaMenu1] = useState(false);
+  const [megaMenu2, setMegaMenu2] = useState(false);
   const xs = useMediaQuery("(max-width:600px)");
   const sm = useMediaQuery("(max-width:720px)");
   const md = useMediaQuery("(max-width:900px)");
@@ -59,9 +60,9 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   useEffect(() => {
     if (articles.length === 0) getArticles();
     document.addEventListener("scroll", () => {
-      setMegaMenu(false);
+      setMegaMenu1(false);
     });
-  }, [megaMenu]);
+  }, [megaMenu1, megaMenu2]);
 
   return (
     <div className="relative">
@@ -100,7 +101,16 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
         <MenuHeaderForMobile />
         {!xs && !sm && !md && (
-          <div className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full p-[12px] box-border">
+          <div
+            className="flex-center flex-1 gap-[12px] xs:gap-[3px] sm:gap-[3px] md:gap-[3px] h-full p-[12px] box-border"
+            onMouseEnter={() => {
+              setMegaMenu1(true);
+              setMegaMenu2(true);
+            }}
+            onMouseLeave={() => {
+              setMegaMenu1(false);
+            }}
+          >
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
@@ -116,7 +126,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 <div
                   className="flex-center h-full"
                   onMouseEnter={() => {
-                    setMegaMenu(true);
+                    setMegaMenu1(true);
                   }}
                 >
                   <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
@@ -148,7 +158,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 <div
                   className="flex-center h-full"
                   onMouseEnter={() => {
-                    setMegaMenu(true);
+                    setMegaMenu1(true);
                   }}
                 >
                   <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
@@ -181,7 +191,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 <div
                   className="flex-center h-full"
                   onMouseEnter={() => {
-                    setMegaMenu(true);
+                    setMegaMenu1(true);
                   }}
                 >
                   <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
@@ -231,50 +241,59 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
         </div>
       </div>
 
-      {!!megaMenu && !!articles && (
-        <div className="absolute h-screen top-[75px] z-[11001] shadow-inner">
-          <div className="flex justify-center gap-[24px] w-screen h-[300px] m-[2px] dark:lightDarkBg lightBg border-b-[2px] border-t-0 border-l-0 border-r-0 border-solid border-black">
-            <div className="w-[200px]">
-              <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
-                {t("product")}
-              </h3>
-              <nav className="h-[270px] overflow-hidden overflow-y-scroll box-border py-[6px] border-t-[0.5px] border-0 border-solid border-grey500">
-                <ul className="flex flex-col gap-[6px] m-0 p-0">
-                  {pathname === "/" && (
-                    <li
-                      className="darkLi list-none cursor-pointer text-black text-[16px] font-light hover:text-deepPurple900 rounded-[7px]"
-                      onClick={() => {
-                        scrollTo(window, "solutions");
-                        setMegaMenu(false);
-                      }}
-                    >
-                      <span className="dark:text-white">
-                        {t("exclusive-job-offer-suggestions")}
-                      </span>
+      {(!!megaMenu1 || !!megaMenu2) && !!articles && (
+        <div className="absolute h-screen top-[69px] z-[11001] shadow-inner">
+          <div
+            onMouseEnter={() => {
+              setMegaMenu2(true);
+            }}
+            onMouseLeave={() => {
+              if (!megaMenu1) setMegaMenu2(false);
+            }}
+          >
+            <div className="flex justify-center z-[110] gap-[24px] w-screen h-[300px] m-[2px] dark:lightDarkBg lightBg border-y-[2px] border-l-0 border-r-0 border-solid border-black">
+              <div className="w-[200px]">
+                <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
+                  {t("product")}
+                </h3>
+                <nav className="h-[270px] overflow-hidden overflow-y-scroll box-border py-[6px] border-t-[0.5px] border-0 border-solid border-grey500">
+                  <ul className="flex flex-col gap-[6px] m-0 p-0">
+                    {pathname === "/" && (
+                      <li
+                        className="darkLi list-none cursor-pointer text-black text-[16px] font-light hover:font-medium rounded-[7px]"
+                        onClick={() => {
+                          scrollTo(window, "solutions");
+                          setMegaMenu1(false);
+                        }}
+                      >
+                        <span className="dark:text-white">
+                          {t("exclusive-job-offer-suggestions")}
+                        </span>
+                      </li>
+                    )}
+                    <li className="darkLi list-none cursor-pointer text-[16px] font-light hover:font-medium">
+                      <Link
+                        href="/le-produit/mise-en-relation"
+                        className="no-underline text-black"
+                      >
+                        <span className="dark:text-white">
+                          {
+                            { fr: "Mise en Relation", en: "Linking" }[
+                              language as "fr" | "en"
+                            ]
+                          }
+                        </span>
+                      </Link>
                     </li>
-                  )}
-                  <li className="darkLi list-none cursor-pointer text-[16px] font-light hover:text-deepPurple900">
-                    <Link
-                      href="/le-produit/mise-en-relation"
-                      className="no-underline text-black"
-                    >
-                      <span className="dark:text-white">
-                        {
-                          { fr: "Mise en Relation", en: "Linking" }[
-                            language as "fr" | "en"
-                          ]
-                        }
-                      </span>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div className="w-[200px]">
-              <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
-                {t("biographies")}
-              </h3>
-              <BlogMenuNav articles={articles} />
+                  </ul>
+                </nav>
+              </div>
+              <div className="w-[200px]">
+                <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
+                  {t("biographies")}
+                </h3>
+                <BlogMenuNav articles={articles} />
+              </div>
             </div>
           </div>
         </div>
