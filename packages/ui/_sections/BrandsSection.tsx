@@ -29,21 +29,6 @@ const brands = [
     url: "https://www.scalian.com/",
     logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740263325/youmeet-official/logo/zkmngds2p4srwzbw4wds.webp",
   },
-  {
-    name: "Thalès",
-    url: "https://www.thalesgroup.com/fr",
-    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740264133/youmeet-official/logo/tbujcrszqzr4omtn8f8d.webp",
-  },
-  {
-    name: "Marriott Hotels",
-    url: "https://www.marriott.com/fr/",
-    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740264426/youmeet-official/logo/cyqyxstuwizi3y83im1r.webp",
-  },
-  {
-    name: "Accor Hotels",
-    url: "https://all.accor.com/",
-    logo: "https://res.cloudinary.com/de822mdsy/image/upload/v1740264548/youmeet-official/logo/q3dx1hy3cfdy43gwbaxu.webp",
-  },
 ];
 
 export default function BrandsSection() {
@@ -55,7 +40,7 @@ export default function BrandsSection() {
         <h2 role="heading" className="text-center text-[18px]">
           {t("connecting-you-with-recruiters")}
         </h2>
-        <div className="overflow-hidden w-full h-[400px] rounded-[14px] bg-specialDark">
+        <div className="overflow-hidden w-full h-[400px] rounded-[14px] bg-black opacity-60">
           <div className="flex h-full flex-center gap-[72px] flex-wrap">
             {brands.map((brand) => {
               return (
@@ -67,6 +52,7 @@ export default function BrandsSection() {
                     className="flex-center"
                   >
                     <Image
+                      className="animate-pulse"
                       role="img"
                       width={160}
                       height={120}
