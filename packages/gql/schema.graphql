@@ -224,6 +224,7 @@ type BetaCandidate {
   targetJob: Job
   targetJobId: String
   targetContractType: String
+  preferredLocation: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1207,6 +1208,7 @@ input CandidateBasicInput {
   avatars: [AvatarInput]
   userId: String
   targetContractType: String
+  preferredLocation: String
 }
 
 input UnlockInput {

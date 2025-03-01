@@ -25,13 +25,20 @@ export async function POST(req: NextRequest) {
 
     obj = { userId: body.userId, jobId: body.jobId };
     data = { userId: body.userId, targetJobId: body.jobId };
-  } else {
+  } else if (body.dataType === "contractType") {
     schema = z.object({
       userId: z.string().min(1),
       contractType: z.string().min(1),
     });
     obj = { userId: body.userId, contractType: body.contractType };
     data = { userId: body.userId, targetContractType: body.contractType };
+  } else {
+    schema = z.object({
+      userId: z.string().min(1),
+      preferredLocation: z.string().min(1),
+    });
+    obj = { userId: body.userId, preferredLocation: body.preferredLocation };
+    data = { userId: body.userId, preferredLocation: body.preferredLocation };
   }
 
   try {
@@ -44,6 +51,7 @@ export async function POST(req: NextRequest) {
         0,
         true
       )) as PayloadBackendError | withData<BetaCandidate>;
+
       if (result && isPayloadError(result)) {
         throw new BackendError(
           BACKEND_ERRORS.PROCESSING,

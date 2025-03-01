@@ -3204,6 +3204,8 @@ const resolvers: Resolvers = {
       if (d.userId) updates.user = { connect: { id: d.userId } };
       if (d.targetContractType)
         updates.targetContractType = d.targetContractType as string;
+      if (d.preferredLocation)
+        updates.preferredLocation = d.preferredLocation as string;
 
       if (candidate) {
         candidate = await prisma.betacandidates.update({

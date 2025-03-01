@@ -47,6 +47,7 @@ const formProfile = {
   "me-profile-infos-label-ending": "Fin",
   "me-profile-infos-label-starting": "Début",
   "me-profile-infos-label-job": "Poste",
+  preferredLocation: "Lieu souhaité",
   "me-profile-infos-label-company": "Entreprise",
   "me-profile-infos-label-expenses": "Dépenses",
   "me-profile-infos-label-salary": "Salaire souhaité par an",
@@ -900,6 +901,8 @@ const compte = {
   temperature: "Température",
   "import-linkedin-exps": "Importer les expériences Linkedin",
   "say-us-which-job": "Dites-nous quel emploi vous recherchez",
+  "say-us-which-location":
+    "Dites-nous dans quel lieu vous souhaitez travailler",
   "say-us-which-contract-type":
     "Dites-nous quel type de contrat vous recherchez",
   "say-us-which-job-text":

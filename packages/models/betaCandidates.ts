@@ -42,6 +42,8 @@ export class BetaCandidateSchema {
   @typegoose.prop()
   public targetContractType: string;
   @typegoose.prop()
+  public preferredLocation: string;
+  @typegoose.prop()
   public createdAt: Date;
   @typegoose.prop()
   public updatedAt: Date;

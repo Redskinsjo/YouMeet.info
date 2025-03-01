@@ -441,6 +441,7 @@ model betacandidates {
   targetJob                 jobs?             @relation(fields: [targetJobId], references: [id])
   targetJobId               String?           @db.ObjectId
   targetContractType        String?
+  preferredLocation         String?
   createdAt                 DateTime?
   updatedAt                 DateTime?
 }

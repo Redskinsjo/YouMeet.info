@@ -7,6 +7,9 @@ import dynamic from "next/dynamic";
 const ProfileViewsComponent = dynamic(() => import("./ProfileViewsChild"));
 const CustomTabPanel = dynamic(() => import("./CustomTabPanelChild"));
 const NewTargetJobComponent = dynamic(() => import("./NewTargetJobChild"));
+const PreferredLocationComponent = dynamic(
+  () => import("./PreferredLocationChild")
+);
 const NewTargetContractTypeComponent = dynamic(
   () => import("./NewTargetContractTypeChild")
 );
@@ -34,6 +37,9 @@ export default function DashboardContent({ profil }: { profil: BetaUser }) {
         </div>
         <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
           <NewTargetContractTypeComponent profil={profil} />
+        </div>
+        <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
+          <PreferredLocationComponent profil={profil} />
         </div>
       </CustomTabPanel>
       <CustomTabPanel index={2}>

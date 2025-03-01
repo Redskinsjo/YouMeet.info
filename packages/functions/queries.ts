@@ -276,6 +276,7 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
         }
         candidate {
           id
+          preferredLocation
           targetContractType
           avatars {
             secure_url
@@ -1216,6 +1217,7 @@ export const getNotificationQuery = `query GetNotification ($data: NotificationI
 export const createCandidateBasicMutation = `mutation CreateCandidateBasic($data: CandidateBasicInput) {
   createCandidateBasic(data: $data) {
     id
+    preferredLocation
     targetContractType
     targetJob {
       id

@@ -120,6 +120,7 @@ export type BetaCandidate = {
   details?: Maybe<BetaDetails>;
   experiences?: Maybe<Array<Maybe<BetaExperience>>>;
   id?: Maybe<Scalars['ID']['output']>;
+  preferredLocation?: Maybe<Scalars['String']['output']>;
   profile?: Maybe<BetaProfile>;
   salaryExpected?: Maybe<Scalars['String']['output']>;
   targetContractType?: Maybe<Scalars['String']['output']>;
@@ -455,6 +456,7 @@ export type BetaWhatsappThread = {
 
 export type CandidateBasicInput = {
   avatars?: InputMaybe<Array<InputMaybe<AvatarInput>>>;
+  preferredLocation?: InputMaybe<Scalars['String']['input']>;
   targetContractType?: InputMaybe<Scalars['String']['input']>;
   targetJobId?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['String']['input']>;
@@ -3529,6 +3531,7 @@ export type BetaCandidateResolvers<ContextType = any, ParentType extends Resolve
   details?: Resolver<Maybe<ResolversTypes['BetaDetails']>, ParentType, ContextType>;
   experiences?: Resolver<Maybe<Array<Maybe<ResolversTypes['BetaExperience']>>>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  preferredLocation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['BetaProfile']>, ParentType, ContextType>;
   salaryExpected?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   targetContractType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

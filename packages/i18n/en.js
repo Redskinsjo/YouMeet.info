@@ -90,6 +90,7 @@ const meOrganisation = {
   "me-organisation-infos-label-name": "Company name",
   "me-organisation-infos-label-location": "Location",
   "me-organisation-infos-label-resume": "Description",
+  preferredLocation: "Preferred location",
   "me-organisation-service-connections": "Service connections",
   "me-oganisation-service-connections-description":
     "Here you connect your work follow-up tool(s). Our system will check up the resources of the humans (HR) on multiple criterias, like the technical skills, the speed, the communication.",
@@ -869,6 +870,7 @@ const compte = {
   temperature: "Temperature",
   "import-linkedin-exps": "Import experiences from Linkedin",
   "say-us-which-job": "Tell us what job you are looking for",
+  "say-us-which-location": "Tell us which location",
   "say-us-which-contract-type":
     "Tell us what contract type you are looking for",
   "say-us-which-job-text":
