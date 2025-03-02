@@ -18,10 +18,7 @@ const PreferredLocation = ({ profil }: { profil: BetaUser }) => {
   const [candidateValidated, setCandidateValidated] = useState<
     BetaCandidate | undefined
   >();
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const {
     setValue,
     watch,
@@ -129,7 +126,10 @@ const PreferredLocation = ({ profil }: { profil: BetaUser }) => {
               <div className="flex-center gap-[12px]">
                 {candidateValidated?.preferredLocation ? (
                   <span className="dark:text-white">
-                    {t(candidateValidated.preferredLocation)}
+                    {t(
+                      candidateValidated?.preferredLocation[0].toUpperCase() +
+                        candidateValidated?.preferredLocation.slice(1)
+                    )}
                   </span>
                 ) : (
                   <span className="dark:text-white">-</span>

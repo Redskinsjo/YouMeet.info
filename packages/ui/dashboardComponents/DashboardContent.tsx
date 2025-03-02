@@ -1,3 +1,4 @@
+import OtherOfferComponent from "../OtherOfferComponent";
 import { BetaUser } from "@youmeet/gql/generated";
 // import AffiliatesComponent from "./AffiliatesComponent";
 import dynamic from "next/dynamic";
@@ -40,6 +41,16 @@ export default function DashboardContent({ profil }: { profil: BetaUser }) {
         </div>
         <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
           <PreferredLocationComponent profil={profil} />
+        </div>
+        <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
+          {profil.candidate?.suggestedOpportunities?.map((opp) => {
+            return opp ? (
+              <OtherOfferComponent
+                key={opp?.id}
+                offer={opp}
+              ></OtherOfferComponent>
+            ) : undefined;
+          })}
         </div>
       </CustomTabPanel>
       <CustomTabPanel index={2}>

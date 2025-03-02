@@ -26,4 +26,6 @@ export type OfferContentValues = {
   dureeTravailConverti: string;
   experience: string;
   secteurActivite: string;
+  intitule: string;
+  salaire: string;
 };

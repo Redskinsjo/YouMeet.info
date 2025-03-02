@@ -225,6 +225,7 @@ type BetaCandidate {
   targetJobId: String
   targetContractType: String
   preferredLocation: String
+  suggestedOpportunities: [Offer]
   createdAt: DateTime
   updatedAt: DateTime
 }

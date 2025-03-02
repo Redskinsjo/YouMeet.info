@@ -983,6 +983,22 @@
             "deprecationReason": null
           },
           {
+            "name": "suggestedOpportunities",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Offer",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "targetContractType",
             "description": null,
             "args": [],

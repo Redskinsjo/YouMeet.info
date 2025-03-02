@@ -1,5 +1,6 @@
 "use client";
 import { Competency, Offer, Video } from "@youmeet/gql/generated";
+import { OfferContentValues } from "@youmeet/types/OfferContentValues";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -8,7 +9,7 @@ export default function SeeMore({ el }: { el: Offer | Competency | Video }) {
 
   if (el.__typename === "Video") {
     return null;
-  }
+  } else if (!(el as Offer).slug) return null;
 
   const component = useMemo(() => {
     let attributes = {
@@ -18,7 +19,7 @@ export default function SeeMore({ el }: { el: Offer | Competency | Video }) {
     };
     if (el.__typename === "Offer") {
       attributes = {
-        href: `/offres/${el.slug}`,
+        href: `${el.slug}`,
         cta: "Postuler",
         title: "Postuler à cette offre",
       };
@@ -38,7 +39,7 @@ export default function SeeMore({ el }: { el: Offer | Competency | Video }) {
         <div />
       </div>
     );
-  }, [el, click]);
+  }, [click]);
 
   return component;
 }

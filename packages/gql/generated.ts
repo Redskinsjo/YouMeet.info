@@ -123,6 +123,7 @@ export type BetaCandidate = {
   preferredLocation?: Maybe<Scalars['String']['output']>;
   profile?: Maybe<BetaProfile>;
   salaryExpected?: Maybe<Scalars['String']['output']>;
+  suggestedOpportunities?: Maybe<Array<Maybe<Offer>>>;
   targetContractType?: Maybe<Scalars['String']['output']>;
   targetJob?: Maybe<Job>;
   targetJobId?: Maybe<Scalars['String']['output']>;
@@ -3534,6 +3535,7 @@ export type BetaCandidateResolvers<ContextType = any, ParentType extends Resolve
   preferredLocation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profile?: Resolver<Maybe<ResolversTypes['BetaProfile']>, ParentType, ContextType>;
   salaryExpected?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  suggestedOpportunities?: Resolver<Maybe<Array<Maybe<ResolversTypes['Offer']>>>, ParentType, ContextType>;
   targetContractType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   targetJob?: Resolver<Maybe<ResolversTypes['Job']>, ParentType, ContextType>;
   targetJobId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

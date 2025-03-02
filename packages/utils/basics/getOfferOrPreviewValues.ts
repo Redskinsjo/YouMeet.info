@@ -50,7 +50,7 @@ export default async function getOfferOrPreviewValues(
       listReqs(el?.competences) ||
       [];
     values.contractType = el?.contractType || el?.typeContratLibelle || "";
-    values.location = el.location || "";
+    values.location = el.location || el.lieuTravail?.libelle || "";
     values.revenue =
       (el.revenue && typeof el.revenue === "number" && String(el.revenue)) ||
       el?.salaire?.libelle ||
@@ -68,7 +68,11 @@ export default async function getOfferOrPreviewValues(
     values.remote = el.remote || "";
     values.qualification = el.qualificationLibelle || "";
     values.location = el?.location || el?.lieuTravail?.libelle || "";
-    values.slug = `/offres/${el?.slug}`;
+    values.slug = el.slug
+      ? `/offres/${el?.slug}`
+      : el.contact?.urlPostulation
+      ? `${el.contact?.urlPostulation}`
+      : "";
     values.limitDate = el?.limitDate;
     values.tools = (el.outilsBureautiques as string[]) || [];
     values.permis = listReqs(el.permis) || [];

@@ -12,10 +12,6 @@ import { Offer } from "@youmeet/gql/generated";
 import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import dynamic from "next/dynamic";
 import TooltipedAsset from "../TooltipedAsset";
-import { useSelector } from "react-redux";
-import { GlobalState } from "@youmeet/global-config/features/global";
-import { RootState } from "@youmeet/global-config/store";
-import VideoAddingContent from "../modals/modalContents/VideoAddingContent";
 import setFileUrl from "@youmeet/utils/basics/setFileUrl";
 
 const DoubleDetails = dynamic(() => import("./DoubleDetails"));

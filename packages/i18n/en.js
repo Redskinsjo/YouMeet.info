@@ -33,6 +33,7 @@ const meProfile = {
   "me-profile-infos-label-company": "Company",
   "me-profile-infos-label-ending": "End",
   "me-profile-infos-label-starting": "Start",
+  "transmit-your-video": "Send your video when applying",
   "me-profile-infos-label-salary": "Wished Salary per year",
   "income-offered": "Determined Income per year",
   "me-profile-infos-label-age": "Age",
@@ -1116,6 +1117,21 @@ const offres = {
   "some-more-offers": "Here are some more offers",
   "take-opportunity-to-apply":
     "If you take +the opportunity to apply= to other offers, you'll have more chance to get hired.+",
+  january: "january",
+  february: "february",
+  february: "february",
+  march: "march",
+  april: "april",
+  may: "may",
+  june: "june",
+  july: "july",
+  august: "august",
+  august: "august",
+  september: "september",
+  october: "october",
+  november: "november",
+  december: "december",
+  december: "december",
 };
 
 export default Object.assign(

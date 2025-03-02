@@ -294,6 +294,29 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
               bgImage
             }
           }
+          suggestedOpportunities {
+            id
+            idFT
+            intitule
+            lieuTravail {
+              libelle
+            }  
+            contact {
+              urlPostulation
+            }
+            createdAt
+            entreprise {
+              nom
+            }
+            qualificationLibelle
+            experienceLibelle
+            remote
+            limitDate
+            salaire {
+              libelle
+            }
+            contractType
+          }
         }
         details {
           id

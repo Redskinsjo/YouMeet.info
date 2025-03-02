@@ -56,7 +56,7 @@ const PreferredLocationField = ({
               key={location.toLowerCase()}
               value={location.toLowerCase()}
             >
-              {location[0].toUpperCase() + location.slice(1)}
+              {location}
             </MenuItem>
           );
         })}

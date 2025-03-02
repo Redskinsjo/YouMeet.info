@@ -46,6 +46,7 @@ const formProfile = {
   "me-profile-infos-label-languages": "Langues",
   "me-profile-infos-label-ending": "Fin",
   "me-profile-infos-label-starting": "Début",
+  "transmit-your-video": "Envoyez votre vidéo",
   "me-profile-infos-label-job": "Poste",
   preferredLocation: "Lieu souhaité",
   "me-profile-infos-label-company": "Entreprise",
@@ -1001,6 +1002,7 @@ const login = {
     "Votre demande a bien été prise en compte. Un email vous sera envoyé si l'email est valide. Ce ne sera pas le cas si votre connexion était par Google.",
   "connect-as": "Se connecter comme",
   as: "comme",
+  toNow: "à",
   for: "pour",
   "og-title-login": "Connexion à l'Application YouMeet",
   "se-connecter:description-content":
@@ -1156,6 +1158,21 @@ const offres = {
   "some-more-offers": "Voici d'autres offres similaires",
   "take-opportunity-to-apply":
     "Si vous prenez +l'opportunité de postuler= à d'autres offres, vous aurez plus de chances de trouver un travail.+",
+  january: "janvier",
+  february: "février",
+  february: "fevrier",
+  march: "mars",
+  april: "avril",
+  may: "mai",
+  june: "juin",
+  july: "juillet",
+  august: "août",
+  august: "aout",
+  september: "septembre",
+  october: "octobre",
+  november: "novembre",
+  december: "décembre",
+  december: "decembre",
 };
 
 export default Object.assign(

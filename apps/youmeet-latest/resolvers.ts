@@ -3607,6 +3607,14 @@ const resolvers: Resolvers = {
       });
       return details;
     },
+    suggestedOpportunities: async (candidate: BetaCandidate) => {
+      const opps = await prisma.offers.findMany({
+        where: {
+          suggestedCandidatesIds: { has: candidate.id },
+        },
+      });
+      return opps;
+    },
   },
   FormResponse: {
     question: async (response: FormResponse) =>
