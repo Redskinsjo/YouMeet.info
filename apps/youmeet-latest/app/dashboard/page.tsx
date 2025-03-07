@@ -24,14 +24,15 @@ export const metadata: Metadata = {
   creator: NAME,
 };
 
-export const dynamic = "force-dynamic";
-
 export default async function Dashboard() {
   const verified = await verifyTokenServer();
   if (verified) {
-    const user = (await getUser({
-      userId: (verified as LoginCookiePayload)?.userId,
-    })) as BetaUser;
+    const user = (await getUser(
+      {
+        userId: (verified as LoginCookiePayload)?.userId,
+      },
+      0
+    )) as BetaUser;
 
     if (user && isUser(user)) {
       const references = (await getMyReferences<Reference[]>({
