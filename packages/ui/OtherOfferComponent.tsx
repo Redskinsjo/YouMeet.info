@@ -40,8 +40,6 @@ export default function OtherOfferComponent({ offer }: { offer: Offer }) {
     ? `${at.getDate()} ${at.getMonth()} ${at.getFullYear()}`
     : undefined;
 
-  console.log(values?.qualification, values?.experience);
-
   return (
     <>
       <div className="flex flex-col gap-[6px] w-full border-[0.5px] border-solid border-grey900 rounded-[14px] p-[6px] px-[12px] box-border">

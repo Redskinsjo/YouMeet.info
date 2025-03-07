@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   creator: NAME,
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Dashboard() {
   const verified = await verifyTokenServer();
   if (verified) {

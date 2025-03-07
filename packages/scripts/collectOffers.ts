@@ -201,8 +201,14 @@ const collectOffers = async (searchRole: string) => {
 };
 
 const connectMatches = async (candidates: BetaCandidate[]) => {
-  for (let i = 0; candidates.length; i++) {
+  await prisma.betacandidates.updateMany({
+    where: { suggestedOpportunities: { none: undefined } },
+    data: { suggestedOpportunitiesIds: { set: [] } },
+  });
+  for (let i = 0; i < candidates.length; i++) {
+    console.log("in", i);
     const candidate = candidates[i];
+
     // for each candidate, link the target job to the job
     if (!candidate?.targetJobId) continue;
     const job = await prisma.jobs.findUnique({
@@ -211,43 +217,45 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
       },
     });
     if (job) {
-      const min3 = (tokens) => tokens.filter((token) => token.length > 3);
-      const enTitle = min3(job.title?.en.toLowerCase().split(" "));
-      const frTitle = min3(job.title?.fr.toLowerCase().split(" "));
+      const min4 = (tokens) => tokens.filter((token) => token.length > 4);
+      const enTitle = min4(job.title?.en.toLowerCase().split(" "));
+      const frTitle = min4(job.title?.fr.toLowerCase().split(" "));
       const tokens = enTitle.concat(frTitle);
       const codes = ["75", "92", "93", "94", "91", "78", "77"];
+
+      let entries = [];
+      for (let j = 0; j < tokens.length; j++) {
+        for (let k = 0; k < codes.length; k++) {
+          entries.push([tokens[j], codes[k]]);
+        }
+      }
 
       // récupère les offres qui matchent
       const matchedOffers = await prisma.offers.findMany({
         where: {
-          OR: tokens.map((token) => {
+          OR: entries.map(([token, code]) => {
             return {
               intitule: { mode: "insensitive", contains: token },
+              lieuTravail: { is: { codePostal: { startsWith: code } } },
             };
           }),
         },
       });
+      console.log("matched:", matchedOffers.length);
+
       if (matchedOffers.length === 0) continue;
-
-      const parisOffers = matchedOffers.filter((offer: Offer) => {
-        return codes.some((code) =>
-          offer.lieuTravail?.codePostal?.includes(code)
-        );
-      });
-
-      if (parisOffers.length === 0) continue;
 
       console.log([
         candidate.targetContractType,
         job.title,
-        parisOffers.length,
+        matchedOffers.length,
       ]);
       // connect the opportunities to candidate
       const ca = await prisma.betacandidates.update({
         where: { id: candidate.id },
         data: {
           suggestedOpportunities: {
-            connect: parisOffers.map((m) => ({
+            connect: matchedOffers.map((m) => ({
               id: m.id,
             })),
           },
@@ -255,7 +263,7 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
       });
       // connect the candidate to the opportunity
       await Promise.all(
-        parisOffers.map(
+        matchedOffers.map(
           async (opp) =>
             await prisma.offers.update({
               where: { id: opp.id },
@@ -281,24 +289,9 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
     },
   });
 
-  // const candidatesWhoTargetJobAndContract = candidates.reduce((acc, curr) => {
-  //   if (!acc.includes(curr.targetJobId)) acc.push(curr.targetJobId);
-  //   return acc;
-  // }, []);
-
-  // for (let i = 0; i < candidatesWhoTargetJobAndContract.length; i++) {
-  //   const jobId = candidatesWhoTargetJobAndContract[i];
-
-  //   const job = await prisma.jobs.findUnique({
-  //     where: { id: jobId },
-  //   });
-
-  //   if (job.title.fr) {
-  //     await collectOffers(job.title.fr);
-  //   }
-  // }
+  console.log(candidates.length, "candidates");
   // const candidatesWhoTargetJobAndContract = candidates
-  //   .filter((cand) => !!cand.targetJobId && !!cand.targetContractType)
+  //   .filter((cand) => !!cand.targetJobId)
   //   .reduce((acc, curr) => {
   //     if (!acc.find((cand) => cand.targetJobId === curr.targetJobId))
   //       acc.push(curr);
@@ -316,10 +309,13 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
   //   });
 
   //   if (job.title.fr) {
-  //     const search = `${job.title.fr} ${candidate.targetContractType} ile-de-france`;
+  //     let search = !!candidate.targetContractType
+  //       ? `${job.title.fr} ${candidate.targetContractType} ile-de-france`
+  //       : `${job.title.fr} ile-de-france`;
   //     if (!scrapped.includes(search)) await collectOffers(search);
   //   }
   // }
+  console.log("connecting...");
   await connectMatches(candidates);
   console.log("exiting");
   process.exit();
