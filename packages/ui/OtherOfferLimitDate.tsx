@@ -18,8 +18,10 @@ const monthsMapping = {
 
 export default function OtherOfferLimitDate({
   limitDate,
+  revenue,
 }: {
   limitDate: string;
+  revenue?: string;
 }) {
   const { t } = useTranslation();
 
@@ -32,13 +34,27 @@ export default function OtherOfferLimitDate({
   const year = format[2];
 
   return (
-    <div className="flex items-end gap-[6px]">
-      <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
-        {t("me-profile-infos-label-starting")}
-      </span>
-      <div className="text-[14px] xs:text-[12px] sm:text-[12px] whitespace-nowrap">
-        {`${day} ${t(month)} ${year}`}
-      </div>
+    <div className="flex">
+      {!!revenue && (
+        <div className="flex items-end gap-[6px]">
+          <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+            {t("salary")}
+          </span>
+          <div className="text-[14px] xs:text-[12px] sm:text-[12px] whitespace-nowrap">
+            {revenue}
+          </div>
+        </div>
+      )}
+      {limitDate.length > 0 && (
+        <div className="flex items-end gap-[6px]">
+          <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+            {t("me-profile-infos-label-starting")}
+          </span>
+          <div className="text-[14px] xs:text-[12px] sm:text-[12px] whitespace-nowrap">
+            {`${day} ${t(month)} ${year}`}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

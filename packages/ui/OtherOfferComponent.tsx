@@ -40,6 +40,8 @@ export default function OtherOfferComponent({ offer }: { offer: Offer }) {
     ? `${at.getDate()} ${at.getMonth()} ${at.getFullYear()}`
     : undefined;
 
+  console.log(values, "values");
+
   return (
     <>
       <div className="flex flex-col gap-[6px] w-full border-[0.5px] border-solid border-grey900 rounded-[14px] p-[6px] px-[12px] box-border">
@@ -67,74 +69,107 @@ export default function OtherOfferComponent({ offer }: { offer: Offer }) {
             {t("transmit-your-video")}
           </span>
         </div>
-
-        <div className="flex-bet gap-x-[6px] flex-wrap">
-          <div className="flex-center">
-            {values?.contractType && (
-              <div className="flex items-end gap-[6px]">
-                <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
-                  {t(values?.contractType)}
-                </div>
+        <div className="flex flex-wrap gap-[12px]">
+          {(values?.location || values?.companyName) && (
+            <div className="flex-bet gap-x-[6px] flex-wrap">
+              <div className="flex-center">
+                {values?.location && (
+                  <div className="flex items-end gap-[6px]">
+                    <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                      {values.location}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-            {!!values?.contractType && <div>-</div>}
-            {values?.location && (
-              <div className="flex items-end gap-[6px]">
-                <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
-                  {values.location}
-                </div>
+              <div>
+                {!!values?.companyName && (
+                  <div className="flex items-end gap-[6px]">
+                    <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+                      {t("at")}
+                    </span>
+                    <div className="flex-center gap-[6px]">
+                      {!!values?.logo && (
+                        <Image
+                          src={values.logo}
+                          alt={`Logo de l'entreprise ${values.companyName}`}
+                          height={45}
+                          width={45}
+                        />
+                      )}
+                      <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                        {values.companyName}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div>
-            {!!values?.companyName && (
-              <div className="flex items-end gap-[6px]">
-                <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
-                  {t("at")}
-                </span>
-                <div className="flex-center gap-[6px]">
-                  {!!values?.logo && (
-                    <Image
-                      src={values.logo}
-                      alt={`Logo de l'entreprise ${values.companyName}`}
-                      height={45}
-                      width={45}
-                    />
-                  )}
+            </div>
+          )}
+          {(values?.location || values?.companyName) && (
+            <div className="w-[1px] bg-grey500" />
+          )}
+          {(values?.dureeTravail || values?.dureeTravailConverti) && (
+            <div className="flex-bet gap-x-[6px] flex-wrap">
+              {values?.dureeTravail && (
+                <div className="flex items-end gap-[6px]">
                   <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
-                    {values.companyName}
+                    {values.dureeTravail}
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-        </div>
-        <div>
-          <div className="flex-bet gap-x-[6px] flex-wrap">
-            {values?.experience && (
-              <div className="flex items-end gap-[6px]">
-                <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
-                  {values.experience}
+              )}
+              {values?.dureeTravailConverti && (
+                <div className="flex items-end gap-[6px]">
+                  <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                    {values.dureeTravailConverti}
+                  </div>
                 </div>
-              </div>
-            )}
-            {values?.qualification && (
-              <div className="flex items-end gap-[6px]">
-                <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
-                  {t("status")}
-                </span>
-                <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
-                  {values.qualification}
+              )}
+            </div>
+          )}
+          {(values?.dureeTravail || values?.dureeTravailConverti) && (
+            <div className="w-[1px] bg-grey500" />
+          )}
+
+          {(values?.experience || values?.contractType) && (
+            <div className="flex-bet gap-x-[6px] flex-wrap">
+              {values?.experience && (
+                <div className="flex items-end gap-[6px]">
+                  <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+                    {t("exp-level")}
+                  </span>
+                  <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                    {values.experience}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+              {values?.contractType && (
+                <div className="flex items-end gap-[6px]">
+                  <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+                    {t("contractType")}
+                  </span>
+                  <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                    {values.contractType}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+          {(values?.experience || values?.contractType) && (
+            <div className="w-[1px] bg-grey500" />
+          )}
         </div>
         <div className="flex-bet">
-          {!!values?.slug && (
+          {!!values?.slug ? (
             <SeeMore el={{ slug: values?.slug, __typename: "Offer" }} />
+          ) : (
+            <div />
           )}
-          {!!limitDate && <OtherOfferLimitDate limitDate={limitDate} />}
+          {!!limitDate && (
+            <OtherOfferLimitDate
+              limitDate={limitDate}
+              revenue={values?.revenue}
+            />
+          )}
         </div>
       </div>
     </>

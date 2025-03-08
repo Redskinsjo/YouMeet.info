@@ -44,7 +44,7 @@ export default function BrandsSection() {
           <div className="flex h-full flex-center gap-[72px] flex-wrap">
             {brands.map((brand) => {
               return (
-                <div className="w-[15%]">
+                <div className="w-[15%]" key={brand.name + brand.url}>
                   <Link
                     role="link"
                     href={brand.url}

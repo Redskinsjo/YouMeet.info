@@ -857,6 +857,8 @@ const compte = {
   offerRevenue: "Annual job income",
   revenue: "Income",
   contractType: "Contract type",
+  salary: "Salary",
+  "exp-level": "Experience level",
   authorInterviewLink: "Author interview link",
   limitDate: "Application limit date",
   authorName: "Author name",

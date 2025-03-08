@@ -202,8 +202,12 @@ const collectOffers = async (searchRole: string) => {
 
 const connectMatches = async (candidates: BetaCandidate[]) => {
   await prisma.betacandidates.updateMany({
-    where: { suggestedOpportunities: { none: undefined } },
+    where: { suggestedOpportunitiesIds: { isEmpty: false } },
     data: { suggestedOpportunitiesIds: { set: [] } },
+  });
+  await prisma.offers.updateMany({
+    where: { suggestedCandidatesIds: { isEmpty: false } },
+    data: { suggestedCandidatesIds: { set: [] } },
   });
   for (let i = 0; i < candidates.length; i++) {
     console.log("in", i);

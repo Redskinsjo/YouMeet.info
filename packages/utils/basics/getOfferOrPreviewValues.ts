@@ -49,7 +49,8 @@ export default async function getOfferOrPreviewValues(
       listReqs(el?.requirements as Competency[]) ||
       listReqs(el?.competences) ||
       [];
-    values.contractType = el?.contractType || el?.typeContratLibelle || "";
+    values.contractType =
+      el?.contractType || el?.typeContratLibelle || el?.typeContrat || "";
     values.location = el.location || el.lieuTravail?.libelle || "";
     values.revenue =
       (el.revenue && typeof el.revenue === "number" && String(el.revenue)) ||

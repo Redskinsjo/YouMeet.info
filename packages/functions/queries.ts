@@ -310,12 +310,15 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
             }
             qualificationLibelle
             experienceLibelle
+            dureeTravailLibelle
+            dureeTravailLibelleConverti
             remote
             limitDate
             salaire {
               libelle
             }
             contractType
+            revenue
           }
         }
         details {
