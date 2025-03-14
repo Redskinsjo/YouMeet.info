@@ -317,6 +317,10 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
             salaire {
               libelle
             }
+            origineOffre {
+              urlOrigine
+              origine
+            }
             contractType
             revenue
           }
