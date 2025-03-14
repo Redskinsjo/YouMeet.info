@@ -73,6 +73,8 @@ export default async function getOfferOrPreviewValues(
       ? `/offres/${el?.slug}`
       : el.contact?.urlPostulation
       ? `${el.contact?.urlPostulation}`
+      : el.origineOffre?.urlOrigine
+      ? el.origineOffre?.urlOrigine
       : "";
     values.limitDate = el?.limitDate;
     values.tools = (el.outilsBureautiques as string[]) || [];

@@ -1,7 +1,7 @@
 import prisma from "@youmeet/prisma-config/prisma";
 import puppeteer from "puppeteer";
 import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
-import { BetaCandidate, Offer } from "@youmeet/gql/generated";
+import regions from "@youmeet/raw-data/regions_departements.json";
 
 const monthsMapping = {
   janvier: "january",
@@ -21,65 +21,64 @@ const monthsMapping = {
   decembre: "december",
 };
 
-const x = (selector: string, parent?: Element) =>
-  (document || parent).querySelector(selector);
-const xs = (selector: string, parent?: Element) =>
-  (document || parent).querySelectorAll(selector);
 const wttjLink = "https://www.welcometothejungle.com";
+const thalesLink = "https://careers.thalesgroup.com/fr/fr/search-results";
+const glassdoorLink = "https://www.glassdoor.fr/Emploi/index.htm";
+const doctolibLink = "https://careers.doctolib.fr/";
+const freelanceInformatiqueLink =
+  "https://www.freelance-informatique.fr/offres-freelance";
+const helloWorkLink = "https://www.hellowork.com/fr-fr/emploi.html";
 
-const collectOffers = async (searchRole: string) => {
-  const browser = await puppeteer.launch({
-    headless: false,
-  });
-  const page = await browser.newPage();
+type DataType = {
+  link: string;
+  source: string;
+  company: string;
+  jobTitle: string;
+  education_level: string;
+  experience: string;
+  remote: string;
+  start: string;
+  salary: string;
+  location: string;
+  contract: string;
+  error: Error;
+  dureeTravailLibelleConverti: string;
+};
 
-  await page.goto(wttjLink);
+type linksEvalArgs = { link: string; cardsSelector: string };
 
-  await page.waitForNetworkIdle();
+type Site = {
+  link: string;
+  searchElSelector: string;
+  locationSelector?: string;
+  searchButtonElSelector?: string;
+  cardsSelector: string;
+  linksEvalFnc: (args: linksEvalArgs) => string[];
+  linksEvalArgs: linksEvalArgs;
+  dataEvalFnc: () => DataType;
+  dataEvalArgs: any;
+  secure?: boolean;
+};
 
-  console.log(searchRole.toLowerCase(), "job search");
-  const search = await page.$eval(
-    "#search-query-field",
-    (el, searchRole) => el.setAttribute("value", `${searchRole.toLowerCase()}`),
-    searchRole
-  );
-
-  const searchButton = await page.$eval(
-    "[data-testid='homepage-search-button']",
-    (el) => (el as HTMLButtonElement).click()
-  );
-
-  await page.waitForSelector(
-    "[data-testid='search-results-list-item-wrapper']"
-  );
-
-  const cardsParent = await page.$(
-    "[data-testid='search-results-list-item-wrapper']"
-  );
-
-  const links = await page.evaluate(
-    ({ wttjLink }) => {
-      const cardsParent = document.querySelectorAll(
-        "[data-testid='search-results-list-item-wrapper']"
-      );
+const sites: Site[] = [
+  {
+    link: wttjLink,
+    searchElSelector: "#search-query-field",
+    searchButtonElSelector: "[data-testid='homepage-search-button']",
+    cardsSelector: "[data-testid='search-results-list-item-wrapper']",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
 
       const cards = [...cardsParent].map((card) => card.querySelector("a"));
-      const hrefs = cards.map((card) => card.getAttribute("href"));
-      return hrefs.map((href) => `${wttjLink}${href}`);
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+      return hrefs.map((href) => `${link}${href}`);
     },
-    { wttjLink }
-  );
-
-  for (let i = 0; i < links.length; i++) {
-    const exist = await prisma.offers.findFirst({
-      where: {
-        contact: { urlPostulation: links[i] },
-      },
-    });
-    if (exist) continue;
-    await page.goto(links[i]);
-    const data = (await page.evaluate(() => {
-      const data = {} as any;
+    linksEvalArgs: {
+      link: wttjLink,
+      cardsSelector: "[data-testid='search-results-list-item-wrapper']",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
 
       try {
         const contract = document.querySelector("i[name='contract']");
@@ -108,7 +107,7 @@ const collectOffers = async (searchRole: string) => {
         }
         const experience = document.querySelector("div > i[name='suitcase']");
         if (experience?.parentElement?.textContent) {
-          data.suitcase = experience?.parentElement?.textContent;
+          data.experience = experience?.parentElement?.textContent;
         }
         const education_level = document.querySelector(
           "i[name='education_level']"
@@ -125,159 +124,397 @@ const collectOffers = async (searchRole: string) => {
           data.company = company.textContent;
         }
         data.link = window.location.href;
-        data.retrievedAt = new Date().toISOString();
+
         data.source = "wttj";
         return data;
       } catch (e) {
-        console.log(e);
-        return { error: e };
+        return { ...data, error: e };
       }
-    })) as {
-      link: string;
-      retrievedAt: Date;
-      source: string;
-      company: string;
-      jobTitle: string;
-      education_level: string;
-      experience: string;
-      remote: string;
-      start: string;
-      salary: string;
-      location: string;
-      contract: string;
-      error: Error;
-    };
-    if (data.error) console.log(data.error);
-    else if (data) {
-      const { slug, extension } = await setUniqueSlugAndExtension(
-        data.jobTitle
+    },
+    dataEvalArgs: {},
+  },
+  {
+    link: doctolibLink,
+    searchElSelector: ".input-search__input",
+    cardsSelector: ".job-card",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
+
+      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+
+      return hrefs.map((href) =>
+        href.includes("https") ? `${href}` : `${link}${href}`
       );
-      console.log(data.start, "start");
-      const start = data.start
-        ? new Date(
-            data.start
-              .split(" ")
-              .map((token) => monthsMapping[token] ?? token)
-              .join(" ")
-          ).toISOString()
-        : undefined;
+    },
+    linksEvalArgs: {
+      link: doctolibLink,
+      cardsSelector: ".job-card",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
 
       try {
-        const exist = await prisma.offers.findFirst({
-          where: {
-            contact: { urlPostulation: data.link },
-          },
-        });
-        if (exist) continue;
+        const contract = document.querySelector(
+          "svg[aria-label='Type de contrat:'] + p.paragraph"
+        );
+        if (contract?.textContent) data.contract = contract?.textContent;
 
-        const created = await prisma.offers.create({
-          data: {
-            contact: { urlPostulation: data.link },
-            createdAt: data.retrievedAt,
-            origineOffre: { origine: data.source },
-            entreprise: { nom: data.company },
-            intitule: data.jobTitle,
-            qualificationLibelle: data.education_level,
-            experienceLibelle: data.experience,
-            remote: data.remote?.toLowerCase(),
-            limitDate: start,
-            salaire: { libelle: data.salary },
-            lieuTravail: { libelle: data.location },
-            contractType: data.contract,
-            contexteTravail: {},
-            slug,
-            extension,
-            idFT: slug + extension,
-          },
-        });
-        console.log(created.id, "created");
-      } catch (err) {
-        console.log(err.message);
+        const location = document.querySelector(
+          "svg[aria-label='Endroit:'] + p.paragraph"
+        );
+        if (location?.textContent) data.location = location?.textContent;
+
+        const jobTitle = document.querySelector("h1.title");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+
+        data.company = "Doctolib";
+
+        data.link = window.location.href;
+
+        data.source = "doctolib";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+  },
+  {
+    secure: true,
+    link: freelanceInformatiqueLink,
+    searchElSelector: "#competences",
+    searchButtonElSelector: "li.banner-search-submit button",
+    cardsSelector: "h2.job-title",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
+
+      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+      return hrefs.map((href) =>
+        href.includes("https") ? `${href}` : `${link}${href}`
+      );
+    },
+    linksEvalArgs: {
+      link: freelanceInformatiqueLink,
+      cardsSelector: "h2.job-title",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      try {
+        const contract = document.querySelector(
+          "[title='Durée'] > div > div:not(.fw-bold)"
+        );
+        if (contract?.textContent) data.contract = contract?.textContent;
+
+        const location = document.querySelector(
+          "[title='Localisation'] > h2 > a"
+        );
+        if (location?.textContent) data.location = location?.textContent;
+
+        const jobTitle = document.querySelector("h1.title");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+        const company = document.querySelector(
+          "#the-company-section a div span"
+        );
+
+        const salaire = document.querySelector(
+          "[title='Tarif Journalier Moyen'] > div > h2"
+        );
+        if (salaire?.textContent) {
+          data.salary = salaire.textContent;
+        }
+        const start = document.querySelector(
+          "[title='Date de début'] > div > div:not(.fw-bold)"
+        );
+        if (start?.textContent) data.start = start.textContent;
+
+        data.link = window.location.href;
+
+        data.source = "freelance-informatique";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+  },
+  {
+    link: helloWorkLink,
+    searchElSelector: "#competences",
+    searchButtonElSelector: "li.banner-search-submit button",
+    cardsSelector: "h2.job-title",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
+
+      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+      return hrefs.map((href) =>
+        href.includes("https") ? `${href}` : `${link}${href}`
+      );
+    },
+    linksEvalArgs: {
+      link: helloWorkLink,
+      cardsSelector: "h2.job-title",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      try {
+        const contract = document.querySelector(
+          "[title='Durée'] > div > div:not(.fw-bold)"
+        );
+        if (contract?.textContent) data.contract = contract?.textContent;
+
+        const location = document.querySelector(
+          "[title='Localisation'] > h2 > a"
+        );
+        if (location?.textContent) data.location = location?.textContent;
+
+        const jobTitle = document.querySelector("h1.title");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+        const company = document.querySelector(
+          "#the-company-section a div span"
+        );
+
+        const salaire = document.querySelector(
+          "[title='Tarif Journalier Moyen'] > div > h2"
+        );
+        if (salaire?.textContent) {
+          data.salary = salaire.textContent;
+        }
+        const start = document.querySelector(
+          "[title='Date de début'] > div > div:not(.fw-bold)"
+        );
+        if (start?.textContent) data.start = start.textContent;
+
+        data.link = window.location.href;
+
+        data.source = "freelance-informatique";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+    secure: true,
+  },
+  {
+    link: thalesLink,
+    searchElSelector: "#typehead",
+    searchButtonElSelector: "#ph-search-backdrop",
+    cardsSelector: ".jobs-list-item",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
+
+      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+      console.log(hrefs);
+      return hrefs.map((href) =>
+        href.includes("https") ? `${href}` : `${link}${href}`
+      );
+    },
+    linksEvalArgs: { link: thalesLink, cardsSelector: ".jobs-list-item" },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      try {
+        // contract
+        const dureeTravailLibelleConverti = document.querySelector(
+          ".au-target.hiringType"
+        );
+        if (dureeTravailLibelleConverti)
+          data.dureeTravailLibelleConverti =
+            dureeTravailLibelleConverti.textContent;
+
+        // location
+        const location = document.querySelector(".au-target.job-location");
+        if (location.textContent) {
+          data.location = location?.textContent;
+        }
+
+        // jobTitle
+        const jobTitle = document.querySelector("h1.job-title");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+
+        // company
+        const company = document.querySelector(
+          "#the-company-section a div span"
+        );
+        if (company?.textContent) {
+          data.company = company.textContent;
+        }
+
+        // link
+        data.link = window.location.href;
+        // source
+        data.source = "thales";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+    secure: true,
+  },
+  {
+    link: glassdoorLink,
+    searchElSelector: "#searchBar-jobTitle",
+    locationSelector: "#searchBar-location",
+    cardsSelector: "[data-test='jobListing']",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
+
+      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+      return hrefs.map((href) =>
+        href.includes("https") ? `${href}` : `${link}${href}`
+      );
+    },
+    linksEvalArgs: {
+      link: wttjLink,
+      cardsSelector: "[data-test='jobListing']",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      return data;
+    },
+    dataEvalArgs: {},
+    secure: true,
+  },
+];
+
+const collectOffers = async (searchRole: string, workLocation: string) => {
+  const browser = await puppeteer.launch({
+    headless: false,
+  });
+  const page = await browser.newPage();
+
+  // const crawl = sites.filter((site) => !site.secure);
+  const crawl = [sites[1]];
+  // const crawl = sites.slice(0, 1);
+
+  console.log(crawl.length, "crawling sites");
+  for (let p = 0; p < crawl.length; p++) {
+    const site = crawl[p];
+
+    await page.goto(site.link);
+
+    await page.waitForNetworkIdle();
+
+    console.log(site.searchElSelector, "site.searchElSelector");
+
+    if (site?.searchElSelector) {
+      const search = await page.$eval(
+        site.searchElSelector,
+        (el, searchRole) =>
+          el.setAttribute("value", `${searchRole.toLowerCase()}`),
+        searchRole
+      );
+      console.log(search, "search");
+    }
+
+    if (site?.locationSelector) {
+      const location = await page.$eval(
+        site.locationSelector,
+        (el, workLocation) =>
+          el.setAttribute("value", `${workLocation.toLowerCase()}`),
+        workLocation
+      );
+      console.log(location, "location");
+    }
+
+    if (site.searchButtonElSelector) {
+      await page.$eval(site.searchButtonElSelector, (el) =>
+        (el as HTMLButtonElement).click()
+      );
+    } else {
+      await page.keyboard.press("Enter");
+    }
+
+    try {
+      await page.waitForSelector(site.cardsSelector, { timeout: 10000 });
+    } catch (err: any) {
+      continue;
+    }
+
+    const links = await page.evaluate(site.linksEvalFnc, site.linksEvalArgs);
+
+    console.log(links.length, "links");
+    for (let i = 0; i < links.length; i++) {
+      const exist = await prisma.offers.findFirst({
+        where: {
+          contact: { urlPostulation: links[i] },
+        },
+      });
+      if (exist) continue;
+      await page.goto(links[i]);
+      const data = (await page.evaluate(site.dataEvalFnc)) as DataType;
+      console.log(data);
+      if (data.error) console.log(data.error);
+      else if (data) {
+        const { slug, extension } = await setUniqueSlugAndExtension(
+          data.jobTitle
+        );
+
+        const start = data.start
+          ? new Date(
+              data.start
+                .split(" ")
+                .map((token) => monthsMapping[token] ?? token)
+                .join(" ")
+            ).toISOString()
+          : undefined;
+
+        try {
+          const exist = await prisma.offers.findFirst({
+            where: {
+              contact: { urlPostulation: data.link },
+            },
+          });
+          if (exist) continue;
+
+          let payload = {} as any;
+
+          if (data.link) payload.contact = { urlPostulation: data.link };
+
+          if (data.source) payload.origineOffre = { origine: data.source };
+          if (data.company) payload.entreprise = { nom: data.company };
+          if (data.jobTitle) payload.intitule = data.jobTitle;
+          if (data.education_level)
+            payload.qualificationLibelle = data.education_level;
+          if (data.experience) payload.experienceLibelle = data.experience;
+          if (data.remote) payload.remote = data.remote?.toLowerCase();
+          if (start) payload.limitDate = start;
+          if (data.salary) payload.salaire = { libelle: data.salary };
+          if (data.location) payload.lieuTravail = { libelle: data.location };
+          if (data.contract) payload.contractType = data.contract;
+          if (data.dureeTravailLibelleConverti)
+            payload.dureeTravailLibelleConverti =
+              data.dureeTravailLibelleConverti;
+
+          payload.slug = slug;
+          payload.extension = extension;
+          payload.idFT = slug + extension;
+          payload.contexteTravail = {};
+          payload.remote = data.remote?.toLowerCase();
+          payload.contact = { urlPostulation: data.link };
+          payload.createdAt = new Date();
+
+          const created = await prisma.offers.create({
+            data: payload,
+          });
+          console.log(created.id, "created");
+        } catch (err) {
+          console.log(err.message);
+        }
       }
     }
   }
 
   await browser.close();
-};
-
-const connectMatches = async (candidates: BetaCandidate[]) => {
-  await prisma.betacandidates.updateMany({
-    where: { suggestedOpportunitiesIds: { isEmpty: false } },
-    data: { suggestedOpportunitiesIds: { set: [] } },
-  });
-  await prisma.offers.updateMany({
-    where: { suggestedCandidatesIds: { isEmpty: false } },
-    data: { suggestedCandidatesIds: { set: [] } },
-  });
-  for (let i = 0; i < candidates.length; i++) {
-    console.log("in", i);
-    const candidate = candidates[i];
-
-    // for each candidate, link the target job to the job
-    if (!candidate?.targetJobId) continue;
-    const job = await prisma.jobs.findUnique({
-      where: {
-        id: candidate.targetJobId,
-      },
-    });
-    if (job) {
-      const min4 = (tokens) => tokens.filter((token) => token.length > 4);
-      const enTitle = min4(job.title?.en.toLowerCase().split(" "));
-      const frTitle = min4(job.title?.fr.toLowerCase().split(" "));
-      const tokens = enTitle.concat(frTitle);
-      const codes = ["75", "92", "93", "94", "91", "78", "77"];
-
-      let entries = [];
-      for (let j = 0; j < tokens.length; j++) {
-        for (let k = 0; k < codes.length; k++) {
-          entries.push([tokens[j], codes[k]]);
-        }
-      }
-
-      // récupère les offres qui matchent
-      const matchedOffers = await prisma.offers.findMany({
-        where: {
-          OR: entries.map(([token, code]) => {
-            return {
-              intitule: { mode: "insensitive", contains: token },
-              lieuTravail: { is: { codePostal: { startsWith: code } } },
-            };
-          }),
-        },
-      });
-      console.log("matched:", matchedOffers.length);
-
-      if (matchedOffers.length === 0) continue;
-
-      console.log([
-        candidate.targetContractType,
-        job.title,
-        matchedOffers.length,
-      ]);
-      // connect the opportunities to candidate
-      const ca = await prisma.betacandidates.update({
-        where: { id: candidate.id },
-        data: {
-          suggestedOpportunities: {
-            connect: matchedOffers.map((m) => ({
-              id: m.id,
-            })),
-          },
-        },
-      });
-      // connect the candidate to the opportunity
-      await Promise.all(
-        matchedOffers.map(
-          async (opp) =>
-            await prisma.offers.update({
-              where: { id: opp.id },
-              data: { suggestedCandidates: { connect: { id: candidate.id } } },
-            })
-        )
-      );
-    }
-  }
-  return;
 };
 
 (async () => {
@@ -293,34 +530,27 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
     },
   });
 
-  console.log(candidates.length, "candidates");
-  // const candidatesWhoTargetJobAndContract = candidates
-  //   .filter((cand) => !!cand.targetJobId)
-  //   .reduce((acc, curr) => {
-  //     if (!acc.find((cand) => cand.targetJobId === curr.targetJobId))
-  //       acc.push(curr);
-  //     return acc;
-  //   }, []);
+  const candidatesWhoTargetJobAndContract = candidates
+    .filter((cand) => !!cand.targetJobId)
+    .reduce((acc, curr) => {
+      if (!acc.find((cand) => cand.targetJobId === curr.targetJobId))
+        acc.push(curr);
+      return acc;
+    }, []);
 
-  // const scrapped = [];
+  console.log(candidatesWhoTargetJobAndContract.length, "candidates");
+  for (let i = 0; i < candidatesWhoTargetJobAndContract.length; i++) {
+    const candidate = candidatesWhoTargetJobAndContract[i];
+    const jobId = candidate.targetJobId;
 
-  // for (let i = 0; i < candidatesWhoTargetJobAndContract.length; i++) {
-  //   const candidate = candidatesWhoTargetJobAndContract[i];
-  //   const jobId = candidate.targetJobId;
+    const job = await prisma.jobs.findUnique({
+      where: { id: jobId },
+    });
 
-  //   const job = await prisma.jobs.findUnique({
-  //     where: { id: jobId },
-  //   });
-
-  //   if (job.title.fr) {
-  //     let search = !!candidate.targetContractType
-  //       ? `${job.title.fr} ${candidate.targetContractType} ile-de-france`
-  //       : `${job.title.fr} ile-de-france`;
-  //     if (!scrapped.includes(search)) await collectOffers(search);
-  //   }
-  // }
+    console.log(job.title.fr, "job.title.fr");
+    if (job.title.fr) await collectOffers(`${job.title.fr}`, "ile-de-france");
+  }
   console.log("connecting...");
-  await connectMatches(candidates);
-  console.log("exiting");
+
   process.exit();
 })();
