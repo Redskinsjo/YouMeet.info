@@ -28,4 +28,5 @@ export type OfferContentValues = {
   secteurActivite: string;
   intitule: string;
   salaire: string;
+  source?: string;
 };

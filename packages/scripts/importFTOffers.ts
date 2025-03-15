@@ -64,7 +64,7 @@ import { setUniqueSlugAndExtension } from "@youmeet/utils/backoffice/setUniqueIn
     const result = (await getOffersFT<ResultOffresFT>({
       range: `${start}-${end}`,
     })) as ResultOffresFT;
-    console.log(`Fetched: ${result.resultats.length} offers`);
+    console.log(`Fetched: ${result?.resultats?.length} offers`);
     const data = result?.resultats;
     const offres = data?.length > 0 ? data : [];
 

@@ -17,11 +17,12 @@
     "importFTOffers": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts",
     "checkDbIndexes": "SCRIPT=true dotenv -e .env.development -- ts-node ./checkDbIndexes.ts",
     "updateReducedOffers": "SCRIPT=true dotenv -e .env -- ts-node ./updateReducedOffers.ts",
-    "renewDbProd": "SCRIPT=true dotenv -e .env -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts && npx tsx ./collectOffers.ts",
+    "renewDbProd": "SCRIPT=true dotenv -e .env -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts && npx tsx ./collectOffers.ts && npx tsx ./connectOffers.ts",
     "renewDb": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts",
     "removeBadIndexes": "SCRIPT=true dotenv -e .env -- npx tsx ./removeBadIndexes.ts",
     "collectOffers": "SCRIPT=true dotenv -e .env -- npx tsx ./collectOffers.ts",
     "connectOffers": "SCRIPT=true dotenv -e .env -- npx tsx ./connectOffers.ts",
+    "collectAnConnect": "SCRIPT=true dotenv -e .env -- npx tsx ./collectOffers.ts && npx tsx ./connectOffers.ts",
     "sendEmailNotificationForNewOpportunities": "SCRIPT=true dotenv -e .env.development -- npx tsx ./sendEmailNotificationForNewOpportunities.ts",
     "sendEmailNotificationForNewOpportunitiesProd": "SCRIPT=true dotenv -e .env -- npx tsx ./sendEmailNotificationForNewOpportunities.ts"
   },

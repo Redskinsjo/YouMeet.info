@@ -22,15 +22,18 @@ const monthsMapping = {
 };
 
 const wttjLink = "https://www.welcometothejungle.com";
-const thalesLink = "https://careers.thalesgroup.com/fr/fr/search-results";
-const glassdoorLink = "https://www.glassdoor.fr/Emploi/index.htm";
-const doctolibLink = "https://careers.doctolib.fr/";
-const freelanceInformatiqueLink =
-  "https://www.freelance-informatique.fr/offres-freelance";
-const helloWorkLink = "https://www.hellowork.com/fr-fr/emploi.html";
+const thalesLink = "https://careers.thalesgroup.com";
+const glassdoorLink = "https://www.glassdoor.fr";
+const doctolibLink = "https://careers.doctolib.fr";
+const freelanceInformatiqueLink = "https://www.freelance-informatique.fr";
+const helloWorkLink = "https://www.hellowork.com";
+const weAreSanderLink = "https://www.wearesander.com";
+const emploiParisLink = "https://emploi.paris.fr";
+const chooseYourBossLink = "https://chooseyourboss.com";
 
 type DataType = {
   link: string;
+  searchLink: string;
   source: string;
   company: string;
   jobTitle: string;
@@ -49,6 +52,7 @@ type linksEvalArgs = { link: string; cardsSelector: string };
 
 type Site = {
   link: string;
+  searchLink: string;
   searchElSelector: string;
   locationSelector?: string;
   searchButtonElSelector?: string;
@@ -63,6 +67,7 @@ type Site = {
 const sites: Site[] = [
   {
     link: wttjLink,
+    searchLink: wttjLink,
     searchElSelector: "#search-query-field",
     searchButtonElSelector: "[data-testid='homepage-search-button']",
     cardsSelector: "[data-testid='search-results-list-item-wrapper']",
@@ -135,6 +140,7 @@ const sites: Site[] = [
   },
   {
     link: doctolibLink,
+    searchLink: doctolibLink,
     searchElSelector: ".input-search__input",
     cardsSelector: ".job-card",
     linksEvalFnc: ({ link, cardsSelector }) => {
@@ -144,7 +150,7 @@ const sites: Site[] = [
       const hrefs = cards.map((card) => card?.getAttribute("href"));
 
       return hrefs.map((href) =>
-        href.includes("https") ? `${href}` : `${link}${href}`
+        href?.includes("https") ? `${href}` : `${link}${href}`
       );
     },
     linksEvalArgs: {
@@ -181,8 +187,164 @@ const sites: Site[] = [
     dataEvalArgs: {},
   },
   {
+    link: chooseYourBossLink,
+    searchLink: `${chooseYourBossLink}/offres/emploi-it`,
+    searchElSelector: "#offer-search-skill",
+    locationSelector: "#offer-search-location",
+    cardsSelector: ".card.offer",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
+
+      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+
+      return hrefs.map((href) =>
+        href?.includes("https") ? `${href}` : `${link}${href}`
+      );
+    },
+    linksEvalArgs: {
+      link: chooseYourBossLink,
+      cardsSelector: ".card.offer",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      try {
+        const jobTitle = document.querySelector(".headline h1");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+
+        const company = document.querySelector("a.company-link");
+        if (company?.textContent) data.company = company?.textContent;
+
+        data.link = window.location.href;
+
+        data.source = "chooseYourBoss";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+  },
+  {
     secure: true,
+    link: emploiParisLink,
+    searchLink: `${emploiParisLink}/offres`,
+    searchElSelector: "input[name='what[search]']",
+    cardsSelector: ".job-card",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cardsParent = document.querySelectorAll(cardsSelector);
+
+      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+      const hrefs = cards.map((card) => card?.getAttribute("href"));
+
+      return hrefs.map((href) =>
+        href?.includes("https") ? `${href}` : `${link}${href}`
+      );
+    },
+    linksEvalArgs: {
+      link: emploiParisLink,
+      cardsSelector: ".job-card",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      try {
+        const contract = document.querySelector(
+          "svg[aria-label='Type de contrat:'] + p.paragraph"
+        );
+        if (contract?.textContent) data.contract = contract?.textContent;
+
+        const location = document.querySelector(
+          "svg[aria-label='Endroit:'] + p.paragraph"
+        );
+        if (location?.textContent) data.location = location?.textContent;
+
+        const jobTitle = document.querySelector("h1.title");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+
+        data.company = "Doctolib";
+
+        data.link = window.location.href;
+
+        data.source = "doctolib";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+  },
+  {
+    link: weAreSanderLink,
+    searchLink: `${weAreSanderLink}/fr/jobs`,
+    searchElSelector: "#careers-search-input",
+    searchButtonElSelector: "#careers-search-submit",
+    cardsSelector: "#job-listings-grid > a",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cards = document.querySelectorAll(cardsSelector);
+
+      const hrefs = [...cards].map((card) => card?.getAttribute("href"));
+
+      return hrefs.map((href) =>
+        href?.includes("https") ? `${href}` : `${link}${href}`
+      );
+    },
+    linksEvalArgs: {
+      link: weAreSanderLink,
+      cardsSelector: "#job-listings-grid > a",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      try {
+        const contract = document.evaluate(
+          `//*[contains(text(), 'Type de Contrat')]`,
+          document,
+          null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE,
+          null
+        ).singleNodeValue;
+        if (contract?.nextSibling?.textContent)
+          data.contract = contract?.nextSibling?.textContent;
+
+        const location = document.evaluate(
+          `//*[contains(text(), 'Région')]`,
+          document,
+          null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE,
+          null
+        ).singleNodeValue;
+        if (location?.nextSibling?.textContent)
+          data.location = location?.nextSibling?.textContent;
+
+        const salaire = document.evaluate(
+          `//*[contains(text(), 'Proposition salariale')]`,
+          document,
+          null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE,
+          null
+        ).singleNodeValue;
+
+        if (salaire?.nextSibling?.textContent)
+          data.salary = salaire?.nextSibling?.textContent;
+
+        const jobTitle = document.querySelector("#career-details-title.h1");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+
+        data.link = window.location.href;
+
+        data.source = "wearesander";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+  },
+  {
     link: freelanceInformatiqueLink,
+    searchLink: `${freelanceInformatiqueLink}/offres-freelance`,
     searchElSelector: "#competences",
     searchButtonElSelector: "li.banner-search-submit button",
     cardsSelector: "h2.job-title",
@@ -191,9 +353,9 @@ const sites: Site[] = [
 
       const cards = [...cardsParent].map((card) => card.querySelector("a"));
       const hrefs = cards.map((card) => card?.getAttribute("href"));
-      return hrefs.map((href) =>
-        href.includes("https") ? `${href}` : `${link}${href}`
-      );
+      return hrefs
+        .map((href) => (href?.includes("https") ? `${href}` : `${link}${href}`))
+        .filter((href) => !href.includes("undefined"));
     },
     linksEvalArgs: {
       link: freelanceInformatiqueLink,
@@ -203,21 +365,20 @@ const sites: Site[] = [
       const data = {} as DataType;
 
       try {
-        const contract = document.querySelector(
+        const dureeTravailLibelleConverti = document.querySelector(
           "[title='Durée'] > div > div:not(.fw-bold)"
         );
-        if (contract?.textContent) data.contract = contract?.textContent;
+        if (dureeTravailLibelleConverti?.textContent)
+          data.dureeTravailLibelleConverti =
+            dureeTravailLibelleConverti?.textContent;
 
         const location = document.querySelector(
-          "[title='Localisation'] > h2 > a"
+          "[title='Localisation'] > div > h2 > a"
         );
         if (location?.textContent) data.location = location?.textContent;
 
         const jobTitle = document.querySelector("h1.title");
         if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
-        const company = document.querySelector(
-          "#the-company-section a div span"
-        );
 
         const salaire = document.querySelector(
           "[title='Tarif Journalier Moyen'] > div > h2"
@@ -231,6 +392,7 @@ const sites: Site[] = [
         if (start?.textContent) data.start = start.textContent;
 
         data.link = window.location.href;
+        data.contract = "freelance";
 
         data.source = "freelance-informatique";
         return data;
@@ -241,7 +403,9 @@ const sites: Site[] = [
     dataEvalArgs: {},
   },
   {
+    secure: true,
     link: helloWorkLink,
+    searchLink: `${helloWorkLink}/fr-fr/emploi.html`,
     searchElSelector: "#competences",
     searchButtonElSelector: "li.banner-search-submit button",
     cardsSelector: "h2.job-title",
@@ -251,7 +415,7 @@ const sites: Site[] = [
       const cards = [...cardsParent].map((card) => card.querySelector("a"));
       const hrefs = cards.map((card) => card?.getAttribute("href"));
       return hrefs.map((href) =>
-        href.includes("https") ? `${href}` : `${link}${href}`
+        href?.includes("https") ? `${href}` : `${link}${href}`
       );
     },
     linksEvalArgs: {
@@ -298,10 +462,10 @@ const sites: Site[] = [
       }
     },
     dataEvalArgs: {},
-    secure: true,
   },
   {
     link: thalesLink,
+    searchLink: `${thalesLink}/fr/fr/search-results`,
     searchElSelector: "#typehead",
     searchButtonElSelector: "#ph-search-backdrop",
     cardsSelector: ".jobs-list-item",
@@ -312,7 +476,7 @@ const sites: Site[] = [
       const hrefs = cards.map((card) => card?.getAttribute("href"));
       console.log(hrefs);
       return hrefs.map((href) =>
-        href.includes("https") ? `${href}` : `${link}${href}`
+        href?.includes("https") ? `${href}` : `${link}${href}`
       );
     },
     linksEvalArgs: { link: thalesLink, cardsSelector: ".jobs-list-item" },
@@ -326,12 +490,14 @@ const sites: Site[] = [
         );
         if (dureeTravailLibelleConverti)
           data.dureeTravailLibelleConverti =
-            dureeTravailLibelleConverti.textContent;
+            dureeTravailLibelleConverti.textContent.trim();
 
         // location
         const location = document.querySelector(".au-target.job-location");
         if (location.textContent) {
-          data.location = location?.textContent;
+          data.location = location?.textContent
+            .replace("localisation", "")
+            .trim();
         }
 
         // jobTitle
@@ -356,10 +522,11 @@ const sites: Site[] = [
       }
     },
     dataEvalArgs: {},
-    secure: true,
   },
   {
+    secure: true,
     link: glassdoorLink,
+    searchLink: `${glassdoorLink}/Emploi/index.htm`,
     searchElSelector: "#searchBar-jobTitle",
     locationSelector: "#searchBar-location",
     cardsSelector: "[data-test='jobListing']",
@@ -369,7 +536,7 @@ const sites: Site[] = [
       const cards = [...cardsParent].map((card) => card.querySelector("a"));
       const hrefs = cards.map((card) => card?.getAttribute("href"));
       return hrefs.map((href) =>
-        href.includes("https") ? `${href}` : `${link}${href}`
+        href?.includes("https") ? `${href}` : `${link}${href}`
       );
     },
     linksEvalArgs: {
@@ -382,7 +549,6 @@ const sites: Site[] = [
       return data;
     },
     dataEvalArgs: {},
-    secure: true,
   },
 ];
 
@@ -392,17 +558,16 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
   });
   const page = await browser.newPage();
 
-  // const crawl = sites.filter((site) => !site.secure);
-  const crawl = [sites[1]];
-  // const crawl = sites.slice(0, 1);
+  const crawl = sites.filter((site) => !site.secure);
+  // const crawl = [sites[8]];
 
   console.log(crawl.length, "crawling sites");
   for (let p = 0; p < crawl.length; p++) {
     const site = crawl[p];
 
-    await page.goto(site.link);
+    await page.goto(site.searchLink);
 
-    await page.waitForNetworkIdle();
+    await page.waitForSelector(site.searchElSelector);
 
     console.log(site.searchElSelector, "site.searchElSelector");
 
@@ -413,8 +578,8 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
           el.setAttribute("value", `${searchRole.toLowerCase()}`),
         searchRole
       );
-      console.log(search, "search");
     }
+    console.log("0");
 
     if (site?.locationSelector) {
       const location = await page.$eval(
@@ -423,8 +588,8 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
           el.setAttribute("value", `${workLocation.toLowerCase()}`),
         workLocation
       );
-      console.log(location, "location");
     }
+    console.log("1");
 
     if (site.searchButtonElSelector) {
       await page.$eval(site.searchButtonElSelector, (el) =>
@@ -433,9 +598,11 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
     } else {
       await page.keyboard.press("Enter");
     }
+    console.log("2");
 
     try {
       await page.waitForSelector(site.cardsSelector, { timeout: 10000 });
+      console.log("waited");
     } catch (err: any) {
       continue;
     }
@@ -459,14 +626,19 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
           data.jobTitle
         );
 
-        const start = data.start
-          ? new Date(
-              data.start
-                .split(" ")
-                .map((token) => monthsMapping[token] ?? token)
-                .join(" ")
-            ).toISOString()
-          : undefined;
+        let start;
+        try {
+          start = data.start
+            ? new Date(
+                data.start
+                  .split(" ")
+                  .map((token) => monthsMapping[token] ?? token)
+                  .join(" ")
+              ).toISOString()
+            : undefined;
+        } catch (err: any) {
+          console.log("Invalid time value");
+        }
 
         try {
           const exist = await prisma.offers.findFirst({
@@ -520,6 +692,9 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
 (async () => {
   const candidates = await prisma.betacandidates.findMany({
     where: {
+      user: {
+        email: "jonathan.carnos@gmail.com",
+      },
       OR: [
         {
           user: { isNot: null },

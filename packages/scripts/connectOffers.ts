@@ -10,6 +10,10 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
     where: { suggestedCandidatesIds: { isEmpty: false } },
     data: { suggestedCandidatesIds: { set: [] } },
   });
+  console.log("mise à niveau");
+  await new Promise((res) => {
+    setTimeout(res, 2000);
+  });
   for (let i = 0; i < candidates.length; i++) {
     console.log("in", i);
     const candidate = candidates[i];
@@ -46,6 +50,8 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
                   OR: [
                     { codePostal: { startsWith: code } },
                     { libelle: { contains: code } },
+                    { codePostal: { isSet: false } },
+                    { libelle: { isSet: false } },
                   ],
                 },
               },
@@ -91,6 +97,9 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
 (async () => {
   const candidates = await prisma.betacandidates.findMany({
     where: {
+      user: {
+        email: "jonathan.carnos@gmail.com",
+      },
       OR: [
         {
           user: { isNot: null },

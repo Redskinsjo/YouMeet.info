@@ -76,7 +76,7 @@ export default async function getOfferOrPreviewValues(
       : el.origineOffre?.urlOrigine
       ? el.origineOffre?.urlOrigine
       : "";
-    values.limitDate = el?.limitDate;
+    values.source = el?.origineOffre?.origine || "";
     values.tools = (el.outilsBureautiques as string[]) || [];
     values.permis = listReqs(el.permis) || [];
     values.nombrePostes = el.nombrePostes || 1;

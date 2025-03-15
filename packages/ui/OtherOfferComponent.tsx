@@ -40,8 +40,6 @@ export default function OtherOfferComponent({ offer }: { offer: Offer }) {
     ? `${at.getDate()} ${at.getMonth()} ${at.getFullYear()}`
     : undefined;
 
-  console.log(values, "values");
-
   return (
     <>
       <div className="flex flex-col gap-[6px] w-full border-[0.5px] border-solid border-grey900 rounded-[14px] p-[6px] px-[12px] box-border">
@@ -66,7 +64,7 @@ export default function OtherOfferComponent({ offer }: { offer: Offer }) {
             )
           )}
           <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px] whitespace-nowrap">
-            {t("transmit-your-video")}
+            {values?.source}
           </span>
         </div>
         <div className="flex flex-wrap gap-[12px]">
