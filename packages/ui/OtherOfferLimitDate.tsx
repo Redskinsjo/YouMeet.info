@@ -1,4 +1,6 @@
 "use client";
+import { useMediaQuery } from "@mui/material";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 const monthsMapping = {
@@ -24,6 +26,8 @@ export default function OtherOfferLimitDate({
   revenue?: string;
 }) {
   const { t } = useTranslation();
+  const revenueRef = useRef<HTMLDivElement>(null);
+  const md = useMediaQuery("(max-width:900px)");
 
   const format = limitDate.split(" ").map((p, i) => {
     if (i === 1) return (monthsMapping as any)[p];
@@ -33,10 +37,19 @@ export default function OtherOfferLimitDate({
   const month = format[1];
   const year = format[2];
 
+  useEffect(() => {
+    if (revenueRef.current) {
+      const dim = revenueRef.current.getBoundingClientRect();
+      if (dim.width > 152 && md) {
+        revenueRef.current.setAttribute("style", "display:none;");
+      }
+    }
+  }, [revenueRef]);
+
   return (
     <div className="flex">
       {!!revenue && (
-        <div className="flex items-end gap-[6px]">
+        <div className="flex items-end gap-[6px]" ref={revenueRef}>
           <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
             {t("salary")}
           </span>

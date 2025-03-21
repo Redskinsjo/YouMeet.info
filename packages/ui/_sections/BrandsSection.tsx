@@ -41,7 +41,7 @@ export default function BrandsSection() {
           {t("connecting-you-with-recruiters")}
         </h2>
         <div className="overflow-hidden w-full h-[400px] rounded-[14px] bg-black opacity-60">
-          <div className="flex h-full flex-center gap-[72px] flex-wrap">
+          <div className="flex h-full flex-center gap-[72px] flex-wrap xs:gap-[24px] sm:gap-[24px] md:gap-[24px]">
             {brands.map((brand) => {
               return (
                 <div

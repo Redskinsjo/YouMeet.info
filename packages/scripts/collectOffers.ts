@@ -21,6 +21,21 @@ const monthsMapping = {
   decembre: "december",
 };
 
+const monthMappingNum = {
+  "01": "january",
+  "02": "february",
+  "03": "march",
+  "04": "april",
+  "05": "may",
+  "06": "june",
+  "07": "july",
+  "08": "august",
+  "09": "september",
+  "10": "october",
+  "11": "november",
+  "12": "december",
+};
+
 const wttjLink = "https://www.welcometothejungle.com";
 const thalesLink = "https://careers.thalesgroup.com";
 const glassdoorLink = "https://www.glassdoor.fr";
@@ -30,6 +45,7 @@ const helloWorkLink = "https://www.hellowork.com";
 const weAreSanderLink = "https://www.wearesander.com";
 const emploiParisLink = "https://emploi.paris.fr";
 const chooseYourBossLink = "https://chooseyourboss.com";
+const capgeminiLink = "https://www.capgemini.com";
 
 type DataType = {
   link: string;
@@ -350,8 +366,25 @@ const sites: Site[] = [
     cardsSelector: "h2.job-title",
     linksEvalFnc: ({ link, cardsSelector }) => {
       const cardsParent = document.querySelectorAll(cardsSelector);
+      const filtered = [...cardsParent].filter((card) => {
+        const published =
+          card.parentElement.querySelector("i.icon-clock").parentElement
+            .textContent;
+        const date = published.replace("Publiée le", "").trim().split("/");
 
-      const cards = [...cardsParent].map((card) => card.querySelector("a"));
+        if (date.length === 3) {
+          date[1] = monthMappingNum[date[1]];
+          const joined = date.join(" ");
+          const newDate = new Date(joined);
+          const now = new Date();
+          if (now.getTime() - newDate.getTime() > 3600 * 1000 * 24 * 30 * 3) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      const cards = filtered.map((card) => card.querySelector("a"));
       const hrefs = cards.map((card) => card?.getAttribute("href"));
       return hrefs
         .map((href) => (href?.includes("https") ? `${href}` : `${link}${href}`))
@@ -395,6 +428,66 @@ const sites: Site[] = [
         data.contract = "freelance";
 
         data.source = "freelance-informatique";
+        return data;
+      } catch (e) {
+        return { ...data, error: e };
+      }
+    },
+    dataEvalArgs: {},
+  },
+  {
+    link: capgeminiLink,
+    searchLink: `${capgeminiLink}/careers/join-capgemini/job-search`,
+    searchElSelector: "#searchsubmit",
+    searchButtonElSelector: ".search-button",
+    cardsSelector: ".joblink",
+    linksEvalFnc: ({ link, cardsSelector }) => {
+      const cards = document.querySelectorAll(cardsSelector);
+
+      const hrefs = [...cards].map((card) => card?.getAttribute("href"));
+      return hrefs
+        .map((href) => (href?.includes("https") ? `${href}` : `${link}${href}`))
+        .filter((href) => !href.includes("undefined"));
+    },
+    linksEvalArgs: {
+      link: capgeminiLink,
+      cardsSelector: ".joblink",
+    },
+    dataEvalFnc: () => {
+      const data = {} as DataType;
+
+      try {
+        const contract = document.evaluate(
+          `//*[contains(text(), 'Contract type')]`,
+          document,
+          null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE,
+          null
+        ).singleNodeValue;
+
+        if (contract.nextSibling.textContent)
+          data.contract = contract.nextSibling.textContent;
+
+        const experienceLevel = document.evaluate(
+          `//*[contains(text(), 'Experience level')]`,
+          document,
+          null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE,
+          null
+        ).singleNodeValue;
+
+        if (experienceLevel.nextSibling.textContent)
+          data.experience = experienceLevel.nextSibling.textContent;
+
+        const location = document.querySelector("span.box-tag");
+        if (location?.textContent) data.location = location?.textContent;
+
+        const jobTitle = document.querySelector("h1.box-title");
+        if (jobTitle?.textContent) data.jobTitle = jobTitle.textContent;
+
+        data.link = window.location.href;
+
+        data.source = "capgemini";
         return data;
       } catch (e) {
         return { ...data, error: e };
@@ -620,8 +713,10 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
       await page.goto(links[i]);
       const data = (await page.evaluate(site.dataEvalFnc)) as DataType;
       console.log(data);
-      if (data.error) console.log(data.error);
-      else if (data) {
+      if (data.error) {
+        console.log("error on data (or ancient offer)");
+        return;
+      } else if (data) {
         const { slug, extension } = await setUniqueSlugAndExtension(
           data.jobTitle
         );
@@ -692,9 +787,7 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
 (async () => {
   const candidates = await prisma.betacandidates.findMany({
     where: {
-      user: {
-        email: "jonathan.carnos@gmail.com",
-      },
+      user: { user: true },
       OR: [
         {
           user: { isNot: null },

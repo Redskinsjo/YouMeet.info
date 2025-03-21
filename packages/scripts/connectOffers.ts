@@ -97,9 +97,7 @@ const connectMatches = async (candidates: BetaCandidate[]) => {
 (async () => {
   const candidates = await prisma.betacandidates.findMany({
     where: {
-      user: {
-        email: "jonathan.carnos@gmail.com",
-      },
+      user: { user: true },
       OR: [
         {
           user: { isNot: null },
