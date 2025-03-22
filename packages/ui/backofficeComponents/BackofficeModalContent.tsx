@@ -94,7 +94,7 @@ export default function BackofficeModalContent({
     undefined | (BetaProfile | undefined | null)[]
   >();
   const [loading, setLoading] = useState(false);
-  const [timer, setTimer] = useState<NodeJS.Timeout | undefined>();
+
   const {
     t,
     i18n: { language },

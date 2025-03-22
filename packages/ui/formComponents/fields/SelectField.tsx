@@ -1,5 +1,11 @@
 "use client";
-import { ReactElement, useCallback, useEffect, useState } from "react";
+import {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
@@ -14,6 +20,7 @@ import {
   GetOneJobDocument,
   GetOneTopSectorDocument,
   GetTopSectorsDocument,
+  JobInput,
 } from "@youmeet/gql/generated";
 import { client } from "@youmeet/gql/index";
 import { TypedDocumentNode } from "@apollo/client";
@@ -122,6 +129,7 @@ const SelectField = ({
     (state: RootState) => (state.form as FormState).profileStep
   );
   const [data, setData] = useState<QueriesDocuments | PhoneCodes[]>([]);
+  const [isLoading, setTransition] = useTransition();
   const dispatch = useDispatch();
   const [added, setAdded] = useState<string[] | undefined>([]);
   const {
@@ -152,27 +160,32 @@ const SelectField = ({
   }
 
   const fetchData = useCallback(
-    async (value: string) => {
-      const variables = {} as any;
+    (value: string) => {
+      setTransition(async () => {
+        const variables = {} as any;
 
-      if (name === "phonecode") return setData(phoneCodes);
-      if (name === "job") {
-        variables.data = { title: value };
-      }
-      if (name === "company") {
-        variables.first = { take: 50 };
-        variables.filters = { name: value };
-      }
-      try {
-        const response = await client.query({
-          query: names[name].multiple.request,
-          variables,
-        });
-        const resData = response.data[names[name].multiple.response];
-        if (resData) setData(resData as QueriesDocuments);
-      } catch (e) {
-        dispatch(setError("not-completed") as UnknownAction);
-      }
+        if (name === "phonecode") return setData(phoneCodes);
+        if (name === "job") {
+          variables.data = { title: value, contains: true } as JobInput;
+          variables.first = { take: 30 };
+        }
+        if (name === "company") {
+          variables.first = { take: 50 };
+          variables.filters = { name: value };
+        }
+        try {
+          const response = await client.query({
+            query: names[name].multiple.request,
+            variables,
+          });
+          const resData = response.data[names[name].multiple.response];
+          if (resData) {
+            setData(resData as QueriesDocuments);
+          }
+        } catch (e) {
+          dispatch(setError("not-completed") as UnknownAction);
+        }
+      });
     },
     [name]
   );
@@ -372,7 +385,6 @@ const SelectField = ({
               setValue={setValue}
               onChange={onChange}
               fetchData={fetchData}
-              fnc={fnc}
             />
           );
         }}

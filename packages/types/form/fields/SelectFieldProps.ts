@@ -82,7 +82,7 @@ export type GenericFieldProps = SelectFieldProps & {
   tags?: number;
   index?: number;
   sx?: { [key: string]: number | string };
-  fetchData?: (value: string) => Promise<void>;
+  fetchData?: (value: string) => void;
   type: string;
   fnc?: (...args: any) => void;
 };

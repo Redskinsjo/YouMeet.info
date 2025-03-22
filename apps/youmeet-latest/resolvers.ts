@@ -1164,11 +1164,33 @@ const resolvers: Resolvers = {
       if (args.first?.skip) skip = { skip: args.first.skip };
 
       if (d?.title && d.contains) {
+        const mapping = {
+          e: "éèêë",
+          a: "àâä",
+          o: "ôö",
+          u: "ûü",
+          i: "îï",
+          c: "ç",
+        } as { [key: string]: string };
+        for (let i = 0; i < d.title.length; i++) {
+          const letter = d.title[i];
+          const mapped = mapping[letter];
+          if (mapped) {
+            for (let j = 0; j < mapped.length; j++) {
+              const word = d.title.slice(0, i) + mapped + d.title.slice(i + 1);
+              whereOr.push({
+                title: {
+                  is: {
+                    fr: { contains: word, mode: "insensitive" },
+                  },
+                },
+              });
+            }
+          }
+        }
+
         whereOr.push({
-          title: { is: { fr: { startsWith: d?.title, mode: "insensitive" } } },
-        });
-        whereOr.push({
-          title: { is: { en: { startsWith: d?.title, mode: "insensitive" } } },
+          title: { is: { en: { contains: d?.title, mode: "insensitive" } } },
         });
       }
 

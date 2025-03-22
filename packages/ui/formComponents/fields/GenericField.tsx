@@ -2,7 +2,7 @@
 import { Button, TextField, TextFieldProps } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { GenericFieldProps } from "@youmeet/types/form/fields/SelectFieldProps";
-import { useId } from "react";
+import { useId, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import { VscFilterFilled } from "react-icons/vsc";
@@ -31,6 +31,7 @@ export default function GenericField({
   let autoCompleteParams = {};
   let basicParams = {};
   const { t } = useTranslation();
+  const [timer, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   if (basic) {
     basicParams = {
@@ -53,8 +54,11 @@ export default function GenericField({
         inputLabel: { ...params.InputLabelProps },
       },
 
-      onChange: async (e: any) => {
-        await fetchData(e.target.value);
+      onChange: (e: any) => {
+        if (timer) clearTimeout(timer);
+
+        const timerId = setTimeout(() => fetchData(e.target.value), 300);
+        setTimerId(timerId);
       },
     } as TextFieldProps;
   }

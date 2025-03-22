@@ -242,7 +242,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
       </div>
 
       {(!!megaMenu1 || !!megaMenu2) && !!articles && (
-        <div className="absolute h-screen top-[69px] z-[11001] shadow-inner">
+        <div className="absolute h-screen top-[69px] z-[111] shadow-inner">
           <div
             onMouseEnter={() => {
               setMegaMenu2(true);
