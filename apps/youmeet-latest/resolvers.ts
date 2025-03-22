@@ -1188,7 +1188,9 @@ const resolvers: Resolvers = {
             }
           }
         }
-
+        whereOr.push({
+          title: { is: { fr: { contains: d?.title, mode: "insensitive" } } },
+        });
         whereOr.push({
           title: { is: { en: { contains: d?.title, mode: "insensitive" } } },
         });
