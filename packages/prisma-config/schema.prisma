@@ -33,9 +33,95 @@ type eager {
   secure_url     String?
 }
 
+type WorkLocationFT {
+  libelle    String?
+  latitude   Float?
+  longitude  Float?
+  codePostal String?
+  commune    String?
+}
+
+type EnterpriseFT {
+  nom               String?
+  description       String?
+  logo              String?
+  url               String?
+  entrepriseAdaptee Boolean?
+}
+
+type FormationFT {
+  codeFormation  String?
+  domaineLibelle String?
+  niveauLibelle  String?
+  commentaire    String?
+  exigence       String?
+}
+
+type LanguageFT {
+  libelle  String?
+  exigence String?
+}
+
+type PermisFT {
+  libelle  String?
+  exigence String?
+}
+
+type CompetenceFT {
+  code     String?
+  libelle  String?
+  exigence String?
+}
+
+type SalaryFT {
+  libelle     String?
+  commentaire String?
+  complement1 String?
+  complement2 String?
+}
+
+type ContactFT {
+  nom            String?
+  coordonnees1   String?
+  coordonnees2   String?
+  coordonnees3   String?
+  telephone      String?
+  courriel       String?
+  commentaire    String?
+  urlRecruteur   String?
+  urlPostulation String?
+}
+
+type AgencyFT {
+  telephone String?
+  courriel  String?
+}
+
+type ProfessionalQualityFT {
+  libelle     String?
+  description String?
+}
+
+type OriginOfferFT {
+  origine     String?
+  urlOrigine  String?
+  partenaires PartenairFT[]
+}
+
+type ContextTravailFT {
+  horaires           String[]
+  conditionsExercice String[]
+}
+
+type PartenairFT {
+  nom  String?
+  url  String?
+  logo String?
+}
+
 model profileviews {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  user      betausers? @relation(references: [id], fields: [userId])
+  user      betausers? @relation(references: [id], fields: [userId], onDelete: Cascade)
   userId    String?    @db.ObjectId
   count     Int        @default(1)
   createdAt DateTime?
@@ -258,7 +344,7 @@ model meets {
 model customisations {
   id        String       @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
-  origin    betausers?   @relation(references: [id], fields: [originId])
+  origin    betausers?   @relation(references: [id], fields: [originId], onDelete: Cascade)
   originId  String?      @db.ObjectId
   queues    betaqueues[]
   questions questions[]
@@ -355,6 +441,7 @@ model betacandidates {
   targetJob                 jobs?             @relation(fields: [targetJobId], references: [id])
   targetJobId               String?           @db.ObjectId
   targetContractType        String?
+  preferredLocation         String?
   createdAt                 DateTime?
   updatedAt                 DateTime?
 }
@@ -387,6 +474,8 @@ model betacompanies {
   videos              videos[]
   isPublic            Boolean?          @default(false)
   sharingRefusals     sharingRefusals[]
+  url                 String?
+  entrepriseAdaptee   Boolean?
   createdAt           DateTime?
   updatedAt           DateTime?
 }
@@ -479,7 +568,7 @@ model unlockedUsers {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
   origin    betausers? @relation("origin", references: [id], fields: [originId])
   originId  String?    @db.ObjectId
-  target    betausers? @relation("target", references: [id], fields: [targetId])
+  target    betausers? @relation("target", references: [id], fields: [targetId], onDelete: Cascade)
   targetId  String?    @db.ObjectId
   createdAt DateTime?
   updatedAt DateTime?
@@ -602,50 +691,96 @@ model userRemarks {
 }
 
 model offers {
-  id                     String            @id @default(auto()) @map("_id") @db.ObjectId
-  slug                   String?           @unique
-  extension              String?
-  sector                 topsectors?       @relation(fields: [sectorId], references: [id])
-  sectorId               String?           @db.ObjectId
-  job                    jobs?             @relation(fields: [jobId], references: [id])
-  jobId                  String?           @db.ObjectId
-  content                String?
-  profileSearched        String?
-  requirements           competencies[]    @relation(fields: [requirementsIds], references: [id])
-  requirementsIds        String[]          @default([]) @db.ObjectId
-  jobDescriptionLink     String?
-  revenue                Int?
-  contractType           String?
-  remote                 String?
-  location               String?
-  limitDate              DateTime?
-  authorInterviewLink    String?
-  authorName             String?
-  authorEmail            String?
-  rebroadcast            Boolean?          @default(false)
-  companyName            String?
-  companyLogo            String?
-  author                 betausers?        @relation("author", fields: [authorId], references: [id])
-  authorId               String?           @db.ObjectId
-  candidates             betausers[]       @relation("candidates", fields: [candidatesIds], references: [id])
-  candidatesIds          String[]          @default([]) @db.ObjectId
-  generated              String?
-  company                betacompanies?    @relation(references: [id], fields: [companyId])
-  companyId              String?           @db.ObjectId
-  suggestedCandidates    betacandidates[]  @relation(references: [id], fields: [suggestedCandidatesIds])
-  suggestedCandidatesIds String[]          @db.ObjectId
-  favorites              favorites[]
-  sharings               profileSharings[]
-  queues                 betaqueues[]
-  createdAt              DateTime?
-  updatedAt              DateTime?
+  id                          String                  @id @default(auto()) @map("_id") @db.ObjectId
+  slug                        String?                 @unique
+  extension                   String?
+  sector                      topsectors?             @relation(fields: [sectorId], references: [id])
+  sectorId                    String?                 @db.ObjectId
+  job                         jobs?                   @relation(fields: [jobId], references: [id])
+  jobId                       String?                 @db.ObjectId
+  content                     String?
+  profileSearched             String?
+  requirements                competencies[]          @relation(fields: [requirementsIds], references: [id])
+  requirementsIds             String[]                @default([]) @db.ObjectId
+  jobDescriptionLink          String?
+  revenue                     Int?
+  contractType                String?
+  remote                      String?
+  location                    String?
+  limitDate                   DateTime?
+  authorInterviewLink         String?
+  authorName                  String?
+  authorEmail                 String?
+  rebroadcast                 Boolean?                @default(false)
+  companyName                 String?
+  companyLogo                 String?
+  author                      betausers?              @relation("author", fields: [authorId], references: [id])
+  authorId                    String?                 @db.ObjectId
+  candidates                  betausers[]             @relation("candidates", fields: [candidatesIds], references: [id])
+  candidatesIds               String[]                @default([]) @db.ObjectId
+  generated                   String?
+  company                     betacompanies?          @relation(references: [id], fields: [companyId])
+  companyId                   String?                 @db.ObjectId
+  suggestedCandidates         betacandidates[]        @relation(references: [id], fields: [suggestedCandidatesIds])
+  suggestedCandidatesIds      String[]                @db.ObjectId
+  favorites                   favorites[]
+  sharings                    profileSharings[]
+  queues                      betaqueues[]
+  createdAt                   DateTime?
+  updatedAt                   DateTime?
+  idFT                        String?                 @unique
+  intitule                    String?
+  intituleReduced             String?
+  description                 String?
+  dateCreation                String?
+  dateActualisation           String?
+  lieuTravail                 WorkLocationFT?
+  romeCode                    String?
+  romeLibelle                 String?
+  romeLibelleReduced          String?
+  appellationlibelle          String?
+  entreprise                  EnterpriseFT?
+  typeContrat                 String?
+  typeContratLibelle          String?
+  natureContrat               String?
+  experienceExige             String?
+  experienceLibelle           String?
+  experienceCommentaire       String?
+  formations                  FormationFT[]
+  langues                     LanguageFT[]
+  permis                      PermisFT[]
+  outilsBureautiques          String[]
+  competences                 CompetenceFT[]
+  salaire                     SalaryFT?
+  dureeTravailLibelle         String?
+  dureeTravailLibelleConverti String?
+  complementExercice          String?
+  conditionExercice           String?
+  alternance                  Boolean?
+  contact                     ContactFT?
+  agence                      AgencyFT?
+  nombrePostes                Int?
+  accessibleTH                Boolean?
+  deplacementCode             String?
+  deplacementLibelle          String?
+  qualificationCode           String?
+  qualificationLibelle        String?
+  codeNAF                     String?
+  secteurActivite             String?
+  secteurActiviteLibelle      String?
+  qualitesProfessionnelles    ProfessionalQualityFT[]
+  trancheEffectifEtab         String?
+  origineOffre                OriginOfferFT?
+  offresManqueCandidats       Boolean?
+  contexteTravail             ContextTravailFT
+  live                        Boolean?
 }
 
 model favorites {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
   origin        betausers? @relation("origin", fields: [originId], references: [id])
   originId      String?    @db.ObjectId
-  target        betausers? @relation("target", fields: [targetId], references: [id])
+  target        betausers? @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId      String?    @db.ObjectId
   offerTarget   offers?    @relation(fields: [offerTargetId], references: [id])
   offerTargetId String?    @db.ObjectId
@@ -661,7 +796,7 @@ model verificationRequest {
   judiciaryProofs    files[]
   origin             betausers? @relation("origin", fields: [originId], references: [id])
   originId           String?    @db.ObjectId
-  target             betausers? @relation("target", fields: [targetId], references: [id])
+  target             betausers? @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId           String?    @db.ObjectId
   createdAt          DateTime?
   updatedAt          DateTime?
@@ -674,7 +809,7 @@ model interviewOffer {
   comment   String?
   origin    betausers? @relation("origin", fields: [originId], references: [id])
   originId  String?    @db.ObjectId
-  target    betausers? @relation("target", fields: [targetId], references: [id])
+  target    betausers? @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId  String?    @db.ObjectId
   createdAt DateTime?
   updatedAt DateTime?
@@ -686,7 +821,7 @@ model references {
   content      String?
   concerned    String?
   valid        Boolean?
-  user         betausers?       @relation(fields: [userId], references: [id])
+  user         betausers?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?          @db.ObjectId
   experience   betaexperiences? @relation(fields: [experienceId], references: [id])
   experienceId String?          @db.ObjectId
@@ -702,7 +837,7 @@ model referenceContacts {
   position     String?
   experience   betaexperiences? @relation(fields: [experienceId], references: [id])
   experienceId String?          @db.ObjectId
-  user         betausers?       @relation(fields: [userId], references: [id])
+  user         betausers?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?          @db.ObjectId
   createdAt    DateTime?
   updatedAt    DateTime?
@@ -722,7 +857,7 @@ model notifications {
   status      String           @default("pending")
   origin      betausers?       @relation("origin", fields: [originId], references: [id])
   originId    String?          @db.ObjectId
-  target      betausers?       @relation("target", fields: [targetId], references: [id])
+  target      betausers?       @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
   targetId    String?          @db.ObjectId
   createdAt   DateTime?
   updatedAt   DateTime?

@@ -35,7 +35,7 @@ export default function HomeMedia({ articles }: { articles: Article[] }) {
           {articles.length > 0
             ? articles.map((article) =>
                 article ? (
-                  <Suspense>
+                  <Suspense key={article.id}>
                     <HomeMediaCard article={article} />
                   </Suspense>
                 ) : undefined

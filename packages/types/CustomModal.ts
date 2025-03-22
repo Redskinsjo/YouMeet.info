@@ -9,22 +9,13 @@ export type CustomModalType =
   | "search"
   | "account"
   | "retrieval"
-  | "login"
-  | "loginPage"
-  | "upload"
-  | "upload-50"
   | "video"
   | "accountCandidate"
-  | "fileTooLarge"
-  | "offerConfirm"
-  | "backofficeConfirm"
   | "videoAdding"
   | "unauthorized"
   | "feedback"
   | "notifications"
   | "backoffice"
-  | "not-completed"
-  | "request-feedback"
   | "remark"
   | "record"
   | "fulfill"
@@ -34,11 +25,13 @@ export type CustomModalType =
   | "publicOffer"
   | "sharing"
   | "profils"
-  | "creditTooLow"
   | "interviewOffer"
   | "shareProfile"
-  | "requestNotCompleted"
-  | "delete";
+  | LoginPrompt
+  | GlobalError
+  | BackofficeMessage
+  | UploadMessage
+  | OfferCreationMessage;
 
 export type SignupCookiePayload = {
   email: string;
@@ -47,10 +40,25 @@ export type SignupCookiePayload = {
   returnTo: string;
 };
 
+export type LoginPrompt = "login" | "loginPage";
+
+export type OfferCreationMessage = "offerConfirm";
+
+export type UploadMessage = "upload" | "upload-50" | "delete";
+
+export type BackofficeMessage = "backofficeConfirm";
+
+export type GlobalError =
+  | "creditTooLow"
+  | "requestNotCompleted"
+  | "fileTooLarge"
+  | "not-completed"
+  | "request-feedback";
+
 export type CustomModalProps = {
   video?: Video;
   children?: ReactElement;
-  type: CustomModalType;
+  type?: CustomModalType | GlobalError;
   setDisplayModal?: Dispatch<SetStateAction<any>>;
   setIsSubscribing?: Dispatch<SetStateAction<boolean>>;
   setIsForgotten?: Dispatch<SetStateAction<boolean>>;

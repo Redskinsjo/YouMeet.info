@@ -8,7 +8,7 @@ import {
   BackofficeModalDataType,
 } from "@youmeet/types/modal";
 import { useMemo } from "react";
-import BackofficeModalContent from "../backoffice/backofficeComponents/BackofficeModalContent";
+import BackofficeModalContent from "../backofficeComponents/BackofficeModalContent";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 
 export default function BackofficeModalComponent(props: CustomModalProps) {
@@ -56,6 +56,12 @@ export default function BackofficeModalComponent(props: CustomModalProps) {
         data = {
           type: "user",
           data: modal.user as Partial<BackofficeModalData>,
+        };
+      }
+      if (modal.sharing) {
+        data = {
+          type: "sharing",
+          data: modal.sharing as Partial<BackofficeModalData>,
         };
       }
       if (data) {

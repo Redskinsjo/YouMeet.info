@@ -1,5 +1,5 @@
 import Layout from "@youmeet/ui/Layout";
-import AddOffer from "@youmeet/ui/backoffice/backofficeComponents/AddOffer";
+import AddOffer from "@youmeet/ui/backofficeComponents/AddOffer";
 import { Offer } from "@youmeet/gql/generated";
 import Link from "next/link";
 import { Button } from "@mui/material";
@@ -13,6 +13,9 @@ export default function BackofficeOffersChild({ offers }: { offers: Offer[] }) {
         </Link>
         <Link href={`/backoffice/users`} className="no-underline">
           <Button>Voir utilisateurs</Button>
+        </Link>
+        <Link href={`/backoffice/applications`} className="no-underline">
+          <Button>Voir candidatures</Button>
         </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>

@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { s } from "@youmeet/utils/basics/jwt";
+import { personalRegex } from "@youmeet/utils/basics/isProfessionalEmail";
 import { setName } from "@youmeet/utils/basics/setName";
 import { handleRedirect } from "@youmeet/utils/backoffice/classic-login";
 import { parsePrms } from "@youmeet/utils/backoffice/parseParams";
@@ -18,11 +19,9 @@ const regex = new RegExp(
   /[a-zA-Z0-9\._-]{3,}@gmail|aol|yahoo|outlook|hotmail|protonmail|mail|yandex|zoho|gmx\.[a-z]{2,}/gm
 );
 
-const personalRegex = new RegExp(/jonathan.carnos@gmail.com/gim);
-
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;
-  const state = query.get("state");
+  const state = query.get("state") as string;
   let code = query.get("code");
 
   const oauth2Client = new google.auth.OAuth2(
@@ -38,10 +37,6 @@ export async function GET(req: NextRequest) {
     picture = "";
   let languages: string[] = [];
   let emails = [];
-
-  const queryParams = state
-    ? parsePrms(decodeURIComponent((state as string).split("=")[1]))
-    : undefined;
 
   if (code) {
     try {
@@ -194,9 +189,8 @@ export async function GET(req: NextRequest) {
             user = await BetaUser.findById(user?._id);
           }
 
-          let returnTo = queryParams?.redirect
-            ? decodeURIComponent(queryParams.redirect)
-            : "dashboard";
+          const redirect = parsePrms(state).redirect;
+          let returnTo = redirect ? decodeURIComponent(redirect) : "dashboard";
           if (returnTo.includes("%")) returnTo = decodeURIComponent(returnTo);
           if (returnTo.includes("%")) returnTo = decodeURIComponent(returnTo);
 

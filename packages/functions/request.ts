@@ -75,6 +75,10 @@ import {
   QueryUsersArgs,
   QueryVideoByPublicIdArgs,
   QueryCompetenciesArgs,
+  DeleteOneProfileSharingMutation,
+  QuerySharingsArgs,
+  MutationCreateRemarkArgs,
+  MutationDeleteUserArgs,
 } from "@youmeet/gql/generated";
 import {
   GetOfferQuery,
@@ -97,10 +101,12 @@ import {
   createProfileViewMutation,
   createQuestionMutation,
   createQueueMutation,
+  createRemarkMutation,
   createResponsesMutation,
   createSharingRefusalMutation,
   createThreadMutation,
   createUserMutation,
+  deleteAccountMutation,
   deleteAffiliationMutation,
   deleteCompanyMutation,
   deleteInterviewOfferMutation,
@@ -145,12 +151,14 @@ import {
   getOfferMetadataQuery,
   getOffersParamsQuery,
   getOffersQuery,
+  getOneCompleteSharingQuery,
   getOneDetailsQuery,
   getOneMeetQuery,
   getOneQueueQuery,
   getProfileViewsQuery,
   getRawUserQuery,
   getSharingQuery,
+  getSharingsQuery,
   getSimpleCompanyQuery,
   getSimpleUserQuery,
   getUserCandidateQuery,
@@ -191,6 +199,9 @@ import {
 import { BackendError } from "@youmeet/utils/basics/BackendErrorClass";
 import { isNotHandledReq, isPayloadError } from "@youmeet/types/TypeGuards";
 import { AES } from "crypto-js";
+import { OffreEmploiFTParams } from "@youmeet/types/api/OffreEmploiFT";
+import { getAccessTokenFT } from "./browserRequests";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const createError = async <T>(
   variables?: MutationCreateErrorArgs,
@@ -228,7 +239,7 @@ const req = async <T>(
         "Content-Type": "application/json",
         Accept: "application/json",
         "x-domain-youmeet": encrypt,
-        origin: "https://www.youmeet.info",
+        origin: uri,
       },
       mode: "same-origin",
       credentials: "same-origin",
@@ -236,6 +247,7 @@ const req = async <T>(
       body: JSON.stringify(params),
       signal: controller?.signal,
     });
+
     const json = await response.json();
     if (response.ok) {
       clearTimeout(timeoutId);
@@ -286,6 +298,93 @@ const req = async <T>(
   }
 };
 
+const reqFT = async <T>(
+  uri: string,
+  scope: string,
+  params: string = "",
+  revalidate: number = 30
+): Promise<withData<T> | PayloadBackendError> => {
+  try {
+    console.log("getting access...");
+    const credentials = (await getAccessTokenFT(scope)) as
+      | withData<{ access_token: string }>
+      | PayloadBackendError;
+
+    if (credentials && isPayloadError(credentials)) {
+      throw new BackendError(credentials.type, credentials.message);
+    } else {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller?.abort(), 10000);
+      const nextParams = {} as { next?: { revalidate: number } };
+      if (process.env.SCRIPT === undefined) nextParams.next = { revalidate };
+
+      const urlParams = `${params ? `?${params}` : ""}`;
+      const encrypt = AES.encrypt(
+        "app",
+        `${process.env.JWT_SECRET}`
+      ).toString();
+      const response = await fetch(`${uri}${urlParams}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${credentials.data.access_token}`,
+          Accept: "application/json",
+          "x-domain-youmeet": encrypt,
+          origin: uri,
+        },
+        mode: "same-origin",
+        credentials: "same-origin",
+        ...nextParams,
+        signal: controller?.signal,
+      });
+      const json = await response.json();
+      if (response.ok) {
+        clearTimeout(timeoutId);
+        if (json) {
+          if (!json.errors) {
+            return { data: json as T };
+          }
+          console.log(json.errors, "errors");
+          console.log(json.errors[0].extensions, "extensions");
+          throw new BackendError(
+            BACKEND_ERRORS.REQUEST_FEEDBACK,
+            BACKEND_MESSAGES.REQUEST_FEEDBACK,
+            response.status
+          );
+        }
+        throw new BackendError(
+          BACKEND_ERRORS.JSON_NOT_VALID,
+          BACKEND_MESSAGES.JSON_NOT_VALID,
+          response.status
+        );
+      }
+      throw new BackendError(
+        BACKEND_ERRORS.PROCESSING,
+        json.errors ? json.errors[0].message : response.statusText,
+        response.status
+      );
+    }
+  } catch (err: any) {
+    await createError({
+      data: {
+        environment: dev ? "development" : "production",
+        message: err.message,
+        pro: false,
+        query: "FT request",
+        status: err.status,
+        statusText: err.statusText ?? "",
+        type: err.type,
+      },
+    });
+    return {
+      type: err.type ?? BACKEND_ERRORS.UNKNOWN,
+      message: err.message,
+      status: err.status,
+      error: true,
+    };
+  }
+};
+
 async function reqFnc<T>(
   path: string,
   multiple: boolean = false,
@@ -297,6 +396,7 @@ async function reqFnc<T>(
   const params = { query } as { query: string; variables?: any };
   if (variables) params.variables = variables;
   const res = await req<T>(params, revalidate);
+
   if (res && isPayloadError(res)) {
     if (isNotHandledReq<T>(handling, res))
       return { data: multiple ? [] : undefined } as withData<
@@ -307,6 +407,31 @@ async function reqFnc<T>(
     const data = (res.data as withData<{ [path in string]: T }>).data;
     const result = data[path];
     return { data: result } as withData<T>;
+  }
+}
+
+async function reqFTFnc<T, S>(
+  uri: string,
+  multiple: boolean = false,
+  search: S,
+  scope: string,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<PayloadBackendError | PayloadBackendSuccess<T>> {
+  const params = new URLSearchParams(
+    search as { [key: string]: string }
+  ).toString();
+
+  const res = await reqFT<T>(uri, scope, params, revalidate);
+  if (res && isPayloadError(res)) {
+    if (isNotHandledReq<T>(handling, res))
+      return { data: multiple ? [] : undefined } as withData<
+        never[] | undefined
+      >;
+    else return res;
+  } else {
+    const data = res.data as withData<{ [path in string]: T }>;
+    return { data } as withData<T>;
   }
 }
 
@@ -1204,6 +1329,24 @@ export const getJob = async <T>(
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
 
+export const createRemark = async <T>(
+  variables?: MutationCreateRemarkArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "createRemark",
+    multiple,
+    createRemarkMutation,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
 export const createProfileSharing = async <T>(
   variables?: MutationCreateProfileSharingArgs,
   revalidate: number = 0,
@@ -1687,6 +1830,24 @@ export const getSimpleUser = async <T>(
     return result.data as ResultNotHandled<T>;
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
+export const deleteAccount = async <T>(
+  variables: MutationDeleteUserArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "deleteAccount",
+    multiple,
+    deleteAccountMutation,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
 export const getMeetCandidates = async <T>(
   variables: any = undefined,
   revalidate: number = 0,
@@ -1864,6 +2025,44 @@ export const getSharing = async <T>(
     "oneProfileSharing",
     multiple,
     getSharingQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getSharings = async <T>(
+  variables?: QuerySharingsArgs | undefined,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = true;
+  const result = await reqFnc(
+    "sharings",
+    multiple,
+    getSharingsQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const deleteSharing = async <T>(
+  variables?: MutationDeleteProfileSharingArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "deleteProfileSharing",
+    multiple,
+    deleteProfileSharingMutation,
     variables,
     revalidate,
     handling
@@ -2072,24 +2271,6 @@ export const deleteInterviewOffer = async <T>(
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
 };
 
-export const deleteProfileSharing = async <T>(
-  variables: MutationDeleteProfileSharingArgs,
-  revalidate: number = 0,
-  handling: true | undefined = undefined
-): Promise<Result<T>> => {
-  const multiple = false;
-  const result = await reqFnc(
-    "deleteProfileSharing",
-    multiple,
-    deleteProfileSharingMutation,
-    variables,
-    revalidate,
-    handling
-  );
-  if (isNotHandledReq<T>(handling, result)) {
-    return result.data as ResultNotHandled<T>;
-  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
-};
 export const videoByPublicId = async <T>(
   variables: QueryVideoByPublicIdArgs,
   revalidate: number = 0,
@@ -2164,4 +2345,57 @@ export const getCompetenciesTitle = async <T>(
   if (isNotHandledReq<T>(handling, result)) {
     return result.data as ResultNotHandled<T>;
   } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getOneCompleteSharing = async <T>(
+  variables: QueryOneProfileSharingArgs,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = false;
+  const result = await reqFnc(
+    "oneProfileSharing",
+    multiple,
+    getOneCompleteSharingQuery,
+    variables,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const getOffersFT = async <T>(
+  search: OffreEmploiFTParams,
+  revalidate: number = 0,
+  handling: true | undefined = undefined
+): Promise<Result<T>> => {
+  const multiple = true;
+  const endpoint =
+    "https://api.francetravail.io/partenaire/offresdemploi/v2/offres/search";
+  const uri = endpoint;
+  const scope = "o2dsoffre api_offresdemploiv2";
+  const result = await reqFTFnc<T, OffreEmploiFTParams>(
+    uri,
+    multiple,
+    search,
+    scope,
+    revalidate,
+    handling
+  );
+  if (isNotHandledReq<T>(handling, result)) {
+    return result.data as ResultNotHandled<T>;
+  } else return result as PayloadBackendError | PayloadBackendSuccess<T>;
+};
+
+export const revalidate = async (
+  path: string | undefined,
+  tag: string = ""
+) => {
+  const promise = new Promise((resolve) => {
+    if (!!path) resolve(revalidatePath(`/${path}`));
+    if (!!tag) resolve(revalidateTag(`${tag}`));
+  });
+  return await promise;
 };

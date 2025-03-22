@@ -1,6 +1,12 @@
 import { Metadata } from "next";
 import BlogChild from "./blogChild";
-import { logoUrl } from "@youmeet/functions/imports";
+import {
+  githubUrl,
+  linkedinUrl,
+  logoUrl,
+  NAME,
+  uri,
+} from "@youmeet/functions/imports";
 import { getArticles } from "@youmeet/functions/request";
 import { Article } from "@youmeet/gql/generated";
 
@@ -10,7 +16,7 @@ export const metadata: Metadata = {
     "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
   openGraph: {
     title: "YouMeet - Blog",
-    url: "https://www.youmeet.info/blog",
+    url: `${uri}/blog`,
     images: [logoUrl],
     type: "article",
     description:
@@ -18,14 +24,14 @@ export const metadata: Metadata = {
   },
   keywords: ["blog", "cv vidéo", "compétences", "informations", "profil"],
   authors: [
-    { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+    { name: NAME, url: githubUrl },
     {
-      name: "Jonathan Carnos",
-      url: "https://www.linkedin.com/in/jonathancarnos123/",
+      name: NAME,
+      url: linkedinUrl,
     },
   ],
   category: "Articles d'informations",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function Blog() {

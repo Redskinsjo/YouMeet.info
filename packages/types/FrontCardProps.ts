@@ -5,8 +5,6 @@ import { CardTurnUp } from "./Header";
 export type FrontCardProps = {
   user?: BetaUser;
   company?: BetaCompany;
-  setFrontShouldTurnUp: Dispatch<SetStateAction<false | CardTurnUp>>;
-  frontShouldTurnUp: false | CardTurnUp;
   offer?: Offer;
   isSubscribed?: boolean;
   type?: "favorites" | "candidates";

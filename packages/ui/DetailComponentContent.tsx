@@ -15,6 +15,7 @@ import TooltipedAsset from "./TooltipedAsset";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
 import { Attr } from "@youmeet/types/attributes";
+import { updateUser } from "@youmeet/functions/request";
 
 export default function DetailComponent({
   label,
@@ -25,7 +26,6 @@ export default function DetailComponent({
   newClasses,
   onClick,
   newStyles,
-  fontSize,
   noLabelColon,
   noPadding,
   name,
@@ -51,7 +51,6 @@ export default function DetailComponent({
   newClasses?: string;
   onClick?: () => void;
   newStyles?: Attr;
-  fontSize?: string;
   noLabelColon?: boolean;
   noPadding?: boolean;
   fullWidth?: boolean;
@@ -75,7 +74,11 @@ export default function DetailComponent({
   const md = useMediaQuery("(max-width:900px)");
   const searchParams = useSearchParams();
 
-  const LabelComponent = createElement(labelComponent, {}, label);
+  const LabelComponent = createElement(
+    labelComponent,
+    {},
+    typeof label === "string" ? t(label as string) : label
+  );
 
   return type === "modal" &&
     ((profil && name && !profil?.hiddenFields?.includes(name) && !account) ||
@@ -86,7 +89,7 @@ export default function DetailComponent({
         newClasses || ""
       }`}
       style={{
-        alignItems: conversation ? "flex-start" : "center",
+        alignItems: "flex-start",
         flexDirection: conversation ? "column" : "row",
         padding: noGap ? "0px" : noPadding ? "0px" : "12px",
         ...newStyles,
@@ -94,10 +97,9 @@ export default function DetailComponent({
       onClick={onClick}
     >
       <div
-        className="flex font-bold w-fit dark:text-white text-black"
+        className="text-[14px] xs:text-[12px] sm:text-[12px] flex w-fit dark:text-white text-black"
         style={{
           textAlign: "start",
-          fontSize: fontSize || "14px",
           whiteSpace:
             labelNoWrap || (!xs && !sm && !md) || !searchParams.get("new")
               ? "nowrap"
@@ -138,15 +140,9 @@ export default function DetailComponent({
         }}
       >
         <div
-          className="rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
+          className="w-full text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            fontSize: fontSize || "15px",
-            width: fullWidth
-              ? "100%"
-              : conversation
-              ? "fit-content"
-              : "max-content",
 
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
@@ -160,7 +156,7 @@ export default function DetailComponent({
               color: valueColor ?? "inherit",
             }}
           >
-            {value}
+            {typeof value === "string" ? t(value) : value}
           </div>
         </div>
         {account &&
@@ -175,18 +171,12 @@ export default function DetailComponent({
                 className="item cursor-pointer dark:text-white"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: appUser.hiddenFields.filter(
-                            (f) => !name
-                          ),
-                        },
-                        userId: appUser.id,
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: {
+                        hiddenFields: appUser.hiddenFields.filter((f) => !name),
                       },
-                    });
-                    const updated = response.data?.updateUser;
+                    })) as BetaUser;
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])
@@ -208,16 +198,10 @@ export default function DetailComponent({
                 className="item cursor-pointer dark:text-grey300 text-grey700"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: [...appUser.hiddenFields, name],
-                        },
-                        userId: appUser.id,
-                      },
-                    });
-                    const updated = response.data?.updateUser;
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: { hiddenFields: [...appUser.hiddenFields, name] },
+                    })) as BetaUser;
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])
@@ -239,7 +223,7 @@ export default function DetailComponent({
         newClasses || ""
       }`}
       style={{
-        alignItems: conversation ? "flex-start" : "center",
+        alignItems: "flex-start",
         flexDirection: conversation ? "column" : "row",
         padding: noGap ? "0px" : noPadding ? "0px" : "12px",
         ...newStyles,
@@ -247,10 +231,9 @@ export default function DetailComponent({
       onClick={onClick}
     >
       <div
-        className="flex font-bold w-fit dark:text-white text-black"
+        className="text-[14px] xs:text-[12px] sm:text-[12px] flex w-fit dark:text-white text-black"
         style={{
           textAlign: "start",
-          fontSize: fontSize || "14px",
           whiteSpace:
             labelNoWrap || (!xs && !sm && !md) || !searchParams.get("new")
               ? "nowrap"
@@ -283,15 +266,9 @@ export default function DetailComponent({
         }}
       >
         <div
-          className="rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
+          className="w-full text-[15px] xs:text-[13px] sm:text-[13px] rounded-[14px] box-border flex justify-end break-any dark:text-white dark:extraLightDarkBg"
           style={{
             ...outfit.style,
-            fontSize: fontSize || "15px",
-            width: fullWidth
-              ? "100%"
-              : conversation
-              ? "fit-content"
-              : "max-content",
             justifyContent: conversation ? "center" : "end",
             padding: noPadding ? "0px" : "12px",
             fontWeight: valueInBold ? 500 : "initial",
@@ -305,7 +282,7 @@ export default function DetailComponent({
               color: valueColor ?? "inherit",
             }}
           >
-            {value}
+            {typeof value === "string" ? t(value) : value}
           </div>
         </div>
         {account &&
@@ -318,18 +295,12 @@ export default function DetailComponent({
                 className="item text-black cursor-pointer"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: appUser.hiddenFields.filter(
-                            (f) => !name
-                          ),
-                        },
-                        userId: appUser.id,
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: {
+                        hiddenFields: appUser.hiddenFields.filter((f) => !name),
                       },
-                    });
-                    const updated = response.data?.updateUser;
+                    })) as BetaUser;
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])
@@ -349,16 +320,11 @@ export default function DetailComponent({
                 className="item text-black cursor-pointer"
                 onClick={async () => {
                   if (appUser?.hiddenFields) {
-                    const response = await client.mutate({
-                      mutation: UpdateUserDocument,
-                      variables: {
-                        data: {
-                          hiddenFields: [...appUser.hiddenFields, name],
-                        },
-                        userId: appUser.id,
-                      },
-                    });
-                    const updated = response.data?.updateUser;
+                    const updated = (await updateUser<BetaUser>({
+                      userId: appUser.id,
+                      data: { hiddenFields: [...appUser.hiddenFields, name] },
+                    })) as BetaUser;
+
                     if (updated)
                       dispatch(
                         setHiddenFields(updated.hiddenFields as string[])
@@ -383,11 +349,16 @@ export default function DetailComponent({
               newClasses || ""
             }`
       }
-      style={{ ...newStyles }}
+      style={{
+        alignItems: "flex-start",
+        flexDirection: conversation ? "column" : "row",
+        padding: noGap ? "0px" : noPadding ? "0px" : "12px",
+        ...newStyles,
+      }}
       onClick={onClick}
     >
       <div
-        className="mr-[12px] text-[14px] font-bold text-grey500 dark:text-white text-black flex-center"
+        className="mr-[12px] text-[14px] dark:text-white text-black flex-center"
         style={{
           fontWeight: labelInBold ? 700 : 300,
           whiteSpace:
@@ -420,8 +391,10 @@ export default function DetailComponent({
                 color: valueColor ?? "inherit",
               }}
             >
-              {value}
+              {typeof value === "string" ? t(value) : value}
             </div>
+          ) : typeof value === "string" ? (
+            t(value)
           ) : (
             value
           )}

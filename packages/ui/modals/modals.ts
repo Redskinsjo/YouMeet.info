@@ -1,8 +1,24 @@
 import { CustomModalType, ModalContentProps } from "@youmeet/types/CustomModal";
 
 export const modals: { [type in CustomModalType]: ModalContentProps } = {
-  "upload-50": {},
-  delete: {},
+  upload: {
+    content: {
+      en: "Little patience... Loading is in progress.",
+      fr: "Un peu de patience... Le chargement est en cours.",
+    },
+  },
+  "upload-50": {
+    content: {
+      fr: "Ça y est, c'est presque fini... 50%.",
+      en: "That's it, almost there... Loading is at 50%.",
+    },
+  },
+  delete: {
+    content: {
+      fr: "Nous supprimons le fichier.",
+      en: "We are deleting the file.",
+    },
+  },
   fulfill: {},
   "request-feedback": {
     content: {
@@ -129,7 +145,6 @@ export const modals: { [type in CustomModalType]: ModalContentProps } = {
       en: "Thank you.+",
     },
   },
-  upload: {},
   video: {},
   unauthorized: {
     title: {

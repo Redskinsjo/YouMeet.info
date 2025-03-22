@@ -22,7 +22,7 @@ export default function SubmitBtn({ text }: { text: string }) {
       ) : (
         <Button
           disabled={pending}
-          className="px-[12px] w-full subItem bg-deepPurple700 dark:darkBg text-white"
+          className="px-[12px] w-full subItem bg-deepPurple700 dark:darkBg text-white normal-case"
           type="submit"
         >
           {text}

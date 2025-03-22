@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { BetaCompany } from "@youmeet/gql/generated";
-import BackofficeCompaniesComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficeCompaniesComponent";
+import BackofficeCompaniesComponent from "@youmeet/ui/backofficeComponents/BackofficeCompaniesComponent";
 
 export default function BackofficeChild({
   companies,
@@ -16,6 +16,9 @@ export default function BackofficeChild({
         </Link>
         <Link href={`/backoffice/users`} className="no-underline">
           <Button>Voir utilisateurs</Button>
+        </Link>
+        <Link href={`/backoffice/applications`} className="no-underline">
+          <Button>Voir candidatures</Button>
         </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>

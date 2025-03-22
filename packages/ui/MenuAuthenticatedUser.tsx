@@ -7,12 +7,11 @@ import { deepPurple, grey } from "@mui/material/colors";
 import MenuItemRouter from "./MenuItemRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@youmeet/global-config/store";
-import { UserState, removeUser } from "@youmeet/global-config/features/user";
+import { UserState } from "@youmeet/global-config/features/user";
 import { outfit } from "@youmeet/functions/fonts";
 import { setName } from "@youmeet/utils/basics/setName";
-import { onLogout } from "@youmeet/functions/actions";
-import { useRouter } from "next/navigation";
 import LogoutBtn from "./LogoutBtn";
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 
 export default function MenuAuthenticatedUser() {
   const user = useSelector(
@@ -29,7 +28,6 @@ export default function MenuAuthenticatedUser() {
   const sm = useMediaQuery("(max-width:720px)");
   const xs = useMediaQuery("(max-width:600px)");
   const { t } = useTranslation();
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleClick = useCallback(
@@ -40,15 +38,6 @@ export default function MenuAuthenticatedUser() {
   );
   const handleClose = useCallback(() => {
     setAnchorEl(undefined);
-  }, []);
-
-  const customOnLogout = useCallback(async () => {
-    await onLogout();
-    dispatch(removeUser("ok"));
-  }, []);
-
-  useEffect(() => {
-    router.prefetch("/");
   }, []);
 
   return (
@@ -114,7 +103,7 @@ export default function MenuAuthenticatedUser() {
           />
         )}
         {process.env.APP === "candidate" &&
-          user.email.toLowerCase() === "jonathan.carnos@gmail.com" && (
+          user.email.toLowerCase() === EMAIL_PERSO && (
             <MenuItemRouter
               route="/backoffice"
               handleClose={handleClose}
@@ -122,7 +111,7 @@ export default function MenuAuthenticatedUser() {
             />
           )}
 
-        <form action={customOnLogout} className="flex-center">
+        <form action={"/api/auth/logout"} className="flex-center">
           <MenuItem
             component={LogoutBtn}
             sx={{

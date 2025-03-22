@@ -8,13 +8,13 @@ import { ModalState } from "@youmeet/global-config/features/modal";
 import { CustomModalProps } from "@youmeet/types/CustomModal";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import NewTargetContractTypeComponent from "../dashboard/dashboardComponents/NewTargetContractTypeComponent";
+import NewTargetContractTypeComponent from "../dashboardComponents/NewTargetContractTypeComponent";
 import AddVideo from "../AddVideo";
-import LoginModalClose from "../LoginModalClose";
+import ModalClose from "./ModalClose";
 
 const BoldText = dynamic(() => import("@youmeet/ui/TextChild"), { ssr: false });
 const NewTargetJobComponent = dynamic(
-  () => import("../dashboard/dashboardComponents/NewTargetJobComponent"),
+  () => import("../dashboardComponents/NewTargetJobComponent"),
   { ssr: false }
 );
 export default function FulfillModal({ type }: CustomModalProps) {
@@ -24,7 +24,7 @@ export default function FulfillModal({ type }: CustomModalProps) {
     modal.user && (
       <ModalWrapper>
         <>
-          <div className="w-full h-full flex-col flex-center gap-[12px]">
+          <div className="w-full h-full flex-col flex-center gap-[12px] max-w-[600px]">
             <h3 className="dark:text-white font-semibold">{t("welcome")}</h3>
             <BoldText text={t("happy-to-see-you")} align="center" />
             <BoldText text={t("welcome-incentive")} />
@@ -47,7 +47,7 @@ export default function FulfillModal({ type }: CustomModalProps) {
               <AddVideo profil={modal.user} />
             </div>
           </div>
-          <LoginModalClose />
+          <ModalClose />
         </>
       </ModalWrapper>
     )

@@ -370,16 +370,39 @@ export default function CandidateVideo({
     fullScreenListener,
   ]);
 
+  const isAttr = (attr?: string | number) => (xs || sm || md) && !!attr;
+
   return (
     !loading && (
       <div
         className="relative h-full flex w-full xs:flex-col-reverse sm:flex-col-reverse md:flex-col-reverse justify-between"
         style={{
           ...containerNewStyles,
-          minHeight: inFullScreen ? "100%" : containerNewStyles?.minHeight,
-          minWidth: inFullScreen ? "100%" : containerNewStyles?.minWidth,
-          height: inFullScreen ? "100%" : containerNewStyles?.height,
-          width: inFullScreen ? "100%" : containerNewStyles?.width,
+          minHeight: inFullScreen
+            ? "100%"
+            : isAttr(containerNewStyles?.mobileMinHeight)
+            ? containerNewStyles?.mobileMinHeight
+            : containerNewStyles?.minHeight,
+          minWidth: inFullScreen
+            ? "100%"
+            : isAttr(containerNewStyles?.mobileMinWidth)
+            ? containerNewStyles?.mobileMinWidth
+            : containerNewStyles?.minWidth,
+          height: inFullScreen
+            ? "100%"
+            : isAttr(containerNewStyles?.mobileHeight)
+            ? containerNewStyles?.mobileHeight
+            : containerNewStyles?.height,
+          width: inFullScreen
+            ? "100%"
+            : isAttr(containerNewStyles?.mobileWidth)
+            ? containerNewStyles?.mobileWidth
+            : containerNewStyles?.width,
+          maxWidth: inFullScreen
+            ? "100%"
+            : isAttr(containerNewStyles?.mobileMaxWidth)
+            ? containerNewStyles?.mobileMaxWidth
+            : containerNewStyles?.maxWidth,
         }}
       >
         {!loading && (
@@ -410,12 +433,32 @@ export default function CandidateVideo({
               autoPlay={notAutoPlay ? false : true}
               id="video"
               style={{
-                maxWidth: "100%",
                 ...newStyles,
-                minHeight: inFullScreen ? "100%" : newStyles?.minHeight,
-                minWidth: inFullScreen ? "100%" : newStyles?.minWidth,
-                height: inFullScreen ? "100%" : newStyles?.height,
-                width: inFullScreen ? "100%" : newStyles?.height,
+                minHeight: inFullScreen
+                  ? "100%"
+                  : isAttr(newStyles?.mobileMinHeight)
+                  ? newStyles?.mobileMinHeight
+                  : newStyles?.minHeight,
+                minWidth: inFullScreen
+                  ? "100%"
+                  : isAttr(newStyles?.mobileMinWidth)
+                  ? newStyles?.mobileMinWidth
+                  : newStyles?.minWidth,
+                height: inFullScreen
+                  ? "100%"
+                  : isAttr(newStyles?.mobileHeight)
+                  ? newStyles?.mobileHeight
+                  : newStyles?.height,
+                width: inFullScreen
+                  ? "100%"
+                  : isAttr(newStyles?.mobileWidth)
+                  ? newStyles?.mobileWidth
+                  : newStyles?.width,
+                maxWidth: inFullScreen
+                  ? "100%"
+                  : isAttr(newStyles?.mobileMaxWidth)
+                  ? newStyles?.mobileMaxWidth
+                  : newStyles?.maxWidth,
               }}
               src={setFileUrl(video, onTheFly) as string}
               onClick={(e) => togglePlay(e)}
@@ -506,7 +549,7 @@ export default function CandidateVideo({
                     }
                   }}
                 >
-                  <div className="timeline opacity-[0.5] h-[3px] bg-purple500 group-hover:h-[12px] group-hover:opacity-[0.3] w-full relative">
+                  <div className="timeline opacity-[0.5] h-[3px] bg-purple500 group-hover:h-[6px] group-hover:opacity-[0.3] w-full relative">
                     {/* <Image
                   src={video.secure_url as string}
                   width={120}
@@ -743,7 +786,6 @@ export default function CandidateVideo({
 
                       {usersWithVideos[currentPosition].fullname ? (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
                           type="modal2"
@@ -758,7 +800,6 @@ export default function CandidateVideo({
                         usersWithVideos[currentPosition].lastname ? (
                         <div className="flex flex-col gap-[12px]">
                           <DetailComponent
-                            fontSize={xs || sm || md ? "14px" : "inherit"}
                             conversation={xs || sm || md ? false : true}
                             newStyles={{ color: "white" }}
                             noPadding={!xs && !sm && !md}
@@ -772,7 +813,6 @@ export default function CandidateVideo({
                           />
 
                           <DetailComponent
-                            fontSize={xs || sm || md ? "14px" : "inherit"}
                             conversation={xs || sm || md ? false : true}
                             newStyles={{ color: "white" }}
                             noPadding={!xs && !sm && !md}
@@ -788,7 +828,6 @@ export default function CandidateVideo({
                       ) : undefined}
                       {usersWithVideos[currentPosition].linkedinProfileId && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
@@ -812,7 +851,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition]?.languages as string[])
                         ?.length > 0 && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
@@ -829,7 +867,6 @@ export default function CandidateVideo({
                         usersWithVideos[currentPosition].details?.phone
                           ?.number && (
                           <DetailComponent
-                            fontSize={xs || sm || md ? "14px" : "inherit"}
                             conversation={xs || sm || md ? false : true}
                             newStyles={{ color: "white" }}
                             noPadding={!xs && !sm && !md}
@@ -847,7 +884,6 @@ export default function CandidateVideo({
                         )}
                       {usersWithVideos[currentPosition]?.age && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding={!xs && !sm && !md}
@@ -895,7 +931,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition] as BetaCompany)
                         .name && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding
@@ -911,7 +946,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition] as BetaCompany)
                         .location && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding
@@ -928,7 +962,6 @@ export default function CandidateVideo({
                       {(usersWithVideos[currentPosition] as BetaCompany)
                         .linkedinProfilePage && (
                         <DetailComponent
-                          fontSize={xs || sm || md ? "14px" : "inherit"}
                           conversation={xs || sm || md ? false : true}
                           newStyles={{ color: "white" }}
                           noPadding

@@ -154,8 +154,8 @@ export const userSlice = createSlice({
       if (professionalEmail !== undefined)
         state.professionalEmail = professionalEmail as boolean;
       if (uniqueName) state.uniqueName = uniqueName as string;
-      if (cvFile) state.cvFile = cvFile as Avatar;
       if (myOffers) state.myOffers = myOffers as Offer[];
+      state.cvFile = cvFile || null;
     },
     setCredit: (state: UserState, action: PayloadAction<number>) => {
       state.credit = action.payload;
@@ -194,7 +194,7 @@ export const userSlice = createSlice({
     setCustomerId: (state: UserState, action: PayloadAction<string>) => {
       state.customerId = action.payload;
     },
-    setCvFile: (state: UserState, action: PayloadAction<Avatar>) => {
+    setCvFile: (state: UserState, action: PayloadAction<Avatar | null>) => {
       state.cvFile = action.payload;
     },
     setUnlimited: (state: UserState, action: PayloadAction<boolean>) => {

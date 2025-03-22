@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { MenuItem } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { deepPurple, purple } from "@mui/material/colors";
+import { useRouter } from "next/navigation";
 
 const MenuItemRouter = ({
   route,
@@ -20,6 +21,9 @@ const MenuItemRouter = ({
   onClick?: () => void;
 }) => {
   const pathname = usePathname();
+  const router = useRouter();
+  if (route) router.prefetch(route);
+
   return route === pathname || disabled ? (
     <MenuItem
       className="subItem"

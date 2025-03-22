@@ -9,8 +9,8 @@ export type Result<T> =
 export type withData<T> = { data: T };
 
 export type PayloadBackendError = {
-  type: BACKEND_ERRORS;
-  message: string;
+  type: string | BACKEND_ERRORS;
+  message: string | BACKEND_MESSAGES;
   status?: number;
   error: true;
 };
@@ -22,8 +22,8 @@ export type PayloadBackend = {
 
 export type PayloadRedirections = {
   error?: {
-    type: BACKEND_ERRORS;
-    message: BACKEND_MESSAGES;
+    type: BACKEND_ERRORS | string | number;
+    message: BACKEND_MESSAGES | string | number;
   };
   success?: {
     uri?: string;
@@ -77,7 +77,7 @@ export enum BACKEND_MESSAGES {
   NOT_DELETED = "Aucun document n'a été supprimé",
   WRONG_FORMAT = "Le format ne correspond pas",
   NO_USER = "L'utilisateur n'existe pas",
-  WRONG_CREDENTIALS = "Le mot de passe ne correspond pas à l'email",
+  WRONG_CREDENTIALS = "Le mot de passe ne correspond pas à l'e-mail",
   UNKNOWN = "Une erreur est survenue. Réessayez plus tard.",
   NO_PRO_USER = "L'utilisateur ne peut pas se connecter ici",
   NO_CAND_USER = "L'utilisateur ne peut pas se connecter ici",
@@ -87,7 +87,7 @@ export enum BACKEND_MESSAGES {
   NOT_AUTHORIZED = "Vous n'êtes pas autorisé.",
   USER_EXIST = "L'utilisateur existe déjà.",
   DATATYPE_INVALID = "Le type de donnée n'est pas valide pour:",
-  EMAIL_FAIL = "L'email n'a pas pu être envoyé.",
+  EMAIL_FAIL = "L'e-mail n'a pas pu être envoyé.",
   NOT_VALID = "La donnée n'est pas valide.",
   NO_PAYLOAD = "Une erreur est survenue.",
   COOKIE_CORRUPTED = "Votre cookie n'est pas valide.",

@@ -2,7 +2,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { ReactNode } from "react";
 import { Metadata } from "next";
-import { logoUrl, uri } from "@youmeet/functions/imports";
+import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - Blog`,
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
       "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
   },
   category: "Abonnements",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://www.youmeet.info/blog" />
+      <link rel="canonical" href={`${uri}/blog`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -45,7 +45,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Articles d'informations sur l'écosystème du recrutement selon YouMeet et pour les entreprises",
             description:
               "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
-            url: "https://www.youmeet.info/blog",
+            url: `${uri}/blog`,
             image: logoUrl,
             brand: {
               "@type": "Brand",

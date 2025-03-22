@@ -29,7 +29,7 @@ export default function Card({ el }: { el: Offer | Competency | Video }) {
   if (el.__typename === "Video") {
     attributes = {
       className:
-        "w-[400px] xs:w-[350px] sm:w-[350px] h-full xs:h-full sm:h-full rounded-[7px] border-[3px] shadow-xl shadow-grey300 border-solid border-grey400 dark:border-grey900 bg-white dark:lightDarkBg box-border cursor-pointer",
+        "w-[400px] xs:w-[300px] sm:w-[300px] h-full xs:h-full sm:h-full rounded-[7px] border-[3px] shadow-xl shadow-grey300 border-solid border-grey400 dark:border-grey900 bg-white dark:lightDarkBg box-border cursor-pointer",
       aos: "fade-up",
       href: ``,
     };

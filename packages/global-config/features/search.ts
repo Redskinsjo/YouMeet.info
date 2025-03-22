@@ -1,11 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+type OffresSearch = {
+  search: string;
+  departments: string[];
+  "all-skip"?: number;
+  "paris-skip"?: number;
+  "marseille-skip"?: number;
+  "lyon-skip"?: number;
+  "bordeaux-skip"?: number;
+};
 export interface SearchState {
   search: string;
   video: boolean;
   phone: boolean;
   linkedin: boolean;
+  offres: OffresSearch;
 }
 
 const initialState: SearchState = {
@@ -13,6 +23,15 @@ const initialState: SearchState = {
   video: true,
   phone: false,
   linkedin: false,
+  offres: {
+    search: "",
+    departments: [],
+    "all-skip": 0,
+    "paris-skip": 0,
+    "marseille-skip": 0,
+    "lyon-skip": 0,
+    "bordeaux-skip": 0,
+  },
 };
 
 export const globalSlice = createSlice({
@@ -34,6 +53,15 @@ export const globalSlice = createSlice({
     resetSearchInput: (state) => {
       state.search = "";
     },
+    setOffresSearch: (
+      state: SearchState,
+      action: PayloadAction<OffresSearch>
+    ) => {
+      state.offres = { ...state, ...action.payload };
+    },
+    resetOffresSearch: (state) => {
+      state.offres = { search: "", departments: [] };
+    },
   },
 });
 
@@ -44,6 +72,8 @@ export const {
   setVideoFilter,
   setPhoneFilter,
   setLinkedinFilter,
+  setOffresSearch,
+  resetOffresSearch,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

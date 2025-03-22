@@ -1,0 +1,41 @@
+{
+  "name": "@youmeet/performance",
+  "version": "0.0.7",
+  "description": "Methods and utils for high performance for Youmeet",
+  "files": [
+    "dist/cjs",
+    "dist/esm",
+    "dist/types"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Redskinsjo/YouMeet.info.git#main"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "author": {
+    "name": "Jonathan Carnos",
+    "email": "contact@youmeet.info",
+    "url": "https://github.com/Redskinsjo"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://paypal.me/yoka999999999?country.x=FR&locale.x=fr_FR"
+  },
+  "packageManager": "yarn@1.22.22",
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

@@ -5,8 +5,26 @@
   "imports": {
     "@/*": "./*"
   },
+  "exports": {
+    "./store": "./store.ts",
+    "./useRedirect": "./useRedirect.ts",
+    "./useFormDefaultValues": "./useFormDefaultValues.ts",
+    "./useSubscriptionStatus": "./useSubscriptionStatus.ts",
+    "./useSelectedLayoutClient": "./useSelectedLayoutClient.ts",
+    "./features/form": "./features/form.ts",
+    "./features/global": "./features/global.ts",
+    "./features/modal": "./features/modal.ts",
+    "./features/search": "./features/search.ts",
+    "./features/selection": "./features/selection.ts",
+    "./features/user": "./features/user.ts"
+  },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.3.0",
     "@youmeet/utils": "*"
+  },
+  "dependencies": {
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-redux": "^9.1.2"
   }
 }

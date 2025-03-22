@@ -3,6 +3,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import { Article } from "@youmeet/gql/generated";
 import Script from "next/script";
 import { ReactNode } from "react";
+import { uri } from "@youmeet/functions/imports";
 
 export default async function Layout({
   children,
@@ -20,10 +21,7 @@ export default async function Layout({
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link
-        rel="canonical"
-        href={`https://www.youmeet.info/medias/${article?.slug}`}
-      />
+      <link rel="canonical" href={`${uri}/medias/${article?.slug}`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -42,7 +40,7 @@ export default async function Layout({
             title: article?.title,
             description:
               "Découvrez ce nouvel article, informez-vous des dernières actualités dans le recrutement pour être toujours le premier sur les nouvelles tendances.",
-            url: `https://www.youmeet.info/offres/${article?.slug}`,
+            url: `${uri}/medias/${article?.slug}`,
             datePosted: article?.createdAt,
             identifier: article?.id,
           }),

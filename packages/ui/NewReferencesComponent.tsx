@@ -15,8 +15,7 @@ export default function NewReferencesComponent({
   const refers = references;
   const pro = refers?.filter((ref) => ref?.type === "professional");
   const academic = refers?.filter((ref) => ref?.type === "academic");
-  const judiciary = refers?.filter((ref) => ref?.type === "judiciary");
-  const refs = { pro, academic, judiciary };
+  const refs = { pro, academic };
 
   return (
     <SubPartContainer
@@ -41,7 +40,6 @@ export default function NewReferencesComponent({
                       label={<ReferenceLabel title={title} list={list} />}
                       value={<ReferenceValue list={list} />}
                       type="modal"
-                      fontSize="16px"
                       conversation={list.length === 0 ? false : true}
                     />
                   </SubPartContainer>

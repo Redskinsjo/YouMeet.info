@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
-import BackofficeComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficePageComponent";
-import FranceTravailConnect from "@youmeet/ui/backoffice/backofficeComponents/FranceTravailConnect";
+import BackofficeComponent from "@youmeet/ui/backofficeComponents/BackofficePageComponent";
+import FranceTravailConnect from "@youmeet/ui/backofficeComponents/FranceTravailConnect";
 
 export default async function BackofficeChild({
   leads,
@@ -16,6 +16,9 @@ export default async function BackofficeChild({
       <div className="flex-center">
         <Link href={`/backoffice/users`} className="no-underline">
           <Button>Voir utilisateurs</Button>
+        </Link>
+        <Link href={`/backoffice/applications`} className="no-underline">
+          <Button>Voir candidatures</Button>
         </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>

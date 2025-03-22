@@ -1,6 +1,6 @@
 import { BetaUser, Reference, Video } from "@youmeet/gql/generated";
-import { uri } from "@youmeet/functions/imports";
-import CandidateChild from "./candidateChild";
+import { githubUrl, linkedinUrl, NAME, uri } from "@youmeet/functions/imports";
+import CandidateChild from "@youmeet/ui/candidateProfileComponents/candidateChild";
 import { setName } from "@youmeet/utils/basics/setName";
 import { getPrincipalVideo } from "@youmeet/utils/basics/getPrincipalVideo";
 import { Metadata, ResolvingMetadata } from "next";
@@ -84,14 +84,14 @@ export async function generateMetadata(
         "profil public",
       ],
       authors: [
-        { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+        { name: NAME, url: githubUrl },
         {
-          name: "Jonathan Carnos",
-          url: "https://www.linkedin.com/in/jonathancarnos123/",
+          name: NAME,
+          url: linkedinUrl,
         },
       ],
       category: "Profil public",
-      creator: "Jonathan Carnos",
+      creator: NAME,
     };
   }
 
@@ -108,15 +108,15 @@ export async function generateMetadata(
         "Découvrez le profil du candidat, visionnez sa vidéo de présentation, consultez ses références professionnelles et académiques, et notifiez-le d'une proposition d'entretien sur notre plateforme de recrutement.",
     },
     authors: [
-      { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+      { name: NAME, url: githubUrl },
       {
-        name: "Jonathan Carnos",
-        url: "https://www.linkedin.com/in/jonathancarnos123/",
+        name: NAME,
+        url: linkedinUrl,
       },
     ],
 
     category: "Profil public",
-    creator: "Jonathan Carnos",
+    creator: NAME,
   };
 }
 

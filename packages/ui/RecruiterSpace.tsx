@@ -24,7 +24,7 @@ export default function RecruiterSpace({
         className={"header-item text-white h-[36px]"}
       >
         <Button
-          className="px-[18px] xs:px-[6px] sm:px-[6px] py-[4px] cursor-pointer no-underline legend h-full rounded-lg text-thisBlue border-0"
+          className="px-[18px] xs:px-[6px] sm:px-[6px] py-[4px] cursor-pointer no-underline legend h-full rounded-lg text-thisBlue border-0 normal-case"
           style={{ ...newStyles, backgroundColor: cyan[50] }}
           tabIndex={0}
         >

@@ -1,23 +1,18 @@
 import { AppSubscription } from "@youmeet/types/app";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
-export type GlobalError =
-  | "fileTooLarge"
-  | "creditTooLow"
-  | "requestNotCompleted"
-  | "fileTooLarge"
-  | "not-completed"
-  | "request-feedback";
+import { GlobalError, UploadMessage } from "@youmeet/types/CustomModal";
 
 export interface GlobalState {
   locale: string;
   background: number;
   lastModification: number;
-  upload: "upload" | "upload-50" | "delete" | null;
+  upload: UploadMessage | null;
   error: GlobalError | null;
   login: boolean;
   subscription: AppSubscription | undefined | false;
+  redirect: string;
+  tab: number;
 }
 
 const initialState: GlobalState = {
@@ -28,6 +23,8 @@ const initialState: GlobalState = {
   error: null,
   login: false,
   subscription: undefined,
+  redirect: "dashboard",
+  tab: 0,
 };
 
 export const globalSlice = createSlice({
@@ -44,10 +41,7 @@ export const globalSlice = createSlice({
       state.background = action.payload.background;
       state.lastModification = action.payload.lastModification;
     },
-    setUpload: (
-      state,
-      action: PayloadAction<"upload" | "upload-50" | "delete" | null>
-    ) => {
+    setUpload: (state, action: PayloadAction<UploadMessage | null>) => {
       state.upload = action.payload;
     },
     setError: (state, action: PayloadAction<GlobalError | null>) => {
@@ -62,6 +56,13 @@ export const globalSlice = createSlice({
     ) => {
       state.subscription = action.payload;
     },
+    setRedirect: (state, action: PayloadAction<string>) => {
+      state.redirect = action.payload;
+    },
+    setTab: (state, action: PayloadAction<number>) => {
+      state.tab = action.payload;
+    },
+    setMegaMenu: (state, action: PayloadAction<boolean>) => {},
   },
 });
 
@@ -73,6 +74,8 @@ export const {
   setError,
   setLogin,
   setSubscription,
+  setRedirect,
+  setTab,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

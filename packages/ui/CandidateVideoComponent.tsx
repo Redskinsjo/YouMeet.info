@@ -43,7 +43,7 @@ export default function CandidateVideoComponent({ video }: CustomModalProps) {
 
   return (
     <div
-      className="modal-content"
+      className="modal-container"
       onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
     >
       <div className="flex-center gap-[12px]">

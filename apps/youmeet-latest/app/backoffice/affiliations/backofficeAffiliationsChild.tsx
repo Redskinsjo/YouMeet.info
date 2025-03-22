@@ -1,8 +1,8 @@
 import { Affiliation } from "@youmeet/gql/generated";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import BackofficeAffiliationsComponent from "@youmeet/ui/backoffice/backofficeComponents/BackofficeAffiliationsComponent";
-import CreateAffiliation from "@youmeet/ui/backoffice/backofficeComponents/CreateAffiliation";
+import BackofficeAffiliationsComponent from "@youmeet/ui/backofficeComponents/BackofficeAffiliationsComponent";
+import CreateAffiliation from "@youmeet/ui/backofficeComponents/CreateAffiliation";
 
 export default function BackofficeAffiliationsChild({
   affiliations,
@@ -17,6 +17,9 @@ export default function BackofficeAffiliationsChild({
         </Link>
         <Link href={`/backoffice/users`} className="no-underline">
           <Button>Voir Utilisateurs</Button>
+        </Link>
+        <Link href={`/backoffice/applications`} className="no-underline">
+          <Button>Voir candidatures</Button>
         </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>

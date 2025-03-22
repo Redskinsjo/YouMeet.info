@@ -2,7 +2,7 @@ import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent
 import Script from "next/script";
 import { ReactNode } from "react";
 import { Metadata } from "next";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - Mise En Relation`,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "Découvrez les fonctionnalités de notre plateforme de recrutement, facilitant la mise en relation optimale entre candidats et recruteurs. Explorez comment nous innovons pour rendre le processus de recrutement plus efficace et transparent.",
   },
   category: "Gratuit",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -34,10 +34,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link
-        rel="canonical"
-        href="https://www.youmeet.info/le-produit/mise-en-relation"
-      />
+      <link rel="canonical" href={`${uri}/le-produit/mise-en-relation`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -55,7 +52,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Solution Complète de Visibilité pour les Candidats",
             description:
               "Optimisez vos candidatures avec notre application de visibilité pour candidats. Découvrez ses fonctionnalités et avantages.",
-            url: "https://www.youmeet.info/le-produit/mise-en-relation",
+            url: `${uri}/le-produit/mise-en-relation`,
             image: logoUrl,
             brand: {
               "@type": "Brand",

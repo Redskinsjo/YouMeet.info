@@ -214,12 +214,17 @@ export default function BoldText({
     }
     if (lastIndex === 0) list.push(textToFormat);
 
+    const leading =
+      align === "center"
+        ? ""
+        : "leading-[1.9] xs:leading-[1.6] sm:leading-[1.6]";
+
     const returnedElement = createElement(
       component,
       {
         className: formatDisplay
           ? `break-words font-[300] mb-[12px] w-full text-wrap list-outside box-border dark:text-white text-[15px] ${fontSizeClass}`
-          : `leading-[1.9] xs:leading-[1.6] sm:leading-[1.6] break-words font-[300] mb-[12px] w-full text-wrap list-outside box-border dark:text-white text-[15px] ${fontSizeClass}`,
+          : `break-words font-[300] mb-[12px] w-full text-wrap list-outside box-border dark:text-white text-[15px] ${fontSizeClass} ${leading}`,
         style: {
           listStyle: component === "li" ? "lower-greek" : "none",
           textRendering: "geometricPrecision",

@@ -8,7 +8,6 @@ export async function GET(req: NextRequest) {
   const search = req.nextUrl.searchParams;
   const realm = search.get("realm") ?? "";
 
-  console.log(realm, "realm");
   try {
     if (!realm)
       throw new BackendError(

@@ -1,7 +1,8 @@
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactNode } from "react";
-import DashboardFeatures from "@youmeet/ui/dashboard/dashboardComponents/dashboardFeatures";
+import DashboardFeatures from "@youmeet/ui/dashboardComponents/dashboardFeatures";
+import { uri } from "@youmeet/functions/imports";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -9,7 +10,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://pro.youmeet.info/dashboard" />
+      <link rel="canonical" href={`${uri}/dashboard`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -27,14 +28,14 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Espace Personnel Recruteur - Plateforme de Recrutement",
             description:
               "Consultez vos notifications et ajoutez des offres d'emploi sur notre plateforme de recrutement pour recruteurs.",
-            url: "https://pro.youmeet.info/dashboard",
+            url: `${uri}/dashboard`,
             potentialAction: [
               {
                 "@type": "ViewAction",
                 name: "Consulter les Notifications",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/dashboard",
+                  urlTemplate: `${uri}/dashboard`,
                 },
               },
               {
@@ -42,14 +43,14 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Ajouter une Offre d'Emploi",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://pro.youmeet.info/dashboard",
+                  urlTemplate: `${uri}/dashboard`,
                 },
               },
             ],
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://pro.youmeet.info",
+              url: uri,
             },
           }),
         }}

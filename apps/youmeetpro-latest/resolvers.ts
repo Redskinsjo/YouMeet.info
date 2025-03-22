@@ -126,7 +126,7 @@ import {
 import { v2 as cloudinary } from "cloudinary";
 import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDuration";
 import { s } from "@youmeet/utils/basics/jwt";
-import * as SendinBlue from "@sendinblue/client";
+import * as SendinBlue from "@getbrevo/brevo";
 import CryptoJS from "crypto-js";
 import { formatForDb } from "@youmeet/utils/resolvers/formatCompetencyTitle";
 import { uri, uriCandidates } from "@youmeet/functions/imports";
@@ -822,23 +822,29 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      type ORTypes = {
-        company?: { name: { mode: "insensitive"; contains: string } };
-        job?: {
-          title?: { is: { fr: { mode: "insensitive"; contains: string } } };
-        };
-      }[];
-      const OR = [] as ORTypes;
-      const where = {} as {
-        jobId: { in: string[] };
-        sectorId: { in: string[] };
-        OR?: ORTypes;
-      };
 
-      if (args.data?.jobs && args.data.jobs.length > 0)
-        where.jobId = { in: args.data.jobs as string[] };
-      if (args.data?.sectors && args.data.sectors.length > 0)
-        where.sectorId = { in: args.data.sectors as string[] };
+      const OR = [] as Prisma.offersWhereInput[];
+      const where = {} as Prisma.offersWhereInput;
+
+      const data = args.data;
+      const jobs = data?.jobs as string[];
+      const sectors = data?.sectors as string[];
+      const title = data?.title as string;
+
+      if (jobs && jobs.length > 0) where.jobId = { in: jobs };
+      if (sectors && sectors.length > 0) where.sectorId = { in: sectors };
+      if (title) {
+        let translated = {} as { is: { fr: FilterText } | { en: FilterText } };
+        if (data?.language === "fr")
+          translated.is = { fr: { contains: title, mode: "insensitive" } };
+        if (data?.language === "en")
+          translated.is = { en: { contains: title, mode: "insensitive" } };
+
+        where.OR = [
+          { job: { title: translated } },
+          { intitule: { contains: title, mode: "insensitive" } },
+        ];
+      }
 
       if (args.params?.search) {
         OR.push({
@@ -854,8 +860,8 @@ const resolvers: Resolvers = {
           },
         });
       }
-      if (args.data?.targetSectorId) {
-        where.sectorId = { in: [args.data.targetSectorId] };
+      if (data?.targetSectorId) {
+        where.sectorId = { in: [data.targetSectorId] };
       }
       let take = {} as { take?: number };
       if (args.params?.take) take = { take: args.params.take };
@@ -1093,7 +1099,7 @@ const resolvers: Resolvers = {
         const filter = { mode: "insensitive" } as FilterText;
         if (d.contains) filter.contains = d.title;
         else filter.startsWith = d.title;
-        where.title = { is: { fr: filter } };
+        where.title = { is: { OR: [{ fr: filter }, { en: filter }] } };
       }
       if (d?.topSectorIds && d.topSectorIds.length > 0)
         whereOr.push({
@@ -1102,6 +1108,8 @@ const resolvers: Resolvers = {
       if (d?.in) whereOr.push({ id: { in: d.in as string[] } });
 
       if (whereOr && whereOr.length > 0) where.OR = whereOr;
+
+      console.log(where, "where");
       return await prisma.jobs.findMany({
         where,
       });
@@ -2797,6 +2805,7 @@ const resolvers: Resolvers = {
       if (data?.sector) creates.sector = { connect: { id: data.sector } };
       if (data?.companyId)
         creates.company = { connect: { id: data.companyId } };
+      if (data?.contexteTravail) creates.contexteTravail = data.contexteTravail as any
 
       const rebroadcasting = {} as { companyName: string; rebroadcast: true };
       if (data?.companyName) {
@@ -2813,9 +2822,7 @@ const resolvers: Resolvers = {
         });
         if (resultingJob) {
           const res = await setUniqueSlugAndExtension(
-            resultingJob?.title?.fr as string,
-            0,
-            "offers"
+            resultingJob?.title?.fr as string
           );
 
           if (res.extension) creates.extension = res.extension;

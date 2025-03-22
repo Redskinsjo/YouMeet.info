@@ -1,3 +1,4 @@
+import { logoUrl, uri } from "@youmeet/functions/imports";
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactElement } from "react";
@@ -8,7 +9,7 @@ export default function Layout({ children }: { children: ReactElement }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://www.youmeet.info/se-connecter" />
+      <link rel="canonical" href={`${uri}/se-connecter`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -26,14 +27,13 @@ export default function Layout({ children }: { children: ReactElement }) {
             name: "Se Connecter - Plateforme de Recrutement",
             description:
               "Connectez-vous à notre plateforme de recrutement et explorez des opportunités passionnantes. Rencontrez des talents exceptionnels et trouvez le candidat idéal.",
-            url: "https://www.youmeet.info/se-connecter",
-            image:
-              "https://res.cloudinary.com/de822mdsy/image/upload/v1691348066/youmeet-official/webp/logo-favicon_yvmhxq.webp",
+            url: `${uri}/se-connecter`,
+            image: logoUrl,
             inLanguage: "fr-FR",
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://www.youmeet.info/se-connecter",
+              url: `${uri}/se-connecter`,
             },
             potentialAction: [
               {
@@ -41,13 +41,13 @@ export default function Layout({ children }: { children: ReactElement }) {
                 name: "Connexion Candidat",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://www.youmeet.info/se-connecter",
+                  urlTemplate: `${uri}/se-connecter`,
                 },
               },
               {
                 "@type": "Action",
                 name: "Inscription Candidat",
-                target: "https://www.youmeet.info/se-connecter",
+                target: `${uri}/se-connecter`,
               },
             ],
           }),

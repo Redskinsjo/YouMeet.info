@@ -26,7 +26,7 @@ export default function ProfilePartComponent({
   references: Reference[];
 }) {
   return (
-    <div className="dark:extraLightDarkBg flex flex-col gap-[6px] w-[499px] xs:w-screen sm:w-screen">
+    <div className="dark:extraLightDarkBg flex flex-col gap-[6px] w-[499px] xs:w-full sm:w-full md:w-full box-border">
       {!!profil && <ProfileNameAndJob profil={profil} account={account} />}
 
       <div className="flex-center flex-col gap-[12px] p-[12px] border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg">

@@ -2,13 +2,18 @@ import { BetaExperience } from "@youmeet/gql/generated";
 import { deepPurple, grey } from "@mui/material/colors";
 import { ReactElement, forwardRef } from "react";
 
-export const getTooltip = (asset: BetaExperience | string | ReactElement) => {
+export const getTooltip = (
+  asset: BetaExperience | string | ReactElement,
+  translate: (str: string) => string
+) => {
   if (typeof asset === "object") {
     if ("duration" in asset) {
       return "Digital - ESN - " + (asset as BetaExperience)?.duration + " mois";
+    } else {
+      return asset as ReactElement;
     }
   }
-  return asset as string;
+  return translate(asset as string);
 };
 
 export const getColor = (asset: BetaExperience | string) => {

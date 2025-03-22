@@ -1,4 +1,4 @@
-import { uri, uriCandidates } from "@youmeet/functions/imports";
+import { EMAIL_PERSO, uri, uriCandidates } from "@youmeet/functions/imports";
 import { NextRequest, NextResponse } from "next/server";
 import Meet from "@youmeet/models/meets";
 import { s } from "@youmeet/utils/basics/jwt";
@@ -22,8 +22,7 @@ export async function GET(req: NextRequest) {
 
     if (
       meet &&
-      (recruiter.email === email ||
-        email.toLowerCase() === "jonathan.carnos@gmail.com")
+      (recruiter.email === email || email.toLowerCase() === EMAIL_PERSO)
     ) {
       if (!meet.expired) {
         const beforeCookie = {

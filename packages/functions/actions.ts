@@ -22,6 +22,7 @@ import {
   QuerySendEmailArgs,
   Question,
   SharingRefusal,
+  UserRemark,
   Video,
 } from "@youmeet/gql/generated";
 import { ConversationTheme } from "@youmeet/types/ConversationTheme";
@@ -53,7 +54,7 @@ import {
   deleteInterviewOffer,
   deleteLead,
   deleteOffer,
-  deleteProfileSharing,
+  deleteSharing,
   deleteVideo,
   getAffiliation,
   getRawUser,
@@ -71,6 +72,8 @@ import {
   updateUser,
   updateVideo,
   searchSomeone,
+  createRemark,
+  deleteAccount as deleteAccountReq,
 } from "./request";
 import {
   FormHandledData,
@@ -94,6 +97,7 @@ import { setName } from "@youmeet/utils/basics/setName";
 import { handleActionError } from "@youmeet/utils/basics/handleActionError";
 import { redirect } from "next/navigation";
 import { getUserIdFromPublicId } from "@youmeet/utils/basics/getPublicId";
+import { redir } from "@youmeet/utils/checkout/functions";
 
 ///// backendisées avec gestion d'erreur
 
@@ -362,6 +366,55 @@ export const onAddVideo = async (
   }
 };
 
+export const onRemark = async (
+  formData: FormData
+): Promise<withData<UserRemark> | PayloadBackendError> => {
+  const schema = z.object({
+    content: z.string().min(1),
+    userId: z.string().min(1),
+  });
+
+  const obj = Object.fromEntries(
+    Object.entries(Object.fromEntries(formData.entries())).map((entry) => [
+      entry[0],
+      entry[1].toString().trim(),
+    ])
+  );
+
+  const toBeParsed = obj;
+
+  try {
+    const valid = schema.parse(toBeParsed);
+
+    if (valid) {
+      const result = (await createRemark<UserRemark>(
+        { data: { content: valid.content, userId: valid.userId } },
+        0,
+        true
+      )) as PayloadBackendError | withData<UserRemark>;
+      if (result && isPayloadError(result)) {
+        throw new BackendError(result.type, result.message);
+      } else if (!result?.data) {
+        throw new BackendError(
+          BACKEND_ERRORS.PROCESSING,
+          BACKEND_MESSAGES.PROCESSING
+        );
+      } else {
+        if (!test) revalidatePath("/dashboard");
+        if (!test) revalidatePath("/backoffice/remarks");
+
+        return { data: result.data };
+      }
+    }
+    throw new BackendError(
+      BACKEND_ERRORS.NOT_VALID,
+      BACKEND_MESSAGES.NOT_VALID
+    );
+  } catch (err: any) {
+    return await handleActionError(err);
+  }
+};
+
 export const onAddFeedback = async (
   prevState: any,
   formData: FormData
@@ -498,99 +551,6 @@ export const onCreateProAccount = async (
   }
 };
 
-export const onTargetJobUpdate = async (extras: {
-  userId: string;
-  jobId: string;
-}): Promise<withData<BetaCandidate> | PayloadBackendError> => {
-  const schema = z.object({
-    userId: z.string().min(1),
-    jobId: z.string().min(1),
-  });
-
-  const obj = { userId: extras.userId, jobId: extras.jobId };
-
-  try {
-    const valid = schema.parse(obj);
-    if (valid) {
-      const result = (await createCandidateBasic<BetaCandidate>(
-        {
-          data: { userId: extras.userId, targetJobId: extras.jobId },
-        },
-        0,
-        true
-      )) as PayloadBackendError | withData<BetaCandidate>;
-      if (result && isPayloadError(result)) {
-        throw new BackendError(
-          BACKEND_ERRORS.PROCESSING,
-          BACKEND_MESSAGES.PROCESSING
-        );
-      } else if (!result?.data) {
-        throw new BackendError(
-          BACKEND_ERRORS.PROCESSING,
-          BACKEND_MESSAGES.PROCESSING
-        );
-      } else {
-        if (!test) revalidatePath("/dashboard");
-
-        return { data: result.data };
-      }
-    }
-    throw new BackendError(
-      BACKEND_ERRORS.MISSING_ARGUMENT,
-      BACKEND_MESSAGES.MISSING_ARGUMENT
-    );
-  } catch (err: any) {
-    return await handleActionError(err);
-  }
-};
-
-export const onTargetContractTypeUpdate = async (extras: {
-  userId: string;
-  contractType: string;
-}): Promise<withData<BetaCandidate> | PayloadBackendError> => {
-  const schema = z.object({
-    userId: z.string().min(1),
-    contractType: z.string().min(1),
-  });
-  const obj = { userId: extras.userId, contractType: extras.contractType };
-  try {
-    const valid = schema.parse(obj);
-    if (valid) {
-      const result = (await createCandidateBasic<BetaCandidate>(
-        {
-          data: {
-            userId: extras.userId,
-            targetContractType: extras.contractType,
-          },
-        },
-        0,
-        true
-      )) as PayloadBackendError | withData<BetaCandidate>;
-
-      if (result && isPayloadError(result)) {
-        throw new BackendError(
-          BACKEND_ERRORS.PROCESSING,
-          BACKEND_MESSAGES.PROCESSING
-        );
-      } else if (!result?.data) {
-        throw new BackendError(
-          BACKEND_ERRORS.PROCESSING,
-          BACKEND_MESSAGES.PROCESSING
-        );
-      } else {
-        if (!test) revalidatePath("/dashboard");
-        return { data: result.data };
-      }
-    }
-    throw new BackendError(
-      BACKEND_ERRORS.MISSING_ARGUMENT,
-      BACKEND_MESSAGES.MISSING_ARGUMENT
-    );
-  } catch (err: any) {
-    return await handleActionError(err);
-  }
-};
-
 export const onLogin = async (
   initial: withData<string | null> | PayloadBackendError,
   formData: FormData
@@ -684,8 +644,8 @@ export const onLogin = async (
             }
           } else {
             throw new BackendError(
-              BACKEND_ERRORS.PROCESSING,
-              BACKEND_MESSAGES.PROCESSING
+              BACKEND_ERRORS.WRONG_CREDENTIALS,
+              BACKEND_MESSAGES.WRONG_CREDENTIALS
             );
           }
         } else {
@@ -870,16 +830,6 @@ export const onSigninUp = async (
   }
 };
 
-export const onLogout = async () => {
-  (await cookies()).delete({
-    name: process.env.APP === "candidate" ? "login" : "loginPro",
-    path: "/",
-    domain: `${process.env.API_DOMAIN}`,
-  });
-  revalidatePath("/");
-  redirect("/");
-};
-
 export const onApplying = async (extras: {
   originId: string | undefined;
   targetId: string | undefined;
@@ -888,7 +838,7 @@ export const onApplying = async (extras: {
 }): Promise<withData<ProfileSharing> | PayloadBackendError> => {
   const schema = z.object({
     originId: z.string().min(1),
-    targetId: z.string().min(1),
+    targetId: z.string().optional(),
     videoId: z.string().min(1),
     offerTargetId: z.string().min(1),
   });
@@ -1532,11 +1482,9 @@ export const onDeleteNotification = async (
 ): Promise<withData<boolean> | PayloadBackendError> => {
   try {
     if (type === "s") {
-      const result = (await deleteProfileSharing<ProfileSharing>(
-        { id },
-        0,
-        true
-      )) as PayloadBackendError | withData<ProfileSharing>;
+      const result = (await deleteSharing<ProfileSharing>({ id }, 0, true)) as
+        | PayloadBackendError
+        | withData<ProfileSharing>;
       if (result && isPayloadError(result)) {
         throw new BackendError(result.type, result.message);
       } else {
@@ -1983,7 +1931,6 @@ export const generateCV = async (formData: FormData) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.ok ? "done" : response.ok);
       const result = await response.arrayBuffer();
       return result;
     }

@@ -109,7 +109,8 @@ const nextConfig = {
     GOOGLE_OAUTH_CLIENT_SECRET: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
     GOOGLE_OAUTH_CLIENT_ID: process.env.GOOGLE_OAUTH_CLIENT_ID,
   },
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev, isServer, nextRuntime }) => {
+    if (nextRuntime !== "nodejs") return config;
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
     config.module.rules.push({

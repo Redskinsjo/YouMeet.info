@@ -1,15 +1,15 @@
 import GoogleTagAndHotjarComponent from "@youmeet/ui/GoogleTagAndHotjarComponent";
 import Script from "next/script";
 import { ReactNode } from "react";
-import { logoUrl } from "@youmeet/functions/imports";
+import { logoUrl, uri } from "@youmeet/functions/imports";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="p-[6px]">
+    <div>
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href="https://www.youmeet.info/dashboard" />
+      <link rel="canonical" href={`${uri}/dashboard`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Espace Personnel Candidat - Plateforme de Recrutement",
             description:
               "Gérez vos informations personnelles et professionnelles, votre vidéo de présentation, souscrivez à un abonnement, consultez vos notifications. Optimisez votre expérience sur la plateforme.",
-            url: "https://www.youmeet.info/dashboard",
+            url: `${uri}/dashboard`,
             image: logoUrl,
             potentialAction: [
               {
@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Souscrire à un Abonnement",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://www.youmeet.info/dashboard",
+                  urlTemplate: `${uri}/dashboard`,
                 },
               },
               {
@@ -43,7 +43,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Voir les Informations Personnelles et Professionnelles",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://www.youmeet.info/dashboard",
+                  urlTemplate: `${uri}/dashboard`,
                 },
               },
               {
@@ -51,7 +51,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Visionner votre Vidéo de Présentation",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://www.youmeet.info/dashboard",
+                  urlTemplate: `${uri}/dashboard`,
                 },
               },
               {
@@ -59,14 +59,14 @@ export default function Layout({ children }: { children: ReactNode }) {
                 name: "Consulter les Notifications",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://www.youmeet.info/dashboard",
+                  urlTemplate: `${uri}/dashboard`,
                 },
               },
             ],
             publisher: {
               "@type": "Organization",
               name: "YouMeet",
-              url: "https://www.youmeet.info",
+              url: `${uri}`,
             },
           }),
         }}

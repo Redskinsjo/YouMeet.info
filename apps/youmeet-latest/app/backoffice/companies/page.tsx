@@ -1,3 +1,4 @@
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 import BackofficeCompaniesChild from "./backofficeCompaniesChild";
 import { getCompanies } from "@youmeet/functions/request";
 import { BetaCompany } from "@youmeet/gql/generated";
@@ -6,10 +7,7 @@ import { notFound } from "next/navigation";
 
 export default async function BackofficeCompanies() {
   const verified = await verifyTokenServer();
-  if (
-    verified &&
-    verified.email.toLowerCase() === "jonathan.carnos@gmail.com"
-  ) {
+  if (verified && verified.email.toLowerCase() === EMAIL_PERSO) {
     const companies = (await getCompanies<BetaCompany[]>()) as BetaCompany[];
 
     if (companies) return <BackofficeCompaniesChild companies={companies} />;

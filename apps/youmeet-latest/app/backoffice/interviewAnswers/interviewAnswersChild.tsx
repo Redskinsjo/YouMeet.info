@@ -13,11 +13,14 @@ export default function InterviewAnswersChild({
     <Layout newStyles={{ maxWidth: "1200px", padding: "0px", width: "100%" }}>
       <div className="flex flex-col gap-[24px] w-full border-[0.5px] border-solid border-grey500">
         <div className="flex-center">
+          <Link href={`/backoffice`} className="no-underline">
+            <Button>Retour vers Backoffice</Button>
+          </Link>
           <Link href={`/backoffice/users`} className="no-underline">
             <Button>Voir utilisateurs</Button>
           </Link>
-          <Link href={`/backoffice`} className="no-underline">
-            <Button>Retour vers Backoffice</Button>
+          <Link href={`/backoffice/applications`} className="no-underline">
+            <Button>Voir candidatures</Button>
           </Link>
           <Link href={`/backoffice/remarks`} className="no-underline">
             <Button>Voir remarques</Button>

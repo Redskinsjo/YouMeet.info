@@ -1,14 +1,9 @@
 import { Avatar, BetaUser } from "@youmeet/gql/generated";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { onAddCV } from "@youmeet/functions/actions";
-import {
-  GlobalState,
-  setError,
-  setUpload,
-} from "@youmeet/global-config/features/global";
-import { RootState } from "@youmeet/global-config/store";
+import { setError, setUpload } from "@youmeet/global-config/features/global";
 import { setCvFile } from "@youmeet/global-config/features/user";
 import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
@@ -21,9 +16,6 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
   const cvRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const upload = useSelector(
-    (state: RootState) => (state.global as GlobalState).upload
-  );
 
   const customOnAddCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("upload"));
@@ -42,26 +34,26 @@ export default function NewAddCVComponent({ profil }: { profil?: BetaUser }) {
         dispatch(setError("not-completed"));
       } else {
         dispatch(setCvFile((result2 as withData<Avatar>).data));
+        dispatch(setUpload(null));
       }
     }
-    dispatch(setUpload(null));
   };
 
   return profil?.cvFile ? undefined : (
-    <div className="w-full flex-bet p-[6px] h-[39px]">
+    <div className="w-full flex justify-end p-[6px] h-[39px]">
       <form
         ref={cvRef}
         action={customOnAddCV.bind(null, profil?.id as string)}
-        className="w-full min-w-[245px] flex-center rounded-xl cursor-pointer relative"
+        className="rounded-xl flex items-center justify-end min-w-[80px] cursor-pointer relative"
       >
         <label
           htmlFor="cv"
-          className="w-full h-full cursor-pointer absolute flex justify-end items-center dark:text-deepPurple200 text-deepPurple700 font-bold"
+          className="h-full cursor-pointer absolute left-0 dark:text-deepPurple200 text-deepPurple700 font-bold flex-center whitespace-nowrap"
         >
           {t("add-cv")}
         </label>
         <input
-          className="invisible w-full h-full absolute"
+          className="invisible left-0 absolute"
           id="cv"
           name="cvFile"
           type="file"

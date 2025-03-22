@@ -7,6 +7,7 @@ const meProfile = {
   phone: "Phone",
   email: "Email",
   analytics: "Analytics",
+  settings: "Settings",
   notice: "Notice",
   "link-broken": "The link is broken. Add a video.",
   "select-your-role": "Select your role",
@@ -32,6 +33,7 @@ const meProfile = {
   "me-profile-infos-label-company": "Company",
   "me-profile-infos-label-ending": "End",
   "me-profile-infos-label-starting": "Start",
+  "transmit-your-video": "Send your video when applying",
   "me-profile-infos-label-salary": "Wished Salary per year",
   "income-offered": "Determined Income per year",
   "me-profile-infos-label-age": "Age",
@@ -89,6 +91,7 @@ const meOrganisation = {
   "me-organisation-infos-label-name": "Company name",
   "me-organisation-infos-label-location": "Location",
   "me-organisation-infos-label-resume": "Description",
+  preferredLocation: "Preferred location",
   "me-organisation-service-connections": "Service connections",
   "me-oganisation-service-connections-description":
     "Here you connect your work follow-up tool(s). Our system will check up the resources of the humans (HR) on multiple criterias, like the technical skills, the speed, the communication.",
@@ -105,6 +108,7 @@ const me = {
   "linkedinProfileId-field-placeholder":
     "What is the Linkedin profile of the company?",
   "location-field-placeholder": "What is the location of the company?",
+  "department-field-placeholder": "In which department ?",
   "resume-field-placeholder": "What is the description of the company?",
   "form-come-back": "Go back",
   "your-experiences": "Your experiences",
@@ -317,9 +321,12 @@ const translations = {
   next: "Next",
   "alumnis-feedbacks": "Some feedbacks from our alumnus",
   login: "Login",
+  "exclusive-job-offer-suggestions": "Exclusive job offer suggestions",
+  "what-we-do": "What we do",
   enter: "Enter",
   home: "Home",
   blog: "Blog",
+  biographies: "Life stories",
   product: "Product",
   enterprise: "Enterprise",
   recruiters: "Recruiters",
@@ -342,7 +349,7 @@ const translations = {
   "marketing-content01":
     "Reveal your professional background and technical skills. Your future starts here. Create your profile now!",
   homeTitle: "Job Offers, Video CVs and References",
-  homeTitleSecondary: "Video CVs and References",
+  homeTitleSecondary: "Professional video presentations and life stories",
   homeDescription: "Stand out among the other candidates, you are a ",
   talent: "talent",
   developer: "developer",
@@ -471,7 +478,7 @@ const presentation = {
   "home-explanation-question": "You search for a job+",
   "home-explanation1": "Present yourself in a video",
   "home-explanation2": "Add your profile link to your CV",
-  "home-explanation3": "We certify your experiences",
+  "home-explanation3": "You search for a talent+",
   "start-wa1": "Start a conversation with us",
   "start-wa2": "on WhatsApp to get to know our service.",
   discuss: "Discuss",
@@ -542,6 +549,7 @@ const students = {
   Account: "Account",
   status: "Status",
   delete: "Delete",
+  "delete-account": "Delete Account",
   createdAt: "Created At",
   updatedAt: "Updated At",
   linkedin: "Linkedin",
@@ -661,6 +669,8 @@ const partners = {
   brand: "Brand",
   historic: "Historic",
   informations: "Information",
+  "to-recruiters": "to recruiters",
+  "incredible-opportunity-to-find-job": "Incredible opportunity to find a job",
   "return-button": "Return",
   search: "Search",
   job: "Job",
@@ -678,9 +688,6 @@ const recruiters = {
   "welcome-incentive":
     "You +benefit= from significant advantages during your +job search= thanks to YouMeet.info. A +complete= profile allows you to access more opportunities, by making it public.+",
   "profile-views": "Profile views",
-  loading: "Little patience... Loading is in progress.",
-  deleting: "Deleting...",
-  "loading-50": "That's it, almost there... Loading is at 50%.",
   "use-this-link":
     "Share this link with the recruiters, insert it in your CV.+",
   welcome: "Welcome",
@@ -850,6 +857,8 @@ const compte = {
   offerRevenue: "Annual job income",
   revenue: "Income",
   contractType: "Contract type",
+  salary: "Salary",
+  "exp-level": "Experience level",
   authorInterviewLink: "Author interview link",
   limitDate: "Application limit date",
   authorName: "Author name",
@@ -864,6 +873,7 @@ const compte = {
   temperature: "Temperature",
   "import-linkedin-exps": "Import experiences from Linkedin",
   "say-us-which-job": "Tell us what job you are looking for",
+  "say-us-which-location": "Tell us which location",
   "say-us-which-contract-type":
     "Tell us what contract type you are looking for",
   "say-us-which-job-text":
@@ -944,7 +954,7 @@ const favorites = {
 };
 
 const login = {
-  signin: "Signin",
+  signup: "Sign up",
   "google-signin": "Connect Google",
   "already-signed": "Already signed in?",
   "forgotten-password": "Forgotten password?",
@@ -1005,6 +1015,7 @@ const misc = {
   "send-conversation-responses": "Send answers to the questions",
   "pass-next-question": "Pass to next question",
   "offer-applied": "Offer concerned",
+  "present-yourself": "Present yourself",
   "present-yourself-quickly": "Present yourself +succinctly=.+",
   "speak-about-job-and-company": "Speak about the job and/or the company.+",
   "explain-why-you-are-the-right-person":
@@ -1071,6 +1082,8 @@ const misc = {
   "apply-now": "Apply now",
   "already-applied": "Already applied",
   "choose-video": "Choose video",
+  "choose-another-video": "Choose another video",
+  "take-this-video": "Take this video",
   "start-with-video-cv": "Start with a video CV",
   "new-article": "New",
   "some-articles-could-interest": "Some articles that could interest you",
@@ -1092,13 +1105,35 @@ const competencies = {
 };
 
 const offres = {
+  "reset-navigation": "Reset navigation",
+  or: "or",
   "no-offer-for-the-moment":
     "We don't have any offers at the moment. Come back later.",
   "offers-announcement": "Find here all the opportunities available.",
+  "all-in-paris": "All offers in Paris",
+  "all-in-marseille": "All offers in Marseille",
+  "all-in-bordeaux": "All offers in Bordeaux",
+  "all-in-lyon": "All offers in Lyon",
+  department: "Department",
   "requirements-skills": "Required skills",
   "some-more-offers": "Here are some more offers",
   "take-opportunity-to-apply":
     "If you take +the opportunity to apply= to other offers, you'll have more chance to get hired.+",
+  january: "january",
+  february: "february",
+  february: "february",
+  march: "march",
+  april: "april",
+  may: "may",
+  june: "june",
+  july: "july",
+  august: "august",
+  august: "august",
+  september: "september",
+  october: "october",
+  november: "november",
+  december: "december",
+  december: "december",
 };
 
 export default Object.assign(

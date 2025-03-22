@@ -140,13 +140,15 @@ import {
   QueryAffiliationArgs,
   QueryVideoByPublicIdArgs,
   FormResponse,
+  WorkLocationFtInput,
+  QuerySharingsArgs,
 } from "@youmeet/gql/generated";
 import { v2 as cloudinary } from "cloudinary";
 import { fromFullname, split } from "@youmeet/utils/resolvers/resolveFullname";
 import { createUpdateCandidate } from "@youmeet/utils/resolvers/createCandidateForm";
 import { getExperienceDuration } from "@youmeet/utils/resolvers/getExperienceDuration";
 import { s } from "@youmeet/utils/basics/jwt";
-import * as SendinBlue from "@sendinblue/client";
+import * as SendinBlue from "@getbrevo/brevo";
 import CryptoJS from "crypto-js";
 import { setUniqueNameAndExtension } from "@youmeet/utils/backoffice/setUniqueInput";
 import { uri, uriPro } from "@youmeet/functions/imports";
@@ -165,6 +167,7 @@ import {
   setDetailPayload,
   setUserPayload,
 } from "@youmeet/utils/basics/setPayload";
+import { replaceLetters } from "@youmeet/utils/resolvers/reduceAppelations";
 
 export const apiInstance = new SendinBlue.TransactionalEmailsApi();
 
@@ -179,8 +182,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
 });
-
-const low = (str: string) => str.toLowerCase();
 
 const resolvers: Resolvers = {
   Query: {
@@ -586,29 +587,17 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-      if (
-        args.data?.offerTargetId &&
-        args.data.originId &&
-        args.data.targetId
-      ) {
-        const where = {} as {
-          id?: string;
-          originId?: string;
-          targetId?: string;
-          offerTargetId?: string;
-        };
-        if (args.data?.id) where.id = args.data?.id;
-        if (args.data?.originId) where.originId = args.data?.originId;
-        if (args.data?.targetId) where.targetId = args.data?.targetId;
-        if (args.data?.offerTargetId)
-          where.offerTargetId = args.data?.offerTargetId;
-        const sharing = await prisma.profileSharings.findFirst({
-          where,
-          include: { target: true, origin: true, offerTarget: true },
-        });
-        return sharing;
-      }
-      return null;
+      const where = {} as Prisma.profileSharingsWhereInput;
+      const d = args.data;
+      if (d?.id) where.id = d?.id;
+      if (d?.originId) where.originId = d?.originId;
+      if (d?.targetId) where.targetId = d?.targetId;
+      if (d?.offerTargetId) where.offerTargetId = d?.offerTargetId;
+      const sharing = await prisma.profileSharings.findFirst({
+        where,
+        include: { target: true, origin: true, offerTarget: true, video: true },
+      });
+      return sharing;
     },
     myCompanyProfileSharings: async (
       _: unknown,
@@ -861,78 +850,96 @@ const resolvers: Resolvers = {
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
-      const where = {} as Prisma.offersWhereInput;
+      let where = {} as Prisma.offersWhereInput;
 
-      if (args.data?.jobs && args.data.jobs.length > 0)
-        where.jobId = { in: args.data.jobs as string[] };
-      if (args.data?.sectors && args.data.sectors.length > 0)
-        where.sectorId = { in: args.data.sectors as string[] };
+      const data = args.data;
+      const prms = args.params;
 
-      if (args.params?.search || (args.data?.language && args.data.title)) {
+      if (data?.lieuTravail) {
+        const l = data.lieuTravail;
+        const f = (value: any, type: "contains" | "startsWith" = "contains") =>
+          ({
+            [type]: value,
+            mode: "insensitive",
+          } as any);
+        let is = {} as Prisma.WorkLocationFTWhereInput;
+
+        const getOr = (l: WorkLocationFtInput, codePostal: string) => {
+          let is = {} as Prisma.WorkLocationFTWhereInput;
+          if (l.codePostal) is.codePostal = f(codePostal, "startsWith");
+          if (l.commune) is.commune = f(l.commune);
+          if (l.libelle) is.libelle = f(l.libelle);
+          return is;
+        };
+        if (l.codePostal) {
+          const ors = [] as Prisma.WorkLocationFTWhereInput[];
+          for (let i = 0; i < l.codePostal.length; i++) {
+            const codePostal = l.codePostal[i];
+            ors.push(getOr(l, codePostal || ""));
+          }
+          where.lieuTravail = { is: { OR: ors } };
+        }
+      }
+
+      if (data?.jobs && data.jobs.length > 0)
+        where.jobId = { in: data.jobs as string[] };
+      if (data?.sectors && data.sectors.length > 0)
+        where.sectorId = { in: data.sectors as string[] };
+
+      if (prms?.search || (data?.language && data.title)) {
         where.OR = [];
       }
 
-      if (args.params?.search && where.OR) {
-        where.OR.push({
-          company: {
-            name: { mode: "insensitive", startsWith: args.params.search },
-          },
+      const search = prms?.search;
+
+      if (search) {
+        const s = replaceLetters(search);
+        const mode = "insensitive";
+        where.OR?.push({ intitule: { contains: search, mode } });
+        where.OR?.push({
+          intituleReduced: { contains: s, mode },
         });
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                fr: { mode: "insensitive", startsWith: args.params.search },
-              },
-            },
-          },
+        where.OR?.push({
+          romeLibelle: { contains: search, mode },
         });
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                en: { mode: "insensitive", startsWith: args.params.search },
-              },
-            },
-          },
-        });
-      }
-      if (args.data?.language && args.data.title && where.OR) {
-        where.OR.push({
-          job: {
-            title: {
-              is: {
-                [args.data.language]: {
-                  mode: "insensitive",
-                  equals: args.data.title,
-                },
-              },
-            },
-          },
+        where.OR?.push({
+          romeLibelleReduced: { contains: s, mode },
         });
       }
 
-      if (args.data?.targetSectorId) {
-        where.sectorId = { in: [args.data.targetSectorId] };
+      if (data?.targetSectorId) {
+        where.sectorId = { in: [data.targetSectorId] };
       }
       let take = {} as { take?: number };
-      if (args.params?.take) take = { take: args.params.take };
+      if (prms?.take) take = { take: prms.take };
       let skip = {} as { skip?: number };
-      if (args.params?.skip) skip = { skip: args.params.skip };
+      if (prms?.skip) skip = { skip: prms.skip };
 
-      const finalWhere = {} as Prisma.offersFindManyArgs;
+      const finalWhere = { where: {} };
       if (Object.keys(where).length > 0) finalWhere.where = where;
 
       return await prisma.offers.findMany({
         ...finalWhere,
         ...skip,
         ...take,
-        include: {
-          requirements: true,
+        select: {
+          id: true,
+          slug: true,
+          contractType: true,
+          intitule: true,
           job: true,
-          sector: true,
-          author: true,
+          typeContratLibelle: true,
+          qualificationLibelle: true,
+          companyName: true,
+          entreprise: true,
+          location: true,
+          lieuTravail: true,
           company: true,
+          outilsBureautiques: true,
+          dureeTravailLibelleConverti: true,
+          nombrePostes: true,
+          experienceLibelle: true,
+          permis: true,
         },
       });
     },
@@ -1530,6 +1537,28 @@ const resolvers: Resolvers = {
       if (!noCors) return [];
       return await prisma.affiliations.findMany({ include: { parent: true } });
     },
+    sharings: async (
+      _: unknown,
+      args: QuerySharingsArgs,
+      context: ContextRequest
+    ) => {
+      const noCors = await noCorsMiddleware(context);
+      if (!noCors) return [];
+      const data = args.data;
+      const where = {} as Prisma.profileSharingsWhereInput;
+      if (data?.offerId) where.offerTarget = { id: data.offerId };
+      if (data?.originId) where.origin = { id: data.originId };
+      if (data?.targetId) where.target = { id: data.targetId };
+      if (data?.videoId) where.video = { id: data.videoId };
+
+      let finalWhere = {} as Prisma.profileSharingsWhereInput;
+      if (Object.keys(where).length > 0) finalWhere = where;
+      const sharings = await prisma.profileSharings.findMany({
+        where: { ...finalWhere },
+        include: { video: true, offerTarget: true, origin: true, target: true },
+      });
+      return sharings;
+    },
     experiences: async (_: unknown, args: any, context: ContextRequest) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return [];
@@ -1870,7 +1899,7 @@ const resolvers: Resolvers = {
       args: MutationCreateErrorArgs,
       context: ContextRequest
     ) => {
-      const noCors = await noCorsMiddleware(context, true);
+      const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
       const data = args.data;
       if (data) {
@@ -2261,53 +2290,100 @@ const resolvers: Resolvers = {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
       const data = args.data;
-      if (
-        data?.targetId &&
-        data.originId &&
-        data.offerTargetId &&
-        data.videoId
-      ) {
-        const sharing = await prisma.$transaction(
-          async (prisma) => {
-            const sharing = await prisma.profileSharings.create({
-              data: {
-                origin: { connect: { id: data?.originId as string } },
-                target: { connect: { id: data.targetId as string } },
-                offerTarget: {
-                  connect: { id: data?.offerTargetId as string },
-                },
-                video: { connect: { id: data?.videoId as string } },
-                createdAt: new Date(),
-                updatedAt: new Date(),
-              },
-            });
-            const targetUsers = await prisma.betausers.findMany({
-              where: { companyId: data?.targetId as string },
-            });
-            if (targetUsers) {
-              for (let i = 0; i < targetUsers.length; i++) {
-                const user = targetUsers[i];
 
-                await prisma.notifications.create({
-                  data: {
-                    type: "sharing",
-                    sharing: { connect: { id: sharing.id as string } },
-                    content:
-                      "Quelqu'un vient de partager son profil avec vous.",
-                    createdAt: new Date(),
-                    origin: { connect: { id: data?.originId as string } },
-                    target: { connect: { id: user.id as string } },
-                    status: "pending",
-                    updatedAt: new Date(),
+      if (data?.originId && data?.offerTargetId && data?.videoId) {
+        const target = {} as { target: { connect: { id: string } } };
+        if (data?.targetId) target.target = { connect: { id: data.targetId } };
+
+        const origin = await prisma.betausers.findUnique({
+          where: { id: data.originId },
+          select: { id: true, email: true, fullname: true },
+        });
+
+        if (origin) {
+          const sharing = await prisma.$transaction(
+            async (prisma) => {
+              const emailPromise = new Promise(async (resolve, reject) => {
+                const offer = await prisma.offers.findUnique({
+                  where: { id: data.offerTargetId as string },
+                  select: {
+                    intitule: true,
+                    entreprise: true,
                   },
                 });
+                if (!offer) reject(BACKEND_MESSAGES.EMAIL_FAIL);
+                const res = await apiInstance.sendTransacEmail({
+                  to: [
+                    {
+                      email: origin?.email as string,
+                      name: origin?.fullname as string,
+                    },
+                  ],
+                  params: {
+                    name: origin?.fullname,
+                    intitule: offer?.intitule,
+                    entreprise: offer?.entreprise?.nom,
+                  },
+                  templateId: 39 as number,
+                });
+                if (res.response.statusCode !== 201) {
+                  reject(BACKEND_MESSAGES.PROCESSING);
+                } else {
+                  resolve(res.body.messageId);
+                }
+              });
+              try {
+                const results = await Promise.all([
+                  prisma.profileSharings.create({
+                    data: {
+                      origin: { connect: { id: data?.originId as string } },
+                      ...target,
+                      offerTarget: {
+                        connect: { id: data?.offerTargetId as string },
+                      },
+                      video: { connect: { id: data?.videoId as string } },
+                      createdAt: new Date(),
+                      updatedAt: new Date(),
+                    },
+                  }),
+                  emailPromise,
+                ]);
+
+                const sharing = results[0];
+
+                if (data?.targetId) {
+                  const targetUsers = await prisma.betausers.findMany({
+                    where: { companyId: data?.targetId as string },
+                  });
+                  if (targetUsers) {
+                    for (let i = 0; i < targetUsers.length; i++) {
+                      const user = targetUsers[i];
+
+                      await prisma.notifications.create({
+                        data: {
+                          type: "sharing",
+                          sharing: { connect: { id: sharing.id as string } },
+                          content:
+                            "Quelqu'un vient de partager son profil avec vous.",
+                          createdAt: new Date(),
+                          origin: { connect: { id: data?.originId as string } },
+                          target: { connect: { id: user.id as string } },
+                          status: "pending",
+                          updatedAt: new Date(),
+                        },
+                      });
+                    }
+                  }
+                }
+                return sharing;
+              } catch (err: any) {
+                return null;
               }
-            }
-            return sharing;
-          },
-          { timeout: 15000 }
-        );
-        if (sharing) return sharing;
+            },
+            { timeout: 15000 }
+          );
+          if (sharing) return sharing;
+        }
       }
       return null;
     },
@@ -2574,13 +2650,14 @@ const resolvers: Resolvers = {
       const sector = args.data?.sector as string;
       const userId = args.data?.userId;
       const companyId = args.data?.companyId;
+      const contexteTravail = args.data?.contexteTravail as any;
 
       const author = {} as { author?: { connect: { id: string } } };
       if (userId) author.author = { connect: { id: userId } };
 
       const offer = await prisma.offers.create({
         data: {
-          content,
+          contexteTravail,
           authorEmail,
           authorName,
           ...author,
@@ -3127,6 +3204,8 @@ const resolvers: Resolvers = {
       if (d.userId) updates.user = { connect: { id: d.userId } };
       if (d.targetContractType)
         updates.targetContractType = d.targetContractType as string;
+      if (d.preferredLocation)
+        updates.preferredLocation = d.preferredLocation as string;
 
       if (candidate) {
         candidate = await prisma.betacandidates.update({
@@ -3413,23 +3492,62 @@ const resolvers: Resolvers = {
       if (candidate) return candidate;
       return null;
     },
-
-    deleteUser: async (
+    deleteAccount: async (
       _: unknown,
       args: MutationDeleteUserArgs,
       context: ContextRequest
     ) => {
       const noCors = await noCorsMiddleware(context);
       if (!noCors) return null;
-      const user = await prisma.betausers.findFirst({
+      const user = await prisma.betausers.findUnique({
         where: { id: args.userId as string },
+        select: {
+          id: true,
+          email: true,
+          fullname: true,
+        },
       });
       if (user) {
-        await prisma.betausers.delete({
-          where: { id: args.userId as string },
+        const result = await prisma.$transaction(async (prisma) => {
+          try {
+            const emailPromise = new Promise(async (resolve, reject) => {
+              const res = await apiInstance.sendTransacEmail({
+                to: [
+                  {
+                    email: user?.email as string,
+                    name: user?.fullname as string,
+                  },
+                ],
+                params: {
+                  name: user?.fullname,
+                },
+                templateId: 38 as number,
+              });
+              if (res.response.statusCode !== 201) {
+                reject(BACKEND_MESSAGES.PROCESSING);
+              } else {
+                resolve(res.body.messageId);
+              }
+            });
+
+            const results = await Promise.all([
+              prisma.betausers.delete({
+                where: { id: user.id as string },
+                select: {
+                  id: true,
+                },
+              }),
+              emailPromise,
+            ]);
+            return results[0];
+          } catch (err: any) {
+            console.log(err, "err");
+            return null;
+          }
         });
+        if (result) return result;
       }
-      return user;
+      return null;
     },
   },
   BetaCompany: {
@@ -3488,6 +3606,14 @@ const resolvers: Resolvers = {
         },
       });
       return details;
+    },
+    suggestedOpportunities: async (candidate: BetaCandidate) => {
+      const opps = await prisma.offers.findMany({
+        where: {
+          suggestedCandidatesIds: { has: candidate.id },
+        },
+      });
+      return opps;
     },
   },
   FormResponse: {
@@ -4034,6 +4160,14 @@ const resolvers: Resolvers = {
         : sharing.offerTargetId
         ? await prisma.offers.findUnique({
             where: { id: sharing.offerTargetId as string },
+          })
+        : null,
+    video: async (sharing: ProfileSharing) =>
+      sharing.video
+        ? sharing.video
+        : sharing.videoId
+        ? await prisma.videos.findUnique({
+            where: { id: sharing.videoId as string },
           })
         : null,
   },

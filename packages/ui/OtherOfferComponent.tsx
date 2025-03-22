@@ -1,62 +1,175 @@
 import { Offer } from "@youmeet/gql/generated";
+import { OfferContentValues } from "@youmeet/types/OfferContentValues";
+import getOfferOrPreviewValues from "@youmeet/utils/basics/getOfferOrPreviewValues";
 import Link from "next/link";
-import React from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import SeeMore from "./_components/SeeMore";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const OtherOfferLimitDate = dynamic(() => import("./OtherOfferLimitDateChild"));
 
 export default function OtherOfferComponent({ offer }: { offer: Offer }) {
   const {
     t,
     i18n: { language },
   } = useTranslation();
+  const [values, setValues] = useState<OfferContentValues | undefined>();
+
+  const getValues = useCallback(async () => {
+    const values = await getOfferOrPreviewValues(
+      offer,
+      language as "fr" | "en",
+      offer?.company?.id || undefined
+    );
+    setValues(values);
+  }, [offer, language]);
+
+  useEffect(() => {
+    getValues();
+  }, [getValues]);
+
+  const at = values?.limitDate
+    ? new Date(`${values?.limitDate}`)
+    : values?.createdAt
+    ? new Date(`${values?.createdAt}`)
+    : undefined;
+
+  const limitDate = at
+    ? `${at.getDate()} ${at.getMonth()} ${at.getFullYear()}`
+    : undefined;
 
   return (
     <>
-      <Link
-        key={offer?.id}
-        href={`/offres/${offer?.slug}`}
-        className="w-full no-underline box-border cursor-pointer"
-      >
-        <div className="flex-bet w-full border-[0.5px] border-solid border-grey300 rounded-[14px] p-[6px] px-[12px] box-border bg-cyan50 dark:bg-black text-black dark:text-white">
-          {!!offer?.job?.title && (
-            <div className="h-full flex items-start">
-              {offer?.job?.title[language as "fr" | "en"]}
+      <div className="flex flex-col gap-[6px] w-full border-[0.5px] border-solid border-grey900 rounded-[14px] p-[6px] px-[12px] box-border">
+        <div className="flex-bet gap-x-[6px] flex-wrap">
+          {values?.slug ? (
+            <Link
+              key={offer?.id}
+              href={`${values?.slug}`}
+              className="w-fit underline-offset-2 box-border text-deepPurple900 cursor-pointer"
+            >
+              {!!values?.jobTitle && (
+                <div className="h-full flex font-semibold items-start text-[15px] xs:text-[13px] sm:text-[13px]">
+                  {values?.jobTitle}
+                </div>
+              )}
+            </Link>
+          ) : (
+            !!values?.jobTitle && (
+              <div className="h-full flex font-semibold items-start text-[15px] xs:text-[13px] sm:text-[13px]">
+                {values?.jobTitle}
+              </div>
+            )
+          )}
+          <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px] whitespace-nowrap">
+            {values?.source}
+          </span>
+        </div>
+        <div className="flex flex-wrap gap-[12px]">
+          {(values?.location || values?.companyName) && (
+            <div className="flex-bet gap-x-[6px] flex-wrap">
+              <div className="flex-center">
+                {values?.location && (
+                  <div className="flex items-end gap-[6px]">
+                    <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                      {values.location}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div>
+                {!!values?.companyName && (
+                  <div className="flex items-end gap-[6px]">
+                    <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+                      {t("at")}
+                    </span>
+                    <div className="flex-center gap-[6px]">
+                      {!!values?.logo && (
+                        <Image
+                          src={values.logo}
+                          alt={`Logo de l'entreprise ${values.companyName}`}
+                          height={45}
+                          width={45}
+                        />
+                      )}
+                      <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                        {values.companyName}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           )}
-
-          <div className="flex items-end flex-col gap-[6px]">
-            {offer?.contractType && (
-              <div className="flex-center gap-[6px]">
-                <span className="font-extralight text-[14px]">{t("as")}</span>
-                <div>{t(offer?.contractType)}</div>
-              </div>
-            )}
-            <div className="flex-center gap-[12px]">
-              {offer?.revenue && (
-                <div className="flex-center gap-[6px]">
-                  <span className="font-extralight text-[14px]">
-                    {t("for")}
-                  </span>
-                  <div>{offer.revenue}€</div>
+          {(values?.location || values?.companyName) && (
+            <div className="w-[1px] bg-grey500" />
+          )}
+          {(values?.dureeTravail || values?.dureeTravailConverti) && (
+            <div className="flex-bet gap-x-[6px] flex-wrap">
+              {values?.dureeTravail && (
+                <div className="flex items-end gap-[6px]">
+                  <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                    {values.dureeTravail}
+                  </div>
                 </div>
               )}
-              {offer?.location && (
-                <div className="flex-center gap-[6px]">
-                  <span className="font-extralight text-[14px]">
-                    {t("toNow")}
-                  </span>
-                  <div className="w-min">{offer.location}</div>
+              {values?.dureeTravailConverti && (
+                <div className="flex items-end gap-[6px]">
+                  <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                    {values.dureeTravailConverti}
+                  </div>
                 </div>
               )}
             </div>
-            {!!offer.company?.name && (
-              <div className="flex-center gap-[6px]">
-                <span className="font-extralight text-[14px]">{t("at")}</span>
-                <div>{offer.company.name}</div>
-              </div>
-            )}
-          </div>
+          )}
+          {(values?.dureeTravail || values?.dureeTravailConverti) && (
+            <div className="w-[1px] bg-grey500" />
+          )}
+
+          {(values?.experience || values?.contractType) && (
+            <div className="flex-bet gap-x-[6px] flex-wrap">
+              {values?.experience && (
+                <div className="flex items-end gap-[6px]">
+                  <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+                    {t("exp-level")}
+                  </span>
+                  <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                    {values.experience}
+                  </div>
+                </div>
+              )}
+              {values?.contractType && (
+                <div className="flex items-end gap-[6px]">
+                  <span className="font-extralight text-[13px] xs:text-[11px] sm:text-[11px]">
+                    {t("contractType")}
+                  </span>
+                  <div className="text-[14px] xs:text-[12px] sm:text-[12px] w-max">
+                    {values.contractType}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+          {(values?.experience || values?.contractType) && (
+            <div className="w-[1px] bg-grey500" />
+          )}
         </div>
-      </Link>
+        <div className="flex-bet">
+          {!!values?.slug ? (
+            <SeeMore el={{ slug: values?.slug, __typename: "Offer" }} />
+          ) : (
+            <div />
+          )}
+          {!!limitDate && (
+            <OtherOfferLimitDate
+              limitDate={limitDate}
+              revenue={values?.revenue}
+            />
+          )}
+        </div>
+      </div>
     </>
   );
 }

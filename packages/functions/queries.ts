@@ -76,6 +76,7 @@ export const getUserMetadataQuery = `query GetUser($uniqueName: String, $userId:
         }
         secure_url
         subtitledUrl
+        original_filename
       }
     }
     firstname
@@ -102,6 +103,7 @@ export const getOfferMetadataQuery = `query GetOffer($id: ID, $slug: String) {
             en
           }
         }
+        intitule
         company {
           id
           name
@@ -164,7 +166,8 @@ export const getRawUserQuery = `query GetUser($uniqueName: String, $userId: ID, 
     company {
       id
     }
-  }`;
+  }
+}`;
 export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $email: String, $originId: ID, $fullname: String) {
     user(email: $email, userId: $userId, uniqueName: $uniqueName, originId: $originId, fullname: $fullname) {
         __typename
@@ -273,6 +276,7 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
         }
         candidate {
           id
+          preferredLocation
           targetContractType
           avatars {
             secure_url
@@ -289,6 +293,36 @@ export const getUserQuery = `query GetUser($uniqueName: String, $userId: ID, $em
               id
               bgImage
             }
+          }
+          suggestedOpportunities {
+            id
+            idFT
+            intitule
+            lieuTravail {
+              libelle
+            }  
+            contact {
+              urlPostulation
+            }
+            createdAt
+            entreprise {
+              nom
+            }
+            qualificationLibelle
+            experienceLibelle
+            dureeTravailLibelle
+            dureeTravailLibelleConverti
+            remote
+            limitDate
+            salaire {
+              libelle
+            }
+            origineOffre {
+              urlOrigine
+              origine
+            }
+            contractType
+            revenue
           }
         }
         details {
@@ -936,6 +970,7 @@ export const submitVideoMutation = `mutation SubmitVideo($data: VideoInput) {
         subtitledUrl
         url
         secure_url
+        original_filename
       }
       job {
         id
@@ -996,7 +1031,8 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
     __typename
     id
     slug
-    jobDescriptionLink
+    contractType
+    intitule
     job {
       id
       title {
@@ -1004,29 +1040,22 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
         en
       }
     }
-    limitDate
-    location
-    requirements {
-      title
-      id
-    }
-    content
-    revenue
-    remote
-    contractType
-    authorName
-    authorInterviewLink
-    authorEmail
-    rebroadcast
+    typeContratLibelle
+    qualificationLibelle
     companyName
-    sector {
-      id
-      bgImage
+    entreprise {
+      nom
+      logo
+    }
+    location 
+    lieuTravail {
+      libelle
+      codePostal
+      commune
     }
     company {
       id
       name
-      location
       logo {
         secure_url
         url
@@ -1035,13 +1064,13 @@ export const getOffersQuery = `query GetOffers($params: PageParamsInput, $data: 
         }
       }
     }
-    author {
-      id
-      firstname
-      lastname
-      fullname
-      email
-      linkedinProfileId
+    outilsBureautiques
+    dureeTravailLibelleConverti
+    nombrePostes
+    experienceLibelle
+    permis {
+      libelle
+      exigence
     }
   }
 }`;
@@ -1108,6 +1137,104 @@ export const GetOfferQuery = `query GetOneOffer($id: ID, $slug: String) {
         id
       }
     }
+    intitule
+    description
+    dateCreation
+    dateActualisation
+    lieuTravail {
+      libelle
+      latitude
+      longitude
+      codePostal
+      commune
+    }
+    romeCode
+    romeLibelle
+    appellationlibelle
+    entreprise {
+      nom
+      description
+      logo
+      url
+      entrepriseAdaptee
+    }
+    typeContrat
+    typeContratLibelle
+    natureContrat
+    experienceExige
+    experienceLibelle
+    experienceCommentaire
+    formations {
+      codeFormation
+      domaineLibelle
+      niveauLibelle
+      commentaire
+      exigence
+    }
+    langues {
+      libelle
+      exigence
+    }
+    permis {
+      libelle
+      exigence
+    }
+    outilsBureautiques
+    competences {
+      code
+      libelle
+      exigence
+    }
+    salaire {
+      libelle
+      commentaire
+      complement1
+      complement2
+    }
+    dureeTravailLibelle
+    dureeTravailLibelleConverti
+    complementExercice
+    conditionExercice
+    alternance
+    contact {
+      nom
+      coordonnees1
+      coordonnees2
+      coordonnees3
+      telephone
+      courriel
+      commentaire
+      urlRecruteur
+      urlPostulation
+    }
+    agence {
+      telephone
+      courriel
+    }
+    nombrePostes
+    accessibleTH
+    deplacementCode
+    deplacementLibelle
+    qualificationCode
+    qualificationLibelle
+    codeNAF
+    secteurActivite
+    secteurActiviteLibelle
+    qualitesProfessionnelles {
+      libelle
+      description
+    }
+    trancheEffectifEtab
+    origineOffre {
+      origine
+      urlOrigine
+      partenaires {
+          nom
+          url
+          logo
+      }
+    }
+    offresManqueCandidats
   }
 }`;
 
@@ -1120,6 +1247,7 @@ export const getNotificationQuery = `query GetNotification ($data: NotificationI
 export const createCandidateBasicMutation = `mutation CreateCandidateBasic($data: CandidateBasicInput) {
   createCandidateBasic(data: $data) {
     id
+    preferredLocation
     targetContractType
     targetJob {
       id
@@ -1473,6 +1601,14 @@ export const getSimpleUserQuery = `query GetUser($uniqueName: String, $userId: I
     }
   }
 }`;
+export const deleteAccountMutation = `mutation DeleteAccount($userId: ID) {
+  deleteAccount(userId: $userId) {
+    __typename
+    id
+    email
+    fullname
+  }
+}`;
 
 export const getOneQueueQuery = `query GetOneQueue($id: ID) {
   oneQueue(id: $id) {
@@ -1669,6 +1805,7 @@ export const getMeetsQuery = `query GetMeets {
           subtitledUrl
           url
           secure_url
+          original_filename
         }  
       }
       linkedinProfileId
@@ -1723,6 +1860,7 @@ export const getOneMeetQuery = `query GetOneMeet ($id: ID) {
           eager {
             transformation
           }
+            original_filename
         }
       }
     }
@@ -1796,6 +1934,7 @@ export const getMeetCandidateQuery = `query GetOneMeetCandidate ($id: ID) {
         url
         subtitledUrl
         secure_url
+        original_filename
       }
     }
   }
@@ -1822,6 +1961,7 @@ export const updateMeetMutation = `mutation UpdateMeet ($data: MeetInput, $id: I
         url
         subtitledUrl
         secure_url
+        original_filename
       }
     }
   }
@@ -2022,6 +2162,270 @@ export const getCandidateQuery = `query GetCandidate($data: BetaUserInput, $user
 export const getSharingQuery = `query GetOneProfileSharing($data: ProfileSharingInput) {
   oneProfileSharing(data: $data) {
     id
+  }
+}`;
+
+export const getOneCompleteSharingQuery = `query getOneCompleteSharingQuery($data: ProfileSharingInput) {
+  oneProfileSharing(data: $data) {
+    origin {
+      __typename
+      id
+      firstname
+      lastname
+      fullname
+      email
+      description
+      picture
+      isPublic
+      uniqueName
+      age
+      user
+      pro
+      consent
+      languages
+      scrapped
+      linkedinProfileId
+      cvFile {
+        url
+        secure_url
+      }
+      hiddenFields
+      role
+      roles {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      candidate {
+        id
+        targetContractType
+        avatars {
+          secure_url
+          url
+          eager {
+            transformation
+          }
+        }
+        targetJob {
+          id
+          title {
+            fr
+            en
+          }
+          topSector {
+            id
+            bgImage
+          }
+        }
+      }
+      details {
+        id
+        phone {
+          number
+          code
+        }
+      }
+    }
+    target {
+      __typename
+      id
+      location
+      name
+      resume
+    }
+    video {
+      id
+      likes
+      principal
+      report
+      job {
+        id
+        title {
+          fr
+          en
+        }
+      }
+      transcript
+      confidence
+      audio {
+        url
+        secure_url
+      }
+      file {
+        url
+        secure_url
+        subtitledUrl
+        width
+        height
+        original_filename
+        public_id
+        eager {
+          transformation
+        }
+      }
+    }
+    offerTarget {
+      id
+      content
+      profileSearched
+      slug
+      company {
+        id
+        name
+        location
+      }
+      author {
+        id
+        email
+        firstname
+        fullname
+        lastname
+      }
+      remote
+      requirements {
+        id
+        title
+      }
+      rebroadcast
+      companyName
+      companyLogo
+      contractType
+      limitDate
+      authorInterviewLink
+      authorName
+      createdAt
+      updatedAt
+      job {
+        id
+        title {
+          fr
+          en
+        }
+        topSector {
+          id
+          bgImage
+        }
+      }
+      sector {
+        id
+      }
+      jobDescriptionLink
+      authorEmail
+      location
+      revenue
+      sharings {
+        id
+        origin {
+          id
+        }
+        target {
+          id
+        }
+        offerTarget {
+          id
+        }
+      }
+      intitule
+      description
+      dateCreation
+      dateActualisation
+      lieuTravail {
+        libelle
+        latitude
+        longitude
+        codePostal
+        commune
+      }
+      romeCode
+      romeLibelle
+      appellationlibelle
+      entreprise {
+        nom
+        description
+        logo
+        url
+        entrepriseAdaptee
+      }
+      typeContrat
+      typeContratLibelle
+      natureContrat
+      experienceExige
+      experienceLibelle
+      experienceCommentaire
+      formations {
+        codeFormation
+        domaineLibelle
+        niveauLibelle
+        commentaire
+        exigence
+      }
+      langues {
+        libelle
+        exigence
+      }
+      permis {
+        libelle
+        exigence
+      }
+      outilsBureautiques
+      competences {
+        code
+        libelle
+        exigence
+      }
+      salaire {
+        libelle
+        commentaire
+        complement1
+        complement2
+      }
+      dureeTravailLibelle
+      dureeTravailLibelleConverti
+      complementExercice
+      conditionExercice
+      alternance
+      contact {
+        nom
+        coordonnees1
+        coordonnees2
+        coordonnees3
+        telephone
+        courriel
+        commentaire
+        urlRecruteur
+        urlPostulation
+      }
+      agence {
+        telephone
+        courriel
+      }
+      nombrePostes
+      accessibleTH
+      deplacementCode
+      deplacementLibelle
+      qualificationCode
+      qualificationLibelle
+      codeNAF
+      secteurActivite
+      secteurActiviteLibelle
+      qualitesProfessionnelles {
+        libelle
+        description
+      }
+      trancheEffectifEtab
+      origineOffre {
+        origine
+        urlOrigine
+        partenaires {
+            nom
+            url
+            logo
+        }
+      }
+      offresManqueCandidats
+    }
   }
 }`;
 
@@ -2365,3 +2769,44 @@ export const searchSomeoneQuery = `query SearchSomeone($uniqueName: String, $use
     uniqueName
   }
 }`;
+
+export const getSharingsQuery = `query GetSharings {
+  sharings {
+    id
+    origin {
+      id
+      fullname
+      email
+    }
+    target {
+      id
+      name
+      url
+      logo {
+        url
+        secure_url
+      }
+    }
+    offerTarget {
+      id
+      intitule
+      job {
+        title {
+          fr
+          en
+        }
+      }
+      entreprise {
+        logo
+      }
+    }
+  }
+}`;
+
+export const createRemarkMutation = `mutation CreateUserRemark($data: RemarkInput) {
+  createRemark(data: $data) {
+    id
+    content
+  }
+}
+`;

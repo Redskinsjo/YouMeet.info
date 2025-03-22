@@ -1,3 +1,4 @@
+import { EMAIL_PERSO } from "@youmeet/functions/imports";
 import BackofficeUsersChild from "./backofficeUsersChild";
 import { getUsers } from "@youmeet/functions/request";
 import { BetaUser } from "@youmeet/gql/generated";
@@ -6,10 +7,7 @@ import { notFound } from "next/navigation";
 
 export default async function BackofficeUsers() {
   const verified = await verifyTokenServer();
-  if (
-    verified &&
-    verified.email.toLowerCase() === "jonathan.carnos@gmail.com"
-  ) {
+  if (verified && verified.email.toLowerCase() === EMAIL_PERSO) {
     const users = (await getUsers(
       { data: { user: true, pro: true } },
       0

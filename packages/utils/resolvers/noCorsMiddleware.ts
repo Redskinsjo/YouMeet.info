@@ -9,29 +9,25 @@ dotenv.config();
 const hosts = [
   "www.youmeet.info",
   "youmeet-git-testing-youmeet.vercel.app",
+  "youmeet-git-ft-offres-youmeet.vercel.app",
   "youmeetpro-git-testing-youmeet.vercel.app",
   "app",
 ];
 
 const regex = /(?<=\/\/)[^\/_&?]+/gm;
 
-export const noCorsMiddleware = async (context: ContextRequest, err?: true) => {
+export const noCorsMiddleware = async (context: ContextRequest) => {
   const host = context.request.headers.get("host") || "";
   const origin = context.request.headers.get("origin") || "";
   const uniqueHeader = context.request.headers.get("x-domain-youmeet") || "";
 
-  if (!origin) return false;
-  const match = origin.match(regex);
-  const originHost = match ? match[0] : "";
+  const decrypt = AES.decrypt(
+    uniqueHeader,
+    `${process.env.JWT_SECRET}`
+  ).toString(enc.Utf8);
 
-  if (err || dev || hosts.includes(host) || hosts.includes(originHost)) {
-    const decrypt = AES.decrypt(
-      uniqueHeader,
-      `${process.env.JWT_SECRET}`
-    ).toString(enc.Utf8);
-    if (hosts.includes(decrypt)) {
-      return true;
-    }
+  if (hosts.includes(decrypt)) {
+    return true;
   }
   await createError({
     data: {

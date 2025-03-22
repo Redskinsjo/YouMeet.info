@@ -3,7 +3,8 @@ import { BetaQueue } from "@youmeet/gql/generated";
 import { setName } from "@youmeet/utils/basics/setName";
 import { Metadata, ResolvingMetadata } from "next";
 import { redirect } from "next/navigation";
-import ConversationChild from "./conversationChild";
+import ConversationChild from "@youmeet/ui/conversationComponents/conversationChild";
+import { githubUrl, linkedinUrl, NAME, uri } from "@youmeet/functions/imports";
 
 type Props = {
   params: Promise<{ queueId: string }>;
@@ -39,7 +40,7 @@ export async function generateMetadata(
       title: `YouMeet - ${name}`,
       description: `Découvrez les questions de l'entreprise ${queue.origin?.company?.name} et répondez-y pour avancer dans le processus de candidature`,
       openGraph: {
-        url: `https://www.youmeet.info/dashboard/converations/${queueId}`,
+        url: `${uri}/dashboard/conversations/${queueId}`,
         title: `YouMeet - ${name}`,
         type: "website",
         locale: "fr_FR",
@@ -52,14 +53,14 @@ export async function generateMetadata(
         "entretiens",
       ],
       authors: [
-        { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+        { name: NAME, url: githubUrl },
         {
-          name: "Jonathan Carnos",
-          url: "https://www.linkedin.com/in/jonathancarnos123/",
+          name: NAME,
+          url: linkedinUrl,
         },
       ],
       category: "webpage",
-      creator: "Jonathan Carnos",
+      creator: NAME,
     };
   }
 
@@ -75,14 +76,14 @@ export async function generateMetadata(
         "Découvrez les questions du recruteur et répondez-y pour avancer dans le processus de candidature.",
     },
     authors: [
-      { name: "Jonathan Carnos", url: "https://github.com/Redskinsjo" },
+      { name: NAME, url: githubUrl },
       {
-        name: "Jonathan Carnos",
-        url: "https://www.linkedin.com/in/jonathancarnos123/",
+        name: NAME,
+        url: linkedinUrl,
       },
     ],
     category: "webpage",
-    creator: "Jonathan Carnos",
+    creator: NAME,
   };
 }
 

@@ -2,10 +2,11 @@ import { Metadata } from "next";
 import LoginCookiePayload from "@youmeet/types/LoginCookiePayload";
 import { getMyReferences, getUser } from "@youmeet/functions/request";
 import verifyTokenServer from "@youmeet/utils/basics/verifyTokenServer";
-import DashboardChild from "./dashboardChild";
+import DashboardChild from "@youmeet/ui/dashboardComponents/dashboardChild";
 import { redirect } from "next/navigation";
 import { isUser } from "@youmeet/types/TypeGuards";
 import { BetaUser, Reference } from "@youmeet/gql/generated";
+import { NAME } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
   title: `YouMeet - Gestion de votre Compte Candidat`,
@@ -20,15 +21,18 @@ export const metadata: Metadata = {
   ],
 
   category: "Profil public",
-  creator: "Jonathan Carnos",
+  creator: NAME,
 };
 
 export default async function Dashboard() {
   const verified = await verifyTokenServer();
   if (verified) {
-    const user = (await getUser({
-      userId: (verified as LoginCookiePayload)?.userId,
-    })) as BetaUser;
+    const user = (await getUser(
+      {
+        userId: (verified as LoginCookiePayload)?.userId,
+      },
+      0
+    )) as BetaUser;
 
     if (user && isUser(user)) {
       const references = (await getMyReferences<Reference[]>({

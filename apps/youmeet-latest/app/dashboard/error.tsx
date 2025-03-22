@@ -1,11 +1,5 @@
 "use client";
-import Footer from "@youmeet/ui/Footer";
-import dynamic from "next/dynamic";
-
-const ErrorChild = dynamic(() => import("@youmeet/ui/ErrorChild"), {
-  ssr: false,
-});
-
+import ErrorComponent from "@youmeet/ui/ErrorComponent";
 export default function ServerError500({
   error,
   reset,
@@ -13,10 +7,5 @@ export default function ServerError500({
   error?: Error & { digest: string };
   reset?: () => void;
 }) {
-  return (
-    <div className="min-h-screen flex flex-col h-screen">
-      <ErrorChild error={error} reset={reset} />
-      <Footer />
-    </div>
-  );
+  return <ErrorComponent error={error} reset={reset} />;
 }

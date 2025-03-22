@@ -1,8 +1,7 @@
 "use client";
 import { Button } from "@mui/material";
-import { generateCV } from "@youmeet/functions/actions";
 import { uri } from "@youmeet/functions/imports";
-import SelectField from "@youmeet/ui/formulaire-profil/formComponents/fields/SelectField";
+import SelectField from "@youmeet/ui/formComponents/fields/SelectField";
 import Link from "next/link";
 
 export default function BackofficeUsersPage() {
@@ -14,6 +13,9 @@ export default function BackofficeUsersPage() {
         </Link>
         <Link href={`/backoffice/users`} className="no-underline">
           <Button>Voir users</Button>
+        </Link>
+        <Link href={`/backoffice/applications`} className="no-underline">
+          <Button>Voir candidatures</Button>
         </Link>
         <Link href={`/backoffice/remarks`} className="no-underline">
           <Button>Voir remarques</Button>

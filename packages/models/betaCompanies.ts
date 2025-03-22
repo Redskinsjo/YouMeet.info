@@ -38,6 +38,10 @@ export class BetaCompanySchema {
   @typegoose.prop()
   public logo: Avatars;
   @typegoose.prop()
+  public url: string;
+  @typegoose.prop()
+  public entrepriseAdaptee: boolean;
+  @typegoose.prop()
   public createdAt: Date;
   @typegoose.prop()
   public updatedAt: Date;

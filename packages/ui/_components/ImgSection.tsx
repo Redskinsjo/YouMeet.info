@@ -50,7 +50,7 @@ export default function ImgSection({ type }: { type: Type }) {
   const alt = types[type].alt;
 
   return (
-    <div className="flex-1 flex-center homeImgBg p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] dark:darkHomeSectionBg">
+    <div className="flex-1 flex-center bg-specialDark p-[48px] xs:p-[12px] sm:p-[12px] md:p-[24px] dark:darkHomeSectionBg">
       <Image
         role="img"
         title={alt}

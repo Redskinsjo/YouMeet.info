@@ -1,19 +1,15 @@
 "use client";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { BetaUser } from "@youmeet/gql/generated";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@youmeet/global-config/store";
+import { useDispatch } from "react-redux";
 import { dev } from "@youmeet/functions/imports";
 import Link from "next/link";
 import NewAddCVComponent from "./NewAddCVComponent";
-import {
-  GlobalState,
-  setError,
-  setUpload,
-} from "@youmeet/global-config/features/global";
+import { setError, setUpload } from "@youmeet/global-config/features/global";
 import { onDeleteCV } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
+import { resetModal } from "@youmeet/global-config/features/modal";
 
 export default function NewCVUpload({
   account,
@@ -26,17 +22,17 @@ export default function NewCVUpload({
   const cvFile = profil?.cvFile;
   const formRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
-  const upload = useSelector(
-    (state: RootState) => (state.global as GlobalState).upload
-  );
 
   const customeOnDeleteCV = async (userId: string, formData: FormData) => {
     dispatch(setUpload("delete"));
     const result = await onDeleteCV(userId);
     if (result && isPayloadError(result)) {
       dispatch(setError("not-completed"));
+    } else if (!result) {
+      dispatch(setError("not-completed"));
+    } else {
+      dispatch(setUpload(null));
     }
-    dispatch(setUpload(null));
   };
 
   const cvComponent = useMemo(() => {
