@@ -42,5 +42,15 @@ export const metadata: Metadata = {
 
 export default async function Blog() {
   const videos = (await getVideos<Video[]>()) as Video[];
-  return <BlogChild videos={videos} />;
+  const display = Object.values(
+    videos
+      .filter((video) => video && video.id)
+      .reduce((acc: any, curr: any) => {
+        if (!acc[curr.id]) {
+          acc[curr.id] = curr;
+        }
+        return acc;
+      }, {})
+  ) as Video[];
+  return <BlogChild videos={display} />;
 }

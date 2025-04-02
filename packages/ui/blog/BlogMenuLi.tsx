@@ -15,7 +15,7 @@ export default function BlogMenuLi({
   return (
     <li
       key={article.id}
-      className="darkLi article list-none cursor-pointer text-[16px] font-light hover:font-medium hover:opacity-100"
+      className="darkLi list-none cursor-pointer text-[16px] font-light hover:font-medium hover:opacity-100"
     >
       <Link href={`${article.slug}`} className="no-underline text-black">
         <span className="dark:text-white">

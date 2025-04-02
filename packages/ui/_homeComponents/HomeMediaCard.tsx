@@ -75,7 +75,7 @@ export default function HomeMediaCard({
       key={video?.id}
       className="w-[550px] xs:w-full sm:w-full box-border h-[360px] xs:h-[240px] sm:h-[240px] p-[24px] box-border flex-bet flex-col gap-[12px] border-[1px] border-solid border-deepPurple900 bg-black rounded-[14px] relative"
     >
-      <div className="h-[72px] min-h-[72px]">
+      <div>
         <h2
           role="heading"
           className="text-white text-center text-ellipsis overflow-hidden xs:m-0 sm:m-0 md:-0"

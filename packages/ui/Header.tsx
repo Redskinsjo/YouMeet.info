@@ -18,7 +18,6 @@ import { Article, Video } from "@youmeet/gql/generated";
 import { getArticlesParams, getVideos } from "@youmeet/functions/request";
 import BlogMenuNav from "./blog/BlogMenuNav";
 import { ReducedArticle, ReducedVideo } from "@youmeet/types/ReducedArticle";
-import { uri } from "@youmeet/functions/imports";
 
 export default function Header({ classes, newStyles }: HeaderComponentProps) {
   const user = useSelector((state: RootState) => state.user as UserState);
@@ -54,13 +53,21 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   };
   const fetchVideos = async () => {
     const result = (await getVideos<Video[]>()) as Video[];
-    const videos = result
-      .map((a) => ({
-        id: `${a.id}`,
-        name: `${a.user?.firstname}`,
-        slug: `/on/${a.user?.uniqueName}`,
-      }))
-      .filter((v) => v.name && v.id && v.slug);
+    const videos = Object.values(
+      result
+        .map((a) => ({
+          id: `${a.id}`,
+          name: `${a.user?.firstname}`,
+          slug: `/on/${a.user?.uniqueName}`,
+        }))
+        .filter((v) => v.name && v.id && v.slug)
+        .reduce((acc, curr) => {
+          if (!acc[curr.id]) {
+            acc[curr.id] = curr;
+          }
+          return acc;
+        }, {} as any)
+    ) as ReducedVideo[];
     setVideos(videos);
   };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import OneLineSkeleton from "../OneLineSkeleton";
-import { BetaUser } from "@youmeet/gql/generated";
+import { BetaUser, Offer } from "@youmeet/gql/generated";
 import dynamic from "next/dynamic";
 
 const DashboardContent = dynamic(() => import("./DashboardContent"), {
@@ -26,6 +26,12 @@ const DashboardContent = dynamic(() => import("./DashboardContent"), {
   ),
 });
 
-export default function fnc({ profil }: { profil: BetaUser }) {
-  return <DashboardContent profil={profil} />;
+export default function fnc({
+  profil,
+  opps,
+}: {
+  profil: BetaUser;
+  opps: Offer[];
+}) {
+  return <DashboardContent profil={profil} opps={opps} />;
 }

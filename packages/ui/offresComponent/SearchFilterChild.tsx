@@ -8,6 +8,6 @@ const SearchFilter = dynamic(() => import("./SearchFilter"), {
   loading: () => <OneLineSkeleton height="45px" width="100%" />,
 });
 
-export default function fnc() {
-  return <SearchFilter />;
+export default function fnc({ dashboard }: { dashboard?: boolean }) {
+  return <SearchFilter dashboard={dashboard} />;
 }

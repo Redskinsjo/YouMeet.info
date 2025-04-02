@@ -646,48 +646,69 @@ const sites: Site[] = [
 ];
 
 const collectOffers = async (searchRole: string, workLocation: string) => {
-  const browser = await puppeteer.launch({
+  let browser, page, crawl, links, site, r;
+  let countdown = 0;
+  let interval: NodeJS.Timeout;
+
+  const reset = () => {
+    let result = false;
+    countdown = 0;
+    clearInterval(interval);
+    interval = setInterval(() => {
+      countdown++;
+      if (countdown > 10) {
+        result = true;
+        return clearInterval(interval);
+      }
+    }, 1000);
+    return result;
+  };
+  browser = await puppeteer.launch({
     headless: false,
   });
-  const page = await browser.newPage();
+  page = await browser.newPage();
 
-  const crawl = sites.filter((site) => !site.secure);
-  // const crawl = [sites[8]];
+  crawl = sites.filter((site) => !site.secure);
 
   console.log(crawl.length, "crawling sites");
+
   for (let p = 0; p < crawl.length; p++) {
-    const site = crawl[p];
+    site = crawl[p];
 
     await page.goto(site.searchLink);
-
+    r = reset();
+    if (r) continue;
     try {
       await page.waitForSelector(site.searchElSelector);
     } catch (err: any) {
       console.log("error on searchElSelector");
       continue;
     }
-
+    r = reset();
+    if (r) continue;
     console.log(site.searchElSelector, "site.searchElSelector");
 
     if (site?.searchElSelector) {
-      const search = await page.$eval(
+      await page.$eval(
         site.searchElSelector,
         (el, searchRole) =>
           el.setAttribute("value", `${searchRole.toLowerCase()}`),
         searchRole
       );
     }
-    console.log("0");
+    r = reset();
+    if (r) continue;
 
     if (site?.locationSelector) {
-      const location = await page.$eval(
+      await page.$eval(
         site.locationSelector,
         (el, workLocation) =>
           el.setAttribute("value", `${workLocation.toLowerCase()}`),
         workLocation
       );
     }
-    console.log("1");
+    r = reset();
+    if (r) continue;
 
     if (site.searchButtonElSelector) {
       await page.$eval(site.searchButtonElSelector, (el) =>
@@ -696,7 +717,8 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
     } else {
       await page.keyboard.press("Enter");
     }
-    console.log("2");
+    r = reset();
+    if (r) continue;
 
     try {
       await page.waitForSelector(site.cardsSelector, { timeout: 10000 });
@@ -704,10 +726,15 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
     } catch (err: any) {
       continue;
     }
+    r = reset();
+    if (r) continue;
 
-    const links = await page.evaluate(site.linksEvalFnc, site.linksEvalArgs);
+    links = await page.evaluate(site.linksEvalFnc, site.linksEvalArgs);
+    r = reset();
+    if (r) continue;
 
     console.log(links.length, "links");
+
     for (let i = 0; i < links.length; i++) {
       const exist = await prisma.offers.findFirst({
         where: {
@@ -716,7 +743,11 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
       });
       if (exist) continue;
       await page.goto(links[i]);
+      r = reset();
+      if (r) continue;
       const data = (await page.evaluate(site.dataEvalFnc)) as DataType;
+      r = reset();
+      if (r) continue;
       console.log(data);
       if (data.error) {
         console.log("error on data (or ancient offer)");
@@ -746,6 +777,7 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
               contact: { urlPostulation: data.link },
             },
           });
+          const r = reset();
           if (exist) continue;
 
           let payload = {} as any;
@@ -812,6 +844,7 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
     }, []);
 
   console.log(candidatesWhoTargetJobAndContract.length, "candidates");
+
   for (let i = 0; i < candidatesWhoTargetJobAndContract.length; i++) {
     const candidate = candidatesWhoTargetJobAndContract[i];
     const jobId = candidate.targetJobId;

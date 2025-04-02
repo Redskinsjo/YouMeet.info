@@ -1,4 +1,4 @@
-import { BetaUser } from "@youmeet/gql/generated";
+import { BetaUser, Offer } from "@youmeet/gql/generated";
 // import AffiliatesComponent from "./AffiliatesComponent";
 import dynamic from "next/dynamic";
 // import NewConsentComponent from "./NewConsentComponent";
@@ -18,7 +18,13 @@ const NewVideoComponent = dynamic(() => import("./NewVideoChild"));
 const SettingsComponent = dynamic(() => import("./SettingsChild"));
 // const UserNotices = dynamic(() => import("./UserNoticesChild"));
 
-export default function DashboardContent({ profil }: { profil: BetaUser }) {
+export default function DashboardContent({
+  profil,
+  opps,
+}: {
+  profil: BetaUser;
+  opps: Offer[];
+}) {
   return (
     <div className="dark:extraLightDarkBg">
       <CustomTabPanel index={0}>
@@ -43,7 +49,7 @@ export default function DashboardContent({ profil }: { profil: BetaUser }) {
           <PreferredLocationComponent profil={profil} />
         </div>
         <div className="indent-4 xs:indent-0 border-[0.5px] border-solid border-grey300 dark:border-grey900 dark:extraLightDarkBg sm:indent-0 md:indent-0 text-justify p-[12px]">
-          <SuggestedOffers profil={profil} />
+          <SuggestedOffers opps={opps} profil={profil} />
         </div>
       </CustomTabPanel>
       <CustomTabPanel index={2}>

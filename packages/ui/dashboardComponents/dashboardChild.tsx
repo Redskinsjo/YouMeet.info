@@ -1,4 +1,9 @@
-import { BetaDetails, BetaUser, Reference } from "@youmeet/gql/generated";
+import {
+  BetaDetails,
+  BetaUser,
+  Offer,
+  Reference,
+} from "@youmeet/gql/generated";
 import Discussions from "@youmeet/ui/_homeComponents/Discussions";
 import ProfilePartComponent from "@youmeet/ui/ProfilePartComponent";
 import DashboardPartComponent from "@youmeet/ui/dashboardComponents/DashboardPartComponent";
@@ -6,9 +11,11 @@ import DashboardPartComponent from "@youmeet/ui/dashboardComponents/DashboardPar
 export default function DashboardChild({
   profil,
   references,
+  opps,
 }: {
   profil: BetaUser;
   references: Reference[];
+  opps: Offer[];
 }) {
   return (
     <div
@@ -23,7 +30,7 @@ export default function DashboardChild({
           references={references}
         />
 
-        <DashboardPartComponent profil={profil} />
+        <DashboardPartComponent profil={profil} opps={opps} />
       </div>
 
       <Discussions />
