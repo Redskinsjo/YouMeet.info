@@ -7,7 +7,7 @@ import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 export const metadata: Metadata = {
   title: `YouMeet - Biographies`,
   description:
-    "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
+    "Écoutez les histoires passionantes de nos talents en vidéo et profitez d'un format innovant pour découvrir votre potentiel collaborateur.",
   keywords: [
     "biographies",
     "articles",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: `${uri}/biographies`,
     type: "website",
     description:
-      "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
+      "Écoutez les histoires passionantes de nos talents en vidéo et profitez d'un format innovant pour découvrir votre potentiel collaborateur.",
   },
   category: "Abonnements",
   creator: NAME,
@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             "@type": "WebPage",
             name: "Articles d'informations sur l'écosystème du recrutement selon YouMeet et pour les entreprises",
             description:
-              "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
+              "Écoutez les histoires passionantes de nos talents en vidéo et profitez d'un format innovant pour découvrir votre potentiel collaborateur.",
             url: `${uri}/biographies`,
             image: logoUrl,
             brand: {
