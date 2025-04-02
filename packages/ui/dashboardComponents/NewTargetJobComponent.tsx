@@ -12,7 +12,13 @@ import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { uri } from "@youmeet/functions/imports";
 
-const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
+const NewTargetJobComponent = ({
+  profil,
+  noWrap = true,
+}: {
+  profil: BetaUser;
+  noWrap?: boolean;
+}) => {
   const [isValidated, setIsValidated] = useState(true);
   const [candidateValidated, setCandidateValidated] = useState<
     BetaCandidate | undefined
@@ -69,7 +75,7 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
               noPadding
               account
               name="targetJob"
-              labelNoWrap
+              labelNoWrap={noWrap}
               reversePlacement
               label={
                 <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
@@ -106,7 +112,7 @@ const NewTargetJobComponent = ({ profil }: { profil: BetaUser }) => {
             noPadding
             account
             name="targetJob"
-            labelNoWrap
+            labelNoWrap={noWrap}
             reversePlacement
             label={
               <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">

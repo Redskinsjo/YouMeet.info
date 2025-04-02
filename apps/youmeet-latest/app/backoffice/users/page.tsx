@@ -12,6 +12,7 @@ export default async function BackofficeUsers() {
       { data: { user: true, pro: true } },
       0
     )) as BetaUser[];
+
     if (users) return <BackofficeUsersChild users={users} />;
   }
   return notFound();

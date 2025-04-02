@@ -38,10 +38,13 @@ export default function FulfillModal({ type }: CustomModalProps) {
             />
             <BoldText text={t("start-with-some-info")} />
             <div className="w-full bg-grey100  dark:extraLightDarkBg rounded-[14px] p-[6px] box-border">
-              <NewTargetJobComponent profil={modal.user} />
+              <NewTargetJobComponent profil={modal.user} noWrap={false} />
             </div>
             <div className="w-full bg-grey100  dark:extraLightDarkBg rounded-[14px] p-[6px] box-border">
-              <NewTargetContractTypeComponent profil={modal.user} />
+              <NewTargetContractTypeComponent
+                profil={modal.user}
+                noWrap={false}
+              />
             </div>
             <div className="w-full bg-grey100  dark:extraLightDarkBg rounded-[14px] p-[6px] box-border">
               <AddVideo profil={modal.user} />

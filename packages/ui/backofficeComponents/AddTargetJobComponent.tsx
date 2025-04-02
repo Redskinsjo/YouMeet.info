@@ -18,11 +18,10 @@ export default function AddTargetJobComponent({
 }) {
   const { setValue, watch, handleSubmit, clearErrors, register } =
     useForm<FieldValues>({
-      values: { job: "" },
+      values: { job: profil.candidate?.targetJob?.id || "" },
     });
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const router = useRouter();
 
   const customOnUpdateTargetJob = async (formData: FieldValues) => {
     const userId = profil.id as string;
@@ -32,7 +31,7 @@ export default function AddTargetJobComponent({
     }
   };
 
-  return !profil.candidate?.targetJob ? (
+  return (
     <form
       className="w-full flex"
       onSubmit={handleSubmit(customOnUpdateTargetJob)}
@@ -51,5 +50,5 @@ export default function AddTargetJobComponent({
       />
       {watch("job") ? <Button type="submit">{t("submit")}</Button> : undefined}
     </form>
-  ) : undefined;
+  );
 }

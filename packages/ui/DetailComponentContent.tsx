@@ -101,9 +101,7 @@ export default function DetailComponent({
         style={{
           textAlign: "start",
           whiteSpace:
-            labelNoWrap || (!xs && !sm && !md) || !searchParams.get("new")
-              ? "nowrap"
-              : "initial",
+            labelNoWrap || !searchParams.get("new") ? "nowrap" : "initial",
           width: labelFullWidth ? "100%" : "fit-content",
           textDecoration: labelUnderline ? "underline" : "unset",
           fontWeight: labelInBold ? 700 : 300,
@@ -235,9 +233,7 @@ export default function DetailComponent({
         style={{
           textAlign: "start",
           whiteSpace:
-            labelNoWrap || (!xs && !sm && !md) || !searchParams.get("new")
-              ? "nowrap"
-              : "initial",
+            labelNoWrap || !searchParams.get("new") ? "nowrap" : "initial",
           width: labelFullWidth ? "100%" : "fit-content",
           textDecoration: labelUnderline ? "underline" : "unset",
           fontWeight: labelInBold ? 700 : 300,
@@ -362,9 +358,7 @@ export default function DetailComponent({
         style={{
           fontWeight: labelInBold ? 700 : 300,
           whiteSpace:
-            labelNoWrap || (!xs && !sm && !md) || !searchParams.get("new")
-              ? "nowrap"
-              : "initial",
+            labelNoWrap || !searchParams.get("new") ? "nowrap" : "initial",
         }}
       >
         {label === "user"

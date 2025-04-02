@@ -13,7 +13,13 @@ import { withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { uri } from "@youmeet/functions/imports";
 
-const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
+const NewTargetContractTypeComponent = ({
+  profil,
+  noWrap = true,
+}: {
+  profil: BetaUser;
+  noWrap?: boolean;
+}) => {
   const [isValidated, setIsValidated] = useState(true);
   const [candidateValidated, setCandidateValidated] = useState<
     BetaCandidate | undefined
@@ -79,7 +85,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
               noLabelColon
               noPadding
               account
-              labelNoWrap
+              labelNoWrap={noWrap}
               name="contractType"
               reversePlacement
               label={
@@ -118,7 +124,7 @@ const NewTargetContractTypeComponent = ({ profil }: { profil: BetaUser }) => {
             name="contractType"
             reversePlacement
             noLabelColon
-            labelNoWrap
+            labelNoWrap={noWrap}
             label={
               <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
                 {t("contractType")}

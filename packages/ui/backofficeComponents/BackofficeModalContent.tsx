@@ -1004,9 +1004,8 @@ export default function BackofficeModalContent({
         }
         type="modal2"
       />
-      {!(data?.candidate?.targetJob?.title as Translated) ? (
-        <AddTargetJobComponent profil={data as BetaUser} />
-      ) : undefined}
+      <AddTargetJobComponent profil={data as BetaUser} />
+
       <DetailComponent
         noPadding
         label="Nom unique"
