@@ -660,7 +660,12 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
 
     await page.goto(site.searchLink);
 
-    await page.waitForSelector(site.searchElSelector);
+    try {
+      await page.waitForSelector(site.searchElSelector);
+    } catch (err: any) {
+      console.log("error on searchElSelector");
+      continue;
+    }
 
     console.log(site.searchElSelector, "site.searchElSelector");
 

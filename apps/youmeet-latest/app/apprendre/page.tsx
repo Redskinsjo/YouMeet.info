@@ -11,18 +11,18 @@ import { getArticles } from "@youmeet/functions/request";
 import { Article } from "@youmeet/gql/generated";
 
 export const metadata: Metadata = {
-  title: "YouMeet - Blog",
+  title: "YouMeet - Apprendre",
   description:
     "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
   openGraph: {
-    title: "YouMeet - Blog",
-    url: `${uri}/blog`,
+    title: "YouMeet - Apprendre",
+    url: `${uri}/apprendre`,
     images: [logoUrl],
     type: "article",
     description:
       "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
   },
-  keywords: ["blog", "cv vidéo", "compétences", "informations", "profil"],
+  keywords: ["learn", "cv vidéo", "compétences", "informations", "profil"],
   authors: [
     { name: NAME, url: githubUrl },
     {

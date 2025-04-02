@@ -240,6 +240,7 @@ const product = {
   "the-product": "Le Produit",
   "the-product-solution": "La Plateforme - notre solution complète",
   read: "Lire",
+  watch: "Regarder",
   "linking-cta1": "Visibilité et Crédibilité Accrues",
   "linking-cta2": "Création de Profil Complète",
   "linking-cta3": "Réseau Social et Connectivité",
@@ -305,6 +306,9 @@ const translations = {
   "read-some-articles":
     "Lire quelques articles est une bonne idée. La lecture est un moyen de se détendre et de s'instruire.",
   "some-articles-to-read": "Quelques articles à lire",
+  "discover-some-biographies": "Découvrez les biographies des talents",
+  "watch-some-stories":
+    "Regarder de nouvelles façons de voir le monde peut être enrichissant",
   linking: "Mise en Relation",
   ats: "ATS",
 
@@ -354,6 +358,7 @@ const translations = {
   home: "Accueil",
   blog: "Blog",
   biographies: "Biographies",
+  learn: "Apprendre",
   "admit-cgu": "En vous connectant, vous admettez avoir lu et accepté les ",
   product: "Produit",
   solutions: "Solution",

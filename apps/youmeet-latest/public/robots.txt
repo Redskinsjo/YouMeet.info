@@ -6,7 +6,8 @@ Allow: /se-connecter
 Allow: /offres/
 Allow: /competences/
 Allow: /medias/
-Allow: /blog
+Allow: /biographies
+Allow: /apprendre
 Allow: /le-produit/mise-en-relation
 
 Disallow: /dashboard

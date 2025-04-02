@@ -27,26 +27,32 @@ export default async function sitemap(): Promise<any> {
     {
       url: `${uri}/offres`,
       lastModified: new Date(),
-      changeFrequency: "daily",
+      changeFrequency: "monthly",
       priority: 1,
     },
     {
-      url: `${uri}/blog`,
+      url: `${uri}/biographies`,
       lastModified: new Date(),
-      changeFrequency: "daily",
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url: `${uri}/apprendre`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
       priority: 1,
     },
     {
       url: `${uri}/le-produit/mise-en-relation`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: "monthly",
       priority: 0.8,
     },
   ].concat(
     offers.map((offer) => ({
       url: `${uri}/offres/${offer.slug}`,
       lastModified: new Date(),
-      changeFrequency: "always",
+      changeFrequency: "monthly",
       priority: 1,
     })) as any,
     users.map((user) => ({

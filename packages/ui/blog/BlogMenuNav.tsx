@@ -3,22 +3,33 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
+import { ReducedArticle, ReducedVideo } from "@youmeet/types/ReducedArticle";
 
 const BlogMenuLi = dynamic(() => import("./BlogMenuLiChild"));
 
 export default function BlogMenuNav({
   articles,
+  videos,
 }: {
-  articles: { id?: string; title: Translated; slug?: string }[];
+  articles?: ReducedArticle[];
+  videos?: ReducedVideo[];
 }) {
   const {
     i18n: { language },
   } = useTranslation();
   const router = useRouter();
 
-  const articleEls = articles.map((article) => {
-    router.prefetch(`/medias/${article.slug}`);
-    return <BlogMenuLi article={article} key={article.id} />;
+  const articleEls = (articles || videos || []).map((article) => {
+    let slug = `${article.slug}`;
+    if (articles) {
+      slug = `/medias/${(article as ReducedArticle).slug}`;
+      router.prefetch(`${slug}`);
+    } else if (videos) {
+      router.prefetch(`${slug}`);
+    }
+    return (
+      <BlogMenuLi article={Object.assign(article, { slug })} key={article.id} />
+    );
   });
 
   const updateBlur = (scrollContainer: any, listItems: HTMLLIElement[]) => {

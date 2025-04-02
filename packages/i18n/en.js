@@ -281,6 +281,9 @@ const translations = {
   "read-some-articles":
     "Read some articles is a good idea. Reading is a good way to relax and learn new things.",
   "some-articles-to-read": "Some articles to read",
+  "discover-some-biographies": "Discover life stories from talents",
+  "watch-some-stories": "Watch life experiences can be enriching.",
+  watch: "Watch",
   linking: "Linking",
   ats: "ATS",
   "conversation-state": "Conversation state",
@@ -327,6 +330,7 @@ const translations = {
   home: "Home",
   blog: "Blog",
   biographies: "Life stories",
+  learn: "Learn",
   product: "Product",
   enterprise: "Enterprise",
   recruiters: "Recruiters",

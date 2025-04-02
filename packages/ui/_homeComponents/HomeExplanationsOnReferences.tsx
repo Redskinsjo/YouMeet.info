@@ -25,7 +25,7 @@ export default function HomeExplanationsOnReferences() {
         padding: "0px",
       }}
     >
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col" id="homeExplanationsOnReferences">
         <div className="h-full xs:h-full sm:h-full dark:mediumDarkBg z-20 w-full box-border slideIn flex-center xs:flex-col sm:flex-col md:flex-col box-border">
           <div className="shadow-2xl w-full xs:py-[24px] xs:px-[6px] sm:py-[24px] sm:px-[6px] box-border h-full flex-center min-h-[80px] dark:mediumDarkBg bg-white xs:border-b-[0.5px] sm:border-b-[0.5px] md:border-b-[0.5px] border-0 border-solid border-blueGrey500 xs:mt-[0.5px] sm:mt-[0.5px] md:mt-[0.5px]">
             <BoldText

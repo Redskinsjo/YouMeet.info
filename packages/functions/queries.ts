@@ -1757,6 +1757,18 @@ export const getVideosQuery = `query GetVideos {
     user {
       id
       uniqueName
+      firstname
+      description
+      candidate {
+        id
+        targetJob {
+          id
+          title {
+            fr
+            en
+          }
+        }
+      }
     }
     file {
       eager {

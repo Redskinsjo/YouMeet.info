@@ -5,14 +5,20 @@ import { Metadata } from "next";
 import { logoUrl, NAME, uri } from "@youmeet/functions/imports";
 
 export const metadata: Metadata = {
-  title: `YouMeet - Blog`,
+  title: `YouMeet - Biographies`,
   description:
     "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
-  keywords: ["blog", "articles", "informations", "renseignements", "suivi"],
+  keywords: [
+    "biographies",
+    "articles",
+    "informations",
+    "renseignements",
+    "suivi",
+  ],
   openGraph: {
-    title: `YouMeet - Blog`,
+    title: `YouMeet - biographies`,
     images: [logoUrl],
-    url: `${uri}/blog`,
+    url: `${uri}/biographies`,
     type: "website",
     description:
       "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
@@ -27,7 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <link rel="preconnect" href="https://vitals.vercel-insights.com/" />
       <link rel="preconnect" href="https://region1.google-analytics.com/" />
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <link rel="canonical" href={`${uri}/blog`} />
+      <link rel="canonical" href={`${uri}/biographies`} />
       <link rel="icon" href="/favicon.ico" />
       <meta
         name="viewport"
@@ -45,7 +51,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             name: "Articles d'informations sur l'écosystème du recrutement selon YouMeet et pour les entreprises",
             description:
               "Découvrez des articles exclusives et modernes sur l'évolution du recrutement par vidéo et IA dans différents secteurs d'activité.",
-            url: `${uri}/blog`,
+            url: `${uri}/biographies`,
             image: logoUrl,
             brand: {
               "@type": "Brand",

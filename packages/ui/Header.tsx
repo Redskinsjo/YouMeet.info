@@ -14,10 +14,11 @@ import { useTranslation } from "react-i18next";
 import RecruiterSpace from "./RecruiterSpace";
 import NotificationsComponent from "./NotificationsIconComponent";
 import MenuHeaderForMobile from "./MenuHeaderForMobile";
-import { Article } from "@youmeet/gql/generated";
-import { getArticlesParams } from "@youmeet/functions/request";
+import { Article, Video } from "@youmeet/gql/generated";
+import { getArticlesParams, getVideos } from "@youmeet/functions/request";
 import BlogMenuNav from "./blog/BlogMenuNav";
-import { ReducedArticle } from "@youmeet/types/ReducedArticle";
+import { ReducedArticle, ReducedVideo } from "@youmeet/types/ReducedArticle";
+import { uri } from "@youmeet/functions/imports";
 
 export default function Header({ classes, newStyles }: HeaderComponentProps) {
   const user = useSelector((state: RootState) => state.user as UserState);
@@ -33,19 +34,14 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     i18n: { language },
   } = useTranslation();
   const [articles, setArticles] = useState<ReducedArticle[]>([]);
+  const [videos, setVideos] = useState<ReducedVideo[]>([]);
   const router = useRouter();
   router.prefetch(`/${searchParams.get("candidate")}`);
   router.prefetch("/le-produit/mise-en-relation");
   router.prefetch("/");
-  router.prefetch("/blog");
+  router.prefetch("/biographies");
+  router.prefetch("/apprendre");
   router.prefetch("/offres");
-
-  const scrollTo = (window: Window, type: "solutions" | "prices") => {
-    window.scrollTo({
-      top: type === "solutions" ? 2639 : 500,
-      behavior: "smooth",
-    });
-  };
 
   const getArticles = async () => {
     const result = (await getArticlesParams<Article[]>()) as Article[];
@@ -56,9 +52,21 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     }));
     setArticles(articles);
   };
+  const fetchVideos = async () => {
+    const result = (await getVideos<Video[]>()) as Video[];
+    const videos = result
+      .map((a) => ({
+        id: `${a.id}`,
+        name: `${a.user?.firstname}`,
+        slug: `/on/${a.user?.uniqueName}`,
+      }))
+      .filter((v) => v.name && v.id && v.slug);
+    setVideos(videos);
+  };
 
   useEffect(() => {
     if (articles.length === 0) getArticles();
+    if (videos.length === 0) fetchVideos();
     document.addEventListener("scroll", () => {
       setMegaMenu1(false);
     });
@@ -114,7 +122,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             {pathname === "/" ||
             pathname === "/le-produit/mise-en-relation" ||
             pathname === "/le-produit/ats" ||
-            pathname.includes("blog") ||
+            pathname.includes("biographies") ||
             pathname.includes("offres") ||
             pathname.includes("medias") ? (
               <Link
@@ -145,10 +153,10 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             {pathname === "/" ||
             pathname.includes("le-produit") ||
             pathname.includes("competences") ||
-            pathname.includes("blog") ||
+            pathname.includes("biographies") ||
             pathname.includes("medias") ||
             pathname.includes("offres") ||
-            pathname === "/blog" ? (
+            pathname.includes("apprendre") ? (
               <Link
                 title="Naviguer vers le produit de mise en relation de YouMeet.info"
                 href={"/le-produit/mise-en-relation"}
@@ -178,13 +186,13 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
             {pathname === "/" ||
             pathname.includes("le-produit") ||
             pathname.includes("competences") ||
-            pathname.includes("blog") ||
+            pathname.includes("biographies") ||
             pathname.includes("medias") ||
-            pathname.includes("offres") ||
-            pathname === "/blog" ? (
+            pathname.includes("apprendre") ||
+            pathname.includes("offres") ? (
               <Link
-                title="Naviguer vers le blog de YouMeet.info"
-                href={"/blog"}
+                title="Naviguer vers les biographies de YouMeet.info"
+                href={"/biographies"}
                 className="text-black flex-center h-full group relative cursor-pointer hover:rounded-t-xl focus-visible:outline-0"
                 style={{ textDecoration: "none", height: "100%" }}
               >
@@ -199,7 +207,39 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                   </span>
                   <div
                     className={
-                      pathname === "/blog"
+                      pathname === "/biographies"
+                        ? "absolute bottom-0 w-[25%] h-[2px] bg-black dark:bg-white blinkSide"
+                        : "absolute bottom-0 w-[25%] h-[2px] blinkSide"
+                    }
+                  />
+                </div>
+              </Link>
+            ) : undefined}
+            {pathname === "/" ||
+            pathname.includes("le-produit") ||
+            pathname.includes("competences") ||
+            pathname.includes("biographies") ||
+            pathname.includes("medias") ||
+            pathname.includes("apprendre") ||
+            pathname.includes("offres") ? (
+              <Link
+                title="Naviguer vers le module d'apprentissage de YouMeet.info"
+                href={"/apprendre"}
+                className="text-black flex-center h-full group relative cursor-pointer hover:rounded-t-xl focus-visible:outline-0"
+                style={{ textDecoration: "none", height: "100%" }}
+              >
+                <div
+                  className="flex-center h-full"
+                  onMouseEnter={() => {
+                    setMegaMenu1(true);
+                  }}
+                >
+                  <span className="text-[16px] header-item dark:bg-white dark:text-black px-[12px]">
+                    {t("learn")}
+                  </span>
+                  <div
+                    className={
+                      pathname === "/apprendre"
                         ? "absolute bottom-0 w-[25%] h-[2px] bg-black dark:bg-white blinkSide"
                         : "absolute bottom-0 w-[25%] h-[2px] blinkSide"
                     }
@@ -259,17 +299,17 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
                 <nav className="h-[270px] overflow-hidden overflow-y-scroll box-border py-[6px] border-t-[0.5px] border-0 border-solid border-grey500">
                   <ul className="flex flex-col gap-[6px] m-0 p-0">
                     {pathname === "/" && (
-                      <li
-                        className="darkLi list-none cursor-pointer text-black text-[16px] font-light hover:font-medium rounded-[7px]"
+                      <Link
+                        href={"#homeExplanationsOnReferences"}
+                        className="darkLi no-underline list-none cursor-pointer text-black text-[16px] font-light hover:font-medium rounded-[7px]"
                         onClick={() => {
-                          scrollTo(window, "solutions");
                           setMegaMenu1(false);
                         }}
                       >
                         <span className="dark:text-white">
                           {t("exclusive-job-offer-suggestions")}
                         </span>
-                      </li>
+                      </Link>
                     )}
                     <li className="darkLi list-none cursor-pointer text-[16px] font-light hover:font-medium">
                       <Link
@@ -291,6 +331,12 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
               <div className="w-[200px]">
                 <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
                   {t("biographies")}
+                </h3>
+                <BlogMenuNav videos={videos} />
+              </div>
+              <div className="w-[200px]">
+                <h3 className="h-[30px] m-0 py-[6px] box-border text-grey500 text-[14px] font-extralight">
+                  {t("learn")}
                 </h3>
                 <BlogMenuNav articles={articles} />
               </div>

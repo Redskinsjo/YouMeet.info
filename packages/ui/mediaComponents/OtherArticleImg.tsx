@@ -17,8 +17,8 @@ export default function OtherArticleImg({ article }: { article: Article }) {
           height: "200px",
           objectFit: "cover",
         }}
-        alt={article.alt ?? "image représentant l'article de blog"}
-        title={`${article.alt ?? "image représentant l'article de blog"}`}
+        alt={article.alt ?? "image représentant la biographie"}
+        title={`${article.alt ?? "image représentant la biographie"}"}`}
         src={article.bgImage}
       />
     )

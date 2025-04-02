@@ -52,7 +52,7 @@ export default function ThinHeader({
       <div className="cursor-pointer p-[1px] box-border flex-center gap-[12px]">
         {/* {!pathname.includes("/offres") &&
           pathname !== "/" &&
-          pathname !== "/blog" &&
+          pathname !== "/biographies" &&
           !pathname.includes("le-produit") &&
           !pathname.includes("/medias") && (
             <Link

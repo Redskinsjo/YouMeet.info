@@ -7,7 +7,8 @@ Allow: /offres/
 Allow: /competences/
 Allow: /medias/
 Allow: /on/
-Allow: /blog
+Allow: /biographies
+Allow: /apprendre
 Allow: /le-produit/mise-en-relation
 
 Disallow: /dashboard

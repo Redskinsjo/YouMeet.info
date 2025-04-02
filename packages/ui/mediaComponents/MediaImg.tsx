@@ -8,8 +8,8 @@ export default function MediaImg({ media }: { media: Article }) {
         width={0}
         height={0}
         src={media.bgImage}
-        alt={media.alt ?? "image représentant l'article de blog"}
-        title={`${media.alt ?? "image représentant l'article de blog"}`}
+        alt={media.alt ?? "image représentant la biographie"}
+        title={`${media.alt ?? "image représentant la biographie"}"}`}
         style={{
           width: "100%",
           height: "auto",

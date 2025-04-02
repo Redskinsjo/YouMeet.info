@@ -60,9 +60,14 @@ export default function MenuHeaderForMobile() {
           itemText={t("ats")}
         /> */}
         <MenuItemRouter
-          route={"/blog"}
+          route={"/biographies"}
           handleClose={handleClose}
-          itemText={t("blog")}
+          itemText={t("biographies")}
+        />
+        <MenuItemRouter
+          route={"/apprendre"}
+          handleClose={handleClose}
+          itemText={t("learn")}
         />
       </Menu>
     </div>
