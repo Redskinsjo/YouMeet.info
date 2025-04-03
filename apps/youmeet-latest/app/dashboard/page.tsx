@@ -50,45 +50,51 @@ export default async function Dashboard({
         userId: user.id,
       })) as Reference[];
 
-      const opps = (
-        await Promise.all(
-          user.candidate?.suggestedOpportunities
-            ?.filter((opp) => opp)
-            .map((opp) => {
-              const promise = new Promise(async (resolve) => {
-                if (!opp) return false;
-                const values = await getOfferOrPreviewValues(
-                  opp,
-                  "fr",
-                  opp?.company?.id || undefined
-                );
-                const low = (s: string) => s.toLowerCase();
+      let opps: Offer[] = [];
+      if (user.candidate?.suggestedOpportunities) {
+        opps = (
+          await Promise.all(
+            user.candidate?.suggestedOpportunities
+              ?.filter((opp) => opp)
+              .map((opp) => {
+                const promise = new Promise(async (resolve) => {
+                  if (!opp) return false;
+                  const values = await getOfferOrPreviewValues(
+                    opp,
+                    "fr",
+                    opp?.company?.id || undefined
+                  );
+                  const low = (s: string) => s.toLowerCase();
 
-                const matLocation = low(values.location).includes(low(search));
-                const matJobTitle = low(values.jobTitle).includes(low(search));
-                const matCompany = low(values.companyName).includes(
-                  low(search)
-                );
-                const matContractType = low(values.contractType).includes(
-                  low(search)
-                );
-                const matRevenue = low(values.revenue).includes(low(search));
+                  const matLocation = low(values.location).includes(
+                    low(search)
+                  );
+                  const matJobTitle = low(values.jobTitle).includes(
+                    low(search)
+                  );
+                  const matCompany = low(values.companyName).includes(
+                    low(search)
+                  );
+                  const matContractType = low(values.contractType).includes(
+                    low(search)
+                  );
+                  const matRevenue = low(values.revenue).includes(low(search));
 
-                if (
-                  matLocation ||
-                  matJobTitle ||
-                  matCompany ||
-                  matContractType ||
-                  matRevenue
-                ) {
-                  resolve(opp);
-                } else resolve(undefined);
-              });
-              return promise;
-            }) as Offer[]
-        )
-      ).filter((opp) => opp);
-
+                  if (
+                    matLocation ||
+                    matJobTitle ||
+                    matCompany ||
+                    matContractType ||
+                    matRevenue
+                  ) {
+                    resolve(opp);
+                  } else resolve(undefined);
+                });
+                return promise;
+              }) as Offer[]
+          )
+        ).filter((opp) => opp);
+      }
       return (
         <DashboardChild profil={user} references={references} opps={opps} />
       );

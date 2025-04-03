@@ -1,7 +1,7 @@
 import { BetaUser, Offer } from "@youmeet/gql/generated";
 import OtherOfferComponent from "../OtherOfferComponent";
 import dynamic from "next/dynamic";
-import { Skeleton } from "@mui/material";
+import BoldText from "../BoldText";
 
 const TransmitOffers = dynamic(() => import("./TransmitOffersChild"));
 const SearchFilter = dynamic(
@@ -23,6 +23,10 @@ export default function SuggestedOffers({
       <TransmitOffers />
       <DividerSection bg="bg-transparent" />
       <SearchFilter dashboard />
+      <DividerSection bg="bg-transparent" />
+      {opps.length === 0 && (
+        <BoldText text={"we-will-notify-you-when-offers-available"} />
+      )}
       <DividerSection bg="bg-transparent" />
       <div className="flex flex-col gap-[6px]">
         {opps?.map((opp) => {

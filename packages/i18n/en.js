@@ -284,6 +284,8 @@ const translations = {
   "discover-some-biographies": "Discover life stories from talents",
   "watch-some-stories": "Watch life experiences can be enriching.",
   watch: "Watch",
+  "we-will-notify-you-when-offers-available":
+    "We will notify you when offers are available",
   linking: "Linking",
   ats: "ATS",
   "conversation-state": "Conversation state",
