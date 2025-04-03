@@ -8,13 +8,5 @@ const ProfileViewsComponent = dynamic(() => import("./ProfileViewsComponent"), {
 });
 
 export default function fnc({ profil }: { profil: BetaUser }) {
-  return (
-    <ProfileViewsComponent
-      profil={profil}
-      hideTooltip={() => {}}
-      showTooltip={() => {}}
-      updateTooltip={() => {}}
-      tooltipOpen={false}
-    />
-  );
+  return <ProfileViewsComponent profil={profil} viewsData={[]} />;
 }

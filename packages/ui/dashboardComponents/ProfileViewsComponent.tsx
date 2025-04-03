@@ -1,293 +1,124 @@
-import React, { useMemo, useCallback } from "react";
-import { AreaClosed, Line, Bar } from "@visx/shape";
-import appleStock, { AppleStock } from "@visx/mock-data/lib/mocks/appleStock";
-import { curveMonotoneX } from "@visx/curve";
-import { GridRows, GridColumns } from "@visx/grid";
-import { scaleTime, scaleLinear } from "@visx/scale";
-import {
-  withTooltip,
-  Tooltip,
-  TooltipWithBounds,
-  defaultStyles,
-} from "@visx/tooltip";
-import { WithTooltipProvidedProps } from "@visx/tooltip/lib/enhancers/withTooltip";
-import { localPoint } from "@visx/event";
-import { LinearGradient } from "@visx/gradient";
-import { max, extent, bisector } from "@visx/vendor/d3-array";
-import { timeFormat } from "@visx/vendor/d3-time-format";
+import React from "react";
 import { BetaUser, ProfileView } from "@youmeet/gql/generated";
 import DetailComponent from "../DetailComponent";
 import { useTranslation } from "react-i18next";
 import {
   getDatesBetween,
-  getMultiplyingRatio,
   getStockFromViews,
 } from "@youmeet/utils/basics/getDatesBetween";
-import { formatToDatetime } from "@youmeet/utils/basics/formatToDatetime";
-import { useMediaQuery } from "@mui/material";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-type TooltipData = AppleStock;
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-const stock = appleStock.slice(800);
-export const background = "#3b6978";
-export const background2 = "#204051";
-export const accentColor = "#edffea";
-export const accentColorDark = "#75daad";
-const tooltipStyles = {
-  ...defaultStyles,
-  background,
-  border: "1px solid white",
-  color: "white",
-};
-
-// util
-const formatDate = timeFormat("%b %d, '%y");
-
-// accessors
-const getDate = (d: AppleStock) => new Date(d.date);
-const getStockValue = (d: AppleStock) => d.close;
-const bisectDate = bisector<AppleStock, Date>((d) => new Date(d.date)).left;
+interface ProfileViewsChartProps {
+  viewsData: { date: string; views: number }[];
+  profil: BetaUser;
+}
 
 export type AreaProps = {
   profil: BetaUser;
   margin?: { top: number; right: number; bottom: number; left: number };
 };
 
-const ProfileViewsComponent: React.FC<
-  AreaProps & WithTooltipProvidedProps<TooltipData>
-> = withTooltip<AreaProps, TooltipData>(
-  ({
-    margin = { top: 0, right: 0, bottom: 0, left: 0 },
-    showTooltip,
-    hideTooltip,
-    tooltipData,
-    tooltipTop = 0,
-    tooltipLeft = 0,
-    profil,
-  }: AreaProps & WithTooltipProvidedProps<TooltipData>) => {
-    const xs = useMediaQuery("(max-width:600px)");
-    const sm = useMediaQuery("(max-width:720px)");
-    const width = xs || sm ? 300 : 400;
-    const height = xs || sm ? 225 : 300;
-    const today = new Date();
-    const startDate = new Date(today.getTime() - 2 * 30 * 24 * 3600 * 1000);
-    const {
-      t,
-      i18n: { language },
-    } = useTranslation();
+const monthsMapping = {
+  "0": "january",
+  "1": "february",
+  "2": "march",
+  "3": "april",
+  "4": "may",
+  "5": "june",
+  "6": "july",
+  "7": "august",
+  "8": "september",
+  "9": "october",
+  "10": "november",
+  "11": "december",
+};
 
-    const dates = getDatesBetween(startDate, today);
+const ProfileViewsComponent: React.FC<ProfileViewsChartProps> = ({
+  viewsData,
+  profil,
+}) => {
+  const today = new Date();
+  const startDate = new Date(today.getTime() - 2 * 30 * 24 * 3600 * 1000);
+  const { t } = useTranslation();
 
-    const stock = useMemo(() => {
-      return getStockFromViews(
-        dates,
-        (profil.profileViews || []).filter((view) => view) as ProfileView[]
-      ) as TooltipData[];
-    }, [profil.profileViews]);
+  const dates = getDatesBetween(startDate, today);
 
-    if (width < 10) return null;
+  const res = getStockFromViews(
+    dates,
+    (profil.profileViews as ProfileView[]) || []
+  );
 
-    // bounds
-    const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom;
+  const views = res.map((item) => item.views);
 
-    // scales
-    const dateScale = useMemo(
-      () =>
-        scaleTime({
-          range: [margin.left, innerWidth + margin.left],
-          domain: extent(stock, getDate) as [Date, Date],
-        }),
-      [innerWidth, margin.left]
-    );
+  const labels = res.map((item) => {
+    const d = new Date(item.date);
+    const day = d.getDate();
+    const month = t((monthsMapping as any)[d.getMonth()]); // Les mois commencent à 0
+    return `${day} ${month}`;
+  });
 
-    const stockValueScale = useMemo(
-      () =>
-        scaleLinear({
-          range: [innerHeight + margin.top, margin.top],
-          domain: [0, (max(stock, getStockValue) || 0) + innerHeight / 3],
-          nice: true,
-        }),
-      [margin.top, innerHeight]
-    );
-
-    // tooltip handler
-    const handleTooltip = useCallback(
-      (
-        event:
-          | React.TouchEvent<SVGRectElement>
-          | React.MouseEvent<SVGRectElement>
-      ) => {
-        const { x } = localPoint(event) || { x: 0 };
-        const x0 = dateScale.invert(x);
-        const index = bisectDate(stock, x0, 1);
-        const d0 = stock[index - 1];
-        const d1 = stock[index];
-        let d = d0;
-        if (d1 && getDate(d1)) {
-          d =
-            x0.valueOf() - getDate(d0).valueOf() >
-            getDate(d1).valueOf() - x0.valueOf()
-              ? d1
-              : d0;
-        }
-        showTooltip({
-          tooltipData: d,
-          tooltipLeft: x,
-          tooltipTop: stockValueScale(getStockValue(d)),
-        });
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: t("profile-views-count"),
+        data: views,
+        borderColor: "rgb(54, 162, 235)",
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        tension: 0.4, // Rend la ligne plus lisse
       },
-      [showTooltip, stockValueScale, dateScale]
-    );
+    ],
+  };
 
-    return (
-      <DetailComponent
-        type="modal2"
-        noLabelColon
-        noPadding
-        conversation
-        labelNoWrap
-        account
-        label={
-          <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
-            {t("profile-views")}
-          </h3>
-        }
-        value={
-          <div className="flex-center">
-            <svg width={width} height={height}>
-              <rect
-                x={0}
-                y={0}
-                width={width}
-                height={height}
-                fill="url(#area-background-gradient)"
-                rx={14}
-              />
-              <LinearGradient
-                id="area-background-gradient"
-                from={background}
-                to={background2}
-              />
-              <LinearGradient
-                id="area-gradient"
-                from={accentColor}
-                to={accentColor}
-                toOpacity={0.1}
-              />
-              <GridRows
-                left={margin.left}
-                scale={stockValueScale}
-                width={innerWidth}
-                strokeDasharray="1,3"
-                stroke={accentColor}
-                strokeOpacity={0}
-                pointerEvents="none"
-              />
-              <GridColumns
-                top={margin.top}
-                scale={dateScale}
-                height={innerHeight}
-                strokeDasharray="1,3"
-                stroke={accentColor}
-                strokeOpacity={0.2}
-                pointerEvents="none"
-              />
-              <AreaClosed<AppleStock>
-                data={stock}
-                x={(d) => dateScale(getDate(d)) ?? 0}
-                y={(d) => stockValueScale(getStockValue(d)) ?? 0}
-                yScale={stockValueScale}
-                strokeWidth={1}
-                stroke="url(#area-gradient)"
-                fill="url(#area-gradient)"
-                curve={curveMonotoneX}
-              />
-              <Bar
-                x={margin.left}
-                y={margin.top}
-                width={innerWidth}
-                height={innerHeight}
-                fill="transparent"
-                rx={14}
-                onTouchStart={handleTooltip}
-                onTouchMove={handleTooltip}
-                onMouseMove={handleTooltip}
-                onMouseLeave={() => hideTooltip()}
-              />
-              {tooltipData && (
-                <g>
-                  <Line
-                    from={{ x: tooltipLeft, y: margin.top }}
-                    to={{ x: tooltipLeft, y: innerHeight + margin.top }}
-                    stroke={accentColorDark}
-                    strokeWidth={2}
-                    pointerEvents="none"
-                    strokeDasharray="5,2"
-                  />
-                  <circle
-                    cx={tooltipLeft}
-                    cy={tooltipTop + 1}
-                    r={4}
-                    fill="black"
-                    fillOpacity={0.1}
-                    stroke="black"
-                    strokeOpacity={0.1}
-                    strokeWidth={2}
-                    pointerEvents="none"
-                  />
-                  <circle
-                    cx={tooltipLeft}
-                    cy={tooltipTop}
-                    r={4}
-                    fill={accentColorDark}
-                    stroke="white"
-                    strokeWidth={2}
-                    pointerEvents="none"
-                  />
-                </g>
-              )}
-            </svg>
-            {tooltipData && (
-              <div>
-                <TooltipWithBounds
-                  key={Math.random()}
-                  top={tooltipTop + 12}
-                  left={tooltipLeft + 12}
-                  style={tooltipStyles}
-                >
-                  {`${
-                    getStockValue(tooltipData) /
-                    getMultiplyingRatio(
-                      (profil.profileViews as ProfileView[]) || []
-                    )
-                  } vue(s)`}
-                </TooltipWithBounds>
-                <Tooltip
-                  top={innerHeight + margin.top - 14}
-                  left={tooltipLeft}
-                  style={{
-                    ...defaultStyles,
-                    minWidth: 72,
-                    textAlign: "center",
-                    transform: "translateX(-50%)",
-                  }}
-                >
-                  {formatToDatetime(
-                    getDate(tooltipData),
-                    true,
-                    false,
-                    false,
-                    language
-                  )}
-                </Tooltip>
-              </div>
-            )}
-          </div>
-        }
-      />
-    );
-  }
-);
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: t("profile-views-evolution"),
+      },
+    },
+  };
+
+  return (
+    <DetailComponent
+      type="modal2"
+      noLabelColon
+      noPadding
+      conversation
+      labelNoWrap
+      account
+      label={
+        <h3 className="font-light subItem my-0 text-grey700 dark:text-grey300">
+          {t("profile-views")}
+        </h3>
+      }
+      value={<Line data={data} options={options} />}
+    />
+  );
+};
 
 export default ProfileViewsComponent;

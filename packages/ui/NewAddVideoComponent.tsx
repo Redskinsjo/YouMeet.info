@@ -1,7 +1,7 @@
 "use client";
 import { UserState, addVideo } from "@youmeet/global-config/features/user";
 import { RootState } from "@youmeet/global-config/store";
-import { BetaUser, Video } from "@youmeet/gql/generated";
+import { BetaUser, UpdateUserDocument, Video } from "@youmeet/gql/generated";
 import { Dispatch, SetStateAction, useCallback, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,16 +14,11 @@ import { onAddVideo } from "@youmeet/functions/actions";
 import { PayloadBackendError, withData } from "@youmeet/types/api/backend";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
 import { submitFile } from "@youmeet/utils/basics/submitFile";
-import Link from "next/link";
 import { getPublicIdFirstPart } from "@youmeet/utils/basics/getPublicId";
 import { Button } from "@mui/material";
-import { modals } from "./modals/modals";
-import dynamic from "next/dynamic";
-import { trads } from "@youmeet/types/CustomModal";
 import { setModal } from "@youmeet/global-config/features/modal";
 import { UnknownAction } from "@reduxjs/toolkit";
-
-const BoldText = dynamic(() => import("./TextChild"));
+import { client } from "@youmeet/gql/index";
 
 export default function NewAddVideoComponent({
   profil,
@@ -42,65 +37,74 @@ export default function NewAddVideoComponent({
   const submitVideoRef = useRef<HTMLButtonElement | null>(null);
   const user = useSelector((state: RootState) => state.user as UserState);
   const dispatch = useDispatch();
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t } = useTranslation();
   const global = useSelector((state: RootState) => state.global as GlobalState);
-  const error = global.error;
   const upload = global.upload;
-  const uploading =
-    upload === "upload" || upload === "upload-50" ? upload : null;
-  const type = error || uploading;
 
-  const customOnAddVideo = async (
-    extras: {
-      publicId: string;
-      jobId?: string;
+  const automaticUpdateIsPublic = useCallback(
+    async (added: number = 0) => {
+      const isPublic = (profil.videos as Video[]).length + added !== 0;
+
+      await client.mutate({
+        mutation: UpdateUserDocument,
+        variables: { data: { isPublic }, userId: profil.id },
+      });
     },
-    formData: FormData
-  ) => {
-    dispatch(setUpload("upload"));
+    [profil.videos]
+  );
 
-    let count = 0;
-    const intervalId = setInterval(() => {
-      count++;
-      if (count === 10) {
-        dispatch(setUpload("upload-50"));
-      }
-    }, 1000);
+  const customOnAddVideo = useCallback(
+    async (
+      extras: {
+        publicId: string;
+        jobId?: string;
+      },
+      formData: FormData
+    ) => {
+      dispatch(setUpload("upload"));
 
-    const videoFile = formData.get("video") as File;
+      let count = 0;
+      const intervalId = setInterval(() => {
+        count++;
+        if (count === 10) {
+          dispatch(setUpload("upload-50"));
+        }
+      }, 1000);
 
-    const fileFormData = new FormData();
-    fileFormData.append("file", videoFile);
-    const result1 = await submitFile(fileFormData, extras.publicId, "video");
+      const videoFile = formData.get("video") as File;
 
-    if (result1 && isPayloadError(result1)) {
-      if (result1.type === 15) dispatch(setError("request-feedback"));
-      else if (result1.type === 8) dispatch(setError("fileTooLarge"));
-      else dispatch(setError("not-completed"));
-    } else {
-      const result = (await onAddVideo(
-        extras.publicId,
-        extras.jobId,
-        result1,
-        exchangeId
-      )) as PayloadBackendError | withData<Video>;
+      const fileFormData = new FormData();
+      fileFormData.append("file", videoFile);
+      const result1 = await submitFile(fileFormData, extras.publicId, "video");
 
-      if (result && isPayloadError(result)) {
-        dispatch(setError("not-completed"));
-      } else if (!result?.data) {
-        dispatch(setError("not-completed"));
+      if (result1 && isPayloadError(result1)) {
+        if (result1.type === 15) dispatch(setError("request-feedback"));
+        else if (result1.type === 8) dispatch(setError("fileTooLarge"));
+        else dispatch(setError("not-completed"));
       } else {
-        dispatch(addVideo((result as withData<Video>).data));
-        if (setChosenVideo) setChosenVideo((result as withData<Video>).data);
-        if (setVideoId) setVideoId(result.data.id as string);
+        const result = (await onAddVideo(
+          extras.publicId,
+          extras.jobId,
+          result1,
+          exchangeId
+        )) as PayloadBackendError | withData<Video>;
+
+        if (result && isPayloadError(result)) {
+          dispatch(setError("not-completed"));
+        } else if (!result?.data) {
+          dispatch(setError("not-completed"));
+        } else {
+          dispatch(addVideo((result as withData<Video>).data));
+          if (setChosenVideo) setChosenVideo((result as withData<Video>).data);
+          if (setVideoId) setVideoId(result.data.id as string);
+          automaticUpdateIsPublic(1);
+        }
       }
-    }
-    clearInterval(intervalId);
-    dispatch(setUpload(null));
-  };
+      clearInterval(intervalId);
+      dispatch(setUpload(null));
+    },
+    [automaticUpdateIsPublic]
+  );
 
   const inputElement = useMemo(
     () => (

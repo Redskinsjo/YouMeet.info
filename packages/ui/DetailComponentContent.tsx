@@ -69,9 +69,6 @@ export default function DetailComponent({
   const dispatch = useDispatch();
   const appUser = useSelector((state: RootState) => state.user as UserState);
   const { t } = useTranslation();
-  const xs = useMediaQuery("(max-width:600px)");
-  const sm = useMediaQuery("(max-width:720px)");
-  const md = useMediaQuery("(max-width:900px)");
   const searchParams = useSearchParams();
 
   const LabelComponent = createElement(

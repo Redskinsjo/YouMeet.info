@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   ////////////////////////// 1
   // Check if the path is a candidate profile
 
-  const regex = new RegExp(/(?<=\/)[^\/]+/i);
+  const regex = new RegExp(/(?<=\/)[^\/]+/gim);
   // all paths /*****
   if (regex.test(pathname)) {
     const privatePages = [
@@ -48,14 +48,16 @@ export async function middleware(request: NextRequest) {
       ...privatePages,
     ];
     const match = pathname.match(regex);
+
     if (match) {
       // what is the matched path /****
       const m = match[0];
+      const s = match[1];
 
       // if the path is not in the list of pages
-      if (!pages.includes(m)) {
+      if (m === "on") {
         const user = (await getUser<BetaUser>(
-          { uniqueName: m },
+          { uniqueName: s },
           0
         )) as BetaUser;
 
@@ -125,7 +127,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/:candidateName/:path",
+    "/on/:candidateName/:path",
     "/formulaire-profil",
     "/dashboard/:path*",
     "/backoffice/:path*",

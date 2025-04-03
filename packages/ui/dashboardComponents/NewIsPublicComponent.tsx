@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormControlLabel, Switch } from "@mui/material";
 import { BetaUser, UpdateUserDocument, Video } from "@youmeet/gql/generated";
 import DetailComponent from "../DetailComponent";
@@ -12,13 +12,11 @@ import { UnknownAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { onUpdateisPublic } from "@youmeet/functions/actions";
 import { isPayloadError } from "@youmeet/types/TypeGuards";
-import { useRouter } from "next/navigation";
 
 const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
   const [isPublic, setIsPublic] = useState(profil.isPublic ?? false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const cantEnable =
     !isPublic &&
@@ -27,6 +25,13 @@ const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
       profil.candidate?.avatars?.length === 0 ||
       (profil.videos as Video[]).length === 0 ||
       !profil?.candidate?.targetJob?.id);
+
+  const customUpdateIsPublic = useCallback(async () => {
+    const result = await onUpdateisPublic(profil.id as string, !isPublic);
+    if (result && isPayloadError(result)) {
+      dispatch(setError("not-completed") as UnknownAction);
+    } else setIsPublic(!isPublic);
+  }, [isPublic]);
 
   const automaticUpdateIsPublic = useCallback(async () => {
     if ((profil.videos as Video[]).length === 0) {
@@ -38,13 +43,6 @@ const NewIsPublicComponent = ({ profil }: { profil: BetaUser }) => {
       if (updated) setIsPublic(updated.isPublic as boolean);
     }
   }, [profil.videos]);
-
-  const customUpdateIsPublic = useCallback(async () => {
-    const result = await onUpdateisPublic(profil.id as string, !isPublic);
-    if (result && isPayloadError(result)) {
-      dispatch(setError("not-completed") as UnknownAction);
-    } else setIsPublic(!isPublic);
-  }, [isPublic]);
 
   useEffect(() => {
     if (profil?.id) automaticUpdateIsPublic();

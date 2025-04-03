@@ -1,5 +1,4 @@
 import { ProfileView } from "@youmeet/gql/generated";
-import { AppleStock } from "@visx/mock-data/lib/mocks/appleStock";
 
 export const getDatesBetween = (startDate: Date, today: Date) => {
   let countingDate = startDate.getTime();
@@ -31,32 +30,39 @@ export const getMultiplyingRatio = (views: ProfileView[]) => {
   return 1;
 };
 
-type TooltipData = AppleStock;
-
 export const getStockFromViews = (
   dates: { date: string }[],
-  profileViews: ProfileView[],
-): TooltipData[] => {
-  let stock = [];
+  profileViews: ProfileView[]
+): { date: string; views: number }[] => {
+  let stock: { date: string; views: number }[] = [];
   for (let i = 0; i < dates.length; i++) {
-    const date = dates[i].date;
-    let result = { date } as { date: string; close: number };
+    const o = dates[i];
+    const date = new Date(dates[i].date);
 
     if (profileViews.length > 0) {
       for (let j = 0; j < profileViews.length; j++) {
         const view = profileViews[j];
+        const viewDate = new Date(view.createdAt);
+
+        let payload: { date: string; views: number } = {
+          date: o.date,
+          views: 0,
+        };
         if (view.createdAt) {
-          if (isSameDay(new Date(view.createdAt), new Date(date))) {
-            result.close =
-              (view.count as number) * getMultiplyingRatio(profileViews);
+          if (isSameDay(date, viewDate)) {
+            const exist = stock.find((item) => item.date === o.date);
+
+            if (view.count) {
+              payload = { date: o.date, views: view.count };
+              if (exist) {
+                payload = { date: o.date, views: view.count + exist.views };
+              }
+            }
           }
         }
+        stock.push(payload);
       }
     }
-
-    if (!result.close) result.close = 0;
-
-    stock.push(result);
   }
 
   return stock;
