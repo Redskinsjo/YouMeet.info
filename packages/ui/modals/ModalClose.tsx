@@ -20,13 +20,14 @@ export default function ModalClose() {
           backgroundColor: grey[300],
           height: "24px",
         }}
-        onClick={() => {
+        onClick={async () => {
           if (pathname === "/se-connecter") {
             router.back();
           } else {
             dispatch(resetModal(null));
             dispatch(setError(null));
           }
+          router.push("/dashboard");
         }}
         onFocus={(e) => {
           e.target.style.backgroundColor = blueGrey[200];

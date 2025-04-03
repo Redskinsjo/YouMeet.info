@@ -47,9 +47,6 @@ export default function CustomModal({
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const uploadDelete =
-    type === "upload" || type === "upload-50" || type === "delete";
-
   const modalContent = useMemo(
     () =>
       type ? (
@@ -99,7 +96,7 @@ export default function CustomModal({
         zIndex: aboveError ? 1101 : 1100,
         background: "rgba(0,0,0,0.5)",
       }}
-      onClick={(e) => {
+      onClick={async (e) => {
         e.stopPropagation();
 
         if (type === "login") router.back();
@@ -108,6 +105,7 @@ export default function CustomModal({
         } else {
           dispatch(resetModal(null));
         }
+        router.push("/dashboard");
       }}
     >
       <div className="h-full flex-center absolute w-full">
