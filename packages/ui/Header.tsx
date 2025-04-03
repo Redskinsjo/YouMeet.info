@@ -76,7 +76,10 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   useEffect(() => {
     if (articles.length === 0) getArticles();
     if (videos.length === 0) fetchVideos();
-  }, []);
+    document.addEventListener("scroll", () => {
+      setMegaMenu1(false);
+    });
+  }, [megaMenu1, megaMenu2]);
 
   return (
     <div className="relative">
