@@ -229,7 +229,7 @@ export default function SimpleField({
         {children}
       </TextField>
       {!!errors && errors[name] && type !== "hidden" && (
-        <div className="w-full my-[6px] text-red600 text-[15px]">
+        <div className="w-full my-[6px] text-black text-[15px]">
           {errors[name]?.message as string}
         </div>
       )}
