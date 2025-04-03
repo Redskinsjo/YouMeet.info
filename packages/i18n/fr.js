@@ -241,6 +241,7 @@ const product = {
   "the-product-solution": "La Plateforme - notre solution complète",
   read: "Lire",
   watch: "Regarder",
+  "and-279-others": " et 279 autres",
   "profile-views-evolution": "Évolution des vues du profil",
   "profile-views-count": "Nombre de vues du profil",
   "we-will-notify-you-when-offers-available":

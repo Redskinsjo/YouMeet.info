@@ -9,9 +9,9 @@ export default function BlogMenuLi({
   article: ReducedArticle | ReducedVideo;
 }) {
   const {
-    t,
     i18n: { language },
   } = useTranslation();
+
   return (
     <li
       key={article.id}

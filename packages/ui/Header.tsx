@@ -43,13 +43,15 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   router.prefetch("/offres");
 
   const getArticles = async () => {
+    if (articles.length !== 0) return;
     const result = (await getArticlesParams<Article[]>()) as Article[];
-    const articles = result.map((a) => ({
+
+    const arts = result.map((a) => ({
       id: a.id,
       title: a.title,
       slug: a.slug,
     }));
-    setArticles(articles);
+    setArticles(arts);
   };
   const fetchVideos = async () => {
     const result = (await getVideos<Video[]>()) as Video[];
@@ -74,10 +76,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
   useEffect(() => {
     if (articles.length === 0) getArticles();
     if (videos.length === 0) fetchVideos();
-    document.addEventListener("scroll", () => {
-      setMegaMenu1(false);
-    });
-  }, [megaMenu1, megaMenu2]);
+  }, []);
 
   return (
     <div className="relative">

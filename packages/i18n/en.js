@@ -284,6 +284,7 @@ const translations = {
   "discover-some-biographies": "Discover life stories from talents",
   "watch-some-stories": "Watch life experiences can be enriching.",
   watch: "Watch",
+  "and-279-others": "and 279 others",
   "profile-views-evolution": "Profile views evolution",
   "profile-views-count": "Profile views count",
   "we-will-notify-you-when-offers-available":
