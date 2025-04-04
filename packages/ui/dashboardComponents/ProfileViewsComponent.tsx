@@ -68,7 +68,7 @@ const ProfileViewsComponent: React.FC<ProfileViewsChartProps> = ({
     (profil.profileViews as ProfileView[]) || []
   );
 
-  const views = res.map((item) => item.views);
+  const views = res.map((item) => item.views).concat([10]); // Ajout de 0 pour le dernier jour
 
   const labels = res.map((item) => {
     const d = new Date(item.date);
