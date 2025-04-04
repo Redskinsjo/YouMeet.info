@@ -57,6 +57,7 @@ export default function Header({ classes, newStyles }: HeaderComponentProps) {
     const result = (await getVideos<Video[]>()) as Video[];
     const videos = Object.values(
       result
+        .filter((v) => !v.preview)
         .map((a) => ({
           id: `${a.id}`,
           name: `${a.user?.firstname}`,

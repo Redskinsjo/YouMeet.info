@@ -1747,6 +1747,7 @@ export const getVideosQuery = `query GetVideos {
   videos {
     __typename
     id
+    preview
     transcript
     confidence
     report
