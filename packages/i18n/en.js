@@ -679,7 +679,8 @@ const partners = {
   historic: "Historic",
   informations: "Information",
   "to-recruiters": "to recruiters",
-  "incredible-opportunity-to-find-job": "Incredible opportunity to find a job",
+  "incredible-opportunity-to-find-job":
+    "Incredible opportunity to find a job, learn and grow.",
   "return-button": "Return",
   search: "Search",
   job: "Job",
@@ -1024,7 +1025,8 @@ const misc = {
   "send-conversation-responses": "Send answers to the questions",
   "pass-next-question": "Pass to next question",
   "offer-applied": "Offer concerned",
-  "present-yourself": "Present yourself",
+  "gain-visibility": "Gain visibility",
+  "in-your-day-to-day-life": "in your day to day life",
   "present-yourself-quickly": "Present yourself +succinctly=.+",
   "speak-about-job-and-company": "Speak about the job and/or the company.+",
   "explain-why-you-are-the-right-person":

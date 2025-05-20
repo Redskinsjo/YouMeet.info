@@ -389,10 +389,11 @@ const translations = {
   FOR_RECRUITERS: "POUR RECRUTEURS",
   FOR_CANDIDATES: "POUR CANDIDATS",
   homeDescription: "Démarquez-vous parmi les autres candidats, vous êtes un ",
-  "present-yourself": "Présentez-vous",
+  "gain-visibility": "Gagnez en visibilité",
+  "in-your-day-to-day-life": "dans votre vie quotidienne",
   "to-recruiters": "aux recruteurs",
   "incredible-opportunity-to-find-job":
-    "Une opportunité incroyable pour trouver un emploi",
+    "Une opportunité incroyable pour trouver un emploi, apprendre et se former.",
   talent: "talent",
   developer: "développeur",
   productOwner: "product owner",
