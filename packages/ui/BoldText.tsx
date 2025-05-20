@@ -223,8 +223,8 @@ export default function BoldText({
       component,
       {
         className: formatDisplay
-          ? `break-words font-[300] mb-[12px] w-full text-wrap list-outside box-border dark:text-white text-[15px] ${fontSizeClass}`
-          : `break-words font-[300] mb-[12px] w-full text-wrap list-outside box-border dark:text-white text-[15px] ${fontSizeClass} ${leading}`,
+          ? `break-words font-[300] mb-[12px] w-full text-wrap list-outside box-border dark:text-white text-[16px]`
+          : `break-words font-[300] mb-[12px] w-full text-wrap list-outside box-border dark:text-white text-[16px] ${leading}`,
         style: {
           listStyle: component === "li" ? "lower-greek" : "none",
           textRendering: "geometricPrecision",

@@ -13,6 +13,9 @@ import Footer from "@youmeet/ui/Footer";
 import "aos/dist/aos.css";
 import dynamic from "next/dynamic";
 import DataSection from "@youmeet/ui/_components/DataSection";
+import Image from "next/image";
+
+const HeroStyledText = dynamic(() => import("../_components/HeroTextChild"));
 
 const BigHeaderSection = dynamic(
   () => import("@youmeet/ui/_sections/BigHeaderSectionChild")
@@ -38,23 +41,40 @@ export default async function Home({
       <BigHeaderSection />
       <DividerSection />
       <div className="flex-center flex-col">
-        <div className="box-border w-3/4 xs:w-full sm:w-full md:w-full p-[72px] xs:p-[12px] sm:p-[12px] md:p-[12px]">
-          <HeroSection />
-          <MasterSearch />
+        <div className="flex sm:h-screen xs:h-screen md:h-[85vh]">
+          <div className="box-border w-3/4 xs:w-full sm:w-full md:w-full p-[72px] xs:p-[12px] sm:p-[12px] md:p-[12px]">
+            <HeroSection />
+            <MasterSearch />
+          </div>
+          <HeroStyledText />
         </div>
 
         {/* <PromotionSection /> */}
-        <DataSection data={videos} />
+        {/* <DataSection data={videos} /> */}
       </div>
       {/* <OfferSection offers={offers} /> */}
       {/* <CompetencySection competences={competences} /> */}
-      <DividerSection />
+      <Image
+        src={
+          "https://res.cloudinary.com/de822mdsy/image/upload/v1743799457/dgvqhkl2armpoxl8gn6f.png"
+        }
+        alt="divider"
+        width={0}
+        height={0}
+        style={{
+          width: "100%",
+          height: "100px",
+          objectFit: "cover",
+          opacity: 0.5,
+          position: "absolute",
+        }}
+      />
       <InsightSection />
       <BandSection />
       <DividerSection />
-      <div className="homeLightning">
+      <div className="bg-black">
         <BrandsSection />
-        <SquareSection />
+        {/* <SquareSection /> */}
         {/* <WhatsappSection /> */}
       </div>
       <DividerSection />

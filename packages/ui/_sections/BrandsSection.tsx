@@ -40,6 +40,21 @@ export default function BrandsSection() {
         <h2 role="heading" className="text-center text-[18px]">
           {t("connecting-you-with-recruiters")}
         </h2>
+        <div className="w-full flex-center">
+          <Image
+            src={
+              "https://res.cloudinary.com/de822mdsy/image/upload/v1743873864/dnb0zsb8pghwj69sreox.svg"
+            }
+            alt="pattern"
+            width={0}
+            height={0}
+            style={{
+              width: "40px",
+              height: "20px",
+              objectFit: "cover",
+            }}
+          />
+        </div>
         <div className="overflow-hidden w-full h-[400px] rounded-[14px] bg-black opacity-60">
           <div className="flex h-full flex-center gap-[72px] flex-wrap xs:gap-[24px] sm:gap-[24px] md:gap-[24px]">
             {brands.map((brand) => {

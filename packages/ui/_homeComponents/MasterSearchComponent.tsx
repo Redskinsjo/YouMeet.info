@@ -19,7 +19,7 @@ export default function MasterSearchComponent({
   return (
     <>
       <h2
-        className="underline font-light text-specialDark"
+        className="underline text-deepPurple100"
         style={{
           ...indie_flower.style,
           textDecorationThickness: "1px",
