@@ -105,7 +105,6 @@ export default function CustomModal({
         } else {
           dispatch(resetModal(null));
         }
-        router.push("/dashboard");
       }}
     >
       <div className="h-full flex-center absolute w-full">
