@@ -39,7 +39,7 @@ export default function NotificationsModalComponent(props: CustomModalProps) {
   return (
     <ModalWrapper>
       <>
-        <div className="w-full h-full flex-col flex-center">
+        <div className="w-[300px] h-[300px] flex-col flex-center">
           <h3 className="item my-0">{t("my-notifications")}</h3>
           {!loading ? (
             <div className="w-full h-full flex items-center justify-between gap-[12px] box-border flex-col p-[8px] bg-grey200 rounded-[7px]">
