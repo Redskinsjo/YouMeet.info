@@ -41,7 +41,7 @@ export default async function Home({
       <BigHeaderSection />
       <DividerSection />
       <div className="flex-center flex-col">
-        <div className="flex sm:h-screen xs:h-screen md:h-[85vh]">
+        <div className="flex xs:flex-col sm:flex-col md:flex-col">
           <div className="box-border w-3/4 xs:w-full sm:w-full md:w-full p-[72px] xs:p-[12px] sm:p-[12px] md:p-[12px]">
             <HeroSection />
             <MasterSearch />

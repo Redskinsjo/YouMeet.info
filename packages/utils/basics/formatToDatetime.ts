@@ -27,11 +27,11 @@ export const formatToSimpleDate = (dateStr: string, hour?: string) => {
   const time = hour?.split(":");
   if (time) {
     const hourSet = new Date(dateStr).setHours(
-      time[0].length === 1 ? Number(`0${time[0]}`) : Number(time[0]),
+      time[0].length === 1 ? Number(`0${time[0]}`) : Number(time[0])
     );
 
     const minutesSet = new Date(hourSet).setMinutes(
-      time[1].length === 1 ? Number(`0${time[1]}`) : Number(time[1]),
+      time[1].length === 1 ? Number(`0${time[1]}`) : Number(time[1])
     );
 
     return new Date(minutesSet);
@@ -46,14 +46,14 @@ export const formatToDatetime = (
   noHour?: boolean,
   noWeekDay?: boolean,
   noDay?: boolean,
-  locale: string = "fr",
+  locale: string = "fr"
 ) => {
   const date =
     typeof dateStr === "string"
       ? new Date(dateStr)
       : typeof dateStr === "object"
-        ? dateStr
-        : new Date();
+      ? dateStr
+      : new Date();
   if (date) {
     const year = date.getFullYear();
     const month = (monthMapping as any)[date.getMonth()]
@@ -86,19 +86,19 @@ export const giveTimeAgo = (dateStr: Date) => {
     diff > 0
       ? Math.floor(diff / 1000 / 3600 / 24)
       : Math.ceil(diff / 1000 / 3600 / 24),
-    0,
+    0
   );
   const calculatedMon = fix(
     diff > 0
       ? Math.floor(diff / 1000 / 3600 / 24 / 30)
       : Math.ceil(diff / 1000 / 3600 / 24 / 30),
-    0,
+    0
   );
   const calculatedY = fix(
     diff > 0
       ? Math.floor(diff / 1000 / 3600 / 24 / 365)
       : Math.ceil(diff / 1000 / 3600 / 24 / 365),
-    0,
+    0
   );
 
   if (calculatedY >= 1) {

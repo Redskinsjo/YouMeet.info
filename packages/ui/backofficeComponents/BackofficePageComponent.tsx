@@ -2,15 +2,18 @@ import Layout from "../Layout";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
 import BackofficeLeadsComponent from "./BackofficeLeadsComponent";
 import dynamic from "next/dynamic";
+import Tipe from "@youmeet/ui/backofficeComponents/Tipe";
 
 const MoreFeaturesLeads = dynamic(() => import("./MoreFeaturesLeadChild"));
 
 export default function BackofficePageComponent({
   leads,
   users,
+  tipeData,
 }: {
   leads: Lead[];
   users: BetaUser[];
+  tipeData: any[];
 }) {
   return (
     <Layout newStyles={{ maxWidth: "1200px", padding: "0px", width: "100%" }}>
@@ -20,6 +23,7 @@ export default function BackofficePageComponent({
         <Layout newStyles={{ minWidth: "900px" }}>
           <MoreFeaturesLeads />
         </Layout>
+        <Tipe tipeData={tipeData} />
       </div>
     </Layout>
   );

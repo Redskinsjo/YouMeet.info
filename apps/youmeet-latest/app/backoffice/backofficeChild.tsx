@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BetaUser, Lead } from "@youmeet/gql/generated";
 import BackofficeComponent from "@youmeet/ui/backofficeComponents/BackofficePageComponent";
 import FranceTravailConnect from "@youmeet/ui/backofficeComponents/FranceTravailConnect";
+import prisma from "@youmeet/prisma-config/prisma";
 
 export default async function BackofficeChild({
   leads,
@@ -11,6 +12,10 @@ export default async function BackofficeChild({
   leads: Lead[];
   users: BetaUser[];
 }) {
+  const tipeData = await prisma.tipe.findMany({
+    orderBy: { createdAt: "asc" },
+    take: 200,
+  });
   return (
     <div className="relative flex-1 flex-center flex-col h-full lightBg dark:darkBg">
       <div className="flex-center">
@@ -44,7 +49,7 @@ export default async function BackofficeChild({
       </div>
       <FranceTravailConnect />
 
-      <BackofficeComponent leads={leads} users={users} />
+      <BackofficeComponent leads={leads} users={users} tipeData={tipeData} />
     </div>
   );
 }

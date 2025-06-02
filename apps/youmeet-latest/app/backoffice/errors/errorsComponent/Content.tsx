@@ -44,7 +44,7 @@ export default function Content({ errors }: { errors: Error[] }) {
                 value={formatToDatetime(
                   err.createdAt,
                   false,
-                  false,
+                  true,
                   false,
                   language
                 )}

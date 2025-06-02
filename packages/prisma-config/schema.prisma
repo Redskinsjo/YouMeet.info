@@ -7,6 +7,19 @@ datasource db {
   url      = env("MONGODB_URI")
 }
 
+type temperature {
+  main  Float?
+  cores Int[]
+  max   Int?
+}
+
+model tipe {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  temperature temperature?
+  createdAt   DateTime?
+  updatedAt   DateTime?
+}
+
 type files {
   asset_id          String?
   public_id         String?

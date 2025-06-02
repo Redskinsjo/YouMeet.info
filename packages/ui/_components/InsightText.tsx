@@ -11,7 +11,7 @@ export default function InsightText() {
       <SectionTitle
         component="h2"
         translation="insight-title"
-        className="text-left"
+        className="text-left relative"
       />
       <BoldText
         text={"improve-your-applications"}
