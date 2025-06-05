@@ -5,6 +5,7 @@ import { Article, Video } from "@youmeet/gql/generated";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { grey } from "@mui/material/colors";
 
 export default function HomeMediaCard({
   article,
@@ -106,8 +107,12 @@ export default function HomeMediaCard({
         <BoldText
           text={`${video.user?.description}+`}
           align="justify"
-          fontSizeClass="overflow-hidden bg-grey300 overflow-y-scroll max-h-[159px] box-border overflow-y-scroll"
+          fontSizeClass="box-border"
           containerStyle={{
+            maxHeight: "139px",
+            backgroundColor: grey[300],
+            overflow: "hidden",
+            overflowY: "scroll",
             fontWeight: "normal",
             padding: "6px 12px",
             borderRadius: "7px",
