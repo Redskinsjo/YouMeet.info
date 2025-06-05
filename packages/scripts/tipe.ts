@@ -8,9 +8,6 @@ import { SortableArray } from "@youmeet/performance";
     console.log(`Allons-y !`);
 
     const array = new Array<number>(1000000);
-    for (let i = 0; i < array.length; i++) {
-      console.log(`Array[${i}]: ${array[i]}`);
-    }
 
     console.log(array.length); // 10
 

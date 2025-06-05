@@ -13,6 +13,14 @@ type temperature {
   max   Int?
 }
 
+model fft {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  amplitude Float?
+  frequency Float?
+  createdAt DateTime?
+  updatedAt DateTime?
+}
+
 model tipe {
   id          String       @id @default(auto()) @map("_id") @db.ObjectId
   temperature temperature?

@@ -28,7 +28,8 @@
     "sendEmailTheatre": "SCRIPT=true dotenv -e .env -- npx tsx ./sendEmailTheatre.ts",
     "tipe": "SCRIPT=true dotenv -e .env.development -- npx tsx ./tipe.ts",
     "tipe2": "SCRIPT=true dotenv -e .env.development -- npx tsx ./tipe2.ts",
-    "welcomeEmail": "SCRIPT=true dotenv -e .env.development -- npx tsx ./welcomeEmail.ts"
+    "welcomeEmail": "SCRIPT=true dotenv -e .env -- npx tsx ./welcomeEmail.ts",
+    "fft": "SCRIPT=true dotenv -e .env.development -- npx tsx ./fft.ts"
   },
   "dependencies": {
     "@getbrevo/brevo": "^2.2.0",
@@ -46,6 +47,7 @@
     "mongodb": "^6.13.0",
     "mongoose": "^8.8.0",
     "openai": "^4.70.3",
+    "osx-temperature-sensor": "^1.0.8",
     "pidusage": "^4.0.1",
     "puppeteer": "^24.3.0",
     "reflect-metadata": "^0.2.2",

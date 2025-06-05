@@ -14,7 +14,13 @@ export default async function BackofficeChild({
 }) {
   const tipeData = await prisma.tipe.findMany({
     orderBy: { createdAt: "asc" },
-    take: 200,
+    // skip: 10,
+    // take: 200,
+  });
+  const tipeFftData = await prisma.fft.findMany({
+    orderBy: { frequency: "asc" },
+    // skip: 10,
+    // take: 200,
   });
   return (
     <div className="relative flex-1 flex-center flex-col h-full lightBg dark:darkBg">
@@ -49,7 +55,12 @@ export default async function BackofficeChild({
       </div>
       <FranceTravailConnect />
 
-      <BackofficeComponent leads={leads} users={users} tipeData={tipeData} />
+      <BackofficeComponent
+        leads={leads}
+        users={users}
+        tipeData={tipeData}
+        tipeFftData={tipeFftData}
+      />
     </div>
   );
 }

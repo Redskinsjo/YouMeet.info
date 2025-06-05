@@ -20,29 +20,28 @@ ChartJS.register(
   Legend
 );
 type tipeDataType = {
-  temperature: { main: number; cores: number[]; max: number };
+  amplitude: number;
+  frequency: number;
   createdAt: Date;
   updatedAt: Date;
 };
 
 export default function Tipe({ tipeData }: { tipeData: any[] }) {
   if (tipeData.length === 0) return <div>No data available</div>;
-  const temps = (tipeData as tipeDataType[]).map((doc) => doc.temperature.main);
 
-  const t0 = new Date((tipeData as tipeDataType[])[0].createdAt).getTime();
+  const temps = (tipeData as tipeDataType[]).map((doc) => doc.amplitude);
+
+  const t0 = new Date((tipeData as tipeDataType[])[0].frequency);
 
   const labels = (tipeData as tipeDataType[]).map((doc) => {
-    const d = new Date(doc.createdAt);
-    const ms = d.getTime() - t0;
-
-    return `${ms / 1000} s`;
+    return `${doc.frequency} Hz`;
   });
 
   const data = {
     labels,
     datasets: [
       {
-        label: "Temperature (°C)",
+        label: "Amplitude",
         data: temps,
         borderColor: "rgb(54, 162, 235)",
         backgroundColor: "rgba(54, 162, 235, 0.2)",
@@ -60,7 +59,7 @@ export default function Tipe({ tipeData }: { tipeData: any[] }) {
       },
       title: {
         display: true,
-        text: "Evolution de la température du CPU pour un algorithme de complexité quadratique",
+        text: "Transformée de Fourier (FFT) des températures",
       },
     },
   };
