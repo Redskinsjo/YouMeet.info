@@ -12,6 +12,7 @@ import { setModal } from "@youmeet/global-config/features/modal";
 import { useDispatch } from "react-redux";
 import { UnknownAction } from "@reduxjs/toolkit";
 import {
+  deleteAccount,
   deleteVideo,
   getMyVideos,
   getUser,
@@ -240,12 +241,11 @@ export default function BackofficeUsersComponent({
                           const videos = (await getMyVideos<Video[]>({
                             userId: row.id,
                           })) as Video[];
-                          const response = await client.mutate({
-                            mutation: DeleteUserDocument,
-                            variables: { userId: row.id },
+
+                          const deleted = await deleteAccount({
+                            userId: row.id,
                           });
 
-                          const deleted = response?.data?.deleteUser;
                           if (deleted) {
                             if (videos && videos.length > 0) {
                               for (let i = 0; i < videos.length; i++) {
