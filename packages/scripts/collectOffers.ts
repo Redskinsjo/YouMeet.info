@@ -854,7 +854,11 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
     });
 
     console.log(job.title.fr, "job.title.fr");
-    if (job.title.fr) await collectOffers(`${job.title.fr}`, "ile-de-france");
+    if (job.title.fr)
+      await collectOffers(
+        `${job.title.fr}`,
+        candidate.targetContractType || "CDI"
+      );
   }
   console.log("connecting...");
 
