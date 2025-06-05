@@ -253,7 +253,6 @@ export default function BackofficeUsersComponent({
                                 await deleteVideo({ id: videoId });
                               }
                             }
-
                             const users = (await getUsers(
                               {
                                 data: { pro: true, user: true },
