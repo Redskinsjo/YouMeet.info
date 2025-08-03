@@ -836,30 +836,30 @@ const collectOffers = async (searchRole: string, workLocation: string) => {
   });
 
   const candidatesWhoTargetJobAndContract = candidates
-    .filter((cand) => !!cand.targetJobId)
+    .filter((cand) => !!cand.suggestedOpportunitiesIds?.length)
     .reduce((acc, curr) => {
       if (!acc.find((cand) => cand.targetJobId === curr.targetJobId))
-        acc.push(curr);
+        acc.push(curr.suggestedOpportunitiesIds);
       return acc;
     }, []);
 
-  console.log(candidatesWhoTargetJobAndContract.length, "candidates");
+  console.log(candidatesWhoTargetJobAndContract, "candidates");
 
-  for (let i = 0; i < candidatesWhoTargetJobAndContract.length; i++) {
-    const candidate = candidatesWhoTargetJobAndContract[i];
-    const jobId = candidate.targetJobId;
+  // for (let i = 0; i < candidatesWhoTargetJobAndContract.length; i++) {
+  //   const candidate = candidatesWhoTargetJobAndContract[i];
+  //   const jobId = candidate.targetJobId;
 
-    const job = await prisma.jobs.findUnique({
-      where: { id: jobId },
-    });
+  //   const job = await prisma.jobs.findUnique({
+  //     where: { id: jobId },
+  //   });
 
-    console.log(job.title.fr, "job.title.fr");
-    if (job.title.fr)
-      await collectOffers(
-        `${job.title.fr}`,
-        candidate.targetContractType || "CDI"
-      );
-  }
+  //   console.log(job.title.fr, "job.title.fr");
+  //   if (job.title.fr)
+  //     await collectOffers(
+  //       `${job.title.fr}`,
+  //       candidate.targetContractType || "CDI"
+  //     );
+  // }
   console.log("connecting...");
 
   process.exit();

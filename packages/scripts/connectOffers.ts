@@ -1,5 +1,7 @@
 import { BetaCandidate } from "@youmeet/gql/generated";
 import prisma from "@youmeet/prisma-config/prisma";
+import dotenv from "dotenv";
+dotenv.config();
 
 const connectMatches = async (candidates: BetaCandidate[]) => {
   await prisma.betacandidates.updateMany({

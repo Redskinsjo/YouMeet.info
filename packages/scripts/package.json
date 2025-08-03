@@ -17,19 +17,23 @@
     "importFTOffers": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts",
     "checkDbIndexes": "SCRIPT=true dotenv -e .env.development -- ts-node ./checkDbIndexes.ts",
     "updateReducedOffers": "SCRIPT=true dotenv -e .env -- ts-node ./updateReducedOffers.ts",
-    "renewDbProd": "SCRIPT=true dotenv -e .env -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts && npx tsx ./collectOffers.ts && npx tsx ./connectOffers.ts",
+    "renewDbProd": "SCRIPT=true dotenv -e .env -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts && dotenv -e .env -- npx tsx ./collectOffersProd.ts && dotenv -e .env -- npx tsx ./connectOffersProd.ts",
     "renewDb": "SCRIPT=true dotenv -e .env.development -- npx tsx ./importFTOffers.ts && ts-node ./updateReducedOffers.ts",
     "removeBadIndexes": "SCRIPT=true dotenv -e .env -- npx tsx ./removeBadIndexes.ts",
-    "collectOffers": "SCRIPT=true dotenv -e .env -- npx tsx ./collectOffers.ts",
+    "collectOffers": "SCRIPT=true dotenv -e .env -- npx tsx ./collectOffers/script.ts",
     "connectOffers": "SCRIPT=true dotenv -e .env -- npx tsx ./connectOffers.ts",
-    "collectAnConnect": "SCRIPT=true dotenv -e .env -- npx tsx ./collectOffers.ts && npx tsx ./connectOffers.ts",
+    "collectAnConnect": "SCRIPT=true dotenv -e .env -- npx tsx ./collectOffers/script.ts && dotenv -e .env -- npx tsx ./connectOffers.ts",
     "sendEmailNotificationForNewOpportunities": "SCRIPT=true dotenv -e .env.development -- npx tsx ./sendEmailNotificationForNewOpportunities.ts",
     "sendEmailNotificationForNewOpportunitiesProd": "SCRIPT=true dotenv -e .env -- npx tsx ./sendEmailNotificationForNewOpportunities.ts",
     "sendEmailTheatre": "SCRIPT=true dotenv -e .env -- npx tsx ./sendEmailTheatre.ts",
     "tipe": "SCRIPT=true dotenv -e .env.development -- npx tsx ./tipe.ts",
     "tipe2": "SCRIPT=true dotenv -e .env.development -- npx tsx ./tipe2.ts",
     "welcomeEmail": "SCRIPT=true dotenv -e .env -- npx tsx ./welcomeEmail.ts",
-    "fft": "SCRIPT=true dotenv -e .env.development -- npx tsx ./fft.ts"
+    "fft": "SCRIPT=true dotenv -e .env.development -- npx tsx ./fft.ts",
+    "applyForJob": "SCRIPT=true dotenv -e .env.development -- npx tsx ./applyForJob.ts",
+    "test-collect": "NODE_ENV=test dotenv -e .env.development -- npx tsx ./collectOffers/script.ts",
+    "test-connect": "NODE_ENV=test dotenv -e .env.development -- npx tsx ./connectOffers.ts",
+    "test-collect-connect": "NODE_ENV=test dotenv -e .env.development -- npx tsx ./collectOffers/script.ts && NODE_ENV=test dotenv -e .env.development -- npx tsx ./connectOffers.ts"
   },
   "dependencies": {
     "@getbrevo/brevo": "^2.2.0",
@@ -55,6 +59,7 @@
   },
   "devDependencies": {
     "babel-jest": "^29.7.0",
+    "cypress": "^14.4.1",
     "jest": "^29.7.0",
     "vitest": "^3.0.7"
   }
